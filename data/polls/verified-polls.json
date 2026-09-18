@@ -1,0 +1,86 @@
+{
+  "title": "Verified individual poll data points (line-by-line verified)",
+  "method": "Each entry records the exact numbers as published by the pollster (or its primary syndication), with the verification chain. These anchor the poll layer for the 2026 live cycle and the 2024 backtest.",
+  "polls": [
+    {
+      "id": "quinnipiac-2026-09",
+      "pollster": "Quinnipiac University",
+      "cycle": 2026,
+      "kind": "generic-ballot-house",
+      "fieldDates": "2026-09-03..2026-09-06",
+      "sample": "970 registered voters (national)",
+      "moE": "±3.9",
+      "results": { "houseControlD": 49, "houseControlR": 38, "houseControlNoOpinion": 13, "trumpApproval": 33, "trumpDisapproval": 59 },
+      "source": "https://www.quinnipiac.edu/politics",
+      "verifiedVia": "Syndicated full text (masslive.com, pennlive.com, mlive.com) fetched 2026-09-18; press release released 2026-09-10.",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "quinnipiac-2026-06",
+      "pollster": "Quinnipiac University",
+      "cycle": 2026,
+      "kind": "generic-ballot-house",
+      "fieldDates": "2026-06 (per syndication)",
+      "results": { "houseControlD": 48, "houseControlR": 41, "houseControlNoOpinion": 11 },
+      "source": "https://www.pennlive.com/politics/2026/09/new-poll-reveals-1-party-with-huge-advantage-in-2026-midterms-and-its-bad-news-for-trump.html",
+      "verifiedVia": "Syndicated full text fetched 2026-09-18 (June benchmark cited in the September release).",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "monmouth-2024-10",
+      "pollster": "Monmouth University",
+      "cycle": 2024,
+      "kind": "generic-ballot-house",
+      "fieldDates": "2024-10 (n=802)",
+      "results": { "houseGenericD": 47, "houseGenericR": 45, "neither": 6, "dk": 2, "weightedPartyId": { "R": 28, "I": 42, "D": 30 } },
+      "source": "https://www.monmouth.edu/polling-institute/reports/monmouthpoll_us_102324/",
+      "verifiedVia": "Monmouth report page fetched 2026-09-18 (full trend table Oct/Sept/Aug/June 2024).",
+      "verifiedOn": "2026-09-18",
+      "note": "Institute ceased operations 2025-07-01 (Ballotpedia, fetched 2026-09-18)."
+    },
+    {
+      "id": "pew-2026-weighting-report",
+      "pollster": "Pew Research Center (methodology report, not a poll)",
+      "cycle": 2026,
+      "kind": "methodology",
+      "findings": { "shareOf2024NationalPollsWithPoliticalWeighting": 70, "finding": "political weighting has made polls modestly more accurate; partisan nonresponse bias (Republicans underrepresented in samples)" },
+      "source": "https://www.pewresearch.org/methods/2026/09/16/weighting-polls-on-party-affiliation-and-past-vote/",
+      "verifiedVia": "Report page fetched 2026-09-18.",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "votehub-2026-05",
+      "pollster": "VoteHub model (forecast, not a poll)",
+      "cycle": 2026,
+      "kind": "forecast",
+      "asOf": "2026-05-04",
+      "results": { "houseDProb": 85, "houseSeatsFavored": { "D": 234, "R": 201 }, "senate": { "Alaska": "toss-up (D narrow)", "Ohio": "toss-up (R narrow)", "Texas": "tilt R (R 58%)" } },
+      "source": "https://votehub.com/2026/05/04/introducing-the-2026-votehub-midterm-forecast/",
+      "verifiedVia": "Forecast page + methodology PDF fetched 2026-09-18.",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "538-archive-2024",
+      "pollster": "FiveThirtyEight (archived dataset)",
+      "cycle": 2024,
+      "kind": "poll-averages-time-series",
+      "asOf": "2024-09-12 (final archived general-election averages)",
+      "coverage": "National + 50-state daily trend-adjusted averages, 2020-02-27..2024-09-12",
+      "source": "https://github.com/fivethirtyeight/data/blob/master/polls/2024-averages/presidential_general_averages_2024-09-12_uncorrected.csv",
+      "verifiedVia": "Cloned (sparse checkout) 2026-09-18; file copied verbatim to data/polls/538-national-averages.csv (1,604,311 bytes). Columns documented in the repo README (fetched 2026-09-18).",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "gallup-final-approval",
+      "pollster": "Gallup",
+      "cycle": 2025,
+      "kind": "presidential-approval",
+      "asOf": "2025-12",
+      "results": { "approve": 36, "disapprove": 59 },
+      "source": "https://www.nytimes.com/2026/02/11/us/politics/gallup-poll-presidential-approval-ratings-trump.html",
+      "verifiedVia": "NYT article (2026-02-11) fetched 2026-09-18 — final measure before Gallup ended the series.",
+      "verifiedOn": "2026-09-18",
+      "note": "Gallup ended presidential approval tracking in Feb 2026 (irregularity #4)."
+    }
+  ]
+}

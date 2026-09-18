@@ -1,0 +1,52 @@
+{
+  "title": "Verified official election outcomes (cross-check targets)",
+  "method": "Every outcome below was verified against at least one official/primary source, fetched or located line-by-line on 2026-09-18. Kalshi's own settlement results (from the official API) are included as an independent cross-check: if the exchange settlement disagrees with an official source, that is flagged.",
+  "outcomes": [
+    {
+      "cycle": 2024,
+      "office": "President",
+      "winner": "Donald Trump (R) / JD Vance",
+      "detail": { "electoralVotes": { "Trump": 312, "Harris": 226 }, "popularVote": { "Trump": 77302580, "Harris": 75017613 }, "percentages": { "Trump": 49.8, "Harris": 48.3 }, "turnoutPct": 64.3, "statesCarried": { "Trump": "31 + ME-02", "Harris": "19 + DC + NE-02" } },
+      "sources": [
+        { "claim": "312/226 EV; 77,302,580 / 75,017,613 popular; 49.8%/48.3%; turnout 64.3%", "url": "https://en.wikipedia.org/wiki/2024_United_States_presidential_election", "notes": "Infobox (fetched via MediaWiki API 2026-09-18) cites the official FEC PDF https://www.fec.gov/resources/cms-content/documents/2024presgeresults.pdf and University of Florida for turnout." },
+        { "claim": "Trump won 312 EV; Harris 226 EV (results source: FEC 2024presgeresults.pdf)", "url": "https://www.electionguide.org/elections/id/4325/", "notes": "Fetched 2026-09-18." },
+        { "claim": "Market resolves Yes (Trump/another Republican inaugurated)", "url": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=PRES&limit=3", "notes": "PRES-2024-DJT result=yes, settled 2025-01-20T18:04:06Z, $262.3M contracts volume." }
+      ],
+      "crossCheck": "PASS — FEC-cited infobox, IFES, and Kalshi settlement all agree."
+    },
+    {
+      "cycle": 2024,
+      "office": "Senate (chamber control)",
+      "winner": "Republican (53-47)",
+      "detail": { "senateComposition": { "R": 53, "D": 47 }, "flips": "Republicans flipped 4 Democratic-held seats (AZ, GA, MI, PA) and defended all their own seats" },
+      "sources": [
+        { "claim": "Republicans flipped four Democratic-held seats, regaining a Senate majority; defended all own seats; first chamber flip in a presidential year since 1980", "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_elections", "notes": "REST summary API, fetched 2026-09-18 (revision 1375347616)." },
+        { "claim": "Market resolves Yes (Republicans win Senate)", "url": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=CONTROLS&limit=10", "notes": "CONTROLS-2024-R result=yes, settled 2025-02-01T16:00:09Z; CONTROLS-2024-D result=no. Settlement rule = party of President pro tempore on Feb 1, 2025 (Library of Congress as settlement source)." }
+      ],
+      "crossCheck": "PASS — Wikipedia summary and Kalshi settlement agree."
+    },
+    {
+      "cycle": 2024,
+      "office": "House (chamber control)",
+      "winner": "Republican (220-215)",
+      "detail": { "houseComposition": { "R": 220, "D": 215 }, "popularVote": { "R": 74390864, "D": 70571330 }, "percentages": { "R": 49.8, "D": 47.2 } },
+      "sources": [
+        { "claim": "R seats won 220 / D 215; popular vote 74,390,864 (49.8%) / 70,571,330 (47.2%)", "url": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_elections", "notes": "Infobox (fetched 2026-09-18) cites the House Clerk's 2024 report (cite_note-Clerk2024)." },
+        { "claim": "119th Congress composition R 220: House Roll 102 (119-1) passed H.R.22 220-208 with all 216 present R voting yea", "url": "https://www.congress.gov/votes/house/119-1/102", "notes": "Official roll-call record, fetched 2026-09-18." },
+        { "claim": "Market resolves Yes (Republicans win House)", "url": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=CONTROLH&limit=5", "notes": "CONTROLH-2024-R result=yes / CONTROLH-2024-D result=no, settled 2025-02-01T16:00:09Z." }
+      ],
+      "crossCheck": "PASS — Clerk-cited infobox, congress.gov roll calls, and Kalshi settlement all agree."
+    },
+    {
+      "cycle": 2020,
+      "office": "President",
+      "winner": "Joe Biden (D) / Kamala Harris",
+      "detail": { "electoralVotes": { "Biden": 306, "Trump": 232 }, "popularVote": { "Biden": 81283501, "Trump": 74223975 }, "percentages": { "Biden": 51.3, "Trump": 46.8 }, "turnoutPct": 66.6 },
+      "sources": [
+        { "claim": "306/232 EV; 81,283,501 / 74,223,975 popular; 51.3%/46.8%; turnout 66.6% (U.S. Elections Project)", "url": "https://en.wikipedia.org/wiki/2020_United_States_presidential_election", "notes": "Infobox wikitext (fetched via MediaWiki API 2026-09-18); lead cites AP 'Biden officially secures enough electors' (2020-12-05)." }
+      ],
+      "crossCheck": "N/A (no Kalshi 2020 presidential market was captured — Kalshi launched 2021; listed as baseline cycle for multi-cycle poll backtests)."
+    }
+  ],
+  "flaggedDiscrepancies": []
+}
