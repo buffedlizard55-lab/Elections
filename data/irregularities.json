@@ -1,0 +1,114 @@
+{
+  "title": "Irregularities & discrepancies flagged for review",
+  "method": "Anything observed that is inconsistent, stale, impossible, or a structural risk gets a numbered entry here and is never silently normalized. Severity: high = affects trust in a result; medium = affects interpretation; low = cosmetic/monitor.",
+  "items": [
+    {
+      "id": 1,
+      "severity": "high",
+      "area": "Institution",
+      "title": "Election Assistance Commission has had NO serving commissioners since July 2026",
+      "detail": "Two of three commissioners were dismissed by the president and the remaining one resigned, leaving the federal election-administration commission without a member (Wikipedia, fetched 2026-09-18; Ballotpedia corroborates leadership history). Its guidance output is at risk until reconstituted.",
+      "action": "Treat EAC guidance with caution; no numeric data in this repo depends on it.",
+      "source": "https://en.wikipedia.org/wiki/Election_Assistance_Commission"
+    },
+    {
+      "id": 2,
+      "severity": "medium",
+      "area": "Kalshi API",
+      "title": "Shared API host returned STALE last_price_dollars / updated_time for CONTROLH-2026",
+      "detail": "On 2026-09-18 the public API on api.elections.kalshi.com showed last_price 0.10 with updated_time 2026-07-14 for CONTROLH-2026-R, while the live web page showed an 89/91 book. The order-book fields (yes_bid/yes_ask) were current. This session's snapshot uses the order-book side and flags the divergence.",
+      "action": "Consumers must prefer yes_bid/yes_ask (or the orderbook endpoint) over last_price_dollars for live markets; re-verified on every collect run.",
+      "source": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=3"
+    },
+    {
+      "id": 3,
+      "severity": "medium",
+      "area": "Third-party tracker",
+      "title": "covers.com 2026-08-27 guide is internally inconsistent on Senate odds (R 57% in prose, 53% in its own table)",
+      "detail": "The same page's narrative text says Republicans 57% to keep the Senate while its table shows R 53% / D 47%. Unreconciled source data.",
+      "action": "Excluded from the master source list; kept only as a historical cross-check point with both figures recorded.",
+      "source": "https://www.covers.com/betting/prediction-sites/guides/midterm-election-odds-tracker"
+    },
+    {
+      "id": 4,
+      "severity": "medium",
+      "area": "Polling ecosystem",
+      "title": "Gallup ended presidential approval tracking (Feb 2026) and horse-race election polling (2015)",
+      "detail": "After ~90 years, Gallup no longer polls presidential approval (final measure Dec 2025: 36%) and will not 'publish assessments of individual political figures' (NYT 2026-02-11; CNN 2026-02-12). Any 2026 analysis citing 'Gallup approval' is using stale series.",
+      "action": "Gallup is included as a historical series only; 2026 approval comparisons use CNN Poll of Polls (39%) and Quinnipiac (33%, 2026-09).",
+      "source": "https://www.nytimes.com/2026/02/11/us/politics/gallup-poll-presidential-approval-ratings-trump.html"
+    },
+    {
+      "id": 5,
+      "severity": "medium",
+      "area": "Polling ecosystem",
+      "title": "Monmouth University Polling Institute ceased operations 2025-07-01",
+      "detail": "The institute that published the October 2024 generic-ballot polls used in this repo no longer exists (Ballotpedia, fetched 2026-09-18). Its 2024-2025 releases are historical-only.",
+      "action": "Monmouth data used with its cessation noted; no forward reliance.",
+      "source": "https://ballotpedia.org/Monmouth_University_Polling_Institute"
+    },
+    {
+      "id": 6,
+      "severity": "medium",
+      "area": "Forecasting ecosystem",
+      "title": "FiveThirtyEight website shut down 2025-03-05 (Disney/ABC); archive lives on GitHub",
+      "detail": "538 the site was dissolved on 2025-03-05 with ~15 layoffs; Silver kept the model IP (now Silver Bulletin). The 2024 polling data used here comes from the GitHub archive, whose final national general-average snapshot is dated 2024-09-12 — there is NO late-October/November 538 series in the public archive.",
+      "action": "The poll-vs-market backtest reuses the 2024-09-12 anchor and reports its age in days per comparison point; late-window poll absence is itself a flagged data gap.",
+      "source": "https://en.wikipedia.org/wiki/FiveThirtyEight"
+    },
+    {
+      "id": 7,
+      "severity": "low",
+      "area": "Kalshi web UI",
+      "title": "Hub page percentages can sum to ≠100% (mixed bid/ask display)",
+      "detail": "Examples captured 2026-09-18: MI Secretary of State 95%+14%, KS Attorney General 57%+49%, NH State Senate 75%+30%, MO SD8 80%+31%. The web renders opposite-side quotes from each market's own book, so pairs need not complement.",
+      "action": "This repo stores both the web percentages (as rendered) and, where captured, the raw API bid/ask; consumers should not average web % pairs across markets.",
+      "source": "https://kalshi.com/category/elections/midterms"
+    },
+    {
+      "id": 8,
+      "severity": "high",
+      "area": "Kalshi market design",
+      "title": "KXMUSKCHALLENGERS-26: 'At least 3' (13%) priced ABOVE 'At least 1' (12%) — logically impossible",
+      "detail": "The event 'How many Elon-backed challengers will win seats in Congress this year?' shows the 'at least 3' outcome at 13% while 'at least 1' sits at 12%. Since {at least 3} ⊂ {at least 1}, this ordering cannot hold for consistent probabilities. Likely a thin market with a wide/stale book.",
+      "action": "Flagged, not traded in any strategy; monitor for self-correction. If it persists into the 2026 cycle it is a candidate for a market-design anomaly study.",
+      "source": "https://kalshi.com/category/elections/midterms"
+    },
+    {
+      "id": 9,
+      "severity": "low",
+      "area": "Universe coverage",
+      "title": "34 of 35 Senate seats have tradeable Kalshi markets; Louisiana market is thin; 66 of 435 House districts individually priced",
+      "detail": "predictionmarketspicks.com (2026-09-13) counts 34/35 Senate seats with markets (claims none for LA; the hub does show a thin kxsenatela-26nov — unresolved, recorded both ways) and only 66 competitive House districts with individual markets. The rest are priced only via chamber seat-count and balance-of-power markets.",
+      "action": "The collector script (scripts/collect-kalshi.mjs) enumerates the full live universe every run; thin/missing markets are reported, not imputed.",
+      "source": "https://predictionmarketspicks.com/midterms-2026"
+    },
+    {
+      "id": 10,
+      "severity": "medium",
+      "area": "Regulatory",
+      "title": "Kalshi event contracts: state-vs-CFTC jurisdiction conflict is unresolved",
+      "detail": "CFTC is the exclusive federal regulator (KalshiEX v. CFTC 2024 political-contracts win; CFTC dropped appeal May 2025; Third Circuit 2026-04-06 sports win), but NV/NJ/MD sent cease-and-desist letters and S.D. Ohio (2026-03-09) ruled sports event contracts are NOT swaps in that district. Political contracts (this repo's layer) are the more settled branch, but the regulatory surface is moving.",
+      "action": "Documented; no numeric reliance. Re-checked each session.",
+      "source": "https://www.cftc.gov"
+    },
+    {
+      "id": 11,
+      "severity": "low",
+      "area": "Data capture",
+      "title": "Election-day (2024-11-05) candlestick bar was not captured for the 2024 backtest markets",
+      "detail": "The historical candlestick fetch used end_ts=1730851200 (2024-11-05T00:00Z), so the last captured bar is the Nov 4 trading day (bars end at midnight ET). Settlement outcomes come from the official market objects, so backtest conclusions are unaffected, but the final-day price path is missing from the charts.",
+      "action": "Collectors re-fetch with end_ts = settlement_ts + 86400; until then the site labels the last point as '2024-11-04 (last captured bar)'.",
+      "source": "https://docs.kalshi.com/api-reference/market/get-market-candlesticks.md"
+    },
+    {
+      "id": 12,
+      "severity": "low",
+      "area": "Modeling assumption",
+      "title": "Poll margin -> win probability uses a logistic mapping (k=4.5) that is a labeled assumption, not a published 538 probability",
+      "detail": "538's public archive publishes margins, not probabilities. This repo maps margin m to p = 1/(1+exp(-m/4.5)) (the scaling 538 used in its 2020 national model) and labels every use as 'modeled mapping'.",
+      "action": "Sensitivity: at k=3 the same 2024-09-12 anchor (Harris +2.82) implies 31% for Trump instead of 35%; the poll-vs-market gap conclusion is unchanged.",
+      "source": "https://github.com/fivethirtyeight/data"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "capturedAt": "2026-09-18T23:35:00Z",
+  "capturedBy": "Arena agent session 2026-09-18 (line-by-line fetches; every entry below carries its source URL)",
+  "note": "Live open political/election markets on Kalshi. Prices are YES-side. Web percentages are mid-point style figures as rendered by the Kalshi Midterms Hub; API fields are raw. See IRREGULARITIES.md for flagged discrepancies (e.g., stale last_price_dollars vs live order book).",
+  "controlMarkets": [
+    {
+      "event": "CONTROLS-2026",
+      "question": "Which party will win the U.S. Senate? (2026)",
+      "markets": [
+        { "ticker": "CONTROLS-2026-D", "side": "Democratic Party", "yesBidCents": 59, "yesAskCents": 60, "lastPriceDollars": 0.60, "volume24hContracts": 77190.74, "totalVolumeContracts": 4083073.82, "openInterestContracts": 2092629.26 },
+        { "ticker": "CONTROLS-2026-R", "side": "Republican Party", "yesBidCents": 40, "yesAskCents": 41, "lastPriceDollars": 0.42, "volume24hContracts": 56444.76, "totalVolumeContracts": 5094233.71, "openInterestContracts": 2909512.86 }
+      ],
+      "webPercentages": { "Democratic": 59, "Republican": 41 },
+      "pageVolumeDollars": 13823193,
+      "sources": [
+        "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=4",
+        "https://kalshi.com/markets/controls/senate-winner/controls-2026",
+        "https://kalshi.com/category/elections/midterms"
+      ]
+    },
+    {
+      "event": "CONTROLH-2026",
+      "question": "Which party will win the U.S. House? (2026)",
+      "markets": [
+        { "ticker": "CONTROLH-2026-R", "side": "Republican Party", "yesBidCents": 10, "yesAskCents": 11, "lastPriceDollars": 0.10, "volume24hContracts": 301105.74, "totalVolumeContracts": 20929541.69, "openInterestContracts": 13387528.81 },
+        { "ticker": "CONTROLH-2026-D", "side": "Democratic Party", "yesBidCents": 89, "yesAskCents": 90, "lastPriceDollars": 0.90, "note": "implied reciprocal of the captured R-side book (89-90c); D market object not individually captured this session" }
+      ],
+      "webPercentages": { "Democratic": 90, "Republican": 10 },
+      "pageVolumeDollars": 31847627,
+      "pageVolumeSource": "https://kalshi.com/category/elections/us-elections (captured 2026-09-18, '$31,847,627 vol 2 markets')",
+      "staleWarning": "API last_price_dollars / order book timestamps read 2026-07-14 on the shared API host while the web page showed a live 89/91 split — flagged as irregularity #2.",
+      "sources": [
+        "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=3",
+        "https://kalshi.com/category/elections/us-elections"
+      ]
+    },
+    {
+      "event": "CONTROLS-2028",
+      "question": "Which party will win the U.S. Senate? (2028)",
+      "markets": [
+        { "ticker": "CONTROLS-2028-D", "side": "Democratic Party", "yesBidCents": 51, "yesAskCents": 56, "lastPriceDollars": 0.57, "totalVolumeContracts": 2015.74 },
+        { "ticker": "CONTROLS-2028-R", "side": "Republican Party", "yesBidCents": 43, "yesAskCents": 49, "lastPriceDollars": 0.50, "totalVolumeContracts": 1927.90 }
+      ],
+      "note": "2028 cycle markets opened 2026-05-15.",
+      "sources": ["https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=4"]
+    },
+    {
+      "event": "CONTROLH-2028",
+      "question": "Which party will win the U.S. House? (2028)",
+      "markets": [
+        { "ticker": "CONTROLH-2028-D", "side": "Democratic Party", "yesBidCents": 72, "yesAskCents": 75, "lastPriceDollars": 0.75, "volume24hContracts": 6.57, "totalVolumeContracts": 13725.12 },
+        { "ticker": "CONTROLH-2028-R", "side": "Republican Party", "yesBidCents": 27, "yesAskCents": 30, "lastPriceDollars": 0.27, "volume24hContracts": 83.11, "totalVolumeContracts": 5925.69 }
+      ],
+      "sources": ["https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=3"]
+    }
+  ],
+  "senate2026Races": [
+    { "state": "Colorado", "slug": "senateco-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "Delaware", "slug": "senatede-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "Georgia", "slug": "senatega-26", "demPct": 93, "rating": "Safe D" },
+    { "state": "Illinois", "slug": "senateil-26", "demPct": 97, "rating": "Safe D" },
+    { "state": "Massachusetts", "slug": "senatema-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "Minnesota", "slug": "senatemn-26", "demPct": 90, "rating": "Safe D" },
+    { "state": "North Carolina", "slug": "senatenc-26", "demPct": 92, "rating": "Safe D" },
+    { "state": "New Jersey", "slug": "senatenj-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "New Mexico", "slug": "senatenm-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "Oregon", "slug": "senateor-26", "demPct": 97, "rating": "Safe D" },
+    { "state": "Rhode Island", "slug": "senateri-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "Virginia", "slug": "senateva-26", "demPct": 98, "rating": "Safe D" },
+    { "state": "New Hampshire", "slug": "senatenh-26", "demPct": 84, "rating": "Likely D" },
+    { "state": "Alaska", "slug": "senateak-26", "demPct": 68, "rating": "Lean D" },
+    { "state": "Maine", "slug": "senateme-26", "demPct": 67, "rating": "Lean D" },
+    { "state": "Michigan", "slug": "senatemi-26", "demPct": 64, "rating": "Lean D" },
+    { "state": "Ohio (special)", "slug": "senateohs-26", "demPct": 55, "rating": "Toss-up" },
+    { "state": "Texas", "slug": "senatetx-26", "demPct": 58, "rating": "Toss-up" },
+    { "state": "Iowa", "slug": "senateia-26", "demPct": 39, "rating": "Lean R" },
+    { "state": "Kansas", "slug": "senateks-26", "demPct": 27, "rating": "Lean R" },
+    { "state": "Nebraska", "slug": "senatene-26", "demPct": 30, "rating": "Lean R" },
+    { "state": "Florida (special)", "slug": "senatefls-26", "demPct": 12, "rating": "Likely R" },
+    { "state": "South Carolina", "slug": "senatesc-26", "demPct": 14, "rating": "Likely R" },
+    { "state": "Alabama", "slug": "senateal-26", "demPct": 4, "rating": "Safe R" },
+    { "state": "Arkansas", "slug": "senatear-26", "demPct": 6, "rating": "Safe R" },
+    { "state": "Idaho", "slug": "senateid-26", "demPct": 8, "rating": "Safe R" },
+    { "state": "Kentucky", "slug": "senatela-26", "demPct": 5, "rating": "Safe R" },
+    { "state": "Louisiana", "slug": "kxsenatela-26nov", "demPct": 6, "rating": "Safe R" },
+    { "state": "Mississippi", "slug": "senatems-26", "demPct": 7, "rating": "Safe R" },
+    { "state": "Montana", "slug": "senatemt-26", "demPct": 8, "rating": "Safe R" },
+    { "state": "Oklahoma", "slug": "senateok-26", "demPct": 2, "rating": "Safe R" },
+    { "state": "South Dakota", "slug": "senatesd-26", "demPct": 8, "rating": "Safe R" },
+    { "state": "Tennessee", "slug": "senatetn-26", "demPct": 4, "rating": "Safe R" },
+    { "state": "West Virginia", "slug": "senatewv-26", "demPct": 2, "rating": "Safe R" },
+    { "state": "Wyoming", "slug": "senatewy-26", "demPct": 1, "rating": "Safe R" }
+  ],
+  "senate2026RacesSource": "https://kalshi.com/category/elections/midterms (ratings + D% as rendered by the Midterms Hub, captured 2026-09-18; 35 seats = 33 regular + OH & FL specials)",
+  "senate2026TopRaces": [
+    { "state": "Texas", "dem": "James Talarico", "rep": "Ken Paxton", "demPct": 57, "repPct": 43, "slug": "senatetx-26" },
+    { "state": "Maine", "dem": "Troy Jackson", "rep": "Susan Collins (incumbent)", "demPct": 66, "repPct": 34, "slug": "senateme-26" },
+    { "state": "Michigan", "dem": "Abdul El-Sayed", "rep": "Mike Rogers", "demPct": 64, "repPct": 36, "slug": "senatemi-26" },
+    { "state": "Ohio (special)", "dem": "Sherrod Brown", "rep": "Jon Husted", "demPct": 55, "repPct": 45, "slug": "senateohs-26" },
+    { "state": "Iowa", "dem": "Josh Turek", "rep": "Ashley Hinson", "demPct": 39, "repPct": 61, "slug": "senateia-26" },
+    { "state": "North Carolina", "dem": "Roy Cooper", "rep": "Michael Whatley", "demPct": 92, "repPct": 8, "slug": "senatenc-26" },
+    { "state": "South Carolina", "dem": "Annie Andrews", "rep": "Darline Graham", "demPct": 14, "repPct": 86, "slug": "senatesc-26" },
+    { "state": "Nebraska", "dem": "Dan Osborn (I)", "rep": "Pete Ricketts", "demPct": 30, "repPct": 70, "slug": "senatene-26" },
+    { "state": "Georgia", "dem": "Jon Ossoff (incumbent)", "rep": "Mike Collins", "demPct": 94, "repPct": 6, "slug": "senatega-26" },
+    { "state": "Kansas", "dem": "Adam Hamilton", "rep": "Roger Marshall (incumbent)", "demPct": 27, "repPct": 73, "slug": "senateks-26" },
+    { "state": "Alaska", "dem": "Democratic party", "rep": "Republican party", "demPct": 68, "repPct": 32, "slug": "senateak-26" },
+    { "state": "New Hampshire", "dem": "Chris Pappas", "rep": "John E. Sununu", "demPct": 83, "repPct": 17, "slug": "senatenh-26" },
+    { "state": "Minnesota", "dem": "Peggy Flanagan", "rep": "Michele Tafoya", "demPct": 90, "repPct": 10, "slug": "senatemn-26" },
+    { "state": "Florida (special)", "dem": "Angie Nixon", "rep": "Ashley Moody", "demPct": 12, "repPct": 88, "slug": "senatefls-26" },
+    { "state": "Montana", "dem": "Seth Bodnar (I)", "rep": "Kurt Alme", "demPct": 8, "repPct": 92, "slug": "senatemt-26" },
+    { "state": "Idaho", "dem": "Todd Achilles (I)", "rep": "Jim Risch (incumbent)", "demPct": 8, "repPct": 92, "slug": "senateid-26" },
+    { "state": "Kentucky", "dem": "Charles Booker", "rep": "Andy Barr", "demPct": 5, "repPct": 95, "slug": "senatela-26" },
+    { "state": "Mississippi", "dem": "Scott Colom", "rep": "Cindy Hyde-Smith (incumbent)", "demPct": 7, "repPct": 93, "slug": "senatems-26" },
+    { "state": "South Dakota", "dem": "Brian Bengs (I)", "rep": "Mike Rounds (incumbent)", "demPct": 8, "repPct": 92, "slug": "senatesd-26" },
+    { "state": "Arkansas", "dem": "Hallie Shoffner", "rep": "Tom Cotton (incumbent)", "demPct": 6, "repPct": 94, "slug": "senatear-26" },
+    { "state": "Louisiana", "dem": "Jamie Davis", "rep": "Julia Letlow", "demPct": 6, "repPct": 94, "slug": "kxsenatela-26nov" },
+    { "state": "New Jersey", "dem": "Cory Booker (incumbent)", "rep": "Justin Murphy", "demPct": 97, "repPct": 3, "slug": "senatenj-26" },
+    { "state": "Tennessee", "dem": "Marquita Bradshaw", "rep": "Bill Hagerty (incumbent)", "demPct": 4, "repPct": 96, "slug": "senatetn-26" },
+    { "state": "Oklahoma", "dem": "N'Kiyla Thomas", "rep": "Kevin Hern", "demPct": 2, "repPct": 98, "slug": "senateok-26" },
+    { "state": "Virginia", "dem": "Mark Warner (incumbent)", "rep": "Bert Mizusawa", "demPct": 98, "repPct": 2, "slug": "senateva-26" },
+    { "state": "New Mexico", "dem": "Ben Ray Luján (incumbent)", "rep": "Larry E. Marker", "demPct": 98, "repPct": 2, "slug": "senatenm-26" },
+    { "state": "Wyoming", "dem": "James Byrd", "rep": "Harriet Hageman", "demPct": 1, "repPct": 99, "slug": "senatewy-26" },
+    { "state": "Rhode Island", "dem": "Jack Reed (incumbent)", "rep": "Raymond McKay", "demPct": 98, "repPct": 2, "slug": "senateri-26" },
+    { "state": "West Virginia", "dem": "Rachel Fetty Anderson", "rep": "Shelley Moore Capito (incumbent)", "demPct": 2, "repPct": 98, "slug": "senatewv-26" },
+    { "state": "Colorado", "dem": "John Hickenlooper (incumbent)", "rep": "Mark Baisley", "demPct": 97, "repPct": 3, "slug": "senateco-26" },
+    { "state": "Illinois", "dem": "Juliana Stratton", "rep": "Don Tracy", "demPct": 98, "repPct": 2, "slug": "senateil-26" },
+    { "state": "Delaware", "dem": "Democratic party (incumbent)", "rep": "Republican party", "demPct": 99, "repPct": 1, "slug": "senatede-26" },
+    { "state": "Massachusetts", "dem": "Ed Markey (incumbent)", "rep": "John Deaton", "demPct": 98, "repPct": 2, "slug": "senatema-26" },
+    { "state": "Oregon", "dem": "Jeff Merkley (incumbent)", "rep": "David Brock Smith", "demPct": 98, "repPct": 2, "slug": "senateor-26" },
+    { "state": "Alabama", "dem": "Everett Wess", "rep": "Barry Moore", "demPct": 4, "repPct": 96, "slug": "senateal-26" }
+  ],
+  "senate2026TopRacesSource": "https://kalshi.com/category/elections/midterms ('Most traded' board, captured 2026-09-18)",
+  "seatCountMarkets": [
+    { "slug": "kxdsenateseats-27", "question": "How many Senate seats will Democrats hold after the Midterms?", "topOutcomes": [ { "outcome": "Above 52", "pct": 30 }, { "outcome": "51", "pct": 16 } ], "volumeDollars": 2789851, "marketsInEvent": 10 },
+    { "slug": "rsenateseats-27", "question": "How many Senate seats will Republicans hold after the Midterms?", "topOutcomes": [ { "outcome": "48", "pct": 15 }, { "outcome": "49", "pct": 15 } ], "volumeDollars": 995920, "marketsInEvent": 15 }
+  ],
+  "comboAndNoveltyMarkets": [
+    { "slug": "kxmetxcombo-26nov", "question": "Maine-Texas Senate Combo", "topOutcomes": [ { "outcome": "James Talarico and Troy Jackson", "pct": 47 }, { "outcome": "Ken Paxton and Susan Collins", "pct": 27 } ], "volumeDollars": 761262, "marketsInEvent": 6 },
+    { "slug": "kxmesenoutcome-27jan", "question": "Maine Senate Exact Outcome", "topOutcomes": [ { "outcome": "Democratic party wins", "pct": 69 }, { "outcome": "Republican party wins", "pct": 31 } ], "volumeDollars": 650002, "marketsInEvent": 2 },
+    { "slug": "kxclosestsenate-27jan03", "question": "Closest Senate race this year?", "topOutcomes": [ { "outcome": "Texas", "pct": 16 }, { "outcome": "Iowa", "pct": 13 } ], "volumeDollars": 527014, "marketsInEvent": 17 },
+    { "slug": "kxtxsenoutcome-27jan", "question": "Texas Senate: Exact outcome", "topOutcomes": [ { "outcome": "Talarico defeats Paxton", "pct": 56 }, { "outcome": "Paxton defeats Talarico", "pct": 44 } ], "volumeDollars": 335870, "marketsInEvent": 2 },
+    { "slug": "kxdemcorefoursenatesweep-26nov03", "question": "Will Democrats sweep the 'core four' Senate races?", "topOutcomes": [ { "outcome": "Yes", "pct": 56 }, { "outcome": "No", "pct": 44 } ], "volumeDollars": 244865, "marketsInEvent": 1 },
+    { "slug": "kxdsenateseatsh-27", "question": "Democratic Senate seats (Higher strikes)", "topOutcomes": [ { "outcome": "Below 53", "pct": 69 }, { "outcome": "53", "pct": 12 } ], "volumeDollars": 171040, "marketsInEvent": 7 },
+    { "slug": "kxlosereelectiondsen-2026", "question": "How many Democratic Senators will lose reelection this year?", "topOutcomes": [ { "outcome": "Exactly 0", "pct": 92 }, { "outcome": "Exactly 2", "pct": 3 } ], "volumeDollars": 95603, "marketsInEvent": 6 },
+    { "slug": "kxlosereelectionrsen-2026", "question": "How many Republican senators will lose reelection this year?", "topOutcomes": [ { "outcome": "5 or more", "pct": 59 }, { "outcome": "Exactly 4", "pct": 22 } ], "volumeDollars": 66191, "marketsInEvent": 4 },
+    { "slug": "kxbluetsunamicombo-27feb", "question": "Blue tsunami this year?", "topOutcomes": [ { "outcome": "Yes", "pct": 49 }, { "outcome": "No", "pct": 51 } ], "volumeDollars": 485282, "marketsInEvent": 1 },
+    { "slug": "kxbluewavecombo-27feb", "question": "Blue wave this year?", "topOutcomes": [ { "outcome": "Yes", "pct": 82 }, { "outcome": "No", "pct": 18 } ], "volumeDollars": 644839, "marketsInEvent": 1 },
+    { "slug": "kxmuskchallengers-26", "question": "How many Elon-backed challengers will win seats in Congress this year?", "topOutcomes": [ { "outcome": "At least 1", "pct": 12 }, { "outcome": "At least 3", "pct": 13 } ], "volumeDollars": 23144, "marketsInEvent": 6 }
+  ],
+  "other2026ElectionMarkets": [
+    { "slug": "kxmayorla-26", "question": "Los Angeles Mayor winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Karen Bass", "pct": 62, "odds": "1.55x" }, { "outcome": "Nithya Raman", "pct": 37, "odds": "2.52x" } ], "volumeDollars": 94866710 },
+    { "slug": "kxtxrailroad-26", "question": "Texas Railroad Commissioner winner", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Jon Rosenthal", "pct": 59 }, { "outcome": "Bo French", "pct": 43 } ], "volumeDollars": 83821 },
+    { "slug": "kxcaballotmeasures-26nov03", "question": "Which ballot measures will pass in California?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Proposition 38", "pct": 29 }, { "outcome": "Proposition 39", "pct": 21 } ], "volumeDollars": 13658 },
+    { "slug": "kxcawealthtax-26", "question": "Will the California billionaire wealth tax pass?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Yes", "pct": 33 }, { "outcome": "No", "pct": 67 } ], "volumeDollars": 898021 },
+    { "slug": "kxcavoterid-26", "question": "Will the California Voter ID initiative pass?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Yes", "pct": 37 }, { "outcome": "No", "pct": 63 } ], "volumeDollars": 10996 },
+    { "slug": "kxattygentx-26", "question": "Texas Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Mayes Middleton", "pct": 83 }, { "outcome": "Nathan Johnson", "pct": 18 } ], "volumeDollars": 11685 },
+    { "slug": "kxattygenmn-26", "question": "Minnesota Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Keith Ellison", "pct": 76 }, { "outcome": "Ronald J. Schutz", "pct": 23 } ], "volumeDollars": 18920 },
+    { "slug": "kxnccourt-26", "question": "North Carolina Supreme Court winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Anita Earls", "pct": 80 }, { "outcome": "Sarah Stevens", "pct": 20 } ], "volumeDollars": 593 },
+    { "slug": "kxflpropertytax-26nov03", "question": "Will Florida's property tax amendment pass?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Yes", "pct": 44 }, { "outcome": "No", "pct": 56 } ], "volumeDollars": 23046 },
+    { "slug": "kxsecstatemi-26", "question": "Michigan Secretary of State winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Garlin Gilchrist", "pct": 95 }, { "outcome": "Anthony Forlini", "pct": 14 } ], "volumeDollars": 15969 },
+    { "slug": "kxstateballotmeasure-id", "question": "Which ballot measures will pass in Idaho?", "date": "Nov 3 @ 10:00AM", "topOutcomes": [ { "outcome": "Reproductive Freedom and Privacy Act", "pct": 47 }, { "outcome": "Drug Legalization Authority Amendment", "pct": 40 } ], "volumeDollars": 24664 },
+    { "slug": "kxstateballotmeasure-wy", "question": "Will Wyoming vote to exempt 50% of primary-home assessed value?", "date": "Nov 3 @ 10:00AM", "topOutcomes": [ { "outcome": "Yes", "pct": 26 }, { "outcome": "No", "pct": 74 } ], "volumeDollars": 6895 },
+    { "slug": "kxmosd8-26", "question": "Missouri State Senate District 8 winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Jon Patterson", "pct": 80 }, { "outcome": "Keri Ingle", "pct": 31 } ], "volumeDollars": null, "note": "NEW market, no volume shown" },
+    { "slug": "kxattygenfl-26", "question": "Florida Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "James Uthmeier", "pct": 85 }, { "outcome": "José Javier Rodriguez", "pct": 13 } ], "volumeDollars": 1651 },
+    { "slug": "kxattygenks-26", "question": "Kansas Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Kris Kobach", "pct": 57 }, { "outcome": "Chris Mann", "pct": 49 } ], "volumeDollars": 2110 },
+    { "slug": "kxstateleg-nhsen26", "question": "New Hampshire State Senate winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Republican party", "pct": 75 }, { "outcome": "Democratic party", "pct": 30 } ], "volumeDollars": 8261 },
+    { "slug": "kxattygenaz-26", "question": "Arizona Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Kris Mayes", "pct": 75 }, { "outcome": "Warren Petersen", "pct": 26 } ], "volumeDollars": 13586 },
+    { "slug": "kxattygenmi-26", "question": "Michigan Attorney General winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "Eli Savit", "pct": 70 }, { "outcome": "Doug Lloyd", "pct": 29 } ], "volumeDollars": 7353 },
+    { "slug": "kxstateballotmeasure-mt", "question": "Which ballot measures will pass in Montana?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "CI-133", "pct": 84 }, { "outcome": "CI-132", "pct": 85 } ], "volumeDollars": null, "note": "NEW market" },
+    { "slug": "kxprovidencemayor-26", "question": "Providence Mayor winner?", "date": "Nov 3 @ 8:00AM", "topOutcomes": [ { "outcome": "David Morales", "pct": 99 }, { "outcome": "Brett Smiley", "pct": 1 } ], "volumeDollars": 180422 },
+    { "slug": "kxstateballotmeasure-ma", "question": "Which ballot measures will pass in Massachusetts?", "date": "Nov 3 @ 10:00AM", "topOutcomes": [ { "outcome": "Question 5", "pct": 39 }, { "outcome": "Question 3", "pct": 69 } ], "volumeDollars": 2888 }
+  ],
+  "crossPlatformChecks": [
+    { "market": "Balance of Power 2026 (Democratic sweep)", "kalshiPct": 59, "polymarketPct": 60, "polymarketVolumeDollars": 12556456, "asOf": "2026-09-18", "sources": ["https://polymarket.com/event/balance-of-power-2026-midterms", "https://kalshi.com/category/elections"] },
+    { "market": "2026 Senate control", "kalshi": "D 59% / R 41% (2026-09-18)", "historical": [ { "date": "2026-03-14", "value": "D 51% / R 49%", "source": "https://news.kalshi.com/p/2026-senate-odds-democrats-now-favored" }, { "date": "2026-07-22", "value": "R 56% to keep control (hub caption)", "source": "https://news.kalshi.com/p/kalshi-midterms-hub-launch-2026" }, { "date": "2026-08-27", "value": "R 53% / D 47% (table); 57% (body text) — internal inconsistency, see IRREGULARITIES.md #3", "source": "https://www.covers.com/betting/prediction-sites/guides/midterm-election-odds-tracker" } ] },
+    { "market": "2026 House control", "kalshi": "D ~90% / R ~10% (2026-09-18, API order book)", "historical": [ { "date": "2026-03-14", "value": "D 84% / R 15%", "source": "https://news.kalshi.com/p/2026-senate-odds-democrats-now-favored" }, { "date": "2026-05-04", "value": "D 85% (VoteHub forecast)", "source": "https://votehub.com/2026/05/04/introducing-the-2026-votehub-midterm-forecast/" }, { "date": "2026-06-30", "value": "D 89% / R 11%", "source": "https://kalshi.com/category/elections/us-elections" } ] }
+  ],
+  "universeNotes": {
+    "midtermsHub": "https://kalshi.com/midtermshub (launched 2026-07-22; tracks every Senate, House, Governor race 24/7; source: https://news.kalshi.com/p/kalshi-midterms-hub-launch-2026 and https://www.cnbc.com/2026/07/22/kalshi-launches-election-hub-for-prediction-markets-ahead-of-midterms.html)",
+    "houseDistrictsWithIndividualMarkets": "66 competitive districts (per https://predictionmarketspicks.com/midterms-2026, 2026-09-13; other seats priced only via chamber seat-count + balance-of-power markets)",
+    "senateRacesWithMarkets": "34 of 35 seats have tradeable Kalshi markets; Louisiana shell market exists but is thin (per same source)",
+    "fullUniverseCollection": "The complete open-market universe is collected automatically by scripts/collect-kalshi.mjs (pagination over GET /markets with series_ticker filters) — this file is the manually verified core seed captured 2026-09-18."
+  }
+}

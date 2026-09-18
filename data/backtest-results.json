@@ -1,0 +1,792 @@
+{
+  "generatedAt": "2026-09-18T23:46:01.595Z",
+  "inputs": [
+    {
+      "path": "src/kalshi-data.js",
+      "source": "https://api.elections.kalshi.com/trade-api/v2/historical/... (per-market capturedFrom fields inside)"
+    },
+    {
+      "path": "data/polls/538-national-averages.csv",
+      "source": "https://github.com/fivethirtyeight/data/blob/master/polls/2024-averages/presidential_general_averages_2024-09-12_uncorrected.csv"
+    },
+    {
+      "path": "data/outcomes/verified-outcomes.json",
+      "source": "FEC/Wikipedia-API/congress.gov (see per-outcome sources)"
+    }
+  ],
+  "note": "Deterministic backtest of captured Kalshi 2024 markets vs official settlements, and 538 archived poll averages vs outcome. All inputs carry provenance (src/kalshi-data.js, data/polls/).",
+  "marketBacktest": {
+    "markets": [
+      {
+        "ticker": "PRES-2024-DJT",
+        "title": "Will Donald Trump or another Republican win the Presidency?",
+        "outcomeIsYes": true,
+        "series": [
+          {
+            "date": "2024-10-04",
+            "ts": 1728100800,
+            "p": 0.5
+          },
+          {
+            "date": "2024-10-05",
+            "ts": 1728187200,
+            "p": 0.5
+          },
+          {
+            "date": "2024-10-06",
+            "ts": 1728273600,
+            "p": 0.5
+          },
+          {
+            "date": "2024-10-07",
+            "ts": 1728360000,
+            "p": 0.5
+          },
+          {
+            "date": "2024-10-08",
+            "ts": 1728446400,
+            "p": 0.51
+          },
+          {
+            "date": "2024-10-09",
+            "ts": 1728532800,
+            "p": 0.5
+          },
+          {
+            "date": "2024-10-10",
+            "ts": 1728619200,
+            "p": 0.53
+          },
+          {
+            "date": "2024-10-11",
+            "ts": 1728705600,
+            "p": 0.53
+          },
+          {
+            "date": "2024-10-12",
+            "ts": 1728792000,
+            "p": 0.54
+          },
+          {
+            "date": "2024-10-13",
+            "ts": 1728878400,
+            "p": 0.54
+          },
+          {
+            "date": "2024-10-14",
+            "ts": 1728964800,
+            "p": 0.55
+          },
+          {
+            "date": "2024-10-15",
+            "ts": 1729051200,
+            "p": 0.57
+          },
+          {
+            "date": "2024-10-16",
+            "ts": 1729137600,
+            "p": 0.56
+          },
+          {
+            "date": "2024-10-17",
+            "ts": 1729224000,
+            "p": 0.58
+          },
+          {
+            "date": "2024-10-18",
+            "ts": 1729310400,
+            "p": 0.58
+          },
+          {
+            "date": "2024-10-19",
+            "ts": 1729396800,
+            "p": 0.56
+          },
+          {
+            "date": "2024-10-20",
+            "ts": 1729483200,
+            "p": 0.58
+          },
+          {
+            "date": "2024-10-21",
+            "ts": 1729569600,
+            "p": 0.61
+          },
+          {
+            "date": "2024-10-22",
+            "ts": 1729656000,
+            "p": 0.6
+          },
+          {
+            "date": "2024-10-23",
+            "ts": 1729742400,
+            "p": 0.59
+          },
+          {
+            "date": "2024-10-24",
+            "ts": 1729828800,
+            "p": 0.62
+          },
+          {
+            "date": "2024-10-25",
+            "ts": 1729915200,
+            "p": 0.61
+          },
+          {
+            "date": "2024-10-26",
+            "ts": 1730001600,
+            "p": 0.62
+          },
+          {
+            "date": "2024-10-27",
+            "ts": 1730088000,
+            "p": 0.63
+          },
+          {
+            "date": "2024-10-28",
+            "ts": 1730174400,
+            "p": 0.62
+          },
+          {
+            "date": "2024-10-29",
+            "ts": 1730260800,
+            "p": 0.62
+          },
+          {
+            "date": "2024-10-30",
+            "ts": 1730347200,
+            "p": 0.59
+          },
+          {
+            "date": "2024-10-31",
+            "ts": 1730433600,
+            "p": 0.58
+          },
+          {
+            "date": "2024-11-01",
+            "ts": 1730520000,
+            "p": 0.56
+          },
+          {
+            "date": "2024-11-02",
+            "ts": 1730606400,
+            "p": 0.49
+          },
+          {
+            "date": "2024-11-03",
+            "ts": 1730692800,
+            "p": 0.53
+          },
+          {
+            "date": "2024-11-04",
+            "ts": 1730782800,
+            "p": 0.57
+          }
+        ],
+        "leadTimes": [
+          {
+            "nDays": 1,
+            "p": 0.53,
+            "brier": 0.22089999999999999,
+            "logloss": 0.6348782724359695,
+            "holdPnlPerContract": 0.47
+          },
+          {
+            "nDays": 3,
+            "p": 0.56,
+            "brier": 0.19359999999999997,
+            "logloss": 0.579818495252942,
+            "holdPnlPerContract": 0.43999999999999995
+          },
+          {
+            "nDays": 7,
+            "p": 0.62,
+            "brier": 0.1444,
+            "logloss": 0.4780358009429998,
+            "holdPnlPerContract": 0.38
+          },
+          {
+            "nDays": 14,
+            "p": 0.61,
+            "brier": 0.1521,
+            "logloss": 0.4942963218147801,
+            "holdPnlPerContract": 0.39
+          },
+          {
+            "nDays": 30,
+            "p": 0.5,
+            "brier": 0.25,
+            "logloss": 0.6931471805599453,
+            "holdPnlPerContract": 0.5
+          },
+          {
+            "nDays": 60,
+            "p": null,
+            "brier": null,
+            "logloss": null,
+            "holdPnlPerContract": null
+          }
+        ],
+        "calibration": {
+          "buckets": [
+            {
+              "lo": 0,
+              "hi": 10,
+              "samples": 0
+            },
+            {
+              "lo": 10,
+              "hi": 20,
+              "samples": 0
+            },
+            {
+              "lo": 20,
+              "hi": 30,
+              "samples": 0
+            },
+            {
+              "lo": 30,
+              "hi": 40,
+              "samples": 0
+            },
+            {
+              "lo": 40,
+              "hi": 50,
+              "samples": 1
+            },
+            {
+              "lo": 50,
+              "hi": 60,
+              "samples": 23
+            },
+            {
+              "lo": 60,
+              "hi": 70,
+              "samples": 8
+            },
+            {
+              "lo": 70,
+              "hi": 80,
+              "samples": 0
+            },
+            {
+              "lo": 80,
+              "hi": 90,
+              "samples": 0
+            },
+            {
+              "lo": 90,
+              "hi": 100,
+              "samples": 0
+            }
+          ],
+          "outcomeWasYes": true
+        }
+      },
+      {
+        "ticker": "CONTROLH-2024-R",
+        "title": "Will Republicans win the House?",
+        "outcomeIsYes": true,
+        "series": [
+          {
+            "date": "2024-09-12",
+            "ts": 1726200000,
+            "p": 0.37
+          },
+          {
+            "date": "2024-10-09",
+            "ts": 1728532800,
+            "p": 0.4
+          },
+          {
+            "date": "2024-10-16",
+            "ts": 1729137600,
+            "p": 0.46
+          },
+          {
+            "date": "2024-10-17",
+            "ts": 1729224000,
+            "p": 0.49
+          },
+          {
+            "date": "2024-10-18",
+            "ts": 1729310400,
+            "p": 0.49
+          },
+          {
+            "date": "2024-10-21",
+            "ts": 1729569600,
+            "p": 0.52
+          },
+          {
+            "date": "2024-10-22",
+            "ts": 1729656000,
+            "p": 0.52
+          },
+          {
+            "date": "2024-10-23",
+            "ts": 1729742400,
+            "p": 0.51
+          },
+          {
+            "date": "2024-10-25",
+            "ts": 1729915200,
+            "p": 0.52
+          },
+          {
+            "date": "2024-10-28",
+            "ts": 1730174400,
+            "p": 0.53
+          },
+          {
+            "date": "2024-10-29",
+            "ts": 1730260800,
+            "p": 0.57
+          },
+          {
+            "date": "2024-10-30",
+            "ts": 1730347200,
+            "p": 0.58
+          },
+          {
+            "date": "2024-10-31",
+            "ts": 1730433600,
+            "p": 0.54
+          },
+          {
+            "date": "2024-11-01",
+            "ts": 1730520000,
+            "p": 0.52
+          },
+          {
+            "date": "2024-11-02",
+            "ts": 1730606400,
+            "p": 0.51
+          },
+          {
+            "date": "2024-11-03",
+            "ts": 1730692800,
+            "p": 0.47
+          },
+          {
+            "date": "2024-11-04",
+            "ts": 1730782800,
+            "p": 0.49
+          }
+        ],
+        "leadTimes": [
+          {
+            "nDays": 1,
+            "p": 0.47,
+            "brier": 0.28090000000000004,
+            "logloss": 0.7550225842780328,
+            "holdPnlPerContract": 0.53
+          },
+          {
+            "nDays": 3,
+            "p": 0.52,
+            "brier": 0.2304,
+            "logloss": 0.6539264674066639,
+            "holdPnlPerContract": 0.48
+          },
+          {
+            "nDays": 7,
+            "p": 0.53,
+            "brier": 0.22089999999999999,
+            "logloss": 0.6348782724359695,
+            "holdPnlPerContract": 0.47
+          },
+          {
+            "nDays": 14,
+            "p": 0.52,
+            "brier": 0.2304,
+            "logloss": 0.6539264674066639,
+            "holdPnlPerContract": 0.48
+          },
+          {
+            "nDays": 30,
+            "p": 0.37,
+            "brier": 0.39690000000000003,
+            "logloss": 0.994252273343867,
+            "holdPnlPerContract": 0.63
+          },
+          {
+            "nDays": 60,
+            "p": null,
+            "brier": null,
+            "logloss": null,
+            "holdPnlPerContract": null
+          }
+        ],
+        "calibration": {
+          "buckets": [
+            {
+              "lo": 0,
+              "hi": 10,
+              "samples": 0
+            },
+            {
+              "lo": 10,
+              "hi": 20,
+              "samples": 0
+            },
+            {
+              "lo": 20,
+              "hi": 30,
+              "samples": 0
+            },
+            {
+              "lo": 30,
+              "hi": 40,
+              "samples": 1
+            },
+            {
+              "lo": 40,
+              "hi": 50,
+              "samples": 6
+            },
+            {
+              "lo": 50,
+              "hi": 60,
+              "samples": 10
+            },
+            {
+              "lo": 60,
+              "hi": 70,
+              "samples": 0
+            },
+            {
+              "lo": 70,
+              "hi": 80,
+              "samples": 0
+            },
+            {
+              "lo": 80,
+              "hi": 90,
+              "samples": 0
+            },
+            {
+              "lo": 90,
+              "hi": 100,
+              "samples": 0
+            }
+          ],
+          "outcomeWasYes": true
+        }
+      },
+      {
+        "ticker": "CONTROLS-2024-R",
+        "title": "Will Republicans win the Senate?",
+        "outcomeIsYes": true,
+        "series": [
+          {
+            "date": "2024-09-12",
+            "ts": 1726200000,
+            "p": 0.75
+          },
+          {
+            "date": "2024-10-03",
+            "ts": 1728014400,
+            "p": 0.73
+          },
+          {
+            "date": "2024-10-08",
+            "ts": 1728446400,
+            "p": 0.74
+          },
+          {
+            "date": "2024-10-09",
+            "ts": 1728532800,
+            "p": 0.74
+          },
+          {
+            "date": "2024-10-10",
+            "ts": 1728619200,
+            "p": 0.74
+          },
+          {
+            "date": "2024-10-13",
+            "ts": 1728878400,
+            "p": 0.78
+          },
+          {
+            "date": "2024-10-14",
+            "ts": 1728964800,
+            "p": 0.79
+          },
+          {
+            "date": "2024-10-15",
+            "ts": 1729051200,
+            "p": 0.8
+          },
+          {
+            "date": "2024-10-16",
+            "ts": 1729137600,
+            "p": 0.82
+          },
+          {
+            "date": "2024-10-17",
+            "ts": 1729224000,
+            "p": 0.82
+          },
+          {
+            "date": "2024-10-24",
+            "ts": 1729828800,
+            "p": 0.85
+          },
+          {
+            "date": "2024-10-26",
+            "ts": 1730001600,
+            "p": 0.85
+          },
+          {
+            "date": "2024-10-28",
+            "ts": 1730174400,
+            "p": 0.86
+          },
+          {
+            "date": "2024-10-29",
+            "ts": 1730260800,
+            "p": 0.86
+          },
+          {
+            "date": "2024-10-30",
+            "ts": 1730347200,
+            "p": 0.84
+          },
+          {
+            "date": "2024-10-31",
+            "ts": 1730433600,
+            "p": 0.85
+          },
+          {
+            "date": "2024-11-01",
+            "ts": 1730520000,
+            "p": 0.83
+          },
+          {
+            "date": "2024-11-02",
+            "ts": 1730606400,
+            "p": 0.82
+          },
+          {
+            "date": "2024-11-03",
+            "ts": 1730692800,
+            "p": 0.79
+          },
+          {
+            "date": "2024-11-04",
+            "ts": 1730782800,
+            "p": 0.83
+          }
+        ],
+        "leadTimes": [
+          {
+            "nDays": 1,
+            "p": 0.79,
+            "brier": 0.044099999999999986,
+            "logloss": 0.23572233352106983,
+            "holdPnlPerContract": 0.20999999999999996
+          },
+          {
+            "nDays": 3,
+            "p": 0.83,
+            "brier": 0.028900000000000012,
+            "logloss": 0.18632957819149348,
+            "holdPnlPerContract": 0.17000000000000004
+          },
+          {
+            "nDays": 7,
+            "p": 0.86,
+            "brier": 0.019600000000000003,
+            "logloss": 0.15082288973458366,
+            "holdPnlPerContract": 0.14
+          },
+          {
+            "nDays": 14,
+            "p": 0.82,
+            "brier": 0.03240000000000002,
+            "logloss": 0.19845093872383832,
+            "holdPnlPerContract": 0.18000000000000005
+          },
+          {
+            "nDays": 30,
+            "p": 0.73,
+            "brier": 0.0729,
+            "logloss": 0.31471074483970024,
+            "holdPnlPerContract": 0.27
+          },
+          {
+            "nDays": 60,
+            "p": null,
+            "brier": null,
+            "logloss": null,
+            "holdPnlPerContract": null
+          }
+        ],
+        "calibration": {
+          "buckets": [
+            {
+              "lo": 0,
+              "hi": 10,
+              "samples": 0
+            },
+            {
+              "lo": 10,
+              "hi": 20,
+              "samples": 0
+            },
+            {
+              "lo": 20,
+              "hi": 30,
+              "samples": 0
+            },
+            {
+              "lo": 30,
+              "hi": 40,
+              "samples": 0
+            },
+            {
+              "lo": 40,
+              "hi": 50,
+              "samples": 0
+            },
+            {
+              "lo": 50,
+              "hi": 60,
+              "samples": 0
+            },
+            {
+              "lo": 60,
+              "hi": 70,
+              "samples": 0
+            },
+            {
+              "lo": 70,
+              "hi": 80,
+              "samples": 8
+            },
+            {
+              "lo": 80,
+              "hi": 90,
+              "samples": 12
+            },
+            {
+              "lo": 90,
+              "hi": 100,
+              "samples": 0
+            }
+          ],
+          "outcomeWasYes": true
+        }
+      }
+    ],
+    "aggregate": [
+      {
+        "nDays": 1,
+        "nMarkets": 3,
+        "meanProbYes": 0.5966666666666667,
+        "meanBrier": 0.1819666666666667,
+        "meanLogloss": 0.541874396745024,
+        "meanHoldPnlPerContract": 0.4033333333333333
+      },
+      {
+        "nDays": 3,
+        "nMarkets": 3,
+        "meanProbYes": 0.6366666666666667,
+        "meanBrier": 0.15096666666666667,
+        "meanLogloss": 0.47335818028369986,
+        "meanHoldPnlPerContract": 0.3633333333333333
+      },
+      {
+        "nDays": 7,
+        "nMarkets": 3,
+        "meanProbYes": 0.6699999999999999,
+        "meanBrier": 0.1283,
+        "meanLogloss": 0.4212456543711843,
+        "meanHoldPnlPerContract": 0.33
+      },
+      {
+        "nDays": 14,
+        "nMarkets": 3,
+        "meanProbYes": 0.6499999999999999,
+        "meanBrier": 0.1383,
+        "meanLogloss": 0.44889124264842745,
+        "meanHoldPnlPerContract": 0.35000000000000003
+      },
+      {
+        "nDays": 30,
+        "nMarkets": 3,
+        "meanProbYes": 0.5333333333333333,
+        "meanBrier": 0.23993333333333333,
+        "meanLogloss": 0.6673700662478376,
+        "meanHoldPnlPerContract": 0.4666666666666666
+      },
+      {
+        "nDays": 60,
+        "nMarkets": 0,
+        "meanProbYes": null,
+        "meanBrier": null,
+        "meanLogloss": null,
+        "meanHoldPnlPerContract": null
+      }
+    ],
+    "electionDayTs": 1730851200
+  },
+  "pollBacktest": {
+    "anchorDate": "2024-09-12",
+    "anchorMargin": -2.8233999999999995,
+    "finalOutcomeMargin": 1.45,
+    "finalOutcome": "Trump +1.45pp (2-party popular vote; FEC 77,302,580 / 75,017,613)",
+    "pollAnchorAbsErrorPp": 4.2734,
+    "marketAbsErrorPp": 4.550000000000005,
+    "checkpoints": [
+      "2024-06-30",
+      "2024-07-21",
+      "2024-08-31",
+      "2024-09-12"
+    ],
+    "lateWindow": [
+      {
+        "date": "2024-10-15",
+        "pollAnchorDate": "2024-09-12",
+        "pollAnchorAgeDays": 33,
+        "poll2PartyMargin": -2.8233999999999995,
+        "pollImpliedTrumpProb": 0.3480952706173157,
+        "kalshiDjtClose": 0.55,
+        "kalshiCloseDate": "2024-10-14",
+        "gapPollVsMarket": -0.20190472938268433
+      },
+      {
+        "date": "2024-10-28",
+        "pollAnchorDate": "2024-09-12",
+        "pollAnchorAgeDays": 46,
+        "poll2PartyMargin": -2.8233999999999995,
+        "pollImpliedTrumpProb": 0.3480952706173157,
+        "kalshiDjtClose": 0.63,
+        "kalshiCloseDate": "2024-10-27",
+        "gapPollVsMarket": -0.2819047293826843
+      },
+      {
+        "date": "2024-11-01",
+        "pollAnchorDate": "2024-09-12",
+        "pollAnchorAgeDays": 50,
+        "poll2PartyMargin": -2.8233999999999995,
+        "pollImpliedTrumpProb": 0.3480952706173157,
+        "kalshiDjtClose": 0.58,
+        "kalshiCloseDate": "2024-10-31",
+        "gapPollVsMarket": -0.23190472938268425
+      },
+      {
+        "date": "2024-11-03",
+        "pollAnchorDate": "2024-09-12",
+        "pollAnchorAgeDays": 52,
+        "poll2PartyMargin": -2.8233999999999995,
+        "pollImpliedTrumpProb": 0.3480952706173157,
+        "kalshiDjtClose": 0.49,
+        "kalshiCloseDate": "2024-11-02",
+        "gapPollVsMarket": -0.14190472938268428
+      }
+    ]
+  }
+}
