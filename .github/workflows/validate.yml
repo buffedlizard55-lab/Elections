@@ -1,0 +1,23 @@
+name: Validate
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Schema-validate master sources
+        run: python scripts/validate_sources.py
+      - name: Paper-trading engine (simulated demo)
+        run: python scripts/paper_trading.py --demo --season CI-DEMO --no-write-latest && rm -f contest/leaderboard_CI-DEMO.* contest/fills_CI-DEMO.jsonl
+      - name: Backtester (synthetic demo)
+        run: python scripts/backtest.py --demo-synthetic --report-name ci_demo && rm -f backtest/reports/ci_demo.*
+      - name: Compile-check all scripts
+        run: python -m compileall -q scripts

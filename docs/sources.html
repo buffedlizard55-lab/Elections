@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources — Elections</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html">Home</a>
+    <a href="sources.html" class="active">Sources</a>
+    <a href="kalshi.html">Kalshi Markets</a>
+    <a href="contest.html">Contest</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="verification.html">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>Master sources — batch 1 (20 verified entries)</h2>
+    <p class="lead">Free, publicly available data from official, verified, trusted sources only. Every URL below was checked on 2026-09-18 — open any link to review it yourself. Caveats are shown inline, not hidden.</p>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Filter by name, tag, or keyword…">
+    <select id="cat">
+      <option value="">All categories</option>
+      <option value="government-official">Government · official</option>
+      <option value="academic">Academic</option>
+      <option value="pollster">Pollsters</option>
+      <option value="aggregator-analysis">Analysis / aggregation</option>
+    </select>
+    <span class="muted" id="count"></span>
+  </div>
+
+  <div class="table-scroll"><table class="data" id="sources-table">
+    <thead><tr><th>ID</th><th>Source</th><th>Category</th><th>Links</th><th>Status</th><th>Caveats</th></tr></thead>
+    <tbody><tr><td colspan="6">Loading…</td></tr></tbody>
+  </table></div>
+
+  <div class="card" style="margin-top:18px">
+    <h3>Researched but excluded</h3>
+    <p>Seven candidates failed admission (defunct, paywalled, or not yet verified). They are documented — not silently dropped — on the verification page.</p>
+    <a href="verification.html#flagged">See flagged candidates →</a>
+  </div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice. · Sources verified 2026-09-18.
+</div></footer>
+<script src="assets/site.js"></script>
+<script>
+let ALL = [];
+function row(s) {
+  const links = link(s.url_primary, "primary") + (s.url_data ? "<br>" + link(s.url_data, "data") : "");
+  const cav = (s.caveats && s.caveats.length)
+    ? s.caveats.map(c => "<div>⚠️ " + esc(c) + "</div>").join("") : "<span class='muted'>none</span>";
+  return "<tr><td><code>" + esc(s.id) + "</code></td>" +
+    "<td><strong>" + esc(s.name) + "</strong><br><span class='muted'>" + esc(s.description) + "</span><br>" +
+    "<span class='muted'>updates: " + esc(s.update_frequency) + " · access: " + esc(s.access) + "</span></td>" +
+    "<td>" + esc(s.category) + "<br><span class='muted'>" + esc(s.type) + "</span></td>" +
+    "<td>" + links + "</td>" +
+    "<td>" + statusBadge(s.verification && s.verification.status) + "<br><span class='muted'>" + esc(s.checked_date) + "</span></td>" +
+    "<td>" + cav + "</td></tr>";
+}
+function render() {
+  const q = document.getElementById("q").value.toLowerCase();
+  const cat = document.getElementById("cat").value;
+  const list = ALL.filter(s => {
+    if (cat && s.category !== cat) return false;
+    if (!q) return true;
+    return (s.name + " " + s.description + " " + (s.tags || []).join(" ") + " " + s.id).toLowerCase().includes(q);
+  });
+  document.querySelector("#sources-table tbody").innerHTML = list.map(row).join("") || '<tr><td colspan="6">No matches.</td></tr>';
+  document.getElementById("count").textContent = list.length + " of " + ALL.length + " shown";
+}
+loadJSON("data/master_sources.json").then(d => {
+  ALL = d.sources;
+  render();
+  document.getElementById("q").addEventListener("input", render);
+  document.getElementById("cat").addEventListener("change", render);
+}).catch(e => showError("count", e));
+</script>
+</body>
+</html>

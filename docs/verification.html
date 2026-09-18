@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification &amp; Flags — Elections</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html">Home</a>
+    <a href="sources.html">Sources</a>
+    <a href="kalshi.html">Kalshi Markets</a>
+    <a href="contest.html">Contest</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="verification.html" class="active">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>Verification &amp; flags</h2>
+    <p class="lead">The receipts: how each source was checked, what failed admission, and every open irregularity. Re-verify anything here with one click.</p>
+  </div>
+
+  <div class="card md" id="verlog"><h3>Line-by-line verification log</h3><p>Loading…</p></div>
+
+  <div class="card" id="flagged">
+    <h3>Flagged / excluded candidates</h3>
+    <p>Researched but not admitted to the live master list — with reasons and evidence.</p>
+    <div class="table-scroll"><table class="data" id="flag-table">
+      <thead><tr><th>ID</th><th>Candidate</th><th>Reason</th><th>Evidence</th><th>Decision</th></tr></thead>
+      <tbody><tr><td colspan="5">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="card md" id="irr"><h3>Irregularities log</h3><p>Loading…</p></div>
+
+  <div class="grid">
+    <div class="card md" id="limits"><h3>Limitations</h3><p>Loading…</p></div>
+    <div class="card md" id="next"><h3>Next session</h3><p>Loading…</p></div>
+  </div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice. · Sources verified 2026-09-18.
+</div></footer>
+<script src="assets/site.js"></script>
+<script>
+loadText("data/verification_log.md").then(md => {
+  document.getElementById("verlog").innerHTML = tinyMD(md);
+}).catch(e => showError("verlog", e));
+loadText("data/irregularities.md").then(md => {
+  document.getElementById("irr").innerHTML = tinyMD(md);
+}).catch(() => {});
+loadText("data/limitations.md").then(md => {
+  document.getElementById("limits").innerHTML = tinyMD(md);
+}).catch(() => {});
+loadText("data/next_session.md").then(md => {
+  document.getElementById("next").innerHTML = tinyMD(md);
+}).catch(() => {});
+loadJSON("data/flagged_sources.json").then(f => {
+  document.querySelector("#flag-table tbody").innerHTML = f.sources.map(s =>
+    "<tr><td><code>" + esc(s.id) + "</code></td>" +
+    "<td><strong>" + esc(s.name) + "</strong><br>" + (s.url ? link(s.url) : "<span class='muted'>URL unverified</span>") + "</td>" +
+    "<td>" + esc(s.reason) + "</td>" +
+    "<td><span class='muted'>" + s.evidence.map(esc).join("<br><br>") + "</span></td>" +
+    "<td>" + esc(s.decision) + "</td></tr>"
+  ).join("");
+}).catch(e => showError("flagged", e));
+</script>
+</body>
+</html>
