@@ -4,22 +4,29 @@ Machine-readable twin: `data/roadmap.json`. Ordered by value; each item is self-
 
 ## Next work
 
-### R1 · Daily automated collection (needs a networked runner) — P1
-`scripts/collect-kalshi.mjs` is written and paginates the live + historical tiers, but the 2026-09-18
-sandbox had no general internet, so it has **not** been exercised live. The committed workflow
-(`.github/workflows/daily-collection.yml`) is disabled by default (`vars.COLLECT_ENABLED`) until a
-proven dry-run passes. Once enabled it accumulates, daily: the full open-market universe, order books,
-candlestick history for new markets, and settled markets into the historical tier — every artifact
-carrying `capturedFrom`+`capturedAt` (the lint enforces it). **Why:** forward collection is an explicit
-project requirement, and the 2026 evidence base grows daily.
+### R1 · Daily automated collection (networked runner) — P1, IN FLIGHT
+Collectors are written and wired: `scripts/collect-universe.mjs` (full open politics/elections
+universe + series registry + append-only daily tracker + settled-2026 candle seed →
+`data/kalshi/forward/`) and the workflow pair `.github/workflows/universe-collection.yml` (daily
+12:40 UTC cron, enabled by default — no variable gate) + `daily-collection.yml` (bootstrap copy with
+a temporary push trigger). GitHub-hosted runners have normal network access to the official Kalshi
+API, so collection runs there and commits back to the branch (`[skip ci]` on collector commits; the
+bot token cannot dispatch workflows — 403 — hence the push-trigger bootstrap). **Status 2026-09-19:**
+first networked run (#5) proved the trigger + tests-on-runner path, then hit the 30-minute job
+timeout inside the rate-limited universe sweep (~25+ min elapsed) — timeout raised to 90 min; the
+re-trigger push is pending a GitHub credential refresh in the sandbox. Once merged, the cron does
+the daily loop with no further action. Every artifact carries `capturedFrom`+`capturedAt` (lint
+enforces; lint is fatal in the workflow after collection).
 
-### R2 · 2024 per-state Senate race markets — P2
-This session verified the `PRES`, `CONTROLH`, `CONTROLS` series (2024 settled + 2026/2028 live). The
-per-state 2024 Senate tickers were **not** found by guessing and the API has no public search endpoint.
-Next: enumerate `GET /historical/markets` by event-ticker pattern, or mine kalshi.com slugs for 2024
-Senate pages; capture candlesticks; extend the multi-market backtest from 3 to ~40 markets.
-**Why:** the single biggest backtest-power upgrade (state-level structure: incumbency, partisans,
-toss-up buckets).
+### R2 · 2024 per-state Senate race markets — P2, collector ready
+`scripts/collect-senate-2024-races.mjs` walks all 50 `SENATE{ST}` series via
+`GET /historical/markets` (close_time ∈ [2024-11-01, 2025-02-01)), captures daily candlesticks
+open→2024-12-01 for every market found, is idempotent (never rewrites an existing capture unless
+`--force`), exits 1 on an empty capture, and writes `data/kalshi/historical-2024/senate-races.json`.
+It runs inside both workflows right after the universe step; official outcomes for the 18
+Kalshi-listed races are already committed (`data/outcomes/senate-2024-official.json`), and the
+senate backtest engine + site section consume the capture as soon as it lands. Awaiting the first
+successful networked run (see R1).
 
 ### R3 · 2026 forward collection with a live calibration tracker — P3
 As R1's data accumulates: store each open 2026 market's implied probability daily; compute Brier/
@@ -49,19 +56,24 @@ volatility-scaled sizing); cumulative 2-cycle PnL ranking after 2026 settles; Th
 min-trading-days rule (≥3 trading days to be ranked). **Why:** the competition is the user's explicit
 framing; 2024 is a pilot cycle.
 
-### R8 · Provenance hardening — P8 (partially done 2026-09-19)
-Dated per-session sections now exist (2026-09-18 base + 2026-09-19 §6, including the 21-entry
-expansion, URL corrections, and fetch-failure records). **Remaining:** add SHA-256 hashes of the
-CSV copies in `data/polls/PROVENANCE.md`; re-verify `iem.isu.edu` directly (the 2026-09-19 fetch
-failed via the sandbox proxy — the entry is marked `verified-via-search`).
+### R8 · Provenance hardening — P8, DONE 2026-09-19
+Dated per-session sections exist (2026-09-18 base + 2026-09-19 §6 + §7). SHA-256 hashes of the
+three poll CSV copies are recorded in `data/polls/PROVENANCE.md`. The IEM entry is corrected and
+verified live: `iem.isu.edu` was the wrong domain entirely (Iowa State ≠ University of Iowa); the
+real properties `iem.uiowa.edu/iem/` and `iemweb.biz.uiowa.edu/markets/` were fetched directly
+(three 2026 congressional-control WTA markets open) — irregularity #26 opened and resolved. The
+master list now has **73 entries** (second 20-entry batch verified line-by-line in §7).
 **Why:** third-party auditability without network access.
 
 ## Current limitations (honest list)
 
-1. Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 session verified
-   21 additional sources directly (master list now 53), but `iem.isu.edu` and the IEM 2026 prospectus
-   PDF could not be fetched directly (proxy errors) — that entry is verified-via-search and needs a
-   networked re-check. The full open-market universe still awaits R1.
+1. Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 sessions verified
+   41 additional sources (master list now 73) and corrected the IEM entry to its true University-of-Iowa
+   domains (verified live; `iem.isu.edu` was simply wrong — irregularity #26). Three entries remain
+   `verified-via-search` where the sandbox proxy blocked direct fetches (Suffolk SUPRC landing page,
+   Morning Consult intel tracker, NCSL hub) — each flagged in its own entry. The full open-market
+   universe lands with R1's first completed networked run (run #5 proved the path, then hit the 30-min
+   timeout mid-sweep; timeout now 90 min, re-trigger pending credential refresh).
 2. 2024 market backtest = 3 markets (presidency + both chamber controls). Directionally strong (all
    settled YES on the R side, matching official outcomes), statistically thin.
 3. NO-side candle prices are derived reciprocals (1 − yesClose); the raw API publishes only the YES

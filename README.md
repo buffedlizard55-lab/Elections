@@ -13,7 +13,7 @@ on Kalshi's open political/election markets.
 
 | | Node pipeline (primary data engines) | Python toolkit (registry + collectors + validators) |
 |---|---|---|
-| Sources | `data/sources/master.json` — 53 verified entries (32 from 2026-09-18 + 21 from 2026-09-19) | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
+| Sources | `data/sources/master.json` — 73 verified entries (32 from 2026-09-18 + 21 + 20 from 2026-09-19) | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
 | Verification log | `VERIFICATION.md` | `data/verification_log.md` |
 | Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/live/…` (series-targeted + candles) | `scripts/fetch_kalshi.py` → `data/kalshi/markets_*.json` (full-universe + keyword filter) |
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
@@ -33,7 +33,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, 2026 live markets, backtests, contest, sources, irregularities, methodology, roadmap |
 | `docs/` | Toolkit site (served as `/docs/`): 20-source registry browser, Kalshi layer, contest leaderboard, methodology, verification evidence |
 | `data/kalshi/` | Captured Kalshi data: 2026-09-18 live-market snapshot; settled 2024 markets live in `src/kalshi-data.js` with per-bar provenance |
-| `data/sources/master.json` | **Master source list — 53 verified entries** (32 from 2026-09-18 + 21 from 2026-09-19), each with a manual-review link and a line-by-line verification note |
+| `data/sources/master.json` | **Master source list — 73 verified entries** (32 from 2026-09-18 + 41 from 2026-09-19), each with a manual-review link and a line-by-line verification note |
 | `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6: the 21 new entries, URL corrections, and fetch failures) |
 | `data/master_sources.json` | **Live-only registry — 20 entries** (5 government · 5 academic · 6 pollsters · 4 analysis), independently verified 2026-09-18 |
 | `data/outcomes/verified-outcomes.json` | Verified official outcomes (2020/2024 presidency, 2024 Senate & House control) with per-claim sources and Kalshi-settlement cross-checks (all PASS) |
@@ -100,10 +100,12 @@ python scripts/sync_site_data.py              # refresh docs/data for the toolki
 
 The 2024 market backtest covers 3 markets (universe expansion is ROADMAP R2); the 538 poll archive
 ends 2024-09-12 (late window reuses the anchor with age disclosed); the election-day (Nov 5) candle
-bar was not captured; the full 2026 live universe is enumerated by the collectors on networked runs;
-the Iowa Electronic Markets entry (master-list #53) was verified via live search because
-`iem.isu.edu` could not be fetched directly in the sandbox (marked `verified-via-search`, re-check
-on a networked run). Python track: no live Kalshi snapshot yet (daily `collect.yml` starts after
+bar was not captured; the full 2026 live universe is enumerated by the collectors on networked runs
+(first networked run exceeded the initial 30-min job timeout — raised to 90 min; the rate-limited
+Kalshi universe sweep takes ~25+ min). The Iowa Electronic Markets entry originally cited the wrong
+domain (`iem.isu.edu` = Iowa State); corrected 2026-09-19 to the live University of Iowa properties
+(`iem.uiowa.edu/iem/` + markets board `iemweb.biz.uiowa.edu/markets/`, both fetched — irregularity
+#26, resolved). Python track: no live Kalshi snapshot yet (daily `collect.yml` starts after
 merge), fees/slippage not modeled in the paper engine. Full lists: [ROADMAP.md](ROADMAP.md) and
 [LIMITATIONS.md](LIMITATIONS.md).
 

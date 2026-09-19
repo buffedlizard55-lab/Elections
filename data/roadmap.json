@@ -6,14 +6,14 @@
       "id": "R1",
       "priority": 1,
       "title": "Daily automated collection (needs a networked runner)",
-      "detail": "scripts/collect-kalshi.mjs is written and unit-scaffolded, but this session's sandbox had no general internet, so it could not be exercised live. Run it in CI (workflow committed: .github/workflows/daily-collection.yml, disabled until the collector is proven) to accumulate: full open-market universe (paginated GET /markets), order books, candlestick histories for every new market, and the historical tier as markets settle. Every artifact must carry capturedFrom+capturedAt or the lint fails.",
+      "detail": "IN FLIGHT 2026-09-19: collectors written (scripts/collect-universe.mjs → data/kalshi/forward/{series-registry,universe-open,settled-2026-seed,meta-*}.json + open-prices.csv append-only tracker) and wired into two workflows: universe-collection.yml (daily 12:40 UTC cron, ENABLED by default — the steady-state loop after merge) and daily-collection.yml (bootstrap copy with a temporary push trigger because the automation token cannot dispatch workflows — 403). First networked run (#5, push-triggered on a GitHub-hosted runner) proved the path: tests-on-runner passed, universe sweep ran 25+ min against the rate-limited Kalshi API, then the job hit its 30-minute timeout — timeout raised to 90 min (both workflows). Re-trigger push pending a sandbox GitHub-credential refresh (GH_TOKEN expired mid-session). Collector commits carry [skip ci] (no trigger loops) and the workflow rebases before pushing.",
       "why": "Forward collection is the user's explicit requirement ('internally model/forecast via historical data collection + backtesting + forward collection') and the 2026 live-cycle evidence base grows daily."
     },
     {
       "id": "R2",
       "priority": 2,
       "title": "2024 per-state Senate race markets (series tickers not yet identified)",
-      "detail": "This session verified the PRES, CONTROLH and CONTROLS series (2024 settled + 2026/2028 live). The per-state 2024 Senate tickers (e.g. a 2024 Arizona market) were not found by guessing; the API has no public search endpoint. Next step: enumerate GET /historical/markets by event-ticker pattern or mine kalshi.com slugs for 2024 Senate pages, capture candlesticks, and extend the multi-market backtest from 3 to ~40 markets. This is the single biggest backtest-power upgrade.",
+      "detail": "COLLECTOR READY 2026-09-19: scripts/collect-senate-2024-races.mjs walks all 50 SENATE{ST} series via GET /historical/markets (close_time window 2024-11-01..2025-02-01), captures daily candlesticks open→2024-12-01, idempotent unless --force, exits 1 on empty capture, writes data/kalshi/historical-2024/senate-races.json. Official outcomes for the 18 Kalshi-listed races committed (data/outcomes/senate-2024-official.json: R flips MT/OH/PA/WV → 53-47; NE = R vs Independent). Senate backtest engine + site section consume the capture automatically. Awaiting the first completed networked run (R1 timeout fix pushed).",
       "why": "A 3-market backtest can detect gross miscalibration but not state-level structure (incumbency, partisans, toss-up buckets)."
     },
     {
