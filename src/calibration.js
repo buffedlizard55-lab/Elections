@@ -32,6 +32,8 @@ export const logloss = (p, o) => { const q = clip(p); return -o * Math.log(q) - 
 export function seriesByTicker(dailyRows) {
   const out = new Map();
   for (const r of dailyRows) {
+    // rows captured after trading ended (status closed/finalized/settled) are not forecasts
+    if (r.status && r.status !== 'active' && r.status !== 'open') continue;
     const row = {
       yes_bid: r.yes_bid === '' || r.yes_bid == null ? null : Number(r.yes_bid),
       yes_ask: r.yes_ask === '' || r.yes_ask == null ? null : Number(r.yes_ask),
@@ -70,8 +72,11 @@ export function scoreCalibration(dailyRows, settlements, leads = LEAD_DAYS) {
   for (const [ticker, s] of Object.entries(settlements)) {
     if (s.result !== 'yes' && s.result !== 'no') continue; // only binary official results are scored
     const o = s.result === 'yes' ? 1 : 0;
-    const obs = series.get(ticker) || [];
     const settleDay = isoDay(Date.parse(s.settlement_ts || s.close_time));
+    // Only observations strictly BEFORE the settlement day are forecasts; a price captured on or after
+    // settlement (e.g. a finalized rung still nested in an open event) is look-ahead and is excluded.
+    const allObs = series.get(ticker) || [];
+    const obs = allObs.filter((pt) => pt.date < settleDay);
     const leadScores = leads.map((n) => {
       const pt = lastOnOrBefore(obs, shiftDays(settleDay, -n));
       if (!pt) return { nDays: n, p: null, date: null, brier: null, logloss: null };
@@ -84,6 +89,7 @@ export function scoreCalibration(dailyRows, settlements, leads = LEAD_DAYS) {
       result: s.result,
       settlementDay: settleDay,
       observations: obs.length,
+      observationsOnOrAfterSettlement: allObs.length - obs.length,
       firstObserved: obs.length ? obs[0].date : null,
       lastObserved: obs.length ? obs[obs.length - 1].date : null,
       leads: leadScores,
@@ -102,7 +108,7 @@ export function scoreCalibration(dailyRows, settlements, leads = LEAD_DAYS) {
   const buckets = Array.from({ length: 10 }, (_, i) => ({ lo: i / 10, hi: (i + 1) / 10, n: 0, sumP: 0, yes: 0 }));
   for (const m of perMarket) {
     const o = m.result === 'yes' ? 1 : 0;
-    for (const pt of series.get(m.ticker) || []) {
+    for (const pt of (series.get(m.ticker) || []).filter((x) => x.date < m.settlementDay)) {
       const i = Math.min(9, Math.floor(pt.p * 10));
       buckets[i].n += 1; buckets[i].sumP += pt.p; buckets[i].yes += o;
     }
@@ -110,8 +116,10 @@ export function scoreCalibration(dailyRows, settlements, leads = LEAD_DAYS) {
   const pooled = buckets.map((b) => ({ lo: b.lo, hi: b.hi, n: b.n, meanP: b.n ? b.sumP / b.n : null, observedYesRate: b.n ? b.yes / b.n : null }));
 
   return {
-    method: 'Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every (day, market) observation of settled markets.',
+    method: 'Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.',
     settledMarkets: perMarket.length,
+    scoreableMarkets: perMarket.filter((m) => m.observations > 0).length,
+    observationsExcludedAsLookAhead: perMarket.reduce((n, m) => n + m.observationsOnOrAfterSettlement, 0),
     trackedMarkets: series.size,
     observationDays: [...new Set(dailyRows.map((r) => r.date))].sort(),
     byLead,

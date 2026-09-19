@@ -153,9 +153,17 @@ const bundle = {
   pollLayer,
   universe: universeSite,
   seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
-  calibration,
+  // per-market lead scores stay in data/kalshi/tracker/calibration.json; the site gets the summary plus the scored markets only
+  calibration: calibration ? { ...calibration, perMarket: (calibration.perMarket || []).filter((m) => m.observations > 0).slice(0, 200) } : null,
   discrepancyWatch: discrepancySite,
-  settlements: settlements ? { capturedAt: settlements.capturedAt, count: Object.keys(settlements.markets).length, markets: settlements.markets } : null,
+  settlements: settlements ? {
+    capturedAt: settlements.capturedAt,
+    count: Object.keys(settlements.markets).length,
+    byResult: Object.values(settlements.markets).reduce((acc, m) => { acc[m.result] = (acc[m.result] || 0) + 1; return acc; }, {}),
+    // compact list for the site (full records with capture URLs stay in data/kalshi/tracker/settlements.json)
+    recent: Object.values(settlements.markets).sort((a, b) => String(b.settlement_ts || b.close_time).localeCompare(String(a.settlement_ts || a.close_time))).slice(0, 40)
+      .map((m) => ({ ticker: m.ticker, series_ticker: m.series_ticker, title: m.title, yes_sub_title: m.yes_sub_title, result: m.result, settlementDay: String(m.settlement_ts || m.close_time || '').slice(0, 10), volume: m.volume })),
+  } : null,
   tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory, runs: runHistory ? runHistory.days.slice(-120) : [] } : null,
   senate2024: senate2024Site,
   crosscheck: crosscheck ? { ...crosscheck, largestLastPriceDifferences: (crosscheck.largestLastPriceDifferences || []).slice(0, 8) } : null,

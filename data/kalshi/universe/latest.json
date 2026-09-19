@@ -1,21 +1,23 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200",
  "capturedAt": "2026-09-19T01:29:55.136Z",
+ "replayedAt": "2026-09-19T01:36:45.000Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-19",
  "categories": [
   "Elections",
   "Politics"
  ],
- "note": "Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; the event stays open until every market settles).",
+ "note": "Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; finalized = settled, recorded in tracker/settlements.json and excluded from the daily CSV; the event stays open until every market settles).",
  "counts": {
   "seriesInRegistry": 4166,
   "openEvents": 4094,
   "usElectionEvents": 3210,
   "openMarkets": 24367,
-  "openMarketsTraded": 10916,
-  "openMarketsWithImpliedPrice": 10916,
-  "openMarketsTradedNotActive": 207,
+  "openMarketsTraded": 10709,
+  "openMarketsWithImpliedPrice": 10709,
+  "openMarketsTradedNotActive": 0,
+  "openMarketsFinalizedInFeed": 207,
   "openMarketsClosedBeforeCapture": 207,
   "exchangeWideOpenEvents": 16004,
   "byCategory": {
@@ -71,7 +73,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 8,
-   "traded": 8,
+   "traded": 6,
    "volume": 34075828.47
   },
   {
@@ -111,7 +113,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 13,
-   "traded": 13,
+   "traded": 9,
    "volume": 22919254.900000002
   },
   {
@@ -161,7 +163,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 3,
    "volume": 11138138.32
   },
   {
@@ -181,7 +183,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 10,
-   "traded": 10,
+   "traded": 8,
    "volume": 8293161.38
   },
   {
@@ -191,7 +193,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 11,
-   "traded": 10,
+   "traded": 8,
    "volume": 7997093.54
   },
   {
@@ -221,7 +223,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 33,
-   "traded": 32,
+   "traded": 30,
    "volume": 5513739.179999998
   },
   {
@@ -261,7 +263,7 @@
    "us_election": 1,
    "events": 350,
    "markets": 705,
-   "traded": 705,
+   "traded": 704,
    "volume": 4062171.859999997
   },
   {
@@ -281,7 +283,7 @@
    "us_election": 0,
    "events": 2,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 3652079.96
   },
   {
@@ -291,7 +293,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 35,
-   "traded": 35,
+   "traded": 34,
    "volume": 3628129.6500000013
   },
   {
@@ -381,7 +383,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 2522066.53
   },
   {
@@ -401,7 +403,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 2453784.1399999997
   },
   {
@@ -621,7 +623,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 1231948.33
   },
   {
@@ -711,7 +713,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 3,
    "volume": 907909.36
   },
   {
@@ -761,7 +763,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 861897.85
   },
   {
@@ -771,7 +773,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 3,
    "volume": 839270.3800000001
   },
   {
@@ -781,7 +783,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 31,
-   "traded": 31,
+   "traded": 30,
    "volume": 800688.0700000001
   },
   {
@@ -841,7 +843,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 8,
-   "traded": 8,
+   "traded": 6,
    "volume": 733940.36
   },
   {
@@ -921,7 +923,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 631209.89
   },
   {
@@ -931,7 +933,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 623105.42
   },
   {
@@ -1061,7 +1063,7 @@
    "us_election": 0,
    "events": 2,
    "markets": 13,
-   "traded": 13,
+   "traded": 12,
    "volume": 483546.22
   },
   {
@@ -1151,7 +1153,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 384251.93
   },
   {
@@ -1191,7 +1193,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 5,
    "volume": 342155.56
   },
   {
@@ -1251,7 +1253,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 3,
    "volume": 315348.63
   },
   {
@@ -1281,7 +1283,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 299657.57
   },
   {
@@ -1321,7 +1323,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 285273.95
   },
   {
@@ -1361,7 +1363,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 3,
    "volume": 260402.43
   },
   {
@@ -1401,7 +1403,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 1,
    "volume": 243682.49000000002
   },
   {
@@ -1431,7 +1433,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 17,
-   "traded": 17,
+   "traded": 15,
    "volume": 240738.43
   },
   {
@@ -1471,7 +1473,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 2,
    "volume": 228518.29
   },
   {
@@ -1621,7 +1623,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 12,
-   "traded": 12,
+   "traded": 4,
    "volume": 189928.87000000002
   },
   {
@@ -1731,7 +1733,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 5,
    "volume": 167369.74000000002
   },
   {
@@ -1771,7 +1773,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 27,
-   "traded": 27,
+   "traded": 25,
    "volume": 159821.64000000007
   },
   {
@@ -1891,7 +1893,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 137306.78999999998
   },
   {
@@ -1951,7 +1953,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 7,
-   "traded": 7,
+   "traded": 4,
    "volume": 130207.59999999998
   },
   {
@@ -2031,7 +2033,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 121576.73000000001
   },
   {
@@ -2161,7 +2163,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 15,
-   "traded": 15,
+   "traded": 10,
    "volume": 112301.9
   },
   {
@@ -2211,7 +2213,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 10,
-   "traded": 10,
+   "traded": 7,
    "volume": 106384.63
   },
   {
@@ -2461,7 +2463,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 3,
    "volume": 92801.72999999998
   },
   {
@@ -2471,7 +2473,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 5,
    "volume": 92779.46999999999
   },
   {
@@ -2611,7 +2613,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 79757.67
   },
   {
@@ -2671,7 +2673,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 24,
-   "traded": 23,
+   "traded": 15,
    "volume": 77110.18999999999
   },
   {
@@ -2701,7 +2703,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 2,
    "volume": 75792.22
   },
   {
@@ -2751,7 +2753,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 72714.65
   },
   {
@@ -2761,7 +2763,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 72564.81
   },
   {
@@ -2781,7 +2783,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 7,
-   "traded": 7,
+   "traded": 6,
    "volume": 71113.92
   },
   {
@@ -2841,7 +2843,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 65934.05
   },
   {
@@ -2881,7 +2883,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 64404.41
   },
   {
@@ -3291,7 +3293,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 3,
    "volume": 53524.409999999996
   },
   {
@@ -3341,7 +3343,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 3,
    "volume": 52541.899999999994
   },
   {
@@ -3411,7 +3413,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 49618.93
   },
   {
@@ -3441,7 +3443,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 48656.07
   },
   {
@@ -3521,7 +3523,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 46862.740000000005
   },
   {
@@ -3551,7 +3553,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 46532.270000000004
   },
   {
@@ -3611,7 +3613,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 5,
    "volume": 45462.47
   },
   {
@@ -3671,7 +3673,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 43488.21
   },
   {
@@ -3691,7 +3693,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 2,
    "volume": 43005.22
   },
   {
@@ -3761,7 +3763,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 16,
-   "traded": 16,
+   "traded": 2,
    "volume": 41630.090000000004
   },
   {
@@ -3951,7 +3953,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 38275.899999999994
   },
   {
@@ -4011,7 +4013,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 37303.66
   },
   {
@@ -4271,7 +4273,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 32968.57
   },
   {
@@ -4301,7 +4303,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 3,
    "volume": 32722.769999999997
   },
   {
@@ -4331,7 +4333,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 8,
-   "traded": 8,
+   "traded": 6,
    "volume": 32653.62
   },
   {
@@ -4341,7 +4343,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 31673.27
   },
   {
@@ -4451,7 +4453,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 29598.519999999997
   },
   {
@@ -4561,7 +4563,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 7,
-   "traded": 7,
+   "traded": 2,
    "volume": 28825.52
   },
   {
@@ -4581,7 +4583,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 28416.18
   },
   {
@@ -4701,7 +4703,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 27366.49
   },
   {
@@ -4711,7 +4713,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 27086.41
   },
   {
@@ -4721,7 +4723,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 27063.59
   },
   {
@@ -4861,7 +4863,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 2,
    "volume": 25091.84
   },
   {
@@ -4871,7 +4873,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 24778.739999999998
   },
   {
@@ -5001,7 +5003,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 23781.95
   },
   {
@@ -5041,7 +5043,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 2,
    "volume": 23398.31
   },
   {
@@ -5061,7 +5063,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 23327.85
   },
   {
@@ -5171,7 +5173,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 22903.35
   },
   {
@@ -5311,7 +5313,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 21816.96
   },
   {
@@ -5321,7 +5323,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 9,
-   "traded": 6,
+   "traded": 5,
    "volume": 21790.030000000002
   },
   {
@@ -5371,7 +5373,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 21426.629999999997
   },
   {
@@ -5491,7 +5493,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 20548.1
   },
   {
@@ -5741,7 +5743,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 18932.920000000002
   },
   {
@@ -5761,7 +5763,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 18920.449999999997
   },
   {
@@ -5841,7 +5843,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 18340.03
   },
   {
@@ -5931,7 +5933,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 17502.62
   },
   {
@@ -6261,7 +6263,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 2,
    "volume": 15354.740000000002
   },
   {
@@ -6271,7 +6273,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 15331.24
   },
   {
@@ -6301,7 +6303,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 15093.240000000002
   },
   {
@@ -6361,7 +6363,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 8,
-   "traded": 8,
+   "traded": 7,
    "volume": 14719.119999999999
   },
   {
@@ -6391,7 +6393,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 14659.619999999999
   },
   {
@@ -6531,7 +6533,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 4,
-   "traded": 4,
+   "traded": 2,
    "volume": 13683.48
   },
   {
@@ -6541,7 +6543,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 13664.599999999999
   },
   {
@@ -6751,7 +6753,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 12929.4
   },
   {
@@ -6801,7 +6803,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 12596.039999999999
   },
   {
@@ -6881,7 +6883,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 12089.04
   },
   {
@@ -6931,7 +6933,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 11805.55
   },
   {
@@ -7131,7 +7133,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 10659.93
   },
   {
@@ -7281,7 +7283,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 10011.029999999999
   },
   {
@@ -7481,7 +7483,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 8,
-   "traded": 8,
+   "traded": 3,
    "volume": 8970.54
   },
   {
@@ -7491,7 +7493,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 8951.81
   },
   {
@@ -7911,7 +7913,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 7647.61
   },
   {
@@ -8011,7 +8013,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 7300.15
   },
   {
@@ -8061,7 +8063,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 7109.18
   },
   {
@@ -8331,7 +8333,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 6204.34
   },
   {
@@ -8341,7 +8343,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 6,
-   "traded": 6,
+   "traded": 4,
    "volume": 6200.34
   },
   {
@@ -8411,7 +8413,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 1,
    "volume": 5992.11
   },
   {
@@ -8431,7 +8433,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 5970.63
   },
   {
@@ -8781,7 +8783,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 4715.43
   },
   {
@@ -9881,7 +9883,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 2610.35
   },
   {
@@ -10131,7 +10133,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 7,
-   "traded": 5,
+   "traded": 4,
    "volume": 2348.73
   },
   {
@@ -10161,7 +10163,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 2290.64
   },
   {
@@ -10231,7 +10233,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 4,
    "volume": 2209.6099999999997
   },
   {
@@ -10631,7 +10633,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 1712.7
   },
   {
@@ -10921,7 +10923,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 1253.87
   },
   {
@@ -11121,7 +11123,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 5,
-   "traded": 5,
+   "traded": 2,
    "volume": 929.4300000000001
   },
   {
@@ -11161,7 +11163,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 3,
-   "traded": 3,
+   "traded": 2,
    "volume": 881.1500000000001
   },
   {
@@ -11181,7 +11183,7 @@
    "us_election": 1,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 838.9
   },
   {
@@ -11461,7 +11463,7 @@
    "us_election": 0,
    "events": 1,
    "markets": 2,
-   "traded": 2,
+   "traded": 1,
    "volume": 600.91
   },
   {
@@ -13859,23 +13861,6 @@
    "basis": "mid"
   },
   {
-   "ticker": "KXHORMUZNORM-26MAR17-B260801",
-   "event_ticker": "KXHORMUZNORM-26MAR17",
-   "series_ticker": "KXHORMUZNORM",
-   "us_election": 0,
-   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before August 1, 2026?",
-   "yes_sub_title": "Before Aug 1, 2026",
-   "close_time": "2026-08-04T13:59:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 5302869.62,
-   "open_interest": 947869.81,
-   "p": 0.01,
-   "basis": "last"
-  },
-  {
    "ticker": "KXPRESPERSON-28-MRUB",
    "event_ticker": "KXPRESPERSON-28",
    "series_ticker": "KXPRESPERSON",
@@ -14148,23 +14133,6 @@
    "basis": "mid"
   },
   {
-   "ticker": "KXHORMUZNORM-26MAR17-B260901",
-   "event_ticker": "KXHORMUZNORM-26MAR17",
-   "series_ticker": "KXHORMUZNORM",
-   "us_election": 0,
-   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before September 1, 2026?",
-   "yes_sub_title": "Before Sep 1, 2026",
-   "close_time": "2026-09-01T13:10:42Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 4089963.29,
-   "open_interest": 1195773.12,
-   "p": 0.01,
-   "basis": "last"
-  },
-  {
    "ticker": "KXPRESNOMD-28-AYAN",
    "event_ticker": "KXPRESNOMD-28",
    "series_ticker": "KXPRESNOMD",
@@ -14227,23 +14195,6 @@
    "open_interest": 1873097.54,
    "p": 0.079,
    "basis": "mid"
-  },
-  {
-   "ticker": "KXTRUMPOUT27-27-26AUG01",
-   "event_ticker": "KXTRUMPOUT27-27",
-   "series_ticker": "KXTRUMPOUT27",
-   "us_election": 0,
-   "title": "Will Donald Trump leave office before August 1, 2026?",
-   "yes_sub_title": "Before August 1, 2026",
-   "close_time": "2026-08-01T14:00:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.003,
-   "volume": 3761100.22,
-   "open_interest": 2357849.16,
-   "p": 0.003,
-   "basis": "last"
   },
   {
    "ticker": "KXPRESPERSON-28-DTRU",
@@ -14598,23 +14549,6 @@
    "basis": "mid"
   },
   {
-   "ticker": "KXUSAIRANAGREEMENT-27-26AUG",
-   "event_ticker": "KXUSAIRANAGREEMENT-27",
-   "series_ticker": "KXUSAIRANAGREEMENT",
-   "us_election": 0,
-   "title": "Will the US agree to a new Iranian nuclear deal before August?",
-   "yes_sub_title": "Before Aug 1, 2026",
-   "close_time": "2026-08-01T14:00:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.001,
-   "volume": 2813334.26,
-   "open_interest": 1102051.28,
-   "p": 0.001,
-   "basis": "last"
-  },
-  {
    "ticker": "KXHORMUZNORM-26MAR17-B270101",
    "event_ticker": "KXHORMUZNORM-26MAR17",
    "series_ticker": "KXHORMUZNORM",
@@ -14676,23 +14610,6 @@
    "volume": 2683048.64,
    "open_interest": 2149592.54,
    "p": 0.001,
-   "basis": "last"
-  },
-  {
-   "ticker": "KXALIENS-27-26SEP",
-   "event_ticker": "KXALIENS-27",
-   "series_ticker": "KXALIENS",
-   "us_election": 0,
-   "title": "Will the U.S. confirm that aliens exist in 2026?",
-   "yes_sub_title": "Before September",
-   "close_time": "2026-09-01T14:00:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 2679607.7,
-   "open_interest": 1706431.4,
-   "p": 0.01,
    "basis": "last"
   },
   {
@@ -14934,40 +14851,6 @@
    "open_interest": 1565937.45,
    "p": 0.365,
    "basis": "mid"
-  },
-  {
-   "ticker": "KXUSAIRANAGREEMENT-27-26SEP",
-   "event_ticker": "KXUSAIRANAGREEMENT-27",
-   "series_ticker": "KXUSAIRANAGREEMENT",
-   "us_election": 0,
-   "title": "Will the US agree to a new Iranian nuclear deal this year?",
-   "yes_sub_title": "Before Sep 1, 2026",
-   "close_time": "2026-09-01T13:20:11Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 2188400.45,
-   "open_interest": 1047532.01,
-   "p": 0.01,
-   "basis": "last"
-  },
-  {
-   "ticker": "KXHORMUZNORM-26MAR17-B260715",
-   "event_ticker": "KXHORMUZNORM-26MAR17",
-   "series_ticker": "KXHORMUZNORM",
-   "us_election": 0,
-   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before July 15, 2026?",
-   "yes_sub_title": "Before Jul 15, 2026",
-   "close_time": "2026-07-21T13:59:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 2178374.78,
-   "open_interest": 611492.61,
-   "p": 0.01,
-   "basis": "last"
   },
   {
    "ticker": "KXPRESNOMD-28-JCRO",
@@ -15226,23 +15109,6 @@
    "basis": "mid"
   },
   {
-   "ticker": "KXCRYPTOSTRUCTURE-26JAN-SEP",
-   "event_ticker": "KXCRYPTOSTRUCTURE-26JAN",
-   "series_ticker": "KXCRYPTOSTRUCTURE",
-   "us_election": 0,
-   "title": "Will a crypto market structure bill becomes law before Sep 1, 2026?",
-   "yes_sub_title": "Before Sep 1, 2026",
-   "close_time": "2026-09-01T13:21:00Z",
-   "status": "finalized",
-   "yes_bid": 0,
-   "yes_ask": 1,
-   "last_price": 0.01,
-   "volume": 1694678.21,
-   "open_interest": 1160717.32,
-   "p": 0.01,
-   "basis": "last"
-  },
-  {
    "ticker": "KXUSAIRANAGREEMENT-27",
    "event_ticker": "KXUSAIRANAGREEMENT-27",
    "series_ticker": "KXUSAIRANAGREEMENT",
@@ -15273,6 +15139,134 @@
    "open_interest": 925153.29,
    "p": 0.395,
    "basis": "mid"
+  },
+  {
+   "ticker": "KXPRESNOMR-28-BK",
+   "event_ticker": "KXPRESNOMR-28",
+   "series_ticker": "KXPRESNOMR",
+   "us_election": 1,
+   "title": "Will Brian Kemp be the nominee for the Presidency for the Republican party?",
+   "yes_sub_title": "Brian Kemp",
+   "close_time": "2028-11-07T15:00:00Z",
+   "yes_bid": 0.006,
+   "yes_ask": 0.009,
+   "last_price": 0.009,
+   "volume": 1638459.62,
+   "open_interest": 1283591.07,
+   "p": 0.0075,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXGREENLAND-29-27",
+   "event_ticker": "KXGREENLAND-29",
+   "series_ticker": "KXGREENLAND",
+   "us_election": 0,
+   "title": "Will Trump buy Greenland?",
+   "yes_sub_title": "Before 2027",
+   "close_time": "2027-01-01T15:00:00Z",
+   "yes_bid": 0.037,
+   "yes_ask": 0.051,
+   "last_price": 0.037,
+   "volume": 1542992.49,
+   "open_interest": 385451.78,
+   "p": 0.044,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXPRESNOMR-28-VR",
+   "event_ticker": "KXPRESNOMR-28",
+   "series_ticker": "KXPRESNOMR",
+   "us_election": 1,
+   "title": "Will Vivek Ramaswamy be the nominee for the Presidency for the Republican party?",
+   "yes_sub_title": "Vivek Ramaswamy",
+   "close_time": "2028-11-07T15:00:00Z",
+   "yes_bid": 0.004,
+   "yes_ask": 0.005,
+   "last_price": 0.005,
+   "volume": 1542816.45,
+   "open_interest": 1107002.8,
+   "p": 0.0045000000000000005,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXPRESNOMR-28-JH",
+   "event_ticker": "KXPRESNOMR-28",
+   "series_ticker": "KXPRESNOMR",
+   "us_election": 1,
+   "title": "Will Josh Hawley be the nominee for the Presidency for the Republican party?",
+   "yes_sub_title": "Josh Hawley",
+   "close_time": "2028-11-07T15:00:00Z",
+   "yes_bid": 0.004,
+   "yes_ask": 0.007,
+   "last_price": 0.004,
+   "volume": 1533008.64,
+   "open_interest": 1286223.49,
+   "p": 0.0055,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXHORMUZNORM-26MAR17-B270701",
+   "event_ticker": "KXHORMUZNORM-26MAR17",
+   "series_ticker": "KXHORMUZNORM",
+   "us_election": 0,
+   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before July 1, 2027?",
+   "yes_sub_title": "Before Jul 1, 2027",
+   "close_time": "2027-07-01T13:59:00Z",
+   "yes_bid": 0.41,
+   "yes_ask": 0.44,
+   "last_price": 0.42,
+   "volume": 1524293.62,
+   "open_interest": 393535.22,
+   "p": 0.425,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXPRESNOMR-28-TG",
+   "event_ticker": "KXPRESNOMR-28",
+   "series_ticker": "KXPRESNOMR",
+   "us_election": 1,
+   "title": "Will Tulsi Gabbard be the nominee for the Presidency for the Republican party?",
+   "yes_sub_title": "Tulsi Gabbard",
+   "close_time": "2028-11-07T15:00:00Z",
+   "yes_bid": 0.002,
+   "yes_ask": 0.003,
+   "last_price": 0.003,
+   "volume": 1519976.28,
+   "open_interest": 1201599.22,
+   "p": 0.0025,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXIMPEACH-27-JAN01",
+   "event_ticker": "KXIMPEACH",
+   "series_ticker": "KXIMPEACH",
+   "us_election": 0,
+   "title": "Will the President be impeached before Jan 1, 2027?",
+   "yes_sub_title": "Before Jan 1, 2027",
+   "close_time": "2027-01-01T15:00:00Z",
+   "yes_bid": 0.021,
+   "yes_ask": 0.035,
+   "last_price": 0.035,
+   "volume": 1516459.82,
+   "open_interest": 520533.96,
+   "p": 0.028000000000000004,
+   "basis": "mid"
+  },
+  {
+   "ticker": "KXPRESNOMR-28-EM",
+   "event_ticker": "KXPRESNOMR-28",
+   "series_ticker": "KXPRESNOMR",
+   "us_election": 1,
+   "title": "Will Elon Musk be the nominee for the Presidency for the Republican party?",
+   "yes_sub_title": "Elon Musk",
+   "close_time": "2028-11-07T15:00:00Z",
+   "yes_bid": 0,
+   "yes_ask": 0.002,
+   "last_price": 0.002,
+   "volume": 1481456.09,
+   "open_interest": 1031607.57,
+   "p": 0.002,
+   "basis": "last"
   }
  ],
  "events": [

@@ -224,7 +224,7 @@
     const agg = PL.aggregatorReadings.map((a) => `<tr><td><strong>${esc(a.aggregator)}</strong><br><span class="small">${esc(a.verifiedVia)}</span></td><td class="small">${esc(a.window)} (as of ${esc(a.asOf)})</td><td class="small">${a.pollsInAverage} polls</td><td class="num">${a.D}</td><td class="num">${a.R}</td><td class="num pos">${esc(a.spread)}</td><td></td><td>${srcs([a.source])}</td></tr>`).join('');
     const mc = PL.marketComparison;
     const races = mc.rows.map((r) => `<tr>
-      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)} · n=${int(r.n)} ±${r.moe}</span></td>
+      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}</span></td>
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
       <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
@@ -309,7 +309,7 @@
     <div class="grid cols4">
       <div class="stat"><div class="n">${D.tracker.days.length}</div><div class="l">collection day${D.tracker.days.length === 1 ? '' : 's'} (${esc(D.tracker.days[0])} → ${esc(D.tracker.days[D.tracker.days.length - 1])})</div></div>
       <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)${U.counts.openMarketsClosedBeforeCapture != null ? ` · ${int(U.counts.openMarketsClosedBeforeCapture)} past their close_time, settlement pending` : ''}</div></div>
-      <div class="stat"><div class="n">${cal.settledMarkets}</div><div class="l">settled markets scored so far · ${st ? int(st.count) : 0} settlements known</div></div>
+      <div class="stat"><div class="n">${int(cal.scoreableMarkets != null ? cal.scoreableMarkets : cal.settledMarkets)}</div><div class="l">settled markets scored (priced before they settled) · ${st ? int(st.count) : 0} settlements known${cal.observationsExcludedAsLookAhead ? ` · ${int(cal.observationsExcludedAsLookAhead)} post-settlement price rows excluded as look-ahead` : ''}</div></div>
       <div class="stat"><div class="n">${cc ? pct(cc.lastPrice.share, 2) : '—'}</div><div class="l">Node-vs-Python last-price agreement (≤2¢) on ${cc ? int(cc.overlap) : '—'} overlapping tickers</div></div>
     </div>
     <div class="grid cols2">
@@ -319,8 +319,11 @@
       <div class="card"><h3 style="margin-top:0">Live calibration (settled markets only)</h3>
         <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean Brier</th><th class="num">Mean log-loss</th></tr></thead><tbody>${leads}</tbody></table>
         <p class="small">${esc(cal.method)}</p>
-        <p class="small">First large U.S. settlements expected after <strong>Nov 3, 2026</strong> (Los Angeles mayor, 35 Senate races, governors); primaries and specials settle earlier.</p></div>
+        <p class="small">First large U.S. settlements expected after <strong>Nov 3, 2026</strong> (Los Angeles mayor, 35 Senate races, governors); primaries and specials settle earlier. ${st && st.count ? `The ${int(st.count)} settlements already on file are rungs that had settled before the tracker's first day (found nested inside still-open events, irregularity #37) — they are recorded, but a price captured after settlement is not a forecast, so they are not scored.` : ''}</p></div>
     </div>
+    ${st && st.recent && st.recent.length ? `<h2>Settlements on file (${int(st.count)}: ${Object.entries(st.byResult || {}).map(([k, v]) => `${int(v)} ${esc(k)}`).join(', ')})</h2>
+    <div class="card" style="overflow-x:auto"><p class="small" style="margin-top:0">Official exchange results re-read from <span class="mono">GET /markets?tickers=…</span> (<span class="mono">data/kalshi/tracker/settlements.json</span>). Most recent ${st.recent.length} shown; results are recorded as returned, never inferred from prices.</p>
+      <table><thead><tr><th>Settled</th><th>Market</th><th>Result</th><th class="num">Volume</th></tr></thead><tbody>${st.recent.map((m) => `<tr><td class="small">${esc(m.settlementDay)}</td><td><span class="mono small">${esc(m.ticker)}</span><br>${esc(m.title)}</td><td><span class="chip ${m.result === 'yes' ? 'good' : m.result === 'no' ? 'bad' : ''}">${esc(m.result)}</span></td><td class="num">${int(m.volume)}</td></tr>`).join('')}</tbody></table></div>` : ''}
     <h2>Run log — one row per collection day</h2>
     <div class="card" style="overflow-x:auto">
       <p class="small" style="margin-top:0">Counts only (<span class="mono">data/kalshi/tracker/history.json</span>). A same-day re-run replaces the row. Consistency = mutually-exclusive ladders whose YES mids sum to more than 1.06 (fully two-sided) / less than 0.94 (≥3 markets), and last trades more than 10¢ outside the quoted book; cross-check = Node vs Python last price within 2¢.</p>

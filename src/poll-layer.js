@@ -64,6 +64,7 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
       marketDate: universe ? universe.date : null,
       gap: pollP !== null && mk.p !== null ? Number((mk.p - pollP).toFixed(4)) : null,
       source: e.source,
+      review: !!e.review,
     });
   }
   return {

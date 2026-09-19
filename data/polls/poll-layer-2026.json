@@ -2,7 +2,7 @@
  "title": "Continuous poll layer — 2026 cycle (line-by-line verified primary releases)",
  "capturedFrom": "primary pollster releases listed per entry (fetched directly; syndication is never the only source)",
  "capturedAt": "2026-09-19T01:30:00Z",
- "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls.",
+ "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
  "updated": "2026-09-19",
  "genericBallot": [
@@ -461,6 +461,150 @@
    "releasePdf": "https://reconmr.com/wp-content/uploads/2026/09/ReconMR-Texas-Poll-September-Release-Final.pdf",
    "verifiedVia": "Siena post + ReconMR release PDF fetched 2026-09-19 (methodology: Sept 8–11 2026, 614 likely Texas voters, dual-frame phone + text-to-web, ±4.3 incl. design effect; Q3 trend table).",
    "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "suffolk-2026-08-ia-senate",
+   "race": "U.S. Senate — Iowa (open seat)",
+   "pollster": "Suffolk University Political Research Center (SUPRC)",
+   "fieldDates": "2026-08-20..2026-08-23",
+   "population": "LV (live telephone; very or somewhat likely to vote)",
+   "n": 500,
+   "moe": 4.4,
+   "candidates": {
+    "R": {
+     "name": "Ashley Hinson",
+     "pct": 45
+    },
+    "D": {
+     "name": "Josh Turek",
+     "pct": 41
+    }
+   },
+   "undecided": 9,
+   "governor": {
+    "D": {
+     "name": "Rob Sand",
+     "pct": 48
+    },
+    "R": {
+     "name": "Zach Lahn",
+     "pct": 44
+    }
+   },
+   "notes": "Among 'very likely' voters the Senate race is tied 45–45 (press release). Muscatine County bellwether (n=300, Aug 17–19, ±5.6): Hinson 44 – Turek 40; Sand 48 – Lahn 44.",
+   "kalshiEvent": "SENATEIA-26",
+   "kalshiDemTicker": "SENATEIA-26-D",
+   "source": "https://www.suffolk.edu/academics/research-at-suffolk/political-research-center/polls/other-states",
+   "toplinesPdf": "https://www.suffolk.edu/-/media/suffolk/documents/academics/research-at-suffolk/suprc/polls/other-states/2026/8_26_2026_iowa_press_release.pdf?la=en&hash=892712F54A72B21F2E54F806654E4207E99B7F84",
+   "verifiedVia": "Suffolk press-release PDF (2026-08-26) fetched 2026-09-19: 'Hinson narrowly leads Turek 45%-41%', 'Sand has the edge over Lahn 48%-44%'; methodology paragraph on the SUPRC 'Polling in Other States' page (500 likely voters, Aug 20–23, ±4.4) fetched the same day.",
+   "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "nyt-siena-2026-07-ak-senate",
+   "race": "U.S. Senate — Alaska",
+   "pollster": "The New York Times / Siena Research Institute",
+   "fieldDates": "released 2026-07-01 (field dates, n and MoE are on the NYT toplines page, which returned HTTP 403 to this project's fetcher — not transcribed)",
+   "population": "LV (per Siena release; not independently confirmed)",
+   "n": null,
+   "moe": null,
+   "candidates": {
+    "R": {
+     "name": "Dan Sullivan",
+     "pct": 47,
+     "incumbent": true
+    },
+    "D": {
+     "name": "Mary Peltola",
+     "pct": 45
+    }
+   },
+   "kalshiEvent": "SENATEAK-26",
+   "kalshiDemTicker": "SENATEAK-26-D",
+   "source": "https://sri.siena.edu/2026/07/01/new-york-times-siena-polls-in-alaska-iowa-north-carolina-and-ohio/",
+   "toplinesPdf": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+   "verifiedVia": "Siena Research Institute release page fetched 2026-09-19 ('Alaska: Sullivan 47% – Peltola 45%'); NYT toplines link listed on that page but not fetchable from the sandbox (403) — review the toplines manually.",
+   "verifiedOn": "2026-09-19",
+   "review": true
+  },
+  {
+   "id": "nyt-siena-2026-07-ia-senate",
+   "race": "U.S. Senate — Iowa (open seat)",
+   "pollster": "The New York Times / Siena Research Institute",
+   "fieldDates": "released 2026-07-01 (field dates, n and MoE on the NYT toplines page — HTTP 403 to this project's fetcher — not transcribed)",
+   "population": "LV (per Siena release; not independently confirmed)",
+   "n": null,
+   "moe": null,
+   "candidates": {
+    "R": {
+     "name": "Ashley Hinson",
+     "pct": 48
+    },
+    "D": {
+     "name": "Josh Turek",
+     "pct": 46
+    }
+   },
+   "kalshiEvent": "SENATEIA-26",
+   "kalshiDemTicker": "SENATEIA-26-D",
+   "source": "https://sri.siena.edu/2026/07/01/new-york-times-siena-polls-in-alaska-iowa-north-carolina-and-ohio/",
+   "toplinesPdf": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-iowa-poll-toplines.html",
+   "verifiedVia": "Siena Research Institute release page fetched 2026-09-19 ('Iowa: Hinson 48% – Turek 46%').",
+   "verifiedOn": "2026-09-19",
+   "review": true
+  },
+  {
+   "id": "nyt-siena-2026-07-nc-senate",
+   "race": "U.S. Senate — North Carolina (open seat)",
+   "pollster": "The New York Times / Siena Research Institute",
+   "fieldDates": "released 2026-07-01 (field dates, n and MoE on the NYT toplines page — HTTP 403 to this project's fetcher — not transcribed)",
+   "population": "LV (per Siena release; not independently confirmed)",
+   "n": null,
+   "moe": null,
+   "candidates": {
+    "D": {
+     "name": "Roy Cooper",
+     "pct": 50
+    },
+    "R": {
+     "name": "Michael Whatley",
+     "pct": 43
+    }
+   },
+   "kalshiEvent": "SENATENC-26",
+   "kalshiDemTicker": "SENATENC-26-D",
+   "source": "https://sri.siena.edu/2026/07/01/new-york-times-siena-polls-in-alaska-iowa-north-carolina-and-ohio/",
+   "toplinesPdf": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-north-carolina-poll-toplines.html",
+   "verifiedVia": "Siena Research Institute release page fetched 2026-09-19 ('North Carolina: Cooper 50% – Whatley 43%'); Siena's director quoted: 'all except for North Carolina are well within the margin of error'.",
+   "verifiedOn": "2026-09-19",
+   "review": true
+  },
+  {
+   "id": "nyt-siena-2026-07-oh-senate",
+   "race": "U.S. Senate — Ohio (special)",
+   "pollster": "The New York Times / Siena Research Institute",
+   "fieldDates": "released 2026-07-01 (field dates, n and MoE on the NYT toplines page — HTTP 403 to this project's fetcher — not transcribed)",
+   "population": "LV (per Siena release; not independently confirmed)",
+   "n": null,
+   "moe": null,
+   "candidates": {
+    "R": {
+     "name": "Jon Husted",
+     "pct": 50,
+     "incumbent": true
+    },
+    "D": {
+     "name": "Sherrod Brown",
+     "pct": 47
+    }
+   },
+   "kalshiEvent": "SENATEOHS-26",
+   "kalshiDemTicker": "SENATEOHS-26-D",
+   "source": "https://sri.siena.edu/2026/07/01/new-york-times-siena-polls-in-alaska-iowa-north-carolina-and-ohio/",
+   "toplinesPdf": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-ohio-poll-toplines.html",
+   "verifiedVia": "Siena Research Institute release page fetched 2026-09-19 ('Ohio: Husted 50% – Brown 47%').",
+   "verifiedOn": "2026-09-19",
+   "review": true,
+   "notes": "Kalshi lists the 2026 Ohio special election under SENATEOHS-26 (SENATEOH-28 is the regular 2028 seat)."
   }
  ],
  "exitPollStatus": {

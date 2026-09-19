@@ -79,6 +79,7 @@ export const DAILY_COLUMNS = ['date', 'ticker', 'yes_bid', 'yes_ask', 'last_pric
 // Exchange market status as returned that day ('active' = tradable; 'closed' = trading ended, awaiting
 // determination/settlement; 'finalized'/'settled' = result known). Blank = not captured (first-day files).
 export const isOpenForTrading = (m) => !m.status || m.status === 'active' || m.status === 'open';
+export const isFinalized = (m) => m.status === 'finalized' || m.status === 'settled';
 // Series tags (from GET /series) that mark a series as a U.S. election market; derived flag only,
 // used to focus the site and the contest universe. Kalshi's own tag vocabulary, captured 2026-09-19.
 export const US_ELECTION_TAGS = ['US Elections', 'Senate', 'House', 'Governor', 'Other US Elections', 'Local', 'Primaries', 'Election Combos', 'Senate Combos', 'House Combos', 'Governor Combos', 'Referendums', 'NYC', '2028'];
@@ -160,10 +161,12 @@ function projectEvents(events, registry) {
 function dailyRows(projected) {
   const rows = [];
   const descriptors = {};
+  const finalized = []; // settled rungs still nested in open events: recorded once in settlements.json, not tracked daily
   let untraded = 0;
   for (const ev of projected) {
     for (const m of ev.markets) {
       if (!isTraded(m)) { untraded += 1; continue; }
+      if (isFinalized(m)) { finalized.push(m.ticker); continue; }
       rows.push({
         date: day,
         ticker: m.ticker,
@@ -192,7 +195,7 @@ function dailyRows(projected) {
     }
   }
   rows.sort((a, b) => (a.ticker < b.ticker ? -1 : a.ticker > b.ticker ? 1 : 0));
-  return { rows, descriptors, untraded };
+  return { rows, descriptors, untraded, finalized };
 }
 
 function updateIndex(index, rows, descriptors) {
@@ -313,6 +316,8 @@ async function main() {
       return [x.ticker, { ...rest, settlement_sources, us_election: isUsElectionSeries(x) }];
     }));
     const savedIndex = loadIndex(join(TRACKER_DIR, 'index.json'));
+    // files written since the status column exists list status only when it is not 'active'
+    const statusAware = !!(savedLatest.counts && savedLatest.counts.openMarketsTradedNotActive != null);
     meta.replayOf = savedLatest.capturedAt;
     replayedAt = capturedAt;
     capturedAt = savedLatest.capturedAt;
@@ -322,7 +327,7 @@ async function main() {
     meta.eventsTotalOpenOnExchange = savedLatest.counts ? savedLatest.counts.exchangeWideOpenEvents : null;
     // saved events are already projected; recompute the derived flag and make sure market rows are complete
     // titles/open_time are not in the compact listing: take them from the saved index (exact), else synthesise
-    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => { const ix = savedIndex.tickers[m.ticker] || {}; return { title: m.title || ix.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || '', open_time: m.open_time || ix.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m }; }) }));
+    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => { const ix = savedIndex.tickers[m.ticker] || {}; return { title: m.title || ix.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || (statusAware ? 'active' : ''), open_time: m.open_time || ix.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m }; }) }));
     meta.eventsKept = projected.length;
     console.log(`  replaying ${projected.length} saved events captured ${savedLatest.capturedAt}`);
   } else {
@@ -346,12 +351,13 @@ async function main() {
     }
   }
   const daily = dailyRows(projected);
-  const { rows, descriptors } = daily;
+  const { rows, descriptors, finalized } = daily;
   // In replay the saved events list only traded markets; the untraded count is carried per event.
   const untraded = REPLAY ? projected.reduce((s, ev) => s + (ev.markets_untraded || 0), 0) : daily.untraded;
-  const openMarketsTotal = rows.length + untraded;
+  const openMarketsTotal = rows.length + finalized.length + untraded;
   meta.openMarkets = openMarketsTotal;
   meta.openMarketsTraded = rows.length;
+  meta.openMarketsFinalizedInFeed = finalized.length;
   meta.openMarketsUntradedNotListed = untraded;
   meta.openEvents = projected.length;
   const priced = rows.filter((r) => impliedProb(r).p !== null).length;
@@ -366,7 +372,7 @@ async function main() {
     bySeries[k] = bySeries[k] || { series_ticker: k, title: registry[k] ? registry[k].title : '', category: ev.category, us_election: ev.us_election ? 1 : 0, events: 0, markets: 0, traded: 0, volume: 0 };
     bySeries[k].events += 1;
     bySeries[k].markets += REPLAY && ev.markets_total != null ? ev.markets_total : ev.markets.length;
-    bySeries[k].traded += ev.markets.filter(isTraded).length;
+    bySeries[k].traded += ev.markets.filter((m) => isTraded(m) && !isFinalized(m)).length;
     bySeries[k].volume += ev.markets.reduce((s, m) => s + (m.volume || 0), 0);
   }
 
@@ -374,10 +380,12 @@ async function main() {
   const index = loadIndex(join(TRACKER_DIR, 'index.json'));
   const openTickers = new Set(rows.map((r) => r.ticker));
   const settlements = readJson(join(TRACKER_DIR, 'settlements.json'), { capturedFrom: `${API_BASE}/markets?tickers=...`, note: 'official exchange settlements of markets previously tracked while open (result yes/no); appended by scripts/collect-kalshi.mjs', markets: {} });
+  // closed-pending rungs stay in the daily rows (their status can flip); finalized rungs are not rows but must be
+  // settlement candidates the first time they are seen (they were never in the index if they settled before day 1)
   const notActive = new Set(rows.filter((r) => !isOpenForTrading(r)).map((r) => r.ticker));
   meta.openMarketsTradedNotActive = notActive.size;
-  meta.openMarketsClosedBeforeCapture = rows.filter((r) => r.close_time && r.close_time < capturedAt).length;
-  if (REPLAY) { meta.settlementScan = 'skipped (replay)'; } else { await scanSettlements(index, openTickers, settlements, meta, notActive); }
+  meta.openMarketsClosedBeforeCapture = rows.filter((r) => r.close_time && r.close_time < capturedAt).length + finalized.length;
+  if (REPLAY) { meta.settlementScan = 'skipped (replay)'; } else { await scanSettlements(index, openTickers, settlements, meta, new Set([...notActive, ...finalized])); }
   updateIndex(index, rows, descriptors);
   index.capturedAt = capturedAt;
   index.days = [...new Set([...(index.days || []), day])].sort();
@@ -422,7 +430,7 @@ async function main() {
     ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true&limit=200`),
     date: day,
     categories: CATEGORIES,
-    note: 'Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; the event stays open until every market settles).',
+    note: 'Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; finalized = settled, recorded in tracker/settlements.json and excluded from the daily CSV; the event stays open until every market settles).',
     counts: {
       seriesInRegistry: meta.seriesInRegistry,
       openEvents: projected.length,
@@ -431,6 +439,7 @@ async function main() {
       openMarketsTraded: rows.length,
       openMarketsWithImpliedPrice: priced,
       openMarketsTradedNotActive: notActive.size,
+      openMarketsFinalizedInFeed: finalized.length,
       openMarketsClosedBeforeCapture: meta.openMarketsClosedBeforeCapture,
       exchangeWideOpenEvents: meta.eventsTotalOpenOnExchange,
       byCategory: projected.reduce((acc, e) => { acc[e.category] = (acc[e.category] || 0) + 1; return acc; }, {}),
@@ -488,12 +497,13 @@ async function main() {
     openMarkets: openMarketsTotal,
     openMarketsTraded: rows.length,
     openMarketsTradedNotActive: notActive.size,
+    openMarketsFinalizedInFeed: finalized.length,
     openMarketsClosedBeforeCapture: meta.openMarketsClosedBeforeCapture,
     exchangeWideOpenEvents: meta.eventsTotalOpenOnExchange ?? null,
     shrinkRatioVsPrevious: meta.shrinkRatioVsPrevious ?? null,
     settlementsFound: meta.settlementsFound ?? 0,
     settlementsKnown: Object.keys(settlements.markets).length,
-    settledMarketsScored: calibration.settledMarkets,
+    settledMarketsScored: calibration.scoreableMarkets ?? calibration.settledMarkets,
     brierT1: t1 ? t1.meanBrier : null,
     consistency: { ...(consistency.counts || {}), total: consistency.findings.length },
     apiRequests: stats.requests,
