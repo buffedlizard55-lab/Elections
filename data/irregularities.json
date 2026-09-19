@@ -109,6 +109,33 @@
       "detail": "538's public archive publishes margins, not probabilities. This repo maps margin m to p = 1/(1+exp(-m/4.5)) (the scaling 538 used in its 2020 national model) and labels every use as 'modeled mapping'.",
       "action": "Sensitivity: at k=3 the same 2024-09-12 anchor (Harris +2.82) implies 31% for Trump instead of 35%; the poll-vs-market gap conclusion is unchanged.",
       "source": "https://github.com/fivethirtyeight/data"
+    },
+    {
+      "id": 23,
+      "severity": "medium",
+      "area": "Data source availability",
+      "title": "OpenElections (Harvard Dataverse) site is offline — the openelections.org domain is for sale (fetched 2026-09-19)",
+      "detail": "Fetch of https://www.openelections.org/ on 2026-09-19 returned a GoDaddy 'domain for sale' listing instead of the dataset site. The master list entry 'harvard-dataverse' points to dataverse.harvard.edu, which is live and unaffected; the OpenElections datasets should be reached there (or via the MEDSL dataverse).",
+      "action": "Do not cite openelections.org; use dataverse.harvard.edu datasets with DOIs. Re-check domain status each session.",
+      "source": "https://forsale.godaddy.com/forsale/openelections.org"
+    },
+    {
+      "id": 24,
+      "severity": "low",
+      "area": "Polling ecosystem",
+      "title": "U.S. Elections Project (UF) migrated — electproject.org is a stub now pointing to the UF Election Lab (fetched 2026-09-19)",
+      "detail": "electproject.org (Google Sites) states: 'My voter turnout data and analyses have moved to the UF Election Lab (election.lab.ufl.edu/voter-turnout/). All data here supersedes data posted on the old US Elections Project site.'",
+      "action": "Use election.lab.ufl.edu as the canonical VEP-turnout source (master entry 'uf-election-lab'); electproject.org kept for historical pages only.",
+      "source": "https://www.electproject.org/"
+    },
+    {
+      "id": 25,
+      "severity": "low",
+      "area": "Polling ecosystem",
+      "title": "Edison Research acquired by SSRS (2025) — edisonresearch.com now redirects to ssrs.com/edison-research-at-ssrs (fetched 2026-09-19)",
+      "detail": "'In 2025, SSRS acquired Edison Research, gaining nearly three decades of experience measuring audio, media, and consumer behavior, as well as a deep background in election research.' Whether the national exit-poll operation will run at the 2026 midterms under the new ownership is not yet stated on the page.",
+      "action": "Treat 2026 exit-poll sourcing as provisional; confirm the 2026 exit-poll operation and methodology before using exit-poll numbers in any backtest.",
+      "source": "https://ssrs.com/edison-research-at-ssrs/"
     }
   ]
 }

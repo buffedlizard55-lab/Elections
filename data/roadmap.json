@@ -2,21 +2,69 @@
   "title": "Remaining work & limitations (for the next session(s))",
   "limit": "Ordered by value. Each item is self-contained enough to start immediately.",
   "items": [
-    { "id": "R1", "priority": 1, "title": "Daily automated collection (needs a networked runner)", "detail": "scripts/collect-kalshi.mjs is written and unit-scaffolded, but this session's sandbox had no general internet, so it could not be exercised live. Run it in CI (workflow committed: .github/workflows/daily-collection.yml, disabled until the collector is proven) to accumulate: full open-market universe (paginated GET /markets), order books, candlestick histories for every new market, and the historical tier as markets settle. Every artifact must carry capturedFrom+capturedAt or the lint fails.", "why": "Forward collection is the user's explicit requirement ('internally model/forecast via historical data collection + backtesting + forward collection') and the 2026 live-cycle evidence base grows daily." },
-    { "id": "R2", "priority": 2, "title": "2024 per-state Senate race markets (series tickers not yet identified)", "detail": "This session verified the PRES, CONTROLH and CONTROLS series (2024 settled + 2026/2028 live). The per-state 2024 Senate tickers (e.g. a 2024 Arizona market) were not found by guessing; the API has no public search endpoint. Next step: enumerate GET /historical/markets by event-ticker pattern or mine kalshi.com slugs for 2024 Senate pages, capture candlesticks, and extend the multi-market backtest from 3 to ~40 markets. This is the single biggest backtest-power upgrade.", "why": "A 3-market backtest can detect gross miscalibration but not state-level structure (incumbency, partisans, toss-up buckets)." },
-    { "id": "R3", "priority": 3, "title": "2026 forward-collection loop with a live calibration tracker", "detail": "Once R1 runs daily: (a) store the implied probability of every open 2026 market each day; (b) as markets settle (first: LA mayor Nov 3, 2026), compute Brier/log-loss per market and per calibration bucket; (c) publish the running record on this site. This directly tests the exchange's '70% means 70%' claim on forward data and the contest's theses on 2026 markets.", "why": "Turns the project from a 2024 retrospective into a live, scored forecasting operation — the user's 'track expected vs actual results' requirement." },
-    { "id": "R4", "priority": 4, "title": "Poll layer beyond 538: add VoteHub/RCP daily averages and the Quinnipiac 2026 series", "detail": "The poll backtest currently uses only the archived 538 national averages (ends 2024-09-12). Adding RCP's daily averages (archived per election) and the 2026 Quinnipiac/other releases (verified in data/polls/verified-polls.json) would give a continuous 2026 poll-vs-market spread to test poll-anchor style strategies on live markets.", "why": "The 2024 result (polls -4.3pp miss, market closer) is a single-cycle observation; a 2026 replication would make it a finding." },
-    { "id": "R5", "priority": 5, "title": "Cross-market consistency checks as a standing monitor", "detail": "Codify: (a) D+R book complementarity per event (flags like #7), (b) monotone outcome sets (flag #8), (c) Kalshi-vs-Polymarket divergence alerts (>5pp on the same event), (d) web-% vs API-book divergence (flag #2). Output to data/discrepancy-watch.json each collect run.", "why": "Cheap to compute, and each catch is a published data-quality result — the 'flag discrepancies' requirement operationalized." },
-    { "id": "R6", "priority": 6, "title": "2020 cycle extension (markets did not exist; poll archive does)", "detail": "Add a 2020 poll-only backtest row (538 2020 averages in the same archive) with the verified official outcome (Biden 306 EV; 81,283,501 votes) to test poll calibration across a wave year vs 2024. No Kalshi markets existed then (exchange launched 2021) — state that explicitly.", "why": "Multi-cycle poll error distribution is what the user asked for ('backtest polls and predictions against actual verified outcomes')." },
-    { "id": "R7", "priority": 7, "title": "Strategy population growth + tournament structure", "detail": "Add entrants with distinct theories (e.g., incumbent-defender on Senate series, seat-count-basis-arb, volatility-scaling) and a 2-cycle cumulative PnL ranking once 2026 settles. Keep The Leap conventions ($100k, realized PnL ranking, min-trading-days rule: require >=3 trading days to be ranked).", "why": "The 'competition' is the user's explicit framing; a single 2024 cycle is a pilot, not a tournament." },
-    { "id": "R8", "priority": 8, "title": "Documentation hardening", "detail": "VERIFICATION.md currently covers the 2026-09-18 session; each session should append its own dated section (what was fetched, line-by-line notes, hashes of copied files). Add SHA-256 hashes of the CSV copies in data/polls/PROVENANCE.md to make byte-level integrity checkable.", "why": "No-hallucination standard: provenance must be auditable by a third party without network access." }
+    {
+      "id": "R1",
+      "priority": 1,
+      "title": "Daily automated collection (needs a networked runner)",
+      "detail": "scripts/collect-kalshi.mjs is written and unit-scaffolded, but this session's sandbox had no general internet, so it could not be exercised live. Run it in CI (workflow committed: .github/workflows/daily-collection.yml, disabled until the collector is proven) to accumulate: full open-market universe (paginated GET /markets), order books, candlestick histories for every new market, and the historical tier as markets settle. Every artifact must carry capturedFrom+capturedAt or the lint fails.",
+      "why": "Forward collection is the user's explicit requirement ('internally model/forecast via historical data collection + backtesting + forward collection') and the 2026 live-cycle evidence base grows daily."
+    },
+    {
+      "id": "R2",
+      "priority": 2,
+      "title": "2024 per-state Senate race markets (series tickers not yet identified)",
+      "detail": "This session verified the PRES, CONTROLH and CONTROLS series (2024 settled + 2026/2028 live). The per-state 2024 Senate tickers (e.g. a 2024 Arizona market) were not found by guessing; the API has no public search endpoint. Next step: enumerate GET /historical/markets by event-ticker pattern or mine kalshi.com slugs for 2024 Senate pages, capture candlesticks, and extend the multi-market backtest from 3 to ~40 markets. This is the single biggest backtest-power upgrade.",
+      "why": "A 3-market backtest can detect gross miscalibration but not state-level structure (incumbency, partisans, toss-up buckets)."
+    },
+    {
+      "id": "R3",
+      "priority": 3,
+      "title": "2026 forward-collection loop with a live calibration tracker",
+      "detail": "Once R1 runs daily: (a) store the implied probability of every open 2026 market each day; (b) as markets settle (first: LA mayor Nov 3, 2026), compute Brier/log-loss per market and per calibration bucket; (c) publish the running record on this site. This directly tests the exchange's '70% means 70%' claim on forward data and the contest's theses on 2026 markets.",
+      "why": "Turns the project from a 2024 retrospective into a live, scored forecasting operation — the user's 'track expected vs actual results' requirement."
+    },
+    {
+      "id": "R4",
+      "priority": 4,
+      "title": "Poll layer beyond 538: add VoteHub/RCP daily averages and the Quinnipiac 2026 series",
+      "detail": "The poll backtest currently uses only the archived 538 national averages (ends 2024-09-12). Adding RCP's daily averages (archived per election) and the 2026 Quinnipiac/other releases (verified in data/polls/verified-polls.json) would give a continuous 2026 poll-vs-market spread to test poll-anchor style strategies on live markets.",
+      "why": "The 2024 result (polls -4.3pp miss, market closer) is a single-cycle observation; a 2026 replication would make it a finding."
+    },
+    {
+      "id": "R5",
+      "priority": 5,
+      "title": "Cross-market consistency checks as a standing monitor",
+      "detail": "Codify: (a) D+R book complementarity per event (flags like #7), (b) monotone outcome sets (flag #8), (c) Kalshi-vs-Polymarket divergence alerts (>5pp on the same event), (d) web-% vs API-book divergence (flag #2). Output to data/discrepancy-watch.json each collect run.",
+      "why": "Cheap to compute, and each catch is a published data-quality result — the 'flag discrepancies' requirement operationalized."
+    },
+    {
+      "id": "R6",
+      "priority": 6,
+      "title": "2020 cycle extension (markets did not exist; poll archive does)",
+      "detail": "Add a 2020 poll-only backtest row (538 2020 averages in the same archive) with the verified official outcome (Biden 306 EV; 81,283,501 votes) to test poll calibration across a wave year vs 2024. No Kalshi markets existed then (exchange launched 2021) — state that explicitly.",
+      "why": "Multi-cycle poll error distribution is what the user asked for ('backtest polls and predictions against actual verified outcomes')."
+    },
+    {
+      "id": "R7",
+      "priority": 7,
+      "title": "Strategy population growth + tournament structure",
+      "detail": "Add entrants with distinct theories (e.g., incumbent-defender on Senate series, seat-count-basis-arb, volatility-scaling) and a 2-cycle cumulative PnL ranking once 2026 settles. Keep The Leap conventions ($100k, realized PnL ranking, min-trading-days rule: require >=3 trading days to be ranked).",
+      "why": "The 'competition' is the user's explicit framing; a single 2024 cycle is a pilot, not a tournament."
+    },
+    {
+      "id": "R8",
+      "priority": 8,
+      "title": "Documentation hardening",
+      "detail": "PARTIALLY DONE 2026-09-19: dated per-session sections now exist (2026-09-18 base + 2026-09-19 §6, 21-entry expansion, URL corrections & fetch failures recorded). REMAINING: add SHA-256 hashes of the CSV copies in data/polls/PROVENANCE.md to make byte-level integrity checkable; re-verify iem.isu.edu directly (2026-09-19 fetch failed via sandbox proxy — entry marked verified-via-search).",
+      "why": "No-hallucination standard: provenance must be auditable by a third party without network access."
+    }
   ],
   "limitations": [
-    "Sandbox of the 2026-09-18 session had no general internet: live capture was done via a proxy fetch tool, so only the manually enumerated endpoints (documented per file) were captured; the full open-market universe awaits R1.",
+    "Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 session verified 21 additional sources directly, but iem.isu.edu and the IEM 2026 prospectus PDF could not be fetched directly (proxy errors) — that entry is verified-via-search and needs a networked re-check. The full open-market universe still awaits R1.",
     "2024 backtest universe = 3 markets (presidency + both chamber controls). Directionally strong (all settled YES on the R side, matching official outcomes), statistically thin.",
     "NO-side prices in captured candles are derived reciprocals (1 - yesClose); the raw API only publishes the YES-side candle history for these series.",
     "Poll data for 2024 ends 2024-09-12 (538 archive cutoff); the poll-vs-market comparison after that date reuses the anchor with its age disclosed.",
     "Web-rendered percentages (kalshi.com hub) are a display convenience; where the API book was captured, that is the authoritative figure and divergences are flagged (IRREGULARITIES #2, #7).",
-    "GitHub Pages serves the committed src/data/site-data.js; the site is a snapshot of 2026-09-18 until the next build commit."
+    "GitHub Pages serves the committed src/data/site-data.js; the site is a snapshot of 2026-09-19 (53 Node-track sources, 25 irregularities) until the next build commit."
   ]
 }

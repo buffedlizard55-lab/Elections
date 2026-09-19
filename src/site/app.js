@@ -48,7 +48,7 @@
     forecasting contest (reverse-engineered from TradingView's <a href="https://www.tradingview.com/the-leap/crypto-series-may-2026/" target="_blank" rel="noopener">The Leap</a>)
     on Kalshi's open election markets.</p>
     <div class="grid cols4">
-      <div class="stat"><div class="n">${sources}</div><div class="l">verified sources in the master list (line-by-line, 2026-09-18)</div></div>
+      <div class="stat"><div class="n">${sources}</div><div class="l">verified sources in the master list (line-by-line, 2026-09-18 + 2026-09-19)</div></div>
       <div class="stat"><div class="n">3 / 3</div><div class="l">2024 Kalshi markets backtested vs official settlements (all cross-checks PASS)</div></div>
       <div class="stat"><div class="n">${ranked}</div><div class="l">ranked contest entrants · ${esc(leader ? leader.username : '—')} leads at ${leader ? leader.realizedPnlPct.toFixed(1) : '—'}%</div></div>
       <div class="stat"><div class="n">${irregular}</div><div class="l">irregularities &amp; discrepancies flagged for review</div></div>
@@ -98,7 +98,10 @@
     const checks = (s.crossPlatformChecks || []).map((c) => `
       <div class="card"><strong>${esc(c.market)}</strong>
         <div class="small" style="margin-top:6px">Kalshi: ${esc(c.kalshiPct != null ? c.kalshiPct + '%' : (c.kalshi || ''))}
-        ${c.polymarketPct != null ? `· Polymarket: ${c.polymarketPct}% (${money(c.polymarketVolumeDollars)} vol) · as of ${esc(c.asOf)}` : ''}</div>
+        ${c.polymarketPct != null ? `· Polymarket: ${c.polymarketPct}% (${money(c.polymarketVolumeDollars)} vol)` : ''}
+        ${c.predictit ? `· PredictIt: ${esc(c.predictit)}` : ''}
+        ${c.asOf ? `· as of ${esc(c.asOf)}` : ''}</div>
+        ${c.divergence ? `<div class="small" style="margin-top:4px"><strong>Assessment:</strong> ${esc(c.divergence)}</div>` : ''}
         ${(c.historical || []).map((h) => `<div class="small">— ${esc(h.date)}: ${esc(h.value)}</div>`).join('')}
         ${srcs((c.sources || []).concat(c.historical || []).map((x) => x.source || x))}</div>`).join('');
     return `
@@ -332,18 +335,25 @@
 
   // ---------- SOURCES ----------
   function sources() {
-    const rows = D.sources.sources.map((s) => `
+    const all = D.sources.sources;
+    const counts = {};
+    all.forEach((s) => { counts[s.verifiedOn] = (counts[s.verifiedOn] || 0) + 1; });
+    const byDate = Object.keys(counts).sort();
+    const rows = all.map((s) => `
       <tr>
         <td><a href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.name)}</strong></a><br><span class="small">${esc(s.type)}</span></td>
         <td class="small">${esc(s.verified)}</td>
         <td class="small" style="white-space:nowrap">${esc(s.verifiedOn)}<br><span class="chip good">${esc(s.status)}</span></td>
         <td class="small">${s.notes ? esc(s.notes) : ''}</td>
       </tr>`).join('');
+    const perSession = byDate.map((d) => `${d}: ${counts[d]}`).join(' · ');
     return `
     <h1>Master source list</h1>
-    <p class="lead">${D.sources.sources.length} entries, each verified line-by-line during the 2026-09-18 session — the URL was fetched (or located via live search) and the
-    <em>verified</em> column records exactly what was observed. <strong>≥20 new entries required: satisfied.</strong>
-    Nothing is listed on assumption. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>.</p>
+    <p class="lead">${all.length} entries — ${perSession} — each verified line-by-line in its session: the URL was fetched
+    (or, where a direct fetch failed, located via live search — noted in the <em>verified</em> column), and that column
+    records <strong>exactly what was observed</strong>. Nothing is listed on assumption; every row carries a link for manual
+    review. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>; full audit trail in
+    <span class="mono">VERIFICATION.md</span> (session sections).</p>
     <div class="card" style="overflow-x:auto"><table>
       <thead><tr><th>Source (link for manual review)</th><th>What was verified</th><th>When / status</th><th>Notes</th></tr></thead>
       <tbody>${rows}</tbody>
@@ -357,6 +367,7 @@
       <div class="card">
         <div style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap">
           <span class="chip ${sev(i.severity)} sev-${i.severity}">#${i.id} · ${i.severity}</span>
+          ${i.track ? `<span class="chip info">${i.track === 'node' ? 'Node track' : 'Python track'}</span>` : ''}
           <div style="flex:1; min-width:240px">
             <strong>${esc(i.title)}</strong>
             <div class="small" style="margin-top:4px">${esc(i.area)} — ${esc(i.detail)}</div>
@@ -367,9 +378,11 @@
       </div>`).join('');
     return `
     <h1>Irregularities &amp; discrepancies flagged for review</h1>
-    <p class="lead">${D.irregularities.items.length} items. Severity: <span class="chip bad">high</span> affects trust in a result ·
+    <p class="lead">${D.irregularities.items.length} items across both toolchains (Node track 1–12 + 23–25 · Python track 13–22).
+    Severity: <span class="chip bad">high</span> affects trust in a result ·
     <span class="chip warn">medium</span> affects interpretation · <span class="chip">low</span> cosmetic/monitor.
-    Nothing flagged here is silently normalized — each item states its action.</p>
+    Nothing flagged here is silently normalized — each item states its action. Full human-readable table:
+    <span class="mono">IRREGULARITIES.md</span>.</p>
     ${items}`;
   }
 
@@ -378,12 +391,13 @@
     return `
     <h1>Methodology</h1>
     <div class="grid cols2">
-      <div class="card"><h3 style="margin-top:0">Data capture (2026-09-18)</h3>
+      <div class="card"><h3 style="margin-top:0">Data capture (sessions 2026-09-18 + 2026-09-19)</h3>
         <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
           <li><strong>Kalshi</strong>: official public API on the production host <span class="mono">api.elections.kalshi.com</span> (listed in docs.kalshi.com). Live markets via <span class="mono">GET /markets?series_ticker=…</span>; settled 2024 markets via the <span class="mono">/historical</span> tier (cutoff 2026-07-20); daily candlesticks via <span class="mono">GET /markets/{t}/candlesticks?period_interval=1440</span>; series fee configs via <span class="mono">GET /series/{t}</span>. Every file records its exact URL + capture time.</li>
           <li><strong>Official outcomes</strong>: FEC-cited figures via the MediaWiki API (infobox wikitext/REST summaries fetched directly), congress.gov roll calls, IFES (FEC-sourced).</li>
           <li><strong>Polls</strong>: 538's official GitHub archive cloned verbatim (byte sizes in <span class="mono">data/polls/PROVENANCE.md</span>); individual 2024/2026 polls verified via primary pages or full syndications.</li>
-          <li><strong>Cross-platform</strong>: Polymarket used only for discrepancy checks, never as a trading layer.</li>
+          <li><strong>Source expansion (2026-09-19)</strong>: 21 additional master-list entries (32 → 53) fetched line-by-line from official government portals, news outlets, polling institutions, academic repositories, and a second prediction market (PredictIt); 3 ecosystem irregularities flagged in the same pass (OpenElections offline, U.S. Elections Project migration, Edison/SSRS acquisition).</li>
+          <li><strong>Cross-platform</strong>: Polymarket (2026-09-18) and PredictIt (2026-09-19) used only for discrepancy checks, never as a trading layer.</li>
         </ul></div>
       <div class="card"><h3 style="margin-top:0">Backtest &amp; contest mechanics</h3>
         <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
