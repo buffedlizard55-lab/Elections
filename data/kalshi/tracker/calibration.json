@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-19T01:48:16.998Z",
+ "capturedAt": "2026-09-19T15:20:21.451Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 207,
+ "settledMarkets": 215,
  "scoreableMarkets": 0,
  "observationsExcludedAsLookAhead": 0,
- "trackedMarkets": 10711,
+ "trackedMarkets": 10682,
  "observationDays": [
   "2026-09-19"
  ],
@@ -10014,6 +10014,390 @@
    "series_ticker": "KXTRUMPMEETM",
    "result": "yes",
    "settlementDay": "2026-09-18",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A10",
+   "title": "Will Trump endorse at least 10 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A15",
+   "title": "Will Trump endorse at least 15 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A20",
+   "title": "Will Trump endorse at least 20 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A25",
+   "title": "Will Trump endorse at least 25 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A3",
+   "title": "Will Trump endorse at least 3 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A5",
+   "title": "Will Trump endorse at least 5 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26SEP18-A50",
+   "title": "Will Trump endorse at least 50 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-09-19",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-EMUS",
+   "title": "Will Donald Trump meet (including phone calls) Elon Musk in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-19",
    "observations": 0,
    "observationsOnOrAfterSettlement": 0,
    "firstObserved": null,
