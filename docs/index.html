@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elections — Collect · Verify · Forecast</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html" class="active">Home</a>
+    <a href="sources.html">Sources</a>
+    <a href="kalshi.html">Kalshi Markets</a>
+    <a href="contest.html">Contest</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="verification.html">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>One project: collect, verify, forecast, backtest.</h2>
+    <p class="lead">We gather election data only from free, public, official and trusted sources — verify every source line-by-line, score every forecast against certified outcomes, and run a Leap-style paper-trading contest on Kalshi politics markets.</p>
+    <div class="stat-row">
+      <div class="stat"><b id="stat-sources">20</b><span>verified sources (batch 1)</span></div>
+      <div class="stat"><b id="stat-flagged">7</b><span>flagged / excluded candidates</span></div>
+      <div class="stat"><b>8</b><span>contest strategies</span></div>
+      <div class="stat"><b>$100k</b><span>virtual cash each</span></div>
+    </div>
+    <div class="pill-row">
+      <span class="badge b-green">verified sources only</span>
+      <span class="badge b-blue">official outcomes win</span>
+      <span class="badge b-amber">no hallucinations — simulated data labeled</span>
+    </div>
+  </div>
+
+  <div class="notice blue"><strong>How to read this site:</strong> every claim links to its source. Green badges were verified live on 2026-09-18; amber badges need a human freshness check. Anything simulated is labeled <span class="badge b-amber">simulated</span> and is never presented as market data.</div>
+
+  <div class="grid">
+    <div class="card"><h3>📚 Sources</h3><p>20 verified entries: federal agencies, academic surveys, pollsters, and nonpartisan analysis — each with links, evidence, and caveats.</p><a href="sources.html">Browse the master list →</a></div>
+    <div class="card"><h3>📈 Kalshi Markets</h3><p>Our market-data layer: verified API map, collector script, politics/elections filter, and snapshot status.</p><a href="kalshi.html">Market data layer →</a></div>
+    <div class="card"><h3>🏆 Paper-Trading Contest</h3><p>Leap-style rules, 8 strategy contestants, virtual $100k, public leaderboard with PnL tracking.</p><a href="contest.html">Rules &amp; leaderboard →</a></div>
+    <div class="card"><h3>🧪 Methodology</h3><p>How forecasts are scored (Brier, log-loss, calibration), what gets flagged, and why.</p><a href="methodology.html">Backtest methodology →</a></div>
+    <div class="card"><h3>✅ Verification &amp; Flags</h3><p>Line-by-line verification log, excluded candidates, and the irregularities log.</p><a href="verification.html">Review the evidence →</a></div>
+    <div class="card"><h3>💻 Repository</h3><p>Collectors, validators, contest engine, and backtester — Python stdlib only, no install pain.</p><a href="https://github.com/buffedlizard55-lab/Elections" target="_blank" rel="noopener">Open on GitHub →</a></div>
+  </div>
+
+  <div class="card">
+    <h3>Project rules</h3>
+    <p><strong>1.</strong> Verified sources only — nothing enters the master list without a checked URL and evidence. &nbsp;<strong>2.</strong> No hallucinations — no invented prices, polls, or results. &nbsp;<strong>3.</strong> Official outcomes win — backtests score against certified results. &nbsp;<strong>4.</strong> Flag, don't patch — anomalies go in the irregularities log with evidence.</p>
+    <p class="muted">Data as of 2026-09-18. Site data files: <a href="data/master_sources.json">master_sources.json</a> · <a href="data/flagged_sources.json">flagged_sources.json</a> · <a href="data/kalshi_api.json">kalshi_api.json</a> · <a href="data/verification_log.md">verification_log.md</a></p>
+  </div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice. Virtual contest funds only, no real money. · Sources verified 2026-09-18.
+</div></footer>
+<script src="assets/site.js"></script>
+<script>
+loadJSON("data/master_sources.json").then(d => {
+  document.getElementById("stat-sources").textContent = d.sources.length;
+}).catch(() => {});
+loadJSON("data/flagged_sources.json").then(d => {
+  document.getElementById("stat-flagged").textContent = d.sources.length;
+}).catch(() => {});
+</script>
+</body>
+</html>

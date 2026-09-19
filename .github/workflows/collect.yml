@@ -1,0 +1,44 @@
+name: Daily Kalshi snapshot
+
+# Forward collection: pull all open Kalshi markets once a day (GitHub-hosted
+# runners have normal network access), filter politics/elections, and commit
+# the snapshot. The Pages workflow rebuilds daily on its own schedule, so the
+# site's market-data status stays fresh. Only successful collections commit.
+on:
+  schedule:
+    - cron: "20 12 * * *" # daily 12:20 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect Kalshi markets
+        id: collect
+        run: |
+          if python scripts/fetch_kalshi.py --out-dir data/kalshi; then
+            echo "collected=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "collected=false" >> "$GITHUB_OUTPUT"
+            echo "collector failed; nothing will be committed (empty snapshots are never published)"
+          fi
+      - name: Commit new snapshot
+        if: steps.collect.outputs.collected == 'true'
+        run: |
+          git config user.name "elections-collector[bot]"
+          git config user.email "elections-collector[bot]@users.noreply.github.com"
+          git add data/kalshi/
+          if git diff --cached --quiet; then
+            echo "no new snapshot files to commit"
+          else
+            git pull --rebase origin main || echo "rebase skipped"
+            git commit -m "chore: daily Kalshi snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi

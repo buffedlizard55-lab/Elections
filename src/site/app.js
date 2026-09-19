@@ -367,6 +367,7 @@
       <div class="card">
         <div style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap">
           <span class="chip ${sev(i.severity)} sev-${i.severity}">#${i.id} · ${i.severity}</span>
+          ${i.track ? `<span class="chip info">${i.track === 'node' ? 'Node track' : 'Python track'}</span>` : ''}
           <div style="flex:1; min-width:240px">
             <strong>${esc(i.title)}</strong>
             <div class="small" style="margin-top:4px">${esc(i.area)} — ${esc(i.detail)}</div>
@@ -377,9 +378,11 @@
       </div>`).join('');
     return `
     <h1>Irregularities &amp; discrepancies flagged for review</h1>
-    <p class="lead">${D.irregularities.items.length} items. Severity: <span class="chip bad">high</span> affects trust in a result ·
+    <p class="lead">${D.irregularities.items.length} items across both toolchains (Node track 1–12 + 23–25 · Python track 13–22).
+    Severity: <span class="chip bad">high</span> affects trust in a result ·
     <span class="chip warn">medium</span> affects interpretation · <span class="chip">low</span> cosmetic/monitor.
-    Nothing flagged here is silently normalized — each item states its action.</p>
+    Nothing flagged here is silently normalized — each item states its action. Full human-readable table:
+    <span class="mono">IRREGULARITIES.md</span>.</p>
     ${items}`;
   }
 

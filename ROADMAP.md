@@ -70,5 +70,5 @@ failed via the sandbox proxy — the entry is marked `verified-via-search`).
    disclosed.
 5. Web-rendered percentages are a display convenience; API books are authoritative where captured and
    divergences are flagged (#2, #7).
-6. The GitHub Pages site is a snapshot of 2026-09-19 (53 sources, 15 irregularities) until the next
+6. The GitHub Pages site is a snapshot of 2026-09-19 (53 Node-track sources, 25 irregularities) until the next
    build commit.

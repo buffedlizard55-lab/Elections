@@ -1,0 +1,108 @@
+{
+  "title": "Irregularities & discrepancies — Python toolkit track (items 13-22)",
+  "capturedFrom": "IRREGULARITIES.md table rows 13-22 (merged from origin/main, 2026-09-18 batch 1 session); evidence in data/verification_log.md and data/flagged_sources.json",
+  "capturedAt": "2026-09-19",
+  "method": "Transcribed line-by-line from the IRREGULARITIES.md table (machine-readable twin for the site bundle; the MD table remains the human-facing record). No content was added or paraphrased beyond the 'source' pointers.",
+  "items": [
+    {
+      "id": 13,
+      "severity": "low",
+      "area": "Forecasting ecosystem",
+      "title": "FiveThirtyEight is defunct; excluded from live sources (NiemanLab 2025-03-05: shutdown, staff laid off, updates canceled; NYT 2026-05-16: archive redirecting to ABC News)",
+      "detail": "Corroborated by two independent outlets; data.fivethirtyeight.com only partially reachable, links redirect (data/flagged_sources.json FLAG-001).",
+      "action": "Confirmed — historical use only. Corroborates item 6.",
+      "source": "https://projects.fivethirtyeight.com/polls/",
+      "track": "python"
+    },
+    {
+      "id": 14,
+      "severity": "low",
+      "area": "Polling ecosystem",
+      "title": "Monmouth Poll ceased operations 2025-07-01; archive only (official institute page statement)",
+      "detail": "Archive last modified 2025-07-17; final national releases December 2024 (data/flagged_sources.json FLAG-002).",
+      "action": "Confirmed — historical use only. Corroborates item 5.",
+      "source": "https://www.monmouth.edu/polling-institute/",
+      "track": "python"
+    },
+    {
+      "id": 15,
+      "severity": "medium",
+      "area": "Aggregator",
+      "title": "RCP polls page served stale 2010-era snapshot to checker (direct fetch HTTP 200, correct title, stale body; live operation corroborated by 2026-09-17 third-party citation)",
+      "detail": "Checker-side staleness vs live operation: the page responded 200 with the right title but 2010-era body content; an independent 2026-09-17 citation confirms RCP averages are still published.",
+      "action": "Open — needs human freshness check before use.",
+      "source": "https://www.realclearpolitics.com/epolls/latestpolls/",
+      "track": "python"
+    },
+    {
+      "id": 16,
+      "severity": "medium",
+      "area": "Polling ecosystem",
+      "title": "Gallup reportedly dropped presidential approval question (Spring 2026) (Princeton research guide note)",
+      "detail": "Second report of the approval-series end; the Node track (item 4) records the Feb 2026 stop with final 36% (Dec 2025) via NYT/CNN.",
+      "action": "Open — verify per-series before use. Corroborates item 4.",
+      "source": "https://news.gallup.com/",
+      "track": "python"
+    },
+    {
+      "id": 17,
+      "severity": "low",
+      "area": "Polling ecosystem",
+      "title": "AP VoteCast described as 2017-2024 (past tense); 2026 status unconfirmed (AP-NORC project page wording)",
+      "detail": "AP-NORC project page describes VoteCast in past tense; ICPSR series 2380 corroborates the archive.",
+      "action": "Open — use archived public-use files until confirmed.",
+      "source": "https://apnorc.org/projects/ap-votecast/",
+      "track": "python"
+    },
+    {
+      "id": 18,
+      "severity": "low",
+      "area": "Institution",
+      "title": "FEC homepage listed 2 commissioners + 4 vacancies (direct fetch of fec.gov, 2026-09-18)",
+      "detail": "Data publication on fec.gov remained current despite the vacancy note (verification_log.md SRC-001).",
+      "action": "Noted — data publication current; quorum implications for enforcement only.",
+      "source": "https://www.fec.gov/",
+      "track": "python"
+    },
+    {
+      "id": 19,
+      "severity": "low",
+      "area": "Data capture",
+      "title": "Harvard Dataverse homepage HTML returned HTTP 500 to checker while API healthy (v6.10.1, OK; re3data + Harvard Library corroboration)",
+      "detail": "API /api/info/version returned {status: OK, version: 6.10.1}; only the homepage HTML failed for the checker (verification_log.md SRC-009).",
+      "action": "Open — re-check homepage next session.",
+      "source": "https://dataverse.harvard.edu/api/info/version",
+      "track": "python"
+    },
+    {
+      "id": 20,
+      "severity": "low",
+      "area": "Source migration",
+      "title": "CES program home migrated Harvard -> Tufts; Split Ticket analysis migrating to The Argument (newsletter URL unverified) (on-site migration notices)",
+      "detail": "Harvard's cces.gov.harvard.edu page carries the migration notice to Tufts; CES 2022 dataset DOI 10.7910/DVN/PR4L8P confirmed on the Harvard page (verification_log.md SRC-008, SRC-019).",
+      "action": "Tracked — dual URLs recorded for CES; Argument URL queued for batch 2.",
+      "source": "https://cces.gov.harvard.edu/",
+      "track": "python"
+    },
+    {
+      "id": 21,
+      "severity": "low",
+      "area": "Source migration",
+      "title": "Pew legacy /politics/ path dead (restructured to /topic/politics-policy/); YouGov today. domain redirecting to yougov.com (direct fetch results)",
+      "detail": "Pew root fetch returned Sept 15-17, 2026 publications with the new topic path; today.yougov.com/politics redirect target loaded with Aug 28-31, 2026 Economist/YouGov poll (verification_log.md SRC-011, SRC-015).",
+      "action": "Confirmed — canonical URLs updated in master list.",
+      "source": "https://www.pewresearch.org/topic/politics-policy/",
+      "track": "python"
+    },
+    {
+      "id": 22,
+      "severity": "low",
+      "area": "Data capture",
+      "title": "Sandbox blocks direct HTTPS to most hosts; live checks via fetch/search channels (only api.github.com directly reachable; all fetches logged)",
+      "detail": "Environment constraint of the 2026-09-18 Python-track verification session; every check's channel (direct-fetch / search-corroborated / api-plus-registry / fetch-plus-third-party) is recorded per line in data/verification_log.md.",
+      "action": "Noted — re-run `validate_sources.py --check-live` from normal network.",
+      "source": "data/verification_log.md",
+      "track": "python"
+    }
+  ]
+}

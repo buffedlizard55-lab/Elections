@@ -17,7 +17,17 @@ const outcomes = read('data/outcomes/verified-outcomes.json');
 const polls = read('data/polls/verified-polls.json');
 const backtests = read('data/backtest-results.json');
 const contest = read('data/contest-results.json');
-const irregularities = read('data/irregularities.json');
+// Both toolchains publish irregularities; the site shows the complete list.
+const irregularitiesNode = read('data/irregularities.json');
+const irregularitiesPython = read('data/irregularities-python-track.json');
+const irregularities = {
+  title: 'Irregularities & discrepancies — combined (both toolchains)',
+  method: 'Node-track items live in data/irregularities.json; Python-track items (13-22) are transcribed verbatim from the IRREGULARITIES.md table into data/irregularities-python-track.json. Combined here in id order for the site.',
+  items: [
+    ...irregularitiesNode.items.map((i) => ({ ...i, track: 'node' })),
+    ...irregularitiesPython.items,
+  ].sort((a, b) => a.id - b.id),
+};
 const roadmap = read('data/roadmap.json');
 
 // 538 national 2024 average series (downsampled to weekly + key dates for the chart)
