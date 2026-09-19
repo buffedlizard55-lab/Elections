@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology — Elections</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html">Home</a>
+    <a href="sources.html">Sources</a>
+    <a href="kalshi.html">Kalshi Markets</a>
+    <a href="contest.html">Contest</a>
+    <a href="methodology.html" class="active">Methodology</a>
+    <a href="verification.html">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>Methodology</h2>
+    <p class="lead">How forecasts are scored, what counts as an irregularity, and how theories get tested — before anyone claims a result.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>1. Collect</h3><p>Polls, ratings, and market prices from verified sources only. Every row of data carries its source URL.</p></div>
+    <div class="card"><h3>2. Forecast</h3><p>Poll averages, fundamentals, and market-implied probabilities compete on equal footing with pre-registered rules.</p></div>
+    <div class="card"><h3>3. Backtest</h3><p>Score against certified outcomes (FEC, House Clerk, NARA): Brier, log-loss, calibration — with small-n warnings.</p></div>
+    <div class="card"><h3>4. Flag</h3><p>Extreme misses, stale forecasts, and missing outcomes are logged publicly, never silently patched.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Scoring metrics</h3>
+    <div class="table-scroll"><table class="data">
+      <thead><tr><th>Metric</th><th>What it rewards</th><th>Watch out</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Brier score</strong> (lower better)</td><td>Probabilities close to outcomes</td><td>Needs shared race sets for fair comparison</td></tr>
+        <tr><td><strong>Log-loss</strong> (lower better)</td><td>Honest uncertainty; punishes confident errors</td><td>Very sensitive to 0/100 calls</td></tr>
+        <tr><td><strong>Accuracy @ 0.5</strong></td><td>Correct binary calls</td><td>Ignores confidence; coin-flips look okay</td></tr>
+        <tr><td><strong>Calibration</strong></td><td>"70% forecasts happen ~70% of the time"</td><td>Needs volume per bin to mean anything</td></tr>
+        <tr><td><strong>Bias</strong></td><td>Detects systematic lean</td><td>Confounded by the cycle's base rate</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted">Implemented in <code>scripts/backtest.py</code>. Run <code>python scripts/backtest.py --demo-synthetic</code> for a labeled pipeline test.</p>
+  </div>
+
+  <div class="card">
+    <h3>Automatic flags</h3>
+    <div class="table-scroll"><table class="data">
+      <thead><tr><th>Flag</th><th>Trigger</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>missing-actual</code></td><td>Forecast with no verified outcome</td><td>Unscored until an official result exists</td></tr>
+        <tr><td><code>bad-values</code></td><td>p outside [0,1] or non-binary outcome</td><td>Data error — fix the row</td></tr>
+        <tr><td><code>stale-forecast</code></td><td>Forecast &gt; 120 days before decision</td><td>Informational; early reads differ from closing ones</td></tr>
+        <tr><td><code>extreme-miss</code></td><td>|prob − outcome| &gt; 0.8</td><td>Review candidate for the irregularities log</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Testable theories (pre-registered, Season 1)</h3>
+    <p>Each theory below is a hypothesis the contest + backtests will evaluate. None has been tested yet — that is the point of pre-registering them.</p>
+    <div class="table-scroll"><table class="data">
+      <thead><tr><th>ID</th><th>Theory</th><th>Test</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>T1</td><td>Blending poll averages with market prices beats either alone (Brier)</td><td><code>polls-plus-blend</code> vs components, same race set</td><td><span class="badge b-gray">untested</span></td></tr>
+        <tr><td>T2</td><td>Early favorites are underpriced (buy-and-hold wins)</td><td><code>hold-to-settle-favorite</code> season PnL &gt; 0</td><td><span class="badge b-gray">untested</span></td></tr>
+        <tr><td>T3</td><td>Cheap tails (5–20c) are systematically mispriced</td><td><code>contrarian-longshot</code> calibration in the 0–20% bin</td><td><span class="badge b-gray">untested</span></td></tr>
+        <tr><td>T4</td><td>Volume spikes carry information (momentum after spikes)</td><td><code>volume-breakout</code> hit-rate vs base rate</td><td><span class="badge b-gray">untested</span></td></tr>
+        <tr><td>T5</td><td>Markets overreact intraday (fades profit)</td><td><code>mean-reversion-fade</code> vs <code>momentum-rider</code></td><td><span class="badge b-gray">untested</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice.
+</div></footer>
+</body>
+</html>

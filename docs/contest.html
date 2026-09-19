@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contest — Elections</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html">Home</a>
+    <a href="sources.html">Sources</a>
+    <a href="kalshi.html">Kalshi Markets</a>
+    <a href="contest.html" class="active">Contest</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="verification.html">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>Paper-trading contest <span class="muted">— Leap-style, virtual funds only</span></h2>
+    <p class="lead">Eight strategy contestants start with <strong>$100,000 virtual</strong> each, trade Kalshi politics/election binaries on paper, and are ranked by total equity. Mechanics adapted from TradingView's The Leap: equal balances, no resets, simulated fills, qualifying day minimum, public leaderboard, season-end settlement.</p>
+  </div>
+
+  <div class="notice red" id="sim-note"><strong>Current leaderboard: SIMULATED.</strong> Prices, volumes, and outcomes below were generated from a fixed random seed to test the engine — they are <em>not</em> Kalshi data. The label flips only when real snapshots drive scoring.</div>
+
+  <div class="card">
+    <h3>Leaderboard <span class="muted" id="lb-meta"></span></h3>
+    <div class="table-scroll"><table class="data" id="lb-table">
+      <thead><tr><th>#</th><th>Contestant</th><th>Strategy</th><th>Equity</th><th>PnL</th><th>Return</th><th>Trades</th><th>Days</th><th>Qualified</th></tr></thead>
+      <tbody><tr><td colspan="9">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Contestants &amp; strategies</h3>
+    <div class="table-scroll"><table class="data" id="ct-table">
+      <thead><tr><th>Username</th><th>Strategy</th><th>Rules (exact, reproducible)</th></tr></thead>
+      <tbody><tr><td colspan="3">Loading…</td></tr></tbody>
+    </table></div>
+    <p class="muted">Usernames are fictional handles for project-designed strategies — not real people. Rules are implemented in <code>scripts/paper_trading.py</code>.</p>
+  </div>
+
+  <div class="card md" id="rules-md"><h3>Rules</h3><p>Loading…</p></div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice. Virtual contest funds only, no real money.
+</div></footer>
+<script src="assets/site.js"></script>
+<script>
+loadJSON("data/leaderboard_latest.json").then(lb => {
+  document.getElementById("lb-meta").textContent = "· season " + lb.season + (lb.simulated ? " · SIMULATED" : " · real prices");
+  if (!lb.simulated) {
+    document.getElementById("sim-note").className = "notice green";
+    document.getElementById("sim-note").innerHTML = "<strong>Real-price leaderboard.</strong> Scored against Kalshi snapshots" + (lb.settled_markets ? " with " + lb.settled_markets + " settled markets" : "") + ".";
+  }
+  const rows = lb.leaderboard.map((r, i) => {
+    const pnlCls = r.pnl >= 0 ? "b-green" : "b-red";
+    return "<tr><td>" + (i + 1) + "</td><td><strong>" + esc(r.username) + "</strong></td>" +
+      "<td>" + esc(r.strategy_id) + "</td><td>" + fmtUSD(r.final_equity) + "</td>" +
+      '<td><span class="badge ' + pnlCls + '">' + fmtUSD(r.pnl) + "</span></td>" +
+      "<td>" + esc(r.return_pct) + "%</td><td>" + esc(r.trades) + "</td><td>" + esc(r.active_days) + "</td>" +
+      "<td>" + (r.qualified ? '<span class="badge b-green">yes</span>' : '<span class="badge b-amber">no</span>') + "</td></tr>";
+  }).join("");
+  document.querySelector("#lb-table tbody").innerHTML = rows;
+}).catch(e => showError("lb-meta", e));
+loadJSON("data/contestants.json").then(c => {
+  document.querySelector("#ct-table tbody").innerHTML = c.contestants.map(x =>
+    "<tr><td><strong>" + esc(x.username) + "</strong></td><td>" + esc(x.strategy_name) + "<br><code>" + esc(x.strategy_id) + "</code></td><td>" + esc(x.description) + "</td></tr>"
+  ).join("");
+}).catch(() => {});
+loadText("data/contest_rules.md").then(md => {
+  document.getElementById("rules-md").innerHTML = tinyMD(md);
+}).catch(() => {});
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalshi Markets — Elections</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <div class="brand"><div class="brand-mark">E</div>
+    <div><h1>Elections — Collect · Verify · Forecast</h1>
+    <p>Trusted election data, backtested forecasts &amp; a paper-trading contest</p></div>
+  </div>
+  <nav class="site">
+    <a href="index.html">Home</a>
+    <a href="sources.html">Sources</a>
+    <a href="kalshi.html" class="active">Kalshi Markets</a>
+    <a href="contest.html">Contest</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="verification.html">Verification &amp; Flags</a>
+  </nav>
+</div></header>
+<main><div class="wrap">
+
+  <div class="hero">
+    <h2>Kalshi market-data layer</h2>
+    <p class="lead">Prediction-market prices are our second layer of intelligence: a real-money consensus to compare against polls, ratings, and our own models. Kalshi is a CFTC-regulated exchange whose election contracts were permitted by federal court decisions in 2024.</p>
+    <div class="pill-row">
+      <span class="badge b-green">docs verified 2026-09-18</span>
+      <span class="badge b-amber">first live snapshot pending — see status</span>
+    </div>
+  </div>
+
+  <div class="notice blue" id="snapshot-status"><strong>Snapshot status:</strong> loading…</div>
+
+  <div class="grid">
+    <div class="card"><h3>Browse</h3><p>Midterms hub and politics category on Kalshi (verified links).</p><p id="browse-links">Loading…</p></div>
+    <div class="card"><h3>API docs</h3><p>Verified documentation entry points.</p><p id="docs-links">Loading…</p></div>
+    <div class="card"><h3>Collector</h3><p>Public endpoints only — no API key. Paginated, polite, fully logged, raw responses preserved.</p><p><code>python scripts/fetch_kalshi.py --out-dir data/kalshi</code></p></div>
+  </div>
+
+  <div class="card">
+    <h3>How we isolate politics/elections markets</h3>
+    <p id="filter-desc">Loading…</p>
+    <p class="muted">Every match records which rule fired (<code>_project_filter_reasons</code>), so the filter is auditable. The operator allowlist (<code>data/kalshi_series_allowlist.json</code>) starts empty and is filled only from confirmed live tickers — never guessed.</p>
+  </div>
+
+  <div class="card">
+    <h3>Verified endpoints</h3>
+    <div class="table-scroll"><table class="data" id="ep-table">
+      <thead><tr><th>Endpoint</th><th>Method</th><th>Verified</th><th>Notes</th></tr></thead>
+      <tbody><tr><td colspan="4">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="notice"><strong>Legal note:</strong> Kalshi's election markets operate under CFTC regulation following <em>KalshiEX LLC v. CFTC</em> (2024). This project only reads public market data and runs virtual paper trading — no real orders. Educational use only, not financial advice.</div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  Elections research project · Educational use only — not financial advice. · Sources verified 2026-09-18.
+</div></footer>
+<script src="assets/site.js"></script>
+<script>
+loadJSON("data/kalshi_api.json").then(k => {
+  document.getElementById("browse-links").innerHTML =
+    link(k.browse_urls.homepage, "kalshi.com") + "<br>" +
+    link(k.browse_urls.elections_midterms_hub, "Midterms hub") + "<br>" +
+    link(k.browse_urls.politics, "Politics category");
+  document.getElementById("docs-links").innerHTML =
+    link(k.docs.welcome, "API documentation") + "<br>" +
+    link(k.docs.get_markets, "Get Markets endpoint") + "<br>" +
+    link(k.docs.rate_limits, "Rate limits") + "<br>" +
+    link(k.docs.demo_environment, "Demo environment");
+  document.getElementById("filter-desc").textContent = k.politics_filter_strategy.method +
+    " Title keywords: " + k.politics_filter_strategy.keywords_title.join(", ") + ".";
+  const eps = k.endpoints;
+  const rows = Object.keys(eps).map(name => {
+    const e = eps[name];
+    return "<tr><td><code>" + esc(k.base_urls.primary + e.path) + "</code><br><span class='muted'>" + esc(name) + "</span></td>" +
+      "<td>" + esc(e.method) + "</td>" +
+      "<td>" + (e.verified_this_session ? '<span class="badge b-green">verified</span>' : '<span class="badge b-amber">unverified</span>') + "</td>" +
+      "<td><span class='muted'>" + esc(e.note || "") + "</span></td></tr>";
+  }).join("");
+  document.querySelector("#ep-table tbody").innerHTML = rows;
+}).catch(e => showError("snapshot-status", e));
+loadJSON("data/kalshi_latest.json").then(s => {
+  const el = document.getElementById("snapshot-status");
+  if (s.markets_total > 0) {
+    el.className = "notice green";
+    el.innerHTML = "<strong>Snapshot status: LIVE.</strong> Last collection " + esc(s.run_finished_at) +
+      " pulled <strong>" + esc(s.markets_total) + "</strong> markets (" + esc(s.markets_politics_filtered) +
+      " politics/elections) into <code>" + esc(s.filtered_file) + "</code>. Collector: <code>scripts/fetch_kalshi.py</code>, daily at 12:20 UTC.";
+  } else {
+    el.className = "notice blue";
+    el.innerHTML = "<strong>Snapshot status:</strong> no live snapshot yet. Last attempt " + esc(s.run_finished_at || "unknown") +
+      " retrieved 0 markets (" + esc((s.fetch_errors && s.fetch_errors[0]) || "see repo log") + "). " +
+      "The collector (<code>scripts/fetch_kalshi.py</code>) runs daily on GitHub Actions; snapshots land in <code>data/kalshi/</code>. No prices are shown until they come from a real snapshot.";
+  }
+}).catch(() => {
+  document.getElementById("snapshot-status").innerHTML = "<strong>Snapshot status:</strong> no collection log published yet. The collector runs daily on GitHub Actions; snapshots land in <code>data/kalshi/</code>.";
+});
+</script>
+</body>
+</html>

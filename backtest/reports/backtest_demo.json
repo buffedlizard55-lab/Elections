@@ -1,0 +1,264 @@
+{
+ "scored": 180,
+ "forecasters": {
+  "calibrated-bot": {
+   "n": 60,
+   "brier": 0.1775,
+   "log_loss": 0.5367,
+   "accuracy_at_0.5": 0.75,
+   "bias": 0.0071,
+   "calibration": [
+    {
+     "bin": "0.0-0.1",
+     "n": 3,
+     "avg_prob": 0.0719,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.1-0.2",
+     "n": 4,
+     "avg_prob": 0.1633,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.2-0.3",
+     "n": 8,
+     "avg_prob": 0.2415,
+     "event_rate": 0.125
+    },
+    {
+     "bin": "0.3-0.4",
+     "n": 8,
+     "avg_prob": 0.3558,
+     "event_rate": 0.375
+    },
+    {
+     "bin": "0.4-0.5",
+     "n": 10,
+     "avg_prob": 0.4717,
+     "event_rate": 0.5
+    },
+    {
+     "bin": "0.5-0.6",
+     "n": 4,
+     "avg_prob": 0.5796,
+     "event_rate": 0.5
+    },
+    {
+     "bin": "0.6-0.7",
+     "n": 4,
+     "avg_prob": 0.6332,
+     "event_rate": 1.0
+    },
+    {
+     "bin": "0.7-0.8",
+     "n": 11,
+     "avg_prob": 0.7572,
+     "event_rate": 0.8182
+    },
+    {
+     "bin": "0.8-0.9",
+     "n": 7,
+     "avg_prob": 0.8414,
+     "event_rate": 0.7143
+    },
+    {
+     "bin": "0.9-1.0",
+     "n": 1,
+     "avg_prob": 0.99,
+     "event_rate": 1.0
+    }
+   ]
+  },
+  "overconfident-bot": {
+   "n": 60,
+   "brier": 0.2537,
+   "log_loss": 0.7439,
+   "accuracy_at_0.5": 0.6333,
+   "bias": 0.0315,
+   "calibration": [
+    {
+     "bin": "0.0-0.1",
+     "n": 4,
+     "avg_prob": 0.021,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.1-0.2",
+     "n": 3,
+     "avg_prob": 0.1503,
+     "event_rate": 0.3333
+    },
+    {
+     "bin": "0.2-0.3",
+     "n": 8,
+     "avg_prob": 0.2588,
+     "event_rate": 0.5
+    },
+    {
+     "bin": "0.3-0.4",
+     "n": 8,
+     "avg_prob": 0.3431,
+     "event_rate": 0.375
+    },
+    {
+     "bin": "0.4-0.5",
+     "n": 5,
+     "avg_prob": 0.4456,
+     "event_rate": 0.4
+    },
+    {
+     "bin": "0.5-0.6",
+     "n": 6,
+     "avg_prob": 0.5504,
+     "event_rate": 0.6667
+    },
+    {
+     "bin": "0.6-0.7",
+     "n": 4,
+     "avg_prob": 0.6518,
+     "event_rate": 0.75
+    },
+    {
+     "bin": "0.7-0.8",
+     "n": 9,
+     "avg_prob": 0.7438,
+     "event_rate": 0.5556
+    },
+    {
+     "bin": "0.8-0.9",
+     "n": 7,
+     "avg_prob": 0.8474,
+     "event_rate": 0.5714
+    },
+    {
+     "bin": "0.9-1.0",
+     "n": 6,
+     "avg_prob": 0.9627,
+     "event_rate": 0.6667
+    }
+   ]
+  },
+  "coin-flip": {
+   "n": 60,
+   "brier": 0.25,
+   "log_loss": 0.6931,
+   "accuracy_at_0.5": 0.5,
+   "bias": 0.0,
+   "calibration": [
+    {
+     "bin": "0.0-0.1",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.1-0.2",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.2-0.3",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.3-0.4",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.4-0.5",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.5-0.6",
+     "n": 60,
+     "avg_prob": 0.5,
+     "event_rate": 0.5
+    },
+    {
+     "bin": "0.6-0.7",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.7-0.8",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.8-0.9",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    },
+    {
+     "bin": "0.9-1.0",
+     "n": 0,
+     "avg_prob": 0.0,
+     "event_rate": 0.0
+    }
+   ]
+  }
+ },
+ "flags": [
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-017",
+   "prob": 0.8376,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-033",
+   "prob": 0.8838,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-calibrated-bot-034",
+   "prob": 0.8519,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-034",
+   "prob": 0.9502,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-036",
+   "prob": 0.9853,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-043",
+   "prob": 0.1432,
+   "outcome": 1
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-calibrated-bot-051",
+   "prob": 0.8927,
+   "outcome": 0
+  },
+  {
+   "type": "extreme-miss",
+   "forecast_id": "SYN-overconfident-bot-053",
+   "prob": 0.8389,
+   "outcome": 0
+  }
+ ],
+ "simulated": true,
+ "generated_at": "2026-09-18T23:40:30+00:00"
+}

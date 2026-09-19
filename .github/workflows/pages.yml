@@ -1,0 +1,43 @@
+name: Deploy GitHub Pages (manual fallback)
+
+# NOTE: the repo's live site deploys from the main branch ROOT
+# (Settings → Pages → Source: Deploy from a branch), which also serves docs/
+# as a subdirectory. This workflow exists only as a manual fallback if the
+# project ever switches Pages to GitHub Actions deployment. Keep it
+# workflow_dispatch-only so it never fights the branch deployment.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate sources (schema)
+        run: python scripts/validate_sources.py
+      - name: Sync site data
+        run: python scripts/sync_site_data.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
