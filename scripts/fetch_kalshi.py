@@ -16,6 +16,17 @@ What it does
 No prices are ever invented. If the network is unavailable, the script exits
 non-zero and records the failure in the log file.
 
+2026-09-19 fixes (first live run on a GitHub-hosted runner):
+* The API's ``status`` *query* values are ``open``/``settled``/... but the
+  ``status`` *field* on returned open markets reads ``"active"`` (settled ones
+  read ``"finalized"``). The old default filter ``open`` therefore matched
+  nothing; the default is now ``active,open``.
+* ``--no-raw`` skips the multi-megabyte raw dump (the daily workflow uses it),
+  ``--compact`` writes a slim filtered file, and ``--series-file`` admits every
+  series ticker from the Node collector's registry
+  (``data/kalshi/universe/series.json``, built from ``GET /series?category=``)
+  as allowlisted — evidence-based instead of keyword guessing.
+
 Docs: https://docs.kalshi.com/api-reference/market/get-markets
 Base:  https://external-api.kalshi.com/trade-api/v2
 """
@@ -110,13 +121,16 @@ def match_politics(market: dict, allow: set[str], deny: set[str]) -> tuple[bool,
     return (len(reasons) > 0, reasons)
 
 
-def fetch_all_markets(base: str, limit: int, max_markets: int, delay: float, timeout: int) -> tuple[list[dict], dict]:
+def fetch_all_markets(base: str, limit: int, max_markets: int, delay: float, timeout: int,
+                      mve_filter: str | None = "exclude") -> tuple[list[dict], dict]:
     markets: list[dict] = []
     cursor: str | None = None
     pages = 0
     errors: list[str] = []
     while True:
-        params = {"limit": str(limit)}
+        params = {"limit": str(limit), "status": "open"}
+        if mve_filter:
+            params["mve_filter"] = mve_filter
         if cursor:
             params["cursor"] = cursor
         url = f"{base}/markets?{urllib.parse.urlencode(params)}"
@@ -138,24 +152,46 @@ def fetch_all_markets(base: str, limit: int, max_markets: int, delay: float, tim
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Collect Kalshi markets (public endpoints).")
     ap.add_argument("--base-url", default=DEFAULT_BASE)
-    ap.add_argument("--limit", type=int, default=200, help="page size per request (docs examples use 100; keep modest)")
-    ap.add_argument("--max-markets", type=int, default=20000)
+    ap.add_argument("--limit", type=int, default=1000, help="page size per request (documented maximum: 1000)")
+    ap.add_argument("--max-markets", type=int, default=200000)
     ap.add_argument("--delay", type=float, default=0.4, help="seconds between pages")
     ap.add_argument("--timeout", type=int, default=30)
     ap.add_argument("--out-dir", default=str(REPO_ROOT / "data" / "kalshi"))
     ap.add_argument("--allowlist", default=str(REPO_ROOT / "data" / "kalshi_series_allowlist.json"))
-    ap.add_argument("--status-filter", default="open",
+    ap.add_argument("--status-filter", default="active,open",
                     help="comma-separated market statuses to keep in the filtered file "
-                         "(matched against the API 'status' field; use 'ALL' to keep everything)")
+                         "(matched against the API 'status' FIELD, which reads 'active' for open "
+                         "markets; use 'ALL' to keep everything)")
+    ap.add_argument("--no-raw", action="store_true", help="do not write the raw full-universe dump")
+    ap.add_argument("--compact", action="store_true",
+                    help="write the filtered file as slim rows (ticker, event, title, prices, volume) "
+                         "to a single overwritten markets_politics_latest.json")
+    ap.add_argument("--series-file", default=None,
+                    help="JSON with a 'series' list (data/kalshi/universe/series.json); every ticker in it "
+                         "is treated as allowlisted")
+    ap.add_argument("--mve-filter", default="exclude", choices=["exclude", "only", "none"],
+                    help="pass mve_filter to GET /markets (default exclude: drop multivariate combos)")
     args = ap.parse_args(argv)
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     allow, deny = load_allowlist(Path(args.allowlist))
+    series_admitted = 0
+    if args.series_file:
+        try:
+            reg = json.loads(Path(args.series_file).read_text())
+            for entry in reg.get("series", []):
+                t = str(entry.get("ticker", "")).upper()
+                if t:
+                    allow.add(t)
+                    series_admitted += 1
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"WARNING: series file {args.series_file} unusable ({exc}); continuing without it.", file=sys.stderr)
 
     started = utcnow()
-    markets, fetch_meta = fetch_all_markets(args.base_url, args.limit, args.max_markets, args.delay, args.timeout)
+    markets, fetch_meta = fetch_all_markets(args.base_url, args.limit, args.max_markets, args.delay, args.timeout,
+                                            mve_filter=None if args.mve_filter == "none" else args.mve_filter)
 
     # Best-effort events fetch (endpoint unverified by this project; log outcome).
     events_out = http_get_json(f"{args.base_url}/events?limit=200", timeout=args.timeout)
@@ -179,14 +215,24 @@ def main(argv: list[str] | None = None) -> int:
             filtered.append(m)
 
     raw_path = out_dir / f"markets_raw_{stamp}.json"
-    filt_path = out_dir / f"markets_politics_{stamp}.json"
-    raw_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets", "capturedAt": started,
-                                    "fetched_at": started, "endpoint": f"{args.base_url}/markets",
-                                    "count": len(markets), "markets": markets}, indent=1))
-    filt_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets", "capturedAt": started,
+    filt_path = out_dir / ("markets_politics_latest.json" if args.compact else f"markets_politics_{stamp}.json")
+    if not args.no_raw:
+        raw_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets", "capturedAt": started,
+                                        "fetched_at": started, "endpoint": f"{args.base_url}/markets",
+                                        "count": len(markets), "markets": markets}, indent=1))
+    if args.compact:
+        slim_keys = ["ticker", "event_ticker", "title", "yes_sub_title", "status", "close_time",
+                     "yes_bid_dollars", "yes_ask_dollars", "last_price_dollars", "volume_fp",
+                     "open_interest_fp", "_project_filter_reasons"]
+        payload_markets = [{k: m.get(k) for k in slim_keys if k in m} for m in filtered]
+    else:
+        payload_markets = filtered
+    filt_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets?status=open", "capturedAt": started,
                                      "fetched_at": started, "status_filter": args.status_filter,
-                                     "filter": "client-side keywords + series allowlist (see kalshi_api.json)",
-                                     "count": len(filtered), "markets": filtered}, indent=1))
+                                     "filter": "client-side keywords + series allowlist (see kalshi_api.json)"
+                                               + (f" + {series_admitted} series admitted from {args.series_file}" if series_admitted else ""),
+                                     "compact": bool(args.compact),
+                                     "count": len(filtered), "markets": payload_markets}, indent=1))
 
     log = {
         "run_started_at": started,
@@ -199,9 +245,10 @@ def main(argv: list[str] | None = None) -> int:
         "markets_politics_filtered": len(filtered),
         "events_endpoint": events_note,
         "fetch_errors": fetch_meta["errors"],
-        "raw_file": raw_path.name,
+        "raw_file": None if args.no_raw else raw_path.name,
         "filtered_file": filt_path.name,
         "allowlist_size": len(allow),
+        "series_admitted_from_file": series_admitted,
         "denylist_size": len(deny),
         "status_filter": args.status_filter,
     }

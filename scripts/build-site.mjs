@@ -4,19 +4,29 @@
  * Reads verified data files + re-exports the engine's computed results
  * into src/data/site-data.js (committed; the Pages site is fully static).
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseCsv } from '../src/kalshi-api.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
+const readOptional = (p) => (existsSync(join(ROOT, p)) ? read(p) : null);
 
 const snapshot = read('data/kalshi/snapshot-2026-09-18.json');
 const sources = read('data/sources/master.json');
 const outcomes = read('data/outcomes/verified-outcomes.json');
 const polls = read('data/polls/verified-polls.json');
 const backtests = read('data/backtest-results.json');
-const contest = read('data/contest-results.json');
+const contestFull = read('data/contest-results.json');
+// Slim the contest output for the browser: keep leaderboards, theses, equity curves and
+// fill counts; drop per-fill logs (they stay in data/contest-results.json for audit).
+const slimResult = (r) => ({ ...r, skipLog: undefined, fillLog: undefined, fillSample: (r.fillLog || []).slice(0, 12) });
+const contest = {
+  ...contestFull,
+  results: contestFull.results.map(slimResult),
+  universes: Object.fromEntries(Object.entries(contestFull.universes || {}).map(([k, u]) => [k, { ...u, results: u.results.map(slimResult) }])),
+};
 // Both toolchains publish irregularities; the site shows the complete list.
 const irregularitiesNode = read('data/irregularities.json');
 const irregularitiesPython = read('data/irregularities-python-track.json');
@@ -29,6 +39,57 @@ const irregularities = {
   ].sort((a, b) => a.id - b.id),
 };
 const roadmap = read('data/roadmap.json');
+const pollLayer = readOptional('data/polls/poll-layer-2026.json');
+
+// Forward-collection layer (written by scripts/collect-kalshi.mjs on networked runs; absent until the first run)
+const universe = readOptional('data/kalshi/universe/latest.json');
+const seriesRegistry = readOptional('data/kalshi/universe/series.json');
+const calibration = readOptional('data/kalshi/tracker/calibration.json');
+const discrepancyWatch = readOptional('data/kalshi/tracker/discrepancy-watch.json');
+const settlements = readOptional('data/kalshi/tracker/settlements.json');
+const trackerIndex = readOptional('data/kalshi/tracker/index.json');
+const senate2024 = readOptional('data/kalshi/historical/senate-2024.json');
+
+// Daily tracker history for the site: the implied-probability path of the most-traded open markets
+const dailyDir = join(ROOT, 'data/kalshi/tracker/daily');
+const dailyFiles = existsSync(dailyDir) ? readdirSync(dailyDir).filter((n) => /^\d{4}-\d{2}-\d{2}\.csv$/.test(n)).sort() : [];
+const trackerHistory = {};
+const trackedTickers = new Set((universe ? universe.topMarkets : []).map((m) => m.ticker));
+for (const f of dailyFiles) {
+  for (const r of parseCsv(readFileSync(join(dailyDir, f), 'utf8'))) {
+    if (!trackedTickers.has(r.ticker)) continue;
+    const bid = r.yes_bid === '' ? null : Number(r.yes_bid);
+    const ask = r.yes_ask === '' ? null : Number(r.yes_ask);
+    const last = r.last_price === '' ? null : Number(r.last_price);
+    (trackerHistory[r.ticker] = trackerHistory[r.ticker] || []).push({ date: r.date, bid, ask, last });
+  }
+}
+
+// Compact universe for the site (drop per-market rules etc.; keep prices)
+const universeSite = universe ? {
+  capturedFrom: universe.capturedFrom,
+  capturedAt: universe.capturedAt,
+  date: universe.date,
+  categories: universe.categories,
+  counts: universe.counts,
+  bySeries: universe.bySeries,
+  topMarkets: universe.topMarkets,
+  events: universe.events.map((e) => ({
+    event_ticker: e.event_ticker, series_ticker: e.series_ticker, category: e.category, title: e.title, sub_title: e.sub_title, mutually_exclusive: e.mutually_exclusive, tags: e.tags,
+    markets: e.markets.map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, title: m.title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest })),
+  })),
+} : null;
+
+const senate2024Site = senate2024 ? {
+  capturedFrom: senate2024.capturedFrom,
+  capturedAt: senate2024.capturedAt,
+  method: senate2024.method,
+  summary: senate2024.summary,
+  states: Object.fromEntries(Object.entries(senate2024.states).map(([st, s]) => [st, { series: s.series, seriesExists: s.seriesExists, markets2024: s.markets2024, eventsSeen: s.eventsSeen, note: s.note }])),
+  series: senate2024.series,
+  markets: Object.fromEntries(Object.entries(senate2024.markets).map(([t, m]) => [t, { ticker: m.ticker, series: m.series, event: m.event, state: m.state, title: m.title, yes_sub_title: m.yes_sub_title, rules_primary: m.rules_primary, openTime: m.openTime, closeTime: m.closeTime, settlementTs: m.settlementTs, result: m.result, status: m.status, totalVolumeContracts: m.totalVolumeContracts, capturedFrom: m.capturedFrom }])),
+  errors: senate2024.errors,
+} : null;
 
 // 538 national 2024 average series (downsampled to weekly + key dates for the chart)
 import { loadNationalAverages, nationalMargin } from '../src/poll-backtest.js';
@@ -49,10 +110,19 @@ const bundle = {
   irregularities,
   roadmap,
   pollSeries2024: pollSeries,
+  pollLayer,
+  universe: universeSite,
+  seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
+  calibration,
+  discrepancyWatch,
+  settlements: settlements ? { capturedAt: settlements.capturedAt, count: Object.keys(settlements.markets).length, markets: settlements.markets } : null,
+  tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory } : null,
+  senate2024: senate2024Site,
   meta: {
     project: 'Elections — collect, analyze, project & estimate',
-    updated: '2026-09-18',
+    updated: new Date().toISOString().slice(0, 10),
     repo: 'https://github.com/buffedlizard55-lab/Elections',
+    liveSite: 'https://buffedlizard55-lab.github.io/Elections/',
   },
 };
 

@@ -1,18 +1,23 @@
 {
-  "generatedAt": "2026-09-19T00:08:04.331Z",
+  "generatedAt": "2026-09-19T00:31:33.388Z",
   "model": {
     "name": "The Leap (paper) — election markets adaptation",
     "source": "https://www.tradingview.com/the-leap/crypto-series-may-2026/ (contest mechanics, verified 2026-09-18)",
     "startingCapitalPerEntrant": 100000,
     "fillCap": 0.1,
-    "fees": "Kalshi official quadratic taker schedule (src/fees.js); M=1 for PRES/CONTROLH/CONTROLS (captured GET /series)",
-    "ranking": "realized P&L at settlement; 0-trade entrants unranked",
-    "universe": [
-      "PRES-2024-DJT",
-      "CONTROLH-2024-R",
-      "CONTROLS-2024-R"
-    ],
+    "minTradingDaysToRank": 3,
+    "fees": "Kalshi official quadratic taker schedule (src/fees.js); M=1 for PRES/CONTROLH/CONTROLS (captured GET /series); 0 SENATE{ST} series fee configs registered from data/kalshi/historical/senate-2024.json",
+    "ranking": "realized P&L at settlement; entrants with fewer than the minimum trading days are unranked (reported with reason)",
     "note": "NO-side fills are derived reciprocal prices (1 - yesClose) and labeled per fill. No-trade bars are refused."
+  },
+  "universeSummary": {
+    "total": 3,
+    "core2024": 3,
+    "senate2024": 0,
+    "senate2024Loaded": false,
+    "senate2024CapturedAt": null,
+    "senate2024Source": null,
+    "senate2024StatesWithMarkets": []
   },
   "pollSignal": {
     "anchorDate": "2024-09-12",
@@ -24,6 +29,10 @@
     {
       "path": "src/kalshi-data.js",
       "source": "https://api.elections.kalshi.com/trade-api/v2/historical/... (per-market capturedFrom fields inside)"
+    },
+    {
+      "path": "data/kalshi/historical/senate-2024.json",
+      "source": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=SENATE{ST} (+ candlesticks; per-object capturedFrom inside)"
     },
     {
       "path": "src/fees.js",
@@ -56,6 +65,8 @@
       "feesPaid": 6.5625,
       "attributionIdentityHolds": true,
       "trades": 1,
+      "tradingDays": 1,
+      "marketsTraded": 1,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -225,7 +236,8 @@
           "equity": 100033.4375
         }
       ],
-      "ranked": true
+      "ranked": false,
+      "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
     },
     {
       "username": "longshot-lotto",
@@ -248,6 +260,8 @@
       "feesPaid": 0,
       "attributionIdentityHolds": true,
       "trades": 0,
+      "tradingDays": 0,
+      "marketsTraded": 0,
       "skips": 0,
       "skipLog": [],
       "fillLog": [],
@@ -393,7 +407,8 @@
           "equity": 100000
         }
       ],
-      "ranked": false
+      "ranked": false,
+      "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
     },
     {
       "username": "momentum-mule",
@@ -416,6 +431,8 @@
       "feesPaid": 486.9266,
       "attributionIdentityHolds": true,
       "trades": 4,
+      "tradingDays": 4,
+      "marketsTraded": 3,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -656,7 +673,8 @@
           "equity": 99086.0634
         }
       ],
-      "ranked": true
+      "ranked": true,
+      "unrankedReason": null
     },
     {
       "username": "fader-flipper",
@@ -679,6 +697,8 @@
       "feesPaid": 554.8929,
       "attributionIdentityHolds": true,
       "trades": 3,
+      "tradingDays": 3,
+      "marketsTraded": 3,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -895,7 +915,8 @@
           "equity": 99713.4682
         }
       ],
-      "ranked": true
+      "ranked": true,
+      "unrankedReason": null
     },
     {
       "username": "poll-anchor",
@@ -918,6 +939,8 @@
       "feesPaid": 450.247,
       "attributionIdentityHolds": true,
       "trades": 1,
+      "tradingDays": 1,
+      "marketsTraded": 1,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -1087,7 +1110,8 @@
           "equity": 97748.765
         }
       ],
-      "ranked": true
+      "ranked": false,
+      "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
     },
     {
       "username": "yield-yak",
@@ -1110,6 +1134,8 @@
       "feesPaid": 0,
       "attributionIdentityHolds": true,
       "trades": 0,
+      "tradingDays": 0,
+      "marketsTraded": 0,
       "skips": 0,
       "skipLog": [],
       "fillLog": [],
@@ -1255,7 +1281,8 @@
           "equity": 100000
         }
       ],
-      "ranked": false
+      "ranked": false,
+      "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
     },
     {
       "username": "shock-surfer",
@@ -1278,6 +1305,8 @@
       "feesPaid": 29.4,
       "attributionIdentityHolds": true,
       "trades": 2,
+      "tradingDays": 2,
+      "marketsTraded": 2,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -1470,7 +1499,8 @@
           "equity": 100050.6
         }
       ],
-      "ranked": true
+      "ranked": false,
+      "unrankedReason": "only 2 active trading day(s); The Leap minimum is 3"
     },
     {
       "username": "breakout-bandit",
@@ -1493,6 +1523,8 @@
       "feesPaid": 1004.9417,
       "attributionIdentityHolds": true,
       "trades": 3,
+      "tradingDays": 1,
+      "marketsTraded": 3,
       "skips": 0,
       "skipLog": [],
       "fillLog": [
@@ -1708,67 +1740,3562 @@
           "equity": 97365.3903
         }
       ],
-      "ranked": true
+      "ranked": false,
+      "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
     }
   ],
   "leaderboard": [
     {
       "rank": 1,
-      "username": "breakout-bandit",
-      "finalEquity": 123121.9948,
-      "realizedPnl": 23121.9948,
-      "realizedPnlPct": 23.121995,
-      "feesPaid": 1004.9417,
-      "trades": 3
-    },
-    {
-      "rank": 2,
       "username": "fader-flipper",
       "finalEquity": 113931.6715,
       "realizedPnl": 13931.6715,
       "realizedPnlPct": 13.931671,
       "feesPaid": 554.8929,
-      "trades": 3
+      "trades": 3,
+      "tradingDays": 3,
+      "marketsTraded": 3
     },
     {
-      "rank": 3,
-      "username": "shock-surfer",
-      "finalEquity": 100730.6,
-      "realizedPnl": 730.6,
-      "realizedPnlPct": 0.7306,
-      "feesPaid": 29.4,
-      "trades": 2
-    },
-    {
-      "rank": 4,
-      "username": "favorite-cash",
-      "finalEquity": 100118.4375,
-      "realizedPnl": 118.4375,
-      "realizedPnlPct": 0.118438,
-      "feesPaid": 6.5625,
-      "trades": 1
-    },
-    {
-      "rank": 5,
+      "rank": 2,
       "username": "momentum-mule",
       "finalEquity": 96895.7154,
       "realizedPnl": -3104.2846,
       "realizedPnlPct": -3.104285,
       "feesPaid": 486.9266,
-      "trades": 4
-    },
-    {
-      "rank": 6,
-      "username": "poll-anchor",
-      "finalEquity": 86685.553,
-      "realizedPnl": -13314.447,
-      "realizedPnlPct": -13.314447,
-      "feesPaid": 450.247,
-      "trades": 1
+      "trades": 4,
+      "tradingDays": 4,
+      "marketsTraded": 3
     }
   ],
   "unranked": [
+    "favorite-cash",
     "longshot-lotto",
-    "yield-yak"
-  ]
+    "poll-anchor",
+    "yield-yak",
+    "shock-surfer",
+    "breakout-bandit"
+  ],
+  "universes": {
+    "core-2024": {
+      "name": "core-2024",
+      "universe": [
+        "PRES-2024-DJT",
+        "CONTROLH-2024-R",
+        "CONTROLS-2024-R"
+      ],
+      "universeSize": 3,
+      "results": [
+        {
+          "username": "favorite-cash",
+          "name": "FavoriteHold",
+          "thesis": "In the final ~75 days, heavy favorites (p>=0.65) are underpriced: the exchange’s \"70% means 70%\" calibration claim implies fair pricing, but late news risk should command a premium markets undercharge. Buy the favorite, hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100118.4375,
+          "realizedPnl": 118.4375,
+          "realizedPnlPct": 0.118438,
+          "feesPaid": 6.5625,
+          "attributionIdentityHolds": true,
+          "trades": 1,
+          "tradingDays": 1,
+          "marketsTraded": 1,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-09-12",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 500,
+              "price": 0.75,
+              "fee": 6.5625,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99993.4375
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 500,
+              "price": 1,
+              "fee": 0,
+              "pnl": 118.4375,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 99983.4375
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100008.4375
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100013.4375
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100018.4375
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100048.4375
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100048.4375
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100038.4375
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100033.4375
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100013.4375
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100033.4375
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "longshot-lotto",
+          "name": "LongshotDCA",
+          "thesis": "CONTROL: longshot bias says cheap sides (0.05<=p<=0.20) are OVERpriced, so daily dollar-cost averaging them should LOSE money. If this entrant ends positive, the longshot-bias theory is wrong for these markets.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100000,
+          "realizedPnl": 0,
+          "realizedPnlPct": 0,
+          "feesPaid": 0,
+          "attributionIdentityHolds": true,
+          "trades": 0,
+          "tradingDays": 0,
+          "marketsTraded": 0,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100000
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "momentum-mule",
+          "name": "MomentumChase",
+          "thesis": "In the final months, >=4pp five-day price moves are news-driven and informative: momentum continues. Enter with the move, exit on a 3pp adverse drift from the entry price.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 96895.7154,
+          "realizedPnl": -3104.2846,
+          "realizedPnlPct": -3.104285,
+          "feesPaid": 486.9266,
+          "attributionIdentityHolds": true,
+          "trades": 4,
+          "tradingDays": 4,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-13",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 9340.2,
+              "price": 0.54,
+              "fee": 162.4074,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99837.5926
+            },
+            {
+              "date": "2024-10-15",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 3000,
+              "price": 0.8,
+              "fee": 33.6,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100084.1986
+            },
+            {
+              "date": "2024-10-22",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.52,
+              "fee": 17.472,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100346.9326
+            },
+            {
+              "date": "2024-11-02",
+              "ticker": "PRES-2024-DJT",
+              "action": "exit",
+              "side": "YES",
+              "shares": 9340.2,
+              "price": 0.49,
+              "fee": 163.3882,
+              "pnl": -792.8056,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "2024-11-03",
+              "ticker": "CONTROLH-2024-R",
+              "action": "exit",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.47,
+              "fee": 17.437,
+              "pnl": -84.909,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "NO",
+              "shares": 5294.8,
+              "price": 0.51,
+              "fee": 92.622,
+              "executedAt": "derived(1-yesClose)",
+              "fillCapApplied": true,
+              "equityAfter": 99086.0634
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "NO",
+              "shares": 5294.8,
+              "price": 0,
+              "fee": 0,
+              "pnl": -2792.97,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 3000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 566.4,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 99837.5926
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 99930.9946
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100084.1986
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100050.7966
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100237.6006
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100177.6006
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99990.7966
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100177.6006
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100457.8066
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100346.9326
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100243.5306
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100683.7366
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100440.3346
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100683.7366
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100627.1386
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100723.7366
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100763.7366
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100433.5306
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100330.1286
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100063.3246
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 99206.1224
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 99058.6854
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 99086.0634
+            }
+          ],
+          "ranked": true,
+          "unrankedReason": null
+        },
+        {
+          "username": "fader-flipper",
+          "name": "OverreactionFade",
+          "thesis": "Counter to momentum: >=4pp five-day drops OVERreact to bad news and revert toward the 14-day mean. Fade the drop (buy YES), exit at the 14-day mean or hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 113931.6715,
+          "realizedPnl": 13931.6715,
+          "realizedPnlPct": 13.931671,
+          "feesPaid": 554.8929,
+          "attributionIdentityHolds": true,
+          "trades": 3,
+          "tradingDays": 3,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-11-01",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 26785.71,
+              "price": 0.56,
+              "fee": 462,
+              "executedAt": "yesClose",
+              "fillCapApplied": false,
+              "equityAfter": 99538
+            },
+            {
+              "date": "2024-11-03",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 12.6,
+              "price": 0.79,
+              "fee": 0.1464,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 98734.2823
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 5294.8,
+              "price": 0.49,
+              "fee": 92.622,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99713.5927
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLS-2024-R",
+              "action": "exit",
+              "side": "YES",
+              "shares": 12.6,
+              "price": 0.83,
+              "fee": 0.1245,
+              "pnl": 0.2331,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 26785.71,
+              "price": 1,
+              "fee": 0,
+              "pnl": 11323.7124,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 5294.8,
+              "price": 1,
+              "fee": 0,
+              "pnl": 2607.726,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 99538
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 97663.0003
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 98734.2823
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 99713.4682
+            }
+          ],
+          "ranked": true,
+          "unrankedReason": null
+        },
+        {
+          "username": "poll-anchor",
+          "name": "PollVsMarket",
+          "thesis": "The last verified 538 national average (2024-09-12: Harris +2.82pp, i.e. Trump -2.82) implies ~35% for Trump via the logistic mapping (k=4.5, labeled assumption), while Kalshi traded Trump 50-57c. If polls still carry information the market ignores, buy the side cheap relative to the poll until the gap closes to <5pp.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 86685.553,
+          "realizedPnl": -13314.447,
+          "realizedPnlPct": -13.314447,
+          "feesPaid": 450.247,
+          "attributionIdentityHolds": true,
+          "trades": 1,
+          "tradingDays": 1,
+          "marketsTraded": 1,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-04",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "NO",
+              "shares": 25728.4,
+              "price": 0.5,
+              "fee": 450.247,
+              "executedAt": "derived(1-yesClose)",
+              "fillCapApplied": true,
+              "equityAfter": 99549.753
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "NO",
+              "shares": 25728.4,
+              "price": 0,
+              "fee": 0,
+              "pnl": -13314.447,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 99292.469
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 98520.617
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 98520.617
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 98263.333
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 97748.765
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 96719.629
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 96976.913
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 97234.197
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 96719.629
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 96205.061
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 97234.197
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 99807.037
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 97748.765
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "yield-yak",
+          "name": "LateFavoriteYield",
+          "thesis": "Buy favorites at >=0.90 only in the final 14 days and collect the carry to settlement: last-minute upsets are rare, and a 90c favorite over 14 days has a strong effective annualized return relative to its risk.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100000,
+          "realizedPnl": 0,
+          "realizedPnlPct": 0,
+          "feesPaid": 0,
+          "attributionIdentityHolds": true,
+          "trades": 0,
+          "tradingDays": 0,
+          "marketsTraded": 0,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100000
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "shock-surfer",
+          "name": "VolumeShock",
+          "thesis": "Days where volume is >=3x the 7-day average AND price moves >=4pp contain genuine informed flow. Enter with the shock, hold to settlement (or exit on a 3pp reversal).",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100730.6,
+          "realizedPnl": 730.6,
+          "realizedPnlPct": 0.7306,
+          "feesPaid": 29.4,
+          "attributionIdentityHolds": true,
+          "trades": 2,
+          "tradingDays": 2,
+          "marketsTraded": 2,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-13",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.78,
+              "fee": 12.012,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99987.988
+            },
+            {
+              "date": "2024-10-16",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.46,
+              "fee": 17.388,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100010.6
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 1000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 522.612,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 1000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 207.988,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 99987.988
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 99997.988
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100007.988
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100010.6
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000.6
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100020.6
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100120.6
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100160.6
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100150.6
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100120.6
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100080.6
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100060.6
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 99990.6
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100050.6
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 2 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "breakout-bandit",
+          "name": "FinalWeekConsensus",
+          "thesis": "In the last 7 days, the side trading above 0.50 with a 7-day average above 0.52 has a stable edge: the remaining window is too short for shocks. Buy consensus, hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 123121.9948,
+          "realizedPnl": 23121.9948,
+          "realizedPnlPct": 23.121995,
+          "feesPaid": 1004.9417,
+          "attributionIdentityHolds": true,
+          "trades": 3,
+          "tradingDays": 1,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-30",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 50847.45,
+              "price": 0.59,
+              "fee": 860.9999,
+              "executedAt": "yesClose",
+              "fillCapApplied": false,
+              "equityAfter": 99139.0001
+            },
+            {
+              "date": "2024-10-30",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 6396.1,
+              "price": 0.58,
+              "fee": 109.0663,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99029.9338
+            },
+            {
+              "date": "2024-10-30",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 3707,
+              "price": 0.84,
+              "fee": 34.8755,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 98995.0583
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 50847.45,
+              "price": 1,
+              "fee": 0,
+              "pnl": 19986.4546,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 6396.1,
+              "price": 1,
+              "fee": 0,
+              "pnl": 2577.2957,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 3707,
+              "price": 1,
+              "fee": 0,
+              "pnl": 558.2445,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 98995.0583
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 98267.8098
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 97048.7988
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 93388.4463
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 95055.2903
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 97365.3903
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        }
+      ],
+      "leaderboard": [
+        {
+          "rank": 1,
+          "username": "fader-flipper",
+          "finalEquity": 113931.6715,
+          "realizedPnl": 13931.6715,
+          "realizedPnlPct": 13.931671,
+          "feesPaid": 554.8929,
+          "trades": 3,
+          "tradingDays": 3,
+          "marketsTraded": 3
+        },
+        {
+          "rank": 2,
+          "username": "momentum-mule",
+          "finalEquity": 96895.7154,
+          "realizedPnl": -3104.2846,
+          "realizedPnlPct": -3.104285,
+          "feesPaid": 486.9266,
+          "trades": 4,
+          "tradingDays": 4,
+          "marketsTraded": 3
+        }
+      ],
+      "unranked": [
+        {
+          "username": "favorite-cash",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "longshot-lotto",
+          "reason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "poll-anchor",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "yield-yak",
+          "reason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "shock-surfer",
+          "reason": "only 2 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "breakout-bandit",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        }
+      ]
+    },
+    "all-2024": {
+      "name": "all-2024",
+      "universe": [
+        "PRES-2024-DJT",
+        "CONTROLH-2024-R",
+        "CONTROLS-2024-R"
+      ],
+      "universeSize": 3,
+      "results": [
+        {
+          "username": "favorite-cash",
+          "name": "FavoriteHold",
+          "thesis": "In the final ~75 days, heavy favorites (p>=0.65) are underpriced: the exchange’s \"70% means 70%\" calibration claim implies fair pricing, but late news risk should command a premium markets undercharge. Buy the favorite, hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100118.4375,
+          "realizedPnl": 118.4375,
+          "realizedPnlPct": 0.118438,
+          "feesPaid": 6.5625,
+          "attributionIdentityHolds": true,
+          "trades": 1,
+          "tradingDays": 1,
+          "marketsTraded": 1,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-09-12",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 500,
+              "price": 0.75,
+              "fee": 6.5625,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99993.4375
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 500,
+              "price": 1,
+              "fee": 0,
+              "pnl": 118.4375,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 99983.4375
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 99988.4375
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100008.4375
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100013.4375
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100018.4375
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 99993.4375
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100048.4375
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100048.4375
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100038.4375
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100043.4375
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100033.4375
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100028.4375
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100013.4375
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100033.4375
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "longshot-lotto",
+          "name": "LongshotDCA",
+          "thesis": "CONTROL: longshot bias says cheap sides (0.05<=p<=0.20) are OVERpriced, so daily dollar-cost averaging them should LOSE money. If this entrant ends positive, the longshot-bias theory is wrong for these markets.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100000,
+          "realizedPnl": 0,
+          "realizedPnlPct": 0,
+          "feesPaid": 0,
+          "attributionIdentityHolds": true,
+          "trades": 0,
+          "tradingDays": 0,
+          "marketsTraded": 0,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100000
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "momentum-mule",
+          "name": "MomentumChase",
+          "thesis": "In the final months, >=4pp five-day price moves are news-driven and informative: momentum continues. Enter with the move, exit on a 3pp adverse drift from the entry price.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 96895.7154,
+          "realizedPnl": -3104.2846,
+          "realizedPnlPct": -3.104285,
+          "feesPaid": 486.9266,
+          "attributionIdentityHolds": true,
+          "trades": 4,
+          "tradingDays": 4,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-13",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 9340.2,
+              "price": 0.54,
+              "fee": 162.4074,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99837.5926
+            },
+            {
+              "date": "2024-10-15",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 3000,
+              "price": 0.8,
+              "fee": 33.6,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100084.1986
+            },
+            {
+              "date": "2024-10-22",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.52,
+              "fee": 17.472,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100346.9326
+            },
+            {
+              "date": "2024-11-02",
+              "ticker": "PRES-2024-DJT",
+              "action": "exit",
+              "side": "YES",
+              "shares": 9340.2,
+              "price": 0.49,
+              "fee": 163.3882,
+              "pnl": -792.8056,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "2024-11-03",
+              "ticker": "CONTROLH-2024-R",
+              "action": "exit",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.47,
+              "fee": 17.437,
+              "pnl": -84.909,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "NO",
+              "shares": 5294.8,
+              "price": 0.51,
+              "fee": 92.622,
+              "executedAt": "derived(1-yesClose)",
+              "fillCapApplied": true,
+              "equityAfter": 99086.0634
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "NO",
+              "shares": 5294.8,
+              "price": 0,
+              "fee": 0,
+              "pnl": -2792.97,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 3000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 566.4,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 99837.5926
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 99930.9946
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100084.1986
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100050.7966
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100237.6006
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100177.6006
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99990.7966
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100177.6006
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100457.8066
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100346.9326
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100243.5306
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100683.7366
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100440.3346
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100683.7366
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100627.1386
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100723.7366
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100763.7366
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100433.5306
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100330.1286
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100063.3246
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 99206.1224
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 99058.6854
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 99086.0634
+            }
+          ],
+          "ranked": true,
+          "unrankedReason": null
+        },
+        {
+          "username": "fader-flipper",
+          "name": "OverreactionFade",
+          "thesis": "Counter to momentum: >=4pp five-day drops OVERreact to bad news and revert toward the 14-day mean. Fade the drop (buy YES), exit at the 14-day mean or hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 113931.6715,
+          "realizedPnl": 13931.6715,
+          "realizedPnlPct": 13.931671,
+          "feesPaid": 554.8929,
+          "attributionIdentityHolds": true,
+          "trades": 3,
+          "tradingDays": 3,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-11-01",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 26785.71,
+              "price": 0.56,
+              "fee": 462,
+              "executedAt": "yesClose",
+              "fillCapApplied": false,
+              "equityAfter": 99538
+            },
+            {
+              "date": "2024-11-03",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 12.6,
+              "price": 0.79,
+              "fee": 0.1464,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 98734.2823
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 5294.8,
+              "price": 0.49,
+              "fee": 92.622,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99713.5927
+            },
+            {
+              "date": "2024-11-04",
+              "ticker": "CONTROLS-2024-R",
+              "action": "exit",
+              "side": "YES",
+              "shares": 12.6,
+              "price": 0.83,
+              "fee": 0.1245,
+              "pnl": 0.2331,
+              "executedAt": "yesClose",
+              "fillCapApplied": false
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 26785.71,
+              "price": 1,
+              "fee": 0,
+              "pnl": 11323.7124,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 5294.8,
+              "price": 1,
+              "fee": 0,
+              "pnl": 2607.726,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 99538
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 97663.0003
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 98734.2823
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 99713.4682
+            }
+          ],
+          "ranked": true,
+          "unrankedReason": null
+        },
+        {
+          "username": "poll-anchor",
+          "name": "PollVsMarket",
+          "thesis": "The last verified 538 national average (2024-09-12: Harris +2.82pp, i.e. Trump -2.82) implies ~35% for Trump via the logistic mapping (k=4.5, labeled assumption), while Kalshi traded Trump 50-57c. If polls still carry information the market ignores, buy the side cheap relative to the poll until the gap closes to <5pp.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 86685.553,
+          "realizedPnl": -13314.447,
+          "realizedPnlPct": -13.314447,
+          "feesPaid": 450.247,
+          "attributionIdentityHolds": true,
+          "trades": 1,
+          "tradingDays": 1,
+          "marketsTraded": 1,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-04",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "NO",
+              "shares": 25728.4,
+              "price": 0.5,
+              "fee": 450.247,
+              "executedAt": "derived(1-yesClose)",
+              "fillCapApplied": true,
+              "equityAfter": 99549.753
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "NO",
+              "shares": 25728.4,
+              "price": 0,
+              "fee": 0,
+              "pnl": -13314.447,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 99292.469
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 99549.753
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 98520.617
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 98520.617
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 98263.333
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 97748.765
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 96719.629
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 96976.913
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 97234.197
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 96719.629
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 96205.061
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 96462.345
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 97234.197
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 97491.481
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 98006.049
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 99807.037
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 98777.901
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 97748.765
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "yield-yak",
+          "name": "LateFavoriteYield",
+          "thesis": "Buy favorites at >=0.90 only in the final 14 days and collect the carry to settlement: last-minute upsets are rare, and a 90c favorite over 14 days has a strong effective annualized return relative to its risk.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100000,
+          "realizedPnl": 0,
+          "realizedPnlPct": 0,
+          "feesPaid": 0,
+          "attributionIdentityHolds": true,
+          "trades": 0,
+          "tradingDays": 0,
+          "marketsTraded": 0,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100000
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "shock-surfer",
+          "name": "VolumeShock",
+          "thesis": "Days where volume is >=3x the 7-day average AND price moves >=4pp contain genuine informed flow. Enter with the shock, hold to settlement (or exit on a 3pp reversal).",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 100730.6,
+          "realizedPnl": 730.6,
+          "realizedPnlPct": 0.7306,
+          "feesPaid": 29.4,
+          "attributionIdentityHolds": true,
+          "trades": 2,
+          "tradingDays": 2,
+          "marketsTraded": 2,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-13",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.78,
+              "fee": 12.012,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99987.988
+            },
+            {
+              "date": "2024-10-16",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 1000,
+              "price": 0.46,
+              "fee": 17.388,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 100010.6
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 1000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 522.612,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 1000,
+              "price": 1,
+              "fee": 0,
+              "pnl": 207.988,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 99987.988
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 99997.988
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100007.988
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100010.6
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000.6
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100020.6
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100030.6
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100040.6
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 99970.6
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100120.6
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100160.6
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 100150.6
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 100120.6
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 100080.6
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 100060.6
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 99990.6
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 100050.6
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 2 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "breakout-bandit",
+          "name": "FinalWeekConsensus",
+          "thesis": "In the last 7 days, the side trading above 0.50 with a 7-day average above 0.52 has a stable edge: the remaining window is too short for shocks. Buy consensus, hold to settlement.",
+          "markets": [
+            "PRES-2024-DJT",
+            "CONTROLH-2024-R",
+            "CONTROLS-2024-R"
+          ],
+          "outcomes": {
+            "PRES-2024-DJT": "yes",
+            "CONTROLH-2024-R": "yes",
+            "CONTROLS-2024-R": "yes"
+          },
+          "startingCapital": 100000,
+          "finalEquity": 123121.9948,
+          "realizedPnl": 23121.9948,
+          "realizedPnlPct": 23.121995,
+          "feesPaid": 1004.9417,
+          "attributionIdentityHolds": true,
+          "trades": 3,
+          "tradingDays": 1,
+          "marketsTraded": 3,
+          "skips": 0,
+          "skipLog": [],
+          "fillLog": [
+            {
+              "date": "2024-10-30",
+              "ticker": "PRES-2024-DJT",
+              "action": "enter",
+              "side": "YES",
+              "shares": 50847.45,
+              "price": 0.59,
+              "fee": 860.9999,
+              "executedAt": "yesClose",
+              "fillCapApplied": false,
+              "equityAfter": 99139.0001
+            },
+            {
+              "date": "2024-10-30",
+              "ticker": "CONTROLH-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 6396.1,
+              "price": 0.58,
+              "fee": 109.0663,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 99029.9338
+            },
+            {
+              "date": "2024-10-30",
+              "ticker": "CONTROLS-2024-R",
+              "action": "enter",
+              "side": "YES",
+              "shares": 3707,
+              "price": 0.84,
+              "fee": 34.8755,
+              "executedAt": "yesClose",
+              "fillCapApplied": true,
+              "equityAfter": 98995.0583
+            },
+            {
+              "date": "settlement",
+              "ticker": "PRES-2024-DJT",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 50847.45,
+              "price": 1,
+              "fee": 0,
+              "pnl": 19986.4546,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLH-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 6396.1,
+              "price": 1,
+              "fee": 0,
+              "pnl": 2577.2957,
+              "executedAt": "official result (yes)"
+            },
+            {
+              "date": "settlement",
+              "ticker": "CONTROLS-2024-R",
+              "action": "settlement",
+              "side": "YES",
+              "shares": 3707,
+              "price": 1,
+              "fee": 0,
+              "pnl": 558.2445,
+              "executedAt": "official result (yes)"
+            }
+          ],
+          "equityCurve": [
+            {
+              "date": "2024-09-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-02",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-03",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-04",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-05",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-06",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-07",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-08",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-09",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-10",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-11",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-12",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-13",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-14",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-15",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-16",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-17",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-18",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-19",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-20",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-21",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-22",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-23",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-24",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-25",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-26",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-27",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-28",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-29",
+              "equity": 100000
+            },
+            {
+              "date": "2024-10-30",
+              "equity": 98995.0583
+            },
+            {
+              "date": "2024-10-31",
+              "equity": 98267.8098
+            },
+            {
+              "date": "2024-11-01",
+              "equity": 97048.7988
+            },
+            {
+              "date": "2024-11-02",
+              "equity": 93388.4463
+            },
+            {
+              "date": "2024-11-03",
+              "equity": 95055.2903
+            },
+            {
+              "date": "2024-11-04",
+              "equity": 97365.3903
+            }
+          ],
+          "ranked": false,
+          "unrankedReason": "only 1 active trading day(s); The Leap minimum is 3"
+        }
+      ],
+      "leaderboard": [
+        {
+          "rank": 1,
+          "username": "fader-flipper",
+          "finalEquity": 113931.6715,
+          "realizedPnl": 13931.6715,
+          "realizedPnlPct": 13.931671,
+          "feesPaid": 554.8929,
+          "trades": 3,
+          "tradingDays": 3,
+          "marketsTraded": 3
+        },
+        {
+          "rank": 2,
+          "username": "momentum-mule",
+          "finalEquity": 96895.7154,
+          "realizedPnl": -3104.2846,
+          "realizedPnlPct": -3.104285,
+          "feesPaid": 486.9266,
+          "trades": 4,
+          "tradingDays": 4,
+          "marketsTraded": 3
+        }
+      ],
+      "unranked": [
+        {
+          "username": "favorite-cash",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "longshot-lotto",
+          "reason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "poll-anchor",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "yield-yak",
+          "reason": "no qualifying entry ever appeared in the universe (0 trades)"
+        },
+        {
+          "username": "shock-surfer",
+          "reason": "only 2 active trading day(s); The Leap minimum is 3"
+        },
+        {
+          "username": "breakout-bandit",
+          "reason": "only 1 active trading day(s); The Leap minimum is 3"
+        }
+      ]
+    }
+  }
 }

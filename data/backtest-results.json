@@ -1,9 +1,14 @@
 {
-  "generatedAt": "2026-09-19T00:08:04.148Z",
+  "generatedAt": "2026-09-19T00:31:33.085Z",
   "inputs": [
     {
       "path": "src/kalshi-data.js",
       "source": "https://api.elections.kalshi.com/trade-api/v2/historical/... (per-market capturedFrom fields inside)"
+    },
+    {
+      "path": "data/kalshi/historical/senate-2024.json",
+      "loaded": false,
+      "source": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=SENATE{ST} (+ /historical/markets/{ticker}/candlesticks; per-object capturedFrom inside)"
     },
     {
       "path": "data/polls/538-national-averages.csv",
@@ -14,13 +19,28 @@
       "source": "FEC/Wikipedia-API/congress.gov (see per-outcome sources)"
     }
   ],
-  "note": "Deterministic backtest of captured Kalshi 2024 markets vs official settlements, and 538 archived poll averages vs outcome. All inputs carry provenance (src/kalshi-data.js, data/polls/).",
+  "note": "Deterministic backtest of captured Kalshi 2024 markets (core 3 + per-state Senate) vs official settlements, and 538 archived poll averages vs outcome. All inputs carry provenance.",
   "marketBacktest": {
+    "universe": {
+      "total": 3,
+      "core2024": 3,
+      "senate2024": 0,
+      "senate2024Loaded": false,
+      "senate2024CapturedAt": null,
+      "senate2024Source": null,
+      "senate2024StatesWithMarkets": []
+    },
     "markets": [
       {
         "ticker": "PRES-2024-DJT",
         "title": "Will Donald Trump or another Republican win the Presidency?",
+        "group": "core-2024",
+        "state": null,
+        "yesSubTitle": null,
         "outcomeIsYes": true,
+        "result": "yes",
+        "settlementTs": "2025-01-20T18:04:06.288352Z",
+        "volume": 262334207,
         "series": [
           {
             "date": "2024-10-04",
@@ -183,6 +203,9 @@
             "p": 0.57
           }
         ],
+        "barsTotal": 32,
+        "barsPreElection": 32,
+        "electionDayBarCaptured": false,
         "leadTimes": [
           {
             "nDays": 1,
@@ -286,7 +309,13 @@
       {
         "ticker": "CONTROLH-2024-R",
         "title": "Will Republicans win the House?",
+        "group": "core-2024",
+        "state": null,
+        "yesSubTitle": null,
         "outcomeIsYes": true,
+        "result": "yes",
+        "settlementTs": "2025-02-01T16:00:09.979663Z",
+        "volume": 1537259,
         "series": [
           {
             "date": "2024-09-12",
@@ -374,6 +403,9 @@
             "p": 0.49
           }
         ],
+        "barsTotal": 28,
+        "barsPreElection": 17,
+        "electionDayBarCaptured": false,
         "leadTimes": [
           {
             "nDays": 1,
@@ -477,7 +509,13 @@
       {
         "ticker": "CONTROLS-2024-R",
         "title": "Will Republicans win the Senate?",
+        "group": "core-2024",
+        "state": null,
+        "yesSubTitle": null,
         "outcomeIsYes": true,
+        "result": "yes",
+        "settlementTs": "2025-02-01T16:00:09.919634Z",
+        "volume": 908243,
         "series": [
           {
             "date": "2024-09-12",
@@ -580,6 +618,9 @@
             "p": 0.83
           }
         ],
+        "barsTotal": 31,
+        "barsPreElection": 20,
+        "electionDayBarCaptured": false,
         "leadTimes": [
           {
             "nDays": 1,
@@ -731,6 +772,400 @@
         "meanHoldPnlPerContract": null
       }
     ],
+    "favoriteAccuracy": [
+      {
+        "nDays": 1,
+        "n": 3,
+        "hits": 2,
+        "rate": 0.6666666666666666
+      },
+      {
+        "nDays": 3,
+        "n": 3,
+        "hits": 3,
+        "rate": 1
+      },
+      {
+        "nDays": 7,
+        "n": 3,
+        "hits": 3,
+        "rate": 1
+      },
+      {
+        "nDays": 14,
+        "n": 3,
+        "hits": 3,
+        "rate": 1
+      },
+      {
+        "nDays": 30,
+        "n": 2,
+        "hits": 1,
+        "rate": 0.5
+      },
+      {
+        "nDays": 60,
+        "n": 0,
+        "hits": 0,
+        "rate": null
+      }
+    ],
+    "groups": {
+      "core-2024": {
+        "nMarkets": 3,
+        "aggregate": [
+          {
+            "nDays": 1,
+            "nMarkets": 3,
+            "meanProbYes": 0.5966666666666667,
+            "meanBrier": 0.1819666666666667,
+            "meanLogloss": 0.541874396745024,
+            "meanHoldPnlPerContract": 0.4033333333333333
+          },
+          {
+            "nDays": 3,
+            "nMarkets": 3,
+            "meanProbYes": 0.6366666666666667,
+            "meanBrier": 0.15096666666666667,
+            "meanLogloss": 0.47335818028369986,
+            "meanHoldPnlPerContract": 0.3633333333333333
+          },
+          {
+            "nDays": 7,
+            "nMarkets": 3,
+            "meanProbYes": 0.6699999999999999,
+            "meanBrier": 0.1283,
+            "meanLogloss": 0.4212456543711843,
+            "meanHoldPnlPerContract": 0.33
+          },
+          {
+            "nDays": 14,
+            "nMarkets": 3,
+            "meanProbYes": 0.6499999999999999,
+            "meanBrier": 0.1383,
+            "meanLogloss": 0.44889124264842745,
+            "meanHoldPnlPerContract": 0.35000000000000003
+          },
+          {
+            "nDays": 30,
+            "nMarkets": 3,
+            "meanProbYes": 0.5333333333333333,
+            "meanBrier": 0.23993333333333333,
+            "meanLogloss": 0.6673700662478376,
+            "meanHoldPnlPerContract": 0.4666666666666666
+          },
+          {
+            "nDays": 60,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          }
+        ],
+        "favoriteAccuracy": [
+          {
+            "nDays": 1,
+            "n": 3,
+            "hits": 2,
+            "rate": 0.6666666666666666
+          },
+          {
+            "nDays": 3,
+            "n": 3,
+            "hits": 3,
+            "rate": 1
+          },
+          {
+            "nDays": 7,
+            "n": 3,
+            "hits": 3,
+            "rate": 1
+          },
+          {
+            "nDays": 14,
+            "n": 3,
+            "hits": 3,
+            "rate": 1
+          },
+          {
+            "nDays": 30,
+            "n": 2,
+            "hits": 1,
+            "rate": 0.5
+          },
+          {
+            "nDays": 60,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          }
+        ]
+      },
+      "senate-2024": {
+        "nMarkets": 0,
+        "aggregate": [
+          {
+            "nDays": 1,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          },
+          {
+            "nDays": 3,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          },
+          {
+            "nDays": 7,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          },
+          {
+            "nDays": 14,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          },
+          {
+            "nDays": 30,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          },
+          {
+            "nDays": 60,
+            "nMarkets": 0,
+            "meanProbYes": null,
+            "meanBrier": null,
+            "meanLogloss": null,
+            "meanHoldPnlPerContract": null
+          }
+        ],
+        "favoriteAccuracy": [
+          {
+            "nDays": 1,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          },
+          {
+            "nDays": 3,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          },
+          {
+            "nDays": 7,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          },
+          {
+            "nDays": 14,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          },
+          {
+            "nDays": 30,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          },
+          {
+            "nDays": 60,
+            "n": 0,
+            "hits": 0,
+            "rate": null
+          }
+        ]
+      }
+    },
+    "pooledCalibration": {
+      "dedupe": false,
+      "marketsUsed": 3,
+      "buckets": [
+        {
+          "lo": 0,
+          "hi": 0.1,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.1,
+          "hi": 0.2,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.2,
+          "hi": 0.3,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.3,
+          "hi": 0.4,
+          "n": 1,
+          "markets": 1,
+          "meanP": 0.37,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.4,
+          "hi": 0.5,
+          "n": 7,
+          "markets": 2,
+          "meanP": 0.47000000000000003,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.5,
+          "hi": 0.6,
+          "n": 33,
+          "markets": 2,
+          "meanP": 0.5415151515151514,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.6,
+          "hi": 0.7,
+          "n": 8,
+          "markets": 1,
+          "meanP": 0.61625,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.7,
+          "hi": 0.8,
+          "n": 8,
+          "markets": 1,
+          "meanP": 0.7575000000000001,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.8,
+          "hi": 0.9,
+          "n": 12,
+          "markets": 1,
+          "meanP": 0.8358333333333333,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.9,
+          "hi": 1,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        }
+      ]
+    },
+    "pooledCalibrationDeduped": {
+      "dedupe": true,
+      "marketsUsed": 3,
+      "buckets": [
+        {
+          "lo": 0,
+          "hi": 0.1,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.1,
+          "hi": 0.2,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.2,
+          "hi": 0.3,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        },
+        {
+          "lo": 0.3,
+          "hi": 0.4,
+          "n": 1,
+          "markets": 1,
+          "meanP": 0.37,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.4,
+          "hi": 0.5,
+          "n": 7,
+          "markets": 2,
+          "meanP": 0.47000000000000003,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.5,
+          "hi": 0.6,
+          "n": 33,
+          "markets": 2,
+          "meanP": 0.5415151515151514,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.6,
+          "hi": 0.7,
+          "n": 8,
+          "markets": 1,
+          "meanP": 0.61625,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.7,
+          "hi": 0.8,
+          "n": 8,
+          "markets": 1,
+          "meanP": 0.7575000000000001,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.8,
+          "hi": 0.9,
+          "n": 12,
+          "markets": 1,
+          "meanP": 0.8358333333333333,
+          "observedYesRate": 1
+        },
+        {
+          "lo": 0.9,
+          "hi": 1,
+          "n": 0,
+          "markets": 0,
+          "meanP": null,
+          "observedYesRate": null
+        }
+      ]
+    },
     "electionDayTs": 1730851200
   },
   "pollBacktest": {

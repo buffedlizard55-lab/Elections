@@ -33,6 +33,10 @@ import { parseBar } from '../kalshi-data.js';
 
 export const STARTING_CAPITAL = 100000; // The Leap paper bankroll (verified)
 export const FILL_CAP_OF_BAR_VOLUME = 0.10; // honesty rule #2
+// The Leap requires a minimum number of active trading days to be ranked
+// (verified 2026-09-18: 3 for the crypto series, 5 for futures). The crypto-
+// series rule (3) is adopted here; a day counts when >= 1 entry fill happened.
+export const MIN_TRADING_DAYS_TO_RANK = 3;
 export const ELECTION_DAY_TS = 1730851200; // 2024-11-05T00:00:00Z
 
 const round6 = (x) => Math.round(x * 1e6) / 1e6;
@@ -211,6 +215,12 @@ export function runStrategy({ strategy, markets, candlesticks, pollSignal = null
 
   const finalEquity = round6(cash);
   const identity = round6(STARTING_CAPITAL + realizedPnl);
+  const entryFills = fills.filter((f) => f.action === 'enter');
+  const tradingDays = new Set(entryFills.map((f) => f.date)).size;
+  const marketsTraded = new Set(entryFills.map((f) => f.ticker)).size;
+  const unrankedReason = entryFills.length === 0
+    ? 'no qualifying entry ever appeared in the universe (0 trades)'
+    : tradingDays < MIN_TRADING_DAYS_TO_RANK ? `only ${tradingDays} active trading day(s); The Leap minimum is ${MIN_TRADING_DAYS_TO_RANK}` : null;
   return {
     username: strategy.username,
     name: strategy.name,
@@ -223,11 +233,14 @@ export function runStrategy({ strategy, markets, candlesticks, pollSignal = null
     realizedPnlPct: round6((realizedPnl / STARTING_CAPITAL) * 100),
     feesPaid: round6(feesPaid),
     attributionIdentityHolds: identity === finalEquity,
-    trades: fills.filter((f) => f.action === 'enter').length,
+    trades: entryFills.length,
+    tradingDays,
+    marketsTraded,
     skips: skips.length,
     skipLog: skips,
     fillLog: fills,
     equityCurve,
-    ranked: fills.filter((f) => f.action === 'enter').length > 0,
+    ranked: unrankedReason === null,
+    unrankedReason,
   };
 }
