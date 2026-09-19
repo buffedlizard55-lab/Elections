@@ -10,6 +10,9 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
+// Forward-loop artifacts appear once the networked collector has run (ROADMAP R1-R4).
+// The bundle must stay small: summaries only, never the full raw captures.
+const readIfExists = (p) => { try { return read(p); } catch { return null; } };
 
 const snapshot = read('data/kalshi/snapshot-2026-09-18.json');
 const sources = read('data/sources/master.json');
@@ -30,6 +33,42 @@ const irregularities = {
 };
 const roadmap = read('data/roadmap.json');
 
+// --- ROADMAP R1-R4 forward-loop artifacts (null until the networked collector runs) ---
+const senate2024Full = readIfExists('data/senate-2024-backtest.json');
+const senate2024 = senate2024Full && {
+  generatedAt: senate2024Full.generatedAt,
+  inputs: senate2024Full.inputs,
+  note: senate2024Full.note,
+  nMarkets: senate2024Full.nMarkets,
+  settlementCrossCheck: senate2024Full.settlementCrossCheck,
+  aggregate: senate2024Full.aggregate,
+  aggregateByBandT7: senate2024Full.aggregateByBandT7,
+  holdOfficialWinners: senate2024Full.holdOfficialWinners,
+  universeCoverage: senate2024Full.universeCoverage,
+  captureErrors: senate2024Full.captureErrors,
+  markets: (senate2024Full.markets || []).map((m) => ({
+    ticker: m.ticker, state: m.state, side: m.side, title: m.title,
+    result: m.result, officialWinner: m.officialWinner, officialWinnerParty: m.officialWinnerParty,
+    crossCheck: m.crossCheck, bandT7: m.bandT7, p7: m.p7, volume: m.volume,
+    nTradeBars: m.nTradeBars, leadTimes: m.leadTimes,
+    series: (m.dailySeries || []).map((p) => ({ date: p.date, p: p.p })),
+  })),
+};
+const calibration = readIfExists('data/calibration-2026.json');
+const polls2026 = readIfExists('data/polls/polls-2026-series.json');
+const universeOpen = readIfExists('data/kalshi/forward/universe-open.json');
+const universeSummary = universeOpen && {
+  capturedFrom: universeOpen.capturedFrom,
+  capturedAt: universeOpen.capturedAt,
+  date: universeOpen.date,
+  count: universeOpen.count,
+  seriesQueried: universeOpen.seriesQueried,
+  top: [...(universeOpen.markets || [])]
+    .sort((a, b) => Number(b.vol || 0) - Number(a.vol || 0))
+    .slice(0, 15)
+    .map((m) => ({ ticker: m.ticker, event: m.event_ticker, series: m.series, sub: m.sub, bid: m.bid, ask: m.ask, vol: m.vol, oi: m.oi, close_time: m.close_time })),
+};
+
 // 538 national 2024 average series (downsampled to weekly + key dates for the chart)
 import { loadNationalAverages, nationalMargin } from '../src/poll-backtest.js';
 const byDate = loadNationalAverages(join(ROOT, 'data/polls/538-national-averages.csv'));
@@ -49,9 +88,13 @@ const bundle = {
   irregularities,
   roadmap,
   pollSeries2024: pollSeries,
+  senate2024,        // ROADMAP R2 (null until the networked capture + backtest run)
+  calibration,       // ROADMAP R3 (null until the forward collector runs)
+  polls2026,         // ROADMAP R4
+  universeSummary,   // ROADMAP R1 (latest open-universe snapshot summary)
   meta: {
     project: 'Elections — collect, analyze, project & estimate',
-    updated: '2026-09-18',
+    updated: '2026-09-19',
     repo: 'https://github.com/buffedlizard55-lab/Elections',
   },
 };

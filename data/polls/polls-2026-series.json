@@ -1,0 +1,127 @@
+{
+  "title": "Continuous 2026 poll layer — verified national poll time series (ROADMAP R4)",
+  "method": "Every row was transcribed from a source fetched during a verification session (per-row verifiedVia + verifiedOn). No modeled or interpolated values: where a chart row in a fetched article did not publish that wave's sample/MoE, the fields say so. The generic-ballot question wording differs between pollsters and is recorded per row; margins are computed arithmetically from the published D/R figures (labeled 'computed'). New verified releases append to this file; nothing is overwritten silently.",
+  "verifiedOn": "2026-09-19",
+  "metrics": ["house-generic-preference", "trump-approval"],
+  "rows": [
+    {
+      "id": "nbc-2025-03",
+      "pollster": "NBC News (Public Opinion Strategies + Hart Research Associates)",
+      "metric": "house-generic-preference",
+      "releasedMonth": "2025-03",
+      "results": { "preferD": 48, "preferR": 47, "unsure": 5, "marginDComputed": 1 },
+      "question": "Preference for the outcome of the congressional elections (D-controlled vs R-controlled Congress)",
+      "sourceUrl": "https://www.nbcnews.com/politics/2026-election/poll-democrats-maintain-edge-fight-congress-trump-gets-poor-marks-rcna348913",
+      "verifiedVia": "NBC News trend chart ('Democrats have a lead in the fight for congressional majorities') inside the 2026-06-14 article fetched directly 2026-09-19. Wave-level sample/MoE not published in the chart — original release not fetched; row kept at month precision.",
+      "verifiedOn": "2026-09-19"
+    },
+    {
+      "id": "nbc-2025-10",
+      "pollster": "NBC News (Public Opinion Strategies + Hart Research Associates)",
+      "metric": "house-generic-preference",
+      "releasedMonth": "2025-10",
+      "results": { "preferD": 50, "preferR": 42, "unsure": 8, "marginDComputed": 8 },
+      "question": "Preference for the outcome of the congressional elections (D-controlled vs R-controlled Congress)",
+      "sourceUrl": "https://www.nbcnews.com/politics/2026-election/poll-democrats-maintain-edge-fight-congress-trump-gets-poor-marks-rcna348913",
+      "verifiedVia": "NBC News trend chart inside the 2026-06-14 article fetched directly 2026-09-19 (chart row 'Oct. 2025: 50 / 8 / 42'). Wave-level sample/MoE not published in the chart.",
+      "verifiedOn": "2026-09-19"
+    },
+    {
+      "id": "nbc-2026-03",
+      "pollster": "NBC News (Public Opinion Strategies + Hart Research Associates)",
+      "metric": "house-generic-preference",
+      "releasedMonth": "2026-03",
+      "results": { "preferD": 50, "preferR": 44, "unsure": 6, "marginDComputed": 6 },
+      "question": "Preference for the outcome of the congressional elections (D-controlled vs R-controlled Congress)",
+      "sourceUrl": "https://www.nbcnews.com/politics/2026-election/poll-democrats-maintain-edge-fight-congress-trump-gets-poor-marks-rcna348913",
+      "verifiedVia": "NBC News trend chart inside the 2026-06-14 article fetched directly 2026-09-19; article text: 'essentially even with the NBC News poll conducted in March, when Democrats had a 6-point lead'. Wave-level sample/MoE not published in the chart.",
+      "verifiedOn": "2026-09-19"
+    },
+    {
+      "id": "nbc-2026-06",
+      "pollster": "NBC News (Public Opinion Strategies + Hart Research Associates); sponsored by More Perfect (nonpartisan nonprofit)",
+      "metric": "house-generic-preference",
+      "released": "2026-06-14T09:00:00-04:00",
+      "fieldDates": "2026-05-29..2026-06-07",
+      "sample": "2,400 registered voters nationally (this question)",
+      "moE": "±2.0",
+      "results": { "preferD": 49, "preferR": 44, "unsure": 7, "marginDComputed": 5 },
+      "question": "\"What is your preference for the outcome of this year's congressional elections, a Congress controlled by Republicans or a Congress controlled by Democrats?\"",
+      "extras": {
+        "independents": "D+12 (46%-34%)",
+        "harrisVotersPreferD": 95,
+        "trumpVotersPreferR": 90,
+        "historicalContext": "May 2022 NBC generic ballot: tied; June 2018: D+10 (per the same article)",
+        "crosstabs": "https://www.documentcloud.org/documents/28246606-260216-nbc-june-2026-poll-61426-release"
+      },
+      "sourceUrl": "https://www.nbcnews.com/politics/2026-election/poll-democrats-maintain-edge-fight-congress-trump-gets-poor-marks-rcna348913",
+      "verifiedVia": "Article fetched DIRECTLY 2026-09-19 (Ben Kamisar & Bridget Bowman, June 14, 2026, 9:00 AM EDT). All figures verbatim from the article body + its Datawrapper chart notes.",
+      "verifiedOn": "2026-09-19"
+    },
+    {
+      "id": "quinnipiac-2026-06",
+      "pollster": "Quinnipiac University Polling Institute",
+      "metric": "house-generic-preference",
+      "releasedMonth": "2026-06",
+      "results": { "preferD": 48, "preferR": 41, "unsure": 11, "marginDComputed": 7 },
+      "sourceUrl": "https://www.pennlive.com/politics/2026/09/new-poll-reveals-1-party-with-huge-advantage-in-2026-midterms-and-its-bad-news-for-trump.html",
+      "verifiedVia": "June 2026 benchmark as cited inside Quinnipiac's 2026-09-10 release (syndicated full text fetched 2026-09-18; recorded in data/polls/verified-polls.json as quinnipiac-2026-06). Wave-level field dates/sample per the original June release (not fetched).",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "quinnipiac-2026-09",
+      "pollster": "Quinnipiac University Polling Institute",
+      "metric": "house-generic-preference",
+      "released": "2026-09-10",
+      "fieldDates": "2026-09-03..2026-09-06",
+      "sample": "970 registered voters nationally",
+      "moE": "±3.9",
+      "results": { "preferD": 49, "preferR": 38, "unsure": 13, "marginDComputed": 11 },
+      "sourceUrl": "https://www.quinnipiac.edu/politics",
+      "verifiedVia": "Syndicated full text (masslive.com, pennlive.com, mlive.com) fetched 2026-09-18; recorded in data/polls/verified-polls.json as quinnipiac-2026-09.",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "nbc-2026-06-approval",
+      "pollster": "NBC News (Public Opinion Strategies + Hart Research Associates)",
+      "metric": "trump-approval",
+      "released": "2026-06-14T09:00:00-04:00",
+      "fieldDates": "2026-05-29..2026-06-07",
+      "sample": "2,400 registered voters nationally (this question)",
+      "moE": "±2.0",
+      "results": { "approveRV": 42, "approveAllAdults": 39, "note": "lowest mark of his second term in NBC News surveys among registered voters; previously 42% in July 2020" },
+      "extras": { "republicansApprove": 82, "republicansApproveMarch2026": 88, "latinoDisapprove": 64, "latinoApprove": 34, "age18_29Disapprove": 77, "age18_29Approve": 21, "independentsDisapprove": "two-thirds" },
+      "sourceUrl": "https://www.nbcnews.com/politics/2026-election/poll-democrats-maintain-edge-fight-congress-trump-gets-poor-marks-rcna348913",
+      "verifiedVia": "Article fetched DIRECTLY 2026-09-19; figures verbatim.",
+      "verifiedOn": "2026-09-19"
+    },
+    {
+      "id": "quinnipiac-2026-09-approval",
+      "pollster": "Quinnipiac University Polling Institute",
+      "metric": "trump-approval",
+      "released": "2026-09-10",
+      "fieldDates": "2026-09-03..2026-09-06",
+      "sample": "970 registered voters nationally",
+      "moE": "±3.9",
+      "results": { "approve": 33, "disapprove": 59 },
+      "sourceUrl": "https://www.quinnipiac.edu/politics",
+      "verifiedVia": "Syndicated full text fetched 2026-09-18; recorded in data/polls/verified-polls.json (quinnipiac-2026-09 results.trumpApproval/trumpDisapproval).",
+      "verifiedOn": "2026-09-18"
+    },
+    {
+      "id": "gallup-2025-12-approval",
+      "pollster": "Gallup (series ENDED Feb 2026 — historical reference row)",
+      "metric": "trump-approval",
+      "releasedMonth": "2025-12 (final measure)",
+      "results": { "approve": 36, "disapprove": 59 },
+      "sourceUrl": "https://www.nytimes.com/2026-02-11/us/politics/gallup-poll-presidential-approval-ratings-trump.html",
+      "verifiedVia": "NYT 2026-02-11 article fetched 2026-09-18 (see data/polls/verified-polls.json gallup-final-approval and IRREGULARITIES #4: Gallup ended presidential approval tracking).",
+      "verifiedOn": "2026-09-18",
+      "caveat": "Do NOT cite Gallup approval for any 2026 field period — the series ended (irregularity #4). Third-party trackers still citing Gallup 2026 numbers are flagged (irregularity #27)."
+    }
+  ],
+  "crossPlatformContext": {
+    "kalshiContemporaneous": "Kalshi CONTROLH-2026 (Democratic Speaker) traded 89/91c on 2026-09-18 (API order book; data/kalshi/snapshot-2026-09-18.json) and CONTROLS-2026-D 59/60c — vs the poll layer's D+11 (Quinnipiac Sep) / D+5 (NBC Jun) generic-ballot margins. The poll->probability mapping remains a labeled model (logistic k=4.5, IRREGULARITIES #12); spreads are recorded, not converted silently.",
+    "iemContemporaneous": "IEM 2026 House control (RH.lose26 = Democrats take the House) closed $0.586 and Kalshi Democratic $0.812 on 2026-07-12 per Gruca & Rietz (2026-07-17, Tippie College of Business; PDF fetched directly 2026-09-19: https://www.biz.uiowa.edu/faculty/trietz/papers/IEM2026Forecasts.pdf)"
+  }
+}
