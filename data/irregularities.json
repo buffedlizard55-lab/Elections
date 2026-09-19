@@ -139,15 +139,114 @@
   },
   {
    "id": 26,
-   "severity": "medium",
-   "area": "Source list integrity",
-   "title": "IEM listed under the WRONG domain (iem.isu.edu = Iowa State; the Iowa Electronic Markets is at the University of Iowa) — corrected 2026-09-19",
-   "detail": "The master source entry for the Iowa Electronic Markets carried https://iem.isu.edu/ (Iowa State University) — an institution that has never hosted the IEM. Direct fetches 'failed via sandbox proxy' in both sessions, which masked the real cause: the domain was wrong. On 2026-09-19 the correct properties were fetched live: https://iem.uiowa.edu/iem/ and the markets board https://iemweb.biz.uiowa.edu/markets/ (three 2026 winner-takes-all congressional-control markets open: U.S. Congressional Control, House Control, Senate Control; live price pages at iemweb.biz.uiowa.edu/iem_market_info/2026-u-s-*-control-winner-takes-all-market/).",
-   "action": "RESOLVED: master entry 'iem' now points at iem.uiowa.edu + iemweb.biz.uiowa.edu/markets and is status 'verified' (was 'verified-via-search'). Lesson recorded: a 'proxy-blocked' fetch failure can hide a plain wrong-URL error — always cross-check the domain against the institution.",
-   "source": "https://iemweb.biz.uiowa.edu/markets/"
+   "severity": "low",
+   "area": "Master list hygiene",
+   "title": "IEM entry pointed at a non-existent host (iem.isu.edu); canonical is iem.uiowa.edu/iem/",
+   "detail": "The 2026-09-19 (session 2) entry recorded 'https://iem.isu.edu/' as the Iowa Electronic Markets URL, copied from a search snippet. Direct fetch 2026-09-19 (session 3): iem.uiowa.edu/iem/ returns 200 (Tippie College of Business); iem.uiowa.edu/iem/markets/ returned HTTP 500 server-side. isu.edu is Iowa State, not the University of Iowa. Late-batch update: the IEM markets board (iemweb.biz.uiowa.edu/markets/) was subsequently fetched LIVE — three 2026 winner-takes-all congressional-control markets open; master entry upgraded to status verified with marketsUrl.",
+   "action": "URL corrected in data/sources/master.json, VERIFICATION.md N21/§6a and ROADMAP R8; treat any URL taken from a search snippet as unverified until fetched. RESOLVED 2026-09-19 (entry corrected + live-verified).",
+   "source": "https://iem.uiowa.edu/iem/"
   },
   {
    "id": 27,
+   "severity": "low",
+   "area": "Kalshi market metadata",
+   "title": "Title typo in a settled market: SENATEAZ-24-D reads 'Will the Democratics win the Arizona Senate race?'",
+   "detail": "Observed in the /historical/markets?series_ticker=SENATEAZ capture (data/kalshi/historical/senate-2024.json). Cosmetic; the result field (yes) and settlement are unaffected.",
+   "action": "Recorded as-is; titles are never edited in captured data.",
+   "source": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=SENATEAZ"
+  },
+  {
+   "id": 28,
+   "severity": "medium",
+   "area": "Collector design",
+   "title": "Python collector's default --status-filter 'active,open' relies on the response value being 'active' while the query parameter is status=open",
+   "detail": "Kalshi returns status 'active' for markets requested with status=open (observed 2026-09-19 status_tally_raw). A filter of just 'open' would silently drop everything; the default now includes both and the raw tally is logged so the mismatch is visible.",
+   "action": "Keep both values in the filter; the collector logs status_tally_raw every run.",
+   "source": "data/kalshi/LATEST.json"
+  },
+  {
+   "id": 29,
+   "severity": "low",
+   "area": "Poll layer",
+   "title": "Quinnipiac benchmark was dated to June in session 2; the primary release says July 29",
+   "detail": "The entry quinnipiac-2026-06 (D 48 / R 41 / 11 no opinion) was captured from a PennLive syndication and dated 2026-06. The Quinnipiac 2026-09-10 release PDF (fetched 2026-09-19) attributes those numbers to its 'July 29 poll'.",
+   "action": "Renamed to quinnipiac-2026-07 in data/polls/verified-polls.json and the poll layer; source switched to the primary PDF.",
+   "source": "https://poll.qu.edu/images/polling/us/us09102026_usvi28.pdf"
+  },
+  {
+   "id": 30,
+   "severity": "medium",
+   "area": "Repository operations",
+   "title": "First live collector run committed ~54 MB of data (24,367-row CSV incl. 13,453 never-traded markets; 12 MB index; 16 MB Python dump) and an 8.6 MB site bundle",
+   "detail": "Run 35409758565 (2026-09-19 00:33 UTC) wrote every open market including strike ladders with zero volume and open interest. A daily commit of that size would make the repository unusable within weeks.",
+   "action": "Fixed the same day (commit fa8e053): daily CSV lists traded markets only (volume>0 or open_interest>0; untraded are counted in the meta file), static descriptors moved to tracker/index.json, universe/latest.json lists traded markets per event, Python sample capped at the 2,000 highest-volume markets, site bundle limited to a US-election watchlist (1.1 MB). Steady state ≈ 1 MB/day. The first-day files were re-derived offline from the same capture (--replay).",
+   "source": "https://github.com/buffedlizard55-lab/Elections/actions/runs/35409758565"
+  },
+  {
+   "id": 31,
+   "severity": "low",
+   "area": "Kalshi API",
+   "title": "Kalshi API docs default to external-api.kalshi.com while this project (and the docs' server list) also use api.elections.kalshi.com",
+   "detail": "docs.kalshi.com/api-reference/market/get-markets (fetched 2026-09-19) lists four servers: external-api.kalshi.com, api.elections.kalshi.com, and two demo hosts. Irregularity #2 (stale last_price on the shared host) was observed on api.elections.kalshi.com.",
+   "action": "Open: run the two-collector cross-check once against external-api.kalshi.com (KALSHI_API_BASE env) to see whether the stale-price behaviour is host-specific.",
+   "source": "https://docs.kalshi.com/api-reference/market/get-markets"
+  },
+  {
+   "id": 32,
+   "severity": "medium",
+   "area": "Cross-market consistency",
+   "title": "Kalshi's mutually_exclusive flag does not imply an exhaustive outcome set: 47 flagged events sum well below 1, 46 sum above 1 (2026-09-19)",
+   "detail": "First live consistency run over 4,094 events: e.g. 'LA-04 Democratic nominee?' lists 2 markets summing to 0.08; 'Brazil Gubernatorial Elections: Most Governorships Won' (12 markets) sums to 2.85. Under-sums are coverage notes (unlisted candidates carry the rest); over-sums on a mutually-exclusive set are real inconsistencies (or a wrong flag).",
+   "action": "Consistency monitor now separates -over (high) from -under (info, ≥3 markets); findings carry us_election and volume so US-election, high-volume cases surface first on the site.",
+   "source": "data/kalshi/tracker/discrepancy-watch.json"
+  },
+  {
+   "id": 33,
+   "severity": "medium",
+   "area": "Market vs ratings",
+   "title": "Kalshi prices 7 of 13 rated 2026 Senate races outside the bands implied by BOTH Cook and Inside Elections ratings (all in the Democratic direction)",
+   "detail": "2026-09-19 tracker vs Cook (Sep 15) / Inside Elections (Sep 17): AK D 68.5% (Toss Up / Tilt R), ME D 67.5% (Toss Up / Toss-up), NH D 83.5% (Toss Up / Toss-up), GA D 93.7% (Lean D / Tilt D), NC D 92.4% (Lean D / Tilt D), KS D 26.5% (Likely R / Likely R), NE Osborn (I) 31.5% (Likely R / Likely R). Either the market is ahead of the raters in a D+8–13 generic-ballot environment or it is overconfident; the 2024 backtest cannot distinguish these yet. Poll cross-check added later on 2026-09-19: the only public AK poll captured (NYT/Siena, released Jul 1: Sullivan 47 – Peltola 45) implies D ≈ 39% vs the market's 68.5%; for OH (special) NYT/Siena Jul 1 had Husted 50 – Brown 47 (D ≈ 34%) vs a 54.5% market. Both polls are 11 weeks old, so the gap mixes time drift with disagreement.",
+   "action": "Published in the poll layer (ratingsComparison) for human review; re-evaluated automatically each day. Settlements on Nov 3 2026 will score it.",
+   "source": "data/polls/poll-layer-2026.json"
+  },
+  {
+   "id": 34,
+   "severity": "low",
+   "area": "Poll vs market",
+   "title": "Iowa Senate: Emerson (Aug 31–Sep 1) R+5 implies D ≈ 25% under the project's logistic mapping; Kalshi prices Turek (D) at 39.5%",
+   "detail": "The 14.7-point gap is the largest of the five poll-vs-market comparisons made first (ME +1.4, MI −1.6/+3.6, TX +2.0). Update 2026-09-19 (later the same day): Suffolk (Aug 20–23, n=500 LV, ±4.4; press-release PDF) has Hinson 45 – Turek 41 → D ≈ 29% under the same mapping (gap +10.4), and NYT/Siena (released Jul 1) had Hinson 48 – Turek 46 → D ≈ 39% (gap +0.4). The market (39.5%) therefore sits between the three polls' implied values; Emerson is the most Republican-leaning of the three, not evidence of a market anomaly on its own. The Texas Poll/ReconMR (Talarico +6 → 79%) vs market 57.5% (gap −21.6) is now the largest single-poll gap; two Texas polls disagree with each other (Emerson Talarico +1).",
+   "action": "Transcribed Suffolk and NYT/Siena Iowa toplines (data/polls/poll-layer-2026.json). Keep reading multi-poll gaps, not single-poll gaps; a poll average per race is the next step (ROADMAP R4).",
+   "source": "https://emersoncollegepolling.com/iowa-2026-poll-hinson-leads-turek/"
+  },
+  {
+   "id": 35,
+   "severity": "low",
+   "area": "Site fetchability",
+   "title": "Some official results hosts block automated fetchers: results.enr.clarityelections.com/GA (403), sos.nh.gov election results (403)",
+   "detail": "Observed 2026-09-19 with this session's fetcher. Human browsers are unaffected; automated re-verification of these hosts must use alternative official URLs (results.sos.ga.gov) or a browser-like client.",
+   "action": "Georgia entry points to sos.ga.gov/elections and results.sos.ga.gov; New Hampshire SoS not added until a fetchable official URL is confirmed.",
+   "source": "https://sos.ga.gov/elections"
+  },
+  {
+   "id": 36,
+   "severity": "low",
+   "area": "Site / code defect",
+   "title": "Poll-backtest checkpoints table rendered 'undefined' rows on the published site (bug in src/poll-backtest.js, present since the 2026-09-18 session)",
+   "detail": "runPollBacktest() returned the list of checkpoint DATES instead of the computed comparison objects, so Backtests §3 'Checkpoints (poll archive)' showed empty/undefined cells. The late-window table and the headline poll-vs-outcome numbers were unaffected. Found 2026-09-19 by a headless render check of every site section (undefined/NaN scan).",
+   "action": "Fixed (checkpoints: comparisons); a unit test now asserts the checkpoint shape and the render check runs against the bundle before publishing.",
+   "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/src/poll-backtest.js"
+  },
+  {
+   "id": 37,
+   "severity": "high",
+   "area": "Kalshi API / tracker",
+   "title": "207 traded markets returned inside OPEN events were already settled (status=finalized, results known) — trading had ended weeks earlier, yet they sat in the 'open' universe and, unguarded, would have entered the calibration sample as perfectly-priced post-settlement observations",
+   "detail": "Daily capture 2026-09-19 (GET /events?status=open&with_nested_markets=true): 207 of 10,915 traded markets had close_time < capture time (17 in July, 102 in August, 88 in September 2026), yes_bid 0 / yes_ask 1 and last prices pinned near 0.01 or 0.99 (e.g. KXBERNIEENDORSE-26NOV03-ADEL closed 2026-07-14, KXTRUMPMEETING-27JAN01-NCSHE closed 2026-07-19 at 0.998, KXHORMUZNORM-26MAR17-B260715 closed 2026-07-21 with 2.18M volume). Multi-market events stay 'open' until every rung settles, so closed rungs are nested in open events. The first-day files did not record the per-market status field, so whether the exchange reports them as 'closed' or still 'active' is unknown until the next live run. None of them is a 2026 general-election race market. The Python sample (top 2,000 by volume) contained none because its filter reads status directly. Update (live run 35412822292, 01:30 UTC the same day, after the status column was added): the API reports all 207 as status=finalized with official results — 174 no, 33 yes; settlement_ts between 2026-07-13 and 2026-09-18. Before the guard, the first scorer pass pooled their post-settlement prices (170 observations in the 0–10% bucket with 0% YES) — a look-ahead artefact, not calibration evidence.",
+   "action": "Fixed: finalized rungs are recorded once in tracker/settlements.json (with settlement_ts and result) and excluded from the daily CSV; closed-pending rungs keep their status; src/calibration.js ignores any price row with a non-active status and any observation dated on/after the settlement day (scoreableMarkets / observationsExcludedAsLookAhead are reported). Site: 'settlements on file' table, run log, 'past close' chips. Still open: why finalized rungs remain nested in status=open events (Kalshi API semantics) — documented in LIMITATIONS.",
+   "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/data/kalshi/universe/latest.json"
+  },
+  {
+   "id": 38,
    "severity": "low",
    "area": "Official sources",
    "title": "DOJ Civil Rights Division Voting Section program pages moved to the administration archive (404 on the legacy URLs, observed 2026-09-19)",
@@ -156,7 +255,7 @@
    "source": "https://www.justice.gov/crt"
   },
   {
-   "id": 28,
+   "id": 39,
    "severity": "low",
    "area": "Campaign-finance data",
    "title": "NIMSP FollowTheMoney.org is in merger transition — state data frozen at the 2024 election year",

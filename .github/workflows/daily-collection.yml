@@ -1,80 +1,184 @@
-# Daily Kalshi collection (forward data loop — ROADMAP R1/R2/R3).
-# Runs the collectors where general internet is available (GitHub-hosted
-# runners), then runs the deterministic analytics, rebuilds the site bundle,
-# and commits the diff to the triggering ref.
+# Daily Kalshi collection — the forward data loop (ROADMAP R1 / R3 / R5).
 #
-# Manual runs: workflow_dispatch with enabled=true (used to prove the
-# collectors against the live API — the 2026-09-19 run on branch
-# arena/01a0b728-elections is the first networked exercise of this loop).
-# Scheduled runs: gated by vars.COLLECT_ENABLED as before; the standing
-# post-merge daily loop lives in universe-collection.yml (enabled by default
-# — the automation token cannot write repository variables, 403 on the
-# variables API, so the gate here is kept only for this legacy workflow).
+# ENABLED BY DEFAULT since 2026-09-19 (opt-out: set repository variable
+# COLLECT_DISABLED=true). Before that date the job was gated behind an opt-in
+# variable because the collector had never been exercised against the live
+# API; the 2026-09-19 session proved it on a GitHub-hosted runner (this
+# workflow's push trigger) and committed the first universe/tracker files.
+#
+# One run:
+#   1. node scripts/collect-kalshi.mjs      -> series registry, open political/election universe,
+#                                              daily tracker CSV, settlements, calibration,
+#                                              consistency findings, site bundle
+#   2. node scripts/collect-senate-2024.mjs -> only when the 2024 Senate capture is missing
+#                                              (or forced via workflow_dispatch input)
+#   3. python scripts/fetch_kalshi.py       -> Python-track independent sample (top 2,000 by volume)
+#      node scripts/crosscheck-collectors.mjs -> tracker/collector-crosscheck.json (agreement report)
+#   3b. node scripts/collect-universe.mjs   -> FULL open-market snapshot (all ~24k open political/
+#                                              election markets, not just top-volume) + settled-2026
+#                                              candle seed -> data/kalshi/forward/ (continue-on-error:
+#                                              a failure here never blocks the main pipeline above)
+#       node scripts/collect-senate-2024-races.mjs -> per-state 2024 Senate capture (36-39 markets
+#                                              incl. candles) -> data/kalshi/historical-2024/
+#       node scripts/run-senate-backtest.mjs + run-calibration.mjs -> forward-loop analytics
+#                                              (data/senate-2024-backtest.json, data/calibration-2026.json)
+#   4. npm run pipeline + lint + tests      -> regenerated backtest/contest/site outputs
+#   5. commit data/ + src/data/ + docs/data/ back to the branch that ran it
+# Failure semantics:
+#   - the collector fetches everything first and writes only at the end, so a
+#     fatal API error leaves just tracker/daily/<date>.error.json (committed as
+#     the audit record) and yesterday's universe stays in place;
+#   - the commit step runs whenever the job was not cancelled, but if the
+#     pipeline / lint / tests did not succeed it restores the generated site
+#     bundles (src/data, docs/data) from HEAD before committing, so raw data is
+#     never lost and a broken bundle is never published to GitHub Pages;
+#   - the former universe-collection.yml (a second daily cron for the forward loop) was retired
+#     when the branches merged on 2026-09-19: its steps now run inside this workflow (3b), so
+#     there is exactly ONE daily collection pass;
+#   - if a human push lands mid-run, the bot rebases and keeps its own version
+#     of any conflicting generated file (run 35413487160 on 2026-09-19 lost its
+#     commit to exactly this race before the -X theirs / --abort retry existed;
+#     its artifacts stayed available for 7 days).
 name: daily-collection
 on:
-  workflow_dispatch:
-    inputs:
-      enabled:
-        description: 'Run the collector (default false)'
-        required: false
-        default: 'false'
   schedule:
     - cron: '30 12 * * *' # 12:30 UTC daily (US markets mid-session)
-  # The TEMPORARY push-trigger bootstrap (needed because the automation token
-  # cannot dispatch workflows — 403) did its job on 2026-09-19: runs #5-#7
-  # collected the universe + 2024 Senate capture on a networked runner and the
-  # data is committed. The steady-state daily loop is universe-collection.yml
-  # (schedule, enabled by default, registers on main at merge).
+  workflow_dispatch:
+    inputs:
+      senate2024:
+        description: 'Force re-capture of the 2024 per-state Senate markets'
+        required: false
+        default: 'false'
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'scripts/collect-kalshi.mjs'
+      - 'scripts/collect-senate-2024.mjs'
+      - 'scripts/crosscheck-collectors.mjs'
+      - 'scripts/fetch_kalshi.py'
+      - 'src/kalshi-api.js'
+      - 'src/calibration.js'
+      - 'src/consistency.js'
+      - 'scripts/collect-universe.mjs'
+      - 'scripts/collect-senate-2024-races.mjs'
+      - 'scripts/run-senate-backtest.mjs'
+      - 'scripts/run-calibration.mjs'
+      - 'src/kalshi-live.js'
+      - 'src/calibration-tracker.js'
+      - 'src/senate2024-backtest.js'
+      - 'test/collector.test.mjs' # the offline replay test must be proven against a live capture
+      - '.github/workflows/daily-collection.yml'
 
 permissions:
   contents: write
-  actions: write # upload the collected data as an artifact when a run fails
+
+concurrency:
+  group: daily-collection-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   collect:
-    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.enabled == 'true') || (github.event_name == 'schedule' && vars.COLLECT_ENABLED == 'true') }}
+    if: ${{ vars.COLLECT_DISABLED != 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Tests on the committed state (validate before collecting)
-        run: npm test
-      - name: Collect full open universe + tracker + settled-2026 seed (R1/R3)
-        run: node scripts/collect-universe.mjs
-      - name: Capture 2024 per-state Senate markets (R2, idempotent)
-        run: node scripts/collect-senate-2024-races.mjs
-      - name: Deterministic analytics (senate backtest + calibration tracker)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Collect open political/election universe + tracker
+        id: collect
+        run: node scripts/collect-kalshi.mjs
+
+      - name: Capture 2024 per-state Senate markets (first run or forced)
+        if: ${{ hashFiles('data/kalshi/historical/senate-2024.json') == '' || inputs.senate2024 == 'true' }}
+        run: node scripts/collect-senate-2024.mjs
+
+      - name: Python-track snapshot (independent capture; 2,000 highest-volume markets, no raw dump)
+        continue-on-error: true
+        run: python scripts/fetch_kalshi.py --out-dir data/kalshi --no-raw --compact --compact-max 2000 --series-file data/kalshi/universe/series.json
+
+      - name: Cross-check the two collectors (Node events feed vs Python markets feed)
+        continue-on-error: true
+        run: node scripts/crosscheck-collectors.mjs
+
+      - name: FULL open-market universe snapshot (forward loop -> data/kalshi/forward/)
+        continue-on-error: true
+        timeout-minutes: 25
+        run: node scripts/collect-universe.mjs || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+
+      - name: 2024 per-state Senate races capture (forward loop -> data/kalshi/historical-2024/)
+        continue-on-error: true
+        timeout-minutes: 15
+        run: node scripts/collect-senate-2024-races.mjs || echo "::warning::senate-races capture failed - previous capture stays in place"
+
+      - name: Forward-loop analytics (senate backtest + live 2026 calibration tracker)
+        continue-on-error: true
+        timeout-minutes: 10
         run: |
-          node scripts/run-senate-backtest.mjs || echo "senate backtest skipped"
-          node scripts/run-calibration.mjs || echo "calibration skipped"
-      - name: Legacy 10-series capture (non-fatal; superseded by the universe collector)
-        run: node scripts/collect-kalshi.mjs || echo "legacy collector reported errors (recorded in its meta.json)"
-      - name: Rebuild site bundle
-        run: node scripts/build-site.mjs
-      - name: Lint provenance (fatal — every new data file must carry its capture URL)
-        run: node scripts/lint-verified.mjs
-      - name: Commit changes
+          node scripts/run-senate-backtest.mjs || echo "::warning::senate backtest rerun failed"
+          node scripts/run-calibration.mjs || echo "::warning::calibration tracker rerun failed"
+
+      - name: Regenerate backtests, contest, site bundle
+        id: pipeline
+        run: npm run pipeline
+
+      - name: Sync Python-track site data
+        id: sync
+        run: python scripts/sync_site_data.py
+
+      - name: Provenance lint + tests
+        id: verify
         run: |
-          git config user.name "elections-collector"
-          git config user.email "collector@users.noreply.github.com"
-          git add data/ src/data/
-          if git diff --cached --quiet; then
-            echo "no data changes"
-          else
-            git commit -m "collect: kalshi universe + tracker $(date -u +%F) (run ${{ github.run_id }}) [skip ci]"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || echo "rebase skipped"
-            git push
-          fi
-      - name: Preserve collected data on failure (nothing gets lost twice — run #6 lesson)
-        if: failure()
+          npm run lint
+          npm test
+
+      - name: Upload run artifacts (7 days)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: collected-data-${{ github.run_id }}
+          name: kalshi-collection-${{ github.run_id }}
           path: |
-            data/
-            src/data/
-          retention-days: 14
+            data/kalshi/universe
+            data/kalshi/tracker
+            data/kalshi/historical
+            data/kalshi/LATEST.json
+            data/kalshi/forward
+            data/kalshi/historical-2024
+            data/calibration-2026.json
+            data/senate-2024-backtest.json
+            data/polls/polls-2026-series.json
+          retention-days: 7
           if-no-files-found: ignore
+
+      - name: Commit and push
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "elections-collector[bot]"
+          git config user.email "elections-collector[bot]@users.noreply.github.com"
+          if [ "${{ steps.pipeline.outcome }}" != "success" ] || [ "${{ steps.sync.outcome }}" != "success" ] || [ "${{ steps.verify.outcome }}" != "success" ]; then
+            echo "pipeline/sync/verify did not all succeed (${{ steps.pipeline.outcome }}/${{ steps.sync.outcome }}/${{ steps.verify.outcome }}): keeping raw data, restoring generated site bundles"
+            git checkout -- src/data/ docs/data/ || true
+          fi
+          git add -A data/ src/data/ docs/data/
+          if git diff --cached --quiet; then
+            echo "no data changes"
+            exit 0
+          fi
+          git commit -m "collect: kalshi $(date -u +%F) (run ${{ github.run_id }})"
+          # Push race: a human commit may land while this job runs. Rebase onto it; if a generated file
+          # conflicts (site bundle, tracker files) keep THIS run's version (-X theirs during a rebase means
+          # the commit being replayed, i.e. the bot commit) — those files are regenerated every run anyway.
+          for i in 1 2 3; do
+            if git pull --rebase -X theirs origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          echo "push failed after retries" && exit 1

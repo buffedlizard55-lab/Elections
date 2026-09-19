@@ -13,14 +13,14 @@ on Kalshi's open political/election markets.
 
 | | Node pipeline (primary data engines) | Python toolkit (registry + collectors + validators) |
 |---|---|---|
-| Sources | `data/sources/master.json` — 73 verified entries (32 from 2026-09-18 + 21 + 20 from 2026-09-19) | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
+| Sources | `data/sources/master.json` — **85 verified entries** (32 on 2026-09-18 + 21 + 20 on 2026-09-19 + 12 unique from the late independent batch; 8 institutions verified in both 2026-09-19 batches were merged into single entries with labelled addenda) | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
 | Verification log | `VERIFICATION.md` | `data/verification_log.md` |
-| Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/live/…` (series-targeted + candles) | `scripts/fetch_kalshi.py` → `data/kalshi/markets_*.json` (full-universe + keyword filter) |
-| Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
+| Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/universe/` + `tracker/` (daily, events feed) · `scripts/collect-senate-2024.mjs` → `historical/senate-2024.json` | `scripts/fetch_kalshi.py` → `data/kalshi/markets_politics_latest.json` (independent markets-feed sample, top 2,000) · cross-checked by `scripts/crosscheck-collectors.mjs` |
+| Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (real Kalshi fees) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (25 tests) + `npm run lint` (provenance) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
-| Automation | `daily-collection.yml` (gated; enable via `vars.COLLECT_ENABLED`) | `collect.yml` (daily snapshot) · `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
+| Checks | `npm test` (61 tests) + `npm run lint` (provenance, irregularities md⇄json sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
 Node pipeline's verified data; the Python engines reproduce the same methodology and run on
@@ -30,34 +30,44 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 
 | Path | What it is |
 |---|---|
-| `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, 2026 live markets, backtests, contest, sources, irregularities, methodology, roadmap |
+| `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, **2026 Markets** (from the daily capture), **2026 Polls** (poll layer vs market vs ratings), **Tracker** (forward loop + calibration + collector cross-check), backtests, contest, sources, irregularities, methodology, roadmap |
 | `docs/` | Toolkit site (served as `/docs/`): 20-source registry browser, Kalshi layer, contest leaderboard, methodology, verification evidence |
-| `data/kalshi/` | Captured Kalshi data: 2026-09-18 live-market snapshot; settled 2024 markets live in `src/kalshi-data.js` with per-bar provenance |
-| `data/sources/master.json` | **Master source list — 73 verified entries** (32 from 2026-09-18 + 41 from 2026-09-19), each with a manual-review link and a line-by-line verification note |
-| `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6: the 21 new entries, URL corrections, and fetch failures) |
+| `data/kalshi/` | `universe/series.json` + `universe/latest.json` (today's registry + open events; per-market `status` when not active), `tracker/daily/YYYY-MM-DD.csv` (traded, not-yet-settled markets, one row per day, with the exchange `status`), `tracker/{index,settlements,calibration,discrepancy-watch,collector-crosscheck,history}.json` (descriptors · official results · look-ahead-guarded scorer · consistency findings · two-collector agreement · one record per run day), `historical/senate-2024.json` (36 settled 2024 Senate markets + 1,269 daily bars), `forward/` (**FULL open-universe capture**: `universe-open.json` 24,150 markets, `tracker.csv` daily bid/ask appends, `settled-2026-candles.json` 400-market candle seed), `historical-2024/senate-races.json` (same 36 Senate markets with candle series for the T-1..T-60 backtest), the 2026-09-18 hand snapshot; core 2024 markets in `src/kalshi-data.js` |
+| `data/sources/master.json` | **Master source list — 85 verified entries**, each with a manual-review link and a line-by-line verification note (session 3 added 8 state election authorities, LA County, Emerson, Marquette, Siena, UNH, Suffolk, SSRS Voter Poll, Cook, Inside Elections, NCSL, Kalshi API docs; the late batch added Sabato's Crystal Ball, Marist, Texas Politics Project, YouGov, Ipsos, Morning Consult, OpenSecrets, NIMSP, NASS, DOJ Civil Rights, Roper Center, CRS) |
+| `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6, §7 and §8: new entries, URL corrections, fetch failures, live-run evidence) |
 | `data/master_sources.json` | **Live-only registry — 20 entries** (5 government · 5 academic · 6 pollsters · 4 analysis), independently verified 2026-09-18 |
 | `data/outcomes/verified-outcomes.json` | Verified official outcomes (2020/2024 presidency, 2024 Senate & House control) with per-claim sources and Kalshi-settlement cross-checks (all PASS) |
-| `data/polls/` | 538's archived national averages (verbatim GitHub copy + provenance) and line-by-line verified individual polls |
-| `data/backtest-results.json` | Market calibration (Brier/log-loss/hold-PnL at T-1…T-60) + poll-vs-market-vs-outcome (generated) |
-| `data/contest-results.json` | Paper-trading contest: 8 entrants, $100k each, Kalshi's real fees, 2024 universe (generated) |
-| `data/irregularities.json` + `IRREGULARITIES.md` | 25 flagged irregularities/discrepancies with severities and actions (Node items 1–12 + 23–25; Python-track items 13–22) |
+| `data/polls/` | 538's archived national averages (verbatim GitHub copy; git-blob SHA-1 = upstream + SHA-256 in `PROVENANCE.md`), `verified-polls.json` (verification chains) and `poll-layer-2026.json` (2026 generic-ballot + state-race polls, Cook/Inside ratings, exit-poll status) |
+| `data/backtest-results.json` | Market calibration over 39 settled 2024 markets (groups core/senate/all; Brier/log-loss/hold-PnL at T-1…T-60; favourite hit-rate; pooled calibration curve) + poll-vs-market-vs-outcome (generated) |
+| `data/contest-results.json` | Paper-trading contest: 8 entrants, $100k each, Kalshi's real fees, The Leap's ≥3-trading-day rule, two universes (core-2024 / all-2024) (generated) |
+| `data/irregularities.json` + `IRREGULARITIES.md` | 37 flagged irregularities/discrepancies with severities and actions (Node items 1–12 + 23–37; Python-track items 13–22); the lint fails if the table and the JSON drift apart |
 | `src/` | Zero-dependency Node engines: fee schedule, market backtests, poll backtest, contest engine + strategies, no-fabrication lint |
 | `scripts/*.py` | Python toolkit: Kalshi collector, source validator, backtester, contest engine, site-data sync |
-| `test/` + `scripts/*.mjs` | 25 Node tests; `run-backtests`, `run-contest`, `build-site`, `collect-kalshi`, `lint-verified` |
+| `test/` + `scripts/*.mjs` | 45 Node tests (incl. an offline end-to-end replay that must reproduce the live capture byte-for-byte); `run-backtests`, `run-contest`, `build-site`, `collect-kalshi`, `collect-senate-2024`, `crosscheck-collectors`, `lint-verified`, `render-check` |
 | `LIMITATIONS.md` / `NEXT_SESSION.md` | Honest constraints + proposed work plan (Python toolkit track) |
-| `ROADMAP.md` | R1–R8 roadmap (Node pipeline track) |
+| `ROADMAP.md` | R1–R10 roadmap with statuses (generated from `data/roadmap.json`) |
 
 ## Quick start
 
 Node pipeline (no dependencies, Node ≥ 18, no network needed):
 
 ```bash
-npm test          # 25 tests
+npm test          # 61 tests
 npm run lint      # no-fabrication provenance lint
 npm run backtest  # regenerate data/backtest-results.json
 npm run contest   # regenerate data/contest-results.json
 npm run build-site# regenerate src/data/site-data.js (the site)
-npm run pipeline  # backtest + contest + build-site
+npm run pipeline  # backtest + contest + build-site + headless render check
+node scripts/collect-kalshi.mjs --replay   # rebuild today's tracker outputs offline from the saved universe (no network)
+```
+
+Networked (what the daily workflow runs):
+
+```bash
+node scripts/collect-kalshi.mjs            # registry + open universe + tracker + settlements + calibration + consistency
+node scripts/collect-senate-2024.mjs       # one-off: 2024 per-state Senate markets (re-run with workflow input senate2024=true)
+python scripts/fetch_kalshi.py --no-raw --compact --compact-max 2000 --series-file data/kalshi/universe/series.json
+node scripts/crosscheck-collectors.mjs     # agreement report between the two captures
 ```
 
 Python toolkit (stdlib only, Python 3.10+):
@@ -81,40 +91,64 @@ python scripts/sync_site_data.py              # refresh docs/data for the toolki
    are explicitly marked wherever they appear. Simulated outputs are never presented as findings.
 4. **Attribution is tested:** `finalEquity = startingCapital + fee-aware realizedPnl` (Node);
    paper-engine equity math is covered end-to-end (Python).
-5. **Irregularities are published, never normalized** — [IRREGULARITIES.md](IRREGULARITIES.md) (25 items).
+5. **Irregularities are published, never normalized** — [IRREGULARITIES.md](IRREGULARITIES.md) (37 items).
+6. **Two independent collectors, one truth.** The Node events feed and the Python markets feed are captured
+   minutes apart and compared every run (`tracker/collector-crosscheck.json`); 2026-09-19: last price within
+   2¢ on 99.9–100% of the 1,852 overlapping tickers across the day's four runs, lifetime volume never decreased.
 
-## 2024 headline results (verified, reproducible)
+## Headline results (verified, reproducible)
 
-- **Markets vs outcome** (PRES-2024-DJT, CONTROLH-2024-R, CONTROLS-2024-R — all settled YES,
-  matching official results): mean Brier at T-7 = **0.128** (chance baseline 0.25); a T-7 hold of the
-  winning side earned **+0.33 $/contract**.
+### 2024 — 39 settled Kalshi markets vs official outcomes
+- **Day-before price** (T-1, 37 markets priced): mean Brier **0.077**, mean log-loss 0.271; the market
+  favourite won **34 of 37 (91.9%)**. At T-7 (25 markets): Brier **0.104**, favourite right 23/25 (92%).
+- **Core 3** (PRES-2024-DJT, CONTROLH-2024-R, CONTROLS-2024-R — all settled YES): Brier at T-7 = 0.128, a
+  T-7 hold of the winning side earned +0.33 $/contract. **Per-state Senate (36 markets, 18 states)**: Brier
+  at T-1 = 0.068; a naive "hold every YES" earned ≈ 0 $/contract (the D and R legs cancel — as they should).
 - **Polls vs outcome**: final 538 national average (2024-09-12) = **Harris +2.82pp**; official outcome
-  = **Trump +1.45pp** (2-party popular, FEC) → **4.3pp miss, wrong direction**. The market traded
-  Trump 50–63¢ through October and never crossed 50¢ the wrong way after the nomination.
-- **Contest (2024 cycle, $100k each)**: @breakout-bandit **+23.1%** (late-week consensus),
-  @fader-flipper **+13.9%**, @shock-surfer +0.7%, @favorite-cash +0.1%, @momentum-mule −3.1%,
-  @poll-anchor **−13.3%** (the poll-information thesis failed 2024). @longshot-lotto and
-  @yield-yak went unranked — no qualifying price ever appeared in the universe (reported, not hidden).
+  = **Trump +1.45pp** (2-party popular, FEC) → **4.3pp miss, wrong direction**. The market traded Trump
+  50–63¢ through October and never crossed 50¢ the wrong way after the nomination.
+- **Contest, all-2024 universe (39 markets, ≥3 trading days to rank)**: @breakout-bandit **+30.0%**,
+  @momentum-mule +10.3%, @longshot-lotto +3.5%, @yield-yak +3.1%, @favorite-cash −2.8%, @fader-flipper −3.3%,
+  @shock-surfer −4.6%; @poll-anchor unranked (1 trading day; would be −13.3% — the poll-information thesis
+  failed 2024). On the original **core-2024** universe only @fader-flipper (+13.9%) and @momentum-mule
+  (−3.1%) qualify under the ≥3-day rule.
+
+### 2026 — live (first collection day 2026-09-19)
+- **Universe**: 4,166 Elections|Politics series, 4,094 open events (3,210 tagged U.S. election), 24,367
+  markets of which 10,711 are traded and still open (day's last run, 01:48 UTC); **207 traded rungs nested in
+  open events were already settled** (finalized Jul 13–Sep 18; 174 no / 33 yes) — recorded as settlements, kept out of the daily rows
+  and out of the scorer (irregularity #37). Chamber control: Senate D 59–60¢, House D 89–90¢.
+- **Polls vs market** (poll layer, logistic k=4.5 labelled): Maine CNN/SSRS D+3 ⇒ 66% vs Kalshi 67.5%;
+  Michigan CNN/SSRS D+3 ⇒ 66% vs 64.5%; Texas Emerson D+1 ⇒ 56% vs 57.5% but ReconMR-Siena D+6 ⇒ 79%
+  (the largest single-poll gap, −21.6pp); Iowa: Emerson R+5 ⇒ 25%, Suffolk R+4 ⇒ 29%, NYT/Siena (Jul) R+2 ⇒ 39%
+  vs market 39.5% — the market sits inside the poll spread (irregularity #34 updated). NYT/Siena July toplines
+  for AK/IA/NC/OH are carried with a *review* flag (n/MoE pages blocked).
+- **Ratings vs market**: Kalshi prices **7 of 13** rated-competitive Senate seats outside the bands implied by
+  *both* Cook (Sep 15) and Inside Elections (Sep 17) ratings, all toward Democrats (AK, ME, NH, GA, NC, KS,
+  NE-Osborn) — published for review (irregularity #33), scored after Nov 3.
+- **Exit polls**: the 2026 product is *The Voter Poll by SSRS* (Edison/NEP exit poll + AP VoteCast merged);
+  no 2026 data exists yet, so none is used.
+- **Calibration tracker**: 207 settlements on file, **0 scoreable** (all settled before the first capture; a
+  post-settlement price is not a forecast) — the empty state is published as such, with the look-ahead guard
+  visible in `calibration.json` (`scoreableMarkets`, `observationsExcludedAsLookAhead`).
 
 ## Known limitations (summary)
 
-The 2024 market backtest covers 3 markets (universe expansion is ROADMAP R2); the 538 poll archive
-ends 2024-09-12 (late window reuses the anchor with age disclosed); the election-day (Nov 5) candle
-bar was not captured; the full 2026 live universe is enumerated by the collectors on networked runs
-(first networked run exceeded the initial 30-min job timeout — raised to 90 min; the rate-limited
-Kalshi universe sweep takes ~25+ min). The Iowa Electronic Markets entry originally cited the wrong
-domain (`iem.isu.edu` = Iowa State); corrected 2026-09-19 to the live University of Iowa properties
-(`iem.uiowa.edu/iem/` + markets board `iemweb.biz.uiowa.edu/markets/`, both fetched — irregularity
-#26, resolved). Python track: no live Kalshi snapshot yet (daily `collect.yml` starts after
-merge), fees/slippage not modeled in the paper engine. Full lists: [ROADMAP.md](ROADMAP.md) and
-[LIMITATIONS.md](LIMITATIONS.md).
+One collection day; the live scorer stays empty until markets that were priced *before* settlement settle
+(first big batch after Nov 3 2026). The 2024 backtest is one cycle (39 markets, most Senate markets opened
+only in October 2024); the hand-captured core-2024 markets in `src/kalshi-data.js` lack the Nov 5
+election-day candle bar (the automated Senate captures include it); the 538 poll archive ends 2024-09-12.
+The poll layer is hand-transcribed (15 entries, 4 flagged *review*) and not a poll average; the poll→probability
+mapping and the rating bands are labelled heuristics. Some official results hosts and the NYT toplines pages
+block automated fetchers. Full lists: [ROADMAP.md](ROADMAP.md) and [LIMITATIONS.md](LIMITATIONS.md).
 
 ## Roadmap (next session(s))
 
-R1 daily collection · R2 2024 per-state Senate markets · R3 live 2026 calibration tracker ·
-R4 continuous poll layer · R5 standing cross-market discrepancy monitor · R6 2020 poll cycle ·
-R7 strategy population + 2-cycle tournament · R8 provenance hardening (SHA-256). Details:
-[ROADMAP.md](ROADMAP.md) and [NEXT_SESSION.md](NEXT_SESSION.md).
+R1 daily collection **live** · R2 2024 Senate markets **done** (39-market backtest) · R3 live calibration
+**running, look-ahead-guarded, empty until pre-settlement prices settle** · R4 poll layer **started** (15
+verified entries; next: per-race poll averages, weekly release check, NYT toplines n/MoE by hand) · R5 consistency monitor **live** · R6 2020 poll cycle ·
+R7 more entrants + 2-cycle tournament · R8 provenance hashes **done** · R9 Polymarket collector ·
+R10 cross-host API comparison. Details: [ROADMAP.md](ROADMAP.md) and [NEXT_SESSION.md](NEXT_SESSION.md).
 
 ## GitHub Pages setup
 

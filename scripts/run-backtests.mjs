@@ -8,6 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runAllBacktests } from '../src/backtest.js';
 import { runPollBacktest } from '../src/poll-backtest.js';
+import { SENATE_2024_LOADED } from '../src/kalshi-data-2024.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const market = runAllBacktests();
@@ -17,10 +18,11 @@ const out = {
   generatedAt: new Date().toISOString(),
   inputs: [
     { path: 'src/kalshi-data.js', source: 'https://api.elections.kalshi.com/trade-api/v2/historical/... (per-market capturedFrom fields inside)' },
+    { path: 'data/kalshi/historical/senate-2024.json', loaded: SENATE_2024_LOADED, source: 'https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=SENATE{ST} (+ /historical/markets/{ticker}/candlesticks; per-object capturedFrom inside)' },
     { path: 'data/polls/538-national-averages.csv', source: 'https://github.com/fivethirtyeight/data/blob/master/polls/2024-averages/presidential_general_averages_2024-09-12_uncorrected.csv' },
     { path: 'data/outcomes/verified-outcomes.json', source: 'FEC/Wikipedia-API/congress.gov (see per-outcome sources)' },
   ],
-  note: 'Deterministic backtest of captured Kalshi 2024 markets vs official settlements, and 538 archived poll averages vs outcome. All inputs carry provenance (src/kalshi-data.js, data/polls/).',
+  note: 'Deterministic backtest of captured Kalshi 2024 markets (core 3 + per-state Senate) vs official settlements, and 538 archived poll averages vs outcome. All inputs carry provenance.',
   marketBacktest: market,
   pollBacktest: polls,
 };
@@ -29,5 +31,7 @@ const dir = join(ROOT, 'data');
 mkdirSync(dir, { recursive: true });
 writeFileSync(join(dir, 'backtest-results.json'), JSON.stringify(out, null, 2) + '\n');
 console.log('wrote data/backtest-results.json');
+console.log('universe:', JSON.stringify(market.universe));
 console.log('aggregate:', JSON.stringify(market.aggregate, null, 1));
+console.log('favorite accuracy:', JSON.stringify(market.favoriteAccuracy));
 console.log('poll anchor 2024-09-12 margin:', polls.anchorMargin, 'pp (final outcome +', polls.finalOutcomeMargin, 'pp)');

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { runStrategy, STARTING_CAPITAL, FILL_CAP_OF_BAR_VOLUME } from '../src/contest/engine.js';
+import { runStrategy, STARTING_CAPITAL, FILL_CAP_OF_BAR_VOLUME, MIN_TRADING_DAYS_TO_RANK } from '../src/contest/engine.js';
 import { STRATEGIES } from '../src/contest/strategies.js';
 import { MARKETS_2024, CANDLESTICKS_2024 } from '../src/kalshi-data.js';
 
@@ -60,12 +60,16 @@ test('fill cap: no fill exceeds 10% of the bar volume', () => {
   }
 });
 
-test('zero-trade strategies are unranked (The Leap convention)', () => {
+test('ranking follows The Leap: 0-trade entrants and entrants under the minimum active days are unranked, with a stated reason', () => {
   const results = runAll();
   for (const r of results) {
-    assert.equal(r.ranked, r.trades > 0);
+    const expectRanked = r.trades > 0 && r.tradingDays >= MIN_TRADING_DAYS_TO_RANK;
+    assert.equal(r.ranked, expectRanked, `${r.username}: trades=${r.trades} days=${r.tradingDays}`);
+    if (!r.ranked) assert.ok(typeof r.unrankedReason === 'string' && r.unrankedReason.length > 0);
+    else assert.equal(r.unrankedReason, null);
+    assert.ok(r.tradingDays <= r.trades);
   }
-  // longshot-lotto and yield-yak genuinely had no qualifying price in the 2024 captured universe
+  // longshot-lotto and yield-yak genuinely had no qualifying price in the 2024 captured core universe
   const unranked = new Set(results.filter((r) => !r.ranked).map((r) => r.username));
   assert.ok(unranked.has('longshot-lotto'));
   assert.ok(unranked.has('yield-yak'));
