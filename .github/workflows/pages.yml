@@ -1,11 +1,11 @@
-name: Deploy GitHub Pages
+name: Deploy GitHub Pages (manual fallback)
 
+# NOTE: the repo's live site deploys from the main branch ROOT
+# (Settings → Pages → Source: Deploy from a branch), which also serves docs/
+# as a subdirectory. This workflow exists only as a manual fallback if the
+# project ever switches Pages to GitHub Actions deployment. Keep it
+# workflow_dispatch-only so it never fights the branch deployment.
 on:
-  push:
-    branches: [main]
-    paths: [docs/**, data/**, contest/**, IRREGULARITIES.md, LIMITATIONS.md, NEXT_SESSION.md]
-  schedule:
-    - cron: "5 13 * * *" # daily rebuild after the Kalshi snapshot (12:20 UTC)
   workflow_dispatch:
 
 permissions:

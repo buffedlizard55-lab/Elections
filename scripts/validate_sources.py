@@ -124,6 +124,7 @@ def main(argv: list[str] | None = None) -> int:
                     live_results.append(r)
 
     report = {
+        "source": "scripts/validate_sources.py (project-generated validation artifact for data/master_sources.json)",
         "checked_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "entries": len(sources),
         "csv_consistent": csv_consistent,

@@ -180,9 +180,11 @@ def main(argv: list[str] | None = None) -> int:
 
     raw_path = out_dir / f"markets_raw_{stamp}.json"
     filt_path = out_dir / f"markets_politics_{stamp}.json"
-    raw_path.write_text(json.dumps({"fetched_at": started, "endpoint": f"{args.base_url}/markets",
+    raw_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets", "capturedAt": started,
+                                    "fetched_at": started, "endpoint": f"{args.base_url}/markets",
                                     "count": len(markets), "markets": markets}, indent=1))
-    filt_path.write_text(json.dumps({"fetched_at": started, "status_filter": args.status_filter,
+    filt_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets", "capturedAt": started,
+                                     "fetched_at": started, "status_filter": args.status_filter,
                                      "filter": "client-side keywords + series allowlist (see kalshi_api.json)",
                                      "count": len(filtered), "markets": filtered}, indent=1))
 
