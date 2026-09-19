@@ -1,33 +1,59 @@
-# Next Session — Proposed Work Plan
+# Next Session — start here
 
-Ordered by dependency. Every item keeps the project's rules: verified sources only, no hallucinations, irregularities logged.
+State at the end of session 3 (2026-09-19): R1 live, R2 done (39-market backtest), R3 running (empty until
+settlements), R4 started (12 verified poll entries), R5 live, R8 done. Master list 73 sources, 36 irregularities,
+42 tests. Full status: `ROADMAP.md` / `data/roadmap.json`.
 
-## P0 — Go live with Kalshi data (unblocks everything)
+Every item keeps the project's rules: free official/trusted sources only, fetch before you write, no hallucinations,
+irregularities logged with an action, nothing imputed.
 
-1. Confirm the `collect.yml` workflow produced the first `data/kalshi/markets_politics_*.json` snapshot after merge (manual fallback: run `python scripts/fetch_kalshi.py` from a normal network and commit it).
-2. Inspect live response fields; confirm `category`/`series` taxonomy; populate `data/kalshi_series_allowlist.json`; tighten the politics filter with evidence.
-3. Verify `/events` docs page; upgrade collector from best-effort if confirmed.
-4. Re-run `python scripts/validate_sources.py --check-live` and resolve IRR-003, IRR-007.
+## P0 — Confirm the loop is alive (10 minutes)
 
-## P1 — First real backtest
+1. `gh run list --workflow daily-collection.yml` — the 12:30 UTC cron must have run on `main` after the merge and
+   committed `collect: kalshi YYYY-MM-DD`. If not: check Actions → the job log; the opt-out variable
+   `DISABLE_DAILY_COLLECTION` must be unset.
+2. `git log --stat -1 -- data/kalshi/tracker/daily/` — each day should add ≈ 1 MB (one CSV) and small diffs to
+   `index.json` / `latest.json` / `series.json`. If a day's commit is > 5 MB, something regressed (irregularity #30).
+3. Open the live site → **Tracker**: days collected should equal the number of bot commits; the Node-vs-Python
+   agreement share should stay ≥ 99%.
 
-5. Pull 2024 certified results (FEC + House Clerk statistics + NARA) into `backtest/actuals_2024.csv` with per-row official source URLs.
-6. Collect final 2024 forecasts (Crystal Ball closing ratings, Split Ticket model, selected poll averages with archived URLs) into `backtest/predictions_2024.csv`.
-7. Run `scripts/backtest.py`, publish report, file any `extreme-miss` findings in `IRREGULARITIES.md`.
+## P1 — Poll layer (R4) — the highest-value manual work
 
-## P2 — Contest Season 1 (real prices)
+4. Transcribe (fetch the release first, then write): Suffolk Iowa Aug 26 2026 (`suffolk.edu … polls/other-states`),
+   NYT/Siena Jul 1 2026 AK/IA/NC/OH toplines (`sri.siena.edu/2026/07/01/…`), UNH Survey Center NH Senate,
+   Marquette Wisconsin, any new CNN/SSRS or Quinnipiac state polls. Add to `data/polls/poll-layer-2026.json`
+   (`stateRaces`) with `kalshiEvent` / `kalshiDemTicker` so `src/poll-layer.js` compares them automatically.
+5. Re-check the Iowa gap (irregularity #34) once ≥ 3 Iowa polls exist; write a simple per-race poll average
+   (window, n, pollsters disclosed) in `poll-layer.js` and show it next to the market.
+6. Add a weekly "poll release check" script that fetches the pollster index pages (Emerson, Marquette, Siena,
+   Quinnipiac, UNH, Suffolk, SSRS news) and diffs headlines into a review list — never auto-admit numbers.
+7. After Nov 3 2026: The Voter Poll by SSRS data will exist — verify the release page before using any of it.
 
-8. Finalize Season 1 window; snapshot Kalshi politics markets daily (scheduled workflow).
-9. Implement the 8 strategies against REAL snapshots (poll-average inputs from Quinnipiac/Marist/YouGov/Ipsos releases).
-10. Add Kalshi fee schedule (verify from official fee page first) + basic slippage; re-run leaderboard.
+## P2 — Backtest & calibration
 
-## P3 — Batch 2 sources (20 more, same bar)
+8. When the first tracked markets settle (`tracker/settlements.json` count > 0), review
+   `tracker/calibration.json → byLead/pooled` and put the first numbers in README/Tracker prose.
+9. Extend `collect-senate-2024.mjs` to 2024 governor/House series if they exist on Kalshi (same pattern:
+   `/historical/markets?series_ticker=…`), and add the 2020 poll-only cycle (R6).
+10. Run the two-collector cross-check once against `external-api.kalshi.com` (R10, irregularity #31).
 
-11. Verify and admit: Ballotpedia polling indexes, Cook (free boundary), NYT/Siena (access terms), The Argument URL, KFF polling, CNN/SSRS, ABC/WaPo, NBC/WSJ, Fox News polls, Suffolk/USA Today, Emerson, EAC EAVS deep links, FEC API (`api.open.fec.gov` — verify), state SOS results portals (shortlist), ICPSR direct entry, CCES cumulative DOIs, Economist model page, Decision Desk HQ (verify), 270toWin (verify — aggregator fit), Polymarket (out-of-scope? decide + document).
-12. Monthly re-verification cron (`validate_sources.py --check-live` + freshness heuristics).
+## P3 — Sources (same bar: fetch, describe what you saw, link)
 
-## P4 — Site & automation
+11. Candidates not yet admitted: New Hampshire SoS (find a fetchable URL — 403 on the results page), Minnesota SoS,
+    Nebraska SoS, Georgia results host `results.sos.ga.gov` as its own entry, Suffolk Iowa release page,
+    NYT/Siena state toplines PDFs, Polymarket Gamma API docs (for R9), Kalshi `/events` docs page.
+12. Re-verify entries older than 60 days (the `verifiedOn` column) — sources drift (538, Monmouth, Gallup did).
 
-13. Scheduled GitHub Action: daily Kalshi snapshot → contest re-mark → `sync_site_data.py` → Pages deploy.
-14. Backtest report pages + calibration charts (static SVG, no external deps).
-15. Theories page: publish testable hypotheses with pre-registered evaluation criteria (no post-hoc story-telling).
+## P4 — Contest & site
+
+13. Add entrants that only make sense on the wide universe (incumbent-defender, seat-count basis, volatility
+    scaling) — executable `decide()` rules only, thesis stated up front (R7).
+14. Site: when `tracker.days > 1`, the Tracker page draws price-history charts automatically; check they render.
+    Consider a per-state race page once the poll layer has ≥ 3 polls per race.
+
+## Python track (kept in sync)
+
+15. `fetch_kalshi.py` now writes a 2,000-market sample; `docs/data/kalshi_latest.json` mirrors its log. If the
+    toolkit site should show prices, extend `sync_site_data.py` to read `data/kalshi/universe/latest.json`.
+16. Open re-checks: RCP freshness (#15) — resolved 2026-09-19 (page current); AP VoteCast 2026 (#17) — resolved
+    (superseded by The Voter Poll); Harvard Dataverse homepage (#19) — still to re-fetch.

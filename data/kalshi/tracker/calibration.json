@@ -1,10 +1,10 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-19T00:47:56.967Z",
+ "capturedAt": "2026-09-19T01:14:24.011Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every (day, market) observation of settled markets.",
  "settledMarkets": 0,
- "trackedMarkets": 10914,
+ "trackedMarkets": 10915,
  "observationDays": [
   "2026-09-19"
  ],
