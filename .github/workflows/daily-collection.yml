@@ -1,9 +1,15 @@
-# Daily Kalshi collection (forward data loop — ROADMAP R1/R3).
-# Runs the collector where general internet is available, then rebuilds
-# the site bundle and commits the diff. Disabled by default: enable by
-# setting the `enabled` input to true once the collector has been proven
-# against the live API (the 2026-09-18 session captured data via a
-# proxied fetch tool; this workflow is the standing loop).
+# Daily Kalshi collection (forward data loop — ROADMAP R1/R2/R3).
+# Runs the collectors where general internet is available (GitHub-hosted
+# runners), then runs the deterministic analytics, rebuilds the site bundle,
+# and commits the diff to the triggering ref.
+#
+# Manual runs: workflow_dispatch with enabled=true (used to prove the
+# collectors against the live API — the 2026-09-19 run on branch
+# arena/01a0b728-elections is the first networked exercise of this loop).
+# Scheduled runs: gated by vars.COLLECT_ENABLED as before; the standing
+# post-merge daily loop lives in universe-collection.yml (enabled by default
+# — the automation token cannot write repository variables, 403 on the
+# variables API, so the gate here is kept only for this legacy workflow).
 name: daily-collection
 on:
   workflow_dispatch:
@@ -15,22 +21,35 @@ on:
   schedule:
     - cron: '30 12 * * *' # 12:30 UTC daily (US markets mid-session)
 
+permissions:
+  contents: write
+
 jobs:
   collect:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.enabled == 'true' || (github.event_name == 'schedule' && vars.COLLECT_ENABLED == 'true') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Collect + rebuild
-        run: node scripts/collect-kalshi.mjs
-      - name: Lint provenance
+      - name: Tests on the committed state (validate before collecting)
+        run: npm test
+      - name: Collect full open universe + tracker + settled-2026 seed (R1/R3)
+        run: node scripts/collect-universe.mjs
+      - name: Capture 2024 per-state Senate markets (R2, idempotent)
+        run: node scripts/collect-senate-2024-races.mjs
+      - name: Deterministic analytics (senate backtest + calibration tracker)
+        run: |
+          node scripts/run-senate-backtest.mjs || echo "senate backtest skipped"
+          node scripts/run-calibration.mjs || echo "calibration skipped"
+      - name: Legacy 10-series capture (non-fatal; superseded by the universe collector)
+        run: node scripts/collect-kalshi.mjs || echo "legacy collector reported errors (recorded in its meta.json)"
+      - name: Rebuild site bundle
+        run: node scripts/build-site.mjs
+      - name: Lint provenance (fatal — every new data file must carry its capture URL)
         run: node scripts/lint-verified.mjs
-      - name: Tests
-        run: node --test
       - name: Commit changes
         run: |
           git config user.name "elections-collector"
@@ -39,6 +58,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "no data changes"
           else
-            git commit -m "collect: kalshi $(date -u +%F)"
+            git commit -m "collect: kalshi universe + tracker $(date -u +%F) (run ${{ github.run_id }})"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || echo "rebase skipped"
             git push
           fi

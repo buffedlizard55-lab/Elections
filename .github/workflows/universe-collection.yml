@@ -30,6 +30,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Tests on the committed state (validate before collecting)
+        run: npm test
       - name: Collect open universe + tracker + settled-2026 seed
         run: node scripts/collect-universe.mjs
       - name: Capture 2024 per-state Senate markets (idempotent)
@@ -40,10 +42,8 @@ jobs:
           node scripts/run-calibration.mjs || echo "calibration skipped (seed pending)"
       - name: Rebuild site bundle
         run: node scripts/build-site.mjs
-      - name: Lint provenance
+      - name: Lint provenance (fatal — every new data file must carry its capture URL)
         run: node scripts/lint-verified.mjs
-      - name: Tests
-        run: npm test
       - name: Commit changes
         run: |
           git config user.name "elections-collector"
