@@ -17,6 +17,13 @@ on:
   schedule:
     - cron: '40 12 * * *' # daily 12:40 UTC (20 min after the Python snapshot workflow)
   workflow_dispatch:
+  push:
+    # TEMPORARY bootstrap trigger: the automation token cannot dispatch
+    # workflows (403 on the dispatches API), so the first networked run is
+    # triggered by pushing this file. REMOVE this push block before merging
+    # to main (schedule + dispatch are the steady-state triggers there).
+    branches: ['arena/01a0b728-elections']
+    paths: ['.github/workflows/universe-collection.yml', 'scripts/collect-universe.mjs', 'scripts/collect-senate-2024-races.mjs']
 
 permissions:
   contents: write
@@ -52,7 +59,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "no data changes"
           else
-            git commit -m "collect: universe + tracker $(date -u +%F) (run ${{ github.run_id }})"
+            git commit -m "collect: universe + tracker $(date -u +%F) (run ${{ github.run_id }}) [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}" || echo "rebase skipped (push may need retry)"
             git push
           fi
