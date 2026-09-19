@@ -94,7 +94,7 @@ python scripts/sync_site_data.py              # refresh docs/data for the toolki
 5. **Irregularities are published, never normalized** — [IRREGULARITIES.md](IRREGULARITIES.md) (37 items).
 6. **Two independent collectors, one truth.** The Node events feed and the Python markets feed are captured
    minutes apart and compared every run (`tracker/collector-crosscheck.json`); 2026-09-19: last price within
-   2¢ on 99.9% of overlapping tickers, lifetime volume never decreased.
+   2¢ on 99.9–100% of the 1,852 overlapping tickers across the day's four runs, lifetime volume never decreased.
 
 ## Headline results (verified, reproducible)
 
@@ -115,8 +115,8 @@ python scripts/sync_site_data.py              # refresh docs/data for the toolki
 
 ### 2026 — live (first collection day 2026-09-19)
 - **Universe**: 4,166 Elections|Politics series, 4,094 open events (3,210 tagged U.S. election), 24,367
-  markets of which 10,709 are traded and still open; **207 traded rungs nested in open events were already
-  settled** (finalized Jul 13–Sep 18; 174 no / 33 yes) — recorded as settlements, kept out of the daily rows
+  markets of which 10,711 are traded and still open (day's last run, 01:48 UTC); **207 traded rungs nested in
+  open events were already settled** (finalized Jul 13–Sep 18; 174 no / 33 yes) — recorded as settlements, kept out of the daily rows
   and out of the scorer (irregularity #37). Chamber control: Senate D 59–60¢, House D 89–90¢.
 - **Polls vs market** (poll layer, logistic k=4.5 labelled): Maine CNN/SSRS D+3 ⇒ 66% vs Kalshi 67.5%;
   Michigan CNN/SSRS D+3 ⇒ 66% vs 64.5%; Texas Emerson D+1 ⇒ 56% vs 57.5% but ReconMR-Siena D+6 ⇒ 79%
