@@ -74,7 +74,10 @@ const provenance = (url) => ({ capturedFrom: url, capturedAt: now.toISOString(),
 
 async function main() {
   console.log(`[collect] ${DRY ? 'DRY RUN' : 'LIVE'} ${day} base=${API}`);
-  const meta = { date: day, series: {}, errors: [] };
+  // meta.json carries the same provenance fields as every other artifact —
+  // the no-fabrication lint walks ALL data/*.json and a provenance-less meta
+  // file failed the fatal lint on the first networked run (run #6, 2026-09-19).
+  const meta = { ...provenance(API), date: day, series: {}, errors: [] };
   for (const series of SERIES) {
     try {
       const [live, hist] = await Promise.all([collectSeriesMarkets(series), collectHistoricalMarkets(series)]);
@@ -89,6 +92,9 @@ async function main() {
       meta.errors.push(`${series}: ${e.message}`);
       console.error(`  ${series}: FAILED ${e.message}`);
     }
+    // Pace between series: this step runs right after the 36-minute universe
+    // sweep, and unpaced bursts got HTTP 429 on 3 of 10 series in run #6.
+    await new Promise((r) => setTimeout(r, 450));
   }
   if (!DRY) {
     try {

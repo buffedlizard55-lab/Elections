@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: write # upload the collected data as an artifact when a run fails
 
 jobs:
   collect:
@@ -56,3 +57,13 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}" || echo "rebase skipped (push may need retry)"
             git push
           fi
+      - name: Preserve collected data on failure (nothing gets lost twice — run #6 lesson)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collected-data-${{ github.run_id }}
+          path: |
+            data/
+            src/data/
+          retention-days: 14
+          if-no-files-found: ignore

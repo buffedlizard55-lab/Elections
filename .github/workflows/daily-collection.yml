@@ -28,10 +28,11 @@ on:
     # REMOVE this push block before merging to main — the steady-state daily
     # loop is universe-collection.yml (schedule, enabled by default).
     branches: ['arena/01a0b728-elections']
-    paths: ['.github/workflows/daily-collection.yml', 'scripts/collect-universe.mjs', 'scripts/collect-senate-2024-races.mjs', 'src/kalshi-live.js']
+    paths: ['.github/workflows/daily-collection.yml', 'scripts/collect-universe.mjs', 'scripts/collect-senate-2024-races.mjs', 'scripts/collect-kalshi.mjs', 'src/kalshi-live.js']
 
 permissions:
   contents: write
+  actions: write # upload the collected data as an artifact when a run fails
 
 jobs:
   collect:
@@ -71,3 +72,13 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}" || echo "rebase skipped"
             git push
           fi
+      - name: Preserve collected data on failure (nothing gets lost twice — run #6 lesson)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collected-data-${{ github.run_id }}
+          path: |
+            data/
+            src/data/
+          retention-days: 14
+          if-no-files-found: ignore
