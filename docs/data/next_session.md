@@ -17,6 +17,10 @@ irregularities logged with an action, nothing imputed.
    `index.json` / `latest.json` / `series.json`. If a day's commit is > 5 MB, something regressed (irregularity #30).
 3. Open the live site → **Tracker**: days collected should equal the number of bot commits; the Node-vs-Python
    agreement share should stay ≥ 99%.
+3a. Do not push to the branch while a collection run is in progress if you can avoid it: the bot rebases and keeps
+   its own generated files on conflict (fixed after run 35413487160 lost its commit to that race), but a bundle
+   built with older `scripts/build-site.mjs` code can then be published against newer `src/site/app.js` until the
+   next run; if that happens, run `npm run pipeline` and push.
 
 ## P1 — Poll layer (R4) — the highest-value manual work
 

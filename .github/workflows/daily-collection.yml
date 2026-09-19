@@ -23,7 +23,11 @@
 #   - the commit step runs whenever the job was not cancelled, but if the
 #     pipeline / lint / tests did not succeed it restores the generated site
 #     bundles (src/data, docs/data) from HEAD before committing, so raw data is
-#     never lost and a broken bundle is never published to GitHub Pages.
+#     never lost and a broken bundle is never published to GitHub Pages;
+#   - if a human push lands mid-run, the bot rebases and keeps its own version
+#     of any conflicting generated file (run 35413487160 on 2026-09-19 lost its
+#     commit to exactly this race before the -X theirs / --abort retry existed;
+#     its artifacts stayed available for 7 days).
 name: daily-collection
 on:
   schedule:
@@ -129,8 +133,12 @@ jobs:
             exit 0
           fi
           git commit -m "collect: kalshi $(date -u +%F) (run ${{ github.run_id }})"
+          # Push race: a human commit may land while this job runs. Rebase onto it; if a generated file
+          # conflicts (site bundle, tracker files) keep THIS run's version (-X theirs during a rebase means
+          # the commit being replayed, i.e. the bot commit) — those files are regenerated every run anyway.
           for i in 1 2 3; do
-            git pull --rebase origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}" && exit 0
+            if git pull --rebase -X theirs origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
             sleep 10
           done
           echo "push failed after retries" && exit 1
