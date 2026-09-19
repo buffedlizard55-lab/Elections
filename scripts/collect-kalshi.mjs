@@ -31,7 +31,7 @@
  * It never rewrites verified historical files. Failures record to the day's
  * meta.json and exit non-zero so the workflow commits nothing partial.
  *
- * Usage: node scripts/collect-kalshi.mjs [--dry-run] [--date YYYY-MM-DD] [--replay]
+ * Usage: node scripts/collect-kalshi.mjs [--dry-run] [--date YYYY-MM-DD] [--replay] [--force]
  *   --replay  offline: rebuild today's outputs from the saved universe/series.json +
  *             universe/latest.json (no network; settlement scan skipped). Used for format
  *             migrations and tests.
@@ -47,6 +47,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const DRY = argv.includes('--dry-run');
 const REPLAY = argv.includes('--replay');
+const FORCE = argv.includes('--force'); // bypass the shrink guard (a universe < 50% of yesterday's is treated as a failed capture)
 const dateArg = argv.indexOf('--date') >= 0 ? argv[argv.indexOf('--date') + 1] : null;
 
 const CATEGORIES = ['Elections', 'Politics'];
@@ -232,16 +233,20 @@ async function scanSettlements(index, openTickers, settlements, meta) {
       continue;
     }
     for (const m of page.markets || []) {
-      const settled = (m.status === 'finalized' || m.status === 'settled') && (m.result === 'yes' || m.result === 'no');
-      if (!settled) { pending += 1; continue; }
+      const finalized = m.status === 'finalized' || m.status === 'settled';
+      if (!finalized) { pending += 1; continue; }
+      const binary = m.result === 'yes' || m.result === 'no';
       const ix = index.tickers[m.ticker] || {};
+      // Non-binary outcomes (voided / scalar / '') are recorded so they are not re-queried forever;
+      // src/calibration.js scores only result === yes|no.
       settlements.markets[m.ticker] = {
+        nonBinary: binary ? undefined : true,
         ticker: m.ticker,
         event_ticker: m.event_ticker,
         series_ticker: ix.series_ticker || '',
         title: m.title,
         yes_sub_title: m.yes_sub_title || '',
-        result: m.result,
+        result: binary ? m.result : (m.result || 'void'),
         status: m.status,
         close_time: m.close_time,
         settlement_ts: m.settlement_ts || null,
@@ -290,12 +295,19 @@ async function main() {
     const savedSeries = readJson(join(UNIVERSE_DIR, 'series.json'), null);
     const savedLatest = readJson(join(UNIVERSE_DIR, 'latest.json'), null);
     if (!savedSeries || !savedLatest) throw new Error('--replay needs universe/series.json and universe/latest.json');
-    registry = Object.fromEntries(savedSeries.series.map((x) => [x.ticker, { ...x, us_election: isUsElectionSeries(x) }]));
+    const srcTable = savedSeries.settlementSources || [];
+    registry = Object.fromEntries(savedSeries.series.map((x) => {
+      const { settlement_source_ids, ...rest } = x;
+      const settlement_sources = x.settlement_sources || (settlement_source_ids || []).map((i) => srcTable[i]).filter(Boolean);
+      return [x.ticker, { ...rest, settlement_sources, us_election: isUsElectionSeries(x) }];
+    }));
+    const savedIndex = loadIndex(join(TRACKER_DIR, 'index.json'));
     meta.replayOf = savedLatest.capturedAt;
     meta.seriesByCategoryFilter = savedLatest.counts ? { replay: savedLatest.counts.seriesInRegistry } : {};
     meta.eventsTotalOpenOnExchange = savedLatest.counts ? savedLatest.counts.exchangeWideOpenEvents : null;
     // saved events are already projected; recompute the derived flag and make sure market rows are complete
-    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => ({ title: m.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || 'active', open_time: m.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m })) }));
+    // titles/open_time are not in the compact listing: take them from the saved index (exact), else synthesise
+    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => { const ix = savedIndex.tickers[m.ticker] || {}; return { title: m.title || ix.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || 'active', open_time: m.open_time || ix.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m }; }) }));
     meta.eventsKept = projected.length;
     console.log(`  replaying ${projected.length} saved events captured ${savedLatest.capturedAt}`);
   } else {
@@ -308,7 +320,20 @@ async function main() {
     const events = await collectOpenUniverse(registry, meta);
     projected = projectEvents(events, registry);
   }
-  const { rows, descriptors, untraded } = dailyRows(projected);
+  // Shrink guard: a partial capture must never overwrite yesterday's universe as if it were the truth.
+  // (Pagination that stops early, an API outage mid-run, or a category rename would all show up here.)
+  const prevLatest = readJson(join(UNIVERSE_DIR, 'latest.json'), null);
+  if (!REPLAY && prevLatest && prevLatest.counts && prevLatest.counts.openEvents > 0) {
+    const ratio = projected.length / prevLatest.counts.openEvents;
+    meta.shrinkRatioVsPrevious = Number(ratio.toFixed(3));
+    if (ratio < 0.5 && !FORCE) {
+      throw new Error(`universe shrank to ${projected.length} events from ${prevLatest.counts.openEvents} (${(ratio * 100).toFixed(0)}%); refusing to overwrite — rerun with --force if this is real`);
+    }
+  }
+  const daily = dailyRows(projected);
+  const { rows, descriptors } = daily;
+  // In replay the saved events list only traded markets; the untraded count is carried per event.
+  const untraded = REPLAY ? projected.reduce((s, ev) => s + (ev.markets_untraded || 0), 0) : daily.untraded;
   const openMarketsTotal = rows.length + untraded;
   meta.openMarkets = openMarketsTotal;
   meta.openMarketsTraded = rows.length;
@@ -325,7 +350,7 @@ async function main() {
     const k = ev.series_ticker;
     bySeries[k] = bySeries[k] || { series_ticker: k, title: registry[k] ? registry[k].title : '', category: ev.category, us_election: ev.us_election ? 1 : 0, events: 0, markets: 0, traded: 0, volume: 0 };
     bySeries[k].events += 1;
-    bySeries[k].markets += ev.markets.length;
+    bySeries[k].markets += REPLAY && ev.markets_total != null ? ev.markets_total : ev.markets.length;
     bySeries[k].traded += ev.markets.filter(isTraded).length;
     bySeries[k].volume += ev.markets.reduce((s, m) => s + (m.volume || 0), 0);
   }
@@ -365,7 +390,7 @@ async function main() {
     mutually_exclusive: ev.mutually_exclusive,
     markets_total: ev.markets.length,
     markets_untraded: ev.markets.filter((m) => !isTraded(m)).length,
-    markets: ev.markets.filter(isTraded).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest })),
+    markets: ev.markets.filter(isTraded).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, volume_24h: m.volume_24h, open_interest: m.open_interest, liquidity: m.liquidity })),
   }));
 
   const latest = {

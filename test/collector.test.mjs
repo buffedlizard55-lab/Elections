@@ -202,3 +202,16 @@ test('captured tracker files, when present, carry provenance and the documented 
   const idx = JSON.parse(readFileSync('data/kalshi/tracker/index.json', 'utf8'));
   assert.ok(Array.isArray(idx.tickers) || typeof idx.tickers === 'object');
 });
+
+// ---------- offline end-to-end: the collector's main path over the saved universe ----------
+
+test('collect-kalshi.mjs --replay --dry-run runs the whole pipeline offline over the saved universe', async () => {
+  if (!existsSync('data/kalshi/universe/latest.json')) return;
+  const { execFileSync } = await import('node:child_process');
+  const out = execFileSync(process.execPath, ['scripts/collect-kalshi.mjs', '--replay', '--dry-run'], { encoding: 'utf8', timeout: 120000 });
+  assert.match(out, /replaying \d+ saved events/);
+  assert.match(out, /markets: \d+ \(\d+ traded, \d+ priced\)/);
+  assert.match(out, /dry run — nothing written/);
+  const m = out.match(/markets: (\d+) \((\d+) traded/);
+  assert.ok(Number(m[1]) >= Number(m[2]) && Number(m[2]) > 0);
+});
