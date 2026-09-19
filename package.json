@@ -12,7 +12,7 @@
     "contest": "node scripts/run-contest.mjs",
     "build-site": "node scripts/build-site.mjs",
     "collect": "node scripts/collect-kalshi.mjs",
-    "pipeline": "npm run backtest && npm run contest && npm run build-site",
+    "pipeline": "npm run backtest && npm run contest && npm run build-site && node scripts/render-check.cjs",
     "lint": "node scripts/lint-verified.mjs",
     "test": "node --test test/*.test.mjs"
   },

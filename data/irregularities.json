@@ -1,141 +1,240 @@
 {
-  "title": "Irregularities & discrepancies flagged for review",
-  "method": "Anything observed that is inconsistent, stale, impossible, or a structural risk gets a numbered entry here and is never silently normalized. Severity: high = affects trust in a result; medium = affects interpretation; low = cosmetic/monitor.",
-  "items": [
-    {
-      "id": 1,
-      "severity": "high",
-      "area": "Institution",
-      "title": "Election Assistance Commission has had NO serving commissioners since July 2026",
-      "detail": "Two of three commissioners were dismissed by the president and the remaining one resigned, leaving the federal election-administration commission without a member (Wikipedia, fetched 2026-09-18; Ballotpedia corroborates leadership history). Its guidance output is at risk until reconstituted.",
-      "action": "Treat EAC guidance with caution; no numeric data in this repo depends on it.",
-      "source": "https://en.wikipedia.org/wiki/Election_Assistance_Commission"
-    },
-    {
-      "id": 2,
-      "severity": "medium",
-      "area": "Kalshi API",
-      "title": "Shared API host returned STALE last_price_dollars / updated_time for CONTROLH-2026",
-      "detail": "On 2026-09-18 the public API on api.elections.kalshi.com showed last_price 0.10 with updated_time 2026-07-14 for CONTROLH-2026-R, while the live web page showed an 89/91 book. The order-book fields (yes_bid/yes_ask) were current. This session's snapshot uses the order-book side and flags the divergence.",
-      "action": "Consumers must prefer yes_bid/yes_ask (or the orderbook endpoint) over last_price_dollars for live markets; re-verified on every collect run.",
-      "source": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=3"
-    },
-    {
-      "id": 3,
-      "severity": "medium",
-      "area": "Third-party tracker",
-      "title": "covers.com 2026-08-27 guide is internally inconsistent on Senate odds (R 57% in prose, 53% in its own table)",
-      "detail": "The same page's narrative text says Republicans 57% to keep the Senate while its table shows R 53% / D 47%. Unreconciled source data.",
-      "action": "Excluded from the master source list; kept only as a historical cross-check point with both figures recorded.",
-      "source": "https://www.covers.com/betting/prediction-sites/guides/midterm-election-odds-tracker"
-    },
-    {
-      "id": 4,
-      "severity": "medium",
-      "area": "Polling ecosystem",
-      "title": "Gallup ended presidential approval tracking (Feb 2026) and horse-race election polling (2015)",
-      "detail": "After ~90 years, Gallup no longer polls presidential approval (final measure Dec 2025: 36%) and will not 'publish assessments of individual political figures' (NYT 2026-02-11; CNN 2026-02-12). Any 2026 analysis citing 'Gallup approval' is using stale series.",
-      "action": "Gallup is included as a historical series only; 2026 approval comparisons use CNN Poll of Polls (39%) and Quinnipiac (33%, 2026-09).",
-      "source": "https://www.nytimes.com/2026/02/11/us/politics/gallup-poll-presidential-approval-ratings-trump.html"
-    },
-    {
-      "id": 5,
-      "severity": "medium",
-      "area": "Polling ecosystem",
-      "title": "Monmouth University Polling Institute ceased operations 2025-07-01",
-      "detail": "The institute that published the October 2024 generic-ballot polls used in this repo no longer exists (Ballotpedia, fetched 2026-09-18). Its 2024-2025 releases are historical-only.",
-      "action": "Monmouth data used with its cessation noted; no forward reliance.",
-      "source": "https://ballotpedia.org/Monmouth_University_Polling_Institute"
-    },
-    {
-      "id": 6,
-      "severity": "medium",
-      "area": "Forecasting ecosystem",
-      "title": "FiveThirtyEight website shut down 2025-03-05 (Disney/ABC); archive lives on GitHub",
-      "detail": "538 the site was dissolved on 2025-03-05 with ~15 layoffs; Silver kept the model IP (now Silver Bulletin). The 2024 polling data used here comes from the GitHub archive, whose final national general-average snapshot is dated 2024-09-12 — there is NO late-October/November 538 series in the public archive.",
-      "action": "The poll-vs-market backtest reuses the 2024-09-12 anchor and reports its age in days per comparison point; late-window poll absence is itself a flagged data gap.",
-      "source": "https://en.wikipedia.org/wiki/FiveThirtyEight"
-    },
-    {
-      "id": 7,
-      "severity": "low",
-      "area": "Kalshi web UI",
-      "title": "Hub page percentages can sum to ≠100% (mixed bid/ask display)",
-      "detail": "Examples captured 2026-09-18: MI Secretary of State 95%+14%, KS Attorney General 57%+49%, NH State Senate 75%+30%, MO SD8 80%+31%. The web renders opposite-side quotes from each market's own book, so pairs need not complement.",
-      "action": "This repo stores both the web percentages (as rendered) and, where captured, the raw API bid/ask; consumers should not average web % pairs across markets.",
-      "source": "https://kalshi.com/category/elections/midterms"
-    },
-    {
-      "id": 8,
-      "severity": "high",
-      "area": "Kalshi market design",
-      "title": "KXMUSKCHALLENGERS-26: 'At least 3' (13%) priced ABOVE 'At least 1' (12%) — logically impossible",
-      "detail": "The event 'How many Elon-backed challengers will win seats in Congress this year?' shows the 'at least 3' outcome at 13% while 'at least 1' sits at 12%. Since {at least 3} ⊂ {at least 1}, this ordering cannot hold for consistent probabilities. Likely a thin market with a wide/stale book.",
-      "action": "Flagged, not traded in any strategy; monitor for self-correction. If it persists into the 2026 cycle it is a candidate for a market-design anomaly study.",
-      "source": "https://kalshi.com/category/elections/midterms"
-    },
-    {
-      "id": 9,
-      "severity": "low",
-      "area": "Universe coverage",
-      "title": "34 of 35 Senate seats have tradeable Kalshi markets; Louisiana market is thin; 66 of 435 House districts individually priced",
-      "detail": "predictionmarketspicks.com (2026-09-13) counts 34/35 Senate seats with markets (claims none for LA; the hub does show a thin kxsenatela-26nov — unresolved, recorded both ways) and only 66 competitive House districts with individual markets. The rest are priced only via chamber seat-count and balance-of-power markets.",
-      "action": "The collector script (scripts/collect-kalshi.mjs) enumerates the full live universe every run; thin/missing markets are reported, not imputed.",
-      "source": "https://predictionmarketspicks.com/midterms-2026"
-    },
-    {
-      "id": 10,
-      "severity": "medium",
-      "area": "Regulatory",
-      "title": "Kalshi event contracts: state-vs-CFTC jurisdiction conflict is unresolved",
-      "detail": "CFTC is the exclusive federal regulator (KalshiEX v. CFTC 2024 political-contracts win; CFTC dropped appeal May 2025; Third Circuit 2026-04-06 sports win), but NV/NJ/MD sent cease-and-desist letters and S.D. Ohio (2026-03-09) ruled sports event contracts are NOT swaps in that district. Political contracts (this repo's layer) are the more settled branch, but the regulatory surface is moving.",
-      "action": "Documented; no numeric reliance. Re-checked each session.",
-      "source": "https://www.cftc.gov"
-    },
-    {
-      "id": 11,
-      "severity": "low",
-      "area": "Data capture",
-      "title": "Election-day (2024-11-05) candlestick bar was not captured for the 2024 backtest markets",
-      "detail": "The historical candlestick fetch used end_ts=1730851200 (2024-11-05T00:00Z), so the last captured bar is the Nov 4 trading day (bars end at midnight ET). Settlement outcomes come from the official market objects, so backtest conclusions are unaffected, but the final-day price path is missing from the charts.",
-      "action": "Collectors re-fetch with end_ts = settlement_ts + 86400; until then the site labels the last point as '2024-11-04 (last captured bar)'.",
-      "source": "https://docs.kalshi.com/api-reference/market/get-market-candlesticks.md"
-    },
-    {
-      "id": 12,
-      "severity": "low",
-      "area": "Modeling assumption",
-      "title": "Poll margin -> win probability uses a logistic mapping (k=4.5) that is a labeled assumption, not a published 538 probability",
-      "detail": "538's public archive publishes margins, not probabilities. This repo maps margin m to p = 1/(1+exp(-m/4.5)) (the scaling 538 used in its 2020 national model) and labels every use as 'modeled mapping'.",
-      "action": "Sensitivity: at k=3 the same 2024-09-12 anchor (Harris +2.82) implies 31% for Trump instead of 35%; the poll-vs-market gap conclusion is unchanged.",
-      "source": "https://github.com/fivethirtyeight/data"
-    },
-    {
-      "id": 23,
-      "severity": "medium",
-      "area": "Data source availability",
-      "title": "OpenElections (Harvard Dataverse) site is offline — the openelections.org domain is for sale (fetched 2026-09-19)",
-      "detail": "Fetch of https://www.openelections.org/ on 2026-09-19 returned a GoDaddy 'domain for sale' listing instead of the dataset site. The master list entry 'harvard-dataverse' points to dataverse.harvard.edu, which is live and unaffected; the OpenElections datasets should be reached there (or via the MEDSL dataverse).",
-      "action": "Do not cite openelections.org; use dataverse.harvard.edu datasets with DOIs. Re-check domain status each session.",
-      "source": "https://forsale.godaddy.com/forsale/openelections.org"
-    },
-    {
-      "id": 24,
-      "severity": "low",
-      "area": "Polling ecosystem",
-      "title": "U.S. Elections Project (UF) migrated — electproject.org is a stub now pointing to the UF Election Lab (fetched 2026-09-19)",
-      "detail": "electproject.org (Google Sites) states: 'My voter turnout data and analyses have moved to the UF Election Lab (election.lab.ufl.edu/voter-turnout/). All data here supersedes data posted on the old US Elections Project site.'",
-      "action": "Use election.lab.ufl.edu as the canonical VEP-turnout source (master entry 'uf-election-lab'); electproject.org kept for historical pages only.",
-      "source": "https://www.electproject.org/"
-    },
-    {
-      "id": 25,
-      "severity": "low",
-      "area": "Polling ecosystem",
-      "title": "Edison Research acquired by SSRS (2025) — edisonresearch.com now redirects to ssrs.com/edison-research-at-ssrs (fetched 2026-09-19)",
-      "detail": "'In 2025, SSRS acquired Edison Research, gaining nearly three decades of experience measuring audio, media, and consumer behavior, as well as a deep background in election research.' Whether the national exit-poll operation will run at the 2026 midterms under the new ownership is not yet stated on the page.",
-      "action": "Treat 2026 exit-poll sourcing as provisional; confirm the 2026 exit-poll operation and methodology before using exit-poll numbers in any backtest.",
-      "source": "https://ssrs.com/edison-research-at-ssrs/"
-    }
-  ]
+ "title": "Irregularities & discrepancies flagged for review",
+ "method": "Anything observed that is inconsistent, stale, impossible, or a structural risk gets a numbered entry here and is never silently normalized. Severity: high = affects trust in a result; medium = affects interpretation; low = cosmetic/monitor.",
+ "items": [
+  {
+   "id": 1,
+   "severity": "high",
+   "area": "Institution",
+   "title": "Election Assistance Commission has had NO serving commissioners since July 2026",
+   "detail": "Two of three commissioners were dismissed by the president and the remaining one resigned, leaving the federal election-administration commission without a member (Wikipedia, fetched 2026-09-18; Ballotpedia corroborates leadership history). Its guidance output is at risk until reconstituted.",
+   "action": "Treat EAC guidance with caution; no numeric data in this repo depends on it.",
+   "source": "https://en.wikipedia.org/wiki/Election_Assistance_Commission"
+  },
+  {
+   "id": 2,
+   "severity": "medium",
+   "area": "Kalshi API",
+   "title": "Shared API host returned STALE last_price_dollars / updated_time for CONTROLH-2026",
+   "detail": "On 2026-09-18 the public API on api.elections.kalshi.com showed last_price 0.10 with updated_time 2026-07-14 for CONTROLH-2026-R, while the live web page showed an 89/91 book. The order-book fields (yes_bid/yes_ask) were current. This session's snapshot uses the order-book side and flags the divergence.",
+   "action": "Consumers must prefer yes_bid/yes_ask (or the orderbook endpoint) over last_price_dollars for live markets; re-verified on every collect run.",
+   "source": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&limit=3"
+  },
+  {
+   "id": 3,
+   "severity": "medium",
+   "area": "Third-party tracker",
+   "title": "covers.com 2026-08-27 guide is internally inconsistent on Senate odds (R 57% in prose, 53% in its own table)",
+   "detail": "The same page's narrative text says Republicans 57% to keep the Senate while its table shows R 53% / D 47%. Unreconciled source data.",
+   "action": "Excluded from the master source list; kept only as a historical cross-check point with both figures recorded.",
+   "source": "https://www.covers.com/betting/prediction-sites/guides/midterm-election-odds-tracker"
+  },
+  {
+   "id": 4,
+   "severity": "medium",
+   "area": "Polling ecosystem",
+   "title": "Gallup ended presidential approval tracking (Feb 2026) and horse-race election polling (2015)",
+   "detail": "After ~90 years, Gallup no longer polls presidential approval (final measure Dec 2025: 36%) and will not 'publish assessments of individual political figures' (NYT 2026-02-11; CNN 2026-02-12). Any 2026 analysis citing 'Gallup approval' is using stale series.",
+   "action": "Gallup is included as a historical series only; 2026 approval comparisons use CNN Poll of Polls (39%) and Quinnipiac (33%, 2026-09).",
+   "source": "https://www.nytimes.com/2026/02/11/us/politics/gallup-poll-presidential-approval-ratings-trump.html"
+  },
+  {
+   "id": 5,
+   "severity": "medium",
+   "area": "Polling ecosystem",
+   "title": "Monmouth University Polling Institute ceased operations 2025-07-01",
+   "detail": "The institute that published the October 2024 generic-ballot polls used in this repo no longer exists (Ballotpedia, fetched 2026-09-18). Its 2024-2025 releases are historical-only.",
+   "action": "Monmouth data used with its cessation noted; no forward reliance.",
+   "source": "https://ballotpedia.org/Monmouth_University_Polling_Institute"
+  },
+  {
+   "id": 6,
+   "severity": "medium",
+   "area": "Forecasting ecosystem",
+   "title": "FiveThirtyEight website shut down 2025-03-05 (Disney/ABC); archive lives on GitHub",
+   "detail": "538 the site was dissolved on 2025-03-05 with ~15 layoffs; Silver kept the model IP (now Silver Bulletin). The 2024 polling data used here comes from the GitHub archive, whose final national general-average snapshot is dated 2024-09-12 — there is NO late-October/November 538 series in the public archive.",
+   "action": "The poll-vs-market backtest reuses the 2024-09-12 anchor and reports its age in days per comparison point; late-window poll absence is itself a flagged data gap.",
+   "source": "https://en.wikipedia.org/wiki/FiveThirtyEight"
+  },
+  {
+   "id": 7,
+   "severity": "low",
+   "area": "Kalshi web UI",
+   "title": "Hub page percentages can sum to ≠100% (mixed bid/ask display)",
+   "detail": "Examples captured 2026-09-18: MI Secretary of State 95%+14%, KS Attorney General 57%+49%, NH State Senate 75%+30%, MO SD8 80%+31%. The web renders opposite-side quotes from each market's own book, so pairs need not complement.",
+   "action": "This repo stores both the web percentages (as rendered) and, where captured, the raw API bid/ask; consumers should not average web % pairs across markets.",
+   "source": "https://kalshi.com/category/elections/midterms"
+  },
+  {
+   "id": 8,
+   "severity": "high",
+   "area": "Kalshi market design",
+   "title": "KXMUSKCHALLENGERS-26: 'At least 3' (13%) priced ABOVE 'At least 1' (12%) — logically impossible",
+   "detail": "The event 'How many Elon-backed challengers will win seats in Congress this year?' shows the 'at least 3' outcome at 13% while 'at least 1' sits at 12%. Since {at least 3} ⊂ {at least 1}, this ordering cannot hold for consistent probabilities. Likely a thin market with a wide/stale book.",
+   "action": "Flagged, not traded in any strategy; monitor for self-correction. If it persists into the 2026 cycle it is a candidate for a market-design anomaly study.",
+   "source": "https://kalshi.com/category/elections/midterms"
+  },
+  {
+   "id": 9,
+   "severity": "low",
+   "area": "Universe coverage",
+   "title": "34 of 35 Senate seats have tradeable Kalshi markets; Louisiana market is thin; 66 of 435 House districts individually priced",
+   "detail": "predictionmarketspicks.com (2026-09-13) counts 34/35 Senate seats with markets (claims none for LA; the hub does show a thin kxsenatela-26nov — unresolved, recorded both ways) and only 66 competitive House districts with individual markets. The rest are priced only via chamber seat-count and balance-of-power markets.",
+   "action": "The collector script (scripts/collect-kalshi.mjs) enumerates the full live universe every run; thin/missing markets are reported, not imputed.",
+   "source": "https://predictionmarketspicks.com/midterms-2026"
+  },
+  {
+   "id": 10,
+   "severity": "medium",
+   "area": "Regulatory",
+   "title": "Kalshi event contracts: state-vs-CFTC jurisdiction conflict is unresolved",
+   "detail": "CFTC is the exclusive federal regulator (KalshiEX v. CFTC 2024 political-contracts win; CFTC dropped appeal May 2025; Third Circuit 2026-04-06 sports win), but NV/NJ/MD sent cease-and-desist letters and S.D. Ohio (2026-03-09) ruled sports event contracts are NOT swaps in that district. Political contracts (this repo's layer) are the more settled branch, but the regulatory surface is moving.",
+   "action": "Documented; no numeric reliance. Re-checked each session.",
+   "source": "https://www.cftc.gov"
+  },
+  {
+   "id": 11,
+   "severity": "low",
+   "area": "Data capture",
+   "title": "Election-day (2024-11-05) candlestick bar was not captured for the 2024 backtest markets",
+   "detail": "The historical candlestick fetch used end_ts=1730851200 (2024-11-05T00:00Z), so the last captured bar is the Nov 4 trading day (bars end at midnight ET). Settlement outcomes come from the official market objects, so backtest conclusions are unaffected, but the final-day price path is missing from the charts.",
+   "action": "Collectors re-fetch with end_ts = settlement_ts + 86400; until then the site labels the last point as '2024-11-04 (last captured bar)'.",
+   "source": "https://docs.kalshi.com/api-reference/market/get-market-candlesticks.md"
+  },
+  {
+   "id": 12,
+   "severity": "low",
+   "area": "Modeling assumption",
+   "title": "Poll margin -> win probability uses a logistic mapping (k=4.5) that is a labeled assumption, not a published 538 probability",
+   "detail": "538's public archive publishes margins, not probabilities. This repo maps margin m to p = 1/(1+exp(-m/4.5)) (the scaling 538 used in its 2020 national model) and labels every use as 'modeled mapping'.",
+   "action": "Sensitivity: at k=3 the same 2024-09-12 anchor (Harris +2.82) implies 31% for Trump instead of 35%; the poll-vs-market gap conclusion is unchanged.",
+   "source": "https://github.com/fivethirtyeight/data"
+  },
+  {
+   "id": 23,
+   "severity": "medium",
+   "area": "Data source availability",
+   "title": "OpenElections (Harvard Dataverse) site is offline — the openelections.org domain is for sale (fetched 2026-09-19)",
+   "detail": "Fetch of https://www.openelections.org/ on 2026-09-19 returned a GoDaddy 'domain for sale' listing instead of the dataset site. The master list entry 'harvard-dataverse' points to dataverse.harvard.edu, which is live and unaffected; the OpenElections datasets should be reached there (or via the MEDSL dataverse).",
+   "action": "Do not cite openelections.org; use dataverse.harvard.edu datasets with DOIs. Re-check domain status each session.",
+   "source": "https://forsale.godaddy.com/forsale/openelections.org"
+  },
+  {
+   "id": 24,
+   "severity": "low",
+   "area": "Polling ecosystem",
+   "title": "U.S. Elections Project (UF) migrated — electproject.org is a stub now pointing to the UF Election Lab (fetched 2026-09-19)",
+   "detail": "electproject.org (Google Sites) states: 'My voter turnout data and analyses have moved to the UF Election Lab (election.lab.ufl.edu/voter-turnout/). All data here supersedes data posted on the old US Elections Project site.'",
+   "action": "Use election.lab.ufl.edu as the canonical VEP-turnout source (master entry 'uf-election-lab'); electproject.org kept for historical pages only.",
+   "source": "https://www.electproject.org/"
+  },
+  {
+   "id": 25,
+   "severity": "low",
+   "area": "Polling ecosystem",
+   "title": "Edison Research acquired by SSRS (2025) — edisonresearch.com now redirects to ssrs.com/edison-research-at-ssrs (fetched 2026-09-19)",
+   "detail": "'In 2025, SSRS acquired Edison Research, gaining nearly three decades of experience measuring audio, media, and consumer behavior, as well as a deep background in election research.' Whether the national exit-poll operation will run at the 2026 midterms under the new ownership is not yet stated on the page.",
+   "action": "Treat 2026 exit-poll sourcing as provisional; confirm the 2026 exit-poll operation and methodology before using exit-poll numbers in any backtest.",
+   "source": "https://ssrs.com/edison-research-at-ssrs/"
+  },
+  {
+   "id": 26,
+   "severity": "low",
+   "area": "Master list hygiene",
+   "title": "IEM entry pointed at a non-existent host (iem.isu.edu); canonical is iem.uiowa.edu/iem/",
+   "detail": "The 2026-09-19 (session 2) entry recorded 'https://iem.isu.edu/' as the Iowa Electronic Markets URL, copied from a search snippet. Direct fetch 2026-09-19 (session 3): iem.uiowa.edu/iem/ returns 200 (Tippie College of Business); iem.uiowa.edu/iem/markets/ returned HTTP 500 server-side. isu.edu is Iowa State, not the University of Iowa.",
+   "action": "URL corrected in data/sources/master.json, VERIFICATION.md N21/§6a and ROADMAP R8; treat any URL taken from a search snippet as unverified until fetched.",
+   "source": "https://iem.uiowa.edu/iem/"
+  },
+  {
+   "id": 27,
+   "severity": "low",
+   "area": "Kalshi market metadata",
+   "title": "Title typo in a settled market: SENATEAZ-24-D reads 'Will the Democratics win the Arizona Senate race?'",
+   "detail": "Observed in the /historical/markets?series_ticker=SENATEAZ capture (data/kalshi/historical/senate-2024.json). Cosmetic; the result field (yes) and settlement are unaffected.",
+   "action": "Recorded as-is; titles are never edited in captured data.",
+   "source": "https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=SENATEAZ"
+  },
+  {
+   "id": 28,
+   "severity": "medium",
+   "area": "Collector design",
+   "title": "Python collector's default --status-filter 'active,open' relies on the response value being 'active' while the query parameter is status=open",
+   "detail": "Kalshi returns status 'active' for markets requested with status=open (observed 2026-09-19 status_tally_raw). A filter of just 'open' would silently drop everything; the default now includes both and the raw tally is logged so the mismatch is visible.",
+   "action": "Keep both values in the filter; the collector logs status_tally_raw every run.",
+   "source": "data/kalshi/LATEST.json"
+  },
+  {
+   "id": 29,
+   "severity": "low",
+   "area": "Poll layer",
+   "title": "Quinnipiac benchmark was dated to June in session 2; the primary release says July 29",
+   "detail": "The entry quinnipiac-2026-06 (D 48 / R 41 / 11 no opinion) was captured from a PennLive syndication and dated 2026-06. The Quinnipiac 2026-09-10 release PDF (fetched 2026-09-19) attributes those numbers to its 'July 29 poll'.",
+   "action": "Renamed to quinnipiac-2026-07 in data/polls/verified-polls.json and the poll layer; source switched to the primary PDF.",
+   "source": "https://poll.qu.edu/images/polling/us/us09102026_usvi28.pdf"
+  },
+  {
+   "id": 30,
+   "severity": "medium",
+   "area": "Repository operations",
+   "title": "First live collector run committed ~54 MB of data (24,367-row CSV incl. 13,453 never-traded markets; 12 MB index; 16 MB Python dump) and an 8.6 MB site bundle",
+   "detail": "Run 35409758565 (2026-09-19 00:33 UTC) wrote every open market including strike ladders with zero volume and open interest. A daily commit of that size would make the repository unusable within weeks.",
+   "action": "Fixed the same day (commit fa8e053): daily CSV lists traded markets only (volume>0 or open_interest>0; untraded are counted in the meta file), static descriptors moved to tracker/index.json, universe/latest.json lists traded markets per event, Python sample capped at the 2,000 highest-volume markets, site bundle limited to a US-election watchlist (1.1 MB). Steady state ≈ 1 MB/day. The first-day files were re-derived offline from the same capture (--replay).",
+   "source": "https://github.com/buffedlizard55-lab/Elections/actions/runs/35409758565"
+  },
+  {
+   "id": 31,
+   "severity": "low",
+   "area": "Kalshi API",
+   "title": "Kalshi API docs default to external-api.kalshi.com while this project (and the docs' server list) also use api.elections.kalshi.com",
+   "detail": "docs.kalshi.com/api-reference/market/get-markets (fetched 2026-09-19) lists four servers: external-api.kalshi.com, api.elections.kalshi.com, and two demo hosts. Irregularity #2 (stale last_price on the shared host) was observed on api.elections.kalshi.com.",
+   "action": "Open: run the two-collector cross-check once against external-api.kalshi.com (KALSHI_API_BASE env) to see whether the stale-price behaviour is host-specific.",
+   "source": "https://docs.kalshi.com/api-reference/market/get-markets"
+  },
+  {
+   "id": 32,
+   "severity": "medium",
+   "area": "Cross-market consistency",
+   "title": "Kalshi's mutually_exclusive flag does not imply an exhaustive outcome set: 47 flagged events sum well below 1, 46 sum above 1 (2026-09-19)",
+   "detail": "First live consistency run over 4,094 events: e.g. 'LA-04 Democratic nominee?' lists 2 markets summing to 0.08; 'Brazil Gubernatorial Elections: Most Governorships Won' (12 markets) sums to 2.85. Under-sums are coverage notes (unlisted candidates carry the rest); over-sums on a mutually-exclusive set are real inconsistencies (or a wrong flag).",
+   "action": "Consistency monitor now separates -over (high) from -under (info, ≥3 markets); findings carry us_election and volume so US-election, high-volume cases surface first on the site.",
+   "source": "data/kalshi/tracker/discrepancy-watch.json"
+  },
+  {
+   "id": 33,
+   "severity": "medium",
+   "area": "Market vs ratings",
+   "title": "Kalshi prices 7 of 13 rated 2026 Senate races outside the bands implied by BOTH Cook and Inside Elections ratings (all in the Democratic direction)",
+   "detail": "2026-09-19 tracker vs Cook (Sep 15) / Inside Elections (Sep 17): AK D 68.5% (Toss Up / Tilt R), ME D 67.5% (Toss Up / Toss-up), NH D 83.5% (Toss Up / Toss-up), GA D 93.7% (Lean D / Tilt D), NC D 92.4% (Lean D / Tilt D), KS D 26.5% (Likely R / Likely R), NE Osborn (I) 31.5% (Likely R / Likely R). Either the market is ahead of the raters in a D+8–13 generic-ballot environment or it is overconfident; the 2024 backtest cannot distinguish these yet.",
+   "action": "Published in the poll layer (ratingsComparison) for human review; re-evaluated automatically each day. Settlements on Nov 3 2026 will score it.",
+   "source": "data/polls/poll-layer-2026.json"
+  },
+  {
+   "id": 34,
+   "severity": "low",
+   "area": "Poll vs market",
+   "title": "Iowa Senate: Emerson (Aug 31–Sep 1) R+5 implies D ≈ 25% under the project's logistic mapping; Kalshi prices Turek (D) at 39.5%",
+   "detail": "The 14.7-point gap is the largest of the five poll-vs-market comparisons (ME +1.4, MI −1.6/+3.6, TX +2.0). NYT/Siena (Jul 1) had Hinson 48–46 and Suffolk polled Iowa Aug 26 (numbers not yet transcribed), so a single poll's margin is not the whole poll picture.",
+   "action": "Transcribe the Suffolk Iowa release and any later Iowa poll before reading the gap as a market anomaly.",
+   "source": "https://emersoncollegepolling.com/iowa-2026-poll-hinson-leads-turek/"
+  },
+  {
+   "id": 35,
+   "severity": "low",
+   "area": "Site fetchability",
+   "title": "Some official results hosts block automated fetchers: results.enr.clarityelections.com/GA (403), sos.nh.gov election results (403)",
+   "detail": "Observed 2026-09-19 with this session's fetcher. Human browsers are unaffected; automated re-verification of these hosts must use alternative official URLs (results.sos.ga.gov) or a browser-like client.",
+   "action": "Georgia entry points to sos.ga.gov/elections and results.sos.ga.gov; New Hampshire SoS not added until a fetchable official URL is confirmed.",
+   "source": "https://sos.ga.gov/elections"
+  },
+  {
+   "id": 36,
+   "severity": "low",
+   "area": "Site / code defect",
+   "title": "Poll-backtest checkpoints table rendered 'undefined' rows on the published site (bug in src/poll-backtest.js, present since the 2026-09-18 session)",
+   "detail": "runPollBacktest() returned the list of checkpoint DATES instead of the computed comparison objects, so Backtests §3 'Checkpoints (poll archive)' showed empty/undefined cells. The late-window table and the headline poll-vs-outcome numbers were unaffected. Found 2026-09-19 by a headless render check of every site section (undefined/NaN scan).",
+   "action": "Fixed (checkpoints: comparisons); a unit test now asserts the checkpoint shape and the render check runs against the bundle before publishing.",
+   "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/src/poll-backtest.js"
+  }
+ ]
 }

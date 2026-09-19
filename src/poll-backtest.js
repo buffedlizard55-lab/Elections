@@ -131,7 +131,7 @@ export function runPollBacktest() {
     finalOutcome: 'Trump +1.45pp (2-party popular vote; FEC 77,302,580 / 75,017,613)',
     pollAnchorAbsErrorPp: anchorAbsError,
     marketAbsErrorPp: marketAbsError,
-    checkpoints,
+    checkpoints: comparisons, // bug fixed 2026-09-19: the date list (not the comparisons) was being returned, so the site rendered 'undefined' rows
     lateWindow,
   };
 }

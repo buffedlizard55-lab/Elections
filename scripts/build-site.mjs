@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseCsv } from '../src/kalshi-api.js';
+import { compareRacesToMarkets, compareRatingsToMarkets } from '../src/poll-layer.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
@@ -39,7 +40,7 @@ const irregularities = {
   ].sort((a, b) => a.id - b.id),
 };
 const roadmap = read('data/roadmap.json');
-const pollLayer = readOptional('data/polls/poll-layer-2026.json');
+const pollLayerRaw = readOptional('data/polls/poll-layer-2026.json');
 
 // Forward-collection layer (written by scripts/collect-kalshi.mjs on networked runs; absent until the first run)
 const universe = readOptional('data/kalshi/universe/latest.json');
@@ -49,6 +50,8 @@ const discrepancyWatch = readOptional('data/kalshi/tracker/discrepancy-watch.jso
 const settlements = readOptional('data/kalshi/tracker/settlements.json');
 const trackerIndex = readOptional('data/kalshi/tracker/index.json');
 const senate2024 = readOptional('data/kalshi/historical/senate-2024.json');
+const crosscheck = readOptional('data/kalshi/tracker/collector-crosscheck.json');
+const testCount = readdirSync(join(ROOT, 'test')).filter((f) => f.endsWith('.test.mjs')).reduce((n, f) => n + (readFileSync(join(ROOT, 'test', f), 'utf8').match(/^test\(/gm) || []).length, 0);
 
 // Daily tracker history for the site: the implied-probability path of the most-traded open markets
 const dailyDir = join(ROOT, 'data/kalshi/tracker/daily');
@@ -114,6 +117,8 @@ const discrepancySite = discrepancyWatch ? {
   findings: [...discrepancyWatch.findings].sort((a, b) => (b.us_election || 0) - (a.us_election || 0) || (b.severity === 'high') - (a.severity === 'high') || (b.volume || 0) - (a.volume || 0)).slice(0, 60),
 } : null;
 
+const pollLayer = pollLayerRaw ? { ...pollLayerRaw, marketComparison: compareRacesToMarkets(pollLayerRaw, universe), ratingsComparison: compareRatingsToMarkets(pollLayerRaw, universe) } : null;
+
 const senate2024Site = senate2024 ? {
   capturedFrom: senate2024.capturedFrom,
   capturedAt: senate2024.capturedAt,
@@ -152,9 +157,11 @@ const bundle = {
   settlements: settlements ? { capturedAt: settlements.capturedAt, count: Object.keys(settlements.markets).length, markets: settlements.markets } : null,
   tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory } : null,
   senate2024: senate2024Site,
+  crosscheck: crosscheck ? { ...crosscheck, largestLastPriceDifferences: (crosscheck.largestLastPriceDifferences || []).slice(0, 8) } : null,
   meta: {
     project: 'Elections — collect, analyze, project & estimate',
     updated: new Date().toISOString().slice(0, 10),
+    tests: testCount,
     repo: 'https://github.com/buffedlizard55-lab/Elections',
     liveSite: 'https://buffedlizard55-lab.github.io/Elections/',
   },
