@@ -1,58 +1,40 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200",
- "capturedAt": "2026-09-19T00:33:33.364Z",
+ "capturedAt": "2026-09-19T00:45:15.494Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-19",
  "base": "https://api.elections.kalshi.com/trade-api/v2",
  "seriesByCategoryFilter": {
-  "Elections": 1824,
-  "Politics": 2342
+  "replay": 4166
  },
  "errors": [],
- "seriesInRegistry": 4166,
- "eventsPagesFetched": 80,
+ "replayOf": "2026-09-19T00:33:33.364Z",
  "eventsTotalOpenOnExchange": 15906,
  "eventsKept": 4094,
- "seriesSeenByEventCategoryOnly": [
-  "KXAAAGASMAXNY",
-  "KXAAAGASMINNY",
-  "KXBIDENBOOK",
-  "KXCREDITRATING",
-  "KXDEBTGROWTH",
-  "KXGOVTCUTS",
-  "KXUSTESTSMATH",
-  "KXUSTESTSREADING"
- ],
+ "seriesInRegistry": 4166,
  "openMarkets": 24367,
+ "openMarketsTraded": 10914,
+ "openMarketsUntradedNotListed": 13453,
  "openEvents": 4094,
- "openMarketsWithImpliedPrice": 22442,
- "settlementCandidates": 0,
- "settlementsFound": 0,
- "settlementsPending": 0,
+ "openMarketsWithImpliedPrice": 10914,
+ "usElectionEvents": 3210,
+ "settlementScan": "skipped (replay)",
  "api": {
-  "requests": 82,
+  "requests": 0,
   "retries": 0,
-  "bytesDownloaded": 322415922
+  "bytesDownloaded": 0
  },
- "finishedAt": "2026-09-19T00:33:48.113Z",
+ "finishedAt": "2026-09-19T00:45:15.913Z",
  "columns": [
   "date",
   "ticker",
-  "event_ticker",
-  "series_ticker",
-  "category",
-  "mutually_exclusive",
-  "title",
-  "yes_sub_title",
-  "status",
-  "open_time",
-  "close_time",
   "yes_bid",
   "yes_ask",
   "last_price",
   "volume",
   "volume_24h",
   "open_interest",
-  "liquidity"
+  "liquidity",
+  "close_time"
  ]
 }

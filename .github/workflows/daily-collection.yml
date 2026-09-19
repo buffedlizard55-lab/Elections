@@ -12,7 +12,8 @@
 #                                              consistency findings, site bundle
 #   2. node scripts/collect-senate-2024.mjs -> only when the 2024 Senate capture is missing
 #                                              (or forced via workflow_dispatch input)
-#   3. python scripts/fetch_kalshi.py       -> Python-track snapshot log (compact, no raw dump)
+#   3. python scripts/fetch_kalshi.py       -> Python-track independent sample (top 2,000 by volume)
+#      node scripts/crosscheck-collectors.mjs -> tracker/collector-crosscheck.json (agreement report)
 #   4. npm run pipeline + lint + tests      -> regenerated backtest/contest/site outputs
 #   5. commit data/ + src/data/ + docs/data/ back to the branch that ran it
 # Failures leave an *.error.json audit record and never publish partial data.
@@ -31,7 +32,11 @@ on:
     paths:
       - 'scripts/collect-kalshi.mjs'
       - 'scripts/collect-senate-2024.mjs'
+      - 'scripts/crosscheck-collectors.mjs'
+      - 'scripts/fetch_kalshi.py'
       - 'src/kalshi-api.js'
+      - 'src/calibration.js'
+      - 'src/consistency.js'
       - '.github/workflows/daily-collection.yml'
 
 permissions:
@@ -66,9 +71,13 @@ jobs:
         if: ${{ hashFiles('data/kalshi/historical/senate-2024.json') == '' || inputs.senate2024 == 'true' }}
         run: node scripts/collect-senate-2024.mjs
 
-      - name: Python-track snapshot (compact; log only, no raw dump)
+      - name: Python-track snapshot (independent capture; 2,000 highest-volume markets, no raw dump)
         continue-on-error: true
-        run: python scripts/fetch_kalshi.py --out-dir data/kalshi --no-raw --compact --series-file data/kalshi/universe/series.json
+        run: python scripts/fetch_kalshi.py --out-dir data/kalshi --no-raw --compact --compact-max 2000 --series-file data/kalshi/universe/series.json
+
+      - name: Cross-check the two collectors (Node events feed vs Python markets feed)
+        continue-on-error: true
+        run: node scripts/crosscheck-collectors.mjs
 
       - name: Regenerate backtests, contest, site bundle
         run: npm run pipeline

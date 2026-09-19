@@ -149,6 +149,13 @@ def fetch_all_markets(base: str, limit: int, max_markets: int, delay: float, tim
     return markets[:max_markets], meta
 
 
+def _num(v) -> float:
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Collect Kalshi markets (public endpoints).")
     ap.add_argument("--base-url", default=DEFAULT_BASE)
@@ -169,6 +176,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--series-file", default=None,
                     help="JSON with a 'series' list (data/kalshi/universe/series.json); every ticker in it "
                          "is treated as allowlisted")
+    ap.add_argument("--compact-max", type=int, default=2000,
+                    help="with --compact: keep only the N highest-volume filtered markets (0 = all). "
+                         "The Node collector is the complete record; this file is the independent cross-check sample.")
     ap.add_argument("--mve-filter", default="exclude", choices=["exclude", "only", "none"],
                     help="pass mve_filter to GET /markets (default exclude: drop multivariate combos)")
     args = ap.parse_args(argv)
@@ -224,7 +234,10 @@ def main(argv: list[str] | None = None) -> int:
         slim_keys = ["ticker", "event_ticker", "title", "yes_sub_title", "status", "close_time",
                      "yes_bid_dollars", "yes_ask_dollars", "last_price_dollars", "volume_fp",
                      "open_interest_fp", "_project_filter_reasons"]
-        payload_markets = [{k: m.get(k) for k in slim_keys if k in m} for m in filtered]
+        ranked = sorted(filtered, key=lambda m: -_num(m.get("volume_fp")))
+        if args.compact_max and args.compact_max > 0:
+            ranked = ranked[: args.compact_max]
+        payload_markets = [{k: m.get(k) for k in slim_keys if k in m} for m in ranked]
     else:
         payload_markets = filtered
     filt_path.write_text(json.dumps({"capturedFrom": f"{args.base_url}/markets?status=open", "capturedAt": started,
@@ -232,7 +245,9 @@ def main(argv: list[str] | None = None) -> int:
                                      "filter": "client-side keywords + series allowlist (see kalshi_api.json)"
                                                + (f" + {series_admitted} series admitted from {args.series_file}" if series_admitted else ""),
                                      "compact": bool(args.compact),
-                                     "count": len(filtered), "markets": payload_markets}, indent=1))
+                                     "compact_max": args.compact_max if args.compact else None,
+                                     "count": len(filtered), "listed": len(payload_markets),
+                                     "markets": payload_markets}, indent=None if args.compact else 1))
 
     log = {
         "run_started_at": started,

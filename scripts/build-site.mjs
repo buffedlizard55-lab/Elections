@@ -65,19 +65,53 @@ for (const f of dailyFiles) {
   }
 }
 
-// Compact universe for the site (drop per-market rules etc.; keep prices)
-const universeSite = universe ? {
-  capturedFrom: universe.capturedFrom,
-  capturedAt: universe.capturedAt,
-  date: universe.date,
-  categories: universe.categories,
-  counts: universe.counts,
-  bySeries: universe.bySeries,
-  topMarkets: universe.topMarkets,
-  events: universe.events.map((e) => ({
-    event_ticker: e.event_ticker, series_ticker: e.series_ticker, category: e.category, title: e.title, sub_title: e.sub_title, mutually_exclusive: e.mutually_exclusive, tags: e.tags,
-    markets: e.markets.map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, title: m.title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest })),
-  })),
+// Compact universe for the site. The full listing lives in data/kalshi/universe/latest.json;
+// the browser gets: counts, per-series totals (US-election series), the top markets, and a
+// watchlist of US-election events (core 2026 series in full, then the highest-volume series),
+// each capped to its 12 most-traded markets.
+const CORE_SERIES_RE = /^(SENATE|CONTROL|KXGOV|KXMAYOR|KXDSENATESEATS|KXRSENATESEATS|KXDHOUSESEATS|KXRHOUSESEATS|KXBALANCEPOWER)/;
+const WATCHLIST_SERIES_MAX = 160;
+const MARKETS_PER_EVENT_MAX = 12;
+const WATCHLIST_EVENTS_MAX = 600;
+const WATCHLIST_MIN_EVENT_VOLUME = 1000; // contracts, lifetime; core-series events are always listed
+let universeSite = null;
+if (universe) {
+  const usSeries = universe.bySeries.filter((s) => s.us_election && s.volume > 0);
+  const watch = new Set(usSeries.filter((s) => CORE_SERIES_RE.test(s.series_ticker)).map((s) => s.series_ticker));
+  for (const s of usSeries) { if (watch.size >= WATCHLIST_SERIES_MAX) break; watch.add(s.series_ticker); }
+  const events = universe.events
+    .filter((e) => e.us_election && watch.has(e.series_ticker) && e.markets.length > 0)
+    .map((e) => {
+      const sorted = [...e.markets].sort((a, b) => (b.volume || 0) - (a.volume || 0));
+      return {
+        event_ticker: e.event_ticker, series_ticker: e.series_ticker, category: e.category, title: e.title, sub_title: e.sub_title, mutually_exclusive: e.mutually_exclusive,
+        markets_total: e.markets_total, markets_untraded: e.markets_untraded, markets_listed: Math.min(sorted.length, MARKETS_PER_EVENT_MAX),
+        volume: sorted.reduce((s, m) => s + (m.volume || 0), 0),
+        markets: sorted.slice(0, MARKETS_PER_EVENT_MAX).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest })),
+      };
+    })
+    .sort((a, b) => b.volume - a.volume)
+    .filter((e) => CORE_SERIES_RE.test(e.series_ticker) || e.volume >= WATCHLIST_MIN_EVENT_VOLUME)
+    .slice(0, WATCHLIST_EVENTS_MAX);
+  universeSite = {
+    capturedFrom: universe.capturedFrom,
+    capturedAt: universe.capturedAt,
+    date: universe.date,
+    categories: universe.categories,
+    counts: universe.counts,
+    bySeries: usSeries.slice(0, 400),
+    topMarkets: universe.topMarkets,
+    watchlist: { seriesCount: watch.size, eventsListed: events.length, eventsMax: WATCHLIST_EVENTS_MAX, minEventVolume: WATCHLIST_MIN_EVENT_VOLUME, marketsPerEventMax: MARKETS_PER_EVENT_MAX, coreSeriesPattern: String(CORE_SERIES_RE) },
+    events,
+  };
+}
+
+// Discrepancy watch: counts + the most relevant findings (US-election first, then by volume)
+const discrepancySite = discrepancyWatch ? {
+  capturedFrom: discrepancyWatch.capturedFrom, capturedAt: discrepancyWatch.capturedAt, date: discrepancyWatch.date, method: discrepancyWatch.method,
+  eventsChecked: discrepancyWatch.eventsChecked, marketsChecked: discrepancyWatch.marketsChecked, counts: discrepancyWatch.counts || {},
+  total: discrepancyWatch.findings.length,
+  findings: [...discrepancyWatch.findings].sort((a, b) => (b.us_election || 0) - (a.us_election || 0) || (b.severity === 'high') - (a.severity === 'high') || (b.volume || 0) - (a.volume || 0)).slice(0, 60),
 } : null;
 
 const senate2024Site = senate2024 ? {
@@ -114,7 +148,7 @@ const bundle = {
   universe: universeSite,
   seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
   calibration,
-  discrepancyWatch,
+  discrepancyWatch: discrepancySite,
   settlements: settlements ? { capturedAt: settlements.capturedAt, count: Object.keys(settlements.markets).length, markets: settlements.markets } : null,
   tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory } : null,
   senate2024: senate2024Site,
