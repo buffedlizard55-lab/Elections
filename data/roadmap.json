@@ -55,12 +55,12 @@
       "id": "R8",
       "priority": 8,
       "title": "Documentation hardening",
-      "detail": "PARTIALLY DONE 2026-09-19: dated per-session sections now exist (2026-09-18 base + 2026-09-19 §6, 21-entry expansion, URL corrections & fetch failures recorded). REMAINING: add SHA-256 hashes of the CSV copies in data/polls/PROVENANCE.md to make byte-level integrity checkable; re-verify iem.isu.edu directly (2026-09-19 fetch failed via sandbox proxy — entry marked verified-via-search).",
+      "detail": "DONE 2026-09-19: dated per-session sections exist (2026-09-18 base + 2026-09-19 §6 + §7 second batch). SHA-256 hashes of the three poll CSV copies are recorded in data/polls/PROVENANCE.md (national-averages c66cf38a…, 2024-polls a95ea024…, 2024-races b28024c5…). iem.isu.edu re-verification RESOLVED: root cause was a wrong domain (ISU ≠ University of Iowa); the correct properties (iem.uiowa.edu/iem/, iemweb.biz.uiowa.edu/markets/) were fetched live and entry 'iem' is now status 'verified' (IRREGULARITIES #26). Master list expanded to 73 entries (20-entry second batch, VERIFICATION.md §7, each verified line-by-line against the official source before adding).",
       "why": "No-hallucination standard: provenance must be auditable by a third party without network access."
     }
   ],
   "limitations": [
-    "Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 session verified 21 additional sources directly, but iem.isu.edu and the IEM 2026 prospectus PDF could not be fetched directly (proxy errors) — that entry is verified-via-search and needs a networked re-check. The full open-market universe still awaits R1.",
+    "Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 sessions verified 41 additional sources (21 + 20; VERIFICATION.md §6/§7) and corrected the IEM entry to its true University-of-Iowa domains, verified live (iem.isu.edu was simply the wrong domain — IRREGULARITIES #26). A few entries remain verified-via-search where the sandbox proxy blocked direct fetches (Suffolk SUPRC landing page, Morning Consult intel tracker, NCSL hub); each is flagged in its own entry. The full open-market universe is being collected by the networked GitHub-runner workflow (R1).",
     "2024 backtest universe = 3 markets (presidency + both chamber controls). Directionally strong (all settled YES on the R side, matching official outcomes), statistically thin.",
     "NO-side prices in captured candles are derived reciprocals (1 - yesClose); the raw API only publishes the YES-side candle history for these series.",
     "Poll data for 2024 ends 2024-09-12 (538 archive cutoff); the poll-vs-market comparison after that date reuses the anchor with its age disclosed.",
