@@ -61,8 +61,8 @@ test('2026 poll layer is consistent with the verified-polls.json anchor file', (
   const qs = p.rows.find((x) => x.id === 'quinnipiac-2026-09');
   assert.equal(qs.results.preferD, qv.results.houseControlD);
   assert.equal(qs.results.preferR, qv.results.houseControlR);
-  const q6v = vp.polls.find((x) => x.id === 'quinnipiac-2026-06');
-  const q6s = p.rows.find((x) => x.id === 'quinnipiac-2026-06');
-  assert.equal(q6s.results.preferD, q6v.results.houseControlD);
-  assert.equal(q6s.results.preferR, q6v.results.houseControlR);
+  const q7v = vp.polls.find((x) => x.id === 'quinnipiac-2026-07');
+  const q7s = p.rows.find((x) => x.id === 'quinnipiac-2026-07');
+  assert.equal(q7s.results.preferD, q7v.results.houseControlD);
+  assert.equal(q7s.results.preferR, q7v.results.houseControlR);
 });
