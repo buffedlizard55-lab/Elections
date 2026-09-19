@@ -13,7 +13,7 @@ on Kalshi's open political/election markets.
 
 | | Node pipeline (primary data engines) | Python toolkit (registry + collectors + validators) |
 |---|---|---|
-| Sources | `data/sources/master.json` — **105 verified entries** (32 on 2026-09-18 + 73 on 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4; 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
+| Sources | `data/sources/master.json` — **125 verified entries** (32 on 2026-09-18 + 93 on 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4 + 20 from session 5; 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda, and 2 session-5 candidates were verified-reachable but declined for absence of current-cycle content — irregularity #53). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
 | Verification log | `VERIFICATION.md` | `data/verification_log.md` |
 | Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/universe/` + `tracker/` (daily, events feed) · `scripts/collect-senate-2024.mjs` → `historical/senate-2024.json` | `scripts/fetch_kalshi.py` → `data/kalshi/markets_politics_latest.json` (independent markets-feed sample, top 2,000) · cross-checked by `scripts/crosscheck-collectors.mjs` |
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
@@ -33,8 +33,8 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, **2026 Markets** (from the daily capture), **2026 Polls** (poll layer vs market vs ratings), **Tracker** (forward loop + calibration + collector cross-check), backtests, contest, sources, irregularities, methodology, roadmap |
 | `docs/` | Toolkit site (served as `/docs/`): 20-source registry browser, Kalshi layer, contest leaderboard, methodology, verification evidence |
 | `data/kalshi/` | `universe/series.json` + `universe/latest.json` (today's registry + open events; per-market `status` when not active), `tracker/daily/YYYY-MM-DD.csv` (traded, not-yet-settled markets, one row per day, with the exchange `status`), `tracker/{index,settlements,calibration,discrepancy-watch,collector-crosscheck,history}.json` (descriptors · official results · look-ahead-guarded scorer · consistency findings · two-collector agreement · one record per run day), `historical/senate-2024.json` (36 settled 2024 Senate markets + 1,269 daily bars), `forward/` (**FULL open-universe capture**: `universe-open.json` 24,150 markets, `tracker.csv` daily bid/ask appends, `settled-2026-candles.json` 400-market candle seed), `historical-2024/senate-races.json` (same 36 Senate markets with candle series for the T-1..T-60 backtest), the 2026-09-18 hand snapshot; core 2024 markets in `src/kalshi-data.js` |
-| `data/sources/master.json` | **Master source list — 105 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note (session 3 added 8 state election authorities, LA County, Emerson, Marquette, Siena, UNH, Suffolk, SSRS Voter Poll, Cook, Inside Elections, NCSL, Kalshi API docs; the late batch added Sabato's Crystal Ball, Marist, Texas Politics Project, YouGov, Ipsos, Morning Consult, OpenSecrets, NIMSP, NASS, DOJ Civil Rights, Roper Center, CRS; **session 4 added 20 more** — FVAP, Wisconsin WEC, Nevada SoS, California SoS, Pennsylvania vote.pa.gov, Virginia Elections, GAO, CES (Tufts), Healthy Elections (MIT archive), VoteView, CIRCLE, Brennan Center, Bipartisan Policy Center, Decision Desk HQ, 270toWin, AtlasIntel, Harris Poll (with the HarrisX distinction), NPR Elections, PBS NewsHour Politics, Saint Anselm SASC) |
-| `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6, §7 and §8: new entries, URL corrections, fetch failures, live-run evidence) |
+| `data/sources/master.json` | **Master source list — 125 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note (session 3 added 8 state election authorities, LA County, Emerson, Marquette, Siena, UNH, Suffolk, SSRS Voter Poll, Cook, Inside Elections, NCSL, Kalshi API docs; the late batch added Sabato's Crystal Ball, Marist, Texas Politics Project, YouGov, Ipsos, Morning Consult, OpenSecrets, NIMSP, NASS, DOJ Civil Rights, Roper Center, CRS; session 4 added 20 more — FVAP, Wisconsin WEC, Nevada SoS, California SoS, Pennsylvania vote.pa.gov, Virginia Elections, GAO, CES (Tufts), Healthy Elections (MIT archive), VoteView, CIRCLE, Brennan Center, Bipartisan Policy Center, Decision Desk HQ, 270toWin, AtlasIntel, Harris Poll (with the HarrisX distinction), NPR Elections, PBS NewsHour Politics, Saint Anselm SASC; **session 5 added 20 more** — Minnesota/NJ/NY/Florida/Oregon/Massachusetts/Illinois election authorities, the American Presidency Project (UCSB), UW–Madison Elections Research Center, UMass Amherst Poll, Muhlenberg MCIPO, the Fox News Poll (Beacon/Shaw), Noble Predictive Insights, State Navigate (the rebranded CNalysis), Metaculus's 2026 midterms hub, Race to the WH, WSJ, Axios, The Texas Tribune and C-SPAN's Campaign 2026 hub) |
+| `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6–§10: new entries, URL corrections, fetch failures, live-run evidence; §10 is the session-5 20-entry batch with its two declined candidates and the Metaculus-vs-Kalshi cross-check) |
 | `data/master_sources.json` | **Live-only registry — 20 entries** (5 government · 5 academic · 6 pollsters · 4 analysis), independently verified 2026-09-18 |
 | `data/outcomes/verified-outcomes.json` | Verified official outcomes (2020/2024 presidency, 2024 Senate & House control) with per-claim sources and Kalshi-settlement cross-checks (all PASS) |
 | `data/polls/` | 538's archived national averages (verbatim GitHub copy; git-blob SHA-1 = upstream + SHA-256 in `PROVENANCE.md`), `verified-polls.json` (verification chains) and `poll-layer-2026.json` (2026 generic-ballot + state-race polls, Cook/Inside ratings, exit-poll status) |
@@ -49,20 +49,20 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 
 ### Master source list: categories and status vocabulary
 
-Every one of the 105 entries carries a `category` (the site groups and filters by it) and a `status`.
+Every one of the 125 entries carries a `category` (the site groups and filters by it) and a `status`.
 Both are fixed vocabularies, enforced by `scripts/lint-verified.mjs` and asserted by
 `test/site-sources.test.mjs`:
 
 | Category | Entries | What belongs here |
 |---|---:|---|
 | Government — federal | 20 | Federal agencies, Congress, the FEC/EAC/NARA, federal archives |
-| Government — state & local | 17 | Secretaries of State, state boards of elections, county election offices |
+| Government — state & local | 24 | Secretaries of State, state boards of elections, county election offices |
 | Official publishers & archives | 1 | Official document publishers (GovInfo) |
-| Academic & university research | 10 | University survey centres, election labs, data archives |
-| Pollsters & survey research | 20 | Survey firms and their published methodology |
-| News outlets & wires | 13 | Wires, broadcasters, newspapers with named election desks |
+| Academic & university research | 12 | University survey centres, election labs, data archives |
+| Pollsters & survey research | 24 | Survey firms and their published methodology |
+| News outlets & wires | 17 | Wires, broadcasters, newspapers with named election desks |
 | Prediction markets & exchange data | 8 | Kalshi/Polymarket/Predictit/IEM data, rules and API docs |
-| Ratings, forecasts & analysis | 15 | Race-rating services, forecasters, aggregators |
+| Ratings, forecasts & analysis | 18 | Race-rating services, forecasters, aggregators |
 | Contest & methodology references | 1 | The Leap contest rules (methodology source, not an election source) |
 
 | Status | Meaning |
@@ -158,6 +158,10 @@ python scripts/sync_site_data.py              # refresh docs/data for the toolki
   NE-Osborn) — published for review (irregularity #33), scored after Nov 3.
 - **Exit polls**: the 2026 product is *The Voter Poll by SSRS* (Edison/NEP exit poll + AP VoteCast merged);
   no 2026 data exists yet, so none is used.
+- **Third layer vs market** (session 5, same-day captures): Metaculus's midterms hub (fetched 2026-09-19)
+  reads **Senate D 51.7% / House D 88.8%** and "House median D +13 seats" while the project's Kalshi capture
+  reads Senate D 59–60¢ and House D 89–90¢ — the two layers agree on the House (≤1pt) but disagree on the
+  Senate by ~8 points. Published for review in VERIFICATION.md §10e, scored after Nov 3.
 - **Calibration tracker**: 207 settlements on file, **0 scoreable** (all settled before the first capture; a
   post-settlement price is not a forecast) — the empty state is published as such, with the look-ahead guard
   visible in `calibration.json` (`scoreableMarkets`, `observationsExcludedAsLookAhead`).

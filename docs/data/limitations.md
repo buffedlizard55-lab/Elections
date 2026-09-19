@@ -63,7 +63,7 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 17. **Fetch-tool provenance.** Captures ran through a proxied fetch tool; some official hosts block it
     (Georgia Clarity results host, NH SoS — irregularity #35). Alternative official URLs are used where found.
-18. **Sources drift.** 105 entries verified across four sessions (five batches); re-verify on a schedule (the daily
+18. **Sources drift.** 125 entries verified across five sessions (six batches; session 5 added 20 on 2026-09-19 and declined two candidates with reasons — irregularity #53); re-verify on a schedule (the daily
     workflow does not re-fetch source pages, so a URL that changes later is caught only by a later session).
 19. **Kalshi API host.** The project uses `api.elections.kalshi.com`; the docs default to
     `external-api.kalshi.com`. Whether the stale-last-price behaviour (irregularity #2) is host-specific is
@@ -89,7 +89,7 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 24. **Point-in-time verification.** The 20 entries added in session 4 were each fetched directly on 2026-09-19 and their
     `verified` fields quote only what was observed that day. Nothing re-checks them automatically; a page that changes
     later is not detected until a session re-verifies it (see #18).
-25. **Categories are labels, not tiers.** Every master-list entry now carries a `category` so the site can group 105
+25. **Categories are labels, not tiers.** Every master-list entry now carries a `category` so the site can group 125
     entries; the assignment is a fixed per-id map reviewed entry-by-entry (`VERIFICATION.md` §9b). A category says how
     this project *files* a source — it makes no claim about reliability, accuracy or tier.
 26. **Fetch-tool reach limits coverage.** Four primary hosts refused this session's proxied fetcher

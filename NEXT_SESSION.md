@@ -1,8 +1,14 @@
-# NEXT_SESSION — handoff after the session-4 merge (PR #6, `arena/01a0bada-elections` → main)
+# NEXT_SESSION — handoff after the session-5 merge (`arena/01a0bb28-elections` → main)
 
-Session 4 (2026-09-19) added **20 newly verified master-list sources**, **10 new irregularities
-(#40–#49)**, a **category taxonomy over the whole registry**, a **rebuilt Sources view on the site**,
-and **3 roadmap items (R11–R13)**. Everything below describes the merged steady state.
+Session 5 (2026-09-19, branch `arena/01a0bb28-elections`) executed the requested "search 20 new
+entries, verify no hallucinations before adding": **22 candidates were fetched and verified, 20 were
+admitted** (7 state election authorities, 2 academic, 4 pollsters, 3 ratings/forecast layers, 4 news
+outlets), **2 were declined with recorded evidence and re-test criteria** (irregularity #53), and
+**4 new irregularities (#50–#53)** were logged — including a near-hallucination caught in flight
+(noblepi.com is a home-inspection company; the pollster is noblepredictiveinsights.com) and the
+cnalysis.com → statenavigate.org rebrand. The registry is now **125 entries**; the suite is
+**71 tests**. Session 4's contributions (20 sources, #40–#49, the category taxonomy, the rebuilt
+Sources view, R11–R13) are all preserved beneath this layer.
 
 ## What is live right now (do not rebuild)
 
@@ -18,16 +24,18 @@ and **3 roadmap items (R11–R13)**. Everything below describes the merged stead
   commit-with-rebase-retry. The former `universe-collection.yml` (12:40 UTC) was **deleted** at
   merge — its steps run inside this workflow now. Job timeout 90 min. Cron only fires on the
   **default branch**, so work must reach `main` to keep the loop running.
-- **Master source list**: `data/sources/master.json` = **105 entries** (base 53 + session-3 20 +
-  late batch 12 unique + **session-4 20**; 8 institutions verified in two 2026-09-19 batches were
-  merged into single entries with labelled second-batch addenda). 73 entries carry
-  `verifiedOn: 2026-09-19`. Every entry now also carries a **`category`** (9 values, tally published
-  in the file's `categories` array) — `scripts/lint-verified.mjs` fails on unknown categories, a
-  tally mismatch, duplicate ids or duplicate urls, and on a missing `notes` field for any entry
-  verified after 2026-09-18. `VERIFICATION.md` §6/§7/§8/§9 are the audit logs (N-labels are
-  batch-local; master.json ids are canonical). **Session 4's evidence is §9 (N42–N61) with §9a
-  cross-checks, §9b the taxonomy, §9c what was NOT added and why, §9d reversals of §8 deferrals.**
-- **Irregularities**: **49 items** (`data/irregularities.json`, ids 1–12, 23–49) mirrored in
+- **Master source list**: `data/sources/master.json` = **125 entries** (base 53 + session-3 20 +
+  late batch 12 unique + session-4 20 + **session-5 20**; 8 institutions verified in two 2026-09-19
+  batches were merged into single entries with labelled second-batch addenda). 93 entries carry
+  `verifiedOn: 2026-09-19`. Every entry carries a **`category`** (9 values, tally published in the
+  file's `categories` array) — `scripts/lint-verified.mjs` fails on unknown categories, a tally
+  mismatch, duplicate ids or duplicate urls, and on a missing `notes` field for any entry verified
+  after 2026-09-18. `VERIFICATION.md` §6/§7/§8/§9/§10 are the audit logs. **Session 5's evidence is
+  §10** — §10a the 20 entries line by line (each tying its Kalshi-relevant markets to quotes read
+  from the project's own capture), §10b method/quote policy (two `verified-via-search` entries:
+  `oregon-sos`, `massachusetts-elections`), §10c the declined candidates, §10d the new
+  irregularities, §10e post-batch evidence + the **Metaculus-vs-Kalshi Senate gap**.
+- **Irregularities**: **53 items** (`data/irregularities.json`, ids 1–12, 23–53) mirrored in
   `IRREGULARITIES.md` — the lint compares the md table and the JSON id-for-id. #26 (IEM host) and
   #29 (Quinnipiac mis-dated) stay resolved in both layers. New in session 4: #40 Wisconsin
   `/elections-voting` "Access denied" (root fetches fine), #41 Nevada `/sos-elections` 404 (canonical
@@ -40,7 +48,14 @@ and **3 roadmap items (R11–R13)**. Everything below describes the merged stead
   figures "may not total 100%"), #47 three candidates excluded because the fetcher could not reach
   them (SurveyUSA, HarrisX, CourtListener), #48 selzerco.com is an empty JS shell, #49 method-mixing
   risk when combining differently-weighted polls (Saint Anselm weights by age/gender/geo/education,
-  **not** party).
+  **not** party). New in session 5: #50 **noblepi.com is a home-inspection company** — the pollster
+  Noble Predictive Insights lives at noblepredictiveinsights.com (a wrong-domain admission would have
+  been a silent hallucination), #51 Massachusetts division root 403 (deep page fetches fine) +
+  C-SPAN /elections/ is a 404 path (hub is /campaign/) + SurveyUSA's third fetch failure, #52
+  **cnalysis.com now redirects to statenavigate.org** (the CNalysis brand is retired; its
+  self-reported accuracy stats are recorded as claims), #53 two verified-reachable candidates
+  (Princeton Election Consortium, Split Ticket) DECLINED for absence of current-cycle content, with
+  re-test criteria. #47's detail was extended with the session-5 SurveyUSA re-attempt.
 - **2024 Senate backtest**: two complementary captures, both cross-checked 100% against
   `data/outcomes/senate-2024-official.json` — theirs (`historical/senate-2024.json`, 36 markets +
   1,269 bars, in `npm run backtest`) and the forward loop's (`historical-2024/senate-races.json` →
@@ -56,17 +71,25 @@ and **3 roadmap items (R11–R13)**. Everything below describes the merged stead
 - **Site**: one bundle (`src/data/site-data.js`, ~1.6 MB) with both data layers; sections: overview,
   2026 Markets, 2026 Polls, Tracker, **Forward Loop (full universe)**, Backtests (both Senate views),
   Contest, **Sources (rebuilt)**, Irregularities, Methodology, Roadmap. The Sources view groups all
-  105 entries under their 9 categories, each block headed by the verified date range and a live count
+  125 entries under their 9 categories, each block headed by the verified date range and a live count
   chip, with a toolbar (text search over name/type/verification text, category select,
   verified-date select, reset) and a per-row `<details>` panel carrying the full observed
   verification text plus the manual-review link. `scripts/render-check.cjs` renders every section
-  headlessly (11 sections) and `test/site-sources.test.mjs` (9 tests) asserts the rendered Sources
+  headlessly (11 sections) and `test/site-sources.test.mjs` (10 tests) asserts the rendered Sources
   HTML: toolbar present, one block per category, one row per entry, per-block counts equal to the
-  published tally and to each chip, bundle ⇄ `master.json` parity, and #40–#49 rendered. Suite total:
-  **70 tests** (`npm test`), all green; keep the README count in sync.
+  published tally and to each chip, bundle ⇄ `master.json` parity, #40–#53 rendered, and the
+  session-5 batch checks (all 20 ids present and dated; exactly two `verified-via-search`; any Kalshi
+  quote in a session-5 note must cite the 2026-09-19 capture). Suite total: **71 tests** (`npm test`),
+  all green; keep the README count in sync.
 
 ## P0 — first things next session
 
+0. **Score the session-5 cross-layer spread after Nov 3**: Metaculus Senate D 51.7% vs Kalshi Senate
+   D 59–60¢ (both captured 2026-09-19; they agree on the House, 88.8% vs 89–90¢). The calibration
+   tracker must score both layers' Senate numbers against the official canvass — VERIFICATION §10e
+   records the spread, and no model depends on either number yet. Also ingest the new sources' first
+   poll-layer rows (UMass Amherst national/MA, Muhlenberg PA, NPI AZ, Fox News Poll toplines) with
+   per-row method-family labels (#49).
 1. **Watch the first post-merge cron run** (12:30 UTC daily): confirm ALL steps green, both data
    layers commit, and the artifact contains `data/kalshi/forward/` + `historical-2024/`. Note the bot
    regenerates `src/data/site-data.js`; the Sources view is data-driven, so new master.json entries
@@ -87,13 +110,19 @@ and **3 roadmap items (R11–R13)**. Everything below describes the merged stead
 
 ## P2 — open roadmap items (see ROADMAP.md for all 13)
 
-- **R11 (new)**: re-verify the hosts this session's fetcher could not reach — `surveypoll.com`
-  (SurveyUSA publishes full questionnaires), `thehillx.com` (HarrisX), `courtlistener.com` (use its
+- **R11 (re-verify + admit)**: re-verify the hosts this fetcher still cannot reach — `surveypoll.com`
+  (SurveyUSA, third failure 2026-09-19), `thehillx.com` (HarrisX), `courtlistener.com` (use its
   free REST API), plus Wisconsin `/elections-voting`, Nevada `/sos-elections`, California
-  `elections.cdn.sos.ca.gov`; and admit the **Franklin & Marshall College Poll** after fetching the
-  F&M release itself (this session only found syndicated coverage: Shapiro 50 / Garrity 28, n=546 PA
-  registered voters, fielded Jun 8–14 2026 — already corroborated by captured Kalshi rungs
-  GOVPARTYPA-26-D 0.968/0.973 and -R 0.030/0.033).
+  `elections.cdn.sos.ca.gov`, the Massachusetts division ROOT (403; deep pages fetch fine), and
+  C-SPAN's `/elections/` path (hub is `/campaign/`); re-test the two session-5 declines
+  (**election.princeton.edu**, **split-ticket.org**) per irregularity #53's criteria; and admit the
+  **Franklin & Marshall College Poll** after fetching the F&M release itself (this session only found
+  syndicated coverage: Shapiro 50 / Garrity 28, n=546 PA registered voters, fielded Jun 8–14 2026 —
+  already corroborated by captured Kalshi rungs GOVPARTYPA-26-D 0.968/0.973 and -R 0.030/0.033).
+  Also add a **State Navigate API collector** (`data.statenavigate.com`, free, documented —
+  master entry `state-navigate`) for the downballot layer Kalshi does not price, and a
+  **Metaculus collector** for the midterms hub's community forecasts so the third intelligence layer
+  is scored continuously instead of by hand.
 - **R12 (new)**: ingest the session-4 survey material into the poll layer — Saint Anselm SASC June
   2026 (n=1,614 NH registered voters, ±2.4%, maps to `SENATENH-26`), CIRCLE's 2026 Youth Poll
   (5,000+ ages 18–29, Jan 26–Feb 12 2026) and YESI Senate/Governor rankings, and CES Dataverse DOIs.
@@ -119,8 +148,11 @@ and **3 roadmap items (R11–R13)**. Everything below describes the merged stead
   `surveypoll.com`, `thehillx.com`, `courtlistener.com` (500). The proxy also intermittently 502s —
   record, re-verify later; **never reconstruct a source from memory**.
 - Brand traps: **Harris Poll** (harrispoll.com, consumer research) ≠ **HarrisX** (thehillx.com,
-  political polling); **CES** now lives at Tufts Tisch, not Harvard; **Healthy Elections** is an
-  archived 2020 project. Guessing deep URLs 404s — use the homepage or a search-discovered path.
+  political polling); **noblepi.com** (home inspections) ≠ **noblepredictiveinsights.com** (the
+  pollster); **CNalysis** is retired — it redirects to **statenavigate.org**; **CES** now lives at
+  Tufts Tisch, not Harvard; **Healthy Elections** is an archived 2020 project. Guessing deep URLs
+  404s — use the homepage or a search-discovered path (Oregon's /sos/elections 404 and C-SPAN's
+  /elections/ 404 both cost an extra hop this session; both recorded in #51).
 - Bot commit step rebases with `-X theirs` on generated files; never hand-edit `src/data/site-data.js`,
   `docs/data/*`, `ROADMAP.md` (generated by `scripts/gen-roadmap.mjs` from `data/roadmap.json`).
 - `scripts/render-check.cjs` uses a minimal DOM shim: only `main`/`nav`/`footline` exist and stub

@@ -10,6 +10,9 @@
  *      way scripts/render-check.cjs does it, then asserted at the HTML level: the filter controls
  *      exist, one block per category, one row per entry, and each block's row count equals both the
  *      bundle's category tally and the number shown in its own count chip.
+ *
+ *   Session-5 (2026-09-19, branch arena/01a0bb28-elections) additionally asserts the 20 new
+ *   entries from that batch and the expanded irregularities ledger (#50–#53).
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -32,7 +35,7 @@ const SESSION4_IDS = [
 ];
 
 test('registry: every entry has url + observed verification + date + status + category + notes', () => {
-  assert.ok(Array.isArray(master.sources) && master.sources.length >= 105, `found ${master.sources?.length}`);
+  assert.ok(Array.isArray(master.sources) && master.sources.length >= 125, `found ${master.sources?.length}`);
   for (const s of master.sources) {
     assert.match(s.url, /^https:\/\//, `${s.id}: url`);
     assert.ok(s.verified && s.verified.length > 40, `${s.id}: verified text too short to be an observation`);
@@ -75,7 +78,40 @@ test('registry: the 20 session-4 entries are present, dated 2026-09-19 and verif
     assert.match(s.verified, /Fetched directly 2026-09-19|fetched directly 2026-09-19|Primary PDF fetched directly 2026-09-19/, `${id}: must state it was fetched this session`);
   }
   const dated = master.sources.filter((s) => s.verifiedOn === '2026-09-19').length;
-  assert.equal(dated, 73, `expected 73 entries verified on 2026-09-19, found ${dated}`);
+  assert.equal(dated, 93, `expected 93 entries verified on 2026-09-19, found ${dated}`);
+});
+
+// ---- session-5 batch (2026-09-19, branch arena/01a0bb28-elections): 20 new entries ----
+const SESSION5_IDS = [
+  'minnesota-sos', 'new-jersey-doe', 'new-york-sboe', 'florida-dos-elections', 'oregon-sos',
+  'massachusetts-elections', 'illinois-sbe', 'american-presidency-project', 'uw-madison-erc',
+  'umass-amherst-poll', 'muhlenberg-ciopo', 'fox-news-poll', 'noble-predictive-insights',
+  'state-navigate', 'metaculus', 'race-to-the-wh', 'wsj', 'axios', 'texas-tribune', 'c-span',
+];
+
+test('registry: the 20 session-5 entries are present, dated 2026-09-19, and either verified-direct or verified-via-search', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  for (const id of SESSION5_IDS) {
+    const s = byId[id];
+    assert.ok(s, `missing session-5 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-19', `${id}: verifiedOn`);
+    assert.ok(['verified', 'verified-via-search'].includes(s.status), `${id}: status ${s.status}`);
+    assert.match(
+      s.verified,
+      /Fetched directly 2026-09-19|Primary PDF fetched directly 2026-09-19|fetched directly 2026-09-19|Reached through live search 2026-09-19/,
+      `${id}: must state how it was observed this session`,
+    );
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+  }
+  // Exactly two entries in this batch came in through search-discovered pages; both must say so.
+  const viaSearch = SESSION5_IDS.filter((id) => byId[id].status === 'verified-via-search');
+  assert.deepEqual(viaSearch.sort(), ['massachusetts-elections', 'oregon-sos']);
+  // No session-5 entry may quote a Kalshi price without referencing the capture date.
+  for (const id of SESSION5_IDS) {
+    if (/0\.\d{3}\/0\.\d{3}/.test(byId[id].notes)) {
+      assert.match(byId[id].notes, /2026-09-19 (universe )?capture/, `${id}: market quotes must cite the capture date`);
+    }
+  }
 });
 
 // ---- render the Sources section headlessly against the committed bundle ----
@@ -157,7 +193,7 @@ test('site: the bundle and data/sources/master.json describe the same registry',
   }
 });
 
-test('site: irregularities rendered include the session-4 items (#40-#49)', () => {
+test('site: irregularities rendered include the session-4 items (#40-#49) and session-5 items (#50-#53)', () => {
   const els = {};
   const mk = (id) => (els[id] = els[id] || { id, innerHTML: '', textContent: '', querySelectorAll: () => [], classList: { toggle() {} } });
   const listeners = {};
@@ -173,7 +209,7 @@ test('site: irregularities rendered include the session-4 items (#40-#49)', () =
   sandbox.Chart2 = { lines() {} };
   vm.runInContext(readFileSync(join(ROOT, 'src/site/app.js'), 'utf8'), sandbox);
   listeners.hashchange();
-  for (let id = 40; id <= 49; id += 1) {
+  for (let id = 40; id <= 53; id += 1) {
     assert.ok(els.main.innerHTML.includes(`#${id} ·`), `irregularity #${id} not rendered on the site`);
   }
 });
