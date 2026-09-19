@@ -1,6 +1,6 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true",
- "capturedAt": "2026-09-19T01:14:24.011Z",
+ "capturedAt": "2026-09-19T01:29:55.136Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-19",
  "method": "C1 mutually-exclusive-sum-over (sum of YES mids - 1 > 0.06, fully two-sided events; high) / C1b -under (1 - sum > 0.06, >= 3 markets; info — the exchange flag does not imply an exhaustive outcome set); C2 crossed-book (bid > ask; high); C3 stale-last-vs-book (last trade > 0.1 outside the book; info). Findings are published, never used to alter data.",
@@ -8,8 +8,8 @@
  "marketsChecked": 24367,
  "counts": {
   "mutually-exclusive-sum-over": 46,
-  "mutually-exclusive-sum-under": 46,
-  "stale-last-vs-book": 346
+  "mutually-exclusive-sum-under": 47,
+  "stale-last-vs-book": 345
  },
  "findings": [
   {
@@ -19,8 +19,8 @@
    "event_ticker": "KXNEXTNATOSECGEN-99",
    "title": "Who will be the next Secretary General of NATO?",
    "markets": 8,
-   "sumOfMids": 1.445,
-   "deviation": 0.445,
+   "sumOfMids": 1.435,
+   "deviation": 0.435,
    "volume": 6859.629999999999
   },
   {
@@ -175,7 +175,7 @@
    "markets": 8,
    "sumOfMids": 0.1185,
    "deviation": -0.8815,
-   "volume": 1799695.1699999997
+   "volume": 1799817.2499999998
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -195,8 +195,8 @@
    "event_ticker": "KXNEWSCOTUSCONF-29JAN20",
    "title": "How many Supreme Court justices will the President confirm?",
    "markets": 10,
-   "sumOfMids": 1.068,
-   "deviation": 0.068,
+   "sumOfMids": 1.0675,
+   "deviation": 0.0675,
    "volume": 212533.62
   },
   {
@@ -285,7 +285,7 @@
    "markets": 22,
    "sumOfMids": 0.6985,
    "deviation": -0.3015,
-   "volume": 1526463.11
+   "volume": 1526473.11
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -371,8 +371,8 @@
    "event_ticker": "KXPRESMATCHUP-28NOV07",
    "title": "2028 Presidential matchup",
    "markets": 16,
-   "sumOfMids": 0.6825,
-   "deviation": -0.3175,
+   "sumOfMids": 0.682,
+   "deviation": -0.318,
    "volume": 279362.31
   },
   {
@@ -613,7 +613,7 @@
    "event_ticker": "KXTHCLEGALSALE3MG-FED",
    "ticker": "KXTHCLEGALSALE3MG-FED-26DEC14",
    "yes_bid": 0.45,
-   "yes_ask": 0.49,
+   "yes_ask": 0.5,
    "last_price": 0.25,
    "volume": 10354.91
   },
@@ -964,7 +964,7 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-TX23R",
    "ticker": "KXMIDTERMMOV-TX23R-P17",
-   "yes_bid": 0.1,
+   "yes_bid": 0.11,
    "yes_ask": 0.16,
    "last_price": 0.51,
    "volume": 4226.17
@@ -1988,7 +1988,7 @@
    "event_ticker": "KXMIDTERMMOV-COSEND",
    "ticker": "KXMIDTERMMOV-COSEND-P20",
    "yes_bid": 0.65,
-   "yes_ask": 0.71,
+   "yes_ask": 0.72,
    "last_price": 0.53,
    "volume": 98
   },
@@ -2301,17 +2301,6 @@
    "volume": 15910.960000000001
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 0,
-   "event_ticker": "KXISLEMINISTER-26SEP24",
-   "title": "Chief Minister of the Isle of Man after their election?",
-   "markets": 10,
-   "sumOfMids": 1.075,
-   "deviation": 0.075,
-   "volume": 34459.96
-  },
-  {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
@@ -2549,7 +2538,7 @@
    "event_ticker": "KXSAXANHGOVT-27JAN15",
    "ticker": "KXSAXANHGOVT-27JAN15-GRUENE",
    "yes_bid": 0.08,
-   "yes_ask": 0.23,
+   "yes_ask": 0.22,
    "last_price": 0.6,
    "volume": 1019.48
   },
@@ -2582,9 +2571,9 @@
    "event_ticker": "KXRHOUSESEATS-27",
    "title": "How many House seats will Republicans hold after the Midterms?",
    "markets": 11,
-   "sumOfMids": 1.072,
-   "deviation": 0.072,
-   "volume": 2976818.6500000004
+   "sumOfMids": 1.073,
+   "deviation": 0.073,
+   "volume": 2976854
   },
   {
    "check": "stale-last-vs-book",
@@ -2667,11 +2656,22 @@
    "check": "mutually-exclusive-sum-over",
    "severity": "high",
    "us_election": 1,
+   "event_ticker": "KXWITREASURER-26NOV03",
+   "title": "Wisconsin State Treasurer winner?",
+   "markets": 2,
+   "sumOfMids": 1.16,
+   "deviation": 0.16,
+   "volume": 4626.01
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 1,
    "event_ticker": "KXSECSTATEWY-26NOV03",
    "title": "Wyoming Secretary of State winner?",
    "markets": 3,
-   "sumOfMids": 1.135,
-   "deviation": 0.135,
+   "sumOfMids": 1.255,
+   "deviation": 0.255,
    "volume": 0
   },
   {
@@ -2692,8 +2692,8 @@
    "event_ticker": "KXSECSTATESD-26NOV03",
    "title": "South Dakota Secretary of State winner?",
    "markets": 3,
-   "sumOfMids": 1.325,
-   "deviation": 0.325,
+   "sumOfMids": 1.175,
+   "deviation": 0.175,
    "volume": 0
   },
   {
@@ -2714,8 +2714,8 @@
    "event_ticker": "KXSECSTATEND-26NOV03",
    "title": "North Dakota Secretary of State winner?",
    "markets": 2,
-   "sumOfMids": 1.095,
-   "deviation": 0.095,
+   "sumOfMids": 1.195,
+   "deviation": 0.195,
    "volume": 0
   },
   {
@@ -2736,8 +2736,8 @@
    "event_ticker": "KXSECSTATEMA-26NOV03",
    "title": "Massachusetts Secretary of State winner?",
    "markets": 2,
-   "sumOfMids": 1.1,
-   "deviation": 0.1,
+   "sumOfMids": 1.13,
+   "deviation": 0.13,
    "volume": 200
   },
   {
@@ -2755,12 +2755,12 @@
    "check": "mutually-exclusive-sum-over",
    "severity": "high",
    "us_election": 1,
-   "event_ticker": "KXSECSTATECA-26NOV03",
-   "title": "California Secretary of State winner?",
+   "event_ticker": "KXSECSTATECT-26NOV03",
+   "title": "Connecticut Secretary of State winner?",
    "markets": 2,
-   "sumOfMids": 1.125,
-   "deviation": 0.125,
-   "volume": 200
+   "sumOfMids": 1.075,
+   "deviation": 0.075,
+   "volume": 0
   },
   {
    "check": "mutually-exclusive-sum-over",
@@ -2777,11 +2777,22 @@
    "check": "mutually-exclusive-sum-over",
    "severity": "high",
    "us_election": 1,
+   "event_ticker": "KXSECSTATEAL-26NOV03",
+   "title": "Alabama Secretary of State winner?",
+   "markets": 2,
+   "sumOfMids": 1.115,
+   "deviation": 0.115,
+   "volume": 0
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 1,
    "event_ticker": "KXRICHMONDMAYOR-26OCT17",
    "title": "Richmond, BC mayoral election winner?",
    "markets": 6,
-   "sumOfMids": 1.06,
-   "deviation": 0.06,
+   "sumOfMids": 1.065,
+   "deviation": 0.065,
    "volume": 1521.68
   },
   {
@@ -2835,8 +2846,8 @@
    "event_ticker": "KXATTYGENCO-26",
    "title": "Colorado Attorney General winner?",
    "markets": 2,
-   "sumOfMids": 1.09,
-   "deviation": 0.09,
+   "sumOfMids": 1.19,
+   "deviation": 0.19,
    "volume": 1197.76
   },
   {
@@ -2970,17 +2981,6 @@
    "yes_ask": 0.979,
    "last_price": 0.79,
    "volume": 14354
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXATTYGENAL-26",
-   "title": "Alabama Attorney General winner?",
-   "markets": 2,
-   "sumOfMids": 1.195,
-   "deviation": 0.195,
-   "volume": 0
   },
   {
    "check": "stale-last-vs-book",
@@ -3275,7 +3275,7 @@
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-NY21-26BGEN",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-NY21-26BGEN-38",
    "yes_bid": 0.88,
-   "yes_ask": 0.98,
+   "yes_ask": 0.97,
    "last_price": 0.74,
    "volume": 1210
   },
@@ -3813,7 +3813,7 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU",
    "ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU-44",
-   "yes_bid": 0.66,
+   "yes_bid": 0.68,
    "yes_ask": 0.74,
    "last_price": 0.88,
    "volume": 505
@@ -3824,7 +3824,7 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU",
    "ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU-46",
-   "yes_bid": 0.54,
+   "yes_bid": 0.57,
    "yes_ask": 0.61,
    "last_price": 0.74,
    "volume": 352
@@ -3834,20 +3834,9 @@
    "severity": "info",
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU",
-   "ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU-48",
-   "yes_bid": 0.41,
-   "yes_ask": 0.49,
-   "last_price": 0.64,
-   "volume": 2227.09
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU",
    "ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU-52",
-   "yes_bid": 0.18,
-   "yes_ask": 0.26,
+   "yes_bid": 0.19,
+   "yes_ask": 0.29,
    "last_price": 0.45,
    "volume": 200
   },
@@ -4259,6 +4248,17 @@
    "volume": 5100.67
   },
   {
+   "check": "mutually-exclusive-sum-under",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXHOUSEWINSTATE-OHD",
+   "title": "How many House seats will Democrats win in Ohio?",
+   "markets": 7,
+   "sumOfMids": 0.935,
+   "deviation": -0.065,
+   "volume": 14240.27
+  },
+  {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
@@ -4446,17 +4446,6 @@
    "volume": 4270
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXTXGLO-26",
-   "title": "Texas Land Commissioner winner?",
-   "markets": 2,
-   "sumOfMids": 1.195,
-   "deviation": 0.195,
-   "volume": 2
-  },
-  {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
@@ -4477,6 +4466,17 @@
    "yes_ask": 0.18,
    "last_price": 0.83,
    "volume": 5994.22
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 1,
+   "event_ticker": "KXSTATELEG-MISEN26",
+   "title": "Michigan State Senate winner?",
+   "markets": 2,
+   "sumOfMids": 1.1,
+   "deviation": 0.1,
+   "volume": 1534.97
   },
   {
    "check": "stale-last-vs-book",
@@ -4518,8 +4518,8 @@
    "event_ticker": "KXSTATELEG-AZHOUSE26",
    "title": "Arizona State House winner?",
    "markets": 2,
-   "sumOfMids": 1.065,
-   "deviation": 0.065,
+   "sumOfMids": 1.07,
+   "deviation": 0.07,
    "volume": 257.06
   },
   {
@@ -4529,8 +4529,8 @@
    "event_ticker": "KXSTATELEG-AKSEN26",
    "title": "Alaska State Senate winner?",
    "markets": 2,
-   "sumOfMids": 1.235,
-   "deviation": 0.235,
+   "sumOfMids": 1.095,
+   "deviation": 0.095,
    "volume": 1470.8700000000001
   },
   {
@@ -4716,7 +4716,7 @@
    "event_ticker": "KXDCGOLFVISITCOUNT-26SEP",
    "ticker": "KXDCGOLFVISITCOUNT-26SEP-2",
    "yes_bid": 0.74,
-   "yes_ask": 0.77,
+   "yes_ask": 0.81,
    "last_price": 0.46,
    "volume": 3762.61
   },
@@ -4727,8 +4727,8 @@
    "event_ticker": "KXHORMUZMAX-26SEP27",
    "title": "Peak Strait of Hormuz traffic day? (9/21 - 9/27)",
    "markets": 7,
-   "sumOfMids": 2.55,
-   "deviation": 1.55,
+   "sumOfMids": 2.515,
+   "deviation": 1.515,
    "volume": 0
   },
   {
@@ -4738,9 +4738,9 @@
    "event_ticker": "KXAPRPOTUS-26SEP25",
    "title": "Trump's approval rating on Sep 25, 2026?",
    "markets": 8,
-   "sumOfMids": 1.115,
-   "deviation": 0.115,
-   "volume": 4694.820000000001
+   "sumOfMids": 1.12,
+   "deviation": 0.12,
+   "volume": 4706.820000000001
   },
   {
    "check": "stale-last-vs-book",
@@ -4784,7 +4784,7 @@
    "markets": 9,
    "sumOfMids": 1.075,
    "deviation": 0.075,
-   "volume": 50815.369999999995
+   "volume": 65387.82000000001
   },
   {
    "check": "stale-last-vs-book",

@@ -1,11 +1,10 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-19T01:14:24.011Z",
- "replayedAt": "2026-09-19T01:29:08.185Z",
+ "capturedAt": "2026-09-19T01:29:55.136Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every (day, market) observation of settled markets.",
- "settledMarkets": 0,
- "trackedMarkets": 10915,
+ "settledMarkets": 207,
+ "trackedMarkets": 10916,
  "observationDays": [
   "2026-09-19"
  ],
@@ -50,30 +49,30 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 170,
+   "meanP": 0.015952941176470545,
+   "observedYesRate": 0
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 3,
+   "meanP": 0.10000000000000002,
+   "observedYesRate": 0
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 1,
+   "meanP": 0.2,
+   "observedYesRate": 1
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 1,
+   "meanP": 0.39,
+   "observedYesRate": 0
   },
   {
    "lo": 0.4,
@@ -92,31 +91,9761 @@
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 1,
+   "meanP": 0.67,
+   "observedYesRate": 1
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 1,
+   "meanP": 0.78,
+   "observedYesRate": 1
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 1,
+   "meanP": 0.83,
+   "observedYesRate": 1
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 0,
-   "meanP": null,
-   "observedYesRate": null
+   "n": 29,
+   "meanP": 0.9804137931034482,
+   "observedYesRate": 1
   }
  ],
- "perMarket": []
+ "perMarket": [
+  {
+   "ticker": "KXENDORSEAOC-26NOV03-GPLA",
+   "title": "Will Alexandria Ocasio-Cortez endorse Graham Platner in Maine Senate before Nov 3, 2026?",
+   "series_ticker": "KXENDORSEAOC",
+   "result": "no",
+   "settlementDay": "2026-07-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERNIEENDORSE-26NOV03-ADEL",
+   "title": "Will Bernie Sanders endorse Antonio Delgado in the 2026 New York gubernatorial election before Nov 3, 2026?",
+   "series_ticker": "KXBERNIEENDORSE",
+   "result": "no",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERNIEENDORSE-26NOV03-CKAS",
+   "title": "Will Bernie Sanders endorse Cameron Kasky in the 2026 NY-12 House election before Nov 3, 2026?",
+   "series_ticker": "KXBERNIEENDORSE",
+   "result": "no",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERNIEENDORSE-26NOV03-TSTE",
+   "title": "Will Bernie Sanders endorse Tom Steyer in 2026 California gubernatorial race before Nov 3, 2026?",
+   "series_ticker": "KXBERNIEENDORSE",
+   "result": "no",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERNIEENDORSE-26NOV03-ZWAH",
+   "title": "Will Bernie Sanders endorse Zach Wahls in the 2026 United States Senate election in Iowa before Nov 3, 2026?",
+   "series_ticker": "KXBERNIEENDORSE",
+   "result": "no",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBILLS-HOUS",
+   "title": "Will legislation that would revise federal housing programs to increase housing supply and affordability by expanding federal financing and grant authority for affordable housing and streamlining federal requirements that delay housing development become law before Jan 1, 2027?",
+   "series_ticker": "KXBILLS",
+   "result": "yes",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXENDORSEAOC-26NOV03-NALL",
+   "title": "Will Alexandria Ocasio-Cortez endorse Nida Allam in NC-04 before Nov 3, 2026?",
+   "series_ticker": "KXENDORSEAOC",
+   "result": "no",
+   "settlementDay": "2026-07-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFISAEXTEND-26JUN-26JUL15",
+   "title": "Will legislation that reauthorizes FISA Section 702 authority become law before Jul 15, 2026?",
+   "series_ticker": "KXFISAEXTEND",
+   "result": "no",
+   "settlementDay": "2026-07-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMCDONALDCONF-26JUN17-JUL18",
+   "title": "Will James McDonald be confirmed as U.S. Attorney for the Southern District of New York before Jul 18, 2026?",
+   "series_ticker": "KXMCDONALDCONF",
+   "result": "no",
+   "settlementDay": "2026-07-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETING-27JAN01-LMES",
+   "title": "Will Donald Trump meet in person Lionel Messi before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPMEETING",
+   "result": "yes",
+   "settlementDay": "2026-07-19",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETING-27JAN01-NCSHE",
+   "title": "Will Donald Trump meet in person Claudia Sheinbaum before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPMEETING",
+   "result": "yes",
+   "settlementDay": "2026-07-19",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZNORM-26MAR17-B260715",
+   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before July 15, 2026?",
+   "series_ticker": "KXHORMUZNORM",
+   "result": "no",
+   "settlementDay": "2026-07-21",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXWHVISIT-27JAN-JAOU",
+   "title": "Will Joseph Aoun visit the White House before Jan 1, 2027?",
+   "series_ticker": "KXWHVISIT",
+   "result": "yes",
+   "settlementDay": "2026-07-21",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDEFAPPROP-JUL24",
+   "title": "Will legislation that provides supplemental appropriations to the Department of Defense beyond regular annual defense appropriations passed the House before Jul 24, 2026?",
+   "series_ticker": "KXDEFAPPROP",
+   "result": "no",
+   "settlementDay": "2026-07-24",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMCDONALDCONF-26JUN17-JUL25",
+   "title": "Will James McDonald be confirmed as U.S. Attorney for the Southern District of New York before Jul 25, 2026?",
+   "series_ticker": "KXMCDONALDCONF",
+   "result": "no",
+   "settlementDay": "2026-07-25",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXIASENATE-26-ZWAH",
+   "title": "Who will win the 2026 Iowa Senate election?",
+   "series_ticker": "KXIASENATE",
+   "result": "no",
+   "settlementDay": "2026-07-27",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXWHVISIT-27-VZEL",
+   "title": "Will Volodymyr Zelenskyy visit the White House before Jan 1, 2027?",
+   "series_ticker": "KXWHVISIT",
+   "result": "yes",
+   "settlementDay": "2026-07-28",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXALIENS-26AUG",
+   "title": "Will the U.S. confirm that aliens exist before Aug 1, 2026?",
+   "series_ticker": "KXALIENS",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXALITOANNOUNCERETIRE-26JUN-AUG01",
+   "title": "Will Samuel Alito announce their departure as Supreme Court justice before Aug 1, 2026?",
+   "series_ticker": "KXALITOANNOUNCERETIRE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXANTHROPICRESCIND-26JUN-26AUG01",
+   "title": "Will the Department of Defense or the White House announce an official action rescinding, waiving, or materially modifying the supply-chain-risk designation or phaseout directive applicable to Anthropic, so as to permit federal government or Department of Defense use of Anthropic's AI models or services before Aug 1, 2026?",
+   "series_ticker": "KXANTHROPICRESCIND",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBIRTHTOURISMVOTE-26JUL-AUG01",
+   "title": "Will the House vote on legislation that would materially restrict birth tourism or birthright citizenship for children of temporary visitors?",
+   "series_ticker": "KXBIRTHTOURISMVOTE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBOLOJANOUT-26JUL-AUG01",
+   "title": "Will Ilie Bolojan be out as Prime Minister of Romania before Aug 1, 2026?",
+   "series_ticker": "KXBOLOJANOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBRIANCONF-26JUL08-AUG01",
+   "title": "Will Brian Johnson be confirmed as Director of the Consumer Financial Protection Bureau before Aug 1, 2026?",
+   "series_ticker": "KXBRIANCONF",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCABLEAVE-26MAY22-26AUG",
+   "title": "Will any member of Trump's Cabinet leave before Aug 2026?",
+   "series_ticker": "KXCABLEAVE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCBPAIRPORT-27-26AUG01",
+   "title": "Will it be reported by any of the Source Agencies that the federal government withdraws CBP officers from a U.S. international airport in response to sanctuary-jurisdiction noncooperation before Aug 1, 2026?",
+   "series_ticker": "KXCBPAIRPORT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCRUDEEXPORTBAN-26-AUG26",
+   "title": "Will it be reported by any of the Source Agencies that the United States has imposed a ban on exports of crude oil that has gone into effect before Aug 1, 2026?",
+   "series_ticker": "KXCRUDEEXPORTBAN",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCRYPTOSTRUCTURE-26JAN-AUG",
+   "title": "Will a crypto market structure bill becomes law before Aug 1, 2026?",
+   "series_ticker": "KXCRYPTOSTRUCTURE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDIAZOUT-MDC-26AUG01",
+   "title": "Will Miguel Díaz-Canel leave office before 2026-08-01T14:00:00.000Z?",
+   "series_ticker": "KXDIAZOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDOJPOWELL-27-AUG01",
+   "title": "Will it be reported that the DOJ reopens or initiates a criminal investigation into Jerome Powell before Aug 1, 2026?",
+   "series_ticker": "KXDOJPOWELL",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEACNOM-27-26AUG01",
+   "title": "Will someone be nominated for member of the Election Assistance Commission before Aug 1, 2026?",
+   "series_ticker": "KXEACNOM",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXELECTIONBILL-AUG01",
+   "title": "Will legislation that requires proof of U.S. citizenship as a condition of registering to vote in federal elections become law before Aug 1, 2026?",
+   "series_ticker": "KXELECTIONBILL",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFARMBILL-26MAY-AUG01",
+   "title": "Will an omnibus, multiyear law that governs an array of agricultural and food programs become law before Aug 1, 2026?",
+   "series_ticker": "KXFARMBILL",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFCCBIG4-26JUN-26AUG01",
+   "title": "Will FCC announce the revocation, cancellation, or denial/non-renewal of the broadcast license of any full-power ABC, CBS, NBC, or Fox television station before Aug 1, 2026?",
+   "series_ticker": "KXFCCBIG4",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFETTERMANSWITCH-26MAY-AUG01",
+   "title": "Will John Fetterman leave the Democratic party before Aug 1, 2026?",
+   "series_ticker": "KXFETTERMANSWITCH",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFISAEXTEND-26MAY-26AUG01",
+   "title": "Will legislation that reauthorizes FISA Section 702 authority become law before Aug 1, 2026?",
+   "series_ticker": "KXFISAEXTEND",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGALLEGOOUT-26AUG01",
+   "title": "Will Ruben Gallego be out as Senator before Aug 1, 2026?",
+   "series_ticker": "KXGALLEGOOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHEGSETHANNOUNCEOUT-26APR-AUG01",
+   "title": "Will Pete Hegseth announce their departure as Secretary of Defense before Aug 1, 2026?",
+   "series_ticker": "KXHEGSETHANNOUNCEOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHEGSETHOUT-26APR-AUG01",
+   "title": "Will Pete Hegseth be out as Secretary of Defense before Aug 1, 2026?",
+   "series_ticker": "KXHEGSETHOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKASHANNOUNCEOUT-26APR-AUG01",
+   "title": "Will Kash Patel announce their departure as FBI Director before Aug 1, 2026?",
+   "series_ticker": "KXKASHANNOUNCEOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKASHOUT-26APR-AUG01",
+   "title": "Will Kash Patel leaves as FBI Director before Aug 1, 2026?",
+   "series_ticker": "KXKASHOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLABORSECCONF-26-AUG01",
+   "title": "Will Trump's first announced Labor Secretary pick be confirmed as Secretary of Labor before Aug 1, 2026?",
+   "series_ticker": "KXLABORSECCONF",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEAVEPOWELLGOV-26AUG01",
+   "title": "Will Jerome Powell leave Member of the Board of Governors of the Federal Reserve System before Aug 1, 2026?",
+   "series_ticker": "KXLEAVEPOWELLGOV",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMACHADOVENEZUELA-26JUN29-AUG01",
+   "title": "Will María Corina Machado visit Venezuela before Aug 1, 2026?",
+   "series_ticker": "KXMACHADOVENEZUELA",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMARTINDNCOUT-26MAY-AUG01",
+   "title": "Will Ken Martin be out as chair of the Democratic National Committee before Aug 1, 2026?",
+   "series_ticker": "KXMARTINDNCOUT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMEXCUBOIL-26-AUG",
+   "title": "Will Mexico resume oil exports to Cuba before August 1, 2026?",
+   "series_ticker": "KXMEXCUBOIL",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSBUDGETRES-26JUN-26AUG01",
+   "title": "Will a budget resolution passed the Senate before Aug 1, 2026?",
+   "series_ticker": "KXSBUDGETRES",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEREC-26JUN-26AUG01",
+   "title": "Will a reconciliation bill passed the Senate before Aug 1, 2026?",
+   "series_ticker": "KXSENATEREC",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTOPTRADE-26AUG01",
+   "title": "Will Donald Trump issue any executive action on imposing a comprehensive trade embargo on a new foreign country before Aug 1, 2026?",
+   "series_ticker": "KXSTOPTRADE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTARIFFCHECKS-26-AUG",
+   "title": "Will it be reported that at least one million Americans have received checks of at least $1000 directly attributable to tariff revenue?",
+   "series_ticker": "KXTARIFFCHECKS",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRADEDEALCUBA-27-B260801",
+   "title": "Will Trump announce a trade deal with Cuba before Aug 1, 2026?",
+   "series_ticker": "KXTRADEDEALCUBA",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPIRAN-26AUG01",
+   "title": "Will Donald Trump visit Iran before Aug 1, 2026?",
+   "series_ticker": "KXTRUMPIRAN",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMOJTABA-26DEC-26JUL",
+   "title": "Donald Trump and Mojtaba Khamenei meet before Aug 1, 2026?",
+   "series_ticker": "KXTRUMPMOJTABA",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPOUT27-27-26AUG01",
+   "title": "Will Donald Trump leave office before August 1, 2026?",
+   "series_ticker": "KXTRUMPOUT27",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSUPREMELEADER-27JAN01-AUG01",
+   "title": "Will Donald Trump meet in person the Supreme Leader of Iran before Aug 1, 2026?",
+   "series_ticker": "KXTRUMPSUPREMELEADER",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPTALKSCOTUS-26DEC31-AUG01",
+   "title": "Will Donald Trump meet (including phone calls) any sitting Supreme Court justice before Aug 1, 2026?",
+   "series_ticker": "KXTRUMPTALKSCOTUS",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-26AUG01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Aug 1, 2026?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXUSAIRANAGREEMENT-27-26AUG",
+   "title": "Will the US agree to a new Iranian nuclear deal before August?",
+   "series_ticker": "KXUSAIRANAGREEMENT",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVETOOVERRIDE-29JAN20-26AUG01",
+   "title": "Will Congress ever override Trump's veto?",
+   "series_ticker": "KXVETOOVERRIDE",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEMILLSEXPEL-26APR-AUG01",
+   "title": "Will the House vote on any resolution providing for the expulsion of Representative Cory Mills (R-FL) from the United States House of Representatives?",
+   "series_ticker": "KXVOTEMILLSEXPEL",
+   "result": "no",
+   "settlementDay": "2026-08-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXRECNCH-27-AUG01",
+   "title": "Will the House pass a reconciliation bill before January 01, 2027?",
+   "series_ticker": "KXRECNCH",
+   "result": "no",
+   "settlementDay": "2026-08-02",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERNIEENDORSE-26NOV03-AGRA",
+   "title": "Will Bernie Sanders endorse Alan Grayson in the 2026 United States Senate special election in Florida before Nov 3, 2026?",
+   "series_ticker": "KXBERNIEENDORSE",
+   "result": "no",
+   "settlementDay": "2026-08-04",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZNORM-26MAR17-B260801",
+   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before August 1, 2026?",
+   "series_ticker": "KXHORMUZNORM",
+   "result": "no",
+   "settlementDay": "2026-08-05",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHOUSERACE-WA09-26-KSAW",
+   "title": "Will Kshama Sawant win the House race for WA-09?",
+   "series_ticker": "KXHOUSERACE",
+   "result": "no",
+   "settlementDay": "2026-08-05",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPIRROOUT-26AUG-26AUG05",
+   "title": "Will Jeanine Pirro announce their departure as United States Attorney for the District of Columbia before Aug 5, 2026?",
+   "series_ticker": "KXPIRROOUT",
+   "result": "no",
+   "settlementDay": "2026-08-05",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVALBELOW-26DEC31-38",
+   "title": "Will Donald Trump's approval rating on approval rating be below 38% during Dec 2025 to Dec 2026 according to VoteHub?",
+   "series_ticker": "KXTRUMPAPPROVALBELOW",
+   "result": "yes",
+   "settlementDay": "2026-08-05",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATES-27JAN01-CA",
+   "title": "Will Donald Trump visit California before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPSTATES",
+   "result": "yes",
+   "settlementDay": "2026-08-05",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXENDORSEAOC-26NOV03-CBUS",
+   "title": "Will Alexandria Ocasio-Cortez endorse Cori Bush in MO-01 before Nov 3, 2026?",
+   "series_ticker": "KXENDORSEAOC",
+   "result": "no",
+   "settlementDay": "2026-08-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPIRROOUT-26AUG-26AUG06",
+   "title": "Will Jeanine Pirro announce their departure as United States Attorney for the District of Columbia before Aug 6, 2026?",
+   "series_ticker": "KXPIRROOUT",
+   "result": "no",
+   "settlementDay": "2026-08-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPIRROOUT-26AUG-26AUG07",
+   "title": "Will Jeanine Pirro announce their departure as United States Attorney for the District of Columbia before Aug 7, 2026?",
+   "series_ticker": "KXPIRROOUT",
+   "result": "no",
+   "settlementDay": "2026-08-07",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEADERSOUT-27JAN01-GPETCOL",
+   "title": "Will Gustavo Petro leave President of Colombia before Jan 1, 2027?",
+   "series_ticker": "KXLEADERSOUT",
+   "result": "yes",
+   "settlementDay": "2026-08-08",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMCDONALDCONF-26JUN17-AUG08",
+   "title": "Will James McDonald be confirmed as U.S. Attorney for the Southern District of New York before Aug 8, 2026?",
+   "series_ticker": "KXMCDONALDCONF",
+   "result": "no",
+   "settlementDay": "2026-08-08",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTESAVEAMERICA-26APR-AUG08",
+   "title": "Will the Senate vote on the SAVE America Act?",
+   "series_ticker": "KXVOTESAVEAMERICA",
+   "result": "no",
+   "settlementDay": "2026-08-08",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPADMINLEAVE-26DEC31-TBLA",
+   "title": "Will Todd Blanche leaves Deputy Attorney General in before 2027?",
+   "series_ticker": "KXTRUMPADMINLEAVE",
+   "result": "yes",
+   "settlementDay": "2026-08-10",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-ACHA",
+   "title": "Will Alexander Chambers win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-ACUR",
+   "title": "Will Andrew Curley win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-ATRU",
+   "title": "Will Arvin Trujillo win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-BNYU",
+   "title": "Will Buu Nygren win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-DBEG",
+   "title": "Will Donovan Begay win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-DNEZ",
+   "title": "Will Debbie Nez-Manuel win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-EELL",
+   "title": "Will Emily Ellison win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-FDAY",
+   "title": "Will Frank Dayish Jr. win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-JBEG",
+   "title": "Will Jordan Begay win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-JRUS",
+   "title": "Will Johnny Russell Jr. win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-KCOD",
+   "title": "Will Kevin Cody win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-LNOB",
+   "title": "Will Larry Noble win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-MLIZ",
+   "title": "Will Myron Lizer win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNAVAJOPRES-26NOV03-TCHE",
+   "title": "Will Tom Chee win the 2026 Navajo Nation presidential election?",
+   "series_ticker": "KXNAVAJOPRES",
+   "result": "no",
+   "settlementDay": "2026-08-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFLINTMAYOR-26-BBIG",
+   "title": "Who will win the Flint, Michigan mayoral election?",
+   "series_ticker": "KXFLINTMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFLINTMAYOR-26-MOWE",
+   "title": "Who will win the Flint, Michigan mayoral election?",
+   "series_ticker": "KXFLINTMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFLINTMAYOR-26-RWOM",
+   "title": "Who will win the Flint, Michigan mayoral election?",
+   "series_ticker": "KXFLINTMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-AUG14",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Aug 14, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-08-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-26AUG14",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Aug 14, 2026?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "no",
+   "settlementDay": "2026-08-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFISAEXTEND-26JUL-26AUG15",
+   "title": "Will legislation that reauthorizes FISA Section 702 authority become law before Aug 15, 2026?",
+   "series_ticker": "KXFISAEXTEND",
+   "result": "no",
+   "settlementDay": "2026-08-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSBUDGETRES-26AUG-26AUG15",
+   "title": "Will a budget resolution passed the Senate before Aug 15, 2026?",
+   "series_ticker": "KXSBUDGETRES",
+   "result": "no",
+   "settlementDay": "2026-08-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXUKBYELECTIONCOUNT-27JAN01-AL5",
+   "title": "Will the total number of UK parliamentary by-elections with polling day scheduled and held in 2026 be at least 5 2026?",
+   "series_ticker": "KXUKBYELECTIONCOUNT",
+   "result": "yes",
+   "settlementDay": "2026-08-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXABRAHAMSA-27-JAN01-COLO",
+   "title": "Will Israel and Colombia normalize relations before Jan 1, 2027?",
+   "series_ticker": "KXABRAHAMSA",
+   "result": "yes",
+   "settlementDay": "2026-08-17",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZNORM-26MAR17-B260815",
+   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before August 15, 2026?",
+   "series_ticker": "KXHORMUZNORM",
+   "result": "no",
+   "settlementDay": "2026-08-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISRNORMCOUNT-27DEC31-AL1",
+   "title": "Will the number of distinct countries with which Israel has agreed to normalize relations under a ratified agreement be at least 1 after Issuance and before 2028?",
+   "series_ticker": "KXISRNORMCOUNT",
+   "result": "yes",
+   "settlementDay": "2026-08-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-AUG18",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Aug 18, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-08-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-AUG21",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Aug 21, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-08-21",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTPETERSBURGMAYOR-26-BGAB",
+   "title": "Who will win the 2026 St. Petersburg, Florida mayoral election?",
+   "series_ticker": "KXSTPETERSBURGMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTPETERSBURGMAYOR-26-JLAR",
+   "title": "Who will win the 2026 St. Petersburg, Florida mayoral election?",
+   "series_ticker": "KXSTPETERSBURGMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTPETERSBURGMAYOR-26-KBAT",
+   "title": "Who will win the 2026 St. Petersburg, Florida mayoral election?",
+   "series_ticker": "KXSTPETERSBURGMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTPETERSBURGMAYOR-26-MSCR",
+   "title": "Who will win the 2026 St. Petersburg, Florida mayoral election?",
+   "series_ticker": "KXSTPETERSBURGMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSTPETERSBURGMAYOR-26-PCON",
+   "title": "Who will win the 2026 St. Petersburg, Florida mayoral election?",
+   "series_ticker": "KXSTPETERSBURGMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTALLAHASSEEMAYOR-26-ALAW",
+   "title": "Who will win the 2026 Tallahassee, Florida mayoral election?",
+   "series_ticker": "KXTALLAHASSEEMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTALLAHASSEEMAYOR-26-DPAR",
+   "title": "Who will win the 2026 Tallahassee, Florida mayoral election?",
+   "series_ticker": "KXTALLAHASSEEMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTALLAHASSEEMAYOR-26-MFOU",
+   "title": "Who will win the 2026 Tallahassee, Florida mayoral election?",
+   "series_ticker": "KXTALLAHASSEEMAYOR",
+   "result": "no",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATES-27JAN01-SC",
+   "title": "Will Donald Trump visit South Carolina before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPSTATES",
+   "result": "yes",
+   "settlementDay": "2026-08-22",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUAMGOV-26-FBLA",
+   "title": "Who will win the 2026 Guam gubernatorial election?",
+   "series_ticker": "KXGUAMGOV",
+   "result": "no",
+   "settlementDay": "2026-08-23",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUAMGOV-26-JAGU",
+   "title": "Who will win the 2026 Guam gubernatorial election?",
+   "series_ticker": "KXGUAMGOV",
+   "result": "no",
+   "settlementDay": "2026-08-23",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUAMGOV-26-JTEN",
+   "title": "Who will win the 2026 Guam gubernatorial election?",
+   "series_ticker": "KXGUAMGOV",
+   "result": "no",
+   "settlementDay": "2026-08-23",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCANUSDEAL-26-26AUG24",
+   "title": "Will it be reported by a Source Agency that Canada and the United States have concluded a final trade agreement before Aug 24, 2026?",
+   "series_ticker": "KXCANUSDEAL",
+   "result": "no",
+   "settlementDay": "2026-08-24",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPRALLIES-26NOV03-A15",
+   "title": "Will the number of Trump rallies be above 15 from January 1 to November 3, 2026?",
+   "series_ticker": "KXTRUMPRALLIES",
+   "result": "yes",
+   "settlementDay": "2026-08-24",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-AUG25",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Aug 25, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-08-25",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFLOCKDROPPED-27-FTWAYNE",
+   "title": "Will it be reported by a Source Agency that Fort Wayne, Indiana ends its use of Flock Safety license plate reader cameras before Feb 1, 2027?",
+   "series_ticker": "KXFLOCKDROPPED",
+   "result": "yes",
+   "settlementDay": "2026-08-27",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMORATORIUMCOUNT-26DEC31-AL2",
+   "title": "Will the number of U.S. states that formally adopt a binding state-level moratorium on data-center development be at least 2 in 2026?",
+   "series_ticker": "KXMORATORIUMCOUNT",
+   "result": "yes",
+   "settlementDay": "2026-08-28",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-AUG28",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Aug 28, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-08-28",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPADMINLEAVE-26DEC31-KLEA",
+   "title": "Will Karoline Leavitt leaves White House Press Secretary in before 2027?",
+   "series_ticker": "KXTRUMPADMINLEAVE",
+   "result": "yes",
+   "settlementDay": "2026-08-28",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAIREVIEW-26JUN-SEP01",
+   "title": "Will Donald Trump issue any executive action on establishing or directing a mandatory federal review, evaluation, or approval process that at least one class of AI models must complete before public release before Sep 1, 2026?",
+   "series_ticker": "KXAIREVIEW",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXALITOOUT-26SEP01",
+   "title": "Will Samuel Alito retires the Supreme Court in before September?",
+   "series_ticker": "KXALITOOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBOLOJANOUT-26JUL-SEP01",
+   "title": "Will Ilie Bolojan be out as Prime Minister of Romania before Sep 1, 2026?",
+   "series_ticker": "KXBOLOJANOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBRIANCONF-26JUL08-SEP01",
+   "title": "Will Brian Johnson be confirmed as Director of the Consumer Financial Protection Bureau before Sep 1, 2026?",
+   "series_ticker": "KXBRIANCONF",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBURNHAMOUT-26JUL-26SEP01",
+   "title": "Will Andy Burnham announce their departure as Prime Minister of the United Kingdom before Sep 1, 2026?",
+   "series_ticker": "KXBURNHAMOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCABLEAVE-26MAY22-26SEP",
+   "title": "Will any member of Trump's Cabinet leave before Sep 2026?",
+   "series_ticker": "KXCABLEAVE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCANUSDEAL-26-26SEP01",
+   "title": "Will it be reported by a Source Agency that Canada and the United States have concluded a final trade agreement before Sep 1, 2026?",
+   "series_ticker": "KXCANUSDEAL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCBPAIRPORT-27-26SEP01",
+   "title": "Will it be reported by any of the Source Agencies that the federal government withdraws CBP officers from a U.S. international airport in response to sanctuary-jurisdiction noncooperation before Sep 1, 2026?",
+   "series_ticker": "KXCBPAIRPORT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCMSDEFERRAL-26JUL-26SEP01",
+   "title": "Will the Centers for Medicare & Medicaid Services (CMS) or the U.S. Department of Health and Human Services (HHS) announce a formal deferral of at least $50 million in federal Medicaid matching funds for claims submitted by a single U.S. state other than California or Minnesota, based on fraud, waste, abuse, or program-integrity concerns before Sep 1, 2026?",
+   "series_ticker": "KXCMSDEFERRAL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCRYPTOSTRUCTURE-26JAN-SEP",
+   "title": "Will a crypto market structure bill becomes law before Sep 1, 2026?",
+   "series_ticker": "KXCRYPTOSTRUCTURE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDATASET13-26SEP01",
+   "title": "Will the Department of Justice (DOJ) release Data Set 13 (pursuant to the Epstein Files Transparency Act) before Sep 1, 2026?",
+   "series_ticker": "KXDATASET13",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDEMSCHUMER-27-SEP01",
+   "title": "Will any current member of the Democratic Senate caucus (including independents who caucus with Democrats) publicly states that Chuck Schumer should step down, resign, or be replaced as Senate Democratic Leader before Sep 1, 2026?",
+   "series_ticker": "KXDEMSCHUMER",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDIAZOUT-MDC-26SEP01",
+   "title": "Will Miguel Díaz-Canel leave office before 2026-09-01T14:00:00.000Z?",
+   "series_ticker": "KXDIAZOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDJTENDORSENETANYAHU-26JUN30-SEP01",
+   "title": "Will Donald Trump endorse Benjamin Netanyahu in the 2026 Israeli legislative election before Sep 1, 2026?",
+   "series_ticker": "KXDJTENDORSENETANYAHU",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDUTERTEOUT-26MAY-SEP01",
+   "title": "Will Sara Duterte be out as Vice President of the Philippines before Sep 1, 2026?",
+   "series_ticker": "KXDUTERTEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXELECTIONBILL-26SEP01",
+   "title": "Will legislation that requires proof of U.S. citizenship as a condition of registering to vote in federal elections become law before Sep 1, 2026?",
+   "series_ticker": "KXELECTIONBILL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXELECTIONEMERGENCY-26SEP01",
+   "title": "Will Donald Trump issue any executive action on declaring a national emergency regarding the 2026 United States midterm election before Sep 1, 2026?",
+   "series_ticker": "KXELECTIONEMERGENCY",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXELECTVENEZUELA-26SEP01",
+   "title": "Will Venezuela hold a presidential election before Sep 1, 2026?",
+   "series_ticker": "KXELECTVENEZUELA",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFARAGEOUTREFORM-26JUL-SEP01",
+   "title": "Will Nigel Farage announce their departure as Leader of Reform UK before Sep 1, 2026?",
+   "series_ticker": "KXFARAGEOUTREFORM",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFARMBILL-26MAY-SEP01",
+   "title": "Will an omnibus, multiyear law that governs an array of agricultural and food programs become law before Sep 1, 2026?",
+   "series_ticker": "KXFARMBILL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFISAEXTEND-26JUL-26SEP01",
+   "title": "Will legislation that reauthorizes FISA Section 702 authority become law before Sep 1, 2026?",
+   "series_ticker": "KXFISAEXTEND",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGALLEGOOUT-26APR-SEP01",
+   "title": "Will Ruben Gallego be out as Senator before Sep 1, 2026?",
+   "series_ticker": "KXGALLEGOOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGAMBLINGREPEAL-26SEP01",
+   "title": "Will bill that removes/changes the gambling tax provision in the One Big Beautiful Bill Act (\"OBBB\") becomes law before Sep 1, 2026?",
+   "series_ticker": "KXGAMBLINGREPEAL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHARPANNOUNCEOUT-26AUG-26SEP01",
+   "title": "Will Natalie Harp announce their departure as Special Assistant and Executive Assistant to the President before Sep 1, 2026?",
+   "series_ticker": "KXHARPANNOUNCEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHEARNCHARGE-26AUG12-26SEP01",
+   "title": "Will David Hearn be charged with a any charge related to the Lincoln Memorial Reflecting Pool crime before Sep 1, 2026?",
+   "series_ticker": "KXHEARNCHARGE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHEGSETHANNOUNCEOUT-26APR-26SEP01",
+   "title": "Will Pete Hegseth announce their departure as Secretary of Defense before Sep 1, 2026?",
+   "series_ticker": "KXHEGSETHANNOUNCEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHEGSETHOUT-26APR-SEP01",
+   "title": "Will Pete Hegseth be out as Secretary of Defense before Sep 1, 2026?",
+   "series_ticker": "KXHEGSETHOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZNORM-26MAR17-B260901",
+   "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before September 1, 2026?",
+   "series_ticker": "KXHORMUZNORM",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXIMPEACH-26-SEP01",
+   "title": "Will the President be impeached before Sep 1, 2026?",
+   "series_ticker": "KXIMPEACH",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXIRANEMBASSY-27-26SEP",
+   "title": "Will the US reopen its embassy in Iran before Sep 1, 2026?",
+   "series_ticker": "KXIRANEMBASSY",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKASHANNOUNCEOUT-26JUL-26SEP01",
+   "title": "Will Kash Patel announce their departure as FBI Director before Sep 1, 2026?",
+   "series_ticker": "KXKASHANNOUNCEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKASHOUT-26APR-26SEP01",
+   "title": "Will Kash Patel be out as FBI Director before Sep 1, 2026?",
+   "series_ticker": "KXKASHOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLABORSECCONF-26-SEP01",
+   "title": "Will Trump's first announced Labor Secretary pick be confirmed as Secretary of Labor before Sep 1, 2026?",
+   "series_ticker": "KXLABORSECCONF",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLAKECONF-26MAY12-SEP01",
+   "title": "Will Kari Lake be confirmed as Ambassador to Jamaica before Sep 1, 2026?",
+   "series_ticker": "KXLAKECONF",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEAVELISACOOK-26SEP01",
+   "title": "Will Lisa DeNell Cook leave Federal Reserve Governor before Sep 1, 2026?",
+   "series_ticker": "KXLEAVELISACOOK",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEAVEMILLS-26NOV03-26SEP01",
+   "title": "Will Cory Mills be out as Congressman before Sep 1, 2026?",
+   "series_ticker": "KXLEAVEMILLS",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEAVEPOWELLGOV-26SEP01",
+   "title": "Will Jerome Powell leave Member of the Board of Governors of the Federal Reserve System before Aug 1, 2026?",
+   "series_ticker": "KXLEAVEPOWELLGOV",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEAVEWALZ-26JUL-26SEP01",
+   "title": "Will Tim Walz be out as Governor of Minnesota before Sep 1, 2026?",
+   "series_ticker": "KXLEAVEWALZ",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLUKEOUT-26JUL-26SEP01",
+   "title": "Will Sylvia Luke be out as Lieutenant Governor of Hawaii before Sep 1, 2026?",
+   "series_ticker": "KXLUKEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLUXONOUT-26AUG-26SEP01",
+   "title": "Will Christopher Luxon announce their departure as Prime Minister of New Zealand before Sep 1, 2026?",
+   "series_ticker": "KXLUXONOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMARTINDNCOUT-26MAY-26SEP01",
+   "title": "Will Ken Martin be out as chair of the Democratic National Committee before Sep 1, 2026?",
+   "series_ticker": "KXMARTINDNCOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMOCTRUMP25-26-SEP01",
+   "title": "Will any Republican member of Congress calls on Trump to be removed as President through the 25th amendment before Sep 1, 2026?",
+   "series_ticker": "KXMOCTRUMP25",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNYTCHARGE-27JAN01-26SEP01",
+   "title": "Will any New York Times reporter whose alleged offense arises from newsgathering, publication, source protection, or compliance with investigative demands concerning the Times’s July 2026 reporting on the security of the Qatari-donated aircraft used as Air Force One be charged with a any crime before Sep 1, 2026?",
+   "series_ticker": "KXNYTCHARGE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPIRROOUT-26AUG-26SEP01",
+   "title": "Will Jeanine Pirro announce their departure as United States Attorney for the District of Columbia before Sep 1, 2026?",
+   "series_ticker": "KXPIRROOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPOLISOUT-26MAY-SEP01",
+   "title": "Will Jared Polis be out as Governor of Colorado before Sep 1, 2026?",
+   "series_ticker": "KXPOLISOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-SEP01",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Sep 1, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXRESTOREDEFERRAL-26JUL-26SEP01",
+   "title": "Will the Centers for Medicare & Medicaid Services (CMS) or the U.S. Department of Health and Human Services (HHS) announce a definitive decision to lift, in whole or in part, either federal Medicaid payment deferral announced for California or Minnesota on July 21, 2026, or otherwise make any amount covered by either deferral available to the applicable state before Sep 1, 2026?",
+   "series_ticker": "KXRESTOREDEFERRAL",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEREC-26JUN-26SEP01",
+   "title": "Will a reconciliation bill passed the Senate before Sep 1, 2026?",
+   "series_ticker": "KXSENATEREC",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSNAPUK-27JAN01-26SEP01",
+   "title": "Will announce a snap election before Sep 1, 2026?",
+   "series_ticker": "KXSNAPUK",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTARIFFAGREE-27-26SEP01",
+   "title": "Will it be reported by any of the Source Agencies that the United States and China reach a new mutual tariff agreement, publicly announced or confirmed by both governments before Sep 1, 2026?",
+   "series_ticker": "KXTARIFFAGREE",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPDCTAKEOVER-26JUN-SEP01",
+   "title": "Will Donald Trump issue any executive action on invoking Section 740 of the D.C. Home Rule Act before Sep 1, 2026?",
+   "series_ticker": "KXTRUMPDCTAKEOVER",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSUPREMELEADER-27JAN01-SEP01",
+   "title": "Will Donald Trump meet in person the Supreme Leader of Iran before Sep 1, 2026?",
+   "series_ticker": "KXTRUMPSUPREMELEADER",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPTHUNEOUT-27JAN01-SEP",
+   "title": "Will Donald Trump issue a statement about explicitly calling for John Thune to resign, step down, be replaced, or be removed from his position as Senate Majority Leader before Sep 1, 2026?",
+   "series_ticker": "KXTRUMPTHUNEOUT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-26SEP01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Sep 1, 2026?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIREWARSH-27JAN01-26SEP01",
+   "title": "Will the President try to fire the Chair of the Federal Reserve before Sep 1, 2026?",
+   "series_ticker": "KXTRYFIREWARSH",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXUSAIRANAGREEMENT-27-26SEP",
+   "title": "Will the US agree to a new Iranian nuclear deal this year?",
+   "series_ticker": "KXUSAIRANAGREEMENT",
+   "result": "no",
+   "settlementDay": "2026-09-01",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXALIENS-27-26SEP",
+   "title": "Will the U.S. confirm that aliens exist in 2026?",
+   "series_ticker": "KXALIENS",
+   "result": "no",
+   "settlementDay": "2026-09-02",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXRECNCH-27-SEP01",
+   "title": "Will the House pass a reconciliation bill before January 01, 2027?",
+   "series_ticker": "KXRECNCH",
+   "result": "no",
+   "settlementDay": "2026-09-02",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSBRIEFINGCOUNT-26SEP-A1",
+   "title": "Will the number of White House Press Briefings in Sep 2026 be at least 1?",
+   "series_ticker": "KXPRESSBRIEFINGCOUNT",
+   "result": "yes",
+   "settlementDay": "2026-09-04",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPFLOCK-26-SEP04",
+   "title": "Will Donald Trump publicly criticize Flock Safety's license plate reader cameras before Sep 4, 2026?",
+   "series_ticker": "KXTRUMPFLOCK",
+   "result": "no",
+   "settlementDay": "2026-09-04",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26SEP-0",
+   "title": "Will exactly 0 people be pardoned in Sep 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-09-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26SEP-1",
+   "title": "Will exactly 1 people be pardoned in Sep 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-09-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26SEP-17",
+   "title": "Will between 10 and 24 people be pardoned in Sep 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-09-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26SEP-2",
+   "title": "Will exactly 2 people be pardoned in Sep 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-09-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26SEP-6",
+   "title": "Will between 3 and 9 people be pardoned in Sep 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-09-06",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBIGBENDRESUME-27-26SEP08",
+   "title": "Will it be reported by any of the Source Agencies that physical construction work on federal border security infrastructure inside Big Bend National Park resumes before Sep 8, 2026?",
+   "series_ticker": "KXBIGBENDRESUME",
+   "result": "no",
+   "settlementDay": "2026-09-08",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-SEP08",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Sep 8, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-09-08",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAXSHIPSHORMUZ-26SEP01-AL5",
+   "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 5 in Sep 2026?",
+   "series_ticker": "KXMAXSHIPSHORMUZ",
+   "result": "yes",
+   "settlementDay": "2026-09-09",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-VPUT",
+   "title": "Will Donald Trump meet (including phone calls) Vladimir Putin in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-09",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBRBALLOT-26-FBOL",
+   "title": "Will Flávio Bolsonaro be on the ballot in the next Brazilian presidential election?",
+   "series_ticker": "KXBRBALLOT",
+   "result": "yes",
+   "settlementDay": "2026-09-10",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBRBALLOT-26-LULA",
+   "title": "Will Luiz Inácio Lula da Silva be on the ballot in the next Brazilian presidential election?",
+   "series_ticker": "KXBRBALLOT",
+   "result": "yes",
+   "settlementDay": "2026-09-10",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBRBALLOT-26-RSAN",
+   "title": "Will Renan Santos be on the ballot in the next Brazilian presidential election?",
+   "series_ticker": "KXBRBALLOT",
+   "result": "yes",
+   "settlementDay": "2026-09-10",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-MBS",
+   "title": "Will Donald Trump meet (including phone calls) Mohammed bin Salman in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-12",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-CCON",
+   "title": "Will Donald Trump meet (including phone calls) Catherine Connolly in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-MCAR",
+   "title": "Will Donald Trump meet (including phone calls) Mark Carney in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-RMCI",
+   "title": "Will Donald Trump meet (including phone calls) Rory McIlroy in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-13",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMEXCUBOIL-26-SEP",
+   "title": "Will Mexico resume oil exports to Cuba before September 1, 2026?",
+   "series_ticker": "KXMEXCUBOIL",
+   "result": "no",
+   "settlementDay": "2026-09-14",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXENDORSEMAMDANI-26SEP15",
+   "title": "Will Zohran Mamdani endorse any candidate in any 2026 primary election for public office whose jurisdiction is outside of New York State before Sep 15, 2026?",
+   "series_ticker": "KXENDORSEMAMDANI",
+   "result": "no",
+   "settlementDay": "2026-09-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZRENAME-26SEP-SEP15",
+   "title": "Will Trump rename the Strait of Hormuz?",
+   "series_ticker": "KXHORMUZRENAME",
+   "result": "no",
+   "settlementDay": "2026-09-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-SEP15",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Sep 15, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "no",
+   "settlementDay": "2026-09-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-SALT",
+   "title": "Will Donald Trump meet (including phone calls) Sam Altman in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTRAIT-26SEP-SEP15",
+   "title": "Will Trump rename the Strait of Hormuz after himself?",
+   "series_ticker": "KXTRUMPSTRAIT",
+   "result": "no",
+   "settlementDay": "2026-09-15",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCBRATEHIKE-27-FED",
+   "title": "Will the Federal Reserve raise the target range for the federal funds rate before 2027?",
+   "series_ticker": "KXCBRATEHIKE",
+   "result": "yes",
+   "settlementDay": "2026-09-17",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-VZEL",
+   "title": "Will Donald Trump meet (including phone calls) Volodymyr Zelenskyy in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-17",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATES-27JAN01-NC",
+   "title": "Will Donald Trump visit North Carolina before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPSTATES",
+   "result": "yes",
+   "settlementDay": "2026-09-17",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXDJTATTACKWARSH-26SEP-26SEP18",
+   "title": "Will Trump publicly criticize Kevin Warsh before Sep 18, 2026?",
+   "series_ticker": "KXDJTATTACKWARSH",
+   "result": "no",
+   "settlementDay": "2026-09-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMTGSWITCH-27JAN",
+   "title": "Will Marjorie Taylor Greene leave the Republican party?",
+   "series_ticker": "KXMTGSWITCH",
+   "result": "yes",
+   "settlementDay": "2026-09-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-KWAR",
+   "title": "Will Donald Trump meet (including phone calls) Kevin Warsh in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-18",
+   "observations": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-19",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  }
+ ]
 }

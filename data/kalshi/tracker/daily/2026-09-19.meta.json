@@ -1,6 +1,6 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200",
- "capturedAt": "2026-09-19T01:14:24.011Z",
+ "capturedAt": "2026-09-19T01:29:55.136Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-19",
  "base": "https://api.elections.kalshi.com/trade-api/v2",
@@ -11,7 +11,7 @@
  "errors": [],
  "seriesInRegistry": 4166,
  "eventsPagesFetched": 81,
- "eventsTotalOpenOnExchange": 16027,
+ "eventsTotalOpenOnExchange": 16004,
  "eventsKept": 4094,
  "seriesSeenByEventCategoryOnly": [
   "KXAAAGASMAXNY",
@@ -25,20 +25,22 @@
  ],
  "shrinkRatioVsPrevious": 1,
  "openMarkets": 24367,
- "openMarketsTraded": 10915,
- "openMarketsUntradedNotListed": 13452,
+ "openMarketsTraded": 10916,
+ "openMarketsUntradedNotListed": 13451,
  "openEvents": 4094,
- "openMarketsWithImpliedPrice": 10915,
+ "openMarketsWithImpliedPrice": 10916,
  "usElectionEvents": 3210,
- "settlementCandidates": 0,
- "settlementsFound": 0,
+ "openMarketsTradedNotActive": 207,
+ "openMarketsClosedBeforeCapture": 207,
+ "settlementCandidates": 207,
+ "settlementsFound": 207,
  "settlementsPending": 0,
  "api": {
-  "requests": 84,
-  "retries": 1,
-  "bytesDownloaded": 323901629
+  "requests": 94,
+  "retries": 0,
+  "bytesDownloaded": 324364008
  },
- "finishedAt": "2026-09-19T01:14:43.122Z",
+ "finishedAt": "2026-09-19T01:30:08.500Z",
  "columns": [
   "date",
   "ticker",
@@ -51,7 +53,5 @@
   "liquidity",
   "close_time",
   "status"
- ],
- "columnsNote": "status column added offline on 2026-09-19 after the live run (blank = not captured that day); the CSV was regenerated with --replay from the live universe/latest.json (byte-identical otherwise)",
- "openMarketsClosedBeforeCapture": 207
+ ]
 }
