@@ -1,6 +1,6 @@
 # IRREGULARITIES & DISCREPANCIES — flagged for review
 
-Machine-readable twins: `data/irregularities.json` (items 1–12) and the Python
+Machine-readable twins: `data/irregularities.json` (Node-track items 1–12 + 23–25) and the Python
 toolkit's `data/flagged_sources.json` + `data/verification_log.md` (items 13–22).
 Severity: **high** = affects trust in a result · **medium** = affects interpretation ·
 **low** = cosmetic/monitor.
@@ -30,6 +30,9 @@ Nothing here is silently normalized; each item states its action.
 | 20 | low | Source migration | **CES program home migrated Harvard → Tufts; Split Ticket analysis migrating to The Argument (newsletter URL unverified)** (on-site migration notices) | Tracked — dual URLs recorded for CES; Argument URL queued for batch 2 |
 | 21 | low | Source migration | **Pew legacy `/politics/` path dead (restructured to `/topic/politics-policy/`); YouGov `today.` domain redirecting to `yougov.com`** (direct fetch results) | Confirmed — canonical URLs updated in master list |
 | 22 | low | Data capture | **Sandbox blocks direct HTTPS to most hosts; live checks via fetch/search channels** (only api.github.com directly reachable; all fetches logged) | Noted — re-run `validate_sources.py --check-live` from normal network |
+| 23 | medium | Data source availability | **OpenElections (Harvard Dataverse) site offline — `openelections.org` domain is for sale on GoDaddy** (fetched 2026-09-19) | Do not cite openelections.org; use `dataverse.harvard.edu` datasets with DOIs; re-check domain each session |
+| 24 | low | Polling ecosystem | **U.S. Elections Project (UF) migrated** — `electproject.org` is now a stub pointing to the UF Election Lab (fetched 2026-09-19) | Use `election.lab.ufl.edu` (master entry `uf-election-lab`) as canonical VEP-turnout source |
+| 25 | low | Polling ecosystem | **Edison Research acquired by SSRS (2025)** — `edisonresearch.com` redirects to `ssrs.com/edison-research-at-ssrs` (fetched 2026-09-19); 2026 exit-poll operation not yet confirmed | Treat 2026 exit-poll sourcing as provisional; confirm operation + methodology before use in backtests |
 
 ## Review status
 
@@ -39,6 +42,7 @@ Nothing here is silently normalized; each item states its action.
 - Items 13–14, 16: independent corroboration of items 6, 5, 4 (second verification session).
 - Items 15, 17, 19: open re-checks for next session (freshness/homepage/VoteCast status).
 - Items 18, 20–22: noted/tracked; canonical URLs already updated where applicable.
+- Items 23–25 (added 2026-09-19, Node track): source-availability/ecosystem changes found during the 21-entry master-list expansion — no numeric data in the repo depends on the affected URLs (audit trail: VERIFICATION.md §6).
 
 ## How to file a new entry
 
