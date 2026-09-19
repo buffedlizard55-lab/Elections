@@ -49,15 +49,19 @@ volatility-scaled sizing); cumulative 2-cycle PnL ranking after 2026 settles; Th
 min-trading-days rule (≥3 trading days to be ranked). **Why:** the competition is the user's explicit
 framing; 2024 is a pilot cycle.
 
-### R8 · Provenance hardening — P8
-Append per-session dated sections to VERIFICATION.md; add SHA-256 hashes of the CSV copies in
-`data/polls/PROVENANCE.md`. **Why:** third-party auditability without network access.
+### R8 · Provenance hardening — P8 (partially done 2026-09-19)
+Dated per-session sections now exist (2026-09-18 base + 2026-09-19 §6, including the 21-entry
+expansion, URL corrections, and fetch-failure records). **Remaining:** add SHA-256 hashes of the
+CSV copies in `data/polls/PROVENANCE.md`; re-verify `iem.isu.edu` directly (the 2026-09-19 fetch
+failed via the sandbox proxy — the entry is marked `verified-via-search`).
+**Why:** third-party auditability without network access.
 
 ## Current limitations (honest list)
 
-1. The 2026-09-18 sandbox had no general internet — live capture went through a proxied fetch tool, so
-   only manually enumerated endpoints (documented per file in VERIFICATION.md §1–4) were captured.
-   The full open-market universe awaits R1.
+1. Sandbox captures run through a proxied fetch tool (both sessions). The 2026-09-19 session verified
+   21 additional sources directly (master list now 53), but `iem.isu.edu` and the IEM 2026 prospectus
+   PDF could not be fetched directly (proxy errors) — that entry is verified-via-search and needs a
+   networked re-check. The full open-market universe still awaits R1.
 2. 2024 market backtest = 3 markets (presidency + both chamber controls). Directionally strong (all
    settled YES on the R side, matching official outcomes), statistically thin.
 3. NO-side candle prices are derived reciprocals (1 − yesClose); the raw API publishes only the YES
@@ -66,4 +70,5 @@ Append per-session dated sections to VERIFICATION.md; add SHA-256 hashes of the 
    disclosed.
 5. Web-rendered percentages are a display convenience; API books are authoritative where captured and
    divergences are flagged (#2, #7).
-6. The GitHub Pages site is a snapshot of 2026-09-18 until the next build commit.
+6. The GitHub Pages site is a snapshot of 2026-09-19 (53 sources, 15 irregularities) until the next
+   build commit.

@@ -61,9 +61,17 @@ test('candlestick transcriptions are well-formed (17 fields, sane ranges)', asyn
 test('master source list has >= 20 verified entries with http(s) URLs', () => {
   const master = JSON.parse(readFileSync(join(ROOT, 'data/sources/master.json'), 'utf8'));
   assert.ok(master.sources.length >= 20, `only ${master.sources.length} sources`);
+  // Session dates must be the documented capture sessions (no invented dates).
+  const allowedDates = new Set(['2026-09-18', '2026-09-19']);
+  const allowedStatuses = new Set(['verified', 'verified-claim', 'verified-via-search']);
+  const ids = new Set();
   for (const s of master.sources) {
-    assert.match(s.url, /^https?:\/\//);
+    assert.match(s.url, /^https?:\/\//, `${s.id} url must be http(s)`);
     assert.ok(s.verified && s.verified.length > 20, `${s.id} verification note too thin`);
-    assert.ok(s.verifiedOn === '2026-09-18');
+    assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(s.verifiedOn || ''), `${s.id} verifiedOn is not a YYYY-MM-DD date`);
+    assert.ok(allowedDates.has(s.verifiedOn), `${s.id} verifiedOn ${s.verifiedOn} is not a documented session date`);
+    assert.ok(allowedStatuses.has(s.status), `${s.id} unrecognized status '${s.status}'`);
+    assert.ok(!ids.has(s.id), `duplicate source id ${s.id}`);
+    ids.add(s.id);
   }
 });
