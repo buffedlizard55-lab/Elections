@@ -139,6 +139,42 @@ const keySet = new Set(['2024-03-01', '2024-06-30', '2024-07-21', '2024-08-05', 
 const weekly = allDates.filter((d, i) => i % 7 === 0 || keySet.has(d));
 const pollSeries = weekly.map((d) => ({ date: d, margin: nationalMargin(byDate, d) })).filter((p) => p.margin !== null);
 
+// --- ROADMAP R1-R4 forward-loop artifacts (null until the networked collector runs) ---
+const senate2024RacesFull = readOptional('data/senate-2024-backtest.json');
+const senate2024Races = senate2024RacesFull && {
+  generatedAt: senate2024RacesFull.generatedAt,
+  inputs: senate2024RacesFull.inputs,
+  note: senate2024RacesFull.note,
+  nMarkets: senate2024RacesFull.nMarkets,
+  settlementCrossCheck: senate2024RacesFull.settlementCrossCheck,
+  aggregate: senate2024RacesFull.aggregate,
+  aggregateByBandT7: senate2024RacesFull.aggregateByBandT7,
+  holdOfficialWinners: senate2024RacesFull.holdOfficialWinners,
+  universeCoverage: senate2024RacesFull.universeCoverage,
+  captureErrors: senate2024RacesFull.captureErrors,
+  markets: (senate2024RacesFull.markets || []).map((m) => ({
+    ticker: m.ticker, state: m.state, side: m.side, title: m.title,
+    result: m.result, officialWinner: m.officialWinner, officialWinnerParty: m.officialWinnerParty,
+    crossCheck: m.crossCheck, bandT7: m.bandT7, p7: m.p7, volume: m.volume,
+    nTradeBars: m.nTradeBars, leadTimes: m.leadTimes,
+    series: (m.dailySeries || []).map((p) => ({ date: p.date, p: p.p })),
+  })),
+};
+const calibrationForward = readOptional('data/calibration-2026.json');
+const polls2026 = readOptional('data/polls/polls-2026-series.json');
+const universeOpen = readOptional('data/kalshi/forward/universe-open.json');
+const universeSummary = universeOpen && {
+  capturedFrom: universeOpen.capturedFrom,
+  capturedAt: universeOpen.capturedAt,
+  date: universeOpen.date,
+  count: universeOpen.count,
+  seriesQueried: universeOpen.seriesQueried,
+  top: [...(universeOpen.markets || [])]
+    .sort((a, b) => Number(b.vol || 0) - Number(a.vol || 0))
+    .slice(0, 15)
+    .map((m) => ({ ticker: m.ticker, event: m.event_ticker, series: m.series, sub: m.sub, bid: m.bid, ask: m.ask, vol: m.vol, oi: m.oi, close_time: m.close_time })),
+};
+
 const bundle = {
   generatedAt: new Date().toISOString(),
   snapshot,
@@ -166,6 +202,10 @@ const bundle = {
   } : null,
   tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory, runs: runHistory ? runHistory.days.slice(-120) : [] } : null,
   senate2024: senate2024Site,
+  senate2024Races,      // ROADMAP R2 forward-loop capture (data/senate-2024-backtest.json)
+  calibrationForward,   // ROADMAP R3 live 2026 calibration tracker (data/calibration-2026.json)
+  polls2026,            // ROADMAP R4 continuous poll layer (data/polls/polls-2026-series.json)
+  universeSummary,      // ROADMAP R1 latest FULL open-universe snapshot summary
   crosscheck: crosscheck ? { ...crosscheck, largestLastPriceDifferences: (crosscheck.largestLastPriceDifferences || []).slice(0, 8) } : null,
   meta: {
     project: 'Elections — collect, analyze, project & estimate',

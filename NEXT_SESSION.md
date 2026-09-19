@@ -1,69 +1,74 @@
-# Next Session — start here
+# NEXT_SESSION — handoff after the 2026-09-19 branch merge (PR #5 ← session-3 main)
 
-State at the end of session 3 (2026-09-19): R1 live (three live runs, hardened: per-market status, shrink guard,
-run history), R2 done (39-market backtest), R3 running (207 pre-tracker settlements on file, 0 scoreable — the
-look-ahead guard is deliberate), R4 started (15 verified poll entries, 4 flagged review), R5 live, R8 done.
-Master list 73 sources, 37 irregularities, 45 tests. Full status: `ROADMAP.md` / `data/roadmap.json`.
+Two parallel sessions landed on 2026-09-19 and were merged into one repo state (this branch →
+main via PR #5). Everything below describes the **merged** steady state.
 
-Every item keeps the project's rules: free official/trusted sources only, fetch before you write, no hallucinations,
-irregularities logged with an action, nothing imputed.
+## What is live right now (do not rebuild)
 
-## P0 — Confirm the loop is alive (10 minutes)
+- **One daily collection pass** — `.github/workflows/daily-collection.yml`, cron **12:30 UTC**,
+  opt-out via repo variable `COLLECT_DISABLED=true`; push trigger on `arena/**` for collector paths.
+  Steps in order: their compact collector (`scripts/collect-kalshi.mjs` → `data/kalshi/universe/`,
+  `tracker/`, settlements, calibration, consistency) → conditional 2024 Senate capture
+  (`collect-senate-2024.mjs`) → **forward-loop FULL universe** (`collect-universe.mjs` →
+  `data/kalshi/forward/`, continue-on-error) → **per-state Senate races with candles**
+  (`collect-senate-2024-races.mjs` → `data/kalshi/historical-2024/`) → **forward analytics**
+  (`run-senate-backtest.mjs`, `run-calibration.mjs`) → Python sample (`fetch_kalshi.py`) →
+  cross-check → `npm run pipeline` → `sync_site_data.py` → lint + tests → artifacts (7 d) →
+  commit-with-rebase-retry. The former `universe-collection.yml` (12:40 UTC) was **deleted** at
+  merge — its steps run inside this workflow now. Job timeout 90 min.
+- **Master source list**: `data/sources/master.json` = **85 entries** (base 53 + session-3 20 +
+  late batch 12 unique; 8 institutions verified in both 2026-09-19 batches were merged into single
+  entries with labelled second-batch addenda). `VERIFICATION.md` §6/§7/§8 are the audit logs
+  (N-labels are batch-local; master.json ids are canonical).
+- **Irregularities**: 29 items (`data/irregularities.json`, ids 1–12, 23–39) mirrored in
+  `IRREGULARITIES.md`. #26 (IEM host) resolved — `iemweb.biz.uiowa.edu/markets/` fetched live,
+  three 2026 congressional-control markets open. #29 (Quinnipiac mis-dated to June) resolved in
+  BOTH layers — the row is `quinnipiac-2026-07` everywhere now.
+- **2024 Senate backtest**: two complementary captures, both cross-checked 100% against
+  `data/outcomes/senate-2024-official.json` — theirs (`historical/senate-2024.json`, 36 markets +
+  1,269 bars, in `npm run backtest`) and the forward loop's (`historical-2024/senate-races.json` →
+  `data/senate-2024-backtest.json`: T-7 mean Brier 0.101 over 22 scored markets; hold-official-winner
+  at T-7 = +0.2755 $/contract over 11 races).
+- **Calibration**: theirs (`tracker/calibration.json`) is look-ahead-guarded and empty by design
+  until pre-settlement-priced markets settle (207 pre-tracker settlements deliberately unscored).
+  The forward loop's (`data/calibration-2026.json`) scores the 400 settled-2026 candle-seed markets
+  at T-1..T-60 (T-1 n=300) + tracks headline series daily. First live settlement wave: **Nov 3 2026**
+  (LA mayor, 35 Senate races, governors).
+- **Site**: one bundle (`src/data/site-data.js`, ~1.5 MB) with both data layers; sections: overview,
+  2026 Markets, 2026 Polls, Tracker, **Forward Loop (full universe)**, Backtests (both Senate views),
+  Contest, Sources, Irregularities, Methodology, Roadmap. `scripts/render-check.cjs` renders every
+  section headlessly (11 sections) — keep it in sync with `SECTIONS` in `src/site/app.js`.
 
-1. `gh run list --workflow daily-collection.yml` — the 12:30 UTC cron must have run on `main` after the merge and
-   committed `collect: kalshi YYYY-MM-DD`. If not: check Actions → the job log; the opt-out variable
-   `COLLECT_DISABLED` must be unset.
-2. `git log --stat -1 -- data/kalshi/tracker/daily/` — each day should add ≈ 1 MB (one CSV) and small diffs to
-   `index.json` / `latest.json` / `series.json`. If a day's commit is > 5 MB, something regressed (irregularity #30).
-3. Open the live site → **Tracker**: days collected should equal the number of bot commits; the Node-vs-Python
-   agreement share should stay ≥ 99%.
-3a. Do not push to the branch while a collection run is in progress if you can avoid it: the bot rebases and keeps
-   its own generated files on conflict (fixed after run 35413487160 lost its commit to that race), but a bundle
-   built with older `scripts/build-site.mjs` code can then be published against newer `src/site/app.js` until the
-   next run; if that happens, run `npm run pipeline` and push.
+## P0 — first things next session
 
-## P1 — Poll layer (R4) — the highest-value manual work
+1. **Watch the first post-merge cron run** (12:30 UTC daily): confirm ALL steps green, both data
+   layers commit, and the artifact contains `data/kalshi/forward/` + `historical-2024/`.
+2. If a step fails: `tracker/daily/<date>.error.json` and/or the run log tells you which collector;
+   the forward-loop steps are continue-on-error so the main pipeline is never blocked by them.
 
-4. Done this session: Suffolk Iowa (press-release PDF) and NYT/Siena Jul-1 AK/IA/NC/OH toplines (Siena release page).
-   Still to transcribe (fetch the release first, then write): the NYT toplines n / MoE / field dates for those four
-   rows (nytimes.com returns 403 to the fetcher — do it by hand and clear `review: true`), UNH Survey Center NH Senate,
-   Marquette Wisconsin, any new CNN/SSRS or Quinnipiac state polls. Add to `data/polls/poll-layer-2026.json`
-   (`stateRaces`) with `kalshiEvent` / `kalshiDemTicker`; `npm run lint` fails if the ticker is not in the tracker index.
-5. Iowa now has three polls (Emerson R+5, Suffolk R+4, NYT/Siena R+2) around the market's 39.5% (irregularity #34
-   updated). Next: a simple per-race poll average (window, n, pollsters disclosed) in `poll-layer.js`, shown next to
-   the market; Texas is the race where two polls disagree most (Emerson D+1 vs ReconMR-Siena D+6).
-6. Add a weekly "poll release check" script that fetches the pollster index pages (Emerson, Marquette, Siena,
-   Quinnipiac, UNH, Suffolk, SSRS news) and diffs headlines into a review list — never auto-admit numbers.
-7. After Nov 3 2026: The Voter Poll by SSRS data will exist — verify the release page before using any of it.
+## P1 — polish (small, safe)
 
-## P2 — Backtest & calibration
+- **UI dedup**: Tracker/Polls (session-3 data) vs Forward Loop (forward data) show overlapping
+  concepts from two capture pipelines. Consider unifying the views or cross-linking them; the
+  bundle keys are already disjoint (`universe`/`calibration`/`pollLayer` vs
+  `universeSummary`/`calibrationForward`/`polls2026`/`senate2024Races`).
+- Test count references in README (`45 tests`) should match `npm test` output after every suite change.
 
-8. `tracker/settlements.json` already holds 207 results, all for rungs that settled BEFORE the first capture, so
-   `calibration.json → scoreableMarkets` is 0 by design. The first real numbers appear when a market that has
-   pre-settlement rows in `tracker/daily/` settles (watch `history.json → settledMarketsScored`); then review
-   `byLead/pooled` and put the first numbers in README/Tracker prose. Check after the 2026-09-20 run whether
-   the 207 finalized rungs still come back nested in open events (irregularity #37, API semantics question).
-9. Extend `collect-senate-2024.mjs` to 2024 governor/House series if they exist on Kalshi (same pattern:
-   `/historical/markets?series_ticker=…`), and add the 2020 poll-only cycle (R6).
-10. Run the two-collector cross-check once against `external-api.kalshi.com` (R10, irregularity #31).
+## P2 — open roadmap items (see ROADMAP.md for all 10)
 
-## P3 — Sources (same bar: fetch, describe what you saw, link)
+- R6: 2020 poll-only backtest row (no Kalshi markets existed pre-2021 — state explicitly).
+- R7+: state-legislative layer via the NCSL 2026 hub (6,139 seats / 88 chambers) — entry `ncsl-elections`.
+- Exit polls: confirm Edison/SSRS 2026 coverage before using any exit-poll data (still unconfirmed).
+- Python track: wire `backtest/` engines to the verified datasets (they run on labeled synthetic data).
+- IEM direct re-verify beyond the markets board (proxy blocked deeper pages); RCP page freshness (#15),
+  AP VoteCast 2026 status (#17), Harvard Dataverse homepage (#19) re-checks.
 
-11. Candidates not yet admitted: New Hampshire SoS (find a fetchable URL — 403 on the results page), Minnesota SoS,
-    Nebraska SoS, Georgia results host `results.sos.ga.gov` as its own entry, Suffolk Iowa release page,
-    NYT/Siena state toplines PDFs, Polymarket Gamma API docs (for R9), Kalshi `/events` docs page.
-12. Re-verify entries older than 60 days (the `verifiedOn` column) — sources drift (538, Monmouth, Gallup did).
+## Gotchas learned the hard way
 
-## P4 — Contest & site
-
-13. Add entrants that only make sense on the wide universe (incumbent-defender, seat-count basis, volatility
-    scaling) — executable `decide()` rules only, thesis stated up front (R7).
-14. Site: when `tracker.days > 1`, the Tracker page draws price-history charts automatically; check they render.
-    Consider a per-state race page once the poll layer has ≥ 3 polls per race.
-
-## Python track (kept in sync)
-
-15. `fetch_kalshi.py` now writes a 2,000-market sample; `docs/data/kalshi_latest.json` mirrors its log. If the
-    toolkit site should show prices, extend `sync_site_data.py` to read `data/kalshi/universe/latest.json`.
-16. Open re-checks: RCP freshness (#15) — resolved 2026-09-19 (page current); AP VoteCast 2026 (#17) — resolved
-    (superseded by The Voter Poll); Harvard Dataverse homepage (#19) — still to re-fetch.
+- Kalshi `status=finalized` markets sit INSIDE open events (207 found) — any new scorer must keep the
+  look-ahead guard (a post-settlement price is not a forecast). See irregularity #37.
+- `mutually_exclusive` does NOT imply an exhaustive outcome set (#32).
+- Some official hosts block bots: `results.enr.clarityelections.com/GA` (403), `sos.nh.gov` results
+  (403), NYT toplines (#35). The proxy also intermittently 502s (IEM earlier) — record, re-verify later.
+- Bot commit step rebases with `-X theirs` on generated files; never hand-edit `src/data/site-data.js`,
+  `docs/data/*`, `ROADMAP.md` (generated by `scripts/gen-roadmap.mjs` from `data/roadmap.json`).

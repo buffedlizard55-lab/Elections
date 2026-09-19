@@ -142,8 +142,8 @@
    "severity": "low",
    "area": "Master list hygiene",
    "title": "IEM entry pointed at a non-existent host (iem.isu.edu); canonical is iem.uiowa.edu/iem/",
-   "detail": "The 2026-09-19 (session 2) entry recorded 'https://iem.isu.edu/' as the Iowa Electronic Markets URL, copied from a search snippet. Direct fetch 2026-09-19 (session 3): iem.uiowa.edu/iem/ returns 200 (Tippie College of Business); iem.uiowa.edu/iem/markets/ returned HTTP 500 server-side. isu.edu is Iowa State, not the University of Iowa.",
-   "action": "URL corrected in data/sources/master.json, VERIFICATION.md N21/§6a and ROADMAP R8; treat any URL taken from a search snippet as unverified until fetched.",
+   "detail": "The 2026-09-19 (session 2) entry recorded 'https://iem.isu.edu/' as the Iowa Electronic Markets URL, copied from a search snippet. Direct fetch 2026-09-19 (session 3): iem.uiowa.edu/iem/ returns 200 (Tippie College of Business); iem.uiowa.edu/iem/markets/ returned HTTP 500 server-side. isu.edu is Iowa State, not the University of Iowa. Late-batch update: the IEM markets board (iemweb.biz.uiowa.edu/markets/) was subsequently fetched LIVE — three 2026 winner-takes-all congressional-control markets open; master entry upgraded to status verified with marketsUrl.",
+   "action": "URL corrected in data/sources/master.json, VERIFICATION.md N21/§6a and ROADMAP R8; treat any URL taken from a search snippet as unverified until fetched. RESOLVED 2026-09-19 (entry corrected + live-verified).",
    "source": "https://iem.uiowa.edu/iem/"
   },
   {
@@ -244,6 +244,24 @@
    "detail": "Daily capture 2026-09-19 (GET /events?status=open&with_nested_markets=true): 207 of 10,915 traded markets had close_time < capture time (17 in July, 102 in August, 88 in September 2026), yes_bid 0 / yes_ask 1 and last prices pinned near 0.01 or 0.99 (e.g. KXBERNIEENDORSE-26NOV03-ADEL closed 2026-07-14, KXTRUMPMEETING-27JAN01-NCSHE closed 2026-07-19 at 0.998, KXHORMUZNORM-26MAR17-B260715 closed 2026-07-21 with 2.18M volume). Multi-market events stay 'open' until every rung settles, so closed rungs are nested in open events. The first-day files did not record the per-market status field, so whether the exchange reports them as 'closed' or still 'active' is unknown until the next live run. None of them is a 2026 general-election race market. The Python sample (top 2,000 by volume) contained none because its filter reads status directly. Update (live run 35412822292, 01:30 UTC the same day, after the status column was added): the API reports all 207 as status=finalized with official results — 174 no, 33 yes; settlement_ts between 2026-07-13 and 2026-09-18. Before the guard, the first scorer pass pooled their post-settlement prices (170 observations in the 0–10% bucket with 0% YES) — a look-ahead artefact, not calibration evidence.",
    "action": "Fixed: finalized rungs are recorded once in tracker/settlements.json (with settlement_ts and result) and excluded from the daily CSV; closed-pending rungs keep their status; src/calibration.js ignores any price row with a non-active status and any observation dated on/after the settlement day (scoreableMarkets / observationsExcludedAsLookAhead are reported). Site: 'settlements on file' table, run log, 'past close' chips. Still open: why finalized rungs remain nested in status=open events (Kalshi API semantics) — documented in LIMITATIONS.",
    "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/data/kalshi/universe/latest.json"
+  },
+  {
+   "id": 38,
+   "severity": "low",
+   "area": "Official sources",
+   "title": "DOJ Civil Rights Division Voting Section program pages moved to the administration archive (404 on the legacy URLs, observed 2026-09-19)",
+   "detail": "justice.gov/crt/voting-section-activities returns 'Page not found'; DOJ's own 404 page states 'Some files associated with previous administrations have been moved to the Archive section of the Department website.' The Division homepage (justice.gov/crt) is live with 2026 press releases and an election-integrity reporting portal ('Do you have evidence of non-citizens voting in elections?').",
+   "action": "Master entry points at the live Division page; deep-links into Voting Section content must be re-resolved via the DOJ archive or search before citation. Monitor: removal/relocation of voting-rights program pages is itself an election-administration signal.",
+   "source": "https://www.justice.gov/crt"
+  },
+  {
+   "id": 39,
+   "severity": "low",
+   "area": "Campaign-finance data",
+   "title": "NIMSP FollowTheMoney.org is in merger transition — state data frozen at the 2024 election year",
+   "detail": "Site banner (fetched 2026-09-19): 'We merged to form OpenSecrets! The National Institute on Money in Politics and the Center for Responsive Politics joined forces to become OpenSecrets. This website displays state campaign finance data that is current through the 2024 election year. While the data is current, the site isn't maintained as we integrate with OpenSecrets and you may find bugs.'",
+   "action": "Use FollowTheMoney.org for the deep 1990-2024 STATE archive; route any NEW state campaign-finance pulls through OpenSecrets (which now advertises governors/legislatures/judicial for all 50 states). Re-check whether followthemoney.org URLs stay live after integration completes.",
+   "source": "https://www.followthemoney.org/"
   }
  ]
 }

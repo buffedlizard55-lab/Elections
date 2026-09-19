@@ -19,7 +19,7 @@ vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 sandbox.Chart2 = { lines() {} };
 vm.runInContext(app, sandbox);
-const sections = ['overview', 'markets', 'polls', 'tracker', 'backtests', 'contest', 'sources', 'irregularities', 'methodology', 'roadmap'];
+const sections = ['overview', 'markets', 'polls', 'tracker', 'forward', 'backtests', 'contest', 'sources', 'irregularities', 'methodology', 'roadmap'];
 let ok = true;
 for (const s of sections) {
   sandbox.location.hash = '#/' + s;

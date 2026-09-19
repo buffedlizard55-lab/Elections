@@ -14,6 +14,14 @@
 #                                              (or forced via workflow_dispatch input)
 #   3. python scripts/fetch_kalshi.py       -> Python-track independent sample (top 2,000 by volume)
 #      node scripts/crosscheck-collectors.mjs -> tracker/collector-crosscheck.json (agreement report)
+#   3b. node scripts/collect-universe.mjs   -> FULL open-market snapshot (all ~24k open political/
+#                                              election markets, not just top-volume) + settled-2026
+#                                              candle seed -> data/kalshi/forward/ (continue-on-error:
+#                                              a failure here never blocks the main pipeline above)
+#       node scripts/collect-senate-2024-races.mjs -> per-state 2024 Senate capture (36-39 markets
+#                                              incl. candles) -> data/kalshi/historical-2024/
+#       node scripts/run-senate-backtest.mjs + run-calibration.mjs -> forward-loop analytics
+#                                              (data/senate-2024-backtest.json, data/calibration-2026.json)
 #   4. npm run pipeline + lint + tests      -> regenerated backtest/contest/site outputs
 #   5. commit data/ + src/data/ + docs/data/ back to the branch that ran it
 # Failure semantics:
@@ -24,6 +32,9 @@
 #     pipeline / lint / tests did not succeed it restores the generated site
 #     bundles (src/data, docs/data) from HEAD before committing, so raw data is
 #     never lost and a broken bundle is never published to GitHub Pages;
+#   - the former universe-collection.yml (a second daily cron for the forward loop) was retired
+#     when the branches merged on 2026-09-19: its steps now run inside this workflow (3b), so
+#     there is exactly ONE daily collection pass;
 #   - if a human push lands mid-run, the bot rebases and keeps its own version
 #     of any conflicting generated file (run 35413487160 on 2026-09-19 lost its
 #     commit to exactly this race before the -X theirs / --abort retry existed;
@@ -48,6 +59,13 @@ on:
       - 'src/kalshi-api.js'
       - 'src/calibration.js'
       - 'src/consistency.js'
+      - 'scripts/collect-universe.mjs'
+      - 'scripts/collect-senate-2024-races.mjs'
+      - 'scripts/run-senate-backtest.mjs'
+      - 'scripts/run-calibration.mjs'
+      - 'src/kalshi-live.js'
+      - 'src/calibration-tracker.js'
+      - 'src/senate2024-backtest.js'
       - 'test/collector.test.mjs' # the offline replay test must be proven against a live capture
       - '.github/workflows/daily-collection.yml'
 
@@ -62,7 +80,7 @@ jobs:
   collect:
     if: ${{ vars.COLLECT_DISABLED != 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -91,6 +109,23 @@ jobs:
         continue-on-error: true
         run: node scripts/crosscheck-collectors.mjs
 
+      - name: FULL open-market universe snapshot (forward loop -> data/kalshi/forward/)
+        continue-on-error: true
+        timeout-minutes: 25
+        run: node scripts/collect-universe.mjs || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+
+      - name: 2024 per-state Senate races capture (forward loop -> data/kalshi/historical-2024/)
+        continue-on-error: true
+        timeout-minutes: 15
+        run: node scripts/collect-senate-2024-races.mjs || echo "::warning::senate-races capture failed - previous capture stays in place"
+
+      - name: Forward-loop analytics (senate backtest + live 2026 calibration tracker)
+        continue-on-error: true
+        timeout-minutes: 10
+        run: |
+          node scripts/run-senate-backtest.mjs || echo "::warning::senate backtest rerun failed"
+          node scripts/run-calibration.mjs || echo "::warning::calibration tracker rerun failed"
+
       - name: Regenerate backtests, contest, site bundle
         id: pipeline
         run: npm run pipeline
@@ -115,6 +150,11 @@ jobs:
             data/kalshi/tracker
             data/kalshi/historical
             data/kalshi/LATEST.json
+            data/kalshi/forward
+            data/kalshi/historical-2024
+            data/calibration-2026.json
+            data/senate-2024-backtest.json
+            data/polls/polls-2026-series.json
           retention-days: 7
           if-no-files-found: ignore
 
