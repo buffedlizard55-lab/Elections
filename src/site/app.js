@@ -223,7 +223,9 @@
       <td>${srcs([p.source])}</td></tr>`).join('');
     const agg = PL.aggregatorReadings.map((a) => `<tr><td><strong>${esc(a.aggregator)}</strong><br><span class="small">${esc(a.verifiedVia)}</span></td><td class="small">${esc(a.window)} (as of ${esc(a.asOf)})</td><td class="small">${a.pollsInAverage} polls</td><td class="num">${a.D}</td><td class="num">${a.R}</td><td class="num pos">${esc(a.spread)}</td><td></td><td>${srcs([a.source])}</td></tr>`).join('');
     const mc = PL.marketComparison;
-    const races = mc.rows.map((r) => `<tr>
+    // group by race (state), newest field period first inside a race; JSON order stays provenance order
+    const raceRows = mc.rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.race.localeCompare(b.r.race) || String(b.r.fieldDates).localeCompare(String(a.r.fieldDates)) || a.i - b.i).map((x) => x.r);
+    const races = raceRows.map((r) => `<tr>
       <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}</span></td>
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
@@ -308,7 +310,7 @@
     Nothing is imputed: the empty state below is the honest state.</p>
     <div class="grid cols4">
       <div class="stat"><div class="n">${D.tracker.days.length}</div><div class="l">collection day${D.tracker.days.length === 1 ? '' : 's'} (${esc(D.tracker.days[0])} → ${esc(D.tracker.days[D.tracker.days.length - 1])})</div></div>
-      <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)${U.counts.openMarketsClosedBeforeCapture != null ? ` · ${int(U.counts.openMarketsClosedBeforeCapture)} past their close_time, settlement pending` : ''}</div></div>
+      <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)${(() => { const fin = U.counts.openMarketsFinalizedInFeed || 0; const pend = U.counts.openMarketsClosedBeforeCapture != null ? Math.max(0, U.counts.openMarketsClosedBeforeCapture - fin) : null; return `${pend ? ` · ${int(pend)} past their close_time, settlement pending` : ''}${fin ? ` · ${int(fin)} already settled in the feed (recorded as settlements, not tracked)` : ''}`; })()}</div></div>
       <div class="stat"><div class="n">${int(cal.scoreableMarkets != null ? cal.scoreableMarkets : cal.settledMarkets)}</div><div class="l">settled markets scored (priced before they settled) · ${st ? int(st.count) : 0} settlements known${cal.observationsExcludedAsLookAhead ? ` · ${int(cal.observationsExcludedAsLookAhead)} post-settlement price rows excluded as look-ahead` : ''}</div></div>
       <div class="stat"><div class="n">${cc ? pct(cc.lastPrice.share, 2) : '—'}</div><div class="l">Node-vs-Python last-price agreement (≤2¢) on ${cc ? int(cc.overlap) : '—'} overlapping tickers</div></div>
     </div>

@@ -37,6 +37,16 @@
 | 19 | SRC-019 | Split Ticket | https://split-ticket.org/ | direct-fetch | LIVE. 2025–2026 articles on page. Partnership notice (bulk of new analysis via The Argument; URL unverified) flagged. |
 | 20 | SRC-020 | OpenSecrets | https://www.opensecrets.org/ | direct-fetch | LIVE. Sept 16, 2026 news + full data nav on page. CRP stewardship corroborated (MacArthur record). |
 
+### Re-checks 2026-09-19
+
+| # | Source | URL checked | Method | Result |
+|---|--------|-------------|--------|--------|
+| R19a | SRC-009 Harvard Dataverse | https://dataverse.harvard.edu/ | direct-fetch | HTTP 500 again (2 attempts; also /dataverse/medsl_election_returns). |
+| R19b | SRC-009 Harvard Dataverse | https://dataverse.harvard.edu/api/info/version | api | {"status":"OK","data":{"version":"6.10.1","build":"iqss-4"}} — live. |
+| R19c | SRC-008 CES dataset | https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/PR4L8P | api | Resolves: "Cooperative Election Study Common Content, 2022", version 4 (released 2024-04-23), CC0 1.0, N = 60,000, authors Schaffner (Tufts) / Ansolabehere (Harvard) / Shih (YouGov), NSF award 2148907; file CCES22_Common_OUTPUT_vv_topost.csv md5 0819d70f07dbf2978e3df2496097773a. Caveat added to SRC-008: this DOI is the 2022 release. |
+| R15 | SRC-017 RealClearPolitics | https://www.realclearpolitics.com/epolls/latestpolls/ | direct-fetch (2026-09-19, earlier in session) | Page current (Sept 17 generic-ballot average D 50.5 / R 41.9 observed) — irregularity #15 resolved. |
+| R17 | SRC-010 AP VoteCast | https://www.ap.org/about/how-we-survey-the-electorate/ + https://ssrs.com/news/the-voter-poll-by-ssrs/ | direct-fetch (2026-09-19, earlier in session) | For 2026 the product is "The Voter Poll by SSRS" (NEP/Edison exit poll + AP VoteCast merged); no 2026 data before Nov 3 2026 — irregularity #17 resolved (superseded). |
+
 ## Kalshi layer (market data, separate track)
 
 | # | Item | URL checked | Method | Result on 2026-09-18 |
