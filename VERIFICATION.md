@@ -206,3 +206,141 @@ Method: every candidate was checked against the official source before being add
 | N41 | CRS Products (`crs`) | direct fetch congress.gov/crs-products (crsreports.congress.gov redirects) | "nonpartisan shared staff to congressional committees and Members"; U.S.-Government works, no copyright, freely redistributable; live stream (Sep 18, 2026: R48887 U.S. Conflict with Iran etc.); full-text search + alerts |
 
 Duplicate-check before adding: `pew` (N15) and `edison-ssrs` (N16) already existed — Pew/SSRS candidates were dropped from the batch rather than duplicated. All 20 new ids checked unique programmatically (73 total, `new Set(ids).size === 73`). Lint (`scripts/lint-verified.mjs`) re-run after the batch: 16 data JSON / **73 sources** / 4 outcomes / 5 markets — all provenance checks pass.
+
+---
+
+## 9 · 2026-09-19 session 4 (branch `arena/01a0bada-elections`) — 20 new master-list entries, every one fetched directly
+
+Requested verbatim: *"Search for 20 new entries. Before adding to master list, Verify no hallucinations."* Entry labels
+N42–N61 below are **batch-local** (they continue §8's N22–N41 numbering); the canonical identifiers are the
+`data/sources/master.json` ids shown in parentheses.
+
+Method — stricter than §6–§8: **all 20 entries were fetched directly** through this session's proxied fetch tool on
+2026-09-19. Nothing in this batch was admitted on a search snippet, on prior knowledge, or on a URL that could not be
+opened. Each `verified` field records only text observed on the fetched page, quoted verbatim where quotation marks
+appear. Candidates that failed to fetch were **excluded** and are itemised in §9c. The merge ran a programmatic
+duplicate check first: 105 ids / 105 urls, `new Set(ids).size === 105`, `new Set(urls).size === 105`, and none of the
+20 new domains occurs anywhere in the previous 85 entries. Master list is now **105 entries** (32 verified 2026-09-18,
+73 verified 2026-09-19).
+
+| # | Entry (id) | Fetched URL (link for manual review) | What was observed on the official source (2026-09-19) |
+|---|---|---|---|
+| N42 | FVAP — Federal Voting Assistance Program, DoD (`fvap`) | direct fetch https://www.fvap.gov/ | "Voting assistance for Service members, their families and overseas citizens"; countdown "**45 Days until the November 03 General Election**" (2026-09-19 + 45 = 2026-11-03); Upcoming Elections: Georgia General Runoff + Arkansas General Runoff (Dec 1); state selector = 50 states + DC, AS, GU, PR, VI with guidelines/dates/office lookup/ballot status; FPCA + FWAB tools; Voter Alerts Sep 3, Aug 4, Jul 17 2026; "Phishing Campaign Impersonating FVAP.gov" (Apr 29) |
+| N43 | Wisconsin Elections Commission (`wisconsin-wec`) | direct fetch https://elections.wi.gov/ | "Your 2026 Election Roadmap" + 2026 Election Information Hub; "a **six member, bipartisan commission** … supporting Wisconsin's **1,851 municipal clerks and 72 county clerks**"; dates Oct 14 (mail/online registration deadline), Oct 20 (in-person absentee may begin), Oct 30 (write-in filing; in-person registration), **Nov 03 2026 General Election**; MyVote WI, ElectEd, sworn complaints, election security. Deep path `/elections-voting` returned "**Access denied**" — IRREGULARITIES **#40** |
+| N44 | Nevada Secretary of State — Elections (`nevada-sos`) | direct fetch https://www.nvsos.gov/elections | Hub links: Election Information, Voter Information, **Voter Registration Statistics**, Information for Candidates, Initiatives & Referenda, Resources, My Voter File (`/votersearch/`). URL CORRECTION: `/sos-elections` → the site's own 404 ("may have been removed, renamed, entered wrong…") behind a BotDetect CAPTCHA — **#41**. County results pages located via live search on the same host (`/SOSelectionPages/results/2026StateWidePrimary/Clark.aspx` — "Official Primary Election Results Clark", 141/141 precincts) |
+| N45 | California Secretary of State — Elections Division (`california-sos`) | direct fetch https://www.sos.ca.gov/elections | "Elections and Voter Information :: California Secretary of State"; **General Election – November 3, 2026**: online registration closes Oct 19, ballots mailed by Oct 5, drop boxes open Oct 6, first VCA vote centers Oct 24, in-person early voting Oct 31, "Mailed ballots must be postmarked on or before November 3", polls 7:00 a.m.–8:00 p.m.; registertovote.ca.gov, voterstatus.sos.ca.gov, voterguide.sos.ca.gov, VoteCal, Same-Day/Conditional registration, NVRA, Political Parties, Elections Division (800) 345-VOTE. CDN host `elections.cdn.sos.ca.gov` → S3 "**AccessDenied**" — **#42** |
+| N46 | Pennsylvania Department of State — vote.pa.gov (`pennsylvania-dos`) | direct fetch https://www.pa.gov/agencies/vote (vote.pa.gov redirects here) | "Welcome to Pennsylvania's official voter information website"; **Election Results** (state returns site), **Voting and Election Statistics**, Upcoming Elections, mail/absentee + ballot availability, mail ballot before Election Day, Accessible Remote Mail Ballot, county election offices, election complaints, poll workers, Election Security, "**Fact-Checking Election Claims**"; ra-voterreg@pa.gov, 1-877-868-3772; Spanish + Traditional Chinese paths |
+| N47 | Virginia Department of Elections (`virginia-elections`) | direct fetch https://www.elections.virginia.gov/ | "An official website of the Commonwealth of Virginia"; live notice "**Early Voting Starts September 18** … through October 31, 2026"; Citizen Portal (`vote.elections.virginia.gov/VoterInformation`); Upcoming Election Info; Voter Pocket Guide; polling-place/ballot lookup; **Campaign Finance** — "Full public access to campaign financial data and financial disclosure reports"; Officer of Election application; mission: "promotes and supports accurate, fair, open and secure elections" |
+| N48 | U.S. Government Accountability Office (`gao`) | direct fetch https://www.gao.gov/ | "When Members of Congress Need Answers to Complex Questions—They Come to GAO"; live products with Published **and** Publicly Released dates (GAO-26-109302, GAO-26-109300 — Sep 18, 2026; GAO-26-107871, GAO-26-109097, GAO-26-108106, GAO-26-108836 — Sep 17, 2026); bid-protest decisions Sep 17–18 2026; "Improper Payments Rose to an Estimated $186 Billion in FY25"; High Risk List; blog "**Mail is Taking Longer to Deliver—We Looked at Why**" (Sep 17, 2026) |
+| N49 | Cooperative Election Study — Tufts Tisch College (`ces-tufts`) | direct fetch https://tischcollege.tufts.edu/research-faculty/research-centers/cooperative-election-study (`/ces` redirects here) | "the **largest academic survey focused on American elections**"; "Since 2006 … **more than a half-million Americans**"; "partially funded by the **National Science Foundation**"; election years = "**more than 50,000 American adults before and after the election**" (pre-election wave: attitudes, demographics, policy assessments, political information, vote intentions; post-election wave: how they voted); Interactive CES Analytics, Dataverse data downloads, CES blog, listserv; in-the-news item "Could Prediction Markets Replace Election Polling?" (Tufts Now, 2026-07-31). Harvard host `cces.gov.harvard.edu` is stale ("PLEASE NOTE THAT OUR NEW WEBSITE CAN BE FOUND HERE"; newest news March 04, 2024) — **#44** |
+| N50 | Stanford-MIT Healthy Elections Project (`healthyelections-mit`) | direct fetch https://web.mit.edu/healthyelections/www/home.html | "Promoting a Safe & Equitable **2020** Election"; "The Virus and the Vote" final report; "**COVID-Related Election Litigation Tracker**"; "After the Polls Close"; "The Miracle and Tragedy of the 2020 Election"; Latest Additions dated **Jun 19, 2021** / Apr 14, 2021; "© 2022 All rights reserved". `healthyelections.org` → HTTP 500 and `healthyelections.mit.edu` is a stub — **#45**; entry labelled ARCHIVE |
+| N51 | VoteView — UCLA (`voteview`) | direct fetch https://voteview.com/ | "**UCLA Presents voteview.com beta 3**"; "**113,550 votes found**"; filters for chamber, date, Congress 1st–119th, vote outcome, subject matter, Key Vote (CQ/Wikipedia). Live 119th-Congress records on the page: Senate 897 (Sep 17, 2026, PN9994, **49-45**, Nomination Confirmed — Kasdin Miller Mitchell, N.D. Tex.), Senate 896 (49-47 cloture), Senate 895 (S4668, 77-22), House 674 (S2403, 401-14), 673 (HR9497, 415-9), 672 (HR9340, 417-3), 671 (HJRES213, 214-208) — House votes dated Sep 16, 2026; per-vote export |
+| N52 | CIRCLE — Tufts (`circle-tufts`) | direct fetch https://circle.tufts.edu/ | "**2026 Youth Poll** — over 5,000 young people … ahead of the midterms"; "Almost **50 million Gen Zers** will be eligible to vote in 2026 … Fielded between **January 26 and February 12** by CIRCLE and When We All Vote … oversampling young Black and Latino voters"; "**2026 Youth Electoral Significance Index** — rankings of 2026 U.S. Senate and gubernatorial elections where the youth vote can have the biggest impact on results" (`/yesi2026`); "Modest Increases in Youth Voter Registration Compared to 2022 Midterms" (18–19 registrations still lower); 2024 post-election youth-vote analyses; Gen Z attitudes-toward-democracy report |
+| N53 | Brennan Center for Justice, NYU Law (`brennan-center`) | direct fetch https://www.brennancenter.org/ | "We stand for the rule of law / the freedom to vote / democracy"; "strengthens American democracy through research, advocacy, and public education"; topic hubs **Voting & Elections**, **Money in Politics**, Government Power; live 2026 items with in-line type labels: resource "**Vote Safely in 2026**", policy solution "Eight Solutions to Protect Voting Rights and Improve Representation", analysis "**Supreme Court Rules Postal Service Must Deliver Mail Ballots**" (2026-09-15), expert brief "The Trump Administration's Campaign to Undermine the Next Election"; midterms hub `/midterms-2026`. Deep-path guesses returned "Content Not Found" — §9c |
+| N54 | Bipartisan Policy Center — Elections (`bipartisan-policy-center`) | direct fetch https://bipartisanpolicy.org/explainer/a-proposal-for-bipartisan-federal-election-reform/ | Explainer comparing the **ACE Act** (Chair Bryan Steil, R-WI) with the **Freedom to Vote Act** (Bennet/Hickenlooper/Klobuchar) across four areas — casting a ballot, voter registration, voter ID, certification — drawn from "**BPC's bipartisan election official task force**"; links three BPC reports verified on the page ("Logical Election Policy" with its numbered recommendations, "Policies Beyond the Next Election", "Voting Experience 2020"); NCSL-linked state counts (automatic registration 22 states, online 42); states plainly it "is not an exhaustive proposal". Shallow paths `/elections/`, `/topic/elections/` → "Page not found" — §9c |
+| N55 | Decision Desk HQ + DDHQ Votes (`decision-desk-hq`) | direct fetch https://www.decisiondeskhq.com/ | "delivers reliable and fast U.S. election data — built for newsrooms, platforms, research, and business use"; "independent results and analysis across **every level** of U.S. elections … presidency and Congress down to mayor and school board"; Data Reporting ("real-time county level election results, **historical datasets** and race projections"), Analysis; **DDHQ Votes** (`votes.decisiondeskhq.com`): "results … **dating back to 2000**", interactive maps/swing views, and "**Prediction Market Integration — Track live odds and market movement from Kalshi and Polymarket alongside official election results**"; Kalshi-branded screenshot of 2024 Wisconsin presidential results |
+| N56 | 270toWin (`270towin`) | direct fetch https://www.270towin.com/ | "**Prediction Markets** — Which party will win the 2028 Presidential Election? **57% / 41%**" with a Kalshi logo and the disclosure "Probability based on the most recent 'yes' trade for each party as of **Sep. 19, 2026 at 18:17 UTC** (2:17 PM EDT). **May not total 100%.**"; "Kalshi **American Power Index** (+1.90 D, KPOW as of 9/17/26 11:53 AM EDT)"; 2026 **Forecast** and 2026 **Polls** pages for Senate/House/Governor; maps for President, Senate, House, Governor, State Senate, State House; dated headlines: Delaware primary live results (Sep 15, 2026), Rhode Island (Sep 9), New Hampshire (Sep 8), "New Interactive Maps: FiftyPlusOne Senate and House Forecast" (Sep 2), Massachusetts (Aug 31); "© 2026 Electoral Ventures LLC"; base map stamped "Map Updated: Jan. 29, 2025" — cross-checked in §9a, recorded as **#46** |
+| N57 | AtlasIntel (`atlasintel`) | direct fetch https://www.atlasintel.org/ | "**Public Polls** — Nationally representative polls conducted by AtlasIntel using its **proprietary data collection technology and post-stratification algorithms**" (`/polls/general-release-polls`); "Tracking Pro — Proprietary **high-frequency polling** … when public opinion shifts and the likelihood of political outcomes changes" (`tracking.atlasintel.org`); Atlas Monitor; Political Risk; Forecasting; Atlas Político. Admitted with the method caveat on the entry and **#49** |
+| N58 | The Harris Poll (`harris-poll`) | direct fetch https://theharrispoll.com/ | "See Tomorrow. Shape Today."; "a global **market research and advisory partner**"; scale claims "70+ Years … since 1956", "40M Unique respondents", "67K+ Media mentions last year", "90 Countries surveyed"; report library (Six Types of AI Users, Sports Momentum, State of Pets 2026, America's World Cup Moment, Algorithmic Aisle, AutoTECHCAST 2026); sub-brands Harris Quest / Storyline Strategies / Bera AI / Emerald Research Group. **No political polling on the page** — DISCREPANCY **#43**; entry admitted as methodology/market-research only |
+| N59 | NPR — Elections 2026 (`npr-elections`) | direct fetch https://www.npr.org/sections/elections/ | "Elections 2026: The latest from the NPR Network"; Sep 18, 2026: "Republican 'cavalry' arrives with a **Trump-backed $150 million ad blitz** in key races" ("two Trump-aligned super PACs have reserved more than $150 million in ads — primarily in deep red House and Senate races that have now become competitive", 4:05 audio + transcript), "A DHS email raises new questions about the Trump administration's election plans" (Exclusive, document linked), "It's illegal for armed federal officers to be at polls. Lawsuits seek to ensure that" (Exclusive); Sep 16, 2026: "**close to 100 lawmakers** who started this Congress will not be around for the next one, according to an **NPR analysis**"; "AI-generated ads are everywhere" |
+| N60 | PBS NewsHour — Politics (`pbs-newshour`) | direct fetch https://www.pbs.org/newshour/politics | "Politics — Follow PBS NewsHour's **complete coverage of politics, Congress, the Supreme court and the presidency**"; items with on-page dates and bylines: Sep 19 "Trump announces all 50 states joining Medicaid drug pricing model" (Fatima Hussein, AP), "MS NOW, CNN and Politico say their journalists were denied access to White House after Trump ban" (Jocelyn Noveck, AP), Kennedy Center protest (Gary Fields, AP); Sep 18 Big Bend border wall ("$46 billion plan", Rebecca Santana, AP), Greenland agreement (Nick Schifrin), press-freedom ban (Liz Landers), News Wrap (Newsom AI order), "Shadow surge" immigration arrests (Geoff Bennett) |
+| N61 | Saint Anselm College Survey Center — NHIOP (`saint-anselm-sasc`) | direct fetch of the primary PDF https://www.anselm.edu/sites/default/files/2026-06/June%2024-25%202026%20Poll.pdf | "A SURVEY OF NEW HAMPSHIRE REGISTERED VOTERS — **June 24-25, 2026**", Neil Levesque (Executive Director), Tauna Sisco Ph.D. (Faculty Advisor); method verbatim: "online surveys of **1614** New Hampshire registered voters … collected between June 24th and 25h, 2026, from cell phone users randomly drawn from a sample of registered voters … **margin of sampling error of +/- 2.4%** with a confidence interval of 95% … weighted for age, gender, geography, and education based on a voter demographic model derived from historical voting patterns, but are **not weighted by party registration or party identification**"; sections incl. Weighted Marginals/Tables/Demographics; ballot tests NH Gov (Ayotte v Warmington), US Senate (Pappas v Brown; Pappas v Sununu), CD-1/CD-2 primaries, 2028 NH primary; findings: Pappas 46-43 favourable and **62-20** over Manzur; Sununu over Brown **59-21**; Shaheen 22 / Sullivan 15 (CD-1 D); Noveletsky 16 / DiLorenzo 13 (CD-1 R); Goodlander **76-9** over Beauchemin |
+
+### 9a · Cross-check of the new sources against this project's own captured Kalshi data (run 2026-09-19)
+
+Every state/pollster entry added above was tied back to the markets this repo already captured, using
+`data/kalshi/forward/universe-open.json` (full open universe, 24,084 markets, `capturedAt 2026-09-19`) and
+`data/kalshi/tracker/daily/2026-09-19.csv`. Prices are the captured `yes_bid`/`yes_ask`, never a rendered percentage:
+
+| New entry | Kalshi market in the 2026-09-19 capture (candidate name as captured) | Captured bid/ask |
+|---|---|---|
+| `wisconsin-wec` | GOVPARTYWI-26-D "David Crowley" · GOVPARTYWI-26-R "Tom Tiffany" (+ vote-share ladders `KXVOTEGENERAL-GOVPARTYWI-26DCRO-*`, `…26TTIF-*`) | 0.80/0.81 · 0.19/0.20 |
+| `nevada-sos` | GOVPARTYNV-26-R "Joe Lombardo" · GOVPARTYNV-26-D "Aaron Ford" (+ `…NV-26JLOM-*`, `…NV-26AFOR-*`) | 0.55/0.56 · 0.44/0.45 |
+| `california-sos` | GOVPARTYCA-26-D "Xavier Becerra" · GOVPARTYCA-26-R "Steve Hilton"; KXGOVCA-26-SHIL is **#11 by lifetime volume** (8,707,389 contracts) | 0.958/0.967 · 0.029/0.043 |
+| `pennsylvania-dos` | GOVPARTYPA-26-D "Josh Shapiro" · GOVPARTYPA-26-R "Stacy Garrity" (+ ladders e.g. `…PA-26JSHA-62` "At least 62%" 0.39/0.45, `…PA-26SGAR-36` "At least 36%" 0.51/0.60) | 0.968/0.973 · 0.030/0.033 |
+| `virginia-elections` | SENATEVA-26-D "Mark Warner" · SENATEVA-26-R "Bert Mizusawa" (+ `…VA-26MWAR-*`, `…VA-26BMIZ-*`); **no VA gubernatorial market in the capture** (last VA governor election was 2025) | 0.973/0.980 · 0.003/0.025 |
+| `saint-anselm-sasc` | SENATENH-26-D "Chris Pappas" · SENATENH-26-R "John E. Sununu" — the same two candidates the June 2026 SACSC release tests head-to-head (+ `…NH-26CPAP-*`, `…NH-26JSUN-*`) | 0.83/0.84 · 0.17/0.18 |
+| `270towin` | KXPRESPARTY-2028-D "Democratic party" · KXPRESPARTY-2028-R "Republican party" | 0.58/0.59 · 0.41/0.42 |
+
+**Third-party rendering vs our captures (the substantive finding, IRREGULARITIES #46).** 270toWin displayed "57%" and
+"41%" for the 2028 presidential party market, labelled "most recent 'yes' trade … as of Sep. 19, 2026 at 18:17 UTC" and
+"May not total 100%". This project's two independent captures of the same tickers — Node events feed
+`2026-09-19T15:59:45.931Z` and Python markets feed `2026-09-19T15:59:58+00:00` — are **identical to each other**
+(D 0.58/0.59/last 0.58; R 0.41/0.42/last 0.41). The rendered 41% equals the Republican last trade exactly; 57% is 1¢
+below the Democratic last trade taken 2h18m earlier. Attribution of 57%→Democrat / 41%→Republican is an **inference**
+from that match (the page labels neither figure), and the 98% sum matches the page's own disclaimer. Conclusion
+recorded: third-party panels corroborate our captures to within 1¢, but they are last-trade based, need not sum to
+100%, and can sit on a page whose base map is 20 months older — so they are a corroboration surface, never a price
+source.
+
+**Election-date triangulation.** FVAP's live countdown ("45 Days until the November 03 General Election"), the WEC
+calendar ("Nov 03 2026 — 2026 General Election"), California SOS ("General Election - November 3, 2026"), Virginia
+ELECT ("Early Voting Starts September 18 … through October 31, 2026") and the captured Kalshi `close_time` values for
+the 2026 state markets (`2027-11-03T15:00:00Z` / `2027-11-03T14:00:00Z`, i.e. election Nov 3 2026 with a one-year
+settlement window) all agree. No date discrepancy found.
+
+### 9b · Organisational change applied to ALL 105 entries: `category`
+
+To keep a 105-row list readable on the site, every entry now carries a `category` label (added 2026-09-19, session 4).
+The assignment is a **fixed per-id map**, reviewed id-by-id against each entry's own `type` and `verified` text — it is
+an organisational label only and never alters verified content, URLs or notes:
+
+| Category | Count | Examples |
+|---|---|---|
+| Government — federal | 20 | fec-results, eac, cftc, govinfo, clerk-house, doj-crt, crs, **fvap**, **gao** |
+| Government — state & local | 17 | ncsbe, texas-sos-results, la-county-rrcc, nass, ncsl-elections, **wisconsin-wec**, **nevada-sos**, **california-sos**, **pennsylvania-dos**, **virginia-elections** |
+| Official publishers & archives | 1 | cq |
+| Academic & university research | 10 | mit-lab, harvard-dataverse, anes, icpsr, uf-election-lab, roper-center, **ces-tufts**, **healthyelections-mit**, **voteview**, **circle-tufts** |
+| Pollsters & survey research | 20 | gallup, pew, quinnipiac, norc, edison-ssrs, siena-sri, unh-survey-center, suffolk-suprc, emerson, marquette-law-poll, marist-poll, yougov-us, ipsos-us, **atlasintel**, **harris-poll**, **saint-anselm-sasc** |
+| News outlets & wires | 13 | ap, reuters, cnn, nyt, wapo, abc-news, cbs-news-2026, nbc-news-2026, politico, the-hill, fox-news, **npr-elections**, **pbs-newshour** |
+| Prediction markets & exchange data | 8 | kalshi, kalshi-api-docs, kalshi-fee-schedule, kalshi-hub-claims, kalshi-midterms-hub, polymarket, predictit, iem |
+| Ratings, forecasts & analysis | 15 | cook-political, inside-elections, crystal-ball, rcp, votehub, silver-bulletin, 538-archive, ballotpedia, opensecrets, nimsp-ftm, ifes, **brennan-center**, **bipartisan-policy-center**, **decision-desk-hq**, **270towin** |
+| Contest & methodology references | 1 | the-leap |
+
+Judgement calls recorded for review: `ifes`, `ballotpedia`, `opensecrets` and `nimsp-ftm` are nonprofits/archives but
+are filed under *Ratings, forecasts & analysis* because that is how this project uses them (aggregated reference
+layers, not primary returns); `roper-center` is filed under *Academic & university research* (a Cornell data archive)
+rather than with pollsters; `ncsl-elections` and `nass` are filed under *Government — state & local* because both are
+bodies of state officials; `crs` and `gao` are federal, not *analysis*, because both are official government research
+arms of Congress; `the-leap` alone forms *Contest & methodology references* (it is the contest-rules source).
+
+### 9c · Candidates NOT added this session (no-hallucination rule enforced)
+
+| Candidate | What happened when it was fetched 2026-09-19 | Disposition |
+|---|---|---|
+| SurveyUSA (`surveypoll.com`) | two attempts, bare "Failed to fetch page", no content returned | **NOT added** — IRREGULARITIES **#47**; §8's deferral stands |
+| HarrisX (`thehillx.com`) | bare "Failed to fetch page", no content returned | **NOT added** — **#47**; the Harris Poll entry (#43) documents why the two brands must not be conflated |
+| CourtListener / Free Law Project (`courtlistener.com`) | HTTP 500 bare and with `?q=election` | **NOT added** — **#47**; retry via its documented free REST API next session |
+| Selzer & Company (`selzerco.com`) | page returned only navigation scaffolding ("Skip to primary navigation", "## Main Content", "Menu") — no substantive content to verify | **NOT added** — **#48**; syndicated coverage of the 2024 Iowa miss and of an announced exit from election polling is **secondary and unfetched**, so no figure from it is recorded as verified |
+| Franklin & Marshall College Poll (`fandm.edu`) | official release not fetched this session; only syndicated coverage located via search (WGAL, ABC27, PoliticsPA — Shapiro 50 / Garrity 28, 546 registered PA voters fielded Jun 8–14 2026 at the Center for Opinion Research) | **NOT added** — search-level evidence only. Its matchup is corroborated independently by captured Kalshi rungs GOVPARTYPA-26-D "Josh Shapiro" / -R "Stacy Garrity" (§9a); the poll itself needs a direct fetch of the F&M release before admission |
+| Brennan Center deep paths (`/our-work/voting-rights`, `/our-work/research-reports/state-votes-elections-2026`) | both returned "Content Not Found \| Brennan Center for Justice" | homepage + topic hubs verified instead; entry records the path caveat |
+| BPC shallow paths (`/elections/`, `/topic/elections/`) | both returned "Page not found • Bipartisan Policy Center" | the specific explainer/report URL was fetched and used as the entry URL |
+| Wisconsin `/elections-voting`, Nevada `/sos-elections`, California `elections.cdn.sos.ca.gov` | access-denied / 404 / S3 AccessDenied | **#40**, **#41**, **#42**; each entry uses the URL that actually fetched |
+
+### 9d · Reversals of §8's deferrals (recorded deliberately, not silently)
+
+§8 declined **270toWin**, **Decision Desk HQ** ("aggregator/forecast-vendor fit still unverified — deferred") and
+**AtlasIntel** ("weaker institutional standing"). All three were fetched directly this session and are admitted with the
+evidence that settled the question: DDHQ's page states county-level results "dating back to 2000" **and** a
+Kalshi/Polymarket price integration (making it a cross-check surface for this project's own captures); 270toWin's
+Kalshi-derived panel produced the quantitative comparison in §9a; AtlasIntel's own page states its sampling method,
+which is why it is admitted **with** the non-probability caveat (#49) rather than as equivalent to a probability panel.
+§8's other deferrals (Pew, SSRS/Edison — already in the list; uspollingdata.com — §5 exclusion; Data for Progress —
+advocacy-aligned) are unchanged, and SurveyUSA remains excluded (#47).
+
+### 9e · Verification evidence after the batch
+
+`npm run lint` → `checked 62 data JSON files, **105 sources**, 4 outcomes, 5 markets, **49 irregularities (md rows 49)**,
+15 poll entries — lint: all verified-data provenance checks pass`. `npm test` → **70 tests, 69 pass, 1 skipped** (the
+network-dependent live-capture test), 0 fail — including the new `test/site-sources.test.mjs` (9 tests), which renders
+the Sources section headlessly against the committed bundle and asserts the toolbar, one block per category, one row per
+registry entry, per-block counts equal to both the published tally and the rendered chip, bundle ⇄ `master.json` parity,
+and that irregularities #40–#49 appear on the site. `npm run pipeline` → backtest, contest, site bundle
+(`src/data/site-data.js`, 1,591 KB) and headless render check of all 11 sections regenerated and passing; the Sources
+section renders all 105 entries grouped by the nine categories above with a live filter. `python3
+scripts/sync_site_data.py` → `synced=12 missing=0` (the toolkit sub-site's copies of IRREGULARITIES.md, LIMITATIONS.md
+and NEXT_SESSION.md refreshed; note this step is **not** part of `npm run pipeline` — the daily workflow calls it
+separately). `python scripts/validate_sources.py` → `entries: 20, csv_consistent: true, schema_valid: true` (the
+Python-track registry is untouched by this batch). Every new entry carries `url` (manual-review link), `verified` (what
+was observed), `verifiedOn` (2026-09-19), `status: verified`, `category` and `notes`; no field in this batch was
+populated from memory or from an unfetched page.

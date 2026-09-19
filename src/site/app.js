@@ -616,29 +616,110 @@
   }
 
   // ---------- SOURCES ----------
+  // Grouped by the `category` label carried on every master-list entry, with a live filter so a
+  // 100+ entry registry stays readable. Every figure here is read from the bundle (D.sources).
   function sources() {
     const all = D.sources.sources;
+    const catOf = (s) => s.category || 'Uncategorised';
+    const cats = (D.sources.categories && D.sources.categories.length
+      ? D.sources.categories.map((c) => c.name)
+      : [...new Set(all.map(catOf))]).filter((c) => all.some((s) => catOf(s) === c));
     const counts = {};
     all.forEach((s) => { counts[s.verifiedOn] = (counts[s.verifiedOn] || 0) + 1; });
     const byDate = Object.keys(counts).sort();
-    const rows = all.map((s) => `
-      <tr>
-        <td><a href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.name)}</strong></a><br><span class="small">${esc(s.type)}</span></td>
-        <td class="small">${esc(s.verified)}</td>
-        <td class="small" style="white-space:nowrap">${esc(s.verifiedOn)}<br><span class="chip ${s.status === 'verified' ? 'good' : 'warn'}">${esc(s.status)}</span></td>
-        <td class="small">${s.notes ? esc(s.notes) : ''}</td>
-      </tr>`).join('');
     const perSession = byDate.map((d) => `${d}: ${counts[d]}`).join(' · ');
+    const searchBlob = (s) => [s.id, s.name, s.type, catOf(s), s.verified, s.notes || '', s.url,
+      s.api || '', s.docs || '', s.marketsUrl || ''].join(' ').toLowerCase();
+    const row = (s) => `
+      <tr data-cat="${esc(catOf(s))}" data-date="${esc(s.verifiedOn)}" data-text="${esc(searchBlob(s))}">
+        <td><a href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.name)}</strong></a>
+          <div class="small mono" style="margin-top:2px">${esc(String(s.url).replace(/^https?:\/\//, '').replace(/\/$/, ''))}</div>
+          <div class="small" style="margin-top:3px">${esc(s.type)}</div></td>
+        <td><details class="src-more"><summary>What was verified</summary><div class="body">${esc(s.verified)}</div></details>
+          ${s.notes ? `<div class="small" style="margin-top:8px"><strong>How this project uses it:</strong> ${esc(s.notes)}</div>` : ''}</td>
+        <td class="small" style="white-space:nowrap">${esc(s.verifiedOn)}<br><span class="chip ${s.status === 'verified' ? 'good' : 'warn'}">${esc(s.status)}</span></td>
+      </tr>`;
+    const blocks = cats.map((c) => {
+      const members = all.filter((s) => catOf(s) === c);
+      return `
+      <section class="src-cat" data-cat="${esc(c)}">
+        <h2 style="margin-top:26px">${esc(c)} <span class="chip" data-count>${members.length}</span></h2>
+        <div class="card" style="overflow-x:auto"><table>
+          <thead><tr><th style="min-width:230px">Source — link for manual review</th>
+            <th>What was verified (observed text) · how this project uses it</th>
+            <th style="min-width:96px">When / status</th></tr></thead>
+          <tbody>${members.map(row).join('')}</tbody></table></div>
+      </section>`;
+    }).join('');
     return `
     <h1>Master source list</h1>
     <p class="lead">${all.length} entries — verified on ${perSession} — each verified line-by-line in its session: the URL was fetched
-    (or, where a direct fetch failed, located via live search — noted in the <em>verified</em> column), and that column
-    records <strong>exactly what was observed</strong>. Nothing is listed on assumption; every row carries a link for manual
-    review. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>; full audit trail in
-    <span class="mono">VERIFICATION.md</span> (session sections).</p>
-    <div class="card" style="overflow-x:auto"><table>
-      <thead><tr><th>Source (link for manual review)</th><th>What was verified</th><th>When / status</th><th>Notes</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`;
+    (or, where a direct fetch failed, located via live search — noted in the entry), and the expandable
+    <em>What was verified</em> panel records <strong>exactly what was observed</strong>. Nothing is listed on assumption; every row
+    carries a link for manual review. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>; full audit trail in
+    <span class="mono">VERIFICATION.md</span> (§1–§9).</p>
+    <div class="toolbar">
+      <input type="search" id="src-q" placeholder="Filter ${all.length} sources — name, domain, keyword, method…" aria-label="Filter sources by text">
+      <select id="src-cat" aria-label="Filter by category">
+        <option value="">All ${cats.length} categories</option>
+        ${cats.map((c) => `<option value="${esc(c)}">${esc(c)} (${all.filter((s) => catOf(s) === c).length})</option>`).join('')}
+      </select>
+      <select id="src-date" aria-label="Filter by verification date">
+        <option value="">Any verification date</option>
+        ${byDate.map((d) => `<option value="${esc(d)}">Verified ${esc(d)} (${counts[d]})</option>`).join('')}
+      </select>
+      <button type="button" id="src-reset" class="btn">Reset</button>
+    </div>
+    <p class="small" id="src-count" aria-live="polite" style="margin:2px 0 0"></p>
+    ${blocks}`;
+  }
+
+  // Live filter for the Sources section (runs after render, like the chart hooks). Guarded so the
+  // headless render check — whose DOM stub has no querySelectorAll results — passes unchanged.
+  function wireSources() {
+    const main = document.getElementById('main');
+    if (!main || !main.querySelectorAll) return;
+    const rows = main.querySelectorAll('tr[data-cat]');
+    if (!rows || !rows.length) return;
+    const blocks = main.querySelectorAll('section.src-cat');
+    const q = document.getElementById('src-q');
+    const cat = document.getElementById('src-cat');
+    const date = document.getElementById('src-date');
+    const reset = document.getElementById('src-reset');
+    const count = document.getElementById('src-count');
+    const apply = () => {
+      const term = ((q && q.value) || '').trim().toLowerCase();
+      const c = (cat && cat.value) || '';
+      const d = (date && date.value) || '';
+      let shown = 0;
+      rows.forEach((tr) => {
+        const ok = (!c || tr.dataset.cat === c) && (!d || tr.dataset.date === d)
+          && (!term || String(tr.dataset.text || '').indexOf(term) !== -1);
+        tr.style.display = ok ? '' : 'none';
+        if (ok) shown += 1;
+      });
+      blocks.forEach((b) => {
+        let vis = 0;
+        b.querySelectorAll('tr[data-cat]').forEach((tr) => { if (tr.style.display !== 'none') vis += 1; });
+        b.style.display = vis ? '' : 'none';
+        const chip = b.querySelector('[data-count]');
+        if (chip) chip.textContent = String(vis);
+      });
+      if (count) {
+        count.textContent = `Showing ${shown} of ${rows.length} entries`
+          + (c ? ` in “${c}”` : '') + (d ? ` verified ${d}` : '') + (term ? ` matching “${term}”` : '') + '.';
+      }
+    };
+    if (q && q.addEventListener) q.addEventListener('input', apply);
+    if (cat && cat.addEventListener) cat.addEventListener('change', apply);
+    if (date && date.addEventListener) date.addEventListener('change', apply);
+    if (reset && reset.addEventListener) reset.addEventListener('click', () => {
+      if (q) q.value = '';
+      if (cat) cat.value = '';
+      if (date) date.value = '';
+      apply();
+    });
+    apply();
   }
 
   // ---------- IRREGULARITIES ----------
@@ -839,7 +920,7 @@
 
   // ---------- ROUTER ----------
   const RENDER = { overview, markets, polls, tracker, forward, backtests, contest, sources, irregularities, methodology, roadmap };
-  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, polls: drawPollCharts, tracker: drawTrackerCharts };
+  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources };
 
   const nav = document.getElementById('nav');
   nav.innerHTML = SECTIONS.map(([id, label]) => `<a href="#/${id}" data-id="${id}">${label}</a>`).join('');

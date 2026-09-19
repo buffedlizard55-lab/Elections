@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
   "updated": "2026-09-19",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) = 85.",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 §9, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md §9b) and never changes a source's verified content.",
   "sources": [
     {
       "id": "kalshi",
@@ -13,7 +13,8 @@
       "verified": "Live public API queried 2026-09-18: GET /series, GET /markets (series_ticker filters PRES, CONTROLH, CONTROLS, SENATEAZ), GET /historical/cutoff, GET /historical/markets (settled 2024 markets with result=yes/no), GET /markets/{t}/candlesticks (daily history). Historical data docs page fetched: market_settled_ts partitioning confirmed.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Primary prediction-market data layer for this project."
+      "notes": "Primary prediction-market data layer for this project.",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "fec-results",
@@ -23,7 +24,8 @@
       "verified": "FEC page fetched via search (2026-09-18): 'Official 2024 Presidential General Election Results, compiled from state election offices (PDF)'; biennial 'Federal Elections' compilations described. 2024 results PDF cited by Wikipedia infobox: https://www.fec.gov/resources/cms-content/documents/2024presgeresults.pdf",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Authoritative source for certified federal results (2020: 81,283,501 Biden / 74,223,975 Trump; 2024: 77,302,580 Trump / 75,017,613 Harris per the FEC PDF via Wikipedia infobox)."
+      "notes": "Authoritative source for certified federal results (2020: 81,283,501 Biden / 74,223,975 Trump; 2024: 77,302,580 Trump / 75,017,613 Harris per the FEC PDF via Wikipedia infobox).",
+      "category": "Government — federal"
     },
     {
       "id": "eac",
@@ -33,7 +35,8 @@
       "verified": "Verified via usa.gov agency page + Ballotpedia/Wikipedia (2026-09-18): federal commission created by HAVA 2002; develops voting system guidelines/certification.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "FLAGGED: as of July 2026 the commission has no serving commissioners (two dismissed, one resigned) — irregularity #1; treat its guidance output accordingly until reconstituted."
+      "notes": "FLAGGED: as of July 2026 the commission has no serving commissioners (two dismissed, one resigned) — irregularity #1; treat its guidance output accordingly until reconstituted.",
+      "category": "Government — federal"
     },
     {
       "id": "census-voting",
@@ -43,7 +46,8 @@
       "verified": "Census press release (2023-05-02) fetched via search: 2022 turnout 52.2% of CVAP, registration 69.1%; NBER-hosted raw files with DOI 10.60592/w6zf-md62 also located.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "2024 presidential turnout 64.3% (per University of Florida, cited in Wikipedia infobox) and 2020 turnout 66.6% (U.S. Elections Project, same infobox) — Census CPS is the comparable series."
+      "notes": "2024 presidential turnout 64.3% (per University of Florida, cited in Wikipedia infobox) and 2020 turnout 66.6% (U.S. Elections Project, same infobox) — Census CPS is the comparable series.",
+      "category": "Government — federal"
     },
     {
       "id": "nara",
@@ -53,7 +57,8 @@
       "verified": "FEC's election-results page (fetched 2026-09-18) designates NARA as the federal agency responsible for coordinating Electoral College functions between States and Congress.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Used for certified electoral vote tallies cross-checks."
+      "notes": "Used for certified electoral vote tallies cross-checks.",
+      "category": "Government — federal"
     },
     {
       "id": "cq",
@@ -63,7 +68,8 @@
       "verified": "CQ 'Sources and Definitions' page fetched via search (2026-09-18): 'compiled from final, official results obtained from election authorities in each state'; district-level presidential votes computed from secretaries of state and boards of elections.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Institutional subscription database — use for research access where available."
+      "notes": "Institutional subscription database — use for research access where available.",
+      "category": "Official publishers & archives"
     },
     {
       "id": "ifes",
@@ -72,7 +78,8 @@
       "url": "https://www.electionguide.org/elections/id/4325/",
       "verified": "Election Guide 2024 US presidency page fetched via search: 'Results Source: Federal Election Commission, 2024presgeresults.pdf — Donald TRUMP won 312 electoral votes; Kamala HARRIS won 226 electoral votes'.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "ap",
@@ -82,7 +89,8 @@
       "verified": "AP election result hubs fetched via search (2026-09-18); AP's 2020 certification article cited in Wikipedia 2020 infobox lead ('Biden officially secures enough electors to become president', 2020-12-05).",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "2026-09-19: for 2025+ elections the NEP/Edison exit poll and AP VoteCast are merged into The Voter Poll by SSRS (see ssrs-voter-poll)."
+      "notes": "2026-09-19: for 2025+ elections the NEP/Edison exit poll and AP VoteCast are merged into The Voter Poll by SSRS (see ssrs-voter-poll).",
+      "category": "News outlets & wires"
     },
     {
       "id": "reuters",
@@ -91,7 +99,8 @@
       "url": "https://www.reuters.com/graphics/USA-ELECTION/RESULTS/zjpqnemxwvx/",
       "verified": "Reuters 2024 results page fetched via search (2026-09-18): state-by-state presidential calls (Trump wins WI/MI/GA/OK/KY/TN etc.), sourced from the National Election Pool (ABC, BBC, CBS, CNN).",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "News outlets & wires"
     },
     {
       "id": "cnn",
@@ -100,7 +109,8 @@
       "url": "https://www.cnn.com/2026/09/08/politics/democrats-target-red-territory-2026-midterms",
       "verified": "2026-09-08 CNN midterm article fetched via search (Dems need 4 net Senate seats; core offensive map); CNN Poll of Polls referenced in CNN's Gallup-tracking story (2026-02-12): 39% approve / 59% disapprove avg of 134 polls.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "News outlets & wires"
     },
     {
       "id": "nyt",
@@ -110,7 +120,8 @@
       "verified": "2026-02-11 article fetched via search: 'Gallup Will No Longer Track Presidential Approval Ratings' (after nearly 90 years); last Gallup approval (Dec 2025): 36% approve.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Also cites 2024 nomination results (2024-03-13)."
+      "notes": "Also cites 2024 nomination results (2024-03-13).",
+      "category": "News outlets & wires"
     },
     {
       "id": "wapo",
@@ -120,7 +131,8 @@
       "verified": "2026-06-23 analysis fetched via search: Post analyzed 2,000 primary markets on Kalshi/Polymarket — candidates priced ~75% won ~75% of the time; LA mayoral market passed $40M before voting ended (Spencer Pratt case).",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Key external validation of prediction-market calibration."
+      "notes": "Key external validation of prediction-market calibration.",
+      "category": "News outlets & wires"
     },
     {
       "id": "gallup",
@@ -130,7 +142,8 @@
       "verified": "Status verified via NYT (2026-02-11) and CNN (2026-02-12): Gallup ended presidential approval tracking (Feb 2026) and horse-race election polling (2015); longest-running continuous approval series since FDR. Final approval 36% (Dec 2025).",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "FLAGGED: no longer polls presidential approval/horse-race — historical series only (irregularity #4)."
+      "notes": "FLAGGED: no longer polls presidential approval/horse-race — historical series only (irregularity #4).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "pew",
@@ -139,7 +152,8 @@
       "url": "https://www.pewresearch.org/methods/2026/09/16/weighting-polls-on-party-affiliation-and-past-vote/",
       "verified": "2026-09-16 report fetched via search: ~70% of 2024 national polls weighted on party/past-vote; political weighting 'modestly more accurate'. NPORS benchmark page: D+47/R+43/Refused 10 (Jan–Jun 2026).",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "quinnipiac",
@@ -149,7 +163,8 @@
       "verified": "2026-09-10 release verified via syndication (masslive/pennlive/mlive, 2026-09-13): House generic ballot D 49% / R 38%; Trump approval 33%; n=970 registered voters, field 2026-09-03..06, MoE ±3.9.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Included in verified-polls.json as a current 2026 data point."
+      "notes": "Included in verified-polls.json as a current 2026 data point.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "monmouth",
@@ -159,7 +174,8 @@
       "verified": "Oct 2024 report fetched via search: generic ballot D 47% / R 45% (n=802); party-ID weighting 28R/42I/30D. Ballotpedia (fetched 2026-09-18): institute ceased operations 2025-07-01.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "FLAGGED: ceased operations 2025-07-01 — historical source only (irregularity #5)."
+      "notes": "FLAGGED: ceased operations 2025-07-01 — historical source only (irregularity #5).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "rcp",
@@ -168,7 +184,8 @@
       "url": "https://www.realclearpolling.com/elections/president/2024/battleground-states",
       "verified": "2024 battleground averages page fetched via search: final RCP averages (Top Battlegrounds Trump +0.8; AZ +2.8, NV +0.6, WI -0.4, MI -0.5, PA +0.4, NC +1.2, GA +1.3). 2026 'Battle for Senate' board lists all competitive Senate matchups.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "votehub",
@@ -177,7 +194,8 @@
       "url": "https://votehub.com/2026/05/04/introducing-the-2026-votehub-midterm-forecast/",
       "verified": "2026-05-04 forecast fetched via search: House Likely D (D 85% to flip; 234 seats favored D vs 201 R); Senate: Alaska & Ohio toss-ups, TX Tilt R (58%). Methodology PDF (poll weighting, ENOP, market-data adjustment) fetched: https://votehub.com/wp-content/uploads/2026/05/2026_votehub_midterm_methodology.pdf",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "silver-bulletin",
@@ -186,7 +204,8 @@
       "url": "https://www.silverbulletin.net",
       "verified": "Status verified via Wikipedia (fetched 2026-09-18): 538 dissolved 2025-03-05; Silver retained model IP; final 2024 forecast ~50.015% Harris / 49.985% Trump; 2026 forecast per analysis: D 72% House, D+22 seats.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "538-archive",
@@ -196,7 +215,8 @@
       "verified": "Repository cloned (sparse, 2026-09-18): polls/2024-averages/presidential_general_averages_2024-09-12_uncorrected.csv (national+state daily averages, 2020-02-27..2024-09-12), state-of-the-polls-2024/2024_polls.csv (1,700 polls, as of 2024-10-28), 2024_races.csv (469 races with Cook ratings). README documents columns.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Site shut down 2025-03-05; GitHub data remains the canonical public archive."
+      "notes": "Site shut down 2025-03-05; GitHub data remains the canonical public archive.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "mit-lab",
@@ -205,7 +225,8 @@
       "url": "https://dataverse.harvard.edu/dataverse/medsl",
       "verified": "Harvard Dataverse MEDSL page fetched via search: precinct-level 2020 returns (DOI 10.7910/DVN/NT66Z3), U.S. House 1976–2022 (DOI 10.7910/DVN/IG0UN2), Senate statewide 1976–2020 (DOI 10.7910/DVN/PEJ5QU), Elections Performance Index.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Academic & university research"
     },
     {
       "id": "harvard-dataverse",
@@ -214,7 +235,8 @@
       "url": "https://dataverse.harvard.edu",
       "verified": "MEDSL dataverse page fetched via search (2026-09-18); versioned datasets with DOIs and UNF identifiers.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Academic & university research"
     },
     {
       "id": "cftc",
@@ -223,7 +245,8 @@
       "url": "https://www.cftc.gov",
       "verified": "Regulatory record verified via law-firm analyses fetched 2026-09-18: Kalshi approved as DCM (2020); KalshiEX LLC v. CFTC (2024) — political event contracts allowed; CFTC dropped appeal (May 2025); Staff Advisory 26-08 (2026-03-12) supportive + ANPRM; Third Circuit (2026-04-06) — CFTC exclusive jurisdiction over sports event contracts; state cease-and-desist letters (NV/NJ/MD) noted.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Government — federal"
     },
     {
       "id": "polymarket",
@@ -233,7 +256,8 @@
       "verified": "Elections page fetched via search (2026-09-18): 1,932 live election markets; Balance of Power 2026: Democrats Sweep 60% (Kalshi: 59%), R-Senate/D-House 31%; Midterms Hub launched 2026-09-16 (PRNewswire).",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Used ONLY for cross-platform discrepancy checks — this project's trading layer is Kalshi."
+      "notes": "Used ONLY for cross-platform discrepancy checks — this project's trading layer is Kalshi.",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "congress",
@@ -243,7 +267,8 @@
       "verified": "119th Congress roll-call votes fetched via search (2026-09-18): House Roll 102 (119-1): H.R.22 passed 220-208 on 2025-04-10 — confirms the R 220 / D 215 composition.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Kalshi's CONTROLH/CONTROLS series name congress.gov (Library of Congress) as settlement source — this is the cross-check target."
+      "notes": "Kalshi's CONTROLH/CONTROLS series name congress.gov (Library of Congress) as settlement source — this is the cross-check target.",
+      "category": "Government — federal"
     },
     {
       "id": "senate",
@@ -252,7 +277,8 @@
       "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/",
       "verified": "119-2 vote 00232 (2026-09-14 cloture on nomination PN1093-3) fetched via search; per-senator votes listed.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Government — federal"
     },
     {
       "id": "ballotpedia",
@@ -262,7 +288,8 @@
       "verified": "Election Assistance Commission page + Monmouth University Polling Institute page fetched via search (2026-09-18) — used for institutional status flags.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Tertiary reference; not a polling source itself."
+      "notes": "Tertiary reference; not a polling source itself.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "usagov-eac",
@@ -271,7 +298,8 @@
       "url": "https://www.usa.gov/agencies/u-s-election-assistance-commission",
       "verified": "Agency page fetched via search (2026-09-18): EAC supports state/local officials, certifies voting systems, audits HAVA funds.",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Government — federal"
     },
     {
       "id": "kalshi-fee-schedule",
@@ -280,7 +308,8 @@
       "url": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
       "verified": "Formula transcribed via KalshiPaperSim VERIFICATION.md (captured from the same PDF, effective 2026-07-07): taker = roundUp(M*0.07*C*P*(1-P)); maker = roundUp(M*0.0175*C*P*(1-P)); no settlement/membership fees. Per-series M re-verified live 2026-09-18 via GET /series for PRES, CONTROLH, CONTROLS (all M=1, quadratic).",
       "verifiedOn": "2026-09-18",
-      "status": "verified"
+      "status": "verified",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "the-leap",
@@ -290,7 +319,8 @@
       "verified": "Contest pages + TradingView blog (Oct 2024) + newtrading.io (2026-07-18) fetched via search: $100,000 paper capital, 15–30 day duration, ranked by REALIZED P&L, minimum trading days (3 crypto / 5 futures), top-250 prizes, open positions force-closed at end, paid/trial subscription required.",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "The contest-design template our paper-trading simulation reverse-engineers (adapted to Kalshi election markets)."
+      "notes": "The contest-design template our paper-trading simulation reverse-engineers (adapted to Kalshi election markets).",
+      "category": "Contest & methodology references"
     },
     {
       "id": "kalshi-hub-claims",
@@ -300,7 +330,8 @@
       "verified": "Press post fetched 2026-09-18: 'markets favored a candidate won roughly 9 times out of 10, even three months out'; 'priced at 70%, it happens about 70% of the time'; hub launched 2026-07-22 (CNBC 2026-07-22 corroborates); KPOW index (May 2026).",
       "verifiedOn": "2026-09-18",
       "status": "verified-claim",
-      "notes": "Claims are independently re-tested in src/backtest.js — exchange marketing is not treated as evidence."
+      "notes": "Claims are independently re-tested in src/backtest.js — exchange marketing is not treated as evidence.",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "kalshi-midterms-hub",
@@ -310,7 +341,8 @@
       "verified": "Full hub page fetched 2026-09-18 (4 chunks): Senate control D 59%/R 41% ($13.82M vol), all 35 Senate races with D% + ratings, seat-count events, 10 combo/novelty markets, 20+ other Nov-3 markets (LA mayor $94.9M vol, AGs, ballot measures, mayors).",
       "verifiedOn": "2026-09-18",
       "status": "verified",
-      "notes": "Source of data/kalshi/snapshot-2026-09-18.json."
+      "notes": "Source of data/kalshi/snapshot-2026-09-18.json.",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "openfec",
@@ -322,7 +354,8 @@
       "verified": "Page fetched 2026-09-19: 'Campaign finance data — See how candidates and committees raise and spend money in federal elections'; live 2026 top-raising list rendered (OSSOFF T. JONATHAN [DEM] GA-Senate, TALARICO JAMES [DEM] TX-Senate, BROWN SHERROD [DEM] OH-Senate); individual-contribution lookup links; API docs located via live search (base https://api.open.fec.gov/v1, auth via api.data.gov key).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Funds-side companion to the FEC results entry (fec-results); free public API — candidate for automated collection."
+      "notes": "Funds-side companion to the FEC results entry (fec-results); free public API — candidate for automated collection.",
+      "category": "Government — federal"
     },
     {
       "id": "nara-ec",
@@ -332,7 +365,8 @@
       "verified": "Page fetched 2026-09-19: OFR (part of NARA) 'on behalf of the Archivist of the United States, coordinates certain functions of the Electoral College between the States and Congress'; posts Certificates of Ascertainment and of Vote and the results 'after Congress counts the electoral votes on January 6'; 2024 Presidential Election section present; 'OFR has no role in appointing electors'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Specific-page companion to the NARA entry; cross-check target for certified electoral tallies (2024: Trump 312 / Harris 226)."
+      "notes": "Specific-page companion to the NARA entry; cross-check target for certified electoral tallies (2024: Trump 312 / Harris 226).",
+      "category": "Government — federal"
     },
     {
       "id": "census-p20586",
@@ -342,7 +376,8 @@
       "verified": "Page fetched 2026-09-19: report P20-586 (April 2024, Fabina & Martin); 'The CPS has surveyed Americans eligible to vote in these elections since 1964, and estimates derived from this survey are among the most consistently reliable and publicly available estimates of the characteristics of American voters'; full PDF at www2.census.gov/library/publications/2024/demo/p20-586.pdf.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Companion to the census-voting press-release entry (2022: 52.2% CVAP turnout); report family continues through 2024/2026 cycles."
+      "notes": "Companion to the census-voting press-release entry (2022: 52.2% CVAP turnout); report family continues through 2024/2026 cycles.",
+      "category": "Government — federal"
     },
     {
       "id": "cisa-elections",
@@ -352,7 +387,8 @@
       "verified": "Page fetched 2026-09-19: CISA secures 'both the physical security and cybersecurity of the systems and assets that support the nation's elections'; DHS designated election infrastructure critical infrastructure (Jan 2017); scope includes voter-registration databases, counting/auditing/results-display systems, storage facilities, polling places; no-cost trainings/toolkit for state & local officials.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Context for the integrity of the result-counting chain; no numeric data in this repo depends on it."
+      "notes": "Context for the integrity of the result-counting chain; no numeric data in this repo depends on it.",
+      "category": "Government — federal"
     },
     {
       "id": "govinfo",
@@ -362,7 +398,8 @@
       "verified": "Page fetched 2026-09-19: GPO's official digital library — Congressional Record, bills, public/private laws, Federal Register, Congressional Serial Set, US Code; trending content included 'H.R. 1 (ENR) — One Big Beautiful Bill Act, 2025' (PDF+XML) and the January 6th Committee Final Report; 'America 250, 1776-2026' banner.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Authoritative official electronic edition; federalregister.gov (below) self-describes as a prototype and points here for the official PDFs."
+      "notes": "Authoritative official electronic edition; federalregister.gov (below) self-describes as a prototype and points here for the official PDFs.",
+      "category": "Government — federal"
     },
     {
       "id": "federal-register",
@@ -372,7 +409,8 @@
       "verified": "Page fetched 2026-09-19: current issue Friday 2026-09-18 — 114 documents from 40 agencies (648 pages), incl. 1 Presidential Document; 1,008,827 documents searchable. Banner: 'It is not an official legal edition of the Federal Register'; official electronic version is on govinfo.gov.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Searchable record of CFTC/event-contract regulatory actions; verify legal citations against the govinfo official edition."
+      "notes": "Searchable record of CFTC/event-contract regulatory actions; verify legal citations against the govinfo official edition.",
+      "category": "Government — federal"
     },
     {
       "id": "clerk-house",
@@ -382,7 +420,8 @@
       "verified": "Page fetched 2026-09-19: 'House at a Glance — 119th Congress, As of September 17th, 2026': 676 votes, 12,398 measures introduced, 1,000 measures passed; composition R 218 / D 214 / I 1 / 2 vacancies; links to the official roll-call vote pages.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Official live House composition — 2026 seat counts (R 218/D 214) differ from the 2024 starting composition (R 220/D 215); cross-check target for CONTROLH-2026 context."
+      "notes": "Official live House composition — 2026 seat counts (R 218/D 214) differ from the 2024 starting composition (R 220/D 215); cross-check target for CONTROLH-2026 context.",
+      "category": "Government — federal"
     },
     {
       "id": "votegov",
@@ -392,7 +431,8 @@
       "verified": "Page fetched 2026-09-19: official .gov portal to register or update registration for national, state, and local elections; per-state registration flows; 19 languages (incl. Amharic, Haitian Creole, Navajo, Yup'ik); guides for new citizens, military, overseas, disability, and post-felony voters.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Voter-access context; no numeric data in this repo depends on it."
+      "notes": "Voter-access context; no numeric data in this repo depends on it.",
+      "category": "Government — federal"
     },
     {
       "id": "abc-news",
@@ -402,7 +442,8 @@
       "verified": "Page fetched 2026-09-19 (live): 'Trump says he is banning CNN, MSNOW and Politico from the White House' (28 minutes old); 'Trump breaks with many Republican midterm candidates, voters on key tech issues'; 'Federal Reserve raises interest rates for the 1st time since 2023' (Sep 16); 'Democratic doctors, nurses aim to flip Congress seats with a focus on healthcare'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "ABC leads the National Election Pool behind the state-by-state calls; the Reuters 2024 results page (master entry 'reuters') names the NEP (ABC, BBC, CBS, CNN) as its source."
+      "notes": "ABC leads the National Election Pool behind the state-by-state calls; the Reuters 2024 results page (master entry 'reuters') names the NEP (ABC, BBC, CBS, CNN) as its source.",
+      "category": "News outlets & wires"
     },
     {
       "id": "cbs-news-2026",
@@ -412,7 +453,8 @@
       "verified": "Page fetched 2026-09-19: 'CBS News Battleground Tracker poll: Democrats hold edge in bid for House control' (Sep 13; related article puts the House model at ~228 D seats); 'nine key Senate and 42 House races that will likely decide the majority'; 'Supreme Court blocks Missouri from using new map favoring GOP in fall elections' (Sep 10); 'Rhode Island Gov. Dan McKee is the first sitting governor nationwide to lose a primary in eight years' (Sep 10); 'Fetterman appears at RNC midterm convention in surprise video' (Sep 9).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Tracker model is a forecast cross-check point against Kalshi's D ~90% House control (snapshot crossPlatformChecks)."
+      "notes": "Tracker model is a forecast cross-check point against Kalshi's D ~90% House control (snapshot crossPlatformChecks).",
+      "category": "News outlets & wires"
     },
     {
       "id": "nbc-news-2026",
@@ -422,7 +464,8 @@
       "verified": "Page fetched 2026-09-19: 'Your guide to the 2026 midterm elections' hub with primary results + calendar; 'Supreme Court denies Trump's mail-in voting restrictions' (Sep 15); 'Postal Service chief says work stopped on computer system key to Trump effort to limit mail voting' (Sep 17); 'Several Republicans start to distance themselves from Trump as the midterms near' (Salazar, Miller-Meeks, Nunn). Related NBC national poll (located via live search, 2026-06-14): generic ballot D 49% / R 44% / 7% unsure; Trump approval 42% among registered voters (lowest of his second term in NBC surveys).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The 2026-06-14 poll is a live 2026 poll data point for the R4 continuous poll layer."
+      "notes": "The 2026-06-14 poll is a live 2026 poll data point for the R4 continuous poll layer.",
+      "category": "News outlets & wires"
     },
     {
       "id": "politico",
@@ -432,7 +475,8 @@
       "verified": "Page fetched 2026-09-19 (live): 'Trump says he's banning media outlets, including POLITICO, from White House'; 'Fears of election 'bloodbath' fuel small GOP revolts as House ditches DC'; 'Florida's governor race heads to Virginia, as Jolly highlights data center debate'; live Capitol agenda (Sep 18, 2026).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Congress-focused coverage; live-updates pages are useful for event timestamps."
+      "notes": "Congress-focused coverage; live-updates pages are useful for event timestamps.",
+      "category": "News outlets & wires"
     },
     {
       "id": "the-hill",
@@ -442,7 +486,8 @@
       "verified": "Page fetched 2026-09-19 (live): 'Trump: US strikes security deal with Greenland, Denmark' (2 hours old); 'Vance ends Iowa rally with 7-minute censure of Rob Sand'; 'Massie: GOP leaders found 'other Republicans' who would join Hegseth impeachment push'; 'Fox News contributors denounce Trump's ban on CNN, MS NOW, Politico'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Congress-focused coverage; campaign + homenews sections track candidate events."
+      "notes": "Congress-focused coverage; campaign + homenews sections track candidate events.",
+      "category": "News outlets & wires"
     },
     {
       "id": "fox-news",
@@ -452,7 +497,8 @@
       "verified": "Page fetched 2026-09-19 (live): 'Trump declares victory on historic deal for Greenland, securing permanent US military rights'; 'VP warns midterms are a vote on common sense versus pure unadulterated crazy' (Vance, Council Bluffs IA rally, 30 minutes old); 'Trump announces ban against CNN, MS NOW, Politico from White House grounds'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "FLAGGED: conservative-leaning outlet — used for event coverage and for balance against other list entries, not as a neutral anchor."
+      "notes": "FLAGGED: conservative-leaning outlet — used for event coverage and for balance against other list entries, not as a neutral anchor.",
+      "category": "News outlets & wires"
     },
     {
       "id": "norc",
@@ -462,7 +508,8 @@
       "verified": "Page fetched 2026-09-19: 'NORC delivers objective, nonpartisan insights and analysis decision-makers trust'; research divisions include Public Affairs and Research Science; 'NORC Data Enclave Gov Earns FedRAMP Certification' press item.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Polling + National Election Pool data partner; candidate source for the R4 continuous poll layer."
+      "notes": "Polling + National Election Pool data partner; candidate source for the R4 continuous poll layer.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "edison-ssrs",
@@ -472,7 +519,8 @@
       "verified": "Page fetched 2026-09-19 (edisonresearch.com redirects here): 'In 2025, SSRS acquired Edison Research, gaining nearly three decades of experience measuring audio, media, and consumer behavior, as well as a deep background in election research'; 'Audio Key to Reaching 2026 Voters' (Jul 30, 2026); clients incl. Disney, Apple, Spotify, Sirius XM.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "FLAGGED: organization now under SSRS (2025 acquisition) — 2026 exit-poll operation under the new ownership not yet confirmed on the page (IRREGULARITIES #15). 2026-09-19: for 2025+ elections the NEP/Edison exit poll and AP VoteCast are merged into The Voter Poll by SSRS (see ssrs-voter-poll)."
+      "notes": "FLAGGED: organization now under SSRS (2025 acquisition) — 2026 exit-poll operation under the new ownership not yet confirmed on the page (IRREGULARITIES #15). 2026-09-19: for 2025+ elections the NEP/Edison exit poll and AP VoteCast are merged into The Voter Poll by SSRS (see ssrs-voter-poll).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "anes",
@@ -482,7 +530,8 @@
       "verified": "Page fetched 2026-09-19: 'Guide to Public Opinion — Key trends in American public opinion and politics from 1948 to the present'; '70+ Datasets'; 'Download data for free'; '10000+ citations in the ANES Bibliography'; 75-year timeline (1948 pilot study, 1952 party identification, 1964 feeling thermometer).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Longitudinal backbone for vote choice / party ID / turnout; datasets distributed via ICPSR and Harvard Dataverse (both in this list)."
+      "notes": "Longitudinal backbone for vote choice / party ID / turnout; datasets distributed via ICPSR and Harvard Dataverse (both in this list).",
+      "category": "Academic & university research"
     },
     {
       "id": "icpsr",
@@ -492,7 +541,8 @@
       "verified": "Page fetched 2026-09-19: news item 'Looking for data on US Elections? Check out ICPSR's Election Data Resource Guide' (Sep 16, 2026); 'access the world's largest archive of social and behavioral science data'; interim director J. Trent Alexander announced Sep 15, 2026.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Repository of record for ANES and National Election Pool datasets; institutional access, public data free."
+      "notes": "Repository of record for ANES and National Election Pool datasets; institutional access, public data free.",
+      "category": "Academic & university research"
     },
     {
       "id": "predictit",
@@ -502,7 +552,8 @@
       "verified": "Page fetched 2026-09-19: 'Real-Money Political Prediction Markets', 191 markets; live 2026 midterm books — Balance of Power 'Dem. House & Senate 57¢ N/C' / 'D House, R Senate 36¢ 1¢' (217K shares); 'GOP Senate seats after 2026 midterms' '47 or fewer 28¢ 1¢' (580K shares); Next WH Press Secretary Jennings 22¢ / Kelly 18¢ / Habba 7¢; 2028 Dem nomination (AOC/Ossoff ahead of Newsom); Senate-control explainer cites Inside Elections moving 11 races in September, 10 toward Democrats.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Used ONLY for cross-platform discrepancy checks — the trading layer remains Kalshi. D-sweep 57¢ vs Kalshi CONTROLS-2026-D 59-60¢: consistent within ~3pp (snapshot crossPlatformChecks, 2026-09-19)."
+      "notes": "Used ONLY for cross-platform discrepancy checks — the trading layer remains Kalshi. D-sweep 57¢ vs Kalshi CONTROLS-2026-D 59-60¢: consistent within ~3pp (snapshot crossPlatformChecks, 2026-09-19).",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "uf-election-lab",
@@ -512,7 +563,8 @@
       "verified": "Page fetched 2026-09-19: VEP (voting-eligible population) national + state turnout 1789-Present (pre-1948 Burnham, 1948-Present McDonald); 'distributed by the National Election Pool, the media consortium that runs the national exit poll, and thus provide the first estimate of voter participation in a federal election as reported by media'; 'The Minnesota Secretary of State uses these statistics as their official turnout rate'; datasets: 1980-2022 general series, 2024/2020/2016/2012 general + nominations, MSAs, demographics 1986-present (CPS reweighted). electproject.org (fetched same day): 'My voter turnout data and analyses have moved to the UF Election Lab... All data here supersedes data posted on the old US Elections Project site.'",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Source family for the 2024 turnout 64.3% cited in the fec-results entry; candidate for the R4/R6 turnout layer. See IRREGULARITIES #14 (migration)."
+      "notes": "Source family for the 2024 turnout 64.3% cited in the fec-results entry; candidate for the R4/R6 turnout layer. See IRREGULARITIES #14 (migration).",
+      "category": "Academic & university research"
     },
     {
       "id": "iem",
@@ -523,7 +575,8 @@
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Previous entry pointed at iem.isu.edu (non-existent host; irregularity #26). Canonical host iem.uiowa.edu verified 2026-09-19: /iem/ returns 200 (Henry B. Tippie College of Business); the /iem/markets/ subpage returned HTTP 500 server-side at fetch time.",
-      "marketsUrl": "https://iemweb.biz.uiowa.edu/markets/"
+      "marketsUrl": "https://iemweb.biz.uiowa.edu/markets/",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "alaska-doe",
@@ -533,7 +586,8 @@
       "verified": "Homepage fetched 2026-09-19: 2026 General Election Tuesday November 3 (candidate list at /candidates/?election=26genr); 2026 Primary official results map at /enr26/ and statements of votes cast at /election-results/e/?id=26prim; 2024 General 'CERTIFIED' results at /election-results/e/?id=24genr with BM2/HD28 recount PDFs; press releases dated Sep 4/10/16 2026; ranked-choice tabulation reports published as PDFs.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Alaska uses top-4 RCV general elections — the RCV tabulation report, not the first-choice count, is the settlement-relevant result."
+      "notes": "Alaska uses top-4 RCV general elections — the RCV tabulation report, not the first-choice count, is the settlement-relevant result.",
+      "category": "Government — state & local"
     },
     {
       "id": "georgia-sos",
@@ -543,7 +597,8 @@
       "verified": "Fetched 2026-09-19 (resolves to /elections-division-georgia-secretary-states-office): 'Information about the November 2026 Election' (/november-3-2026-general-election), Election Results page (/page/georgia-election-results), results host results.sos.ga.gov (US House District 13 special runoff 08/25/2026 linked), Election Data Hub, audit information, cast vote records and ballot-image library.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The legacy results host results.enr.clarityelections.com/GA/ returned HTTP 403 to this session's fetcher (bot block) — use results.sos.ga.gov. The URL sos.ga.gov/elections-division-georgia-secretary-of-states-office (with 'of') is a 404; the canonical slug omits 'of'."
+      "notes": "The legacy results host results.enr.clarityelections.com/GA/ returned HTTP 403 to this session's fetcher (bot block) — use results.sos.ga.gov. The URL sos.ga.gov/elections-division-georgia-secretary-of-states-office (with 'of') is a 404; the canonical slug omits 'of'.",
+      "category": "Government — state & local"
     },
     {
       "id": "iowa-sos",
@@ -553,7 +608,8 @@
       "verified": "Homepage fetched 2026-09-19: 'Obtain Elections Data' → /research-and-data; voter services → /elections-voting; press release Sep 15 2026 'Secretary Pate Encourages Iowans to Make a Plan to Vote in 2026 General Election'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Legacy paths /elections and /elections/results/index.html are 404 after the site redesign — link to the homepage or /research-and-data."
+      "notes": "Legacy paths /elections and /elections/results/index.html are 404 after the site redesign — link to the homepage or /research-and-data.",
+      "category": "Government — state & local"
     },
     {
       "id": "maine-sos",
@@ -563,7 +619,8 @@
       "verified": "Fetched 2026-09-19 (legacy /sos/cec/elec/results/ redirects here): June 9 2026 primary RCV summary reports (PDF) and cast-vote-record exports (Excel) for Governor (D/R), CD-2 (D), Senate District 4, House District 58; 2026 primary candidate list; RCV information page.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Maine's U.S. Senate general election is ranked-choice; the SoS RCV summary report is the settlement-relevant document."
+      "notes": "Maine's U.S. Senate general election is ranked-choice; the SoS RCV summary report is the settlement-relevant document.",
+      "category": "Government — state & local"
     },
     {
       "id": "michigan-sos",
@@ -573,7 +630,8 @@
       "verified": "Fetched 2026-09-19: next election Nov 3 2026 (AV ballots available Sep 24; early voting Oct 24–Nov 1); August 4 2026 primary results (mvic.sos.state.mi.us/votehistory); 'Election results and data' page; 2026 November general candidate listing (mi-boe.entellitrak.com); Board of State Canvassers page.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Official certified results are published by the Board of State Canvassers; election-night numbers on MVIC are unofficial."
+      "notes": "Official certified results are published by the Board of State Canvassers; election-night numbers on MVIC are unofficial.",
+      "category": "Government — state & local"
     },
     {
       "id": "ncsbe",
@@ -583,7 +641,8 @@
       "verified": "Fetched 2026-09-19: Election Results Dashboard (er.ncsbe.gov), historical results, voter registration/history data, absentee & provisional data, public bulk files (dl.ncsbe.gov).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "dl.ncsbe.gov is the machine-readable archive (precinct-level results, absentee files)."
+      "notes": "dl.ncsbe.gov is the machine-readable archive (precinct-level results, absentee files).",
+      "category": "Government — state & local"
     },
     {
       "id": "ohio-sos-data",
@@ -593,7 +652,8 @@
       "verified": "Fetched 2026-09-19 (the legacy /elections/election-results-and-data/ path redirects here): Ohio Election Results Dashboard, Past Election Results, Historical Comparisons, daily absentee/early-voting dashboard, voter-registration snapshots (data.ohiosos.gov); DATA Act (2022) background.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Dashboards are on data.ohiosos.gov; downloadable past results at data.ohiosos.gov/portal/past-election-results."
+      "notes": "Dashboards are on data.ohiosos.gov; downloadable past results at data.ohiosos.gov/portal/past-election-results.",
+      "category": "Government — state & local"
     },
     {
       "id": "texas-sos-results",
@@ -603,7 +663,8 @@
       "verified": "Fetched 2026-09-19: 'Texas Election Results — Official Results'; 2024 NOVEMBER 5TH GENERAL ELECTION: U.S. Senator Ted Cruz (R) 5,990,741 vs Colin Allred (D) 5,031,249; President Trump/Vance 6,393,597 vs Harris/Walz 4,835,250 — consistent with the SENATETX-24 settlement (R = yes) in data/kalshi/historical/senate-2024.json.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Election selector defaults to the latest election; county and report views available."
+      "notes": "Election selector defaults to the latest election; county and report views available.",
+      "category": "Government — state & local"
     },
     {
       "id": "arizona-sos",
@@ -613,7 +674,8 @@
       "verified": "Fetched 2026-09-19 (/elections/results-data redirects here): Nov 3 2026 General Election calendar (registration deadline Oct 5, early voting Oct 7); 2026 Election Information + 2026 Primary Canvass (node/876); election-information pages back to 1974; unofficial election-night results host results.arizona.vote (2024 General featured).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Official canvass PDFs are under the per-year Election Information pages; results.arizona.vote is unofficial election-night reporting."
+      "notes": "Official canvass PDFs are under the per-year Election Information pages; results.arizona.vote is unofficial election-night reporting.",
+      "category": "Government — state & local"
     },
     {
       "id": "la-county-rrcc",
@@ -623,7 +685,8 @@
       "verified": "Fetched 2026-09-19: June 2 2026 Statewide Direct Primary results (results.lavote.gov, election 4338, text version available); results file downloads; Statement of Votes Cast archive; 'Reporting Results After Election Night' canvass schedule (VBM ballots received within 7 days, CVR, provisional).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The LA mayoral general (Bass vs Raman) is decided by the certified canvass, which can take up to ~30 days — Kalshi settlement will lag election night."
+      "notes": "The LA mayoral general (Bass vs Raman) is decided by the certified canvass, which can take up to ~30 days — Kalshi settlement will lag election night.",
+      "category": "Government — state & local"
     },
     {
       "id": "emerson",
@@ -633,7 +696,8 @@
       "verified": "Three 2026 releases fetched 2026-09-19: Texas (Sep 12–14, n=1,000 LV, ±3: Talarico 47 / Paxton 46; Abbott 49 / Hinojosa 46), Michigan (Sep 12–14, n=1,000 LV, ±3: El-Sayed 48 / Rogers 46; Benson 49 / James 42), Iowa (Aug 31–Sep 1, n=750 LV, ±3.6: Hinson 50 / Turek 45; Sand 49 / Lahn 46). Each page publishes the methodology paragraph (mode, weighting, credibility interval) and a link to full results; sponsor Nexstar Media. || Second-batch (emersoncollegepolling.com homepage fetch): \"a non-partisan organization... transparent and representative approach\"; additional live 2026 polls — Kansas Sep 18 (Hamilton vs Marshall tight Senate; Masterson leads Gov, Nexstar), Nevada Sep 10 (Ford vs Lombardo tight Gov; Trump approval 37/55, KLAS-TV), September-11-at-25 national report (Nexstar, Sep 9).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Numbers transcribed into data/polls/poll-layer-2026.json."
+      "notes": "Numbers transcribed into data/polls/poll-layer-2026.json.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "marquette-law-poll",
@@ -643,7 +707,8 @@
       "verified": "Release PDF fetched 2026-09-19 (law.marquette.edu/assets/community/poll/MLSPSC35/MLSPSC35PressRelease_NationalTopics.pdf): Sep 2–9 2026, 1,023 adults (±3.3), 864 RV (±3.6), 581 LV (±4.3); generic congressional ballot LV D 54 / R 41; RV D 50 / R 42; seven-wave trend tables back to Nov 2025; SSRS Opinion Panel fieldwork. || Second-batch (law.marquette.edu/poll/ fetch): Sep 17, 2026 homepage release — SCOTUS approval 43/57 with trend tables back to Jan 2025; 60% call the absentee-ballot-screening EO unconstitutional; court-reform support (ethics code 89 / term limits 79 / expansion 53); WI Dem gov primary Jul 29 (Hong 38 / Barnes 16 / Crowley 7; with leaners Hong 46) ahead of the Aug 11 primary. National surveys fielded via the SSRS Opinion Panel (SSRS news, Sep 16, 2026). Old URL law.marquette.edu/political-polls now 404 — use /poll/.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Trend tables transcribed into data/polls/poll-layer-2026.json (marquette-national-2026-09)."
+      "notes": "Trend tables transcribed into data/polls/poll-layer-2026.json (marquette-national-2026-09).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "ssrs-voter-poll",
@@ -653,7 +718,8 @@
       "verified": "Press release https://ssrs.com/news/the-voter-poll-by-ssrs/ (2025-10-28) fetched 2026-09-19: SSRS acquired Edison Research (NEP exit-poll provider since 2003); The Voter Poll merges the NEP/Edison Exit Poll with AP VoteCast/Fox News Voter Analysis; co-led by Joe Lenski; first fielded Nov 2025 (NYC, VA, NJ, CA). AP explainer (ap.org/elections/our-role-in-the-u-s-elections/how-we-survey-the-electorate/) fetched 2026-09-19: launched Nov 2025; results in every state with a Senate or governor race in a midterm year; partners ABC, CBS, CNN, Fox, MSNOW, NBC.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Resolves the 'confirm Edison/SSRS 2026 exit polls' precondition: the product exists for 2026 but no 2026 general-election data exists before Nov 3 2026, so no exit-poll data is used yet. Supersedes the standalone AP VoteCast entry for 2025+."
+      "notes": "Resolves the 'confirm Edison/SSRS 2026 exit polls' precondition: the product exists for 2026 but no 2026 general-election data exists before Nov 3 2026, so no exit-poll data is used yet. Supersedes the standalone AP VoteCast entry for 2025+.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "siena-sri",
@@ -663,7 +729,8 @@
       "verified": "Homepage fetched 2026-09-19 (scri.siena.edu redirects to sri.siena.edu): NYT/Siena poll of U.S. voters (Sep 15 2026); NYT/Siena July 1 2026 state polls (AK Sullivan 47–Peltola 45; IA Hinson 48–Turek 46; NC Cooper 50–Whatley 43; OH Husted 50–Brown 47); 'Texas Poll' Sep 17 2026 release (ReconMR fieldwork, see poll layer); NYT/Inquirer/Siena Pennsylvania (Aug 25 2026). Release post sri.siena.edu/2026/07/01/new-york-times-siena-polls-in-alaska-iowa-north-carolina-and-ohio/ fetched 2026-09-19 (toplines as listed; NYT toplines/crosstab pages linked there returned HTTP 403 to this fetcher). || Second-batch (sri.siena.edu homepage fetch): \"The preeminent academically situated polling institute in New York State\"; Sep 17, 2026 TX (Hinojosa now leads Abbott by 4; Talarico widens to 6); Aug 25 NYT/Philadelphia Inquirer/Siena PA (Shapiro 55-39 vs Garrity); Aug 12 NY Gov (Hochul 49 vs Blakeman 39); Sep 9, 2025 NYC mayor four-way (Mamdani 46 / Cuomo 24 / Sliwa 15 / Adams 9 — settled race, backtest-usable); 94 archive pages. Institution renamed Siena University; poll branding now \"Siena University Poll\". Official X cites FiveThirtyEight ranking NYT/Siena the most accurate pollster in America.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Texas Poll posts on sri.siena.edu link to ReconMR-hosted PDFs (reconmr.com) — fieldwork and methodology are ReconMR's; recorded in the poll layer with that attribution. AK/IA/NC/OH toplines transcribed into the poll layer with review:true (n/MoE/field dates not fetchable)."
+      "notes": "Texas Poll posts on sri.siena.edu link to ReconMR-hosted PDFs (reconmr.com) — fieldwork and methodology are ReconMR's; recorded in the poll layer with that attribution. AK/IA/NC/OH toplines transcribed into the poll layer with review:true (n/MoE/field dates not fetchable).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "unh-survey-center",
@@ -673,7 +740,8 @@
       "verified": "Fetched 2026-09-19: press releases archive at scholars.unh.edu/survey_center_polls/ — e.g. 'Ayotte's Approval Improves, Lead Over Warmington Grows in New Hampshire Gubernatorial Race' (8/27/2026), 'Pappas Support Slides, CD1 Primaries Down to the Wire' (8/26/2026), 'Approval of Trump Inches Upward in Maine' (7/29/2026); AAPOR Transparency Initiative badge. || Second-batch (scholars.unh.edu/survey_center_polls/ direct fetch): institutional repository where every Granite State Poll release is a free downloadable PDF; survey research at UNH since 1976, 40-50 major projects/year; 2026 releases include Jan 21 NH Senate open-seat early look (Sununu leads Brown for R nom; Pappas D favorite; Shaheen retiring), Jun 30 races tighten, Aug 26-27 wave (NH/MA/RI/CT), Sep 2026 New England cost-of-living/tariff surveys.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Relevant to NH Senate (open, Toss-up) and Maine Senate; releases are hosted on the university's scholars repository."
+      "notes": "Relevant to NH Senate (open, Toss-up) and Maine Senate; releases are hosted on the university's scholars repository.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "suffolk-suprc",
@@ -683,7 +751,8 @@
       "verified": "Fetched 2026-09-19: 'Iowa Governor and US Senate General Election' poll dated Aug 26 2026 (polls/other-states), 'CityView: New York City' Sep 8 2026; 2024 swing-state polls page ('14 for 14 within the margin of error' with poll-vs-actual table); director David Paleologos. Iowa press-release PDF (8_26_2026_iowa_press_release.pdf) fetched 2026-09-19: 'Hinson narrowly leads Turek 45%-41%', 'Sand has the edge over Lahn 48%-44%'; methodology on the Other-States page: 500 likely voters, Aug 20–23 2026, live telephone, ±4.4; Muscatine County bellwether n=300 (Aug 17–19, ±5.6). || Second-batch: official Suffolk (.edu) press-release PDFs — Jun 16, 2026 MA statewide (Suffolk/Boston Globe: Healey 56-31 vs Minogue, 56-29 vs Shortsleeve; Markey 55-30 / Moulton 54-26 vs Deaton; income-tax-cut question 66-21) and Aug 18, 2026 MA Senate Dem primary (Markey 52 vs Moulton 38, fielded Aug 13-16). Note: the suffolk.edu/suprc shortlink returned HTTP 500 from one sandbox the same day; the research-center URL in this entry fetched fine.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Iowa Aug 26 2026 numbers not yet transcribed (release page not fetched) — candidate for the next poll-layer update. Iowa toplines transcribed into data/polls/poll-layer-2026.json (suffolk-2026-08-ia-senate)."
+      "notes": "Iowa Aug 26 2026 numbers not yet transcribed (release page not fetched) — candidate for the next poll-layer update. Iowa toplines transcribed into data/polls/poll-layer-2026.json (suffolk-2026-08-ia-senate).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "kalshi-api-docs",
@@ -693,7 +762,8 @@
       "verified": "Fetched 2026-09-19: Market schema with dollar-string fields (yes_bid_dollars, yes_ask_dollars, last_price_dollars, volume_fp, volume_24h_fp, open_interest_fp, liquidity_dollars, result, settlement_ts, settlement_value_dollars, status, rules_primary/secondary, mve_collection_ticker, is_provisional); server list includes external-api.kalshi.com, api.elections.kalshi.com and two demo hosts; docs index at docs.kalshi.com/llms.txt.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The docs' default host is external-api.kalshi.com; this project uses api.elections.kalshi.com (also listed). Flagged as irregularity #31 for a same-day cross-host comparison."
+      "notes": "The docs' default host is external-api.kalshi.com; this project uses api.elections.kalshi.com (also listed). Flagged as irregularity #31 for a same-day cross-host comparison.",
+      "category": "Prediction markets & exchange data"
     },
     {
       "id": "ncsl-elections",
@@ -703,7 +773,8 @@
       "verified": "Fetched 2026-09-19: 458 election resources; tables updated Sep 15 2026 ('Table 16: When Absentee/Mail Ballot Processing and Counting Can Begin', 'Table 7: When States Mail Out Absentee/Mail Ballots'); '6 Questions: What's Going On With the New Mail Ballot Rules?' (Sep 15 2026). || Second-batch (NCSL own press release, Jul 1, 2026, re-promoted Aug 17): State Elections 2026 hub at ncsl.org/elections-and-campaigns/ncsl-state-elections-2026 — on Nov 3, 2026 voters in 46 states choose 6,139 state legislators (>83% of all seats nationwide) + 157 in DC/American Samoa/Guam/N. Mariana Islands; races in 88 of 99 chambers; partisan-composition pages, races by state/chamber, interactive map, ballot measures, election administration; updated through and after Nov 3. KEY for the state-legislative layer (R2/R6).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The former 'election-results-timing-canvass-and-certification' URL is a 404 — use the section landing page and search. Used to interpret settlement lag between election night and certified results."
+      "notes": "The former 'election-results-timing-canvass-and-certification' URL is a 404 — use the section landing page and search. Used to interpret settlement lag between election night and certified results.",
+      "category": "Government — state & local"
     },
     {
       "id": "cook-political",
@@ -713,7 +784,8 @@
       "verified": "Fetched 2026-09-19 (ratings dated Sep 15 2026): Solid D 9, Likely D 1 (MN open), Lean D 2 (GA Ossoff, NC open), Toss Up 7 (AK Sullivan, IA open, ME Collins, MI open, NH open, OH Husted, TX open), Lean R 0, Likely R 2 (KS Marshall, NE Ricketts), Solid R 14. || Second-batch (homepage fetch): Battleground District Project — joint poll with New River Strategies (D) + GS Strategy Group (R): competitive-district generic ballot D 49 / R 47 (Sep 17, 2026 analysis); CPR PollTracker (rolling daily Trump approval + crosstabs); 2026 House Open Seat Tracker; free layer = ratings-change articles, free newsletters (CPR in Brief) + free podcast (The Odd Years); deep archive subscriber-only.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Ratings transcribed to data/polls/poll-layer-2026.json raceRatings for the market-vs-rating comparison. Terms of use apply to redistribution."
+      "notes": "Ratings transcribed to data/polls/poll-layer-2026.json raceRatings for the market-vs-rating comparison. Terms of use apply to redistribution.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "inside-elections",
@@ -723,7 +795,8 @@
       "verified": "Fetched 2026-09-19 (updated Sep 17 2026 2:25pm): Republicans 53–47; projection 'Democrats +2–4 seats'; Toss-up 4 (ME Collins, MI open, NH open, OH Husted), Tilt D 2 (GA Ossoff, NC open), Tilt R 2 (AK Sullivan, IA open), Lean R 1 (TX open), Likely D 1 (MN), Likely R 3 (KS, NE, SC), Solid D 9, Solid R 13; machine-readable export at /wp-content/themes/inside-elections/cache/ratings_latest_senate_year=2026_district=all_clean.json. || Second-batch (homepage fetch): full public rating-change log — Sep 17, 2026: ME Senate II Tilt R→Toss-up, FL Gov Likely R→Lean R, FL-14→Toss-up; Sep 3: OH Senate III→Toss-up, NH Senate II→Toss-up, AZ Gov→Tilt D; Aug 6: NC & GA Senate II→Tilt D, TX Senate II→Lean R. Uses Senate II/III = Class 2/3 labels.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Ratings transcribed to data/polls/poll-layer-2026.json raceRatings."
+      "notes": "Ratings transcribed to data/polls/poll-layer-2026.json raceRatings.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "crystal-ball",
@@ -733,7 +806,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: live 2026 ratings analysis — TX Senate (Paxton vs Talarico) moved Leans R to Toss-up, TX-15 to Toss-up; FL Senate moved to Safe R; NH Senate moved to Toss-up; gubernatorial Toss-ups AK + GA (AK replaced IA); 6 competitive secretary-of-state races (2 Toss-up); 'GOP still favored, but just barely' Senate overview.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Free weekly newsletter from the UVA Center for Politics — academic, non-partisan ratings layer."
+      "notes": "Free weekly newsletter from the UVA Center for Politics — academic, non-partisan ratings layer.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "marist-poll",
@@ -743,7 +817,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19 (maristpoll.com redirects to the .edu): 'We started as a classroom project in 1978'; latest poll Jul 1, 2026 (America 250); Poll Hub podcast EP463 (Sep 17, 2026); free online Poll Academy; students central to operations. NPR/PBS News/Marist national polls with full methodology + tables hosted as PDFs on maristpoll.marist.edu (e.g. Mar 2026 national adult n=1,591). Ballotpedia: charter member of AAPOR Transparency Initiative; rated top pollster by Bloomberg Politics (2016) and FiveThirtyEight (2020).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "College-based independent poll; NPR/PBS News/Marist is a recurring national series. Toplines + methodology free."
+      "notes": "College-based independent poll; NPR/PBS News/Marist is a recurring national series. Toplines + methodology free.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "texas-politics-project",
@@ -753,7 +828,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: live August 2026 statewide data — 57% of TX voters oppose a data center in their community; ICE favorability 41/46; 64% 'extremely concerned' about healthcare costs; Trump second-term approval trend chart; 'Second Reading' podcast (Henson + Josh Blank) on what we can/can't know about the 2026 Texas election and the Dallas GOP midterm convention; media hits Sep 6-9, 2026 (WFAA, Texas Tribune, Star-Telegram). Free email newsletter; chart library (LAITS-hosted).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The academic authority on Texas statewide opinion — feeds directly into TX Senate/Gov markets (Paxton/Talarico, Abbott/Hinojosa)."
+      "notes": "The academic authority on Texas statewide opinion — feeds directly into TX Senate/Gov markets (Paxton/Talarico, Abbott/Hinojosa).",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "yougov-us",
@@ -763,7 +839,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19 (today.yougov.com redirects): live free trackers — President Trump second-term approval 39/59; congressional ballot voting intention R 39 / D 44; The Economist/YouGov poll Sep 11-14, 2026: 'Independents give Democrats a big midterms lead among likely voters' (article 55567); daily results archive (e.g. 20260918 releases).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Large continuous online panel; weekly Economist/YouGov polls are free with toplines + methodology PDFs."
+      "notes": "Large continuous online panel; weekly Economist/YouGov polls are free with toplines + methodology PDFs.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "ipsos-us",
@@ -773,7 +850,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: 'one of the world's leading market research companies' — 90 markets, 6M+ authenticated proprietary panelists; KnowledgePanel ('The Gold Standard in Online Research Panels' — probability-based); America 250 research program; Ipsos Data Drops 2026 briefings (latest Aug 24, 2026).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Fieldwork house for Reuters/Ipsos national polling (published free via Reuters) and for The Voter Poll/SSRS ecosystem crosstabs; methodology pages public."
+      "notes": "Fieldwork house for Reuters/Ipsos national polling (published free via Reuters) and for The Voter Poll/SSRS ecosystem crosstabs; methodology pages public.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "morning-consult-intel",
@@ -783,7 +861,8 @@
       "verified": "Independent late-batch verification (§8). Official tracker pages located via live search 2026-09-19: 'Tracking Public Opinion of Trump's Washington' (intel.morningconsult.com/mc-content/trackers/donald-trump-congress-policy-republicans-polling) — weekly updates ahead of the 2026 midterms: Trump approval 43/54 (net -11); voters trust Democrats more on the economy (46 vs 41); methodology fully disclosed (online quota sampling; weighted to registered voters on age/gender/education/race/marital/parental/homeownership/region + 2024 presidential vote choice; CPS + ACS targets; e.g. May 22-24, 2026 n=2,204 RV +/-2pp). Separate 'Tracking the 2026 Midterm Elections' generic-ballot tracker.",
       "verifiedOn": "2026-09-19",
       "status": "verified-via-search",
-      "notes": "FLAG: morningconsult.com homepage has pivoted to B2B consumer intelligence — political tracking now lives under intel.morningconsult.com (found via search; direct sandbox fetch of the news subdomain failed). High-frequency daily tracker = strong calibration feed vs Kalshi."
+      "notes": "FLAG: morningconsult.com homepage has pivoted to B2B consumer intelligence — political tracking now lives under intel.morningconsult.com (found via search; direct sandbox fetch of the news subdomain failed). High-frequency daily tracker = strong calibration feed vs Kalshi.",
+      "category": "Pollsters & survey research"
     },
     {
       "id": "opensecrets",
@@ -793,7 +872,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: free searchable databases — federal (members of Congress, committees, presidential, personal finances), state (governors, legislatures in all 50 states, judicial in the 38 states that elect judges, other statewide), elections overview, outside spending, dark money, PACs, industries, political ads, ballot measures, lobbying + FARA foreign-lobby watch, revolving door; live newsroom (Chart of the Week, Sep 16, 2026).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "The merged Center for Responsive Politics + National Institute on Money in Politics. Money-in-politics layer: fundraising/spending asymmetries as race-competitiveness signals; bulk data + API free."
+      "notes": "The merged Center for Responsive Politics + National Institute on Money in Politics. Money-in-politics layer: fundraising/spending asymmetries as race-competitiveness signals; bulk data + API free.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "nimsp-ftm",
@@ -803,7 +883,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: state-level campaign finance tools covering 1990-2026 for all 50 states + DC + territories (Election Overview, My Legislature, Independent Spending, Lobbying Expenditures, Ballot Measures, Competitiveness Index, Power Mapping); APIs + RAND evaluations documented; site banner: 'We merged to form OpenSecrets! ... state campaign finance data current through the 2024 election year ... the site isn't maintained as we integrate with OpenSecrets'.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "FLAG: in maintenance/transition — state data frozen at 2024 election year; prefer OpenSecrets for new state data, FollowTheMoney for the deep 1990-2024 state archive."
+      "notes": "FLAG: in maintenance/transition — state data frozen at 2024 election year; prefer OpenSecrets for new state data, FollowTheMoney for the deep 1990-2024 state archive.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "nass",
@@ -813,7 +894,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: 'The nation's oldest, nonpartisan professional organization for public officials'; membership = the 50 states, DC and U.S. territories (membership roster + committees); Can I Vote portal (registration/polling-place info for all 50 states + DC); live 2026 newsroom: National Voter Registration Day 2026, NASS+NASED recruiting ABA members as poll workers ahead of the general election, Connecticut wins the 2026 IDEAS Award; Microsoft 'Check. Recheck. Vote.' AI-literacy campaign scaled with NASS+NASED across all states ahead of the 2026 election.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Hub to the state Secretaries of State who administer and CERTIFY elections — the official-results access layer above individual SOS sites."
+      "notes": "Hub to the state Secretaries of State who administer and CERTIFY elections — the official-results access layer above individual SOS sites.",
+      "category": "Government — state & local"
     },
     {
       "id": "doj-crt",
@@ -823,7 +905,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: live Division page with 2026 press releases (UC Davis medical-school admissions finding; Minnesota grant-program compliance review; lawsuit vs California re Glock ban; lawsuit vs New York re Catholic nursing facilities; Evanston IL reparations-program intervention); Action Center includes an election-integrity reporting portal ('Do you have evidence of non-citizens voting in elections?'). The Division houses the Voting Section (federal enforcement of the Voting Rights Act, NVRA, HAVA, UOCAVA).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "FLAGGED IRREGULARITY: the legacy Voting Section program page (justice.gov/crt/voting-section-activities) now 404s — DOJ's 404 page states files 'associated with previous administrations have been moved to the Archive'. Enforcement posture/content shifts are themselves a monitorable election-integrity signal; log as an observation."
+      "notes": "FLAGGED IRREGULARITY: the legacy Voting Section program page (justice.gov/crt/voting-section-activities) now 404s — DOJ's 404 page states files 'associated with previous administrations have been moved to the Archive'. Enforcement posture/content shifts are themselves a monitorable election-integrity signal; log as an observation.",
+      "category": "Government — federal"
     },
     {
       "id": "roper-center",
@@ -833,7 +916,8 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19: mission 'to collect, preserve, and disseminate public opinion data'; founded from Elmo Roper's 1947 donation (Fortune Survey 1935-1950 — first scientific national poll; correct 1936 FDR landslide call); iPoll question/dataset search; publicly accessible Presidential approval ratings application (cross-president comparison); 'one of the few places that makes available state and national exit polls, back to 1972'; 'Dive Into Elections and Presidents' data-highlight collection; free classroom materials; 2026 Mitofsky Award to Scott Keeter (Pew).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "CRITICAL for the exit-poll backtest layer: state + national exit polls 1972-present and 50+ years of presidential approval — the historical poll archive the project's poll archive (which currently ends 2024-09-12) can be extended against. Free registration for iPoll."
+      "notes": "CRITICAL for the exit-poll backtest layer: state + national exit polls 1972-present and 50+ years of presidential approval — the historical poll archive the project's poll archive (which currently ends 2024-09-12) can be extended against. Free registration for iPoll.",
+      "category": "Academic & university research"
     },
     {
       "id": "crs",
@@ -843,7 +927,266 @@
       "verified": "Independent late-batch verification (§8). Directly fetched 2026-09-19 (crsreports.congress.gov redirects here): 'CRS serves as nonpartisan shared staff to congressional committees and Members of Congress. It operates solely at the behest of and under the direction of Congress.' CRS Reports are U.S.-Government works — 'not subject to copyright protection ... may be reproduced and distributed in [their] entirety without permission'. Live product stream (e.g. Sep 18, 2026: R48887 U.S. Conflict with Iran; IF10464 UN General Assembly representation); full-text search + alerts.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Nonpartisan deep-dive reports on election law, election administration, redistricting, campaign finance and constitutional questions — free, official, reusable."
+      "notes": "Nonpartisan deep-dive reports on election law, election administration, redistricting, campaign finance and constitutional questions — free, official, reusable.",
+      "category": "Government — federal"
+    },
+    {
+      "id": "fvap",
+      "name": "FVAP.gov — Federal Voting Assistance Program (U.S. Department of Defense)",
+      "type": "Official government (military & overseas voting, UOCAVA)",
+      "url": "https://www.fvap.gov/",
+      "verified": "Fetched directly 2026-09-19 (this session). Homepage: 'Voting assistance for Service members, their families and overseas citizens'; live countdown '45 Days until the November 03 General Election' (2026-09-19 + 45 = 2026-11-03, internally consistent with the election date on every other official source in this list); Upcoming Elections lists 'Georgia — General Runoff' and 'Arkansas — General Runoff' on Dec 1; state selector covers all 50 states plus DC, American Samoa, Guam, Puerto Rico and the U.S. Virgin Islands, each linking to state guidelines, election dates/deadlines, election-office lookup and voted-ballot status; FPCA (register + request a ballot) and FWAB (backup ballot) tools; Latest News shows 'September 2026 Voter Alert' (Sep 3), 'August 2026 Voter Alert' (Aug 4), 'July 2026 Voter Alert' (Jul 17), 'Voting Assistance Town Halls' (Jun 26) and 'Phishing Campaign Impersonating FVAP.gov' (Apr 29); domestic voters are routed to vote.gov.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Official UOCAVA layer: absentee deadlines and per-state Voting Assistance Guides for military and overseas ballots — a counted segment in every statewide race this project tracks, and one of the last-to-arrive ballot groups, so it matters for counting-speed risk. Monthly Voter Alerts are a dated, official feed of election-date changes. Complements votegov and eac.",
+      "category": "Government — federal"
+    },
+    {
+      "id": "wisconsin-wec",
+      "name": "Wisconsin Elections Commission (WEC)",
+      "type": "State election authority (official results & calendar; WI Governor 2026 — Kalshi GOVPARTYWI-26; WI U.S. Senate is SENATEWI-28)",
+      "url": "https://elections.wi.gov/",
+      "verified": "Fetched directly 2026-09-19. Homepage: 'Your 2026 Election Roadmap' linking a 2026 Election Information Hub (key election dates, candidates on the ballot, in-person polling locations, voting statistics). About text verbatim: 'The Wisconsin Elections Commission is a six member, bipartisan commission charged with implementing Wisconsin's election statutes and supporting Wisconsin's 1,851 municipal clerks and 72 county clerks.' Elections & Important Dates listed on the page: Oct 14 2026 'Deadline to register to vote by mail or online', Oct 20 2026 'In-Person absentee voting may begin', Oct 30 2026 'Deadline for write-in candidates to file for the General Election' and 'Deadline to register in person before election day', Nov 03 2026 '2026 General Election'. Also linked: MyVote Wisconsin (myvote.wi.gov), ElectEd official training, commission meetings/minutes, sworn election complaints, election security & integrity, clerk communications. FETCH NOTE: the deep path /elections-voting returned 'Access denied | Wisconsin Elections Commission — You are not authorized to access this page' to this session's fetch tool while the site root fetched normally (irregularity #40).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Wisconsin's 2026 open gubernatorial race is traded on Kalshi — GOVPARTYWI-26-D 'David Crowley' bid 0.80 / ask 0.81 and GOVPARTYWI-26-R 'Tom Tiffany' bid 0.19 / ask 0.20 in the project's 2026-09-19 full open-universe capture, with per-candidate vote-share ladders (KXVOTEGENERAL-GOVPARTYWI-26DCRO-* and …26TTIF-*). Wisconsin's U.S. Senate seat is class 1 and trades as SENATEWI-28. WEC is the bipartisan commission that publishes the official canvass/statement of votes and the statewide election calendar used for settlement-date checks.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "nevada-sos",
+      "name": "Nevada Secretary of State — Elections",
+      "type": "State election authority (official results & registration statistics; NV Governor 2026 — Kalshi GOVPARTYNV-26; NV U.S. Senate is SENATENV-28)",
+      "url": "https://www.nvsos.gov/elections",
+      "verified": "Fetched directly 2026-09-19. The /elections hub links, all present on the fetched page: Election Information (/elections/election-information), Voter Information (/elections/voters), Voter Registration Statistics (/elections/voters/voter-registration-statistics), Information for Candidates (/elections/candidate-information), Initiatives & Referenda (/elections/initiatives-referenda), Resources (/elections/election-resources), plus the My Voter File lookup (nvsos.gov/votersearch/). URL CORRECTION: the older path /sos-elections returns the site's 404 page — 'Page Not Found... The page you are looking for, https://www.nvsos.gov/sos-elections, may have been removed, renamed, entered wrong, or is temporarily unavailable' — behind a BotDetect CAPTCHA (irregularity #41). Official results pages on the same host were located via live search (not fetched directly): /SOSelectionPages/results/2026StateWidePrimary/Clark.aspx headed 'Official Primary Election Results Clark' (showing '141 out of 141 Precincts Reporting' for a Justice of the Peace race) and /2026StateWidePrimary/Nye.aspx headed 'Official Primary Election Results Nye' ('21 out of 21 Precincts Reporting').",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Nevada's 2026 gubernatorial race is traded on Kalshi — GOVPARTYNV-26-R 'Joe Lombardo' bid 0.55 / ask 0.56 and GOVPARTYNV-26-D 'Aaron Ford' bid 0.44 / ask 0.45 in the project's 2026-09-19 capture (one of the closer state markets in that file), with vote-share ladders …NV-26JLOM-* and …NV-26AFOR-*; Nevada's U.S. Senate seat is class 1 and trades as SENATENV-28. SOS publishes the official statewide canvass, county-by-county results and voter-registration statistics — the registration series is a turnout-model input.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "california-sos",
+      "name": "California Secretary of State — Elections & Voter Information Division",
+      "type": "State election authority (official results, registration & candidate status; CA Governor 2026 — Kalshi KXGOVCA-26 / GOVPARTYCA-26; CA U.S. Senate is SENATECA-28)",
+      "url": "https://www.sos.ca.gov/elections",
+      "verified": "Fetched directly 2026-09-19; page title 'Elections and Voter Information :: California Secretary of State' (English/Spanish toggle). Verbatim from the 'General Election - November 3, 2026' block: 'The last day to register to vote online for November 3, 2026, General Election is October 19'; 'County elections officials will begin mailing ballots by October 5'; 'Secure ballot drop-off locations open on October 6'; 'The first vote centers open for early in-person voting in all Voter's Choice Act counties on October 24. In-person early voting locations throughout California will be open on Saturday, October 31'; 'Mailed ballots must be postmarked on or before November 3'; 'November 3 is the last day to vote in-person or return a ballot by 8:00 p.m. Polls are open from 7:00 a.m. to 8:00 p.m.' Links verified on the page: registertovote.ca.gov, voterstatus.sos.ca.gov ('My Voter Status'), the November 3 2026 Official Voter Information Guide (voterguide.sos.ca.gov), Voting Rights Restored tool, conservatorship rules, pre-registration at 16, military & overseas voters, Safe At Home, Political Parties (qualified parties, statements of purpose, party qualification), Guide to Voter Registration Drives, NVRA list maintenance, VoteCal ('California's centralized voter registration database'), Same Day / Conditional Voter Registration, and Elections Division contact (800) 345-VOTE (8683). FETCH NOTE: the division's CDN host elections.cdn.sos.ca.gov returned an S3 'AccessDenied — Access Denied' error to this session's fetch tool (irregularity #42); www.sos.ca.gov pages fetched normally.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "California's 2026 open gubernatorial race is one of the most-traded political events on Kalshi: KXGOVCA-26-SHIL ('Steve Hilton') ranks #11 by lifetime volume in the project's 2026-09-19 full open-universe capture (8,707,389 contracts), and the same capture prices the party markets GOVPARTYCA-26-D 'Xavier Becerra' bid 0.958 / ask 0.967 and GOVPARTYCA-26-R 'Steve Hilton' bid 0.029 / ask 0.043. California's U.S. Senate seat is class 1 and trades as SENATECA-28. CA SOS is the official publisher of statewide results, candidate party-preference designations and registration statistics used for settlement cross-checks.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "pennsylvania-dos",
+      "name": "Pennsylvania Department of State — Voting & Elections (vote.pa.gov)",
+      "type": "State election authority (official results & election statistics; PA Governor 2026 — Kalshi GOVPARTYPA-26; PA U.S. Senate is SENATEPA-28)",
+      "url": "https://www.pa.gov/agencies/vote",
+      "verified": "Fetched directly 2026-09-19 — vote.pa.gov resolves (redirects) to this canonical page: 'Pennsylvania Voting & Elections — Welcome to Pennsylvania's official voter information website. This site is a comprehensive voting resource for all eligible citizens in Pennsylvania.' Links verified on the page: Voter Registration, Upcoming Elections, Accessible Voting, Mail-in and Absentee Ballot, Mail Ballot Availability, 'Voting at a Polling Place' (pa.gov/services/vote/find-your-local-polling-place), 'Vote In Person By Mail Ballot Before Election Day', Contact Your County Election Office, File an Election Complaint, Accessible Remote Mail Ballot, 'Voting and Election Statistics' (Department of State resources), Become a Poll Worker, Election Security, 'Election Results' ('Find the latest information on our election returns website'), and 'Fact-Checking Election Claims' — 'Get accurate, reliable information about Pennsylvania's elections.' Contact channels on page: ra-voterreg@pa.gov and 1-877-868-3772. Spanish ('Recursos en español') and Traditional Chinese resource paths present.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Pennsylvania's 2026 gubernatorial race is traded on Kalshi — GOVPARTYPA-26-D 'Josh Shapiro' bid 0.968 / ask 0.973 and GOVPARTYPA-26-R 'Stacy Garrity' bid 0.030 / ask 0.033 in the project's 2026-09-19 capture, plus vote-share ladders for both candidates (e.g. KXVOTEGENERAL-GOVPARTYPA-26JSHA-62 'At least 62%' bid 0.39 / ask 0.45 and …PA-26SGAR-36 'At least 36%' bid 0.51 / ask 0.60). Those ladders are a market-implied vote-SHARE distribution, which Pennsylvania polls can be scored against directly rather than only as win probability. Pennsylvania's U.S. Senate seat is class 1 and trades as SENATEPA-28. The Department of State's own 'Fact-Checking Election Claims' page is a primary-source correction feed, and 'Voting and Election Statistics' is the official registration/turnout series for the state.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "virginia-elections",
+      "name": "Virginia Department of Elections (ELECT)",
+      "type": "State election authority (official results, registration & campaign finance; VA U.S. Senate 2026 — Kalshi SENATEVA-26)",
+      "url": "https://www.elections.virginia.gov/",
+      "verified": "Fetched directly 2026-09-19. Homepage banner: 'Virginia Department of Elections — An official website of the Commonwealth of Virginia' with the state's 'Here's how you know' verification link. Live notice on the page: 'Early Voting Starts September 18 — At your local general registrar's office or early voting location through October 31, 2026' (i.e. early voting for the November 2026 general was already under way at capture). Verified links: Citizen Portal (vote.elections.virginia.gov/VoterInformation) for registration and absentee requests, Upcoming Election Info calendar, Virginia Voter Pocket Guide, Absentee Voting, Campaign Finance ('Full public access to campaign financial data and financial disclosure reports'), Voter Registration Drive Training, polling-place and ballot lookup, 'Who's my legislator?' (whosmy.virginiageneralassembly.gov), Officer of Election (poll worker) application, and the 'How Virginia Secures Elections' backgrounders (Before/When/After You Vote). Mission verbatim: 'The Department of Elections promotes and supports accurate, fair, open and secure elections for the citizens of the Commonwealth.'",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Virginia's 2026 U.S. Senate race is traded on Kalshi — SENATEVA-26-D 'Mark Warner' bid 0.973 / ask 0.980 and SENATEVA-26-R 'Bert Mizusawa' bid 0.003 / ask 0.025 in the project's 2026-09-19 capture, with vote-share ladders …VA-26MWAR-* and …VA-26BMIZ-*. That capture contains no Virginia gubernatorial market (Virginia's last governor election was 2025). ELECT publishes official certified results and statements of results plus statewide campaign-finance disclosure — a second official finance source alongside the federal FEC/OpenSecrets layer.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "gao",
+      "name": "U.S. Government Accountability Office (GAO)",
+      "type": "Official government audit & evaluation (nonpartisan congressional watchdog)",
+      "url": "https://www.gao.gov/",
+      "verified": "Fetched directly 2026-09-19. Self-description on page: 'When Members of Congress Need Answers to Complex Questions—They Come to GAO.' Live product stream with explicit dates: GAO-26-109302 'Coast Guard: Actions to Address Sexual Misconduct Underway but Incomplete' and GAO-26-109300 'Coast Guard: Opportunities Remain to Improve Access to Housing' (both 'Published: Sep 18, 2026 / Publicly Released: Sep 18, 2026'), GAO-26-107871 'Unpaid Household Work' (Sep 17, 2026), GAO-26-109097 'DHS Grants: Approach to Terminations and Pauses Disrupted Some Program Activities' (Sep 17, 2026), GAO-26-108106 'Whistleblower Protection' (Sep 17, 2026), GAO-26-108836 'Cybersecurity: HHS ... 988 Suicide and Crisis Lifeline' (Sep 17, 2026); bid-protest decisions dated Sep 17-18, 2026 (B-424214.6, B-424581, B-424591.2, B-424606.3, B-338701, B-338093); press releases including 'Improper Payments Rose to an Estimated $186 Billion in FY25'; hubs for High Risk List, Priority Recommendations, Fraud & Improper Payments, America 250, Tracking the Funds; blog 'Mail is Taking Longer to Deliver—We Looked at Why' (Thursday, September 17, 2026).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Nonpartisan federal audit trail for election-adjacent programs — the Sep 17, 2026 postal-delivery analysis bears directly on mail-ballot timing and counting-speed assumptions, and GAO also audits election-security grant programs and HAVA funds administration. Every product carries an explicit publication and public-release date, so any finding used as evidence can be dated precisely and re-fetched.",
+      "category": "Government — federal"
+    },
+    {
+      "id": "ces-tufts",
+      "name": "Cooperative Election Study (CES) — Tufts Tisch College of Civic Life",
+      "type": "Academic research survey (largest academic U.S. election survey; NSF-supported)",
+      "url": "https://tischcollege.tufts.edu/research-faculty/research-centers/cooperative-election-study",
+      "verified": "Fetched directly 2026-09-19 (tischcollege.tufts.edu/ces redirects to this canonical page). Verbatim: 'The Cooperative Election Study is the largest academic survey of the American public and a core resource for academic researchers and the public for understanding public opinion and American elections'; 'Since 2006, the study has interviewed more than a half-million Americans to capture their views on contemporary policy debates, their engagement in political and social life, and their vote choices in federal and state elections'; 'partially funded by the National Science Foundation and involving the participation of hundreds of scholars and students across dozens of academic institutions'; election-year design: 'interviews with more than 50,000 American adults before and after the election' — pre-election wave (general political attitudes, demographics, assessments of policies debated in Congress, political information, vote intentions) and post-election wave (how they voted and other recent engagement); non-election years: a single fall wave. Resources verified on the page: Interactive CES Analytics (Shiny apps), Data Downloads (CES datasets and publications in Dataverse), the CES blog (sites.tufts.edu/cooperativeelectionstudy) and the CES listserv. Directly relevant in-the-news item on the page: Tufts Now, 'Could Prediction Markets Replace Election Polling?' (2026-07-31) — 'tracking their odds won't supplant voter surveys, says a political scientist'.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "CES supplies validated-vote, large-n survey data (2006 onward) for turnout and electorate-composition priors in the 2026 model, and its releases are DOI-versioned in Harvard Dataverse (entry harvard-dataverse). URL MIGRATION recorded: the former Harvard-hosted site cces.gov.harvard.edu still resolves but is stale — it carries the banner 'PLEASE NOTE THAT OUR NEW WEBSITE CAN BE FOUND HERE' pointing to Tufts Tisch College, describes the study as 'a 50,000+ person national stratified sample survey administered by YouGov', and its newest news item is dated March 04, 2024 (irregularity #44).",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "healthyelections-mit",
+      "name": "Stanford-MIT Healthy Elections Project (archived at MIT)",
+      "type": "Academic research archive (election administration; 2020 cycle)",
+      "url": "https://web.mit.edu/healthyelections/www/home.html",
+      "verified": "Fetched directly 2026-09-19. Page title 'Stanford-MIT Healthy Elections Project'; banner 'Promoting a Safe & Equitable 2020 Election'. Featured content verified on the page: 'The Virus and the Vote — Read our final report on administering the 2020 election in a pandemic'; 'COVID-Related Election Litigation Tracker — This database tracks election law cases arising out of the COVID-19 pandemic'; 'After the Polls Close' (post-Election-Day process resources); 'Other Reports' incl. the co-directors' paper 'The Miracle and Tragedy of the 2020 Election'. Latest Additions are dated Jun 19, 2021 (Post-Election Litigation Analysis and Summaries; Other Reports; COVID-Related Election Litigation Tracker) and Apr 14, 2021 (Mail Voting); footer '© 2022 All rights reserved.' Mission verbatim: 'the Stanford-MIT Project on a Healthy Election brings together academics and election administration experts to assess and promote best practices to ensure the election can proceed with integrity, safety, and equal access.' HOST NOTE: healthyelections.org returned HTTP 500 to this session's fetch tool and healthyelections.mit.edu is a stub that says 'Please go to the website for healthyelections.org for more information' (irregularity #45).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "ARCHIVE, not a live 2026 feed — no additions after June 2021 (© 2022). Admitted for its election-administration corpus (mail-voting policy, drop boxes, signature verification, polling-place management, counting and certification timelines, election litigation), which this project uses to reason about counting-speed and certification-timing risk in close 2026 races. Complements mit-lab (the parent lab) and ncsl-elections (current 50-state administration tables).",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "voteview",
+      "name": "VoteView (UCLA) — congressional roll-call votes & members",
+      "type": "Academic data platform (roll-call votes, ideal points, district history)",
+      "url": "https://voteview.com/",
+      "verified": "Fetched directly 2026-09-19. Header verbatim: 'UCLA Presents voteview.com beta 3' with a note that the codebase was just updated. The search index reports '113,550 votes found' with filters for chamber, date range (YYYY-MM-DD or YYYY), Congress range (1st-119th), vote outcome (percentage support: supermajority/majority/minority), subject-matter category and 'Key Vote' (Congressional Quarterly / Wikipedia). Current-cycle records observed on the page (119th Congress): Senate vote 897 on September 17, 2026 — PN9994, 49-45, Nomination Confirmed ('Kasdin Miller Mitchell, of Texas, to be United States District Judge for the Northern District of Texas'); Senate 896 — PN9994, 49-47, Cloture Motion Agreed to; Senate 895 — S4668, 77-22, Motion to Proceed Agreed to (student-athlete name/image/likeness bill); House 674 — S2403, 401-14, Passed (Retire through Ownership Act); House 673 — HR9497, 415-9, Passed (Water Resources Development Act); House 672 — HR9340, 417-3, Passed (Ratepayer Protection Act); House 671 — HJRES213, 214-208, Passed (congressional disapproval under chapter 8 of title 5) — all House votes dated September 16, 2026. Per-vote export is offered, plus member pages, district history and key-vote features.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Roll-call ground truth for incumbent-behaviour features (vulnerability and retirement priors, party unity, CRA disapproval votes) and an independent cross-check on congress.gov / senate.gov / clerk-house records. Data were two days old at capture (through 2026-09-17 Senate / 2026-09-16 House) — a documented lag to respect when comparing against live legislative sources. Free search and export, no registration.",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "circle-tufts",
+      "name": "CIRCLE — Center for Information & Research on Civic Learning and Engagement (Tufts)",
+      "type": "Academic research center (youth turnout estimates & significance index)",
+      "url": "https://circle.tufts.edu/",
+      "verified": "Fetched directly 2026-09-19. Homepage: '2026 Youth Poll — In a major survey, over 5,000 young people share their political values, priorities, and inflection points ahead of the midterms'; methodology verbatim: 'Almost 50 million Gen Zers will be eligible to vote in 2026, prompting this representative survey of 18–29 year olds. Fielded between January 26 and February 12 by CIRCLE and When We All Vote, the survey captured the opinions of over 5,000 young people, oversampling young Black and Latino voters, whose voices are often underrepresented.' Also verified on the page: '2026 Youth Electoral Significance Index — Explore our rankings of 2026 U.S. Senate and gubernatorial elections where the youth vote can have the biggest impact on results' (circle.tufts.edu/yesi2026, item 'Where Young Voters Can Decide Elections in 2026 — CIRCLE's Youth Electoral Significance Index provides data-based rankings of the U.S. Senate and Governor elections where the youth can swing a race'); 'Modest Increases in Youth Voter Registration Compared to 2022 Midterms' (July 2026 data; 'Among the newest eligible voters (ages 18-19), however, registrations remain lower'); 'The Views and Needs of College Students Ahead of the 2026 Election'; 'Two-Thirds of Youth Have Shifted their Political Views in Recent Years'; 2024 post-election youth-vote analyses; the Gen Z attitudes-toward-democracy report (with Protect Democracy); and a media-ecosystems data explorer.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Youth turnout is the largest single swing component in midterm models. YESI 2026 ranks the Senate and gubernatorial races where the youth vote can swing the result — usable as an independent prioritisation of the Kalshi universe to compare against the market's own volume ranking, and CIRCLE's registration-tracking items are a checkable leading indicator before Election Day. Co-located with the CES at Tufts (entry ces-tufts).",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "brennan-center",
+      "name": "Brennan Center for Justice (NYU School of Law)",
+      "type": "Non-partisan law & policy research institute (voting, elections, money in politics)",
+      "url": "https://www.brennancenter.org/",
+      "verified": "Fetched directly 2026-09-19. Homepage mission statements 'We stand for the rule of law', 'We stand for the freedom to vote', 'We stand for democracy'; self-description 'The Brennan Center for Justice strengthens American democracy through research, advocacy, and public education.' Topic hubs verified on the page: Voting & Elections, Money in Politics, Government Power. Live 2026 items with in-line content-type labels: resource 'Vote Safely in 2026' ('In the run-up to the election, the federal government is exerting unprecedented pressure on American democracy') linked to a midterms hub at brennancenter.org/midterms-2026; policy solution 'Eight Solutions to Protect Voting Rights and Improve Representation'; analysis 'Supreme Court Rules Postal Service Must Deliver Mail Ballots' (2026-09-15); analysis 'How the Administration Picks Its Targets, Then Picks the Crime' (2026-08-31); expert brief 'The Trump Administration's Campaign to Undermine the Next Election'; explainer 'Citizens United, Explained'. Featured topics also list Corruption, Supreme Court Reform and Artificial Intelligence ('Does AI Fight or Fuel Election Disinformation').",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Supplies the legal-risk layer that prediction markets price but this project otherwise had no dated source for: litigation over ballot deadlines, mail delivery, polling-place access and certification. Because it is an advocacy-oriented institute, its items are admitted as dated, labelled commentary and litigation tracking — never as outcome data, ratings or probabilities (honesty contract #3). URL NOTE: deep paths guessed during verification (/our-work/voting-rights, /our-work/research-reports/state-votes-elections-2026) returned 'Content Not Found | Brennan Center for Justice'; link from the homepage and topic hubs instead.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "bipartisan-policy-center",
+      "name": "Bipartisan Policy Center — Elections (BPC)",
+      "type": "Non-partisan policy research (bipartisan election-official task force)",
+      "url": "https://bipartisanpolicy.org/explainer/a-proposal-for-bipartisan-federal-election-reform/",
+      "verified": "Fetched directly 2026-09-19. Explainer 'A Proposal for Bipartisan Federal Election Reform' compares the two parties' flagship bills — the American Confidence in Elections (ACE) Act, reintroduced by House Administration Committee Chair Bryan Steil (R-WI), and the Freedom to Vote Act (FTVA) from Sens. Bennet (D-CO), Hickenlooper (D-CO) and Klobuchar (D-MN) — across four areas: casting a ballot, voter registration, voter identification, and certification. It states the compromises are drawn from 'BPC's bipartisan election official task force' and links three BPC reports verified on the page: 'Logical Election Policy' (numbered recommendations including at least seven days of early in-person voting, minimum early-voting-site standards, ERIC membership for all states, pre-processing vote-by-mail ballots, and faster unofficial reporting), 'Policies Beyond the Next Election' and 'Voting Experience 2020'. State counts cited in the text link to NCSL pages (automatic voter registration in 22 states, online registration in 42). The page states plainly: 'This explainer is an exploration of post-2024 bipartisan policy opportunities and is not an exhaustive proposal'. URL NOTE: the shallow paths /elections/ and /topic/elections/ both return 'Page not found • Bipartisan Policy Center'.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Non-partisan counterpart to brennan-center on election administration: signature verification, ballot curing, pre-canvass processing and in-hand deadlines are exactly the mechanics that drive counting-speed risk in close 2026 races (and in Kalshi's settlement timing). Policy recommendations are dated and labelled as recommendations — never used as predictions or as an outcome source.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "decision-desk-hq",
+      "name": "Decision Desk HQ (DDHQ) + DDHQ Votes",
+      "type": "Election-results data provider (independent results & projections; prediction-market integration)",
+      "url": "https://www.decisiondeskhq.com/",
+      "verified": "Fetched directly 2026-09-19. Positioning verbatim: 'Decision Desk HQ delivers reliable and fast U.S. election data — built for newsrooms, platforms, research, and business use' and 'Decision Desk HQ provides independent results and analysis across every level of U.S. elections — From the presidency and Congress down to mayor and school board, DDHQ is trusted by newsrooms and media organizations nationwide.' Products on the page: 'Data Reporting — Reliable, real-time county level election results, historical datasets and race projections with flexible delivery options... used by Television and Digital News Publishers for news reporting, Financial Institutions for data modeling, AI Platforms for LLM training, and diverse elections related research projects'; 'Analysis'; and DDHQ Votes (votes.decisiondeskhq.com) — 'decades of U.S. state and federal results... with interactive maps, raw vote margins, swing visuals, and integrated live prediction market data to track evolving odds and outcomes in real time', with bullets 'Live & Historical Results — Real-time and historical results from U.S. state and federal elections dating back to 2000', 'Interactive Maps & Swing Views', and 'Prediction Market Integration — Track live odds and market movement from Kalshi and Polymarket alongside official election results'. A Kalshi-branded DDHQ Votes screenshot of 2024 Wisconsin presidential results is displayed.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Admitted for two distinct roles: (1) an independent results/race-call vendor for election night 2026 plus county-level results back to 2000 for backtests, and (2) a third-party consumer of Kalshi and Polymarket prices, which makes it a cross-check surface for the project's own API captures — never a price source. Tier note: DDHQ calls races for newsrooms, so its projections are forecasts and are scored against official canvass exactly as Kalshi prices are. VERIFICATION.md §8 deferred this entry for unverified fit; the fit is verified directly this session.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "270towin",
+      "name": "270toWin (Electoral Ventures LLC)",
+      "type": "Free election-data aggregator (interactive maps, 2026 forecasts & poll round-ups, Kalshi-derived market panel)",
+      "url": "https://www.270towin.com/",
+      "verified": "Fetched directly 2026-09-19. The page carries a 'Prediction Markets' block: 'Which party will win the 2028 Presidential Election?' showing '57%' and '41%' with a Kalshi logo and the disclosure verbatim: 'Probability based on the most recent ‘yes’ trade for each party as of Sep. 19, 2026 at 18:17 UTC (2:17 PM EDT). May not total 100%.' Same-day cross-check against this project's own two independent Kalshi captures (both stamped 2026-09-19T15:59:45Z / 15:59:58Z): KXPRESPARTY-2028-D bid 0.58 / ask 0.59 / last 0.58 and KXPRESPARTY-2028-R bid 0.41 / ask 0.42 / last 0.41, identical in the Node events feed (data/kalshi/tracker/daily/2026-09-19.csv) and the Python markets feed (data/kalshi/markets_politics_latest.json) — the rendered 41% matches the Republican last trade exactly and 57% sits 1¢ below the Democratic last trade captured 2h18m earlier (party attribution inferred from that match; the page does not label which figure belongs to which party). Also verified on the page: a 'Kalshi American Power Index (+1.90 D, KPOW as of 9/17/26 11:53 AM EDT)' link; 2026 Forecast pages for Senate, House and Governor; 2026 Poll pages for Senate, House and Governor; interactive maps for President, Senate, House, Governor, State Senate and State House; dated headlines — 'Overview and Live Results: Delaware Primary' (Sep 15, 2026), Rhode Island primary (Sep 9, 2026), New Hampshire primary (Sep 8, 2026), 'New Interactive Maps: FiftyPlusOne Senate and House Forecast' (Sep 2, 2026), Massachusetts primary (Aug 31, 2026); footer '© 2026 Electoral Ventures LLC'. Freshness note: the 2024-margin base map is stamped 'Map Updated: Jan. 29, 2025 at 12:53 UTC'.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Admitted as a free aggregator for electoral maps, 2026 forecast and poll round-ups, and as a documented third-party rendering of Kalshi prices that can be compared against the project's own captures (recorded as irregularity #46). Because its displayed probabilities are LAST-TRADE based and explicitly 'may not total 100%', they are never used as market prices here (see irregularities #2 and #7). VERIFICATION.md §8 deferred this entry pending fit; fit verified this session with the cross-check above.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "atlasintel",
+      "name": "AtlasIntel",
+      "type": "Pollster (proprietary online recruitment + post-stratification; public release page)",
+      "url": "https://www.atlasintel.org/",
+      "verified": "Fetched directly 2026-09-19. Site sections verified on the page: 'Public Polls — Nationally representative polls conducted by AtlasIntel using its proprietary data collection technology and post-stratification algorithms' (atlasintel.org/polls/general-release-polls); 'Tracking Pro — Proprietary high-frequency polling that enables you to be the first to know when public opinion shifts and the likelihood of political outcomes changes' (tracking.atlasintel.org); 'Atlas Monitor — a customizable social media intelligence tool' (monitor.atlasintel.org); 'Political Risk — Data-driven solutions for world-class political risk analysis'; 'Forecasting — Predictive models for strategic decision-making & risk readiness'; 'Atlas Político' (atlaspolitico.com.br). Top-line positioning: 'Big data, big ideas — We develop big data solutions that empower decision-making, strategic planning, and risk management.'",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Admitted with an explicit METHODOLOGY caveat: AtlasIntel self-describes non-probability online recruitment plus post-stratification ('proprietary data collection technology and post-stratification algorithms'), which is not the probability-panel design of ipsos-us/norc or the RDD and live-caller designs of the university pollsters in this list. Its releases are therefore comparable only within a like-method group, and any use in the poll layer must carry the method label (honesty contract #3; irregularity #49). VERIFICATION.md §8 deferred this candidate for weaker institutional standing; it is admitted now because a live public-release page and a stated methodology were verified directly.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "harris-poll",
+      "name": "The Harris Poll (political polling is published under the separate HarrisX brand)",
+      "type": "Pollster / market-research firm (no political polling on this site)",
+      "url": "https://theharrispoll.com/",
+      "verified": "Fetched directly 2026-09-19. Homepage positioning: 'See Tomorrow. Shape Today.'; self-description 'The Harris Poll is a global market research and advisory partner. Our companies help organizations understand people, anticipate change, and act with confidence.' Scale statements on the page: '70+ Years of trusted insights and proven methodology. Driving innovation and industry leadership since 1956', '40M Unique respondents', '67K+ Media mentions last year', '90 Countries surveyed worldwide'. Report library verified (The Six Types of AI Users; Sports Momentum Intelligence Report; The State of Pets 2026; America's World Cup Moment — 2026 FIFA Men's World Cup; The Algorithmic Aisle; AutoTECHCAST 2026). Sub-brands listed: Harris Quest, Storyline Strategies, Bera AI, Emerald Research Group. Practice areas: Market Understanding, Trends & Futures, Thought Leadership, Product & Message, Brand & Reputation. DISCREPANCY OBSERVED: no political or election polling is presented anywhere on the fetched homepage, and the political-polling brand known publicly as 'HarrisX' (thehillx.com) could NOT be fetched by this session's tool (irregularity #43).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Admitted ONLY as a large-sample survey-methodology and media-research source. Do NOT attribute 2026 political horse-race numbers to 'The Harris Poll' without a primary HarrisX release — conflating the two brands is a common attribution error, and this project records it as a flagged discrepancy rather than a silent assumption. thehillx.com is on the re-verify list for the next session.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "npr-elections",
+      "name": "NPR — Elections 2026 section (National Public Radio)",
+      "type": "Official public-media news outlet (federal election coverage, member-station network)",
+      "url": "https://www.npr.org/sections/elections/",
+      "verified": "Fetched directly 2026-09-19. Page title/heading verbatim: 'Elections 2026: The latest from the NPR Network — Explore NPR's latest election coverage', with a 'Subscribe to Politics Newsletter' link. Live items observed with on-page dates: 'Republican ‘cavalry’ arrives with a Trump-backed $150 million ad blitz in key races' (September 18, 2026 — 'two Trump-aligned super PACs have reserved more than $150 million in ads — primarily in deep red House and Senate races that have now become competitive'; 4:05 audio plus transcript link); 'A DHS email raises new questions about the Trump administration's election plans' (September 18, 2026, marked Exclusive/Only on NPR — 'a heavily redacted email from last year, reported first by NPR, reveals that DHS personnel shared a list of jurisdictions that offer election materials in non-English languages'); 'It's illegal for armed federal officers to be at polls. Lawsuits seek to ensure that' (September 18, 2026, Exclusive — 'The latest lawsuit, first reported by NPR, argues the Trump administration's repeated suggestions that federal officers could be at polling sites is a form of illegal voter intimidation'); 'A tumultuous congressional primary season closes with record departures and defeats' (September 16, 2026 — 'close to 100 lawmakers who started this Congress will not be around for the next one, according to an NPR analysis, driven by record-setting retirements and primary defeats'); 'As campaign season gears up, AI-generated ads are everywhere' (September 16, 2026, with an NPR-built collage of AI-generated ads naming candidates in TX, OH, VA and NY races).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Public-media outlet whose items carry full audio transcripts — dated, quotable primary text for the news layer, plus member-station reach. Its ad-reservation reporting ($150M across two super PACs, Sep 18 2026) is a spending-side leading indicator for races the market may be mispricing, and its retirement/primary-defeat analysis is a checkable incumbent-vulnerability dataset. Also a partner outlet in the NPR/PBS News/Marist poll series (entry marist-poll).",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "pbs-newshour",
+      "name": "PBS NewsHour — Politics (public broadcasting)",
+      "type": "Official public-media news outlet (politics, Congress, Supreme Court, presidency)",
+      "url": "https://www.pbs.org/newshour/politics",
+      "verified": "Fetched directly 2026-09-19. Section header verbatim: 'Politics — Follow PBS NewsHour's complete coverage of politics, Congress, the Supreme court and the presidency.' Items observed with on-page dates and bylines: 'Trump announces all 50 states joining Medicaid drug pricing model' (Sep 19, Fatima Hussein, Associated Press); 'MS NOW, CNN and Politico say their journalists were denied access to White House after Trump ban' (Sep 19, Jocelyn Noveck, AP — 'Trump had said Friday he would ban all three outlets because of coverage he disliked'); 'Thousands join protest outside Kennedy Center, expressing concern that Trump might tear it down' (Sep 19, Gary Fields, AP); 'Trump administration begins building border wall in Big Bend region of Texas' (Sep 18, Rebecca Santana, AP — 'the administration's $46 billion plan'); 'What's in the Greenland agreement between U.S. and Denmark' (Sep 18, Nick Schifrin, video 2:49); 'Trump says he's banning 3 outlets from the White House in his latest attack on press freedom' (Sep 18, Liz Landers, video 2:48); 'News Wrap: Newsom signs order for AI safety in California' (Sep 18, video 5:27); ''Shadow surge' pushes immigration arrests to highs as Trump administration shifts tactics' (Sep 18, Geoff Bennett and Jackson Hudgins, video 5:45).",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "Public-broadcasting politics desk: heavy wire (AP) carriage with on-page bylines plus original NewsHour video — a second, non-commercial corroboration path for the same events NPR reports, and the PBS outlet in the NPR/PBS News/Marist poll partnership. Dates and bylines are on-page, so every claim can be pinned to a dated primary URL for manual review.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "saint-anselm-sasc",
+      "name": "Saint Anselm College Survey Center (SACSC) — New Hampshire Institute of Politics",
+      "type": "Academic pollster (New Hampshire; free full PDF releases with marginals, tables & demographics)",
+      "url": "https://www.anselm.edu/sites/default/files/2026-06/June%2024-25%202026%20Poll.pdf",
+      "verified": "Primary PDF fetched directly 2026-09-19: 'A SURVEY OF NEW HAMPSHIRE REGISTERED VOTERS — June 24-25, 2026', 'Neil Levesque, Executive Director; Tauna Sisco, Ph. D, Faculty Advisor', 'NEW HAMPSHIRE INSTITUTE OF POLITICS, Saint Anselm College'. Methodology verbatim: 'These results are from a Saint Anselm College Survey Center poll based on online surveys of 1614 New Hampshire registered voters. Surveys were collected between June 24th and 25h, 2026, from cell phone users randomly drawn from a sample of registered voters reflecting the demographic and partisan characteristics of the voting population. Names were presented in random order for the favorability and ballot tests. The survey has an overall margin of sampling error of +/- 2.4% with a confidence interval of 95%. The data are weighted for age, gender, geography, and education based on a voter demographic model derived from historical voting patterns, but are not weighted by party registration or party identification.' Document contents: Survey Notes, Questions Tested, Summary, Charts, Weighted Marginals, Weighted Tables, Weighted Demographics, About SACSC. Ballot tests on the page: NH Governor (Kelly Ayotte vs Cindi Warmington); U.S. Senate (Chris Pappas vs Scott Brown; Chris Pappas vs John E. Sununu); Democratic and Republican Senate primaries; CD-1 and CD-2 House primaries and general; 2028 NH presidential primary for both parties; plus Trump and Ayotte approval, right-direction/wrong-track (country and state), most-important-issue, Iran military action, economic-security-vs-Biden and party-trust items. Reported findings verbatim: 'Congressman Pappas is relatively popular with a 46%-43% favorability, translating into a commanding 62%-20% lead in the Democratic primary for US Senate over newcomer Karishma Manzur (15%-14% favorability). On the Republican side, former US Senator John E. Sununu leads former US Senator Scott Brown by 38 points, 59%-21%. Former Portsmouth City Councilor Stefany Shaheen leads a crowded field in the 1st Congressional District Democratic Congressional primary with 22%, followed by Democratic Party Vice Chair Maura Sullivan with 15%. Repeat candidate Hollie Noveletsky leads the Republican 1st Congressional District contest with 16%, followed by businessman Anthony DiLorenzo with 13%. Incumbent Congresswoman Maggie Goodlander enjoys a substantial lead over challenger Paige Beauchemin, 76%-9%.' A separate March 2026 release (1,491 NH registered voters, generic ballot Democrats 49%-41%, field Mar 16-18, 2026) exists on the same .edu host but was located via live search and NOT fetched directly, so it is not quoted here.",
+      "verifiedOn": "2026-09-19",
+      "status": "verified",
+      "notes": "New Hampshire's open 2026 U.S. Senate race is traded on Kalshi — SENATENH-26-D 'Chris Pappas' bid 0.83 / ask 0.84 and SENATENH-26-R 'John E. Sununu' bid 0.17 / ask 0.18 in the project's 2026-09-19 capture, with vote-share ladders …NH-26CPAP-* and …NH-26JSUN-*. Those are the same two candidates the June 2026 SACSC release tests head-to-head, so poll rows map onto live markets with no interpretation layer. SACSC is the first-in-the-nation state's own academic pollster and publishes complete PDF releases (weighted marginals, tables, demographics) free, so poll-layer rows can be ingested from the primary document instead of transcribed from news copy; per-release weighting (age, gender, geography, education; explicitly not party registration or party ID) is recorded with each row. New Hampshire's 2026 gubernatorial market does not appear in that capture (GOVPARTYNH-28 is the next-cycle series present).",
+      "category": "Pollsters & survey research"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Government — federal",
+      "count": 20
+    },
+    {
+      "name": "Government — state & local",
+      "count": 17
+    },
+    {
+      "name": "Official publishers & archives",
+      "count": 1
+    },
+    {
+      "name": "Academic & university research",
+      "count": 10
+    },
+    {
+      "name": "Pollsters & survey research",
+      "count": 20
+    },
+    {
+      "name": "News outlets & wires",
+      "count": 13
+    },
+    {
+      "name": "Prediction markets & exchange data",
+      "count": 8
+    },
+    {
+      "name": "Ratings, forecasts & analysis",
+      "count": 15
+    },
+    {
+      "name": "Contest & methodology references",
+      "count": 1
     }
   ]
 }

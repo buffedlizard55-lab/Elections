@@ -83,6 +83,30 @@
       "title": "Same-day cross-host comparison of the Kalshi API (api.elections vs external-api)",
       "detail": "docs.kalshi.com lists both hosts; irregularity #2 (stale last price) was seen on api.elections.kalshi.com. Run the two-collector cross-check with KALSHI_API_BASE=https://external-api.kalshi.com/trade-api/v2 once and record whether the stale-price behaviour is host-specific (irregularity #31).",
       "why": "Determines which host the project should treat as authoritative for last prices."
+    },
+    {
+      "id": "R11",
+      "priority": 11,
+      "status": "OPEN",
+      "title": "Re-verify the hosts that refused the fetch tool, and admit the deferred PA pollster",
+      "detail": "Session 4 (VERIFICATION.md §9c) could not fetch surveypoll.com (SurveyUSA), thehillx.com (HarrisX) or courtlistener.com (HTTP 500), so none was added (irregularity #47); healthyelections.org also 500d (#45), and three official paths refused the tool — Wisconsin /elections-voting (access denied, #40), Nevada /sos-elections (its own 404 behind a CAPTCHA, #41) and Californias elections.cdn.sos.ca.gov (S3 AccessDenied, #42). Re-attempt each from a different fetch path or through a documented API (CourtListener publishes a free REST API; SurveyUSA publishes full questionnaires per poll). Separately, the Franklin & Marshall College Poll was located only through syndicated coverage (Shapiro 50 / Garrity 28, 546 registered PA voters fielded Jun 8-14 2026 at the Center for Opinion Research); fetch the F&M release itself and admit it as the 21st entry of that batch — its matchup is already corroborated by captured Kalshi rungs GOVPARTYPA-26-D Josh Shapiro 0.968/0.973 and -R Stacy Garrity 0.030/0.033.",
+      "why": "A registry that only contains what one fetch path can reach silently under-covers exactly the pollsters that matter in the closest 2026 races."
+    },
+    {
+      "id": "R12",
+      "priority": 12,
+      "status": "OPEN",
+      "title": "Ingest the newly verified poll sources into the 2026 poll layer as machine-readable rows",
+      "detail": "The poll layer still holds 15 hand-transcribed rows. Session 4 added sources whose releases are directly ingestible: the Saint Anselm College Survey Center PDF (June 24-25 2026, n=1,614 NH registered voters, +/-2.4% MoE, weighting stated in the document; its Pappas v Sununu and Pappas v Brown tests map onto SENATENH-26, captured at 0.83/0.84 v 0.17/0.18), CIRCLEs 2026 Youth Poll (n>5,000, fielded Jan 26-Feb 12 2026) and the 2026 Youth Electoral Significance Index (rankings of the Senate and gubernatorial races the youth vote can swing), and the Cooperative Election Study (50,000+ adults per election year, validated vote). Add rows with sourceUrl + verifiedVia + a method-family label (probability panel / RDD-live caller / online post-stratified), then test YESIs race ranking against the markets own volume ranking as an independent prioritisation check.",
+      "why": "Verified sources only become evidence once they are recorded as dated forecasts the scorer can judge after settlement — and YESI/CES give pre-election priors that are not market-derived."
+    },
+    {
+      "id": "R13",
+      "priority": 13,
+      "status": "OPEN",
+      "title": "Automate the third-party market-rendering cross-check (270toWin, DDHQ Votes)",
+      "detail": "The §9a comparison was manual: 270toWins Kalshi panel showed 57% and 41% for KXPRESPARTY-2028 as of 18:17 UTC with the disclaimer May not total 100%, while both project captures of the same tickers (15:59:45Z Node events feed, 15:59:58Z Python markets feed) read D 0.58/0.59/last 0.58 and R 0.41/0.42/last 0.41 — agreement within 1c, sum 98% (irregularity #46). DDHQ Votes likewise publishes live odds and market movement from Kalshi and Polymarket alongside official election results. Add a daily step that records each third-party rendering with its own timestamp, compares it to that days captured bid/ask, and flags divergence larger than the capture-time gap can explain instead of assuming staleness.",
+      "why": "Two independent consumers of the same exchange data agreeing is cheap corroboration that our capture is right; disagreeing is the cheapest signal that one of the three is stale."
     }
   ],
   "limitations": [
@@ -96,6 +120,10 @@
     "Poll data for 2024 ends 2024-09-12 (538 archive cutoff); the poll-vs-market comparison after that date reuses the anchor with its age disclosed.",
     "Two collectors run minutes apart, so the cross-check tolerates 2¢ moves; it is an agreement report, not a proof that either capture is complete. Some official results hosts block automated fetchers (irregularity #35).",
     "GitHub Pages serves the committed site bundle (src/data/site-data.js, ~1.2 MB); it updates only when the daily workflow commits (default branch) or a PR merges. The hand-captured Kalshi hub snapshot of 2026-09-18 is kept for cross-platform checks and is dated on the page.",
-    "Kalshi's events feed (status=open, nested markets) returns settled (finalized) rungs inside still-open multi-market events. The collector now records their status and results and excludes them from the tradable/tracked set, but the API semantics (why finalized markets stay nested for weeks) are undocumented in the pages fetched — treat 'open event' ≠ 'every rung tradable'."
+    "Kalshi's events feed (status=open, nested markets) returns settled (finalized) rungs inside still-open multi-market events. The collector now records their status and results and excludes them from the tradable/tracked set, but the API semantics (why finalized markets stay nested for weeks) are undocumented in the pages fetched — treat 'open event' ≠ 'every rung tradable'.",
+    "Source registry: 105 entries verified across four sessions (five batches), but verification is point-in-time. Session 4 re-fetched its 20 new hosts on 2026-09-19 only, and the daily workflow does not re-fetch source pages, so a URL that changes later is not caught until a session re-verifies it (LIMITATIONS #18).",
+    "Categories on the master list are an organisational label added 2026-09-19 so the site can group 105 entries; they come from a fixed per-id map reviewed entry-by-entry (VERIFICATION.md §9b) and carry no claim about a source tier or reliability ranking.",
+    "Third-party renderings of Kalshi prices (270toWin, DDHQ Votes) are corroboration surfaces only: they are last-trade based, may not sum to 100%, and can mix capture dates on one page (irregularity #46). Every price used in models, backtests and the contest comes from captured yes_bid/yes_ask.",
+    "Fetch-tool reach is a coverage limit, not a data problem: four primary hosts refused this sessions proxied fetcher (healthyelections.org, surveypoll.com, thehillx.com, courtlistener.com) and three official paths returned access-denied / 404 / AccessDenied (WI /elections-voting, NV /sos-elections, CA elections.cdn.sos.ca.gov). Those sources were excluded or annotated rather than reconstructed from memory (irregularities #40-#42, #45, #47)."
   ]
 }

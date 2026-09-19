@@ -82,6 +82,25 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 details { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 10px 0; background: var(--panel); }
 summary { cursor: pointer; font-weight: 600; font-size: 14.5px; }
 details .body { margin-top: 10px; font-size: 14px; }
+/* Sources toolbar + compact expandable verification panels (session 4, 105-entry registry) */
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 14px 0 8px; }
+.toolbar input[type="search"] {
+  flex: 1 1 260px; min-width: 200px; padding: 8px 12px; font-size: 14px; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 9px; background: var(--panel);
+}
+.toolbar select {
+  padding: 8px 10px; font-size: 13.5px; color: var(--muted); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 9px;
+}
+.toolbar input[type="search"]:focus, .toolbar select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+.btn {
+  padding: 8px 14px; font-size: 13.5px; font-weight: 600; color: var(--accent); background: var(--accent-soft);
+  border: 1px solid transparent; border-radius: 9px; cursor: pointer;
+}
+.btn:hover { text-decoration: none; filter: brightness(0.97); }
+details.src-more { border: none; background: transparent; padding: 0; margin: 0; }
+details.src-more > summary { font-size: 13px; font-weight: 600; color: var(--accent); }
+details.src-more > .body { font-size: 13px; color: var(--muted); margin-top: 6px; max-width: 68ch; }
 .bar-track { background: var(--chip); border-radius: 6px; height: 14px; position: relative; overflow: hidden; min-width: 120px; }
 .bar-fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 6px; }
 .bar-fill.dem { background: #2563a8; }
