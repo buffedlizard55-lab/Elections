@@ -11,11 +11,11 @@ universe + series registry + append-only daily tracker + settled-2026 candle see
 12:40 UTC cron, enabled by default — no variable gate) + `daily-collection.yml` (bootstrap copy with
 a temporary push trigger). GitHub-hosted runners have normal network access to the official Kalshi
 API, so collection runs there and commits back to the branch (`[skip ci]` on collector commits; the
-bot token cannot dispatch workflows — 403 — hence the push-trigger bootstrap). **Status 2026-09-19:**
-first networked run (#5) proved the trigger + tests-on-runner path, then hit the 30-minute job
-timeout inside the rate-limited universe sweep (~25+ min elapsed) — timeout raised to 90 min; the
-re-trigger push is pending a GitHub credential refresh in the sandbox. Once merged, the cron does
-the daily loop with no further action. Every artifact carries `capturedFrom`+`capturedAt` (lint
+bot token cannot dispatch workflows — 403 — hence the push-trigger bootstrap). **Status 2026-09-19: LANDED.** Run #5 proved the trigger path (died at the old 30-min timeout → raised
+to 90); run #6 collected everything but the fatal lint correctly refused to commit (legacy `meta.json`
+provenance — fixed, plus 429 pacing + artifact-on-failure); run #7 succeeded end-to-end: 24,150 open
+markets / 4,199 politics series, tracker +24,150 rows, settled-2026 seed 400 with bars, collector
+commit `917ee9e`. Once merged, the cron does the daily loop with no further action. Every artifact carries `capturedFrom`+`capturedAt` (lint
 enforces; lint is fatal in the workflow after collection).
 
 ### R2 · 2024 per-state Senate race markets — P2, collector ready
@@ -72,8 +72,8 @@ master list now has **73 entries** (second 20-entry batch verified line-by-line 
    domains (verified live; `iem.isu.edu` was simply wrong — irregularity #26). Three entries remain
    `verified-via-search` where the sandbox proxy blocked direct fetches (Suffolk SUPRC landing page,
    Morning Consult intel tracker, NCSL hub) — each flagged in its own entry. The full open-market
-   universe lands with R1's first completed networked run (run #5 proved the path, then hit the 30-min
-   timeout mid-sweep; timeout now 90 min, re-trigger pending credential refresh).
+   universe LANDED 2026-09-19 (run #7: 24,150 open markets / 4,199 politics series, commit 917ee9e;
+   daily 12:40 UTC cron takes over on main).
 2. 2024 market backtest = 3 markets (presidency + both chamber controls). Directionally strong (all
    settled YES on the R side, matching official outcomes), statistically thin.
 3. NO-side candle prices are derived reciprocals (1 − yesClose); the raw API publishes only the YES

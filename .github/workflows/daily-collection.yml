@@ -20,15 +20,11 @@ on:
         default: 'false'
   schedule:
     - cron: '30 12 * * *' # 12:30 UTC daily (US markets mid-session)
-  push:
-    # TEMPORARY bootstrap trigger (this workflow already exists on main, so a
-    # push-triggered run evaluates the version from the pushed branch): the
-    # automation token cannot dispatch workflows (403 on the dispatches API),
-    # so the first networked collection run is triggered by pushing this file.
-    # REMOVE this push block before merging to main — the steady-state daily
-    # loop is universe-collection.yml (schedule, enabled by default).
-    branches: ['arena/01a0b728-elections']
-    paths: ['.github/workflows/daily-collection.yml', 'scripts/collect-universe.mjs', 'scripts/collect-senate-2024-races.mjs', 'scripts/collect-kalshi.mjs', 'src/kalshi-live.js']
+  # The TEMPORARY push-trigger bootstrap (needed because the automation token
+  # cannot dispatch workflows — 403) did its job on 2026-09-19: runs #5-#7
+  # collected the universe + 2024 Senate capture on a networked runner and the
+  # data is committed. The steady-state daily loop is universe-collection.yml
+  # (schedule, enabled by default, registers on main at merge).
 
 permissions:
   contents: write

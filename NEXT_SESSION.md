@@ -2,16 +2,16 @@
 
 Ordered by dependency. Every item keeps the project's rules: verified sources only, no hallucinations, irregularities logged, line-by-line evidence in VERIFICATION.md.
 
-## P0 — Land the first networked collection (R1/R2, unblocks the forward loop)
+## P0 — Land the first networked collection (R1/R2) — ✅ DONE 2026-09-19
 
-1. **Push the two pending local commits** (timeout 30→90 min fix; docs sync). The sandbox GH_TOKEN expired mid-session on 2026-09-19 (`gh auth status` → "token no longer valid"; git push → "Invalid username or token"). Once credentials are restored (or the user reconnects GitHub in Arena), `git push origin arena/01a0b728-elections`. The push itself re-triggers `daily-collection.yml` (temporary push trigger, paths-matched on the workflow file) — that is the intended bootstrap.
-2. Watch the run (`gh run watch <id>`): expect universe sweep ~25-40 min (rate-limited), Senate 2024 capture (34 tickers, idempotent), analytics, site rebuild, fatal lint, collector commit `[skip ci]`. Run #5 proved tests-on-runner + trigger wiring before dying at the 30-min timeout.
-3. `git pull --rebase` the collector commit; inspect `data/kalshi/forward/` (universe-open.json, series-registry.json, open-prices.csv, settled-2026-seed.json, meta-*.json) and `data/kalshi/historical-2024/senate-races.json`. Sanity checks: politics series count > 30; open markets in the hundreds; senate capture ≈ 40 markets across 18 states (official-outcome cross-check already committed: 18 of 35 contests, R flips MT/OH/PA/WV → 53-47); 2 skipped tests flip to passing.
-4. Re-run `npm test` + `node scripts/build-site.mjs` + `node scripts/lint-verified.mjs` locally on the collected state; open the site preview; verify the Forward (R1/R3) + Senate-2024 (R2) sections render real data instead of pending placeholders.
+1. ✅ Pushed (credential refreshed after a ~1 h expiry window). Run #6 collected everything but the fatal lint correctly refused to commit (legacy `meta.json` lacked provenance — fixed in 77d0437, plus 429 pacing and upload-artifact-on-failure so a capture is never lost again).
+2. ✅ Run #7 (id 35422611203) SUCCESS in ~36 min: universe 24,150 open markets / 4,199 politics series (registry 14,168), tracker +24,150 rows, settled-2026 seed 9,350 markets / 400 with bars, Senate-2024 capture 36 markets / 18 states / 0 errors, analytics + site rebuild + lint + collector commit `917ee9e` ([skip ci], 1,020,769 lines).
+3. ✅ Pulled + inspected locally: `data/kalshi/forward/*` + `data/kalshi/historical-2024/senate-races.json` present; senate backtest cross-check 36 PASS / 0 FAIL; calibration T-1 Brier 0.0148 (mean 27.5¢ vs 28.4% outcome rate), T-60 0.0345.
+4. ✅ `npm test` = 41 tests / 40 pass / 0 fail / 1 skip (the skip is the inverted guard "skips honestly while capture pending" — by design once the capture exists). Lint green on the collected state.
 
-## P1 — Merge to main and switch to the steady-state loop
+## P1 — Merge to main and switch to the steady-state loop — IN PROGRESS
 
-5. Remove the TEMPORARY push trigger from `daily-collection.yml` (comment in the file says so) before opening the PR; keep `universe-collection.yml` (daily 12:40 UTC cron, enabled by default) as the steady-state collector.
+5. ✅ TEMPORARY push trigger removed from `daily-collection.yml` (bootstrap served its purpose; noted in-file). `universe-collection.yml` (daily 12:40 UTC cron, enabled by default) is the steady-state collector.
 6. Open PR → merge to main (user requirement). On main: `universe-collection.yml` becomes dispatchable AND its cron registers (schedules only fire from the default branch). The 12:40 UTC daily loop then needs no further action; collector commits (`[skip ci]`, rebase-before-push) accumulate `open-prices.csv` — the R3 calibration feed.
 7. First settlements land Nov 3, 2026 (LA mayor + others): `run-calibration.mjs` scores them automatically into the live tracker; verify bucket tables + Brier on the site the day after.
 
