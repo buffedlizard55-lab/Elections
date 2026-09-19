@@ -113,4 +113,63 @@ say so in the method column; none of the 21 is listed on assumption. The 21 entr
 | `https://www.nbcnews.com/politics/nbc-poll-check` → 404 | Live hub is `https://www.nbcnews.com/politics/2026-election` (located via search, then fetched) — entry N11 |
 | `https://us-elections-project.unf.edu` → fetch failed (sandbox proxy error); `https://electproject.github.io/` → 404 page ("There isn't a GitHub Pages site here") | Canonical live URLs: `electproject.org` (stub, fetched) → `election.lab.ufl.edu/voter-turnout` (data, fetched) — entry N20 |
 | `https://www.openelections.org/` → **GoDaddy domain-for-sale page** | Excluded from master list; **IRREGULARITIES #13**; use dataverse.harvard.edu |
-| `https://iem.isu.edu/` + IEM 2026 prospectus PDF → fetch failed (proxy) | Entry N21 marked `verified-via-search` with the university-hosted prospectus as evidence; re-verify directly on a networked run |
+| `https://iem.isu.edu/` + IEM 2026 prospectus PDF → fetch failed (proxy) | Entry N21 marked `verified-via-search` with the university-hosted prospectus as evidence. **Resolved in §7 (2026-09-19 session 3): `iem.isu.edu` is a non-existent host (Iowa State); canonical `https://iem.uiowa.edu/iem/` fetched 200 — irregularity #26.** |
+
+## 7 · 2026-09-19 session 3 — live collection evidence, 20 new master-list entries, poll layer
+
+### 7a · Live Kalshi collection (GitHub Actions, networked)
+
+| Run | What | Evidence |
+|---|---|---|
+| 35409758565 (00:33 UTC) | First live `collect-kalshi.mjs` + `collect-senate-2024.mjs` | Registry 4,166 series (`/series?category=Elections` + `Politics`), 4,094 open events, 24,367 markets; 50 `SENATE{ST}` series queried → 36 settled 2024 markets in 18 states, 1,269 daily bars, 140 requests, 0 errors. Bot commit bdde995 (54 MB — irregularity #30). |
+| 35410552688 (00:48 UTC) | Same-day re-run with the slim formats + Python sample + cross-check | 10,914 traded markets in the CSV; Python sample 2,000 markets; cross-check overlap 1,852: last price within 2¢ on 1,850, book on 1,841, volume never decreased. Bot commit 4896325 (≈ 12 MB diff, one-time index reshape). |
+| spot check | `SENATEAZ-24-D` daily bar ending 2024-11-05T05:00Z | volume 93,619, close 70¢ (matches the API candlestick fetched by hand); result `yes` (Gallego) — now a unit test |
+| spot check | Texas 2024 Senate | Kalshi `SENATETX-24-R` result `yes`; Texas SoS results portal: Cruz 5,990,741 – Allred 5,031,249 |
+
+### 7b · 20 new master-list entries (all fetched directly on 2026-09-19)
+
+| # | Entry | Fetched URL | What was observed (verbatim-level notes are in `data/sources/master.json → verified`) |
+|---|---|---|---|
+| N22 | `alaska-doe` | https://www.elections.alaska.gov/ | 2026 General Nov 3; 2026 primary official results; 2024 certified results + recount PDFs; press releases Sep 4/10/16 2026 |
+| N23 | `georgia-sos` | https://sos.ga.gov/elections (→ elections-division page) | Nov 3 2026 page; results.sos.ga.gov (HD-13 special runoff 08/25/2026); data hub, CVRs, ballot images |
+| N24 | `iowa-sos` | https://sos.iowa.gov/ | 'Obtain Elections Data' → /research-and-data; press release Sep 15 2026 (2026 General) |
+| N25 | `maine-sos` | https://www.maine.gov/sos/elections-voting/election-results-data | June 9 2026 primary RCV summary reports + cast-vote-record exports |
+| N26 | `michigan-sos` | https://www.michigan.gov/sos/elections | Nov 3 2026 dates; Aug 4 2026 primary results; Nov general candidate listing; Board of State Canvassers |
+| N27 | `ncsbe` | https://www.ncsbe.gov/results-data | er.ncsbe.gov dashboard; dl.ncsbe.gov public files; registration/history/absentee data |
+| N28 | `ohio-sos-data` | https://www.ohiosos.gov/data | results dashboards, past results, absentee/early-vote dashboard (data.ohiosos.gov) |
+| N29 | `texas-sos-results` | https://results.texas-election.com/ | 2024 Nov 5 general: Cruz 5,990,741 / Allred 5,031,249; Trump 6,393,597 / Harris 4,835,250 |
+| N30 | `arizona-sos` | https://azsos.gov/elections/election-information | 2026 calendar (reg. deadline Oct 5, early voting Oct 7, Nov 3); per-year election info back to 1974; results.arizona.vote |
+| N31 | `la-county-rrcc` | https://www.lavote.gov/home/voting-elections/current-elections/election-results | June 2 2026 primary results (results.lavote.gov 4338); canvass schedule; SOVC archive |
+| N32 | `emerson` | three release pages (TX, MI Sep 12–14; IA Aug 31–Sep 1) | toplines + methodology paragraphs (n, CI, mode, weighting) — numbers in the poll layer |
+| N33 | `marquette-law-poll` | MLSPSC35 national release PDF | Sep 2–9 2026; LV D 54 / R 41; RV D 50 / R 42; 7-wave trend tables |
+| N34 | `ssrs-voter-poll` | https://ssrs.com/news/the-voter-poll-by-ssrs/ + AP explainer | Edison acquired by SSRS; NEP exit poll + AP VoteCast merged into The Voter Poll (Nov 2025 launch; ABC/AP/CBS/CNN/Fox/NBC) |
+| N35 | `siena-sri` | https://sri.siena.edu/ (scri.siena.edu redirects) | NYT/Siena national Sep 15 2026; Jul 1 state polls AK/IA/NC/OH; Texas Poll Sep 17 2026 (ReconMR PDF) |
+| N36 | `unh-survey-center` | https://cola.unh.edu/unh-survey-center | releases archive on scholars.unh.edu (NH gov Aug 27, CD1 Aug 26, Maine Jul 29 2026); AAPOR TI |
+| N37 | `suffolk-suprc` | https://www.suffolk.edu/academics/research-at-suffolk/political-research-center | Iowa Gov + Senate poll Aug 26 2026; NYC CityView Sep 8; 2024 poll-vs-actual table |
+| N38 | `kalshi-api-docs` | https://docs.kalshi.com/api-reference/market/get-markets | Market schema (dollar strings, result, settlement_ts…); server list incl. external-api + api.elections |
+| N39 | `ncsl-elections` | https://www.ncsl.org/elections-and-campaigns | 458 resources; Tables 7/16 updated Sep 15 2026; mail-ballot rules explainer |
+| N40 | `cook-political` | https://www.cookpolitical.com/ratings/senate-race-ratings | Sep 15 2026 ratings: Toss Up ×7 (AK, IA, ME, MI, NH, OH, TX), Lean D GA/NC, Likely D MN, Likely R KS/NE |
+| N41 | `inside-elections` | https://insideelections.com/ratings/senate/ | Sep 17 2026: Toss-up ME/MI/NH/OH; Tilt D GA/NC; Tilt R AK/IA; Lean R TX; JSON export URL |
+
+### 7c · Poll layer fetches (numbers transcribed into `data/polls/poll-layer-2026.json`)
+
+| Poll | Fetched | Key numbers |
+|---|---|---|
+| Quinnipiac national, Sep 3–6 2026 | https://poll.qu.edu/images/polling/us/us09102026_usvi28.pdf | 970 RV ±3.9; House control D 49 / R 38 / 13 DK; Trump 33/59; cites July 29 poll D 48 / R 41 (fixes the June mis-date, #29) |
+| NBC News, May 29–Jun 7 2026 | nbcnews.com …rcna348913 | 2,400 RV ±2; D 49 / R 44 / 7 unsure; Trump 42/57 RV |
+| Marquette national, Sep 2–9 2026 | MLSPSC35 PDF | LV 581 ±4.3 D 54 / R 41; RV 864 ±3.6 D 50 / R 42; trend since Nov 2025 |
+| CNN/SSRS Maine + Michigan, Aug 31–Sep 6 2026 | cnn.com 2026/09/09 article + ssrs.com news page | ME 880 LV ±3.7 Jackson 48 / Collins 45; MI 843 LV ±4.1 El-Sayed 47 / Rogers 44 |
+| Emerson TX / MI (Sep 12–14) / IA (Aug 31–Sep 1) | emersoncollegepolling.com releases | TX Talarico 47 / Paxton 46 (1,000 LV ±3); MI El-Sayed 48 / Rogers 46; IA Hinson 50 / Turek 45 (750 LV ±3.6) |
+| ReconMR Texas Poll via Siena, Sep 8–11 2026 | reconmr.com release PDF | 614 LV ±4.3; Talarico 49 / Paxton 43; Hinojosa 49 / Abbott 45 |
+| RealClearPolling generic ballot | realclearpolling.com | RCP average as of Sep 17 2026: D 50.5 / R 41.9 (14 polls, Aug 28–Sep 15) — aggregator reading |
+
+### 7d · Failures & corrections this session
+
+| What happened | Resolution |
+|---|---|
+| `results.enr.clarityelections.com/GA/` → HTTP 403; `sos.nh.gov` election results → 403 | Bot-blocked hosts (irregularity #35); Georgia entry uses sos.ga.gov + results.sos.ga.gov; NH not added |
+| `sos.ga.gov/elections-division-georgia-secretary-of-states-office` → 404 | canonical slug omits 'of' (`…secretary-states-office`); entry uses `/elections` |
+| `sos.iowa.gov/elections` and `/elections/results/index.html` → 404 | site redesign; homepage + `/research-and-data` recorded |
+| `ncsl.org/…/election-results-timing-canvass-and-certification` → 404 | section landing page recorded |
+| `iem.isu.edu` | non-existent host — corrected to `iem.uiowa.edu/iem/` (200; `/iem/markets/` 500 server-side) — irregularity #26 |
+| Kalshi docs default host `external-api.kalshi.com` | recorded; cross-host comparison queued (R10, #31) |
