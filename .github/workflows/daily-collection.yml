@@ -16,7 +16,14 @@
 #      node scripts/crosscheck-collectors.mjs -> tracker/collector-crosscheck.json (agreement report)
 #   4. npm run pipeline + lint + tests      -> regenerated backtest/contest/site outputs
 #   5. commit data/ + src/data/ + docs/data/ back to the branch that ran it
-# Failures leave an *.error.json audit record and never publish partial data.
+# Failure semantics:
+#   - the collector fetches everything first and writes only at the end, so a
+#     fatal API error leaves just tracker/daily/<date>.error.json (committed as
+#     the audit record) and yesterday's universe stays in place;
+#   - the commit step runs whenever the job was not cancelled, but if the
+#     pipeline / lint / tests did not succeed it restores the generated site
+#     bundles (src/data, docs/data) from HEAD before committing, so raw data is
+#     never lost and a broken bundle is never published to GitHub Pages.
 name: daily-collection
 on:
   schedule:
@@ -80,12 +87,15 @@ jobs:
         run: node scripts/crosscheck-collectors.mjs
 
       - name: Regenerate backtests, contest, site bundle
+        id: pipeline
         run: npm run pipeline
 
       - name: Sync Python-track site data
+        id: sync
         run: python scripts/sync_site_data.py
 
       - name: Provenance lint + tests
+        id: verify
         run: |
           npm run lint
           npm test
@@ -104,10 +114,14 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit and push
-        if: always()
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "elections-collector[bot]"
           git config user.email "elections-collector[bot]@users.noreply.github.com"
+          if [ "${{ steps.pipeline.outcome }}" != "success" ] || [ "${{ steps.sync.outcome }}" != "success" ] || [ "${{ steps.verify.outcome }}" != "success" ]; then
+            echo "pipeline/sync/verify did not all succeed (${{ steps.pipeline.outcome }}/${{ steps.sync.outcome }}/${{ steps.verify.outcome }}): keeping raw data, restoring generated site bundles"
+            git checkout -- src/data/ docs/data/ || true
+          fi
           git add -A data/ src/data/ docs/data/
           if git diff --cached --quiet; then
             echo "no data changes"

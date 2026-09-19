@@ -1,13 +1,14 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200",
  "capturedAt": "2026-09-19T01:14:24.011Z",
+ "replayedAt": "2026-09-19T01:29:08.185Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-19",
  "categories": [
   "Elections",
   "Politics"
  ],
- "note": "Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract.",
+ "note": "Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; the event stays open until every market settles).",
  "counts": {
   "seriesInRegistry": 4166,
   "openEvents": 4094,
@@ -15,6 +16,8 @@
   "openMarkets": 24367,
   "openMarketsTraded": 10915,
   "openMarketsWithImpliedPrice": 10915,
+  "openMarketsTradedNotActive": 0,
+  "openMarketsClosedBeforeCapture": 207,
   "exchangeWideOpenEvents": 16027,
   "byCategory": {
    "World": 2,

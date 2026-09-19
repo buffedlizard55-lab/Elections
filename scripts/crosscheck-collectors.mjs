@@ -77,6 +77,16 @@ function main() {
     ...crossCheck(nodeRows, py.markets || []),
   };
   writeFileSync(outPath, JSON.stringify(report, null, 1) + '\n');
+  // merge the agreement summary into the per-day run history written by collect-kalshi.mjs
+  const historyPath = join(ROOT, 'data/kalshi/tracker/history.json');
+  if (existsSync(historyPath)) {
+    const history = JSON.parse(readFileSync(historyPath, 'utf8'));
+    const rec = (history.days || []).find((d) => d.date === day);
+    if (rec) {
+      rec.crosscheck = { pythonCapturedAt: report.pythonCapturedAt, pythonMarkets: report.pythonMarkets, overlap: report.overlap, lastWithinTolerance: report.lastPrice.withinTolerance, lastCompared: report.lastPrice.compared, lastShare: report.lastPrice.share, volumeDecreased: report.volumeDecreased };
+      writeFileSync(historyPath, JSON.stringify(history, null, 1) + '\n');
+    }
+  }
   console.log(`[crosscheck] overlap ${report.overlap}/${report.pythonMarkets}; last within ${report.tolerance}: ${report.lastPrice.withinTolerance}/${report.lastPrice.compared}; book: ${report.book.withinTolerance}/${report.book.compared}; volume decreased: ${report.volumeDecreased}`);
 }
 

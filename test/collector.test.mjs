@@ -6,6 +6,7 @@ import { normalizeBar, impliedProb, toCsv, parseCsv, compactMarket, num, dollars
 import { scoreCalibration, seriesByTicker, lastOnOrBefore, LEAD_DAYS } from '../src/calibration.js';
 import { checkConsistency } from '../src/consistency.js';
 import { crossCheck } from '../scripts/crosscheck-collectors.mjs';
+import { DAILY_COLUMNS, isTraded, isOpenForTrading, isUsElectionSeries } from '../scripts/collect-kalshi.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 
 // ---------- kalshi-api normalisers ----------
@@ -215,3 +216,49 @@ test('collect-kalshi.mjs --replay --dry-run runs the whole pipeline offline over
   const m = out.match(/markets: (\d+) \((\d+) traded/);
   assert.ok(Number(m[1]) >= Number(m[2]) && Number(m[2]) > 0);
 });
+
+test('collect-kalshi.mjs --replay reproduces the live capture byte-for-byte (except timestamps) in a scratch copy', async () => {
+  if (!existsSync('data/kalshi/universe/latest.json') || !existsSync('data/kalshi/tracker/index.json')) return;
+  const { execFileSync } = await import('node:child_process');
+  const { mkdtempSync, cpSync, rmSync, readdirSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const scratch = mkdtempSync(join(tmpdir(), 'collect-replay-'));
+  try {
+    cpSync('data/kalshi/universe', join(scratch, 'universe'), { recursive: true });
+    cpSync('data/kalshi/tracker', join(scratch, 'tracker'), { recursive: true });
+    const day = JSON.parse(readFileSync('data/kalshi/universe/latest.json', 'utf8')).date;
+    const out = execFileSync(process.execPath, ['scripts/collect-kalshi.mjs', '--replay', '--date', day], { encoding: 'utf8', timeout: 180000, env: { ...process.env, COLLECT_DATA_DIR: scratch } });
+    assert.match(out, /scratch data dir — site bundle not rebuilt/);
+    const strip = (t) => t.replace(/"(capturedAt|replayedAt|finishedAt)": ?"[^"]*"/g, '"$1":"-"');
+    for (const rel of ['universe/latest.json', 'universe/series.json', 'tracker/index.json', 'tracker/settlements.json', 'tracker/calibration.json', 'tracker/discrepancy-watch.json', `tracker/daily/${day}.csv`]) {
+      const live = strip(readFileSync(join('data/kalshi', rel), 'utf8'));
+      const replayed = strip(readFileSync(join(scratch, rel), 'utf8'));
+      assert.equal(replayed.length, live.length, `${rel}: replay changed the file size`);
+      assert.equal(replayed, live, `${rel}: replay is not faithful`);
+    }
+    const history = JSON.parse(readFileSync(join(scratch, 'tracker/history.json'), 'utf8'));
+    const rec = history.days.find((d) => d.date === day);
+    assert.ok(rec && rec.openEvents > 0 && rec.openMarketsTraded > 0 && rec.consistency.total >= 0);
+    assert.equal(rec.replayedAt !== undefined, true);
+    assert.equal(readdirSync(join(scratch, 'tracker/daily')).includes(`${day}.csv`), true);
+  } finally {
+    rmSync(scratch, { recursive: true, force: true });
+  }
+});
+
+test('collector helpers: daily schema carries the exchange status; lifecycle and trade predicates', () => {
+  assert.deepEqual(DAILY_COLUMNS.slice(0, 2), ['date', 'ticker']);
+  assert.ok(DAILY_COLUMNS.includes('status') && DAILY_COLUMNS.includes('close_time') && DAILY_COLUMNS.includes('volume_24h'));
+  // SYNTHETIC rows
+  assert.equal(isTraded({ volume: 0, open_interest: 0 }), false);
+  assert.equal(isTraded({ volume: 0, open_interest: 3 }), true);
+  assert.equal(isOpenForTrading({ status: 'active' }), true);
+  assert.equal(isOpenForTrading({ status: '' }), true); // unknown (first-day files) is not treated as closed
+  assert.equal(isOpenForTrading({ status: 'closed' }), false);
+  assert.equal(isOpenForTrading({ status: 'finalized' }), false);
+  assert.equal(isUsElectionSeries({ ticker: 'KXNEXTUKPRIMEMIN', tags: ['World Elections'] }), false);
+  assert.equal(isUsElectionSeries({ ticker: 'SENATE', tags: [] }), true);
+  assert.equal(isUsElectionSeries(null), false);
+});
+

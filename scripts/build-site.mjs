@@ -51,6 +51,7 @@ const settlements = readOptional('data/kalshi/tracker/settlements.json');
 const trackerIndex = readOptional('data/kalshi/tracker/index.json');
 const senate2024 = readOptional('data/kalshi/historical/senate-2024.json');
 const crosscheck = readOptional('data/kalshi/tracker/collector-crosscheck.json');
+const runHistory = readOptional('data/kalshi/tracker/history.json');
 const testCount = readdirSync(join(ROOT, 'test')).filter((f) => f.endsWith('.test.mjs')).reduce((n, f) => n + (readFileSync(join(ROOT, 'test', f), 'utf8').match(/^test\(/gm) || []).length, 0);
 
 // Daily tracker history for the site: the implied-probability path of the most-traded open markets
@@ -87,10 +88,10 @@ if (universe) {
     .map((e) => {
       const sorted = [...e.markets].sort((a, b) => (b.volume || 0) - (a.volume || 0));
       return {
-        event_ticker: e.event_ticker, series_ticker: e.series_ticker, category: e.category, title: e.title, sub_title: e.sub_title, mutually_exclusive: e.mutually_exclusive,
+        event_ticker: e.event_ticker, series_ticker: e.series_ticker, category: e.category, us_election: 1, title: e.title, sub_title: e.sub_title, mutually_exclusive: e.mutually_exclusive,
         markets_total: e.markets_total, markets_untraded: e.markets_untraded, markets_listed: Math.min(sorted.length, MARKETS_PER_EVENT_MAX),
         volume: sorted.reduce((s, m) => s + (m.volume || 0), 0),
-        markets: sorted.slice(0, MARKETS_PER_EVENT_MAX).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest })),
+        markets: sorted.slice(0, MARKETS_PER_EVENT_MAX).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, open_interest: m.open_interest, ...(m.status ? { status: m.status } : {}) })),
       };
     })
     .sort((a, b) => b.volume - a.volume)
@@ -155,7 +156,7 @@ const bundle = {
   calibration,
   discrepancyWatch: discrepancySite,
   settlements: settlements ? { capturedAt: settlements.capturedAt, count: Object.keys(settlements.markets).length, markets: settlements.markets } : null,
-  tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory } : null,
+  tracker: trackerIndex ? { days: trackerIndex.days || [], tickers: Object.keys(trackerIndex.tickers).length, history: trackerHistory, runs: runHistory ? runHistory.days.slice(-120) : [] } : null,
   senate2024: senate2024Site,
   crosscheck: crosscheck ? { ...crosscheck, largestLastPriceDifferences: (crosscheck.largestLastPriceDifferences || []).slice(0, 8) } : null,
   meta: {

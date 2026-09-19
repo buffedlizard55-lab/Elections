@@ -258,6 +258,8 @@ def main(argv: list[str] | None = None) -> int:
         "markets_total": len(markets),
         "status_tally_raw": status_tally,
         "markets_politics_filtered": len(filtered),
+        "markets_listed_in_filtered_file": len(payload_markets),
+        "compact_max": args.compact_max if args.compact else None,
         "events_endpoint": events_note,
         "fetch_errors": fetch_meta["errors"],
         "raw_file": None if args.no_raw else raw_path.name,

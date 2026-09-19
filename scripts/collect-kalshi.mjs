@@ -53,11 +53,16 @@ const dateArg = argv.indexOf('--date') >= 0 ? argv[argv.indexOf('--date') + 1] :
 const CATEGORIES = ['Elections', 'Politics'];
 const now = new Date();
 const day = dateArg || now.toISOString().slice(0, 10);
-const capturedAt = now.toISOString();
-const provenance = (url) => ({ capturedFrom: url, capturedAt, capturedBy: 'scripts/collect-kalshi.mjs' });
+// In --replay mode capturedAt is reset to the ORIGINAL live capture time (the data is as-of that
+// moment); the replay time is recorded separately as replayedAt.
+let capturedAt = now.toISOString();
+let replayedAt;
+const provenance = (url) => ({ capturedFrom: url, capturedAt, ...(replayedAt ? { replayedAt } : {}), capturedBy: 'scripts/collect-kalshi.mjs' });
 
-const UNIVERSE_DIR = join(ROOT, 'data/kalshi/universe');
-const TRACKER_DIR = join(ROOT, 'data/kalshi/tracker');
+// COLLECT_DATA_DIR (tests only) redirects every read/write to a scratch copy of data/kalshi.
+const DATA_DIR = process.env.COLLECT_DATA_DIR ? process.env.COLLECT_DATA_DIR : join(ROOT, 'data/kalshi');
+const UNIVERSE_DIR = join(DATA_DIR, 'universe');
+const TRACKER_DIR = join(DATA_DIR, 'tracker');
 const DAILY_DIR = join(TRACKER_DIR, 'daily');
 const readJson = (p, fallback) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : fallback);
 const writeJson = (p, obj) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, JSON.stringify(obj, null, 1) + '\n'); };
@@ -70,7 +75,10 @@ const writeJsonLines = (p, header, key, records) => {
 };
 
 // Day-to-day fields only; static descriptors live in tracker/index.json (keyed by ticker).
-export const DAILY_COLUMNS = ['date', 'ticker', 'yes_bid', 'yes_ask', 'last_price', 'volume', 'volume_24h', 'open_interest', 'liquidity', 'close_time'];
+export const DAILY_COLUMNS = ['date', 'ticker', 'yes_bid', 'yes_ask', 'last_price', 'volume', 'volume_24h', 'open_interest', 'liquidity', 'close_time', 'status'];
+// Exchange market status as returned that day ('active' = tradable; 'closed' = trading ended, awaiting
+// determination/settlement; 'finalized'/'settled' = result known). Blank = not captured (first-day files).
+export const isOpenForTrading = (m) => !m.status || m.status === 'active' || m.status === 'open';
 // Series tags (from GET /series) that mark a series as a U.S. election market; derived flag only,
 // used to focus the site and the contest universe. Kalshi's own tag vocabulary, captured 2026-09-19.
 export const US_ELECTION_TAGS = ['US Elections', 'Senate', 'House', 'Governor', 'Other US Elections', 'Local', 'Primaries', 'Election Combos', 'Senate Combos', 'House Combos', 'Governor Combos', 'Referendums', 'NYC', '2028'];
@@ -167,6 +175,7 @@ function dailyRows(projected) {
         open_interest: m.open_interest,
         liquidity: m.liquidity,
         close_time: m.close_time,
+        status: m.status || '',
       });
       descriptors[m.ticker] = {
         event_ticker: ev.event_ticker,
@@ -217,8 +226,10 @@ export function joinRows(rows, index) {
   });
 }
 
-async function scanSettlements(index, openTickers, settlements, meta) {
-  const candidates = Object.keys(index.tickers).filter((t) => !openTickers.has(t) && !settlements.markets[t]);
+async function scanSettlements(index, openTickers, settlements, meta, extraCandidates = new Set()) {
+  // (a) tickers we tracked that left the open feed; (b) tickers still nested in an open event but no
+  // longer 'active' (closed rungs of a multi-market event settle long before the event closes).
+  const candidates = [...new Set([...Object.keys(index.tickers).filter((t) => !openTickers.has(t)), ...extraCandidates])].filter((t) => !settlements.markets[t]);
   meta.settlementCandidates = candidates.length;
   let found = 0;
   let pending = 0;
@@ -303,11 +314,15 @@ async function main() {
     }));
     const savedIndex = loadIndex(join(TRACKER_DIR, 'index.json'));
     meta.replayOf = savedLatest.capturedAt;
+    replayedAt = capturedAt;
+    capturedAt = savedLatest.capturedAt;
+    meta.capturedAt = capturedAt;
+    meta.replayedAt = replayedAt;
     meta.seriesByCategoryFilter = savedLatest.counts ? { replay: savedLatest.counts.seriesInRegistry } : {};
     meta.eventsTotalOpenOnExchange = savedLatest.counts ? savedLatest.counts.exchangeWideOpenEvents : null;
     // saved events are already projected; recompute the derived flag and make sure market rows are complete
     // titles/open_time are not in the compact listing: take them from the saved index (exact), else synthesise
-    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => { const ix = savedIndex.tickers[m.ticker] || {}; return { title: m.title || ix.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || 'active', open_time: m.open_time || ix.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m }; }) }));
+    projected = savedLatest.events.map((ev) => ({ ...ev, us_election: isUsElectionSeries(registry[ev.series_ticker]), markets: (ev.markets || []).map((m) => { const ix = savedIndex.tickers[m.ticker] || {}; return { title: m.title || ix.title || `${ev.title}${m.yes_sub_title ? ' — ' + m.yes_sub_title : ''}`, status: m.status || '', open_time: m.open_time || ix.open_time || '', volume_24h: m.volume_24h ?? null, liquidity: m.liquidity ?? null, ...m }; }) }));
     meta.eventsKept = projected.length;
     console.log(`  replaying ${projected.length} saved events captured ${savedLatest.capturedAt}`);
   } else {
@@ -359,7 +374,10 @@ async function main() {
   const index = loadIndex(join(TRACKER_DIR, 'index.json'));
   const openTickers = new Set(rows.map((r) => r.ticker));
   const settlements = readJson(join(TRACKER_DIR, 'settlements.json'), { capturedFrom: `${API_BASE}/markets?tickers=...`, note: 'official exchange settlements of markets previously tracked while open (result yes/no); appended by scripts/collect-kalshi.mjs', markets: {} });
-  if (REPLAY) { meta.settlementScan = 'skipped (replay)'; } else { await scanSettlements(index, openTickers, settlements, meta); }
+  const notActive = new Set(rows.filter((r) => !isOpenForTrading(r)).map((r) => r.ticker));
+  meta.openMarketsTradedNotActive = notActive.size;
+  meta.openMarketsClosedBeforeCapture = rows.filter((r) => r.close_time && r.close_time < capturedAt).length;
+  if (REPLAY) { meta.settlementScan = 'skipped (replay)'; } else { await scanSettlements(index, openTickers, settlements, meta, notActive); }
   updateIndex(index, rows, descriptors);
   index.capturedAt = capturedAt;
   index.days = [...new Set([...(index.days || []), day])].sort();
@@ -367,7 +385,13 @@ async function main() {
 
   const allRows = joinRows([...loadAllDailyRows().filter((r) => r.date !== day), ...rows], index);
   const calibration = { ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true (daily) + ${API_BASE}/markets?tickers=... (settlements)`), ...scoreCalibration(allRows, settlements.markets) };
-  const consistency = { ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true`), date: day, ...checkConsistency(projected) };
+  // Consistency checks need the full ladders (untraded rungs with a quoted book still carry implied
+  // probability). The compact universe drops them, so a replay keeps the live file for the same day
+  // instead of recomputing an approximation.
+  const prevConsistency = REPLAY ? readJson(join(TRACKER_DIR, 'discrepancy-watch.json'), null) : null;
+  const consistency = prevConsistency && prevConsistency.date === day && !prevConsistency.replayApproximation
+    ? prevConsistency
+    : { ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true`), date: day, ...(REPLAY ? { replayApproximation: true, note: 'computed from the compact universe (traded markets only); live runs include untraded rungs' } : {}), ...checkConsistency(projected) };
   console.log(`  settlements known: ${Object.keys(settlements.markets).length}; calibration settled=${calibration.settledMarkets}; consistency findings=${consistency.findings.length}`);
 
   // top markets by volume for the site
@@ -375,7 +399,7 @@ async function main() {
     .map((r) => ({ ...r, implied: impliedProb(r) }))
     .sort((a, b) => (b.volume || 0) - (a.volume || 0))
     .slice(0, 120)
-    .map((r) => ({ ticker: r.ticker, event_ticker: r.event_ticker, series_ticker: r.series_ticker, us_election: r.us_election, title: r.title, yes_sub_title: r.yes_sub_title, close_time: r.close_time, yes_bid: r.yes_bid, yes_ask: r.yes_ask, last_price: r.last_price, volume: r.volume, open_interest: r.open_interest, p: r.implied.p, basis: r.implied.basis }));
+    .map((r) => ({ ticker: r.ticker, event_ticker: r.event_ticker, series_ticker: r.series_ticker, us_election: r.us_election, title: r.title, yes_sub_title: r.yes_sub_title, close_time: r.close_time, ...(r.status && r.status !== 'active' ? { status: r.status } : {}), yes_bid: r.yes_bid, yes_ask: r.yes_ask, last_price: r.last_price, volume: r.volume, open_interest: r.open_interest, p: r.implied.p, basis: r.implied.basis }));
 
   // Compact universe listing: every kept event, but only traded markets are listed
   // (untraded rungs are counted per event). Per-market titles are omitted: they are
@@ -388,16 +412,17 @@ async function main() {
     title: ev.title,
     sub_title: ev.sub_title,
     mutually_exclusive: ev.mutually_exclusive,
-    markets_total: ev.markets.length,
-    markets_untraded: ev.markets.filter((m) => !isTraded(m)).length,
-    markets: ev.markets.filter(isTraded).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, volume_24h: m.volume_24h, open_interest: m.open_interest, liquidity: m.liquidity })),
+    // live: full ladder present; replay: the saved listing is traded-only, so keep the saved totals
+    markets_total: ev.markets_total != null ? ev.markets_total : ev.markets.length,
+    markets_untraded: ev.markets_untraded != null ? ev.markets_untraded : ev.markets.filter((m) => !isTraded(m)).length,
+    markets: ev.markets.filter(isTraded).map((m) => ({ ticker: m.ticker, yes_sub_title: m.yes_sub_title, close_time: m.close_time, yes_bid: m.yes_bid, yes_ask: m.yes_ask, last_price: m.last_price, volume: m.volume, volume_24h: m.volume_24h, open_interest: m.open_interest, liquidity: m.liquidity, ...(m.status && m.status !== 'active' ? { status: m.status } : {}) })),
   }));
 
   const latest = {
     ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true&limit=200`),
     date: day,
     categories: CATEGORIES,
-    note: 'Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract.',
+    note: 'Full open political/election universe. Every kept event is listed; markets with zero lifetime volume and zero open interest are counted (markets_untraded) but not listed. Prices are dollars per YES contract. status is listed only when it is not active (closed = trading ended, awaiting settlement; the event stays open until every market settles).',
     counts: {
       seriesInRegistry: meta.seriesInRegistry,
       openEvents: projected.length,
@@ -405,6 +430,8 @@ async function main() {
       openMarkets: openMarketsTotal,
       openMarketsTraded: rows.length,
       openMarketsWithImpliedPrice: priced,
+      openMarketsTradedNotActive: notActive.size,
+      openMarketsClosedBeforeCapture: meta.openMarketsClosedBeforeCapture,
       exchangeWideOpenEvents: meta.eventsTotalOpenOnExchange,
       byCategory: projected.reduce((acc, e) => { acc[e.category] = (acc[e.category] || 0) + 1; return acc; }, {}),
     },
@@ -447,19 +474,54 @@ async function main() {
   writeJson(join(TRACKER_DIR, 'settlements.json'), settlements);
   writeJson(join(TRACKER_DIR, 'calibration.json'), calibration);
   writeJson(join(TRACKER_DIR, 'discrepancy-watch.json'), consistency);
-  console.log(`[collect] wrote tracker/daily/${day}.csv (${rows.length} traded rows; ${untraded} untraded counted only), universe/series.json, universe/latest.json, tracker/{index,settlements,calibration,discrepancy-watch}.json`);
+  // Per-run history: one record per collection day (re-runs on the same day overwrite that day's record).
+  // This is the time series behind the site's Tracker "run log" — counts only, no prices.
+  const history = readJson(join(TRACKER_DIR, 'history.json'), { ...provenance(`${API_BASE}/events?status=open&with_nested_markets=true`), note: 'one record per collection day, written by scripts/collect-kalshi.mjs (crosscheck fields merged by scripts/crosscheck-collectors.mjs); a same-day re-run replaces the record', days: [] });
+  const t1 = (calibration.byLead || []).find((b) => b.nDays === 1) || null;
+  const record = {
+    date: day,
+    capturedAt,
+    replayedAt,
+    seriesInRegistry: meta.seriesInRegistry,
+    openEvents: projected.length,
+    usElectionEvents: meta.usElectionEvents,
+    openMarkets: openMarketsTotal,
+    openMarketsTraded: rows.length,
+    openMarketsTradedNotActive: notActive.size,
+    openMarketsClosedBeforeCapture: meta.openMarketsClosedBeforeCapture,
+    exchangeWideOpenEvents: meta.eventsTotalOpenOnExchange ?? null,
+    shrinkRatioVsPrevious: meta.shrinkRatioVsPrevious ?? null,
+    settlementsFound: meta.settlementsFound ?? 0,
+    settlementsKnown: Object.keys(settlements.markets).length,
+    settledMarketsScored: calibration.settledMarkets,
+    brierT1: t1 ? t1.meanBrier : null,
+    consistency: { ...(consistency.counts || {}), total: consistency.findings.length },
+    apiRequests: stats.requests,
+    apiBytes: stats.bytes,
+    errors: meta.errors.length,
+  };
+  const prior = history.days.find((d) => d.date === day);
+  history.days = [...history.days.filter((d) => d.date !== day), prior && prior.crosscheck ? { ...record, crosscheck: prior.crosscheck } : record].sort((a, b) => a.date.localeCompare(b.date));
+  history.capturedAt = capturedAt;
+  history.count = history.days.length;
+  writeJson(join(TRACKER_DIR, 'history.json'), history);
+  console.log(`[collect] wrote tracker/daily/${day}.csv (${rows.length} traded rows; ${untraded} untraded counted only), universe/series.json, universe/latest.json, tracker/{index,settlements,calibration,discrepancy-watch,history}.json`);
 
+  if (process.env.COLLECT_DATA_DIR) { console.log('[collect] scratch data dir — site bundle not rebuilt'); return; }
   console.log('[collect] rebuilding site bundle');
   const { execFileSync } = await import('node:child_process');
   execFileSync(process.execPath, [join(ROOT, 'scripts/build-site.mjs')], { stdio: 'inherit', cwd: ROOT });
   if (meta.errors.length) process.exitCode = 0; // non-fatal errors are recorded, the run still counts
 }
 
-main().catch((e) => {
-  console.error('[collect] fatal:', e.message);
-  try {
-    mkdirSync(DAILY_DIR, { recursive: true });
-    writeJson(join(DAILY_DIR, `${day}.error.json`), { ...provenance(API_BASE), date: day, fatal: e.message, api: stats });
-  } catch { /* ignore */ }
-  process.exit(1);
-});
+// Run only when executed directly (tests import the pure helpers above without triggering a capture).
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main().catch((e) => {
+    console.error('[collect] fatal:', e.message);
+    try {
+      mkdirSync(DAILY_DIR, { recursive: true });
+      writeJson(join(DAILY_DIR, `${day}.error.json`), { ...provenance(API_BASE), date: day, fatal: e.message, api: stats });
+    } catch { /* ignore */ }
+    process.exit(1);
+  });
+}

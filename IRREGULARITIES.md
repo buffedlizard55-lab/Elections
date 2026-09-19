@@ -1,6 +1,6 @@
 # IRREGULARITIES & DISCREPANCIES — flagged for review
 
-Machine-readable twins: `data/irregularities.json` (Node-track items 1–12 + 23–36) and the Python
+Machine-readable twins: `data/irregularities.json` (Node-track items 1–12 + 23–37) and the Python
 toolkit's `data/flagged_sources.json` + `data/verification_log.md` (items 13–22).
 Severity: **high** = affects trust in a result · **medium** = affects interpretation ·
 **low** = cosmetic/monitor.
@@ -44,6 +44,7 @@ Nothing here is silently normalized; each item states its action.
 | 34 | low | Poll vs market | **Iowa Senate: Emerson (Aug 31–Sep 1) R+5 implies D ≈ 25% under the project's logistic mapping; Kalshi prices Turek (D) at 39.5%** — The 14.7-point gap is the largest of the five poll-vs-market comparisons (ME +1.4, MI −1.6/+3.6, TX +2.0). NYT/Siena (Jul 1) had Hinson 48–46 and Suffolk polled Iowa Aug 26 (numbers not yet transcribed), so a single poll's margin is not the whole poll picture. | Transcribe the Suffolk Iowa release and any later Iowa poll before reading the gap as a market anomaly. |
 | 35 | low | Site fetchability | **Some official results hosts block automated fetchers: results.enr.clarityelections.com/GA (403), sos.nh.gov election results (403)** — Observed 2026-09-19 with this session's fetcher. Human browsers are unaffected; automated re-verification of these hosts must use alternative official URLs (results.sos.ga.gov) or a browser-like client. | Georgia entry points to sos.ga.gov/elections and results.sos.ga.gov; New Hampshire SoS not added until a fetchable official URL is confirmed. |
 | 36 | low | Site / code defect | **Poll-backtest checkpoints table rendered 'undefined' rows on the published site (bug in src/poll-backtest.js, present since the 2026-09-18 session)** — runPollBacktest() returned the list of checkpoint DATES instead of the computed comparison objects, so Backtests §3 'Checkpoints (poll archive)' showed empty/undefined cells. The late-window table and the headline poll-vs-outcome numbers were unaffected. Found… | Fixed (checkpoints: comparisons); a unit test now asserts the checkpoint shape and the render check runs against the bundle before publishing. |
+| 37 | medium | Kalshi API / tracker | **207 traded markets returned inside OPEN events already had a close_time in the past (up to 2026-07-13) with an empty 0/100 book — trading ended, settlement pending, yet listed in the 'open' universe** — capture 2026-09-19: 17 closed in July, 102 in August, 88 in September 2026; last prices pinned near 0.01/0.99 (e.g. KXBERNIEENDORSE-26NOV03-ADEL closed 2026-07-14; KXTRUMPMEETING-27JAN01-NCSHE closed 2026-07-19 at 0.998). Multi-market events stay open until every rung settles. First-day files did not record per-market status. | Collector now records exchange `status` per market per day (new CSV column), counts `openMarketsClosedBeforeCapture`, re-checks non-active rungs for settlement every run; site marks them 'past close' and excludes them from earliest-closing / tradable lists. Review after the 2026-09-20 run. |
 
 ## Review status
 

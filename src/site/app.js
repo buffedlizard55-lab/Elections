@@ -27,6 +27,14 @@
   const usd = (x) => (x == null ? '—' : '$' + Number(x).toLocaleString('en-US', { maximumFractionDigits: 2 }));
   const int = (x) => (x == null ? '—' : Number(x).toLocaleString('en-US', { maximumFractionDigits: 0 }));
   const pct = (x, d = 1) => (x == null ? '—' : (x * 100).toFixed(d) + '%');
+  // Market lifecycle chip: exchange status when recorded (closed/finalized/settled), else a past close_time
+  // (trading ended, settlement pending — the event stays open until every market settles).
+  const lifeChip = (m, ref) => {
+    if (!m) return '';
+    if (m.status && m.status !== 'active' && m.status !== 'open') return ` <span class="chip warn" title="exchange status at capture">${esc(m.status)}</span>`;
+    if (m.close_time && ref && m.close_time < ref) return ' <span class="chip warn" title="close_time is before the capture; trading has ended, settlement pending">past close</span>';
+    return '';
+  };
   const cents = (x) => (x == null ? '—' : (x * 100).toFixed(x < 0.1 ? 1 : 0) + '¢');
   const pp = (x, d = 1) => (x == null ? '—' : (x > 0 ? '+' : '') + x.toFixed(d) + 'pp');
   const cls = (x) => (x > 0 ? 'pos' : x < 0 ? 'neg' : '');
@@ -143,11 +151,11 @@
       <td><span class="mono small">${esc(m.ticker)}</span><br>${esc(m.title)}</td>
       <td class="num">${cents(m.yes_bid)}–${cents(m.yes_ask)}</td>
       <td class="num"><strong>${pct(m.p, 1)}</strong> <span class="small">${esc(m.basis)}</span></td>
-      <td class="num">${int(m.volume)}</td><td class="num">${int(m.open_interest)}</td><td class="small">${day(m.close_time)}</td></tr>`).join('');
+      <td class="num">${int(m.volume)}</td><td class="num">${int(m.open_interest)}</td><td class="small">${day(m.close_time)}${lifeChip(m, U.capturedAt)}</td></tr>`).join('');
     const events = U.events.filter((e) => !/^(SENATE|CONTROL)/.test(e.event_ticker)).slice(0, 40).map((e) => `
       <div class="card"><div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap">
         <strong>${esc(e.title)}</strong><span class="small">${int(e.volume)} contracts · ${e.markets_total} market${e.markets_total === 1 ? '' : 's'}${e.markets_untraded ? ` (${e.markets_untraded} untraded)` : ''}</span></div>
-        <div class="legend" style="margin-top:8px">${e.markets.slice(0, 6).map((m) => `<span><i style="background:var(--accent)"></i>${esc(m.yes_sub_title || m.ticker)} — <strong>${pct(implied(m).p, 1)}</strong></span>`).join('')}${e.markets.length > 6 ? `<span class="small">+${e.markets.length - 6} more</span>` : ''}</div>
+        <div class="legend" style="margin-top:8px">${e.markets.slice(0, 6).map((m) => `<span><i style="background:var(--accent)"></i>${esc(m.yes_sub_title || m.ticker)} — <strong>${pct(implied(m).p, 1)}</strong>${lifeChip(m, U.capturedAt)}</span>`).join('')}${e.markets.length > 6 ? `<span class="small">+${e.markets.length - 6} more</span>` : ''}</div>
         <div class="small" style="margin-top:6px"><span class="mono">${esc(e.event_ticker)}</span> · ${esc(e.category)} · closes ${day(e.markets[0] && e.markets[0].close_time)}</div></div>`).join('');
     const dw = D.discrepancyWatch;
     const findings = dw ? dw.findings.filter((f) => f.us_election).slice(0, 12).map((f) => `<tr>
@@ -282,8 +290,15 @@
     const cats = Object.entries(U.counts.byCategory || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => `<tr><td>${esc(k)}</td><td class="num">${int(v)}</td></tr>`).join('');
     const leads = cal.byLead.map((b) => `<tr><td class="num">T-${b.nDays}</td><td class="num">${b.nMarkets}</td><td class="num">${b.meanBrier == null ? '—' : b.meanBrier.toFixed(3)}</td><td class="num">${b.meanLogloss == null ? '—' : b.meanLogloss.toFixed(3)}</td></tr>`).join('');
     const hist = D.tracker && D.tracker.days.length > 1 ? U.topMarkets.filter((m) => m.us_election).slice(0, 6).map((m, i) => `<div class="card"><strong>${esc(m.title)}</strong><canvas id="tr-${i}" class="chart" style="height:150px"></canvas></div>`).join('') : `<div class="card"><p class="small" style="margin:0">Price history charts appear once more than one day has been collected (currently ${D.tracker ? D.tracker.days.length : 0}).</p></div>`;
-    const soon = U.events.filter((e) => e.us_election && e.markets[0] && e.markets[0].close_time).map((e) => ({ e, close: e.markets.reduce((m, x) => (x.close_time < m ? x.close_time : m), e.markets[0].close_time) })).sort((a, b) => (a.close < b.close ? -1 : 1)).slice(0, 12)
+    // the watchlist only contains U.S.-election events; the flag is kept for clarity
+    const upcoming = (m) => m.close_time && m.close_time >= U.capturedAt && (!m.status || m.status === 'active' || m.status === 'open');
+    const soon = U.events.filter((e) => e.us_election !== 0 && e.markets.some(upcoming)).map((e) => ({ e, close: e.markets.filter(upcoming).reduce((m, x) => (x.close_time < m ? x.close_time : m), '9999') })).sort((a, b) => (a.close < b.close ? -1 : 1)).slice(0, 12)
       .map(({ e, close }) => `<tr><td><span class="mono small">${esc(e.event_ticker)}</span><br>${esc(e.title)}</td><td>${day(close)}</td><td class="num">${int(e.volume)}</td></tr>`).join('');
+    const runs = (D.tracker.runs || []).slice().reverse().map((r) => {
+      const c = r.consistency || {};
+      const x = r.crosscheck;
+      return `<tr><td class="mono small">${esc(r.date)}${r.replayedAt ? ' <span class="chip info" title="record rebuilt offline from the saved capture">replayed</span>' : ''}${r.shrinkRatioVsPrevious != null && r.shrinkRatioVsPrevious < 0.9 ? ` <span class="chip warn">${pct(r.shrinkRatioVsPrevious, 0)} of previous</span>` : ''}</td><td class="num">${int(r.seriesInRegistry)}</td><td class="num">${int(r.openEvents)}</td><td class="num">${int(r.usElectionEvents)}</td><td class="num">${int(r.openMarketsTraded)} / ${int(r.openMarkets)}</td><td class="num">${int(r.settlementsKnown)}${r.settlementsFound ? ` (+${int(r.settlementsFound)})` : ''}</td><td class="num">${int(r.settledMarketsScored)}${r.brierT1 != null ? ` · ${r.brierT1.toFixed(3)}` : ''}</td><td class="num">${int(c['mutually-exclusive-sum-over'] || 0)} / ${int(c['mutually-exclusive-sum-under'] || 0)} / ${int(c['stale-last-vs-book'] || 0)}</td><td class="num">${x ? `${pct(x.lastShare, 1)} of ${int(x.overlap)}${x.volumeDecreased ? ` · <span class="chip warn">${x.volumeDecreased} volume decreases</span>` : ''}` : '—'}</td><td class="num">${r.apiRequests ? `${int(r.apiRequests)} · ${(r.apiBytes / 1e6).toFixed(0)}` : '—'}${r.errors ? ` <span class="chip warn">${r.errors} err</span>` : ''}</td></tr>`;
+    }).join('') || '<tr><td colspan="10">No run history yet.</td></tr>';
     const ccRows = cc ? (cc.largestLastPriceDifferences || []).map((o) => `<tr><td class="mono small">${esc(o.ticker)}</td><td class="num">${cents(o.node.last)} (${cents(o.node.bid)}–${cents(o.node.ask)})</td><td class="num">${cents(o.python.last)} (${cents(o.python.bid)}–${cents(o.python.ask)})</td><td class="num">${(o.dLast * 100).toFixed(1)}¢</td></tr>`).join('') : '';
     return `
     <h1>Tracker — the forward "expected vs actual" loop</h1>
@@ -293,7 +308,7 @@
     Nothing is imputed: the empty state below is the honest state.</p>
     <div class="grid cols4">
       <div class="stat"><div class="n">${D.tracker.days.length}</div><div class="l">collection day${D.tracker.days.length === 1 ? '' : 's'} (${esc(D.tracker.days[0])} → ${esc(D.tracker.days[D.tracker.days.length - 1])})</div></div>
-      <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)</div></div>
+      <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)${U.counts.openMarketsClosedBeforeCapture != null ? ` · ${int(U.counts.openMarketsClosedBeforeCapture)} past their close_time, settlement pending` : ''}</div></div>
       <div class="stat"><div class="n">${cal.settledMarkets}</div><div class="l">settled markets scored so far · ${st ? int(st.count) : 0} settlements known</div></div>
       <div class="stat"><div class="n">${cc ? pct(cc.lastPrice.share, 2) : '—'}</div><div class="l">Node-vs-Python last-price agreement (≤2¢) on ${cc ? int(cc.overlap) : '—'} overlapping tickers</div></div>
     </div>
@@ -305,6 +320,12 @@
         <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean Brier</th><th class="num">Mean log-loss</th></tr></thead><tbody>${leads}</tbody></table>
         <p class="small">${esc(cal.method)}</p>
         <p class="small">First large U.S. settlements expected after <strong>Nov 3, 2026</strong> (Los Angeles mayor, 35 Senate races, governors); primaries and specials settle earlier.</p></div>
+    </div>
+    <h2>Run log — one row per collection day</h2>
+    <div class="card" style="overflow-x:auto">
+      <p class="small" style="margin-top:0">Counts only (<span class="mono">data/kalshi/tracker/history.json</span>). A same-day re-run replaces the row. Consistency = mutually-exclusive ladders whose YES mids sum to more than 1.06 (fully two-sided) / less than 0.94 (≥3 markets), and last trades more than 10¢ outside the quoted book; cross-check = Node vs Python last price within 2¢.</p>
+      <table><thead><tr><th>Date (UTC)</th><th class="num">Series</th><th class="num">Open events</th><th class="num">U.S. election</th><th class="num">Traded markets</th><th class="num">Settlements known</th><th class="num">Scored · Brier T-1</th><th class="num">Consistency over / under / stale</th><th class="num">Cross-check</th><th class="num">API req · MB</th></tr></thead>
+      <tbody>${runs}</tbody></table>
     </div>
     <h2>Earliest-closing U.S. election events in the watchlist</h2>
     <div class="card" style="overflow-x:auto"><table><thead><tr><th>Event</th><th>Closes</th><th class="num">Volume</th></tr></thead><tbody>${soon}</tbody></table></div>

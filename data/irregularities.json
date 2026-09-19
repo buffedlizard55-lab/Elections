@@ -235,6 +235,15 @@
    "detail": "runPollBacktest() returned the list of checkpoint DATES instead of the computed comparison objects, so Backtests §3 'Checkpoints (poll archive)' showed empty/undefined cells. The late-window table and the headline poll-vs-outcome numbers were unaffected. Found 2026-09-19 by a headless render check of every site section (undefined/NaN scan).",
    "action": "Fixed (checkpoints: comparisons); a unit test now asserts the checkpoint shape and the render check runs against the bundle before publishing.",
    "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/src/poll-backtest.js"
+  },
+  {
+   "id": 37,
+   "severity": "medium",
+   "area": "Kalshi API / tracker",
+   "title": "207 traded markets returned inside OPEN events already had a close_time in the past (up to 2026-07-13) with an empty 0/100 book — trading has ended, settlement pending, yet they sat in the 'open' universe as if tradable",
+   "detail": "Daily capture 2026-09-19 (GET /events?status=open&with_nested_markets=true): 207 of 10,915 traded markets had close_time < capture time (17 in July, 102 in August, 88 in September 2026), yes_bid 0 / yes_ask 1 and last prices pinned near 0.01 or 0.99 (e.g. KXBERNIEENDORSE-26NOV03-ADEL closed 2026-07-14, KXTRUMPMEETING-27JAN01-NCSHE closed 2026-07-19 at 0.998, KXHORMUZNORM-26MAR17-B260715 closed 2026-07-21 with 2.18M volume). Multi-market events stay 'open' until every rung settles, so closed rungs are nested in open events. The first-day files did not record the per-market status field, so whether the exchange reports them as 'closed' or still 'active' is unknown until the next live run. None of them is a 2026 general-election race market. The Python sample (top 2,000 by volume) contained none because its filter reads status directly.",
+   "action": "Collector now writes the exchange status per market per day (new 'status' CSV column; first-day rows blank), counts openMarketsClosedBeforeCapture in latest.json/history.json, re-checks non-active rungs for settlement every run, and the site marks such markets 'past close' / by status, excluding them from 'earliest-closing' and from any tradable universe. Review after the 2026-09-20 run: if the API still reports them 'active', raise with the settlement-timing question.",
+   "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/data/kalshi/universe/latest.json"
   }
  ]
 }
