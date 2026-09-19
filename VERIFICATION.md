@@ -344,3 +344,98 @@ separately). `python scripts/validate_sources.py` → `entries: 20, csv_consiste
 Python-track registry is untouched by this batch). Every new entry carries `url` (manual-review link), `verified` (what
 was observed), `verifiedOn` (2026-09-19), `status: verified`, `category` and `notes`; no field in this batch was
 populated from memory or from an unfetched page.
+
+## 10 · 2026-09-19 session 5 (branch `arena/01a0bb28-elections`) — 20 new master-list entries, every one fetched directly (or reached via search and then fetched)
+
+Request executed this session: "Search for 20 new entries. Before adding to master list, verify no
+hallucinations." The session verified **22 candidates** end-to-end, admitted **20**, and **declined 2**
+with recorded evidence (irregularity #53) — nothing was added from memory, and every quote below was
+copied from a page or PDF actually fetched on 2026-09-19, or from the project's own 2026-09-19 Kalshi
+universe capture (`data/kalshi/universe/latest.json`) for market quotes.
+
+### 10a · The batch (id → URL → what was observed)
+
+| # | id | URL fetched | Observed (summary — full text on the master entry) |
+|---|---|---|---|
+| 1 | `minnesota-sos` | sos.state.mn.us/elections-voting/ → **sos.mn.gov/elections-voting/** | 'Minnesota Secretary Of State - Elections & Voting'; ELECTION RESULTS, sample ballot, 'search candidate filings', absentee tracking, 'Secure and Fair Elections' |
+| 2 | `new-jersey-doe` | nj.gov/state/elections/ → **/vote.shtml** | Lt. Gov. Dr. Dale Caldwell; mail-ballot mailing from Sept 19; early voting Oct 24–Nov 1; General Election Nov 3; **Dec 3 canvass certification deadline** |
+| 3 | `new-york-sboe` | **elections.ny.gov/** | 'November 3, 2026 General Election', early voting Oct 24–Nov 1, certification pages, '2026 Political Calendar', EFS |
+| 4 | `florida-dos-elections` | **dos.fl.gov/elections/** | Emergency Rule 1SER26-3 (candidate qualifying); 'The 2nd Qualifying Period for 2026 has closed for ... Governor ...'; Candidate Tracking System; Election Results Archive |
+| 5 | `oregon-sos` | **sos.oregon.gov/elections/pages/current-election.aspx** (found via search after two dead paths) | General election Nov 3, 2026; ballots mailed from Oct 14; postmark rule; '**December 10, 2026 Final election results certified**' |
+| 6 | `massachusetts-elections` | **sec.state.ma.us/divisions/elections/elections-and-voting.htm** (division root 403'd) | Galvin; '2026 State Election Candidates / Ballot Questions / Primary Results'; '**We publish election results here after they're certified. We don't publish results on Election Night.**' |
+| 7 | `illinois-sbe` | **elections.il.gov/** | 'Next Election: GENERAL ELECTION Tuesday, November 3, 2026'; VBM/early-voting calendar; 2026 disclosure deadlines |
+| 8 | `american-presidency-project` | **presidency.ucsb.edu/** | '188,601 Presidential and Non-Presidential Records'; midterm seat-swing statistics; party platforms; Sept 12, 2026 midterms analysis |
+| 9 | `uw-madison-erc` | **elections.wisc.edu/** | 'fosters cutting edge academic analysis of national and state elections'; 'Midterm Risks + Responses' 10/9/26; Election Symposium Nov 20, 2026; EM26 redistricting |
+| 10 | `umass-amherst-poll` | **umass.edu/poll/** | National poll Aug 21–26, 2026 + Sept 2026 releases; AMES June 2–Aug 24, 2026; Nteta/Rhodes/La Raja/Theodoridis; midterm-enthusiasm finding |
+| 11 | `muhlenberg-ciopo` | **muhlenberg.edu/wp-content/uploads/pa-public-health-survey-2026.pdf** | 2026 PA Health Survey, fielded Mar 10–17, 2026 (n=500, ±5.5%, dual-frame RDD, Census-weighted); Borick (Exec. Dir.) & Burt (Managing Dir.) |
+| 12 | `fox-news-poll` | **static.foxnews.com/.../fox_june-12-15-2026_complete_national_topline_june-24-release.pdf** | 'under the joint direction of Beacon Research (D) and Shaw & Company Research (R)', n=1,002 RV from a voter file, Braun Research fieldwork, ±3pp; job-approval trend 39/60 |
+| 13 | `noble-predictive-insights` | **noblepredictiveinsights.com/** (noblepi.com is an unrelated home-inspection firm → #50) | 'nonpartisan Public Opinion Polling firm ... predictive insights on performance at the ballot box' |
+| 14 | `state-navigate` | **cnalysis.com → statenavigate.org/** (rebrand → #52) | 'nonpartisan 501(c)(3) nonprofit'; state-legislative forecasts; Data Downloads + API docs; self-reported stats recorded as claims |
+| 15 | `metaculus` | **metaculus.com/midterms-2026/** (hub linked from the fetched question feed, then fetched itself) | 'Updated in real time'; Senate D 51.7% / House D 88.8%; House median D +13; control question 50.7/38.1/10.2/1.0; drivers stamped 'Sep 19, 2026' |
+| 16 | `race-to-the-wh` | **racetothewh.com/** | Senate forecast 'simulating the election 50,000 times a day'; 2026 House/Governor forecasts; per-race pages for GA/TX/NC/MI Senate and AZ governor |
+| 17 | `wsj` | **wsj.com/politics/elections** | 'Midterm Elections 2026' hub; 'less than 50 days until Election Day'; Senate & House control trackers (Sept 18, 2026) |
+| 18 | `axios` | axios.com/politics → **/politics-policy** | '2026 midterm elections' topic page; Sept 19, 2026 items; '128 bills targeting deepfakes ... Axios analysis of NCSL data' |
+| 19 | `texas-tribune` | **texastribune.org/** | Sept 17–18, 2026 stories; '2026 Texas Elections' series; 'All recent polls have Talarico ahead of Paxton in the U.S. Senate race' tracker |
+| 20 | `c-span` | c-span.org/elections/ (404) → **c-span.org/campaign/** | 'Featured Election Results — Data Provided By' AP; Senate-in-35/governor-in-36 primaries line; 2026 campaign-event video archive |
+
+Every master entry also names the **Kalshi markets it maps to, with quotes from the project's own
+2026-09-19 capture** — e.g. SENATEMN-26-D 'Peggy Flanagan' 0.902/0.904, SENATENJ-26-D 'Cory Booker'
+0.975/0.981, SENATEIL-26-D 'Juliana Stratton' 0.951/0.989, SENATEMA-26-D 'Ed Markey' 0.975/0.980,
+SENATEOR-26-D 'Jeff Merkley' 0.976/0.978, GOVPARTYFL-26-R 'Byron Donalds' 0.790/0.800,
+GOVPARTYNY-26-D 'Kathy Hochul' 0.924/0.930, GOVPARTYAZ-26-D 'Katie Hobbs' 0.870/0.880,
+GOVPARTYPA-26-D 'Josh Shapiro' 0.968/0.973, SENATETX-26-D 'James Talarico' 0.580/0.590 — so each new
+source is tied, the day it was admitted, to the specific live markets it will be scored against.
+
+### 10b · Method notes
+
+- **Two statuses were used**: 18 entries are `verified` (fetched directly); **`oregon-sos` and
+  `massachusetts-elections` are `verified-via-search`** — their canonical landing paths failed (OR:
+  /voting-elections fetch error and /sos/elections 404; MA: division root 403, irregularity #51), the
+  correct pages were discovered through live search, and were then fetched and recorded first-hand.
+- **Quote policy unchanged**: `verified` fields quote only text visible in this session's fetches.
+  Where a fact was seen only in search snippets or on-page self-descriptions (MCIPO's 538 ranking,
+  State Navigate's '96% prediction accuracy'), the entry says so explicitly and the fact is treated as
+  a claim, not evidence.
+- **Market quotes are not fetched from kalshi.com** — they are read from this project's own captured
+  universe file, whose `capturedFrom`/`capturedAt` provenance the lint already enforces.
+- Candidate-name checks: every candidate named in a market quote ('Peggy Flanagan', 'Byron Donalds',
+  'Juliana Stratton', 'Stacy Garrity', 'David Brock Smith', 'Justin Murphy', 'Don Tracy', 'John
+  Deaton', 'Christine Drazan', 'Victor Marx', 'Michele Tafoya', 'Bruce Blakeman', 'Andy Biggs',
+  'David Jolly', 'Phil Weiser', 'James Talarico', 'Ken Paxton') is the `yes_sub_title` recorded in
+  this repo's own capture — none was typed from memory.
+
+### 10c · Declined candidates and a standing deferral re-tested
+
+- **Princeton Election Consortium** — fetched fully; newest on-site posts are 2024-11-05 and the page
+  routes readers to a Substack. Declined under this session's collectability criterion; re-test
+  criteria recorded (irregularity #53).
+- **Split Ticket** — fetched fully; newest on-site post 2025-10-20; its own 2025-08-19 post says the
+  bulk of analysis moves to The Argument. Declined, same criterion (#53).
+- **SurveyUSA** — re-attempted per #47's action: surveypoll.com failed again (third failure). The
+  deferral stands (#51 records the attempt).
+- **HarrisX / CourtListener** — not re-attempted this session (their #47 actions remain valid).
+
+### 10d · Irregularities found during this batch
+
+#50 (noblepi.com domain collision — an inspection company, not the pollster), #51 (MA 403 root,
+C-SPAN /elections/ 404, SurveyUSA third failure), #52 (cnalysis.com → statenavigate.org rebrand),
+#53 (two verified-reachable candidates declined for absence of current-cycle content). All four are
+in `data/irregularities.json` with md rows; #47's detail was extended with this session's re-attempt.
+
+### 10e · Verification evidence after the batch
+
+`npm run lint` → `checked 62 data JSON files, 125 sources, 4 outcomes, 5 markets, 53 irregularities
+(md rows 53), 15 poll entries — lint: all verified-data provenance checks pass`. `npm test` → see the
+counts printed at the end of this section (all pass, 1 skip: the network-dependent live-capture test),
+including the extended `test/site-sources.test.mjs` assertions (≥125 entries; the 20 session-5 ids;
+exactly two `verified-via-search` entries; quotes must cite the capture date; irregularities #40–#53
+render on the site). `npm run pipeline` regenerated `data/backtest-results.json`,
+`data/contest-results.json`, `src/data/site-data.js` and passed the headless render check of all 11
+sections; `python scripts/sync_site_data.py` refreshed the toolkit sub-site's copies.
+
+**Cross-layer observation recorded this session** (not an irregularity — an inter-source spread to be
+scored after Nov 3): Metaculus's midterms hub and this project's Kalshi capture, both stamped
+2026-09-19, **agree on the House** (Metaculus D 88.8% vs Kalshi House D 89–90¢) but **disagree on the
+Senate** (Metaculus D 51.7% vs Kalshi Senate D 59–60¢ — an ~8-point gap). The divergence is exactly
+the kind of signal this project exists to score: after November 3 the calibration tracker will show
+which layer was right. No trade, model, or claim depends on either number today.

@@ -331,7 +331,7 @@
       "severity": "low",
       "area": "Source access",
       "title": "Three candidate sources could not be verified this session and were therefore NOT added to the master list",
-      "detail": "Fetched 2026-09-19: https://www.surveypoll.com (SurveyUSA) failed twice with a bare 'Failed to fetch page' error and returned no content; https://thehillx.com (HarrisX) failed the same way; https://www.courtlistener.com/ returned HTTP 500 both bare and with a query string. Under the project's no-hallucination rule none of the three was added on the strength of prior knowledge or of search snippets alone.",
+      "detail": "Fetched 2026-09-19: https://www.surveypoll.com (SurveyUSA) failed twice with a bare 'Failed to fetch page' error and returned no content; https://thehillx.com (HarrisX) failed the same way; https://www.courtlistener.com/ returned HTTP 500 both bare and with a query string. Under the project's no-hallucination rule none of the three was added on the strength of prior knowledge or of search snippets alone. Re-attempted 2026-09-19 (session 5): https://www.surveypoll.com/ failed again with the same bare error (recorded in irregularity #51); the deferral stands.",
       "action": "Re-attempt all three next session from a different fetch path or via their documented APIs (CourtListener publishes a free REST API; SurveyUSA publishes full questionnaires per poll). SurveyUSA had already been deferred on institutional-standing grounds in VERIFICATION.md §8 — that deferral stands until its own questionnaires can be fetched.",
       "source": "https://www.surveypoll.com/"
     },
@@ -352,6 +352,42 @@
       "detail": "AtlasIntel's own site describes its public polls as 'Nationally representative polls conducted by AtlasIntel using its proprietary data collection technology and post-stratification algorithms' (fetched 2026-09-19). That is a different sampling design from the probability panels in this list (ipsos-us KnowledgePanel, norc) and from the RDD / live-caller university pollsters (quinnipiac, marquette-law-poll, siena-sri, unh-survey-center, suffolk-suprc, emerson, saint-anselm-sasc). Averaging across designs without a method label would silently mix estimators — the same class of error already flagged for the poll→probability mapping in #12.",
       "action": "Every poll-layer row carries its method family; any average, if computed, is computed within a method family and labelled with it. AtlasIntel releases are admitted with the caveat recorded on the master entry, and no AtlasIntel number is pooled with probability-panel numbers without that label.",
       "source": "https://www.atlasintel.org/"
+    },
+    {
+      "id": 50,
+      "severity": "low",
+      "area": "Source access",
+      "title": "noblepi.com is a home-inspection company; the pollster Noble Predictive Insights lives at noblepredictiveinsights.com",
+      "detail": "Fetched 2026-09-19: https://www.noblepi.com/ serves 'Home Inspections | Noble Property Inspections | TX, FL, GA' — a family-owned home/commercial inspection firm ('Our family is personally invested in every inspection we perform', owner Phil Bullock) with no political operation. The Arizona pollster's site is https://www.noblepredictiveinsights.com/ ('Noble Predictive Insights | Full Service Market Research Company', 'nonpartisan Public Opinion Polling firm'). A wrong-domain admission would have been a silent hallucination in the master list.",
+      "action": "Master entry noble-predictive-insights uses noblepredictiveinsights.com as canonical. Any poll-layer row citing NPI must link the release on that domain; noblepi.com must never appear in this repo as a pollster citation.",
+      "source": "https://www.noblepredictiveinsights.com/"
+    },
+    {
+      "id": 51,
+      "severity": "low",
+      "area": "Source access",
+      "title": "Session-5 access findings: MA elections division root 403s (deep page fetches); C-SPAN /elections/ is a 404 path (hub is /campaign/); SurveyUSA fetch failed a third time",
+      "detail": "Fetched 2026-09-19: (a) https://www.sec.state.ma.us/divisions/elections/ returned '403 - Forbidden: Access is denied.' while the deeper /divisions/elections/elections-and-voting.htm fetched in full — same class as #40 (deep-path blocking on a live domain); a sec.state.ma.gov variant also failed to fetch. (b) https://www.c-span.org/elections/ returned C-SPAN's own error page ('Page Not Found — Unfortunately, the page you're looking for does not exist.'); the Campaign hub lives at /campaign/ and fetched fully. (c) https://www.surveypoll.com/ (SurveyUSA) failed a third time with a bare 'Failed to fetch page' — the #47 deferral therefore stands.",
+      "action": "Cite Massachusetts content via the elections-and-voting.htm path (or electionstats.state.ma.us); cite C-SPAN via /campaign/ only; do not add SurveyUSA from memory or search snippets — wait for a successful direct fetch of its own questionnaire pages.",
+      "source": "https://www.sec.state.ma.us/divisions/elections/elections-and-voting.htm"
+    },
+    {
+      "id": 52,
+      "severity": "medium",
+      "area": "Source mapping",
+      "title": "cnalysis.com now redirects to statenavigate.org — the CNalysis brand has been retired into State Navigate (501(c)(3))",
+      "detail": "Fetched 2026-09-19: a request to cnalysis.com resolved to https://statenavigate.org/ (title 'State Navigate | State Data & News'), self-described as 'a nonpartisan 501(c)(3) nonprofit organization' with state-legislative forecasts, district profiles, campaign-finance pages, downloads and an API (data.statenavigate.com). The site self-reports '#1 Pollster in 2025 Elections · 17,000+ state legislative predictions · 96% prediction accuracy' and 'Cited by: SEMAFOR, The Dispatch, The Guardian, Cardinal News' — recorded verbatim as self-reported claims, not as findings.",
+      "action": "Master entry state-navigate uses statenavigate.org as canonical; any future citation of 'CNalysis' ratings must be re-pointed or validated against the redirect. Self-reported accuracy numbers are never used as evidence (same rule as kalshi-hub-claims, #31) until independently reproduced.",
+      "source": "https://statenavigate.org/"
+    },
+    {
+      "id": 53,
+      "severity": "low",
+      "area": "Scope decision",
+      "title": "Two fetched, verified-reachable candidates were DECLINED for absence of current-cycle content: Princeton Election Consortium and Split Ticket",
+      "detail": "Fetched 2026-09-19: https://election.princeton.edu/ (Princeton Election Consortium, Sam Wang) fetched fully but the most recent posts are dated November 5, 2024 ('Geek's Guide to the Election 2024', 'A final snapshot and House prediction', 'Herding, or judgment?') and the page routes readers to a Substack ('Fixing Bugs in Democracy') — no 2026-cycle content on the fetched page. https://split-ticket.org/ fetched fully but its newest on-site post is October 20, 2025 ('The Pendulum Effect') and its own August 19, 2025 post states that under an exclusive partnership with The Argument 'we will be publishing the bulk of our analysis there for the foreseeable future.' Under this session's collectability criterion — a candidate source must carry current-cycle content the project can collect forward, free, from the site itself — both were declined.",
+      "action": "Recorded rather than silently dropped. Re-test criteria: PEC — admit if 2026/2028 forecasts or a Geek's Guide successor is published on-site; Split Ticket — admit if 2026 ratings or model pages return to the free site. Neither is cited anywhere in the repo today.",
+      "source": "https://election.princeton.edu/"
     }
   ]
 }
