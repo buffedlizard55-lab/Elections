@@ -111,6 +111,6 @@ say so in the method column; none of the 21 is listed on assumption. The 21 entr
 | `https://www.cisa.gov/elections` → 404 | Correct page is `https://www.cisa.gov/topics/election-security` — entry N4 |
 | `https://www.cbsnews.com/elections/` → 404 | Correct hub is `https://www.cbsnews.com/feature/2026-midterm-elections/` (located via search, then fetched) — entry N10 |
 | `https://www.nbcnews.com/politics/nbc-poll-check` → 404 | Live hub is `https://www.nbcnews.com/politics/2026-election` (located via search, then fetched) — entry N11 |
-| `https://us-elections-project.unf.edu` / `electproject.github.io` root → unreachable/404 | Canonical live URLs: `electproject.org` (stub) → `election.lab.ufl.edu/voter-turnout` (data) — entry N20 |
+| `https://us-elections-project.unf.edu` → fetch failed (sandbox proxy error); `https://electproject.github.io/` → 404 page ("There isn't a GitHub Pages site here") | Canonical live URLs: `electproject.org` (stub, fetched) → `election.lab.ufl.edu/voter-turnout` (data, fetched) — entry N20 |
 | `https://www.openelections.org/` → **GoDaddy domain-for-sale page** | Excluded from master list; **IRREGULARITIES #13**; use dataverse.harvard.edu |
 | `https://iem.isu.edu/` + IEM 2026 prospectus PDF → fetch failed (proxy) | Entry N21 marked `verified-via-search` with the university-hosted prospectus as evidence; re-verify directly on a networked run |

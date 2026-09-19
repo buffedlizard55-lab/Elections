@@ -98,7 +98,10 @@
     const checks = (s.crossPlatformChecks || []).map((c) => `
       <div class="card"><strong>${esc(c.market)}</strong>
         <div class="small" style="margin-top:6px">Kalshi: ${esc(c.kalshiPct != null ? c.kalshiPct + '%' : (c.kalshi || ''))}
-        ${c.polymarketPct != null ? `· Polymarket: ${c.polymarketPct}% (${money(c.polymarketVolumeDollars)} vol) · as of ${esc(c.asOf)}` : ''}</div>
+        ${c.polymarketPct != null ? `· Polymarket: ${c.polymarketPct}% (${money(c.polymarketVolumeDollars)} vol)` : ''}
+        ${c.predictit ? `· PredictIt: ${esc(c.predictit)}` : ''}
+        ${c.asOf ? `· as of ${esc(c.asOf)}` : ''}</div>
+        ${c.divergence ? `<div class="small" style="margin-top:4px"><strong>Assessment:</strong> ${esc(c.divergence)}</div>` : ''}
         ${(c.historical || []).map((h) => `<div class="small">— ${esc(h.date)}: ${esc(h.value)}</div>`).join('')}
         ${srcs((c.sources || []).concat(c.historical || []).map((x) => x.source || x))}</div>`).join('');
     return `
