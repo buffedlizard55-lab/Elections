@@ -51,7 +51,7 @@ No dependencies. Node ≥ 18. No network needed for anything above.
 3. **Captured vs modeled is labeled.** The poll→probability logistic mapping (k=4.5) is an explicit
    assumption, not a published number.
 4. **Attribution identity is tested:** `finalEquity = startingCapital + fee-aware realizedPnl`.
-5. **Irregularities are published, never normalized** — [IRREGULARITIES.md](IRREGULARITIES.md) (12 items).
+5. **Irregularities are published, never normalized** — [IRREGULARITIES.md](IRREGULARITIES.md) (15 items).
 
 ## 2024 headline results (verified, reproducible)
 
