@@ -55,7 +55,35 @@ for (const [t, c] of Object.entries(CANDLESTICKS_2024)) {
   if (c.bars.length < 10) errors.push(`candlesticks ${t} suspiciously short (${c.bars.length} bars)`);
 }
 
-console.log(`checked ${checked.length} data JSON files, ${master.sources.length} sources, ${outcomes.outcomes.length} outcomes, ${Object.keys(MARKETS_2024).length} markets`);
+// Irregularities: the human-readable table (IRREGULARITIES.md) and the two machine-readable
+// files must list the same ids, every entry needs a source, and ids must be unique.
+const irrNode = JSON.parse(readFileSync(join(ROOT, 'data/irregularities.json'), 'utf8')).items || [];
+const irrPy = JSON.parse(readFileSync(join(ROOT, 'data/irregularities-python-track.json'), 'utf8')).items || [];
+const irrIds = [...irrNode, ...irrPy].map((i) => i.id);
+if (new Set(irrIds).size !== irrIds.length) errors.push('duplicate irregularity ids across data/irregularities*.json');
+for (const i of [...irrNode, ...irrPy]) {
+  if (!i.source) errors.push(`irregularity #${i.id} has no source`);
+  if (!i.action) errors.push(`irregularity #${i.id} has no action`);
+}
+const irrMd = readFileSync(join(ROOT, 'IRREGULARITIES.md'), 'utf8');
+const mdIds = [...irrMd.matchAll(/^\| (\d+) \|/gm)].map((m) => Number(m[1]));
+for (const id of irrIds) if (!mdIds.includes(id)) errors.push(`irregularity #${id} is in the JSON but has no row in IRREGULARITIES.md`);
+for (const id of mdIds) if (!irrIds.includes(id)) errors.push(`IRREGULARITIES.md row #${id} has no machine-readable twin in data/irregularities*.json`);
+
+// Poll layer: every 2026 poll entry needs a source URL and a verification note; a Kalshi ticker, when given, must exist in the tracker index.
+const pollLayer = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
+let indexTickers = null;
+try { indexTickers = new Set(JSON.parse(readFileSync(join(ROOT, 'data/kalshi/tracker/index.json'), 'utf8')).tickers.map((t) => t.ticker)); } catch { /* tracker absent until the first live run */ }
+for (const e of [...(pollLayer.genericBallot || []), ...(pollLayer.stateRaces || [])]) {
+  if (!e.source || !/^https?:\/\//.test(e.source)) errors.push(`poll entry ${e.id} missing source url`);
+  if (!e.verifiedVia || !e.verifiedOn) errors.push(`poll entry ${e.id} missing verifiedVia/verifiedOn`);
+  if (indexTickers && e.kalshiDemTicker && !indexTickers.has(e.kalshiDemTicker)) errors.push(`poll entry ${e.id} points at Kalshi ticker ${e.kalshiDemTicker} which is not in the tracker index`);
+}
+for (const r of (pollLayer.raceRatings && pollLayer.raceRatings.senate2026) || []) {
+  if (indexTickers && r.kalshiTicker && !indexTickers.has(r.kalshiTicker)) errors.push(`rating row ${r.state} points at Kalshi ticker ${r.kalshiTicker} which is not in the tracker index`);
+}
+
+console.log(`checked ${checked.length} data JSON files, ${master.sources.length} sources, ${outcomes.outcomes.length} outcomes, ${Object.keys(MARKETS_2024).length} markets, ${irrIds.length} irregularities (md rows ${mdIds.length}), ${(pollLayer.stateRaces || []).length + (pollLayer.genericBallot || []).length} poll entries`);
 if (errors.length) {
   console.error('LINT FAILURES:');
   for (const e of errors) console.error('  - ' + e);

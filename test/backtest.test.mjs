@@ -67,3 +67,16 @@ test('calibration spread: the Senate-R favorite never traded below 79c after 202
   assert.ok(afterOct20.length > 8);
   assert.ok(Math.min(...afterOct20.map((s) => s.p)) >= 0.79);
 });
+
+test('poll backtest checkpoints are comparison objects (regression: irregularity #36)', async () => {
+  const { runPollBacktest } = await import('../src/poll-backtest.js');
+  const pb = runPollBacktest();
+  assert.ok(Array.isArray(pb.checkpoints) && pb.checkpoints.length >= 4);
+  for (const c of pb.checkpoints) {
+    assert.match(c.date, /^\d{4}-\d{2}-\d{2}$/);
+    assert.ok('poll2PartyMargin' in c && 'pollImpliedTrumpProb' in c && 'kalshiDjtClose' in c);
+  }
+  const anchor = pb.checkpoints[pb.checkpoints.length - 1];
+  assert.equal(anchor.date, pb.anchorDate);
+  assert.ok(Math.abs(anchor.poll2PartyMargin - pb.anchorMargin) < 1e-12);
+});

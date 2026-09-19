@@ -77,9 +77,26 @@ export function takerFee({ count, price, series }) {
   return roundUpToIncrement(M * KALSHI_FEES.takerCoefficient * C * P * (1 - P));
 }
 
+/**
+ * Additional per-series fee configs captured by the collectors (e.g. the 34
+ * SENATE{ST} series from GET /series/SENATE{ST}, see
+ * data/kalshi/historical/senate-2024.json). Registered at runtime so the
+ * verified core registry above stays frozen and auditable.
+ */
+const CAPTURED_SERIES_FEES = {};
+export function registerSeriesFees(map) {
+  let n = 0;
+  for (const [ticker, cfg] of Object.entries(map || {})) {
+    if (!cfg || !Number.isFinite(Number(cfg.fee_multiplier))) continue;
+    CAPTURED_SERIES_FEES[ticker] = Object.freeze({ fee_type: cfg.fee_type || 'quadratic', fee_multiplier: Number(cfg.fee_multiplier), category: cfg.category || 'unknown', title: cfg.title || ticker, capturedFrom: cfg.capturedFrom || null, capturedAt: cfg.capturedAt || null });
+    n += 1;
+  }
+  return n;
+}
+
 /** Resolve the fee configuration for a series (falls back to documented default M=1, labelled). */
 export function seriesFeeConfig(series) {
-  const hit = SERIES_FEE_REGISTRY[series];
+  const hit = SERIES_FEE_REGISTRY[series] || CAPTURED_SERIES_FEES[series];
   if (hit) return hit;
   // Documented default (PDF: "default is 1 unless otherwise indicated").
   return Object.freeze({ fee_type: 'quadratic', fee_multiplier: 1, category: 'unknown', title: series, assumed: true });

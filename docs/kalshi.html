@@ -22,13 +22,14 @@
   </nav>
 </div></header>
 <main><div class="wrap">
+  <div class="notice" id="toolkit-banner"><strong>You are on the Python-toolkit sub-site</strong> (independent 20-source registry, Kalshi sample collector, synthetic-data contest engine). The main site with the live 2026 Kalshi universe, the 39-market 2024 backtest, the 73-entry master source list and the poll layer is at <a href="../">buffedlizard55-lab.github.io/Elections/</a>.</div>
 
   <div class="hero">
     <h2>Kalshi market-data layer</h2>
     <p class="lead">Prediction-market prices are our second layer of intelligence: a real-money consensus to compare against polls, ratings, and our own models. Kalshi is a CFTC-regulated exchange whose election contracts were permitted by federal court decisions in 2024.</p>
     <div class="pill-row">
       <span class="badge b-green">docs verified 2026-09-18</span>
-      <span class="badge b-amber">first live snapshot pending — see status</span>
+      <span class="badge b-amber" id="snapshot-badge">snapshot status: loading…</span>
     </div>
   </div>
 
@@ -37,13 +38,13 @@
   <div class="grid">
     <div class="card"><h3>Browse</h3><p>Midterms hub and politics category on Kalshi (verified links).</p><p id="browse-links">Loading…</p></div>
     <div class="card"><h3>API docs</h3><p>Verified documentation entry points.</p><p id="docs-links">Loading…</p></div>
-    <div class="card"><h3>Collector</h3><p>Public endpoints only — no API key. Paginated, polite, fully logged, raw responses preserved.</p><p><code>python scripts/fetch_kalshi.py --out-dir data/kalshi</code></p></div>
+    <div class="card"><h3>Collector</h3><p>Public endpoints only — no API key. Paginated, polite, fully logged. In CI it runs with <code>--no-raw --compact --compact-max 2000</code> (independent sample; the Node collector in <code>data/kalshi/universe/</code> is the complete record). Add <code>--out-dir data/kalshi</code> without <code>--no-raw</code> to keep raw responses locally.</p><p><code>python scripts/fetch_kalshi.py --out-dir data/kalshi --no-raw --compact --compact-max 2000 --series-file data/kalshi/universe/series.json</code></p></div>
   </div>
 
   <div class="card">
     <h3>How we isolate politics/elections markets</h3>
     <p id="filter-desc">Loading…</p>
-    <p class="muted">Every match records which rule fired (<code>_project_filter_reasons</code>), so the filter is auditable. The operator allowlist (<code>data/kalshi_series_allowlist.json</code>) starts empty and is filled only from confirmed live tickers — never guessed.</p>
+    <p class="muted">Every match records which rule fired (<code>_project_filter_reasons</code>), so the filter is auditable. The operator allowlist (<code>data/kalshi_series_allowlist.json</code>) started empty and is never guessed; since 2026-09-19 the series admitted are read from the live registry the Node collector captured (<code>--series-file data/kalshi/universe/series.json</code>, Elections + Politics categories), and the two collectors are cross-checked every run (<code>data/kalshi/tracker/collector-crosscheck.json</code>).</p>
   </div>
 
   <div class="card">
@@ -88,11 +89,18 @@ loadJSON("data/kalshi_latest.json").then(s => {
   const el = document.getElementById("snapshot-status");
   if (s.markets_total > 0) {
     el.className = "notice green";
+    const listed = s.markets_listed_in_filtered_file != null ? s.markets_listed_in_filtered_file : (s.compact_max || null);
     el.innerHTML = "<strong>Snapshot status: LIVE.</strong> Last collection " + esc(s.run_finished_at) +
-      " pulled <strong>" + esc(s.markets_total) + "</strong> markets (" + esc(s.markets_politics_filtered) +
-      " politics/elections) into <code>" + esc(s.filtered_file) + "</code>. Collector: <code>scripts/fetch_kalshi.py</code>, daily at 12:20 UTC.";
+      " pulled <strong>" + esc(s.markets_total) + "</strong> open markets exchange-wide; " + esc(s.markets_politics_filtered) +
+      " matched the politics/elections filter" + (listed ? " and the " + esc(listed) + " highest-volume of them are listed" : "") +
+      " in <code>" + esc(s.filtered_file) + "</code>. Collector: <code>scripts/fetch_kalshi.py</code>, daily at 12:30 UTC via <code>.github/workflows/daily-collection.yml</code>. " +
+      "The complete open political/election universe (every event, traded markets, daily tracker) is in <code>data/kalshi/universe/</code> and <code>data/kalshi/tracker/</code> and is presented on the <a href='../'>main site</a>.";
+    const badge = document.getElementById("snapshot-badge");
+    if (badge) { badge.className = "badge b-green"; badge.textContent = "live snapshot " + String(s.run_finished_at || "").slice(0, 10); }
   } else {
     el.className = "notice blue";
+    const badge = document.getElementById("snapshot-badge");
+    if (badge) { badge.className = "badge b-amber"; badge.textContent = "no live snapshot yet"; }
     el.innerHTML = "<strong>Snapshot status:</strong> no live snapshot yet. Last attempt " + esc(s.run_finished_at || "unknown") +
       " retrieved 0 markets (" + esc((s.fetch_errors && s.fetch_errors[0]) || "see repo log") + "). " +
       "The collector (<code>scripts/fetch_kalshi.py</code>) runs daily on GitHub Actions; snapshots land in <code>data/kalshi/</code>. No prices are shown until they come from a real snapshot.";

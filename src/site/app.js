@@ -1,7 +1,8 @@
 /**
  * Elections — static site renderer (no build step at browse time).
  * All data arrives from src/data/site-data.js (generated bundle of the
- * verified files under data/).
+ * verified files under data/). Nothing on the page is typed in by hand
+ * except explanatory prose; every figure is read from the bundle.
  */
 (function () {
   const D = window.SITE_DATA;
@@ -10,7 +11,9 @@
 
   const SECTIONS = [
     ['overview', 'Overview'],
-    ['markets', '2026 Live Markets'],
+    ['markets', '2026 Markets'],
+    ['polls', '2026 Polls'],
+    ['tracker', 'Tracker'],
     ['backtests', 'Backtests'],
     ['contest', 'Contest'],
     ['sources', 'Sources'],
@@ -22,9 +25,20 @@
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const money = (x) => (x == null ? '—' : '$' + Number(x).toLocaleString('en-US', { maximumFractionDigits: 0 }));
   const usd = (x) => (x == null ? '—' : '$' + Number(x).toLocaleString('en-US', { maximumFractionDigits: 2 }));
+  const int = (x) => (x == null ? '—' : Number(x).toLocaleString('en-US', { maximumFractionDigits: 0 }));
   const pct = (x, d = 1) => (x == null ? '—' : (x * 100).toFixed(d) + '%');
+  // Market lifecycle chip: exchange status when recorded (closed/finalized/settled), else a past close_time
+  // (trading ended, settlement pending — the event stays open until every market settles).
+  const lifeChip = (m, ref) => {
+    if (!m) return '';
+    if (m.status && m.status !== 'active' && m.status !== 'open') return ` <span class="chip warn" title="exchange status at capture">${esc(m.status)}</span>`;
+    if (m.close_time && ref && m.close_time < ref) return ' <span class="chip warn" title="close_time is before the capture; trading has ended, settlement pending">past close</span>';
+    return '';
+  };
+  const cents = (x) => (x == null ? '—' : (x * 100).toFixed(x < 0.1 ? 1 : 0) + '¢');
   const pp = (x, d = 1) => (x == null ? '—' : (x > 0 ? '+' : '') + x.toFixed(d) + 'pp');
   const cls = (x) => (x > 0 ? 'pos' : x < 0 ? 'neg' : '');
+  const day = (iso) => (iso ? String(iso).slice(0, 10) : '—');
 
   function srcs(urls) {
     if (!urls || !urls.length) return '';
@@ -34,67 +48,154 @@
     return items ? `<div class="srcs">${items}</div>` : '';
   }
 
+  // implied probability: same rule as src/kalshi-api.js impliedProb (book mid when tight, else last)
+  function implied(m) {
+    if (m.yes_bid != null && m.yes_ask != null && m.yes_bid > 0 && m.yes_ask < 1 && m.yes_ask - m.yes_bid <= 0.10) return { p: (m.yes_bid + m.yes_ask) / 2, basis: 'mid' };
+    if (m.last_price != null && m.last_price > 0) return { p: m.last_price, basis: 'last' };
+    return { p: null, basis: 'none' };
+  }
+  const U = D.universe; // may be null before the first collector run
+  const PL = D.pollLayer;
+  const BT = D.backtests.marketBacktest;
+  const CT = D.contest;
+  const allLb = CT.universes && CT.universes['all-2024'] ? CT.universes['all-2024'].leaderboard : CT.leaderboard;
+  const coreLb = CT.universes && CT.universes['core-2024'] ? CT.universes['core-2024'].leaderboard : CT.leaderboard;
+
+  function findEvent(ticker) { return U ? U.events.find((e) => e.event_ticker === ticker) : null; }
+
   // ---------- OVERVIEW ----------
   function overview() {
     const sources = D.sources.sources.length;
     const irregular = D.irregularities.items.length;
-    const ranked = D.contest.leaderboard.length;
-    const leader = D.contest.leaderboard[0];
+    const leader = allLb[0];
+    const t1 = BT.aggregate.find((a) => a.nDays === 1);
+    const fav1 = (BT.favoriteAccuracy || []).find((a) => a.nDays === 1);
+    const days = D.tracker ? D.tracker.days.length : 0;
     return `
     <h1>Elections — collect, analyze, project &amp; estimate</h1>
     <p class="lead">A verification-first election intelligence project: <strong>official, free, public data only</strong>.
-    It collects open political/election prediction markets, backtests <em>polls and markets</em> against
-    <em>verified official outcomes</em>, flags every irregularity it finds, and runs a paper-trading
+    It collects the open political/election prediction-market universe every day, backtests <em>polls and markets</em> against
+    <em>verified official outcomes</em>, tracks a live 2026 poll layer, flags every irregularity it finds, and runs a paper-trading
     forecasting contest (reverse-engineered from TradingView's <a href="https://www.tradingview.com/the-leap/crypto-series-may-2026/" target="_blank" rel="noopener">The Leap</a>)
-    on Kalshi's open election markets.</p>
+    on Kalshi's settled election markets.</p>
     <div class="grid cols4">
-      <div class="stat"><div class="n">${sources}</div><div class="l">verified sources in the master list (line-by-line, 2026-09-18 + 2026-09-19)</div></div>
-      <div class="stat"><div class="n">3 / 3</div><div class="l">2024 Kalshi markets backtested vs official settlements (all cross-checks PASS)</div></div>
-      <div class="stat"><div class="n">${ranked}</div><div class="l">ranked contest entrants · ${esc(leader ? leader.username : '—')} leads at ${leader ? leader.realizedPnlPct.toFixed(1) : '—'}%</div></div>
+      <div class="stat"><div class="n">${sources}</div><div class="l">verified sources in the master list (line-by-line; last batch ${esc(D.sources.updated)})</div></div>
+      <div class="stat"><div class="n">${BT.universe.total}</div><div class="l">settled 2024 Kalshi markets backtested (${BT.universe.core2024} core + ${BT.universe.senate2024} per-state Senate) · favourite at T-1 right ${fav1 ? pct(fav1.rate, 1) : '—'} of ${fav1 ? fav1.n : '—'}</div></div>
+      <div class="stat"><div class="n">${U ? int(U.counts.openMarketsTraded) : '—'}</div><div class="l">traded open political markets in the daily tracker (${U ? int(U.counts.openEvents) : '—'} events · ${days} day${days === 1 ? '' : 's'} collected)</div></div>
       <div class="stat"><div class="n">${irregular}</div><div class="l">irregularities &amp; discrepancies flagged for review</div></div>
     </div>
     <div class="callout good"><strong>Honesty contract.</strong> Every number on this site traces to a captured URL recorded in <span class="mono">data/</span>
-    (machine-checked by <span class="mono">npm run lint</span>). Captured-vs-inferred values are labeled.
+    (machine-checked by <span class="mono">npm run lint</span>). Captured-vs-inferred values are labeled; modelled mappings are called modelled.
     Strategies contain no hard-coded outcomes — only executable <span class="mono">decide()</span> rules. Fills are refused on days with no trade and capped at 10% of the day's volume.</div>
     <div class="grid cols2">
       <div class="card"><h3>What's inside</h3>
         <ul style="margin:8px 0 0; padding-left:20px; font-size:14.5px">
-          <li><a href="#/markets">2026 Live Markets</a> — the full captured Kalshi Midterms Hub board (35 Senate races, controls, seat counts, combos, mayors, ballot measures) with cross-platform checks.</li>
-          <li><a href="#/backtests">Backtests</a> — 2024 Kalshi market prices vs official settlements (Brier / log-loss / calibration) and the 538 poll archive vs market vs outcome.</li>
-          <li><a href="#/contest">Contest</a> — 8 paper-trading entrants with unique usernames &amp; testable theses, $100k each, Kalshi's real fee schedule.</li>
+          <li><a href="#/markets">2026 Markets</a> — chamber control, all priced Senate races with Cook/Inside Elections ratings, the most-traded events, and cross-market consistency checks — from the daily API capture.</li>
+          <li><a href="#/polls">2026 Polls</a> — generic-ballot and state-race polls transcribed from primary releases, put next to the market price and the raters.</li>
+          <li><a href="#/tracker">Tracker</a> — the forward "expected vs actual" loop: what is collected each day, the calibration scorer waiting for settlements, and the two-collector cross-check.</li>
+          <li><a href="#/backtests">Backtests</a> — ${BT.universe.total} settled 2024 markets (Brier / log-loss / calibration curve) and the 538 poll archive vs market vs outcome.</li>
+          <li><a href="#/contest">Contest</a> — ${CT.results.length} paper-trading entrants with testable theses, $100k each, Kalshi's real fee schedule, The Leap's ranking rules.</li>
           <li><a href="#/sources">Sources</a> — the master list with per-entry verification notes; <a href="#/irregularities">Irregularities</a> — everything that didn't reconcile.</li>
         </ul>
       </div>
-      <div class="card"><h3>2024 headline finding (verified)</h3>
-        <p style="font-size:14.5px; margin:6px 0">The final archived 538 national average (2024-09-12) was <strong>Harris +2.82pp</strong>;
-        the official outcome was <strong>Trump +1.45pp</strong> (2-party popular vote, FEC numbers) — a <strong>4.3pp miss in the wrong direction</strong>.
-        The Kalshi presidential market (50–63¢ Trump over the same window) was closer. Details in <a href="#/backtests">Backtests → Polls</a>.</p>
+      <div class="card"><h3>Headline findings (verified)</h3>
+        <p style="font-size:14.5px; margin:6px 0"><strong>2024 markets:</strong> across ${t1 ? t1.nMarkets : '—'} settled markets the day-before price had a mean Brier of <strong>${t1 && t1.meanBrier != null ? t1.meanBrier.toFixed(3) : '—'}</strong>;
+        the market favourite won ${fav1 ? pct(fav1.rate, 1) : '—'} of the time. <a href="#/backtests">Details</a>.</p>
+        <p style="font-size:14.5px; margin:6px 0"><strong>2024 polls:</strong> the final archived 538 national average (2024-09-12) was <strong>Harris +2.82pp</strong>;
+        the official outcome was <strong>Trump +1.45pp</strong> — a 4.3pp miss in the wrong direction. The Kalshi presidential market was closer.</p>
+        <p style="font-size:14.5px; margin:6px 0"><strong>2026 so far:</strong> ${PL && PL.ratingsComparison ? `Kalshi prices <strong>${PL.ratingsComparison.reviewCount} of ${PL.ratingsComparison.rows.length}</strong> rated Senate races outside the bands implied by both Cook and Inside Elections (all toward Democrats) — flagged for review, not asserted.` : 'poll layer not built yet.'}
+        Contest leader on the full 2024 universe: <span class="mono">@${esc(leader ? leader.username : '—')}</span> at ${leader ? (leader.realizedPnlPct > 0 ? '+' : '') + leader.realizedPnlPct.toFixed(1) : '—'}%.</p>
       </div>
     </div>`;
   }
 
-  // ---------- MARKETS ----------
+  // ---------- 2026 MARKETS ----------
+  function ratingChip(label) {
+    if (!label) return '';
+    const l = label.toLowerCase();
+    const c = l.includes('toss') ? 'warn' : l.includes('solid') ? 'bad' : l.includes('likely') ? 'info' : 'good';
+    return `<span class="chip ${c}">${esc(label)}</span>`;
+  }
   function markets() {
-    const s = D.snapshot;
-    const rows = s.senate2026Races.map((r) => {
-      const c = r.rating.startsWith('Safe') ? 'bad' : r.rating.startsWith('Likely') ? 'warn' : r.rating.startsWith('Lean') ? 'info' : 'good';
-      return `<tr><td>${esc(r.state)}</td>
-        <td><div class="bar-track"><div class="bar-fill dem" style="width:${r.demPct}%"></div></div></td>
-        <td class="num">${r.demPct}%</td>
-        <td><span class="chip ${c}">${esc(r.rating)}</span></td></tr>`;
+    if (!U) return `<h1>2026 Markets</h1><p class="lead">No daily capture yet — the collector runs on GitHub Actions (<span class="mono">daily-collection.yml</span>).</p>${legacySnapshot()}`;
+    const ratings = {};
+    if (PL && PL.raceRatings) for (const r of PL.raceRatings.senate2026) ratings[r.kalshiEvent] = r;
+    const control = ['CONTROLS-2026', 'CONTROLH-2026'].map((t) => {
+      const ev = findEvent(t);
+      if (!ev) return '';
+      const rows = ev.markets.map((m) => { const ip = implied(m); return `<tr><td>${esc(m.yes_sub_title)}</td><td class="num">${cents(m.yes_bid)}–${cents(m.yes_ask)}</td><td class="num">${cents(m.last_price)}</td><td class="num"><strong>${pct(ip.p, 1)}</strong></td><td class="num">${int(m.volume)}</td></tr>`; }).join('');
+      return `<div class="card"><h3 style="margin-top:0">${esc(ev.title)}</h3>
+        <table><thead><tr><th>Outcome</th><th class="num">Bid–ask</th><th class="num">Last</th><th class="num">Implied</th><th class="num">Volume (contracts)</th></tr></thead><tbody>${rows}</tbody></table>
+        <p class="small">${esc(ev.sub_title || '')} · <a href="https://kalshi.com/markets/${esc(ev.series_ticker.toLowerCase())}" target="_blank" rel="noopener">kalshi.com</a> · <a href="https://api.elections.kalshi.com/trade-api/v2/events/${esc(ev.event_ticker)}?with_nested_markets=true" target="_blank" rel="noopener">API</a></p></div>`;
     }).join('');
-    const combos = (s.comboAndNoveltyMarkets || []).map((m) => `
+    const senate = U.events.filter((e) => /^SENATE[A-Z]{2}S?-26$/.test(e.event_ticker)).map((e) => {
+      const dem = e.markets.find((m) => /-D$/.test(m.ticker)) || null;
+      const rep = e.markets.find((m) => /-R$/.test(m.ticker)) || null;
+      const other = e.markets.filter((m) => m !== dem && m !== rep);
+      const pd = dem ? implied(dem).p : null;
+      const pr = rep ? implied(rep).p : null;
+      const r = ratings[e.event_ticker];
+      return { state: e.event_ticker.replace(/^SENATE([A-Z]{2})S?-26$/, '$1') + (e.event_ticker.includes('S-26') ? ' (special)' : ''), title: e.title, dem, rep, other, pd, pr, r, vol: e.volume, ticker: e.event_ticker };
+    }).sort((a, b) => (b.pd || 0) - (a.pd || 0));
+    const senateRows = senate.map((s) => `<tr>
+      <td><strong>${esc(s.state)}</strong></td>
+      <td>${s.dem ? esc(s.dem.yes_sub_title) : '—'}</td>
+      <td><div class="bar-track"><div class="bar-fill dem" style="width:${s.pd == null ? 0 : Math.round(s.pd * 100)}%"></div></div></td>
+      <td class="num">${pct(s.pd, 1)}</td>
+      <td>${s.rep ? esc(s.rep.yes_sub_title) : '—'}</td>
+      <td class="num">${pct(s.pr, 1)}</td>
+      <td class="small">${s.other.map((m) => `${esc(m.yes_sub_title)} ${pct(implied(m).p, 1)}`).join(' · ')}</td>
+      <td>${s.r ? ratingChip(s.r.cook) + ' ' + ratingChip(s.r.inside) : ''}</td>
+      <td class="num">${int(s.vol)}</td></tr>`).join('');
+    const top = U.topMarkets.filter((m) => m.us_election).slice(0, 25).map((m) => `<tr>
+      <td><span class="mono small">${esc(m.ticker)}</span><br>${esc(m.title)}</td>
+      <td class="num">${cents(m.yes_bid)}–${cents(m.yes_ask)}</td>
+      <td class="num"><strong>${pct(m.p, 1)}</strong> <span class="small">${esc(m.basis)}</span></td>
+      <td class="num">${int(m.volume)}</td><td class="num">${int(m.open_interest)}</td><td class="small">${day(m.close_time)}${lifeChip(m, U.capturedAt)}</td></tr>`).join('');
+    const events = U.events.filter((e) => !/^(SENATE|CONTROL)/.test(e.event_ticker)).slice(0, 40).map((e) => `
       <div class="card"><div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap">
-        <strong>${esc(m.question)}</strong>
-        <span class="small">${money(m.volumeDollars)} vol · ${m.marketsInEvent || '—'} markets</span></div>
-        <div class="legend" style="margin-top:8px">
-          ${(m.topOutcomes || []).map((o) => `<span><i style="background:var(--accent)"></i>${esc(o.outcome)} — <strong>${o.pct}%</strong></span>`).join('')}
-        </div>
-      </div>`).join('');
-    const other = (s.other2026ElectionMarkets || []).map((m) => `<tr>
-      <td>${esc(m.question)}</td>
-      <td>${(m.topOutcomes || []).map((o) => `${esc(o.outcome)} <strong>${o.pct}%</strong>${o.odds ? ' (' + esc(o.odds) + ')' : ''}`).join(' · ')}</td>
-      <td class="num">${money(m.volumeDollars)}</td></tr>`).join('');
+        <strong>${esc(e.title)}</strong><span class="small">${int(e.volume)} contracts · ${e.markets_total} market${e.markets_total === 1 ? '' : 's'}${e.markets_untraded ? ` (${e.markets_untraded} untraded)` : ''}</span></div>
+        <div class="legend" style="margin-top:8px">${e.markets.slice(0, 6).map((m) => `<span><i style="background:var(--accent)"></i>${esc(m.yes_sub_title || m.ticker)} — <strong>${pct(implied(m).p, 1)}</strong>${lifeChip(m, U.capturedAt)}</span>`).join('')}${e.markets.length > 6 ? `<span class="small">+${e.markets.length - 6} more</span>` : ''}</div>
+        <div class="small" style="margin-top:6px"><span class="mono">${esc(e.event_ticker)}</span> · ${esc(e.category)} · closes ${day(e.markets[0] && e.markets[0].close_time)}</div></div>`).join('');
+    const dw = D.discrepancyWatch;
+    const findings = dw ? dw.findings.filter((f) => f.us_election).slice(0, 12).map((f) => `<tr>
+      <td><span class="chip ${f.severity === 'high' ? 'bad' : ''}">${esc(f.check)}</span></td>
+      <td><span class="mono small">${esc(f.ticker || f.event_ticker)}</span>${f.title ? '<br>' + esc(f.title) : ''}</td>
+      <td class="small">${f.sumOfMids != null ? `sum of YES mids ${f.sumOfMids.toFixed(3)} over ${f.markets} markets` : `bid ${cents(f.yes_bid)} / ask ${cents(f.yes_ask)} / last ${cents(f.last_price)}`}</td>
+      <td class="num">${int(f.volume)}</td></tr>`).join('') : '';
+    return `
+    <h1>2026 Markets (daily capture ${esc(U.date)})</h1>
+    <p class="lead">The open political/election universe on Kalshi from the official public API: ${int(U.counts.openEvents)} open events
+    (${int(U.counts.usElectionEvents)} tagged U.S. election) with ${int(U.counts.openMarkets)} markets, ${int(U.counts.openMarketsTraded)} of them ever traded.
+    Implied probability = order-book midpoint when the book is tight, else last trade (basis shown). Source per table: the event's API URL.</p>
+
+    <h2>Chamber control</h2>
+    <div class="grid cols2">${control}</div>
+
+    <h2>Senate races priced on Kalshi (${senate.length}) — with Cook / Inside Elections ratings</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>State</th><th>Democrat</th><th>D share</th><th class="num">D %</th><th>Republican</th><th class="num">R %</th><th>Other listed</th><th>Cook · Inside</th><th class="num">Volume</th></tr></thead>
+      <tbody>${senateRows}</tbody></table>
+      <p class="small">Ratings: Cook Political Report (${PL && PL.raceRatings ? esc(PL.raceRatings.sources.cook.asOf) : '—'}) · Inside Elections (${PL && PL.raceRatings ? esc(PL.raceRatings.sources.inside.asOf) : '—'}); only the 13 rated-competitive seats carry chips.
+      Nebraska's main non-Republican candidate is independent Dan Osborn (listed under "Other"). Market-vs-rating gaps are analysed on the <a href="#/polls">2026 Polls</a> page.</p></div>
+
+    <h2>Most-traded U.S. election markets</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Market</th><th class="num">Bid–ask</th><th class="num">Implied</th><th class="num">Volume</th><th class="num">Open interest</th><th>Closes</th></tr></thead>
+      <tbody>${top}</tbody></table></div>
+
+    <h2>Other U.S. election events by volume (governors, mayors, primaries, seat counts…)</h2>
+    <div class="grid cols2">${events}</div>
+
+    <h2>Cross-market consistency (U.S. election findings, today)</h2>
+    <div class="card" style="overflow-x:auto">
+      <p class="small" style="margin-top:0">${dw ? esc(dw.method) : ''} Today: ${dw ? Object.entries(dw.counts).map(([k, v]) => `${esc(k)} ${v}`).join(' · ') : '—'} over ${dw ? int(dw.eventsChecked) : '—'} events.</p>
+      <table><thead><tr><th>Check</th><th>Market / event</th><th>Observation</th><th class="num">Volume</th></tr></thead><tbody>${findings || '<tr><td colspan="4">none</td></tr>'}</tbody></table></div>
+    ${legacySnapshot()}`;
+  }
+
+  function legacySnapshot() {
+    const s = D.snapshot;
     const checks = (s.crossPlatformChecks || []).map((c) => `
       <div class="card"><strong>${esc(c.market)}</strong>
         <div class="small" style="margin-top:6px">Kalshi: ${esc(c.kalshiPct != null ? c.kalshiPct + '%' : (c.kalshi || ''))}
@@ -105,77 +206,179 @@
         ${(c.historical || []).map((h) => `<div class="small">— ${esc(h.date)}: ${esc(h.value)}</div>`).join('')}
         ${srcs((c.sources || []).concat(c.historical || []).map((x) => x.source || x))}</div>`).join('');
     return `
-    <h1>2026 Live Markets (captured ${esc((s.capturedAt || '').slice(0, 10))})</h1>
-    <p class="lead">The open political/election market universe on Kalshi, captured from the official exchange UI + public API.
-    Percentages are YES-side; API book figures where captured are authoritative (see <a href="#/irregularities">irregularity #2</a> on stale API last-prices).</p>
-
-    <h2>Chamber control</h2>
-    <div class="grid cols2">
-      <div class="card"><h3 style="margin-top:0">Senate (2026)</h3>
-        <div class="grid cols2">
-          <div class="stat"><div class="n">59–60¢</div><div class="l">Democratic bid–ask (CONTROLS-2026-D)</div></div>
-          <div class="stat"><div class="n">40–41¢</div><div class="l">Republican bid–ask (CONTROLS-2026-R)</div></div>
-        </div>
-        <p class="small">Settlement: party of the President pro tempore on Feb 1, 2027 (or media consensus). Source:
-        <a href="https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&limit=4" target="_blank" rel="noopener">API</a> ·
-        <a href="https://kalshi.com/markets/controls/senate-winner/controls-2026" target="_blank" rel="noopener">page</a></p>
-      </div>
-      <div class="card"><h3 style="margin-top:0">House (2026)</h3>
-        <div class="grid cols2">
-          <div class="stat"><div class="n">~90¢</div><div class="l">Democratic (implied reciprocal; API R-book captured)</div></div>
-          <div class="stat"><div class="n">10–11¢</div><div class="l">Republican bid–ask (CONTROLH-2026-R)</div></div>
-        </div>
-        <p class="small">Volume ${money(20929542)} (R market) · OI ${money(13387529)}. <strong>Flag:</strong> API last-price timestamps were stale (Jul 14) on the shared host — order book used instead (irregularity #2).</p>
-      </div>
-    </div>
-
-    <h2>35 Senate races (Nov 3, 2026)</h2>
-    <div class="card"><table>
-      <thead><tr><th>State</th><th>Democratic share</th><th class="num">D %</th><th>Hub rating</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <p class="small">Source: <a href="https://kalshi.com/category/elections/midterms" target="_blank" rel="noopener">Kalshi Midterms Hub</a>, captured 2026-09-18.
-    Top-race candidate detail: <a href="#/markets#topraces">below</a>.</p></div>
-
-    <h2 id="topraces">Most-traded Senate matchups (candidates)</h2>
-    <div class="card" style="overflow-x:auto"><table>
-      <thead><tr><th>State</th><th>Democrat</th><th>Republican</th><th class="num">D %</th><th class="num">R %</th></tr></thead>
-      <tbody>${(s.senate2026TopRaces || []).map((r) => `<tr><td>${esc(r.state)}</td><td>${esc(r.dem)}</td><td>${esc(r.rep)}</td><td class="num">${r.demPct}%</td><td class="num">${r.repPct}%</td></tr>`).join('')}</tbody>
-    </table></div>
-
-    <h2>Seat counts &amp; novelty markets</h2>
-    <div class="grid cols2">${combos}</div>
-
-    <h2>Other Nov-3 markets (AGs, mayors, ballot measures, …)</h2>
-    <div class="card" style="overflow-x:auto"><table>
-      <thead><tr><th>Market</th><th>Top outcomes (YES%)</th><th class="num">Volume</th></tr></thead>
-      <tbody>${other}</tbody>
-    </table></div>
-
-    <h2>Cross-platform &amp; time-series checks</h2>
+    <h2>Cross-platform checks (hand-captured ${esc(day(s.capturedAt))})</h2>
     ${checks}
-    <div class="callout warn"><strong>Universe note.</strong> 34 of 35 Senate seats have tradeable markets (Louisiana thin) and only 66 of 435 House districts are individually priced
-    (irregularity #9). The full universe is enumerated by <span class="mono">scripts/collect-kalshi.mjs</span> on each collect run.</div>`;
+    <div class="callout warn"><strong>Universe note.</strong> 34 of 35 Senate seats have tradeable markets (Louisiana thin) and only a minority of House districts are individually priced
+    (irregularity #9). The hand-captured Midterms Hub board of ${esc(day(s.capturedAt))} remains in <span class="mono">data/kalshi/snapshot-2026-09-18.json</span>; the tables above are regenerated from the API every day.</div>`;
+  }
+
+  // ---------- 2026 POLLS ----------
+  function polls() {
+    if (!PL) return '<h1>2026 Polls</h1><p class="lead">Poll layer not built.</p>';
+    const gb = PL.genericBallot.map((p) => `<tr>
+      <td><strong>${esc(p.pollster)}</strong><br><span class="small">${esc(p.question)}</span></td>
+      <td class="small">${esc(p.fieldDates)}</td><td class="small">${esc(p.population)}${p.n ? ` · n=${int(p.n)}` : ''}${p.moe ? ` · ±${p.moe}` : ''}</td>
+      <td class="num">${p.D}</td><td class="num">${p.R}</td><td class="num ${cls(p.D - p.R)}">${pp(p.D - p.R, 0)}</td>
+      <td class="num">${p.trumpApproval ? `${p.trumpApproval.approve} / ${p.trumpApproval.disapprove}` : '—'}</td>
+      <td>${srcs([p.source])}</td></tr>`).join('');
+    const agg = PL.aggregatorReadings.map((a) => `<tr><td><strong>${esc(a.aggregator)}</strong><br><span class="small">${esc(a.verifiedVia)}</span></td><td class="small">${esc(a.window)} (as of ${esc(a.asOf)})</td><td class="small">${a.pollsInAverage} polls</td><td class="num">${a.D}</td><td class="num">${a.R}</td><td class="num pos">${esc(a.spread)}</td><td></td><td>${srcs([a.source])}</td></tr>`).join('');
+    const mc = PL.marketComparison;
+    // group by race (state), newest field period first inside a race; JSON order stays provenance order
+    const raceRows = mc.rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.race.localeCompare(b.r.race) || String(b.r.fieldDates).localeCompare(String(a.r.fieldDates)) || a.i - b.i).map((x) => x.r);
+    const races = raceRows.map((r) => `<tr>
+      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}</span></td>
+      <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
+      <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
+      <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
+      <td class="num"><strong>${pct(r.marketDemProb, 1)}</strong> <span class="small">${esc(r.kalshiDemTicker)} · ${esc(r.marketBasis)}</span></td>
+      <td class="num ${cls(r.gap)}">${r.gap == null ? '—' : pp(r.gap * 100, 1)}</td>
+      <td>${srcs([r.source])}</td></tr>`).join('');
+    const rc = PL.ratingsComparison;
+    const rat = rc.rows.map((r) => `<tr ${r.review ? 'style="background:var(--warn-soft)"' : ''}>
+      <td><strong>${esc(r.state)}</strong> <span class="small">${esc(r.seat)}</span></td>
+      <td>${ratingChip(r.cook)}</td><td>${ratingChip(r.inside)}</td>
+      <td>${esc(r.candidate || '')} <span class="small">(${esc(r.side)})</span></td>
+      <td class="num"><strong>${pct(r.marketProb, 1)}</strong></td>
+      <td class="small">${r.withinCookBand == null ? '—' : r.withinCookBand ? 'in band' : 'outside'} · ${r.withinInsideBand == null ? '—' : r.withinInsideBand ? 'in band' : 'outside'}</td>
+      <td>${r.review ? '<span class="chip warn">review</span>' : ''}${r.note ? `<div class="small">${esc(r.note)}</div>` : ''}</td></tr>`).join('');
+    const ex = PL.exitPollStatus;
+    return `
+    <h1>2026 Polls — verified poll layer vs the market</h1>
+    <p class="lead">${esc(PL.method)}</p>
+    <div class="callout"><strong>Admission rule.</strong> ${esc(PL.policy)}</div>
+
+    <h2>Generic congressional ballot</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Poll</th><th>Field dates</th><th>Sample</th><th class="num">D</th><th class="num">R</th><th class="num">Margin</th><th class="num">Trump appr. / disappr.</th><th>Source</th></tr></thead>
+      <tbody>${gb}${agg}</tbody></table>
+      <p class="small">The RealClearPolling row is an aggregator reading (component polls listed on its page), not a poll.</p></div>
+    <div class="card"><h3 style="margin-top:0">Marquette Law School national trend (Nov 2025 → Sep 2026)</h3>
+      <canvas id="mq-chart" class="chart"></canvas>
+      <div class="legend"><span><i style="background:#1f5fbf"></i>Likely voters, D − R (pp)</span><span><i style="background:#9aa7b5"></i>Registered voters, D − R (pp)</span></div>
+      <p class="small">Source: Marquette Law School Poll national release PDF (trend tables), fetched ${esc(PL.genericBallot.find((p) => p.id === 'marquette-national-2026-09').verifiedOn)}.</p></div>
+
+    <h2>State Senate races — poll margin vs Kalshi price</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Race / poll</th><th>Toplines</th><th class="num">D − R</th><th class="num">Poll ⇒ P(D)<sup>a</sup></th><th class="num">Kalshi P(D) ${esc(mc.rows[0] ? mc.rows[0].marketDate : '')}</th><th class="num">Market − poll</th><th>Source</th></tr></thead>
+      <tbody>${races}</tbody></table>
+      <p class="small"><sup>a</sup> ${esc(mc.method)}</p></div>
+
+    <h2>Race ratings vs Kalshi (13 rated-competitive Senate seats)</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Seat</th><th>Cook (${esc(rc.asOf.cook)})</th><th>Inside Elections (${esc(rc.asOf.inside)})</th><th>Kalshi market (non-R side)</th><th class="num">P</th><th>Cook · Inside band</th><th></th></tr></thead>
+      <tbody>${rat}</tbody></table>
+      <p class="small">${esc(rc.method)} <strong>${rc.reviewCount} of ${rc.rows.length}</strong> flagged today (irregularity #33).</p></div>
+
+    <h2>Exit polls — status</h2>
+    <div class="card"><p style="font-size:14.5px; margin:0">${esc(ex.finding)}</p>${srcs(ex.sources)}</div>`;
+  }
+  function drawPollCharts() {
+    const cv = document.getElementById('mq-chart');
+    const mq = PL && PL.genericBallot.find((p) => p.id === 'marquette-national-2026-09');
+    if (!cv || !mq) return;
+    const toPts = (arr) => arr.map((w) => ({ x: w.fieldDates.slice(11), y: w.D - w.R }));
+    C.lines(cv, [
+      { label: 'LV', color: '#1f5fbf', points: toPts(mq.trend.likelyVoters) },
+      { label: 'RV', color: '#9aa7b5', points: toPts(mq.trend.registeredVoters) },
+    ], { yFmt: (v) => (v > 0 ? '+' : '') + v.toFixed(0), hLines: [{ y: 0, label: 'tie', color: '#9aa7b5' }] });
+  }
+
+  // ---------- TRACKER ----------
+  function tracker() {
+    const cal = D.calibration;
+    const cc = D.crosscheck;
+    const st = D.settlements;
+    if (!U || !cal) return '<h1>Tracker</h1><p class="lead">No collector output yet.</p>';
+    const cats = Object.entries(U.counts.byCategory || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => `<tr><td>${esc(k)}</td><td class="num">${int(v)}</td></tr>`).join('');
+    const leads = cal.byLead.map((b) => `<tr><td class="num">T-${b.nDays}</td><td class="num">${b.nMarkets}</td><td class="num">${b.meanBrier == null ? '—' : b.meanBrier.toFixed(3)}</td><td class="num">${b.meanLogloss == null ? '—' : b.meanLogloss.toFixed(3)}</td></tr>`).join('');
+    const hist = D.tracker && D.tracker.days.length > 1 ? U.topMarkets.filter((m) => m.us_election).slice(0, 6).map((m, i) => `<div class="card"><strong>${esc(m.title)}</strong><canvas id="tr-${i}" class="chart" style="height:150px"></canvas></div>`).join('') : `<div class="card"><p class="small" style="margin:0">Price history charts appear once more than one day has been collected (currently ${D.tracker ? D.tracker.days.length : 0}).</p></div>`;
+    // the watchlist only contains U.S.-election events; the flag is kept for clarity
+    const upcoming = (m) => m.close_time && m.close_time >= U.capturedAt && (!m.status || m.status === 'active' || m.status === 'open');
+    const soon = U.events.filter((e) => e.us_election !== 0 && e.markets.some(upcoming)).map((e) => ({ e, close: e.markets.filter(upcoming).reduce((m, x) => (x.close_time < m ? x.close_time : m), '9999') })).sort((a, b) => (a.close < b.close ? -1 : 1)).slice(0, 12)
+      .map(({ e, close }) => `<tr><td><span class="mono small">${esc(e.event_ticker)}</span><br>${esc(e.title)}</td><td>${day(close)}</td><td class="num">${int(e.volume)}</td></tr>`).join('');
+    const runs = (D.tracker.runs || []).slice().reverse().map((r) => {
+      const c = r.consistency || {};
+      const x = r.crosscheck;
+      return `<tr><td class="mono small">${esc(r.date)}${r.replayedAt ? ' <span class="chip info" title="record rebuilt offline from the saved capture">replayed</span>' : ''}${r.shrinkRatioVsPrevious != null && r.shrinkRatioVsPrevious < 0.9 ? ` <span class="chip warn">${pct(r.shrinkRatioVsPrevious, 0)} of previous</span>` : ''}</td><td class="num">${int(r.seriesInRegistry)}</td><td class="num">${int(r.openEvents)}</td><td class="num">${int(r.usElectionEvents)}</td><td class="num">${int(r.openMarketsTraded)} / ${int(r.openMarkets)}</td><td class="num">${int(r.settlementsKnown)}${r.settlementsFound ? ` (+${int(r.settlementsFound)})` : ''}</td><td class="num">${int(r.settledMarketsScored)}${r.brierT1 != null ? ` · ${r.brierT1.toFixed(3)}` : ''}</td><td class="num">${int(c['mutually-exclusive-sum-over'] || 0)} / ${int(c['mutually-exclusive-sum-under'] || 0)} / ${int(c['stale-last-vs-book'] || 0)}</td><td class="num">${x ? `${pct(x.lastShare, 1)} of ${int(x.overlap)}${x.volumeDecreased ? ` · <span class="chip warn">${x.volumeDecreased} volume decreases</span>` : ''}` : '—'}</td><td class="num">${r.apiRequests ? `${int(r.apiRequests)} · ${(r.apiBytes / 1e6).toFixed(0)}` : '—'}${r.errors ? ` <span class="chip warn">${r.errors} err</span>` : ''}</td></tr>`;
+    }).join('') || '<tr><td colspan="10">No run history yet.</td></tr>';
+    const ccRows = cc ? (cc.largestLastPriceDifferences || []).map((o) => `<tr><td class="mono small">${esc(o.ticker)}</td><td class="num">${cents(o.node.last)} (${cents(o.node.bid)}–${cents(o.node.ask)})</td><td class="num">${cents(o.python.last)} (${cents(o.python.bid)}–${cents(o.python.ask)})</td><td class="num">${(o.dLast * 100).toFixed(1)}¢</td></tr>`).join('') : '';
+    return `
+    <h1>Tracker — the forward "expected vs actual" loop</h1>
+    <p class="lead">Every day a GitHub Actions job (<span class="mono">daily-collection.yml</span>, 12:30 UTC) captures the series registry (<span class="mono">GET /series?category=Elections|Politics</span>),
+    every open event with nested markets, and re-checks earlier tickers for settlements (<span class="mono">GET /markets?tickers=…</span>). Prices are appended to
+    <span class="mono">data/kalshi/tracker/daily/YYYY-MM-DD.csv</span>; when a market settles, the scorer computes Brier / log-loss at fixed lead times and a pooled calibration curve.
+    Nothing is imputed: the empty state below is the honest state.</p>
+    <div class="grid cols4">
+      <div class="stat"><div class="n">${D.tracker.days.length}</div><div class="l">collection day${D.tracker.days.length === 1 ? '' : 's'} (${esc(D.tracker.days[0])} → ${esc(D.tracker.days[D.tracker.days.length - 1])})</div></div>
+      <div class="stat"><div class="n">${int(D.tracker.tickers)}</div><div class="l">traded tickers in the index (untraded ladders counted, not stored)${(() => { const fin = U.counts.openMarketsFinalizedInFeed || 0; const pend = U.counts.openMarketsClosedBeforeCapture != null ? Math.max(0, U.counts.openMarketsClosedBeforeCapture - fin) : null; return `${pend ? ` · ${int(pend)} past their close_time, settlement pending` : ''}${fin ? ` · ${int(fin)} already settled in the feed (recorded as settlements, not tracked)` : ''}`; })()}</div></div>
+      <div class="stat"><div class="n">${int(cal.scoreableMarkets != null ? cal.scoreableMarkets : cal.settledMarkets)}</div><div class="l">settled markets scored (priced before they settled) · ${st ? int(st.count) : 0} settlements known${cal.observationsExcludedAsLookAhead ? ` · ${int(cal.observationsExcludedAsLookAhead)} post-settlement price rows excluded as look-ahead` : ''}</div></div>
+      <div class="stat"><div class="n">${cc ? pct(cc.lastPrice.share, 2) : '—'}</div><div class="l">Node-vs-Python last-price agreement (≤2¢) on ${cc ? int(cc.overlap) : '—'} overlapping tickers</div></div>
+    </div>
+    <div class="grid cols2">
+      <div class="card"><h3 style="margin-top:0">Universe by category (${esc(U.date)})</h3>
+        <table><thead><tr><th>Category (series)</th><th class="num">Open events</th></tr></thead><tbody>${cats}</tbody></table>
+        <p class="small">Registry: ${int(U.counts.seriesInRegistry)} series · exchange-wide open events (all categories): ${int(U.counts.exchangeWideOpenEvents)} · U.S.-election tag: ${int(U.counts.usElectionEvents)} events.</p></div>
+      <div class="card"><h3 style="margin-top:0">Live calibration (settled markets only)</h3>
+        <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean Brier</th><th class="num">Mean log-loss</th></tr></thead><tbody>${leads}</tbody></table>
+        <p class="small">${esc(cal.method)}</p>
+        <p class="small">First large U.S. settlements expected after <strong>Nov 3, 2026</strong> (Los Angeles mayor, 35 Senate races, governors); primaries and specials settle earlier. ${st && st.count ? `The ${int(st.count)} settlements already on file are rungs that had settled before the tracker's first day (found nested inside still-open events, irregularity #37) — they are recorded, but a price captured after settlement is not a forecast, so they are not scored.` : ''}</p></div>
+    </div>
+    ${st && st.recent && st.recent.length ? `<h2>Settlements on file (${int(st.count)}: ${Object.entries(st.byResult || {}).map(([k, v]) => `${int(v)} ${esc(k)}`).join(', ')})</h2>
+    <div class="card" style="overflow-x:auto"><p class="small" style="margin-top:0">Official exchange results re-read from <span class="mono">GET /markets?tickers=…</span> (<span class="mono">data/kalshi/tracker/settlements.json</span>). Most recent ${st.recent.length} shown; results are recorded as returned, never inferred from prices.</p>
+      <table><thead><tr><th>Settled</th><th>Market</th><th>Result</th><th class="num">Volume</th></tr></thead><tbody>${st.recent.map((m) => `<tr><td class="small">${esc(m.settlementDay)}</td><td><span class="mono small">${esc(m.ticker)}</span><br>${esc(m.title)}</td><td><span class="chip ${m.result === 'yes' ? 'good' : m.result === 'no' ? 'bad' : ''}">${esc(m.result)}</span></td><td class="num">${int(m.volume)}</td></tr>`).join('')}</tbody></table></div>` : ''}
+    <h2>Run log — one row per collection day</h2>
+    <div class="card" style="overflow-x:auto">
+      <p class="small" style="margin-top:0">Counts only (<span class="mono">data/kalshi/tracker/history.json</span>). A same-day re-run replaces the row. Consistency = mutually-exclusive ladders whose YES mids sum to more than 1.06 (fully two-sided) / less than 0.94 (≥3 markets), and last trades more than 10¢ outside the quoted book; cross-check = Node vs Python last price within 2¢.</p>
+      <table><thead><tr><th>Date (UTC)</th><th class="num">Series</th><th class="num">Open events</th><th class="num">U.S. election</th><th class="num">Traded markets</th><th class="num">Settlements known</th><th class="num">Scored · Brier T-1</th><th class="num">Consistency over / under / stale</th><th class="num">Cross-check</th><th class="num">API req · MB</th></tr></thead>
+      <tbody>${runs}</tbody></table>
+    </div>
+    <h2>Earliest-closing U.S. election events in the watchlist</h2>
+    <div class="card" style="overflow-x:auto"><table><thead><tr><th>Event</th><th>Closes</th><th class="num">Volume</th></tr></thead><tbody>${soon}</tbody></table></div>
+    <h2>Price history (top U.S. election markets)</h2>
+    <div class="grid cols2">${hist}</div>
+    <h2>Two independent collectors, one truth</h2>
+    <div class="card" style="overflow-x:auto">
+      <p class="small" style="margin-top:0">${cc ? esc(cc.method) : 'Cross-check not yet run.'}</p>
+      ${cc ? `<p style="font-size:14.5px">Node events feed (${esc(day(cc.date))}) vs Python markets feed (${esc(cc.pythonCapturedAt)}): overlap ${int(cc.overlap)} of ${int(cc.pythonMarkets)} sampled markets ·
+      last price within 2¢: <strong>${int(cc.lastPrice.withinTolerance)}/${int(cc.lastPrice.compared)}</strong> · bid &amp; ask within 2¢: <strong>${int(cc.book.withinTolerance)}/${int(cc.book.compared)}</strong> ·
+      lifetime volume decreased between captures: <strong>${cc.volumeDecreased}</strong> (must be 0).</p>
+      <table><thead><tr><th>Ticker</th><th class="num">Node last (bid–ask)</th><th class="num">Python last (bid–ask)</th><th class="num">|Δ last|</th></tr></thead><tbody>${ccRows}</tbody></table>` : ''}
+    </div>`;
+  }
+  function drawTrackerCharts() {
+    if (!U || !D.tracker || D.tracker.days.length < 2) return;
+    U.topMarkets.filter((m) => m.us_election).slice(0, 6).forEach((m, i) => {
+      const cv = document.getElementById('tr-' + i);
+      const h = D.tracker.history[m.ticker];
+      if (!cv || !h) return;
+      C.lines(cv, [{ label: m.ticker, color: '#1f5fbf', points: h.map((p) => ({ x: p.date, y: p.bid != null && p.ask != null ? (p.bid + p.ask) / 2 : p.last })) }], { yMin: 0, yMax: 1, yFmt: (v) => Math.round(v * 100) + '¢' });
+    });
   }
 
   // ---------- BACKTESTS ----------
   function backtests() {
-    const bt = D.backtests.marketBacktest;
+    const bt = BT;
     const pb = D.backtests.pollBacktest;
-    const agg = bt.aggregate.map((a) => `<tr>
-      <td class="num">T-${a.nDays}</td>
-      <td class="num">${a.nMarkets}</td>
-      <td class="num">${pct(a.meanProbYes)}</td>
-      <td class="num">${a.meanBrier == null ? '—' : a.meanBrier.toFixed(3)}</td>
-      <td class="num">${a.meanLogloss == null ? '—' : a.meanLogloss.toFixed(3)}</td>
-      <td class="num ${cls(a.meanHoldPnlPerContract)}">${a.meanHoldPnlPerContract == null ? '—' : (a.meanHoldPnlPerContract > 0 ? '+' : '') + a.meanHoldPnlPerContract.toFixed(3) + ' $/contract'}</td>
-    </tr>`).join('');
-    const mkCharts = bt.markets.map((m, i) => `
+    const aggRows = (agg) => agg.map((a) => `<tr>
+      <td class="num">T-${a.nDays}</td><td class="num">${a.nMarkets}</td><td class="num">${pct(a.meanProbYes)}</td>
+      <td class="num">${a.meanBrier == null ? '—' : a.meanBrier.toFixed(3)}</td><td class="num">${a.meanLogloss == null ? '—' : a.meanLogloss.toFixed(3)}</td>
+      <td class="num ${cls(a.meanHoldPnlPerContract)}">${a.meanHoldPnlPerContract == null ? '—' : (a.meanHoldPnlPerContract > 0 ? '+' : '') + a.meanHoldPnlPerContract.toFixed(3)}</td></tr>`).join('');
+    const fav = (bt.favoriteAccuracy || []).map((a) => `<tr><td class="num">T-${a.nDays}</td><td class="num">${a.n}</td><td class="num">${a.hits}</td><td class="num">${pct(a.rate, 1)}</td></tr>`).join('');
+    const core = bt.markets.filter((m) => m.group === 'core-2024');
+    const senate = bt.markets.filter((m) => m.group === 'senate-2024');
+    const mkCharts = core.map((m, i) => `
       <div class="card"><h3 style="margin-top:0">${esc(m.ticker)} — ${esc(m.title)}</h3>
         <canvas id="mk-${i}" class="chart"></canvas>
-        <p class="small">Outcome: <span class="chip ${m.outcomeIsYes ? 'good' : 'bad'}">${m.outcomeIsYes ? 'YES' : 'NO'}</span>
-        (official settlement, ${esc(m.ticker)}). Last captured bar 2024-11-04 (election-day bar not captured — irregularity #11).</p>
-      </div>`).join('');
+        <p class="small">Outcome: <span class="chip ${m.outcomeIsYes ? 'good' : 'bad'}">${m.outcomeIsYes ? 'YES' : 'NO'}</span> (official settlement). ${m.electionDayBarCaptured ? 'Election-day bar captured.' : 'Last captured bar 2024-11-04 (election-day bar not captured — irregularity #11).'}</p></div>`).join('');
+    const senRows = senate.map((m) => {
+      const l7 = m.leadTimes.find((x) => x.nDays === 7); const l1 = m.leadTimes.find((x) => x.nDays === 1);
+      return `<tr><td><span class="mono small">${esc(m.ticker)}</span><br>${esc(m.yesSubTitle || m.title)}</td><td>${esc(m.state || '')}</td>
+      <td class="num">${l7 && l7.p != null ? cents(l7.p) : '—'}</td><td class="num">${l1 && l1.p != null ? cents(l1.p) : '—'}</td>
+      <td><span class="chip ${m.outcomeIsYes ? 'good' : 'bad'}">${m.outcomeIsYes ? 'YES' : 'NO'}</span></td>
+      <td class="num">${l1 && l1.brier != null ? l1.brier.toFixed(3) : '—'}</td><td class="num">${int(m.volume)}</td><td class="num">${m.barsPreElection}</td></tr>`;
+    }).join('');
+    const pooled = bt.pooledCalibrationDeduped;
+    const pooledRows = pooled.buckets.map((b) => `<tr><td>${(b.lo * 100).toFixed(0)}–${(b.hi * 100).toFixed(0)}¢</td><td class="num">${b.n}</td><td class="num">${b.markets}</td><td class="num">${pct(b.meanP, 1)}</td><td class="num">${pct(b.observedYesRate, 1)}</td></tr>`).join('');
     const outcomes = D.outcomes.outcomes.map((o) => `
       <tr><td>${o.cycle} ${esc(o.office)}</td><td>${esc(o.winner)}</td>
       <td class="small">${esc((o.detail && (o.detail.senateComposition || o.detail.houseComposition)) ? '' : (o.detail.electoralVotes ? `EV ${o.detail.electoralVotes[Object.keys(o.detail.electoralVotes)[0]]}–${o.detail.electoralVotes[Object.keys(o.detail.electoralVotes)[1]]}` : ''))}</td>
@@ -190,146 +393,142 @@
       <td class="num">${pct(c.pollImpliedTrumpProb, 0)}</td>
       <td class="num">${c.kalshiDjtClose == null ? '—' : (c.kalshiDjtClose * 100).toFixed(0) + '¢'}</td>
       <td class="num ${cls(-c.gapPollVsMarket)}">${pp(c.gapPollVsMarket * 100, 1)}</td></tr>`).join('');
-    const mkLead = bt.markets.map((m) => {
-      const l = m.leadTimes.find((x) => x.nDays === 7);
-      return `<tr><td>${esc(m.ticker)}</td><td class="num">${l && l.p != null ? (l.p * 100).toFixed(0) + '¢' : '—'}</td>
-      <td class="num">${l && l.brier != null ? l.brier.toFixed(3) : '—'}</td>
-      <td class="num ${cls(l && l.holdPnlPerContract)}">${l && l.holdPnlPerContract != null ? (l.holdPnlPerContract > 0 ? '+' : '') + l.holdPnlPerContract.toFixed(3) : '—'} $/contract</td></tr>`;
-    }).join('');
+    const s24 = D.senate2024;
     return `
     <h1>Backtests — polls &amp; markets vs verified outcomes</h1>
-    <p class="lead">Inputs: captured Kalshi 2024 market history (official API, settled outcomes) + the archived 538 national poll averages + official results (FEC-cited).
+    <p class="lead">Inputs: ${bt.universe.total} settled 2024 Kalshi markets (official API history: ${bt.universe.core2024} hand-verified core markets + ${bt.universe.senate2024} per-state Senate markets captured ${esc(day(bt.universe.senate2024CapturedAt))}), the archived 538 national poll averages, and official results (FEC-cited).
     Deterministic — re-run with <span class="mono">npm run backtest</span>.</p>
 
     <h2>1 · Official outcomes (cross-check targets)</h2>
     <div class="card" style="overflow-x:auto"><table>
       <thead><tr><th>Race</th><th>Official result</th><th>Detail</th><th>Kalshi vs official</th></tr></thead>
-      <tbody>${outcomes}</tbody>
-    </table>
-    <p class="small">Sources per outcome: <a href="data/outcomes/verified-outcomes.json" target="_blank" rel="noopener">data/outcomes/verified-outcomes.json</a> (each row cites its URLs).</p></div>
+      <tbody>${outcomes}</tbody></table>
+    <p class="small">Sources per outcome: <a href="data/outcomes/verified-outcomes.json" target="_blank" rel="noopener">data/outcomes/verified-outcomes.json</a>. The ${bt.universe.senate2024} Senate markets use Kalshi's official settlement (result field) — every state has exactly one YES (test-enforced); Texas cross-checked against the Texas SoS results portal (Cruz 5,990,741 – Allred 5,031,249).</p></div>
 
-    <h2>2 · Kalshi market calibration (2024)</h2>
+    <h2>2 · Kalshi market calibration (2024, ${bt.universe.total} markets)</h2>
     <div class="grid cols2">
-      <div class="card"><h3 style="margin-top:0">Aggregate (mean over captured markets)</h3>
-        <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean P(YES)</th><th class="num">Brier</th><th class="num">Log-loss</th><th class="num">Hold PnL</th></tr></thead>
-        <tbody>${agg}</tbody></table>
-        <p class="small">T-60 shows <em>no markets</em> because the presidential market opened 2024-10-04 and the chamber markets 2024-09-12 — reported honestly, not imputed.</p>
-      </div>
-      <div class="card"><h3 style="margin-top:0">Per market @ T-7</h3>
-        <table><thead><tr><th>Market</th><th class="num">P(YES)</th><th class="num">Brier</th><th class="num">Hold PnL</th></tr></thead>
-        <tbody>${mkLead}</tbody></table>
-        <p class="small">A holding buyer of the YES side seven days out would have earned the "Hold PnL" per $1 contract. All three YES sides settled YES (the R sweep).</p>
-      </div>
+      <div class="card"><h3 style="margin-top:0">All markets — mean by lead time</h3>
+        <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean P(YES)</th><th class="num">Brier</th><th class="num">Log-loss</th><th class="num">Hold PnL $/contract</th></tr></thead>
+        <tbody>${aggRows(bt.aggregate)}</tbody></table>
+        <p class="small">Markets enter a lead time only if they had a trade on or before it; most per-state Senate markets opened in October 2024, hence fewer markets at T-30/T-60 — reported, not imputed.</p></div>
+      <div class="card"><h3 style="margin-top:0">Did the favourite win?</h3>
+        <table><thead><tr><th class="num">Lead</th><th class="num">Markets priced</th><th class="num">Favourite won</th><th class="num">Rate</th></tr></thead><tbody>${fav}</tbody></table>
+        <p class="small">"Favourite" = the side above 50¢ at that lead; markets exactly at 50¢ are excluded.</p></div>
     </div>
+    <div class="grid cols2">
+      <div class="card"><h3 style="margin-top:0">Core 3 (presidency + chamber controls)</h3>
+        <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean P(YES)</th><th class="num">Brier</th><th class="num">Log-loss</th><th class="num">Hold PnL</th></tr></thead><tbody>${aggRows(bt.groups['core-2024'].aggregate)}</tbody></table></div>
+      <div class="card"><h3 style="margin-top:0">Per-state Senate (${bt.groups['senate-2024'].nMarkets})</h3>
+        <table><thead><tr><th class="num">Lead</th><th class="num">Markets</th><th class="num">Mean P(YES)</th><th class="num">Brier</th><th class="num">Log-loss</th><th class="num">Hold PnL</th></tr></thead><tbody>${aggRows(bt.groups['senate-2024'].aggregate)}</tbody></table></div>
+    </div>
+    <div class="card"><h3 style="margin-top:0">Pooled calibration curve (one YES market per event, every pre-election daily close)</h3>
+      <canvas id="cal-chart" class="chart"></canvas>
+      <table><thead><tr><th>Price bucket</th><th class="num">Observations</th><th class="num">Markets</th><th class="num">Mean price</th><th class="num">Observed YES rate</th></tr></thead><tbody>${pooledRows}</tbody></table>
+      <p class="small">${pooled.marketsUsed} markets used (complementary D/R legs de-duplicated so each race counts once). A perfectly calibrated market would sit on the diagonal; with one cycle the curve is indicative, not conclusive.</p></div>
     ${mkCharts}
 
-    <h2>3 · Polls vs market vs outcome (2024 presidential)</h2>
+    <h2>3 · Per-state Senate 2024 markets (${senate.length})</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Market</th><th>State</th><th class="num">T-7</th><th class="num">T-1</th><th>Result</th><th class="num">Brier T-1</th><th class="num">Volume</th><th class="num">Bars</th></tr></thead>
+      <tbody>${senRows}</tbody></table>
+      <p class="small">Capture: <span class="mono">${esc(s24 ? s24.capturedFrom : '')}</span> at ${esc(day(s24 && s24.capturedAt))}; ${s24 ? s24.summary.markets : '—'} markets over ${s24 ? s24.summary.statesWith2024Markets : '—'} states (all 50 SENATE{ST} series were queried; ${s24 ? 50 - s24.summary.statesWith2024Markets : '—'} had no 2024 market). Nebraska's third candidate market, where present, is scored as a YES market of its own.</p></div>
+
+    <h2>4 · Polls vs market vs outcome (2024 presidential)</h2>
     <div class="card"><canvas id="poll-chart" class="chart"></canvas>
       <div class="legend"><span><i style="background:#1f5fbf"></i>538 national 2-party margin (pp, archived series ends 2024-09-12)</span></div>
-      <p class="small">Annotations: 2024-07-21 Biden withdrawal · 2024-08-05 Harris nomination. Final archived value Harris +2.82 vs official outcome Trump +1.45 (FEC).</p>
-    </div>
+      <p class="small">Annotations: 2024-07-21 Biden withdrawal · 2024-08-05 Harris nomination. Final archived value Harris +2.82 vs official outcome Trump +1.45 (FEC).</p></div>
     <div class="grid cols2">
       <div class="card"><h3 style="margin-top:0">Checkpoints (poll archive)</h3>
-        <table><thead><tr><th>Date</th><th class="num">Poll margin</th><th class="num">Poll⇒P(Trump)<sup>a</sup></th><th class="num">Kalshi DJT</th></tr></thead>
-        <tbody>${checkpoints}</tbody></table></div>
+        <table><thead><tr><th>Date</th><th class="num">Poll margin</th><th class="num">Poll⇒P(Trump)<sup>a</sup></th><th class="num">Kalshi DJT</th></tr></thead><tbody>${checkpoints}</tbody></table></div>
       <div class="card"><h3 style="margin-top:0">Late window (anchor reused, age disclosed)</h3>
-        <table><thead><tr><th>Date</th><th class="num">Poll margin</th><th class="num">Poll⇒P(Trump)<sup>a</sup></th><th class="num">Kalshi DJT</th><th class="num">Poll − market</th></tr></thead>
-        <tbody>${late}</tbody></table>
+        <table><thead><tr><th>Date</th><th class="num">Poll margin</th><th class="num">Poll⇒P(Trump)<sup>a</sup></th><th class="num">Kalshi DJT</th><th class="num">Poll − market</th></tr></thead><tbody>${late}</tbody></table>
         <p class="small"><sup>a</sup> logistic mapping k=4.5 — <em>modeled assumption, labeled</em> (irregularity #12). The 538 archive ends 2024-09-12, so late dates reuse the anchor with age in days.</p></div>
     </div>
     <div class="callout"><strong>Finding.</strong> The final poll average was off by <strong>${Math.abs(pb.pollAnchorAbsErrorPp).toFixed(1)}pp in the wrong direction</strong>;
     the market's T-7 price (58¢ Trump) implied a 16pp margin — still wrong in magnitude, but the market never crossed 50¢ the wrong way after October,
-    while the poll average said the opposite. Calibration detail above.</div>`;
+    while the poll average said the opposite.</div>`;
   }
 
   function drawBacktestCharts() {
-    const bt = D.backtests.marketBacktest;
-    bt.markets.forEach((m, i) => {
+    BT.markets.filter((m) => m.group === 'core-2024').forEach((m, i) => {
       const cv = document.getElementById('mk-' + i);
       if (!cv) return;
-      C.lines(cv, [{
-        label: m.ticker, color: '#1f5fbf',
-        points: m.series.map((p) => ({ x: p.date, y: p.p })),
-      }], { yMin: 0, yMax: 1, yFmt: (v) => Math.round(v * 100) + '¢', hLines: [{ y: 0.5, label: '50¢' }] });
+      C.lines(cv, [{ label: m.ticker, color: '#1f5fbf', points: m.series.map((p) => ({ x: p.date, y: p.p })) }], { yMin: 0, yMax: 1, yFmt: (v) => Math.round(v * 100) + '¢', hLines: [{ y: 0.5, label: '50¢' }] });
     });
+    const cal = document.getElementById('cal-chart');
+    if (cal) {
+      const b = BT.pooledCalibrationDeduped.buckets.filter((x) => x.n > 0);
+      C.lines(cal, [
+        { label: 'observed', color: '#1f5fbf', points: b.map((x) => ({ x: ((x.lo + x.hi) / 2 * 100).toFixed(0) + '¢', y: x.observedYesRate })) },
+        { label: 'perfect', color: '#9aa7b5', points: b.map((x) => ({ x: ((x.lo + x.hi) / 2 * 100).toFixed(0) + '¢', y: x.meanP })) },
+      ], { yMin: 0, yMax: 1, yFmt: (v) => Math.round(v * 100) + '%' });
+    }
     const pv = document.getElementById('poll-chart');
     if (pv) {
-      C.lines(pv, [{
-        label: '538 margin', color: '#1f5fbf',
-        points: D.pollSeries2024.map((p) => ({ x: p.date, y: p.margin })),
-      }], { yFmt: (v) => (v > 0 ? '+' : '') + v.toFixed(1), hLines: [{ y: 0, label: 'tie', color: '#9aa7b5' }] });
+      C.lines(pv, [{ label: '538 margin', color: '#1f5fbf', points: D.pollSeries2024.map((p) => ({ x: p.date, y: p.margin })) }], { yFmt: (v) => (v > 0 ? '+' : '') + v.toFixed(1), hLines: [{ y: 0, label: 'tie', color: '#9aa7b5' }] });
     }
   }
 
   // ---------- CONTEST ----------
   function contest() {
-    const c = D.contest;
-    const lb = c.leaderboard.map((r, i) => `
+    const c = CT;
+    const lbRows = (lb) => lb.map((r, i) => `
       <tr ${i === 0 ? 'style="background:var(--accent-soft)"' : ''}>
-        <td class="num"><strong>#${r.rank}</strong></td>
-        <td><span class="mono">@${esc(r.username)}</span></td>
+        <td class="num"><strong>#${r.rank}</strong></td><td><span class="mono">@${esc(r.username)}</span></td>
         <td class="num">${usd(r.finalEquity)}</td>
         <td class="num ${cls(r.realizedPnl)}">${r.realizedPnl > 0 ? '+' : ''}${usd(r.realizedPnl)} (${r.realizedPnlPct > 0 ? '+' : ''}${r.realizedPnlPct.toFixed(2)}%)</td>
-        <td class="num">${usd(r.feesPaid)}</td>
-        <td class="num">${r.trades}</td></tr>`).join('');
-    const cards = c.results.filter((r) => r.ranked).map((r, i) => {
-      const fills = r.fillLog.filter((f) => f.date !== 'settlement').slice(0, 8).map((f) =>
-        `<div class="small mono">${f.date} ${f.ticker} ${f.action} ${f.side} ×${f.shares} @ ${f.price} (fee ${usd(f.fee)})</div>`).join('');
+        <td class="num">${usd(r.feesPaid)}</td><td class="num">${r.trades}</td><td class="num">${r.tradingDays}</td><td class="num">${r.marketsTraded}</td></tr>`).join('');
+    const all = c.universes && c.universes['all-2024'];
+    const coreU = c.universes && c.universes['core-2024'];
+    const results = all ? all.results : c.results;
+    const unranked = results.filter((r) => !r.ranked).map((r) => `<li><span class="mono">@${esc(r.username)}</span> — ${esc(r.unrankedReason)}${r.trades ? ` (would have been ${r.realizedPnlPct > 0 ? '+' : ''}${r.realizedPnlPct.toFixed(2)}%)` : ''}</li>`).join('');
+    const cards = results.filter((r) => r.ranked).map((r, i) => {
+      const fills = (r.fillSample || []).filter((f) => f.date !== 'settlement').slice(0, 8).map((f) => `<div class="small mono">${f.date} ${f.ticker} ${f.action} ${f.side} ×${f.shares} @ ${f.price} (fee ${usd(f.fee)})</div>`).join('');
       return `
       <div class="card">
         <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px">
           <strong class="mono">@${esc(r.username)}</strong>
-          <span class="chip ${r.realizedPnl >= 0 ? 'good' : 'bad'}">${r.realizedPnl > 0 ? '+' : ''}${r.realizedPnlPct.toFixed(2)}% · ${usd(r.finalEquity)}</span>
-        </div>
+          <span class="chip ${r.realizedPnl >= 0 ? 'good' : 'bad'}">${r.realizedPnl > 0 ? '+' : ''}${r.realizedPnlPct.toFixed(2)}% · ${usd(r.finalEquity)}</span></div>
         <p class="small" style="margin:8px 0">${esc(r.thesis)}</p>
         <canvas id="eq-${i}" class="chart" style="height:170px"></canvas>
-        <details><summary>Fills (${r.fillLog.length} incl. settlement)</summary><div class="body">${fills}${r.fillLog.length > 8 ? '<div class="small">…</div>' : ''}</div></details>
+        <p class="small">${r.trades} fills over ${r.tradingDays} trading days in ${r.marketsTraded} markets · fees ${usd(r.feesPaid)} · skips ${r.skips}</p>
+        ${fills ? `<details><summary>Fill sample</summary><div class="body">${fills}</div></details>` : ''}
       </div>`;
     }).join('');
     return `
     <h1>Contest — paper-trading forecasting entrants</h1>
     <p class="lead">A reverse-engineering of TradingView's <a href="https://www.tradingview.com/the-leap/crypto-series-may-2026/" target="_blank" rel="noopener">The Leap</a> contest, adapted to Kalshi election markets:
     $100,000 paper bankroll per entrant, ranked by <strong>realized P&amp;L at settlement</strong>, open positions force-closed at the official settlement value,
-    Kalshi's official quadratic taker fees, and honest fill rules (no fills on no-trade days; fills capped at 10% of the day's volume; NO-side prices labeled as derived reciprocals).</p>
+    Kalshi's official quadratic taker fees, honest fill rules (no fills on no-trade days; fills capped at 10% of the day's volume; NO-side prices labeled as derived reciprocals),
+    and The Leap's eligibility rule: <strong>at least ${c.model.minTradingDaysToRank} active trading days</strong> to be ranked.</p>
+    <div class="callout"><strong>Universes.</strong> <em>all-2024</em>: ${all ? all.universeSize : c.results[0].markets.length} settled 2024 markets (core 3 + per-state Senate). <em>core-2024</em>: the original three (kept so the first pilot stays reproducible).
+    ${esc(c.model.note || '')}</div>
 
-    <div class="callout"><strong>The universe.</strong> ${c.model.universe.map(esc).join(', ')} — the captured 2024 settled markets (presidency + chamber controls),
-    daily bars, official settlements (all cross-checked PASS vs official results).</div>
-
-    <h2>Leaderboard (2024 cycle)</h2>
+    <h2>Leaderboard — all-2024 (${all ? all.universeSize : '—'} markets)</h2>
     <div class="card" style="overflow-x:auto"><table>
-      <thead><tr><th class="num">Rank</th><th>Entrant</th><th class="num">Final equity</th><th class="num">Realized P&amp;L</th><th class="num">Fees paid</th><th class="num">Trades</th></tr></thead>
-      <tbody>${lb}</tbody></table>
-      <p class="small">Unranked (0 trades — the rules, not the engine, suppressed them): ${c.unranked.map((u) => `<span class="mono">@${esc(u)}</span>`).join(', ')} —
-      no qualifying price (0.05–0.20 longshot; ≥0.90 in final two weeks) ever appeared in the captured 2024 universe. Reported, not hidden.</p></div>
+      <thead><tr><th class="num">Rank</th><th>Entrant</th><th class="num">Final equity</th><th class="num">Realized P&amp;L</th><th class="num">Fees</th><th class="num">Fills</th><th class="num">Days</th><th class="num">Markets</th></tr></thead>
+      <tbody>${lbRows(allLb)}</tbody></table>
+      <p class="small"><strong>Unranked</strong> (the rules, not the engine, suppressed them):</p><ul class="small" style="margin:4px 0; padding-left:20px">${unranked}</ul></div>
 
-    <h2>Entrants &amp; theses</h2>
+    <h2>Leaderboard — core-2024 (${coreU ? coreU.universeSize : 3} markets)</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th class="num">Rank</th><th>Entrant</th><th class="num">Final equity</th><th class="num">Realized P&amp;L</th><th class="num">Fees</th><th class="num">Fills</th><th class="num">Days</th><th class="num">Markets</th></tr></thead>
+      <tbody>${lbRows(coreLb)}</tbody></table></div>
+
+    <h2>Ranked entrants &amp; theses (all-2024)</h2>
     <div class="grid cols2">${cards}</div>
-
-    <h2>What the cycle says about the theses</h2>
-    <div class="grid cols2">
-      <div class="card"><h3 style="margin-top:0">Supported this cycle</h3>
-        <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
-          <li><strong>@breakout-bandit (+${(c.leaderboard[0] || {}).realizedPnlPct.toFixed(1)}%)</strong> — late-week consensus was the strongest edge: the 2024 markets were directionally stable in the final week.</li>
-          <li><strong>@fader-flipper (+13.9%)</strong> — the post-shock fades (Oct 30/31 Trump dip) reverted as the thesis predicted.</li>
-        </ul></div>
-      <div class="card"><h3 style="margin-top:0">Rejected / unresolved this cycle</h3>
-        <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
-          <li><strong>@poll-anchor (−13.3%)</strong> — the verified 538 anchor was wrong and the market was right; the poll-information thesis <em>fails</em> on 2024 (see Backtests §3).</li>
-          <li><strong>@momentum-mule (−3.1%)</strong> — 5-day momentum was noise/whipsaw in the final month; 2024 is a single cycle — needs 2026 replication.</li>
-          <li><strong>@favorite-cash (+0.1%)</strong> — the only ≥0.65 price (Senate-R at 75¢ on day one) paid, but the 2024 presidency never traded ≥65¢: carry was structurally unavailable.</li>
-        </ul></div>
-    </div>
-    <p class="small">Determinism + attribution identity (finalEquity = capital + fee-aware realized P&amp;L) are enforced by the test suite (<span class="mono">npm test</span>, 25 tests).</p>`;
+    <div class="callout warn"><strong>Read-out.</strong> One cycle, ${all ? all.universeSize : '—'} markets, most of which opened only in October 2024: results are evidence about the theses, not proof.
+    The poll-anchor thesis lost on 2024 because the verified poll anchor was wrong and the market was right (see Backtests §4); late-consensus and fade theses paid.
+    The 2026 tracker will supply the out-of-sample test when markets settle.</div>
+    <p class="small">Determinism + attribution identity (finalEquity = capital + fee-aware realized P&amp;L) are enforced by the test suite (<span class="mono">npm test</span>, ${D.meta.tests} tests).</p>`;
   }
 
   function drawContestCharts() {
-    D.contest.results.filter((r) => r.ranked).forEach((r, i) => {
+    const all = CT.universes && CT.universes['all-2024'];
+    (all ? all.results : CT.results).filter((r) => r.ranked).forEach((r, i) => {
       const cv = document.getElementById('eq-' + i);
       if (!cv) return;
-      C.lines(cv, [{
-        label: r.username, color: r.realizedPnl >= 0 ? '#177245' : '#b3261e',
-        points: r.equityCurve.map((p) => ({ x: p.date, y: p.equity })),
-      }], { yFmt: (v) => '$' + Math.round(v / 1000) + 'k', hLines: [{ y: 100000, label: 'start $100k', color: '#9aa7b5' }] });
+      C.lines(cv, [{ label: r.username, color: r.realizedPnl >= 0 ? '#177245' : '#b3261e', points: r.equityCurve.map((p) => ({ x: p.date, y: p.equity })) }], { yFmt: (v) => '$' + Math.round(v / 1000) + 'k', hLines: [{ y: 100000, label: 'start $100k', color: '#9aa7b5' }] });
     });
   }
 
@@ -343,27 +542,26 @@
       <tr>
         <td><a href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.name)}</strong></a><br><span class="small">${esc(s.type)}</span></td>
         <td class="small">${esc(s.verified)}</td>
-        <td class="small" style="white-space:nowrap">${esc(s.verifiedOn)}<br><span class="chip good">${esc(s.status)}</span></td>
+        <td class="small" style="white-space:nowrap">${esc(s.verifiedOn)}<br><span class="chip ${s.status === 'verified' ? 'good' : 'warn'}">${esc(s.status)}</span></td>
         <td class="small">${s.notes ? esc(s.notes) : ''}</td>
       </tr>`).join('');
     const perSession = byDate.map((d) => `${d}: ${counts[d]}`).join(' · ');
     return `
     <h1>Master source list</h1>
-    <p class="lead">${all.length} entries — ${perSession} — each verified line-by-line in its session: the URL was fetched
+    <p class="lead">${all.length} entries — verified on ${perSession} — each verified line-by-line in its session: the URL was fetched
     (or, where a direct fetch failed, located via live search — noted in the <em>verified</em> column), and that column
     records <strong>exactly what was observed</strong>. Nothing is listed on assumption; every row carries a link for manual
     review. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>; full audit trail in
     <span class="mono">VERIFICATION.md</span> (session sections).</p>
     <div class="card" style="overflow-x:auto"><table>
       <thead><tr><th>Source (link for manual review)</th><th>What was verified</th><th>When / status</th><th>Notes</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>`;
+      <tbody>${rows}</tbody></table></div>`;
   }
 
   // ---------- IRREGULARITIES ----------
   function irregularities() {
     const sev = (s) => ({ high: 'bad', medium: 'warn', low: '' })[s] || '';
-    const items = D.irregularities.items.map((i) => `
+    const items = [...D.irregularities.items].sort((a, b) => b.id - a.id).map((i) => `
       <div class="card">
         <div style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap">
           <span class="chip ${sev(i.severity)} sev-${i.severity}">#${i.id} · ${i.severity}</span>
@@ -376,11 +574,14 @@
         </div>
         ${srcs([i.source])}
       </div>`).join('');
+    const ids = D.irregularities.items.map((i) => i.id);
+    const bySev = { high: 0, medium: 0, low: 0 };
+    D.irregularities.items.forEach((i) => { bySev[i.severity] = (bySev[i.severity] || 0) + 1; });
     return `
     <h1>Irregularities &amp; discrepancies flagged for review</h1>
-    <p class="lead">${D.irregularities.items.length} items across both toolchains (Node track 1–12 + 23–25 · Python track 13–22).
-    Severity: <span class="chip bad">high</span> affects trust in a result ·
-    <span class="chip warn">medium</span> affects interpretation · <span class="chip">low</span> cosmetic/monitor.
+    <p class="lead">${D.irregularities.items.length} items (#${Math.min(...ids)}–#${Math.max(...ids)}, newest first) across both toolchains —
+    <span class="chip bad">high ${bySev.high}</span> affects trust in a result ·
+    <span class="chip warn">medium ${bySev.medium}</span> affects interpretation · <span class="chip">low ${bySev.low}</span> cosmetic/monitor.
     Nothing flagged here is silently normalized — each item states its action. Full human-readable table:
     <span class="mono">IRREGULARITIES.md</span>.</p>
     ${items}`;
@@ -391,31 +592,31 @@
     return `
     <h1>Methodology</h1>
     <div class="grid cols2">
-      <div class="card"><h3 style="margin-top:0">Data capture (sessions 2026-09-18 + 2026-09-19)</h3>
+      <div class="card"><h3 style="margin-top:0">Data capture</h3>
         <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
-          <li><strong>Kalshi</strong>: official public API on the production host <span class="mono">api.elections.kalshi.com</span> (listed in docs.kalshi.com). Live markets via <span class="mono">GET /markets?series_ticker=…</span>; settled 2024 markets via the <span class="mono">/historical</span> tier (cutoff 2026-07-20); daily candlesticks via <span class="mono">GET /markets/{t}/candlesticks?period_interval=1440</span>; series fee configs via <span class="mono">GET /series/{t}</span>. Every file records its exact URL + capture time.</li>
-          <li><strong>Official outcomes</strong>: FEC-cited figures via the MediaWiki API (infobox wikitext/REST summaries fetched directly), congress.gov roll calls, IFES (FEC-sourced).</li>
-          <li><strong>Polls</strong>: 538's official GitHub archive cloned verbatim (byte sizes in <span class="mono">data/polls/PROVENANCE.md</span>); individual 2024/2026 polls verified via primary pages or full syndications.</li>
-          <li><strong>Source expansion (2026-09-19)</strong>: 21 additional master-list entries (32 → 53) fetched line-by-line from official government portals, news outlets, polling institutions, academic repositories, and a second prediction market (PredictIt); 3 ecosystem irregularities flagged in the same pass (OpenElections offline, U.S. Elections Project migration, Edison/SSRS acquisition).</li>
-          <li><strong>Cross-platform</strong>: Polymarket (2026-09-18) and PredictIt (2026-09-19) used only for discrepancy checks, never as a trading layer.</li>
+          <li><strong>Kalshi, daily (GitHub Actions)</strong>: <span class="mono">GET /series?category=Elections|Politics</span> → every open event with nested markets (<span class="mono">mve_filter=exclude</span>) → traded markets appended to <span class="mono">data/kalshi/tracker/daily/</span>; static descriptors in <span class="mono">tracker/index.json</span>; settlements re-checked via <span class="mono">GET /markets?tickers=…</span>. A second, independent Python collector samples the 2,000 most-traded markets from <span class="mono">GET /markets?status=open</span> and the two are cross-checked every run.</li>
+          <li><strong>Kalshi, 2024 history</strong>: <span class="mono">/historical/markets?series_ticker=SENATE{ST}</span> for all 50 states + daily candlesticks (<span class="mono">period_interval=1440</span>, ending at midnight Eastern) + per-series fee configs; the hand-verified core three (presidency, chamber controls) from the prior sessions.</li>
+          <li><strong>Official outcomes</strong>: FEC-cited figures, congress.gov roll calls, IFES (FEC-sourced), state election authorities (e.g. Texas SoS results portal).</li>
+          <li><strong>Polls</strong>: 538's official GitHub archive cloned verbatim (byte sizes, git blob SHA-1 and SHA-256 in <span class="mono">data/polls/PROVENANCE.md</span>); 2026 polls transcribed from the pollster's primary release (PDF or release page) into <span class="mono">data/polls/poll-layer-2026.json</span>.</li>
+          <li><strong>Master list</strong>: ${D.sources.sources.length} entries, each fetched and described as observed; cross-platform prices (Polymarket, PredictIt) are used only for discrepancy checks, never as a trading layer.</li>
         </ul></div>
-      <div class="card"><h3 style="margin-top:0">Backtest &amp; contest mechanics</h3>
+      <div class="card"><h3 style="margin-top:0">Backtest, calibration &amp; contest mechanics</h3>
         <ul style="font-size:14.5px; margin:6px 0; padding-left:20px">
           <li><strong>No look-ahead</strong>: at T-N only bars with end ≤ that date are used; the last known trade close is the forecast price.</li>
-          <li><strong>Metrics</strong>: Brier (p−o)², log-loss (clipped 1e-4), hold-to-settlement PnL per contract; calibration buckets.</li>
-          <li><strong>Fees</strong>: Kalshi official schedule — taker = roundUp(M·0.07·C·P·(1−P)) to a centicent; M=1 for PRES/CONTROLH/CONTROLS (captured from <span class="mono">GET /series</span>); no settlement/membership fees.</li>
-          <li><strong>Fills</strong>: taker at the day's trade close; refused on no-trade days; capped at 10% of the day's volume; NO-side = derived reciprocal, labeled per fill.</li>
-          <li><strong>Poll→probability</strong>: logistic k=4.5, a labeled modeled mapping (the archive publishes margins, not probabilities).</li>
-          <li><strong>Dates</strong>: Kalshi daily bars end at midnight Eastern (DST transition visible 2024-11-03); labels use the America/New_York trading day.</li>
-          <li><strong>Determinism</strong>: zero randomness anywhere; the test suite re-runs the whole pipeline and asserts byte-equal outputs + the fee-aware attribution identity.</li>
+          <li><strong>Metrics</strong>: Brier (p−o)², log-loss (clipped 1e-4), hold-to-settlement PnL per contract, favourite hit-rate, pooled calibration buckets (complementary legs de-duplicated).</li>
+          <li><strong>Implied probability (live)</strong>: order-book midpoint when a two-sided book with spread ≤ 10¢ exists, else last trade — because the shared API host has served stale last prices (irregularity #2).</li>
+          <li><strong>Fees</strong>: Kalshi official schedule — taker = roundUp(M·0.07·C·P·(1−P)) to a centicent; per-series M captured from <span class="mono">GET /series</span>; no settlement/membership fees.</li>
+          <li><strong>Fills</strong>: taker at the day's trade close; refused on no-trade days; capped at 10% of the day's volume; NO-side = derived reciprocal, labeled per fill. Ranking requires ≥ ${CT.model.minTradingDaysToRank} active trading days (The Leap).</li>
+          <li><strong>Poll→probability</strong>: logistic k=4.5, a labeled modeled mapping used identically for 2024 and 2026.</li>
+          <li><strong>Consistency monitor</strong>: mutually-exclusive over-sum (high), under-sum (info — the exchange flag does not imply exhaustiveness), crossed books, stale last-vs-book; findings are published, never corrected.</li>
+          <li><strong>Determinism</strong>: zero randomness anywhere; the test suite re-runs the pipeline and asserts byte-equal outputs + the fee-aware attribution identity.</li>
         </ul></div>
     </div>
     <h2>Verification tooling</h2>
     <div class="card">
-      <p style="font-size:14.5px"><span class="mono">npm test</span> — 25 tests: fee math vs the official schedule, engine determinism, attribution identity,
-      no-fill-on-no-trade, 10% fill cap, outcome cross-checks (Kalshi settlement vs official), candlestick transcription integrity, source-count and provenance lint.</p>
+      <p style="font-size:14.5px"><span class="mono">npm test</span> — ${D.meta.tests} tests: fee math vs the official schedule, engine determinism, attribution identity, no-fill-on-no-trade, 10% fill cap, outcome cross-checks, candlestick normalisation, CSV round-trips, implied-probability rule, calibration scorer (empty state, lead times, pooled curve), consistency checks, collector cross-check, Senate-2024 capture invariants (one YES per state, hand-verified spot bar), source-count and provenance lint.</p>
       <p style="font-size:14.5px"><span class="mono">npm run lint</span> — fails if any data file lacks provenance, if the master list has &lt;20 entries, or if any outcome lacks cited sources.</p>
-      <p style="font-size:14.5px"><span class="mono">npm run backtest && npm run contest && npm run build-site</span> — regenerates all published numbers and this site's data bundle.</p>
+      <p style="font-size:14.5px"><span class="mono">npm run pipeline</span> — regenerates all published numbers and this site's data bundle; the daily workflow runs it after every capture and commits the result.</p>
     </div>`;
   }
 
@@ -423,13 +624,13 @@
   function roadmap() {
     const items = D.roadmap.items.map((r) => `
       <div class="card"><div style="display:flex; gap:10px; align-items:baseline; flex-wrap:wrap">
-        <span class="chip info">${r.id}</span><strong style="font-size:15.5px">${esc(r.title)}</strong></div>
+        <span class="chip info">${r.id}</span><strong style="font-size:15.5px">${esc(r.title)}</strong>${r.status ? `<span class="chip ${/done/i.test(r.status) ? 'good' : 'warn'}">${esc(r.status)}</span>` : ''}</div>
         <p style="font-size:14.5px; margin:8px 0">${esc(r.detail)}</p>
         <p class="small"><strong>Why:</strong> ${esc(r.why)}</p></div>`).join('');
     const lims = D.roadmap.limitations.map((l) => `<li style="font-size:14.5px">${esc(l)}</li>`).join('');
     return `
     <h1>Roadmap &amp; limitations</h1>
-    <p class="lead">Remaining work for the next session(s), ordered by value — plus the honest limitations of what exists today.</p>
+    <p class="lead">Remaining work for the next session(s), ordered by value — plus the honest limitations of what exists today (updated ${esc(D.roadmap.updated || D.meta.updated)}).</p>
     <h2>Next work</h2>
     ${items}
     <h2>Current limitations</h2>
@@ -437,8 +638,8 @@
   }
 
   // ---------- ROUTER ----------
-  const RENDER = { overview, markets, backtests, contest, sources, irregularities, methodology, roadmap };
-  const AFTER = { backtests: drawBacktestCharts, contest: drawContestCharts };
+  const RENDER = { overview, markets, polls, tracker, backtests, contest, sources, irregularities, methodology, roadmap };
+  const AFTER = { backtests: drawBacktestCharts, contest: drawContestCharts, polls: drawPollCharts, tracker: drawTrackerCharts };
 
   const nav = document.getElementById('nav');
   nav.innerHTML = SECTIONS.map(([id, label]) => `<a href="#/${id}" data-id="${id}">${label}</a>`).join('');
@@ -452,6 +653,6 @@
     if (AFTER[id]) requestAnimationFrame(AFTER[id]);
   }
   window.addEventListener('hashchange', render);
-  document.getElementById('footline').textContent = `Data snapshot ${esc(D.snapshot.capturedAt.slice(0, 10))} · site bundle generated ${D.generatedAt} · repo ${D.meta.repo}`;
+  document.getElementById('footline').textContent = `Daily capture ${U ? U.date : '—'} · hand snapshot ${day(D.snapshot.capturedAt)} · site bundle generated ${D.generatedAt} · repo ${D.meta.repo}`;
   render();
 })();
