@@ -230,12 +230,15 @@ test('collect-kalshi.mjs --replay reproduces the live capture byte-for-byte (exc
     const day = JSON.parse(readFileSync('data/kalshi/universe/latest.json', 'utf8')).date;
     const out = execFileSync(process.execPath, ['scripts/collect-kalshi.mjs', '--replay', '--date', day], { encoding: 'utf8', timeout: 180000, env: { ...process.env, COLLECT_DATA_DIR: scratch } });
     assert.match(out, /scratch data dir — site bundle not rebuilt/);
-    const strip = (t) => t.replace(/"(capturedAt|replayedAt|finishedAt)": ?"[^"]*"/g, '"$1":"-"');
+    // timestamps differ by construction; the replay also adds a `replayedAt` provenance key that a live run never writes
+    const strip = (t) => t
+      .replace(/,?\s*"replayedAt": ?"[^"]*"/g, '')
+      .replace(/"(capturedAt|finishedAt)": ?"[^"]*"/g, '"$1":"-"');
+    const firstDiff = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return `first difference at offset ${i}: live=${JSON.stringify(a.slice(Math.max(0, i - 60), i + 60))} replay=${JSON.stringify(b.slice(Math.max(0, i - 60), i + 60))}`; };
     for (const rel of ['universe/latest.json', 'universe/series.json', 'tracker/index.json', 'tracker/settlements.json', 'tracker/calibration.json', 'tracker/discrepancy-watch.json', `tracker/daily/${day}.csv`]) {
       const live = strip(readFileSync(join('data/kalshi', rel), 'utf8'));
       const replayed = strip(readFileSync(join(scratch, rel), 'utf8'));
-      assert.equal(replayed.length, live.length, `${rel}: replay changed the file size`);
-      assert.equal(replayed, live, `${rel}: replay is not faithful`);
+      assert.ok(replayed === live, `${rel}: replay is not faithful — ${firstDiff(live, replayed)}`);
     }
     const history = JSON.parse(readFileSync(join(scratch, 'tracker/history.json'), 'utf8'));
     const rec = history.days.find((d) => d.date === day);

@@ -5,12 +5,20 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 ## Live collection (R1/R3)
 
-1. **One collection day.** The daily tracker started 2026-09-19 (two runs that day). The live calibration
-   tracker is empty *by construction* until tracked markets settle; the first large U.S. batch settles after
-   Nov 3 2026 (LA mayor, 35 Senate races, governors). Until then the Tracker page shows coverage, not evidence.
-2. **Traded markets only.** The daily CSV stores markets with volume > 0 or open interest > 0 (10,914 of
-   24,367 on day one). Never-traded strike-ladder markets are counted in the day's `.meta.json` but their empty
-   quotes are not kept; a market enters the tracker the first day it trades.
+1. **One collection day.** The daily tracker started 2026-09-19 (four runs that day). The live calibration
+   scorer is empty *by construction* until markets that were priced **before** settlement settle; the first
+   large U.S. batch settles after Nov 3 2026 (LA mayor, 35 Senate races, governors). Until then the Tracker page
+   shows coverage, not evidence. The 207 settlements already on file are rungs that had settled before the first
+   capture (found nested in still-open events, irregularity #37); a post-settlement price is not a forecast, so
+   `scoreableMarkets` is 0 and the scorer refuses any observation dated on/after a market's settlement day.
+2. **Traded markets only.** The daily CSV stores markets with volume > 0 or open interest > 0 that are not yet
+   settled (10,709 of 24,367 on day one; 207 more traded rungs were already finalized and went straight to
+   `settlements.json`). Never-traded strike-ladder markets are counted in the day's `.meta.json` but their empty
+   quotes are not kept; a market enters the tracker the first day it trades. Each row carries the exchange
+   `status` (active / closed / …) so later readers can tell tradable from pending rows.
+2a. **Open event ≠ every rung tradable.** Kalshi's events feed nests finalized markets inside `status=open`
+   events for weeks; the fetched API pages do not document why. Any consumer of `universe/latest.json` must
+   filter on the per-market status, not the event status.
 3. **Settlement scan covers tickers the tracker has seen.** Markets that opened and settled between two daily
    runs (e.g. same-day specials) are missed; the historical tier could back-fill them (not built).
 4. **One scheduled run per day (12:30 UTC).** Intraday moves are invisible; the day's row is the last capture of
@@ -31,8 +39,10 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 ## 2026 poll layer (R4)
 
-10. **Hand-transcribed, incomplete.** 12 entries from primary releases; not a poll average; nothing auto-ingested.
-    Known-but-not-yet-transcribed: Suffolk Iowa (Aug 26), NYT/Siena Jul-1 AK/IA/NC/OH toplines, UNH NH releases.
+10. **Hand-transcribed, incomplete.** 15 entries from primary releases (4 generic-ballot series, 11 state-race
+    rows); not a poll average; nothing auto-ingested. The four NYT/Siena July rows carry `review: true` because
+    n / MoE / field dates live on nytimes.com pages that return 403 to the fetcher — the toplines themselves come
+    from the Siena Research Institute release. Known-but-not-yet-transcribed: UNH NH releases, Marquette Wisconsin.
 11. **Modelled mappings are labelled, not validated.** Poll margin → probability uses logistic k = 4.5 (chosen in
     the 2024 poll backtest). Rating "bands" used to flag market-vs-rating gaps are a project heuristic
     (documented in `poll-layer-2026.json → raceRatings.bands`). Flags are for review, not findings.

@@ -1,8 +1,9 @@
 # Next Session — start here
 
-State at the end of session 3 (2026-09-19): R1 live, R2 done (39-market backtest), R3 running (empty until
-settlements), R4 started (12 verified poll entries), R5 live, R8 done. Master list 73 sources, 36 irregularities,
-42 tests. Full status: `ROADMAP.md` / `data/roadmap.json`.
+State at the end of session 3 (2026-09-19): R1 live (three live runs, hardened: per-market status, shrink guard,
+run history), R2 done (39-market backtest), R3 running (207 pre-tracker settlements on file, 0 scoreable — the
+look-ahead guard is deliberate), R4 started (15 verified poll entries, 4 flagged review), R5 live, R8 done.
+Master list 73 sources, 37 irregularities, 45 tests. Full status: `ROADMAP.md` / `data/roadmap.json`.
 
 Every item keeps the project's rules: free official/trusted sources only, fetch before you write, no hallucinations,
 irregularities logged with an action, nothing imputed.
@@ -11,7 +12,7 @@ irregularities logged with an action, nothing imputed.
 
 1. `gh run list --workflow daily-collection.yml` — the 12:30 UTC cron must have run on `main` after the merge and
    committed `collect: kalshi YYYY-MM-DD`. If not: check Actions → the job log; the opt-out variable
-   `DISABLE_DAILY_COLLECTION` must be unset.
+   `COLLECT_DISABLED` must be unset.
 2. `git log --stat -1 -- data/kalshi/tracker/daily/` — each day should add ≈ 1 MB (one CSV) and small diffs to
    `index.json` / `latest.json` / `series.json`. If a day's commit is > 5 MB, something regressed (irregularity #30).
 3. Open the live site → **Tracker**: days collected should equal the number of bot commits; the Node-vs-Python
@@ -19,20 +20,25 @@ irregularities logged with an action, nothing imputed.
 
 ## P1 — Poll layer (R4) — the highest-value manual work
 
-4. Transcribe (fetch the release first, then write): Suffolk Iowa Aug 26 2026 (`suffolk.edu … polls/other-states`),
-   NYT/Siena Jul 1 2026 AK/IA/NC/OH toplines (`sri.siena.edu/2026/07/01/…`), UNH Survey Center NH Senate,
+4. Done this session: Suffolk Iowa (press-release PDF) and NYT/Siena Jul-1 AK/IA/NC/OH toplines (Siena release page).
+   Still to transcribe (fetch the release first, then write): the NYT toplines n / MoE / field dates for those four
+   rows (nytimes.com returns 403 to the fetcher — do it by hand and clear `review: true`), UNH Survey Center NH Senate,
    Marquette Wisconsin, any new CNN/SSRS or Quinnipiac state polls. Add to `data/polls/poll-layer-2026.json`
-   (`stateRaces`) with `kalshiEvent` / `kalshiDemTicker` so `src/poll-layer.js` compares them automatically.
-5. Re-check the Iowa gap (irregularity #34) once ≥ 3 Iowa polls exist; write a simple per-race poll average
-   (window, n, pollsters disclosed) in `poll-layer.js` and show it next to the market.
+   (`stateRaces`) with `kalshiEvent` / `kalshiDemTicker`; `npm run lint` fails if the ticker is not in the tracker index.
+5. Iowa now has three polls (Emerson R+5, Suffolk R+4, NYT/Siena R+2) around the market's 39.5% (irregularity #34
+   updated). Next: a simple per-race poll average (window, n, pollsters disclosed) in `poll-layer.js`, shown next to
+   the market; Texas is the race where two polls disagree most (Emerson D+1 vs ReconMR-Siena D+6).
 6. Add a weekly "poll release check" script that fetches the pollster index pages (Emerson, Marquette, Siena,
    Quinnipiac, UNH, Suffolk, SSRS news) and diffs headlines into a review list — never auto-admit numbers.
 7. After Nov 3 2026: The Voter Poll by SSRS data will exist — verify the release page before using any of it.
 
 ## P2 — Backtest & calibration
 
-8. When the first tracked markets settle (`tracker/settlements.json` count > 0), review
-   `tracker/calibration.json → byLead/pooled` and put the first numbers in README/Tracker prose.
+8. `tracker/settlements.json` already holds 207 results, all for rungs that settled BEFORE the first capture, so
+   `calibration.json → scoreableMarkets` is 0 by design. The first real numbers appear when a market that has
+   pre-settlement rows in `tracker/daily/` settles (watch `history.json → settledMarketsScored`); then review
+   `byLead/pooled` and put the first numbers in README/Tracker prose. Check after the 2026-09-20 run whether
+   the 207 finalized rungs still come back nested in open events (irregularity #37, API semantics question).
 9. Extend `collect-senate-2024.mjs` to 2024 governor/House series if they exist on Kalshi (same pattern:
    `/historical/markets?series_ticker=…`), and add the 2020 poll-only cycle (R6).
 10. Run the two-collector cross-check once against `external-api.kalshi.com` (R10, irregularity #31).
