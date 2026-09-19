@@ -36,8 +36,37 @@ if (!Array.isArray(master.sources) || master.sources.length < 20) {
   errors.push(`master source list must contain >=20 entries (found ${master.sources?.length})`);
 }
 for (const s of master.sources || []) {
-  if (!s.url || !/^https?:\/\//.test(s.url)) errors.push(`source "${s.id}" missing valid url`);
-  if (!s.verified) errors.push(`source "${s.id}" missing verification notes`);
+  if (!s.url || !/^https:\/\//.test(s.url)) errors.push(`source "${s.id}" missing valid https url`);
+  if (!s.verified || s.verified.length < 40) errors.push(`source "${s.id}" missing observed-verification text`);
+  if (typeof s.verifiedOn !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s.verifiedOn)) errors.push(`source "${s.id}" missing verifiedOn date`);
+  // Status vocabulary (documented in README.md "Sources"):
+  //   verified            - page/PDF fetched directly and the observed text recorded
+  //   verified-via-search - reached through a search-discovered official page, fetched and recorded
+  //   verified-claim      - a third party's RENDERING was verified (not the underlying data); see notes
+  //   needs-review        - fetched, but flagged for a human before the source is relied on
+  //   unverified          - candidate only, never used as evidence
+  if (!['verified', 'verified-via-search', 'verified-claim', 'needs-review', 'unverified'].includes(s.status)) {
+    errors.push(`source "${s.id}" has status "${s.status}" (not in the documented vocabulary)`);
+  }
+  // Organisational notes became mandatory with the session-3 batch (2026-09-19); the 2026-09-18
+  // base entries predate the convention.
+  if (s.verifiedOn > '2026-09-18' && !s.notes) errors.push(`source "${s.id}" missing notes (required for entries verified after 2026-09-18)`);
+}
+// Registry integrity: ids and urls must be unique (the "no duplicates" claim is machine-checked),
+// and the published category tally must match the entries, because the site groups by it.
+const srcIds = (master.sources || []).map((s) => s.id);
+if (new Set(srcIds).size !== srcIds.length) errors.push('duplicate ids in data/sources/master.json');
+const srcUrls = (master.sources || []).map((s) => s.url);
+if (new Set(srcUrls).size !== srcUrls.length) errors.push('duplicate urls in data/sources/master.json');
+const catNames = (master.categories || []).map((c) => c.name);
+if (!catNames.length) errors.push('data/sources/master.json is missing its categories tally');
+for (const s of master.sources || []) {
+  if (!s.category) errors.push(`source "${s.id}" has no category (site grouping)`);
+  else if (!catNames.includes(s.category)) errors.push(`source "${s.id}" has unknown category "${s.category}"`);
+}
+for (const c of master.categories || []) {
+  const n = (master.sources || []).filter((s) => s.category === c.name).length;
+  if (n !== c.count) errors.push(`category "${c.name}" claims ${c.count} entries but ${n} carry it`);
 }
 
 const outcomes = JSON.parse(readFileSync(join(ROOT, 'data/outcomes/verified-outcomes.json'), 'utf8'));

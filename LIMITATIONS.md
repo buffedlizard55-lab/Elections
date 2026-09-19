@@ -1,6 +1,6 @@
 # Limitations
 
-Honest constraints on what this project can currently claim or do. Updated 2026-09-19 (session 3).
+Honest constraints on what this project can currently claim or do. Updated 2026-09-19 (session 4).
 Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 ## Live collection (R1/R3)
@@ -63,8 +63,8 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 17. **Fetch-tool provenance.** Captures ran through a proxied fetch tool; some official hosts block it
     (Georgia Clarity results host, NH SoS — irregularity #35). Alternative official URLs are used where found.
-18. **Sources drift.** 73 entries verified across three sessions; re-verify on a schedule (the daily workflow does
-    not re-fetch source pages).
+18. **Sources drift.** 105 entries verified across four sessions (five batches); re-verify on a schedule (the daily
+    workflow does not re-fetch source pages, so a URL that changes later is caught only by a later session).
 19. **Kalshi API host.** The project uses `api.elections.kalshi.com`; the docs default to
     `external-api.kalshi.com`. Whether the stale-last-price behaviour (irregularity #2) is host-specific is
     untested (R10).
@@ -78,8 +78,27 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
 
 ## Site
 
-22. **Static bundle.** GitHub Pages serves the committed `src/data/site-data.js` (~1.2 MB); it changes only when
+22. **Static bundle.** GitHub Pages serves the committed `src/data/site-data.js` (~1.6 MB); it changes only when
     the daily workflow commits on the default branch or a PR merges. The bundle shows a 600-event U.S.-election
     watchlist, not all 4,094 events (the full files are in `data/kalshi/universe/`).
 23. **Python toolkit demos** (`paper_trading.py --demo`, `backtest.py --demo-synthetic`) run on labelled synthetic
     data and are engine tests, not findings.
+
+## Source registry additions (session 4, 2026-09-19)
+
+24. **Point-in-time verification.** The 20 entries added in session 4 were each fetched directly on 2026-09-19 and their
+    `verified` fields quote only what was observed that day. Nothing re-checks them automatically; a page that changes
+    later is not detected until a session re-verifies it (see #18).
+25. **Categories are labels, not tiers.** Every master-list entry now carries a `category` so the site can group 105
+    entries; the assignment is a fixed per-id map reviewed entry-by-entry (`VERIFICATION.md` §9b). A category says how
+    this project *files* a source — it makes no claim about reliability, accuracy or tier.
+26. **Fetch-tool reach limits coverage.** Four primary hosts refused this session's proxied fetcher
+    (`healthyelections.org`, `surveypoll.com`, `thehillx.com`, `courtlistener.com`) and three official paths returned
+    access-denied / 404 / S3 AccessDenied (WI `/elections-voting`, NV `/sos-elections`, CA
+    `elections.cdn.sos.ca.gov`). Those candidates were **excluded or annotated**, never reconstructed from memory
+    (irregularities #40–#42, #45, #47). SurveyUSA, HarrisX and the Franklin & Marshall College Poll therefore remain
+    outside the registry until they can be fetched (R11).
+27. **Third-party market renderings are corroboration only.** 270toWin and DDHQ Votes both republish Kalshi prices; the
+    one comparison run so far agreed with this project's captures within 1¢ but was manual, single-point, and the
+    aggregator's own disclaimer says its figures "may not total 100%" (irregularity #46). No model, backtest or contest
+    fill uses a rendered percentage — only captured `yes_bid`/`yes_ask`. Automating this check is R13.
