@@ -5,14 +5,14 @@
  "rows": [
   {
    "date": "2026-09-20",
-   "capturedAt": "2026-09-20T17:28:54.498Z",
-   "kalshiCapturedAt": "2026-09-20T16:59:26.117Z",
+   "capturedAt": "2026-09-20T18:01:04.011Z",
+   "kalshiCapturedAt": "2026-09-20T17:33:10.232Z",
    "renderers": {
     "ebo": {
      "capturedFrom": "https://electionbettingodds.com/",
      "status": 200,
      "extract": "ok",
-     "stamp": "1:25PM EDT on Sep 20, 2026",
+     "stamp": "1:58PM EDT on Sep 20, 2026",
      "senateDemKalshi": {
       "bid": 0.584,
       "ask": 0.594
@@ -41,47 +41,25 @@
     "270towin": {
      "capturedFrom": "https://www.270towin.com/",
      "status": 200,
-     "fetchMethod": "headless-chrome",
+     "fetchMethod": "fetch",
      "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
-     "extract": "ok",
-     "kalshiPanel": {
-      "dem": 0.57,
-      "rep": 0.41,
-      "asOf": "Sep. 20, 2026 at 17:29 UTC",
-      "basis": "most recent yes trade (page order: Democrats, Republicans)"
-     },
+     "extract": "failed",
+     "kalshiPanel": null,
      "kpow": {
       "value": "+3.00 D",
       "asOf": "9/20/26 9:15 AM EDT"
      },
-     "vsCaptured": {
-      "dem": {
-       "comparable": true,
-       "rendered": 0.57,
-       "capturedLast": 0.59,
-       "capturedBidAsk": [
-        0.58,
-        0.59
-       ],
-       "diff": -0.02,
-       "flagged": false
-      },
-      "rep": {
-       "comparable": true,
-       "rendered": 0.41,
-       "capturedLast": 0.41,
-       "capturedBidAsk": [
-        0.41,
-        0.42
-       ],
-       "diff": 0,
-       "flagged": false
-      }
+     "sample": " 270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 2",
+     "render": {
+      "ok": false,
+      "reason": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
      }
     }
    },
-   "flags": []
+   "flags": [
+    "270towin: not extractable this run (status 200) — recorded, nothing estimated"
+   ]
   }
  ],
- "capturedAt": "2026-09-20T17:28:54.498Z"
+ "capturedAt": "2026-09-20T18:01:04.011Z"
 }

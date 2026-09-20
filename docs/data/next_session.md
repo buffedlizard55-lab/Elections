@@ -55,7 +55,12 @@ Baseline after session 8: `npm test` = **90 tests (89 pass, 1 skip)**, `npm run 
    Las Vegas Review-Journal, Arizona Republic, Houston Chronicle, Detroit Free Press (news); a Metaculus
    collector for the third layer was DONE in session 7 (scripts/collect-metaculus.mjs) — a **Manifold
    collector** is the natural next third-layer piece (ROADMAP) if you want continuous crowd-price scoring.
-6. **GA Clarity post-Nov-3 readiness**: the probe runner reads GA (browser profile) while the plain fetcher
+6. **#65 recurrence watch**: the 16:22Z universe commit was a two-fetch-state splice (repaired in session 8:
+   replay rebuild + collector self-consistency guard + workflow recapture-after-rebase guard). In session 9,
+   spot-check the NEXT bot universe commit: `bySeries` event-sum must equal `counts.openEvents`, and the
+   offline replay test must pass on the merged tree (it is the canary). If the bot run's hash guard fired
+   (log line 'recapturing so the commit stays a single-run snapshot'), that is working as designed.
+7. **GA Clarity post-Nov-3 readiness**: the probe runner reads GA (browser profile) while the plain fetcher
    gets 403. Plan the GA/WV certification pull to use the probe-runner path (or a browser-profile fetch) on
    Nov 4+. The openelections/clarify parse path (detailxml.zip) is documented in the `clarity-enr` entry.
 
