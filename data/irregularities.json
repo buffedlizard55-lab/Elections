@@ -424,6 +424,15 @@
       "detail": "All captured 2026-09-19: Kalshi CONTROLS-2026-D yes_bid 0.59 / yes_ask 0.60 (this project's 15:59 UTC universe capture); Election Betting Odds' Kalshi row 58.4–59.4% (page stamp 19:42 EDT) with Polymarket 60.0–61.0, PredictIt 59.0–60.0, Betfair 56.6–58.2; DDHQ Votes 'Senate D 52%'; Metaculus hub Senate D 51.7%. On the House the layers agree far more closely (Kalshi 0.89/0.90, Metaculus 88.8%) except DDHQ (70%). The exchanges cluster at ~59–60 while the two forecast/model layers sit at ~52.",
       "action": "data/crosslayer/snapshots.json holds the rows; src/crosslayer.js keeps them status=pending and refuses to score until data/crosslayer/outcomes.json carries an official canvass with a source url (and refuses any snapshot captured on/after election day — the #37 look-ahead guard). After Nov 3 the site's Cross-layer section shows per-layer Brier/log-loss. Nothing is traded or asserted on this spread today.",
       "source": "https://www.metaculus.com/midterms-2026/"
+    },
+    {
+      "id": 58,
+      "severity": "medium",
+      "area": "Collector first live run",
+      "title": "First networked run of the three new collectors (2026-09-20, run 35477851906): State Navigate pages are client-rendered (0 of 35 parsed), the R13 renderers failed on un-decoded HTML entities, and the Metaculus collector left no row",
+      "detail": "Observed in the committed outputs: data/statenavigate/forecast-daily.json — national and all 34 chamber pages parse:'failed', samples show only the page shell ('2026 National Statehouse Forecast | State Navigate … Sign in … Data Downl'), i.e. the numbers seen through the rendering fetch tool on 2026-09-19 are injected client-side; data/statenavigate/api-probe.json — data.statenavigate.com now answers HTTP 200 at / and /index.html but the body is the single word 'Document' (still no readable API documentation; /api/ and /docs/ 404). data/kalshi/tracker/rendering-crosscheck.json — all three renderers extract:'failed' although status 200: the raw HTML carries '&nbsp' without semicolons, flag emoji as '&#x1F1FA&#x1F1F8' and split numbers ('D 70 %'), which the text-transcribed fixtures did not contain. data/crosslayer/metaculus-daily.json — absent: the collector threw before writing its row.",
+      "action": "Fixed in the same PR: entity decoding + '(\\d) %' normalisation in all three parsers (EBO and DDHQ now parse the raw samples), and the Metaculus collector writes a parse:'failed' row with the fetch error instead of dying. NOT fixable by regex: State Navigate's client rendering — collecting it automatically needs a headless-browser step or a recovered API; until then the Cross-layer section shows the hand-verified 2026-09-19 figures and labels them as such. Re-check after the next scheduled run; irregularity #55's 'HTTP 500' detail is superseded by '200 + empty shell'.",
+      "source": "https://github.com/buffedlizard55-lab/Elections/actions/runs/35477851906"
     }
   ]
 }

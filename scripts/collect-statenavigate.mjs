@@ -18,6 +18,9 @@
  * Output: data/statenavigate/forecast-daily.json (append-only rows, capturedFrom/capturedAt each),
  * plus data/statenavigate/api-probe.json (what data.statenavigate.com answered, every run).
  * Anything that fails to parse is recorded as parse:'failed' with a text sample — never filled in.
+ * KNOWN LIMIT (first live run 2026-09-20): the pages are client-rendered, so the raw-HTML fetch here sees only
+ * the shell and every row parses 'failed'. A headless-browser step (or a recovered API) is needed to collect the
+ * numbers automatically; until then the site shows the hand-verified 2026-09-19 figures and says so.
  *
  * Usage: node scripts/collect-statenavigate.mjs [--replay national.html] [--states va,wi,...]
  */
@@ -31,7 +34,12 @@ export const API_DOC_HOST = 'https://data.statenavigate.com/';
 export const LAUNCHED_STATES = ['ak', 'wi', 'mn', 'mi', 'ny', 'ia', 'pa', 'nj', 'ut', 'co', 'wv', 'va', 'nc', 'sc', 'ga', 'tx', 'fl']; // listed on the national page 2026-09-19
 export const stateUrl = (st, chamber) => `https://projects.statenavigate.com/25-26/states/${st}/forecast-${chamber}.html`;
 
-const strip = (html) => String(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
+// First live run 2026-09-20: the forecast pages are client-rendered — the raw HTML holds only the shell
+// ("2026 National Statehouse Forecast | State Navigate … Sign in …") and the numbers seen through a rendering
+// fetcher are absent. Before stripping, any inline JSON (__NEXT_DATA__ / application/json) is kept as text so
+// that server-embedded state, if present, can be matched; otherwise the row records parse:'failed' honestly.
+const keepJson = (html) => String(html).replace(/<script[^>]*type=["']application\/(?:ld\+)?json["'][^>]*>([\s\S]*?)<\/script>/gi, ' $1 ').replace(/<script[^>]*id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/gi, ' $1 ');
+const strip = (html) => keepJson(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;?/g, ' ').replace(/&#x[0-9a-f]+;?/gi, ' ').replace(/&#\d+;?/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/(\d)\s+%/g, '$1%').replace(/\s+/g, ' ');
 const int = (re, t) => { const m = t.match(re); return m ? Number(m[1].replace(/,/g, '')) : null; };
 
 /** National page: headline counts. Regexes match the phrases observed on 2026-09-19. */
@@ -106,7 +114,9 @@ async function main() {
       probe.results.push({ path: '/' + path, status: r.status, sample: strip(r.body).slice(0, 160) });
     } catch (e) { probe.results.push({ path: '/' + path, error: String(e.message).slice(0, 160) }); }
   }
-  probe.reachableDocs = probe.results.some((r) => r.status === 200 && /endpoint|api|GET /i.test(r.sample));
+  // 2026-09-20: the host now answers 200 but the body is an empty client-rendered shell ("Document") — still no
+  // readable documentation. reachableDocs stays false unless the text actually describes endpoints.
+  probe.reachableDocs = probe.results.some((r) => r.status === 200 && /endpoint|\/api\/v\d|GET \/|openapi|swagger/i.test(r.sample));
   writeFileSync(join(outDir, 'api-probe.json'), JSON.stringify(probe, null, 1) + '\n');
 
   // 2. Free forecast pages.

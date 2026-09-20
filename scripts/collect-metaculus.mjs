@@ -43,7 +43,7 @@ function pct(re, text) {
  * BEFORE the next heading, so a quadrant line can never be mistaken for a chamber line.
  */
 export function parseHub(html) {
-  const text = String(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\*\*/g, '').replace(/[ \t]+/g, ' ');
+  const text = String(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;?/g, ' ').replace(/&#x[0-9a-f]+;?/gi, ' ').replace(/&#\d+;?/g, ' ').replace(/&amp;/g, '&').replace(/\*\*/g, '').replace(/(\d)\s+%/g, '$1%').replace(/[ \t]+/g, ' ');
   const N = '(\\d{1,3}(?:\\.\\d)?)\\s*%';
   const chamber = (label) => {
     // heading (markdown "#### House" or bare "House") followed within 400 chars by "Democrats N% Republicans M%"
@@ -136,9 +136,11 @@ async function main() {
     html = readFileSync(argv[replayIdx + 1], 'utf8');
     via = `replay:${argv[replayIdx + 1]}`;
   } else {
-    html = await fetchText(HUB_URL);
+    try { html = await fetchText(HUB_URL); } catch (e) { html = null; var fetchError = String(e.message).slice(0, 300); }
   }
-  const parsed = parseHub(html);
+  // A fetch failure is a row too (parse:'failed' + the error) — the first live run 2026-09-20 wrote nothing because
+  // the process died before this point; that left no audit trail, which is the one thing the collector must never do.
+  const parsed = html == null ? { parse: 'failed', houseD: null, senateD: null, control: {}, consistencyFlags: [], fetchError } : parseHub(html);
   let api = null;
   if (process.env.METACULUS_API_TOKEN && replayIdx < 0) {
     try {

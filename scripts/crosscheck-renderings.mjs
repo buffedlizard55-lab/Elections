@@ -29,7 +29,12 @@ export const SOURCES = {
 };
 export const TOLERANCE = 0.03; // 3 points: renderers refresh every 1-20 min; our capture is once a day
 
-const strip = (html) => String(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
+// Raw HTML (as fetched by the collector) differs from the fetch-tool text the fixtures were transcribed from:
+// entities are un-decoded (&nbsp without a semicolon, &#x1F1FA flag emoji, &amp;) and numbers can be split
+// ("D 70 %"). First live run 2026-09-20 recorded extract:'failed' for all three renderers for exactly this reason.
+const strip = (html) => String(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ')
+  .replace(/&nbsp;?/g, ' ').replace(/&#x[0-9a-f]+;?/gi, ' ').replace(/&#\d+;?/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/(\d)\s+%/g, '$1%').replace(/\s+/g, ' ');
 
 /** EBO: the block titled "Senate Control 2026" contains "DEM ... Kalshi ... 58.4-59.4%" and "REP ... Kalshi ... 40.6-41.6%". */
 export function parseEbo(html) {
@@ -46,7 +51,7 @@ export function parseEbo(html) {
 /** DDHQ Votes: "House D 70%" / "Senate D 52%" style figures (DDHQ's own odds). */
 export function parseDdhq(html) {
   const t = strip(html);
-  const pick = (label) => { const m = t.match(new RegExp(`${label}[^%]{0,80}?D(?:em(?:ocrat)?s?)?[^%\\d]{0,30}(\\d{1,3})%`, 'i')); return m ? Number(m[1]) / 100 : null; };
+  const pick = (label) => { const m = t.match(new RegExp(`\\b${label}\\s*D(?:em(?:ocrat)?s?)?\\s*(\\d{1,3})%`, 'i')) || t.match(new RegExp(`\\b${label}[^%]{0,80}?D(?:em(?:ocrat)?s?)?[^%\\d]{0,30}(\\d{1,3})%`, 'i')); return m ? Number(m[1]) / 100 : null; };
   const out = { extract: 'ok', houseD: pick('House'), senateD: pick('Senate') };
   if (out.houseD == null && out.senateD == null) { out.extract = 'failed'; out.sample = t.slice(0, 300); }
   return out;

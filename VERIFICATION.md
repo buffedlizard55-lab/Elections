@@ -534,4 +534,4 @@ logistic mapping caveat (#12); the k=4.5 mapping saturates on a 25-point lead an
 R13 parsers, seed-snapshot consistency with the captured universe) and three new assertions in
 `test/site-sources.test.mjs` (session-6 ids/statuses, #49 labels on the five rows, the Cross-layer section rendering
 its 7.8-point Senate spread). `npm run pipeline` regenerated the bundle and the headless render check passed all
-12 sections (Cross-layer added). New irregularities: #54–#57.
+12 sections (Cross-layer added). New irregularities: #54–#57 (+ #58 from the first live collector run on 2026-09-20, see IRREGULARITIES.md).

@@ -8,7 +8,7 @@ is auth-walled, #54) and State Navigate (free forecast pages; API host 500 + Tie
 **all 8 re-tests** (CourtListener recovered → admitted; SurveyUSA/HarrisX still fail; PEC/Split Ticket
 still no current-cycle content; WI/NV/CA/MA blocks unchanged), **standing monitors** (R13
 `scripts/crosscheck-renderings.mjs`; Franklin & Marshall admitted after fetching fandmpoll.org's own
-release), and **20 new master entries** (registry 125 → **147**; irregularities 53 → **57**; suite
+release), and **20 new master entries** (registry 125 → **147**; irregularities 53 → **58**; suite
 71 → **82 tests**; site gained a **Cross-layer** section). Evidence: `VERIFICATION.md` §11.
 
 ## What to do first in session 7
