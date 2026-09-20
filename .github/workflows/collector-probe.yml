@@ -10,9 +10,17 @@
 #   4. scripts/crosscheck-renderings.mjs-> data/kalshi/tracker/rendering-crosscheck.json
 # Headless Chrome (pre-installed on the ubuntu runner image) is used by the collectors for client-rendered
 # pages and after a bot interstitial; each output row records which fetch method produced it.
-# Manual trigger only (workflow_dispatch). The daily workflow runs the same steps once a day.
+# Triggers: manual (workflow_dispatch) and a push that touches the probe itself (GitHub only registers a new
+# workflow for manual dispatch once it exists on the default branch, so the push trigger is what runs it first
+# on a working branch). The daily workflow runs the same steps once a day.
 name: collector-probe
 on:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/collector-probe.yml'
+      - 'scripts/probe-hosts.mjs'
+      - 'data/probes/targets.json'
   workflow_dispatch:
     inputs:
       only:
@@ -53,7 +61,8 @@ jobs:
       - name: Host re-test monitor
         continue-on-error: true
         run: |
-          if [ -n "${{ inputs.only }}" ]; then node scripts/probe-hosts.mjs --only "${{ inputs.only }}"; else node scripts/probe-hosts.mjs; fi
+          ONLY="${{ inputs.only }}"
+          if [ -n "$ONLY" ]; then node scripts/probe-hosts.mjs --only "$ONLY"; else node scripts/probe-hosts.mjs; fi
 
       - name: Metaculus collector (hub + question pages)
         continue-on-error: true
@@ -88,7 +97,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit small outputs
-        if: ${{ inputs.commit == 'true' && !cancelled() }}
+        if: ${{ (github.event_name == 'push' || inputs.commit == 'true') && !cancelled() }}
         run: |
           git config user.name "elections-collector[bot]"
           git config user.email "elections-collector[bot]@users.noreply.github.com"
