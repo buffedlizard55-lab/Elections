@@ -1,0 +1,1064 @@
+{
+ "title": "Host re-test monitor — what each previously unreachable URL answered from this runner",
+ "capturedFrom": "data/probes/targets.json (URLs) fetched by scripts/probe-hosts.mjs",
+ "capturedAt": "2026-09-20T05:38:05.361Z",
+ "runner": {
+  "platform": "linux",
+  "node": "v22.23.2",
+  "chrome": "/usr/bin/google-chrome",
+  "github": {
+   "runId": "35490431271",
+   "workflow": "daily-collection",
+   "ref": "arena/01a0bca8-elections"
+  }
+ },
+ "method": "Project user-agent first; browser-like profile only after a 403/503 or a bot interstitial; headless Chrome render for render:true targets when a binary exists. Verdicts describe reachability from this vantage point only — a source is admitted to the registry only after a session reads the page and records the observed text.",
+ "summary": {
+  "surveyusa-surveypoll": "error",
+  "surveyusa-corporate": "reachable",
+  "harrisx": "reachable",
+  "thehillx": "error",
+  "courtlistener-api": "reachable",
+  "pec": "reachable",
+  "split-ticket": "reachable",
+  "wi-elections-voting": "blocked-cloudflare-challenge",
+  "nv-sos-elections": "blocked-akamai-block",
+  "ca-elections-cdn": "http-403",
+  "ma-elections-root": "blocked-imperva-block",
+  "ga-clarity": "reachable",
+  "nh-sos-elections": "reachable",
+  "nyt-siena-ak-toplines": "http-403",
+  "healthyelections-org": "error",
+  "selzerco": "reachable",
+  "statenavigate-api-docs": "reachable",
+  "statenavigate-national": "reachable",
+  "metaculus-hub": "reachable-rendered-only",
+  "metaculus-senate-states": "reachable-rendered-only",
+  "muhlenberg-poll-library": "reachable",
+  "fandmpoll": "reachable",
+  "270towin-home": "reachable",
+  "cnalysis-redirect": "reachable",
+  "surveyusa-poll-28000": "reachable",
+  "surveyusa-archive": "reachable",
+  "ca-electionresults": "reachable",
+  "wv-clarity": "reachable",
+  "hpu-poll-120": "reachable",
+  "winthrop-poll-results": "reachable"
+ },
+ "rows": [
+  {
+   "id": "surveyusa-surveypoll",
+   "url": "https://www.surveypoll.com/",
+   "name": "SurveyUSA (client results host)",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:05.364Z",
+   "fetch": {
+    "ok": false,
+    "status": 0,
+    "finalUrl": null,
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "error": "fetch failed"
+     },
+     {
+      "profile": "browser",
+      "error": "fetch failed"
+     }
+    ],
+    "title": null,
+    "sample": null,
+    "error": "fetch failed"
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "www.surveypoll.com",
+    "textLength": 182,
+    "sample": "www.surveypoll.com This site can’t provide a secure connection www.surveypoll.com sent an invalid response. ERR_SSL_PROTOCOL_ERROR Reload www.surveypoll.com sent an invalid response.",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 185348,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "error"
+  },
+  {
+   "id": "surveyusa-corporate",
+   "url": "https://www.surveyusa.com/",
+   "name": "SurveyUSA (corporate site)",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:07.112Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.surveyusa.com/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.surveyusa.com/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 260011,
+      "challenge": null
+     }
+    ],
+    "title": "SurveyUSA",
+    "sample": "SurveyUSA Skip to content Skip to footer SurveyUSA Menu Home Who we are Our difference Our clients Our data Polling History Case Studies Contact us QUEST winner World’s #1 research company for mobile questionnaires. Top 10 Pollster Rated \"A\" by expert Nate Silver and ranked in the top 1.9% of pollin",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "harrisx",
+   "url": "https://harrisx.com/",
+   "name": "HarrisX (political polling brand; not Harris Poll)",
+   "irregularity": 43,
+   "capturedAt": "2026-09-20T05:38:07.795Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.harrisx.com/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.harrisx.com/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 141827,
+      "challenge": null
+     }
+    ],
+    "title": "HarrisX",
+    "sample": "HarrisX About Solutions Dashboards Our Work News Contact Us Global EMEA APAC Access the latest insights on the 2024 Election through HarrisX s exclusive Dashboard See insights from 2020 s most accurate pollster and discover rich, trended data, track key races, and explore key groups leading up to El",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "thehillx",
+   "url": "https://thehillx.com/",
+   "name": "The Hill / HarrisX poll site",
+   "irregularity": 43,
+   "capturedAt": "2026-09-20T05:38:08.705Z",
+   "fetch": {
+    "ok": false,
+    "status": 0,
+    "finalUrl": null,
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "error": "fetch failed"
+     },
+     {
+      "profile": "browser",
+      "error": "fetch failed"
+     }
+    ],
+    "title": null,
+    "sample": null,
+    "error": "fetch failed"
+   },
+   "verdict": "error"
+  },
+  {
+   "id": "courtlistener-api",
+   "url": "https://www.courtlistener.com/api/rest/v4/",
+   "name": "CourtListener REST API root (v4)",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:09.187Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.courtlistener.com/api/rest/v4/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.courtlistener.com/api/rest/v4/",
+      "contentType": "application/json",
+      "bytes": 3491,
+      "challenge": null
+     }
+    ],
+    "title": null,
+    "sample": "{\"search\":\"https://www.courtlistener.com/api/rest/v4/search/\",\"dockets\":\"https://www.courtlistener.com/api/rest/v4/dockets/\",\"bankruptcy-information\":\"https://www.courtlistener.com/api/rest/v4/bankruptcy-information/\",\"originating-court-information\":\"https://www.courtlistener.com/api/rest/v4/origina",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "pec",
+   "url": "https://election.princeton.edu/",
+   "name": "Princeton Election Consortium",
+   "irregularity": 53,
+   "capturedAt": "2026-09-20T05:38:09.758Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://election.princeton.edu/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://election.princeton.edu/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 62743,
+      "challenge": null
+     }
+    ],
+    "title": "Princeton Election Consortium",
+    "sample": "Princeton Election Consortium Home About Us Methods Sam Wang Contact Races 2020 Forecasts 2016 Forecasts 2012 Forecasts 2008 Forecasts 2004 Forecasts Moneyball Articles Congress Moneyball Senate Democracy Meta Analysis Site News Election Politics Supreme Court Governors President UK Health Princeton",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "split-ticket",
+   "url": "https://split-ticket.org/",
+   "name": "Split Ticket",
+   "irregularity": 53,
+   "capturedAt": "2026-09-20T05:38:10.647Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://split-ticket.org/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://split-ticket.org/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 201033,
+      "challenge": null
+     }
+    ],
+    "title": "Split Ticket Elections at your fingertips",
+    "sample": "Split Ticket Elections at your fingertips Skip to content Split Ticket Elections at your fingertips Archive WAR Database Projects Full Wins Above Replacement (WAR) Database 2024 Wins Above Replacement (WAR) 2024 House WAR 2024 Senate WAR 2022 Wins Above Replacement (WAR) 2022 House WAR 2022 Senate W",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "wi-elections-voting",
+   "url": "https://elections.wi.gov/elections-voting",
+   "name": "Wisconsin Elections Commission — /elections-voting",
+   "irregularity": 40,
+   "capturedAt": "2026-09-20T05:38:11.238Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://elections.wi.gov/elections-voting",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://elections.wi.gov/elections-voting",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5625,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://elections.wi.gov/elections-voting",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5860,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "title": "Just a moment...",
+    "sample": "Just a moment...",
+    "error": null
+   },
+   "verdict": "blocked-cloudflare-challenge"
+  },
+  {
+   "id": "nv-sos-elections",
+   "url": "https://www.nvsos.gov/sos-elections",
+   "name": "Nevada SoS — legacy /sos-elections path",
+   "irregularity": 41,
+   "capturedAt": "2026-09-20T05:38:11.885Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://www.nvsos.gov/sos-elections",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.nvsos.gov/sos-elections",
+      "contentType": "text/html",
+      "bytes": 596,
+      "challenge": "akamai-block"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.nvsos.gov/sos-elections",
+      "contentType": "text/html",
+      "bytes": 596,
+      "challenge": "akamai-block"
+     }
+    ],
+    "title": "Access Denied",
+    "sample": "Access Denied Access Denied You don't have permission to access \"http www nvsos gov sos elections\" on this server. Reference 18 97a5dc17 1789882692 13a507bf https errors edgesuite net 18 97a5dc17 1789882692 13a507bf",
+    "error": null
+   },
+   "verdict": "blocked-akamai-block"
+  },
+  {
+   "id": "ca-elections-cdn",
+   "url": "https://elections.cdn.sos.ca.gov/",
+   "name": "California SoS results/statements CDN",
+   "irregularity": 42,
+   "capturedAt": "2026-09-20T05:38:12.522Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://elections.cdn.sos.ca.gov/",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://elections.cdn.sos.ca.gov/",
+      "contentType": "application/xml",
+      "bytes": 111,
+      "challenge": null
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://elections.cdn.sos.ca.gov/",
+      "contentType": "application/xml",
+      "bytes": 111,
+      "challenge": null
+     }
+    ],
+    "title": null,
+    "sample": "AccessDenied Access Denied",
+    "error": null
+   },
+   "verdict": "http-403"
+  },
+  {
+   "id": "ma-elections-root",
+   "url": "https://www.sec.state.ma.us/divisions/elections/",
+   "name": "Massachusetts Elections Division root",
+   "irregularity": 51,
+   "capturedAt": "2026-09-20T05:38:13.132Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://www.sec.state.ma.us/divisions/elections/",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.sec.state.ma.us/divisions/elections/",
+      "contentType": "text/html",
+      "bytes": 1365,
+      "challenge": "imperva-block"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.sec.state.ma.us/divisions/elections/",
+      "contentType": "text/html",
+      "bytes": 1367,
+      "challenge": "imperva-block"
+     }
+    ],
+    "title": "403 - Forbidden: Access is denied.",
+    "sample": "403 - Forbidden: Access is denied. Server Error 403 - Forbidden: Access is denied. You do not have permission to view this directory or page using the credentials that you supplied.",
+    "error": null
+   },
+   "verdict": "blocked-imperva-block"
+  },
+  {
+   "id": "ga-clarity",
+   "url": "https://results.enr.clarityelections.com/GA/",
+   "name": "Georgia official results host (Clarity/Scytl ENR)",
+   "irregularity": 35,
+   "capturedAt": "2026-09-20T05:38:13.865Z",
+   "fetch": {
+    "ok": true,
+    "status": 202,
+    "finalUrl": "https://results.enr.clarityelections.com/GA/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 202,
+      "finalUrl": "https://results.enr.clarityelections.com/GA/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 2399,
+      "challenge": null
+     }
+    ],
+    "title": "",
+    "sample": "",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "403 Forbidden",
+    "textLength": 33,
+    "sample": "403 Forbidden 403 Forbidden nginx",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 139,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "nh-sos-elections",
+   "url": "https://www.sos.nh.gov/elections",
+   "name": "New Hampshire SoS elections",
+   "irregularity": 35,
+   "capturedAt": "2026-09-20T05:38:15.559Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.sos.nh.gov/elections",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.sos.nh.gov/elections",
+      "contentType": "text/html",
+      "bytes": 381,
+      "challenge": "akamai-block"
+     },
+     {
+      "profile": "browser",
+      "status": 200,
+      "finalUrl": "https://www.sos.nh.gov/elections",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 2963449,
+      "challenge": null
+     }
+    ],
+    "title": "Elections | New Hampshire Secretary of State",
+    "sample": "Elections | New Hampshire Secretary of State Skip to main content A A A Change Text Size Change Site Language Search The Site CLOSE MAKE TEXT SMALLER MAKE TEXT LARGER CLOSE Powered by: Reset Language to English CLOSE Search entire site by keyword or topic SEARCH New Hampshire Secretary of State Davi",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "nyt-siena-ak-toplines",
+   "url": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+   "name": "NYT/Siena Alaska toplines (n / MoE / field dates)",
+   "irregularity": 35,
+   "capturedAt": "2026-09-20T05:38:16.637Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+      "contentType": "text/html;charset=utf-8",
+      "bytes": 771,
+      "challenge": null
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+      "contentType": "text/html;charset=utf-8",
+      "bytes": 771,
+      "challenge": null
+     }
+    ],
+    "title": "nytimes.com",
+    "sample": "nytimes.com Please enable JS and disable any ad blocker",
+    "error": null
+   },
+   "verdict": "http-403"
+  },
+  {
+   "id": "healthyelections-org",
+   "url": "https://healthyelections.org/",
+   "name": "healthyelections.org (Stanford–MIT project, archived at MIT)",
+   "irregularity": 45,
+   "capturedAt": "2026-09-20T05:38:17.270Z",
+   "fetch": {
+    "ok": false,
+    "status": 0,
+    "finalUrl": null,
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "error": "fetch failed"
+     },
+     {
+      "profile": "browser",
+      "error": "fetch failed"
+     }
+    ],
+    "title": null,
+    "sample": null,
+    "error": "fetch failed"
+   },
+   "verdict": "error"
+  },
+  {
+   "id": "selzerco",
+   "url": "https://selzerco.com/",
+   "name": "Selzer & Co.",
+   "irregularity": 48,
+   "capturedAt": "2026-09-20T05:38:18.350Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://selzerco.com/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://selzerco.com/",
+      "contentType": "text/html",
+      "bytes": 10548,
+      "challenge": null
+     }
+    ],
+    "title": "Selzer & Co.",
+    "sample": "Selzer & Co. Skip to primary navigation Skip to content Main Content The best news I can give to any client is the truth. This informs the way I approach their problem, develop methods, analyze data, and report results. It is a core value. Over the years, the accuracy of my work has won wide praise,",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "Selzer & Co.",
+    "textLength": 2518,
+    "sample": "Selzer & Co. Skip to primary navigation Skip to content Main Content The best news I can give to any client is the truth. This informs the way I approach their problem, develop methods, analyze data, and report results. It is a core value. Over the years, the accuracy of my work has won wide praise,",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 10543,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "statenavigate-api-docs",
+   "url": "https://data.statenavigate.com/",
+   "name": "State Navigate API documentation host",
+   "irregularity": 55,
+   "capturedAt": "2026-09-20T05:38:20.086Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://data.statenavigate.com/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://data.statenavigate.com/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 205,
+      "challenge": null
+     }
+    ],
+    "title": "Document",
+    "sample": "Document",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "Document",
+    "textLength": 8,
+    "sample": "Document",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 205,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "statenavigate-national",
+   "url": "https://projects.statenavigate.com/25-26/national/",
+   "name": "State Navigate national forecast page",
+   "irregularity": 58,
+   "capturedAt": "2026-09-20T05:38:21.164Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://projects.statenavigate.com/25-26/national/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://projects.statenavigate.com/25-26/national/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 18227,
+      "challenge": null
+     }
+    ],
+    "title": "2026 National Statehouse Forecast | State Navigate",
+    "sample": "2026 National Statehouse Forecast | State Navigate Skip to the national forecast About Us ↘ Get Connected ↘ Events Select a State ↘ Donate → Atlas Menu × ⌕ Search State Navigate ⌘K How it works Keyboard shortcuts → Sign in Appearance Theme About Us Get Connected Events Select a State Atlas Compare A",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "2026 National Statehouse Forecast | State Navigate",
+    "textLength": 5549,
+    "sample": "2026 National Statehouse Forecast | State Navigate Skip to the national forecast About Us ↘ Our Mission About Us Donors Get Connected ↘ Sponsorships Donate Data Downloads Newsletter Contact Us Events Select a State ↘ Alaska Colorado Florida Georgia Iowa Michigan Minnesota New Jersey New York North C",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 90592,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "metaculus-hub",
+   "url": "https://www.metaculus.com/midterms-2026/",
+   "name": "Metaculus midterms hub",
+   "irregularity": 58,
+   "capturedAt": "2026-09-20T05:38:23.103Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://www.metaculus.com/midterms-2026/",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5641,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5855,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "title": "Just a moment...",
+    "sample": "Just a moment...",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "2026 US Midterm Elections | Metaculus",
+    "textLength": 27968,
+    "sample": "2026 US Midterm Elections | Metaculus Questions Tournaments Services News Questions Tournaments Questions Questions More Log in Sign Up Log in Sign Up 2026 US Midterm Elections Real-time forecasts from the Metaculus community. Forecasts from the Metaculus community on contested races and the policie",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 4675088,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable-rendered-only"
+  },
+  {
+   "id": "metaculus-senate-states",
+   "url": "https://www.metaculus.com/questions/40598/",
+   "name": "Metaculus — Democrat wins 2026 Senate election in these states? (question group)",
+   "irregularity": 58,
+   "capturedAt": "2026-09-20T05:38:31.527Z",
+   "fetch": {
+    "ok": false,
+    "status": 403,
+    "finalUrl": "https://www.metaculus.com/questions/40598/",
+    "profile": "browser",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/questions/40598/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5647,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/questions/40598/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5882,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "title": "Just a moment...",
+    "sample": "Just a moment...",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "Democrat Wins 2026 Senate Election in these states?",
+    "textLength": 5055,
+    "sample": "Democrat Wins 2026 Senate Election in these states? Questions Tournaments Services News Questions Tournaments Questions Questions More Log in Sign Up Log in Sign Up 8 125 forecasters 3 8 comments Closes Nov 3, 2026 125 forecasters US Midterms 2026 3 more ... Will the Democratic candidate win the 202",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 28668,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "budgetMs": 35000,
+      "bytes": 2044108,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable-rendered-only"
+  },
+  {
+   "id": "muhlenberg-poll-library",
+   "url": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
+   "name": "Muhlenberg College Institute of Public Opinion — poll library",
+   "irregularity": 49,
+   "capturedAt": "2026-09-20T05:38:38.865Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 190457,
+      "challenge": null
+     }
+    ],
+    "title": "Muhlenberg College | Poll Library - Muhlenberg College",
+    "sample": "Muhlenberg College | Poll Library - Muhlenberg College Poll Library - Muhlenberg College Skip to main content Alumni Donors Give Magazine Apply About Us Admissions and Aid Academics Muhlenberg Experience Athletics Mission and Values History Lutheran Heritage Traditions Our Community Life in the Lehi",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "fandmpoll",
+   "url": "https://www.fandmpoll.org/",
+   "name": "Franklin & Marshall College Poll (fandmpoll.org)",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:39.407Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.fandmpoll.org/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.fandmpoll.org/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 128133,
+      "challenge": null
+     }
+    ],
+    "title": "Franklin & Marshall College Poll",
+    "sample": "Franklin & Marshall College Poll Skip to content Home About All Posts Topics Poll Archive Our Team Contact Log in Membership Search Welcome to the Franklin & Marshall College Poll Newsletter! Here, you can take a deep dive into Pennsylvania politics, elections, public policy, and topics of social in",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "270towin-home",
+   "url": "https://www.270towin.com/",
+   "name": "270toWin homepage (Kalshi panel for the R13 monitor)",
+   "irregularity": 58,
+   "capturedAt": "2026-09-20T05:38:39.991Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.270towin.com/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.270towin.com/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 183238,
+      "challenge": null
+     }
+    ],
+    "title": "270toWin - 2028 Presidential Election Interactive Map",
+    "sample": "270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 20",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "cnalysis-redirect",
+   "url": "https://cnalysis.com/",
+   "name": "cnalysis.com (retired brand → statenavigate.org)",
+   "irregularity": 52,
+   "capturedAt": "2026-09-20T05:38:40.513Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://statenavigate.org/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://statenavigate.org/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 125378,
+      "challenge": null
+     }
+    ],
+    "title": "State Navigate | State Data & News",
+    "sample": "State Navigate | State Data & News Skip to main content About Us ↘ Get Connected ↘ Events Select a State ↘ Donate → Atlas Menu × ⌕ Search State Navigate ⌘K How it works Keyboard shortcuts → Sign in Appearance Theme About Us Get Connected Events Select a State Atlas Compare Atlas Filter Data Download",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "surveyusa-poll-28000",
+   "url": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
+   "name": "SurveyUSA Poll #28000 (Minnesota, 09/16/26) report page",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:41.194Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
+      "contentType": "text/html",
+      "bytes": 630,
+      "challenge": null
+     }
+    ],
+    "title": "SurveyUSA Election Poll #28000",
+    "sample": "SurveyUSA Election Poll #28000",
+    "error": null
+   },
+   "render": {
+    "ok": true,
+    "bin": "/usr/bin/google-chrome",
+    "challenge": null,
+    "title": "SurveyUSA Election Poll #28000",
+    "textLength": 30,
+    "sample": "SurveyUSA Election Poll #28000",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "bytes": 623,
+      "challenge": null
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "surveyusa-archive",
+   "url": "https://results.surveyusa.com/PollHistory.aspx",
+   "name": "SurveyUSA public poll archive (index)",
+   "irregularity": 47,
+   "capturedAt": "2026-09-20T05:38:43.533Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://results.surveyusa.com/PollHistory.aspx",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://results.surveyusa.com/PollHistory.aspx",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 23945,
+      "challenge": null
+     }
+    ],
+    "title": "SurveyUSA Polls",
+    "sample": "SurveyUSA Polls POLLS Show me polls released during: January February March April May June July August September October November December 2026 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011 2010 2009 2008 2007 2006 2005 2004 2003 2002 09/16/26 Poll #28000 All SurveyUSA c",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "ca-electionresults",
+   "url": "https://electionresults.sos.ca.gov/",
+   "name": "California SoS live results host",
+   "irregularity": 42,
+   "capturedAt": "2026-09-20T05:38:44.140Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://electionresults.sos.ca.gov/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://electionresults.sos.ca.gov/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 15702,
+      "challenge": null
+     }
+    ],
+    "title": "Election Night Results | 2026 Special Election | California Secretary of State",
+    "sample": "Election Night Results | 2026 Special Election | California Secretary of State Skip to Main Content Secretary of State Main Website Elections & Voter Information Prior Election Results Campaign Finance California Special Election Tuesday, August 18, 2026--> California Special Election Tuesday, Augus",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "wv-clarity",
+   "url": "https://results.enr.clarityelections.com/WV/126209",
+   "name": "West Virginia primary results (Clarity ENR)",
+   "irregularity": 35,
+   "capturedAt": "2026-09-20T05:38:44.911Z",
+   "fetch": {
+    "ok": true,
+    "status": 202,
+    "finalUrl": "https://results.enr.clarityelections.com/WV/126209",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 202,
+      "finalUrl": "https://results.enr.clarityelections.com/WV/126209",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 2399,
+      "challenge": null
+     }
+    ],
+    "title": "",
+    "sample": "",
+    "error": null
+   },
+   "render": {
+    "ok": false,
+    "reason": "spawnSync /usr/bin/google-chrome ETIMEDOUT",
+    "bin": "/usr/bin/google-chrome",
+    "attempts": [
+     {
+      "budgetMs": 20000,
+      "error": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
+     },
+     {
+      "budgetMs": 35000,
+      "error": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
+     }
+    ]
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "hpu-poll-120",
+   "url": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
+   "name": "HPU Poll 120 (NC Senate, April 2026) release",
+   "irregularity": null,
+   "capturedAt": "2026-09-20T05:40:30.445Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 313882,
+      "challenge": null
+     }
+    ],
+    "title": "HPU Poll 120: North Carolina Likely Voters Weigh in on U.S. Senate, North Carolina Supreme Court Races | High Point University",
+    "sample": "HPU Poll 120: North Carolina Likely Voters Weigh in on U.S. Senate, North Carolina Supreme Court Races | High Point University Skip to Main Content Menu Request Info Tour Apply Search Request Info Tour Apply Admissions Undergraduate Admissions Office of Undergraduate Admissions Undergraduate Tuition",
+    "error": null
+   },
+   "verdict": "reachable"
+  },
+  {
+   "id": "winthrop-poll-results",
+   "url": "https://www.winthrop.edu/winthroppoll/poll-results.aspx",
+   "name": "Winthrop Poll results index",
+   "irregularity": null,
+   "capturedAt": "2026-09-20T05:40:31.168Z",
+   "fetch": {
+    "ok": true,
+    "status": 200,
+    "finalUrl": "https://www.winthrop.edu/winthroppoll/poll-results.aspx",
+    "profile": "project",
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 200,
+      "finalUrl": "https://www.winthrop.edu/winthroppoll/poll-results.aspx",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 100846,
+      "challenge": null
+     }
+    ],
+    "title": "Winthrop",
+    "sample": "--> --> --> --> Winthrop --> Winthrop Poll - Poll Results | Winthrop University Skip to main content Apply Now Quick Links Email Wingspan Blackboard Map Zoom Eagle Engage Search Site People Go! Admissions Undergraduate Graduate Elevate (CBE) Adult Learners Transfer Military/Veterans International Du",
+    "error": null
+   },
+   "verdict": "reachable"
+  }
+ ]
+}

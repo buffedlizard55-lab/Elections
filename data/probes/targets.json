@@ -1,0 +1,248 @@
+{
+ "title": "Host re-test targets — every URL this project could NOT read (or could read only through the rendering fetch tool) is re-tested from the GitHub-hosted runner by scripts/probe-hosts.mjs",
+ "capturedFrom": "IRREGULARITIES.md (#35, #40–#43, #45, #47, #48, #51–#55, #58) and NEXT_SESSION.md re-test list",
+ "capturedAt": "2026-09-20",
+ "method": "Each target is fetched with the project user-agent, then (only if the answer is a 403/503 or a bot interstitial) with a browser-like header profile; targets marked render:true are additionally rendered in headless Chrome when a binary exists on the runner. The probe records status codes, interstitial type, <title> and a 300-character text sample per attempt. It never admits a source by itself: a 'reachable' verdict is the cue for a human-in-the-loop session to fetch the page, read it and write the observed text into data/sources/master.json.",
+ "targets": [
+  {
+   "id": "surveyusa-surveypoll",
+   "url": "https://www.surveypoll.com/",
+   "name": "SurveyUSA (client results host)",
+   "irregularity": 47,
+   "why": "Old client-results host; still failed 2026-09-20. The live archive is results.surveyusa.com (admitted 2026-09-20 as 'surveyusa') — this target stays only to document the dead host.",
+   "render": true
+  },
+  {
+   "id": "surveyusa-corporate",
+   "url": "https://www.surveyusa.com/",
+   "name": "SurveyUSA (corporate site)",
+   "irregularity": 47,
+   "why": "Second host for the same pollster; a reachable corporate site is not enough on its own — the releases live in the results.surveyusa.com archive (admitted 2026-09-20 as 'surveyusa'; the corporate site links to it).",
+   "render": false
+  },
+  {
+   "id": "harrisx",
+   "url": "https://harrisx.com/",
+   "name": "HarrisX (political polling brand; not Harris Poll)",
+   "irregularity": 43,
+   "why": "#43: harrispoll.com is consumer research; the political brand's hosts (harrisx.com, thehillx.com) were unfetchable in sessions 4–6. Resolved 2026-09-20: www.harrisx.com fetched directly and admitted ('harrisx'); kept to watch for regressions.",
+   "render": false
+  },
+  {
+   "id": "thehillx",
+   "url": "https://thehillx.com/",
+   "name": "The Hill / HarrisX poll site",
+   "irregularity": 43,
+   "why": "Same pollster, publication host used in sessions 4–6.",
+   "render": false
+  },
+  {
+   "id": "courtlistener-api",
+   "url": "https://www.courtlistener.com/api/rest/v4/",
+   "name": "CourtListener REST API root (v4)",
+   "irregularity": 47,
+   "why": "courtlistener.com was admitted in session 6 after the site recovered; the API root is the machine path for election-law dockets (anonymous access is rate-limited per its docs — recorded, not assumed). Resolved 2026-09-20: /api/rest/v4/ answered HTTP 200 to the session fetcher.",
+   "render": false
+  },
+  {
+   "id": "pec",
+   "url": "https://election.princeton.edu/",
+   "name": "Princeton Election Consortium",
+   "irregularity": 53,
+   "why": "Declined in session 5 for absence of current-cycle content; re-admit only if 2026 forecasts appear on-site (#53 criteria).",
+   "render": false
+  },
+  {
+   "id": "split-ticket",
+   "url": "https://split-ticket.org/",
+   "name": "Split Ticket",
+   "irregularity": 53,
+   "why": "Declined in session 5 (analysis moved to The Argument); re-admit only if free 2026 ratings/model pages return (#53 criteria).",
+   "render": false
+  },
+  {
+   "id": "wi-elections-voting",
+   "url": "https://elections.wi.gov/elections-voting",
+   "name": "Wisconsin Elections Commission — /elections-voting",
+   "irregularity": 40,
+   "why": "#40: 'Access denied' to the fetcher while the root fetched fine.",
+   "render": false
+  },
+  {
+   "id": "nv-sos-elections",
+   "url": "https://www.nvsos.gov/sos-elections",
+   "name": "Nevada SoS — legacy /sos-elections path",
+   "irregularity": 41,
+   "why": "#41: 404; canonical is /elections (already in the registry). Kept to detect a redirect appearing.",
+   "render": false
+  },
+  {
+   "id": "ca-elections-cdn",
+   "url": "https://elections.cdn.sos.ca.gov/",
+   "name": "California SoS results/statements CDN",
+   "irregularity": 42,
+   "why": "#42: S3 AccessDenied at the root; deep statement-of-vote PDFs are the target after Nov 3.",
+   "render": false
+  },
+  {
+   "id": "ma-elections-root",
+   "url": "https://www.sec.state.ma.us/divisions/elections/",
+   "name": "Massachusetts Elections Division root",
+   "irregularity": 51,
+   "why": "#51: root 403 while /divisions/elections/elections-and-voting.htm fetched (registry uses the deep page).",
+   "render": false
+  },
+  {
+   "id": "ga-clarity",
+   "url": "https://results.enr.clarityelections.com/GA/",
+   "name": "Georgia official results host (Clarity/Scytl ENR)",
+   "irregularity": 35,
+   "why": "#35: 403 to the fetcher; needed for GA certification links after Nov 3.",
+   "render": true
+  },
+  {
+   "id": "nh-sos-elections",
+   "url": "https://www.sos.nh.gov/elections",
+   "name": "New Hampshire SoS elections",
+   "irregularity": 35,
+   "why": "#35: results pages 403 to the fetcher; NH has a 2026 Senate race (SENATENH-26) and no registry entry yet.",
+   "render": false
+  },
+  {
+   "id": "nyt-siena-ak-toplines",
+   "url": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
+   "name": "NYT/Siena Alaska toplines (n / MoE / field dates)",
+   "irregularity": 35,
+   "why": "Four poll-layer rows carry review:true because these pages return 403; a readable copy lets a session transcribe n/MoE.",
+   "render": false
+  },
+  {
+   "id": "healthyelections-org",
+   "url": "https://healthyelections.org/",
+   "name": "healthyelections.org (Stanford–MIT project, archived at MIT)",
+   "irregularity": 45,
+   "why": "#45: HTTP 500; registry points at the MIT archive copy.",
+   "render": false
+  },
+  {
+   "id": "selzerco",
+   "url": "https://selzerco.com/",
+   "name": "Selzer & Co.",
+   "irregularity": 48,
+   "why": "#48: empty JavaScript shell; rendered here to see whether any content exists behind it.",
+   "render": true
+  },
+  {
+   "id": "statenavigate-api-docs",
+   "url": "https://data.statenavigate.com/",
+   "name": "State Navigate API documentation host",
+   "irregularity": 55,
+   "why": "#55/#58: 500 via the fetch tool, an empty client-rendered shell ('Document') from the runner; rendering may expose the documented endpoints.",
+   "render": true
+  },
+  {
+   "id": "statenavigate-national",
+   "url": "https://projects.statenavigate.com/25-26/national/",
+   "name": "State Navigate national forecast page",
+   "irregularity": 58,
+   "why": "#58: numbers are injected client-side; the rendered DOM is what the collector needs.",
+   "render": true
+  },
+  {
+   "id": "metaculus-hub",
+   "url": "https://www.metaculus.com/midterms-2026/",
+   "name": "Metaculus midterms hub",
+   "irregularity": 58,
+   "why": "#58: Cloudflare 'Just a moment...' (403) from the runner on 2026-09-20 with the project user-agent.",
+   "render": true
+  },
+  {
+   "id": "metaculus-senate-states",
+   "url": "https://www.metaculus.com/questions/40598/",
+   "name": "Metaculus — Democrat wins 2026 Senate election in these states? (question group)",
+   "irregularity": 58,
+   "why": "Seat-by-seat pairing with Kalshi SENATE{ST}-26-D needs the per-state community forecasts; the server-rendered page shows only four states.",
+   "render": true
+  },
+  {
+   "id": "muhlenberg-poll-library",
+   "url": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
+   "name": "Muhlenberg College Institute of Public Opinion — poll library",
+   "irregularity": 49,
+   "why": "Watched for the first 2026 Pennsylvania horse-race release (poll-layer pendingSources).",
+   "render": false
+  },
+  {
+   "id": "fandmpoll",
+   "url": "https://www.fandmpoll.org/",
+   "name": "Franklin & Marshall College Poll (fandmpoll.org)",
+   "irregularity": 47,
+   "why": "Admitted in session 6 after a direct fetch; watched for new releases (standing monitor).",
+   "render": false
+  },
+  {
+   "id": "270towin-home",
+   "url": "https://www.270towin.com/",
+   "name": "270toWin homepage (Kalshi panel for the R13 monitor)",
+   "irregularity": 58,
+   "why": "The R13 parser failed on the raw homepage on 2026-09-20; the raw dump is kept as a parser fixture source.",
+   "render": false
+  },
+  {
+   "id": "cnalysis-redirect",
+   "url": "https://cnalysis.com/",
+   "name": "cnalysis.com (retired brand → statenavigate.org)",
+   "irregularity": 52,
+   "why": "#52: verify the redirect target has not changed.",
+   "render": false
+  },
+  {
+   "id": "surveyusa-poll-28000",
+   "url": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
+   "name": "SurveyUSA Poll #28000 (Minnesota, 09/16/26) report page",
+   "irregularity": 47,
+   "why": "The archive index is readable but the report page is client-rendered (empty <body> to the fetcher, 2026-09-20). A rendered DOM with the Governor / U.S. Senate toplines is what turns this into poll-layer rows for SENATEMN-26 and GOVPARTYMN-26.",
+   "render": true
+  },
+  {
+   "id": "surveyusa-archive",
+   "url": "https://results.surveyusa.com/PollHistory.aspx",
+   "name": "SurveyUSA public poll archive (index)",
+   "irregularity": 47,
+   "why": "Reachable 2026-09-20 from the session fetcher; monitored so a regression is noticed before a release is missed.",
+   "render": false
+  },
+  {
+   "id": "ca-electionresults",
+   "url": "https://electionresults.sos.ca.gov/",
+   "name": "California SoS live results host",
+   "irregularity": 42,
+   "why": "Reachable 2026-09-20 (2026 CA-14 special: certification due September 25, 2026). This is the host the November 3 canvass scoring will read; watched for blocks.",
+   "render": false
+  },
+  {
+   "id": "wv-clarity",
+   "url": "https://results.enr.clarityelections.com/WV/126209",
+   "name": "West Virginia primary results (Clarity ENR)",
+   "irregularity": 35,
+   "why": "Same ENR vendor host that blocked the Georgia fetch (#35); West Virginia's results are only published through it.",
+   "render": true
+  },
+  {
+   "id": "hpu-poll-120",
+   "url": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
+   "name": "HPU Poll 120 (NC Senate, April 2026) release",
+   "irregularity": null,
+   "why": "Release page read directly 2026-09-20 and ingested (poll-layer row hpu-2026-04-nc-senate); kept as a reachability canary for the HPU blog host so later releases (HPU Poll 126, August 2026) can be read the same way.",
+   "render": false
+  },
+  {
+   "id": "winthrop-poll-results",
+   "url": "https://www.winthrop.edu/winthroppoll/poll-results.aspx",
+   "name": "Winthrop Poll results index",
+   "irregularity": null,
+   "why": "Admitted source (winthrop-poll) whose results index was not read this session.",
+   "render": false
+  }
+ ]
+}

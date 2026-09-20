@@ -142,6 +142,65 @@ test('registry: the 20 session-6 entries + 2 re-test admissions are present, dat
   assert.ok(master.sources.length >= 147, `expected >= 147 sources, found ${master.sources.length}`);
 });
 
+// ---- session-7 batch (2026-09-20, branch arena/01a0bca8-elections): 22 new entries (13 state offices + 9 pollsters) ----
+const SESSION7_NEW_IDS = [
+  'alabama-sos', 'arkansas-sos', 'connecticut-elections-database', 'idaho-sos-voteidaho', 'indiana-election-division',
+  'kentucky-sbe-results', 'louisiana-sos', 'maryland-sbe-2026', 'mississippi-sos', 'missouri-sos-elections', 'new-hampshire-sos',
+  'utah-lt-governor-vote', 'west-virginia-sos', 'surveyusa', 'harrisx', 'elon-poll', 'hpu-survey-research-center',
+  'umass-lowell-cpo', 'roanoke-college-ipor', 'uh-hobby-school-elections', 'fhsu-docking-kansas-speaks', 'winthrop-poll',
+];
+const SESSION7_RETESTED = ['harris-poll', 'courtlistener', 'wisconsin-wec', 'nevada-sos', 'california-sos', 'massachusetts-elections', 'metaculus', '270towin'];
+
+test('registry: the 22 session-7 entries are present, dated 2026-09-20, fetched directly, with notes; re-tests are recorded in place', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  assert.equal(SESSION7_NEW_IDS.length, 22);
+  for (const id of SESSION7_NEW_IDS) {
+    const s = byId[id];
+    assert.ok(s, `missing session-7 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-20', `${id}: verifiedOn`);
+    assert.equal(s.status, 'verified', `${id}: every session-7 admission was a direct read`);
+    assert.match(s.verified, /[Ff]etched directly 2026-09-20/, `${id}: must state it was fetched this session`);
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+  }
+  // SurveyUSA/HarrisX were #47/#51 exclusions: admitted only on the live host actually read (not surveypoll.com).
+  assert.match(byId.surveyusa.url, /^https:\/\/results\.surveyusa\.com\//);
+  assert.match(byId.harrisx.url, /^https:\/\/(www\.)?harrisx\.com\//);
+  // Re-tested entries keep their original verifiedOn and append a dated addendum instead of being rewritten.
+  for (const id of SESSION7_RETESTED) {
+    assert.ok(byId[id], `missing re-tested entry ${id}`);
+    assert.match(byId[id].verified, /Re-test 2026-09-20/, `${id}: re-test addendum`);
+    assert.notEqual(byId[id].verifiedOn, '2026-09-20', `${id}: re-test must not overwrite the original verification date`);
+  }
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-20').length, 22);
+  assert.ok(master.sources.length >= 169, `expected >= 169 sources, found ${master.sources.length}`);
+});
+
+test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {
+  const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
+  const fams = new Set(Object.keys(PL.methodFamilies.families));
+  const nc = PL.stateRaces.find((r) => r.id === 'elon-2026-09-nc-senate');
+  assert.ok(nc, 'elon-2026-09-nc-senate row');
+  assert.equal(nc.kalshiDemTicker, 'SENATENC-26-D');
+  assert.deepEqual([nc.candidates.D.pct, nc.candidates.R.pct], [49, 38]);
+  assert.ok(fams.has(nc.methodFamily), `methodFamily ${nc.methodFamily}`);
+  const hpu = PL.stateRaces.find((r) => r.id === 'hpu-2026-04-nc-senate');
+  assert.ok(hpu, 'hpu-2026-04-nc-senate row');
+  assert.equal(hpu.kalshiDemTicker, 'SENATENC-26-D');
+  assert.deepEqual([hpu.candidates.D.pct, hpu.candidates.R.pct, hpu.n, hpu.moe], [50, 42, 703, 4.3]);
+  assert.equal(hpu.methodFamily, 'online-nonprobability-matched', 'HPU Poll 120 was fielded by YouGov online — not the lab\'s CATI operation');
+  assert.match(hpu.methodNote, /credibility interval/, 'the release disclaims a classic MoE; the row must say the figure is a credibility interval');
+  const hx = PL.genericBallot.find((r) => r.id === 'harrisx-2026-08-generic');
+  assert.ok(hx, 'harrisx-2026-08-generic row');
+  assert.equal(hx.moe, null, 'HarrisX publishes no MoE for its opt-in panel — must stay null, not estimated');
+  assert.ok(fams.has(hx.methodFamily), `methodFamily ${hx.methodFamily}`);
+  for (const r of [nc, hpu, hx]) { assert.equal(r.verifiedOn, '2026-09-20'); assert.match(r.source, /^https:\/\//); }
+  // UMass Lowell ME tested a non-nominee (Platner) and SurveyUSA MN is a client-rendered report: evidence only (#60, #47).
+  const pendingIds = PL.pendingSources.map((x) => x.id);
+  assert.ok(pendingIds.includes('umass-lowell-2026-05-me-senate'), 'ME row must not be ingested as a race row');
+  assert.ok(pendingIds.includes('surveyusa-28000-mn'), 'MN report pending until rendered');
+  assert.ok(!PL.stateRaces.some((r) => /umass-lowell-2026-05-me/.test(r.id)));
+});
+
 test('poll layer: session-6 rows carry #49 methodFamily labels and map to captured Kalshi events', () => {
   const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
   const fams = new Set(Object.keys(PL.methodFamilies.families));

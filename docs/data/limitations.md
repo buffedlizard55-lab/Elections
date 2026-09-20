@@ -127,3 +127,33 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
     earlier rows do not yet, so any cross-row aggregate still mixes designs (R12 remaining work).
 35. **Muhlenberg has no 2026 horse-race release** on its own site as of 2026-09-19 — recorded under `pendingSources`
     rather than filled from syndication.
+
+## Session 7 — live-run repairs, new pollsters, host monitor (2026-09-20)
+
+36. **Metaculus behind Cloudflare is best-effort from the runner.** Plain fetches are 403 on both profiles and headless
+    Chrome passed the check on 3 of 7 pages in the first live run (#62). `renderDom` now keeps one Chrome profile per
+    run and retries with a longer budget, and the collector makes a second pass once any page has rendered — but whether
+    the interstitial keeps clearing is outside this project's control. Every row carries `fetchMethod`/`fetchLog`, so a
+    rendered number and a missing one are never confused.
+37. **State Navigate's numbers are still not collected automatically.** The second live run fetched all 35 pages, but a
+    navigation keyword ('close seats') satisfied the render trigger, so Chrome was never used (#62). The trigger is now
+    the parser itself; the next committed `forecast-daily.json` is the proof. Until then the Cross-layer section keeps the
+    hand-verified 2026-09-19 figures, labelled as such.
+38. **The host re-test monitor (R15) has no committed verdicts yet.** Its first live run crashed with ENOENT before
+    writing `data/probes/latest.json`, and the continue-on-error step stayed green (#61). Fixed and verified locally with a
+    stand-in Chrome; the first real `latest.json` arrives with the next push/cron run. Rule from #58/#61: judge a
+    continue-on-error step by the file it should have committed, never by its badge.
+39. **Three poll rows only this session** (Elon and HPU Poll 120 NC Senate, HarrisX generic). HarrisX publishes no margin of error for its
+    opt-in panel (`moe: null`, not estimated); UMass Lowell's Maine test names a non-nominee and SurveyUSA's Minnesota
+    report is client-rendered — both sit in `pendingSources` with reasons, not in `stateRaces` (#60, #47).
+40. **Kalshi tickers do not always encode the state** (`SENATELA-26` is Kentucky, #59). The Metaculus pairing now checks
+    the event title, but other places that build a ticker from a state code (contest strategies, the poll layer's
+    `kalshiDemTicker`) still assume `SENATE{ST}-26` — audit those paths before any per-seat scoring after Nov 3.
+41. **Actions logs and artifacts cannot be read from the sandbox** — only committed files. Every collector now writes a
+    row even on failure and the probe writes a verdict per target, but a crash before the first write is still invisible
+    until someone looks for the file.
+42. **The hub parser has been wrong once in production** (#63: the rendered Metaculus DOM was read as Senate = House
+    88.8 and reached the scoreboard before the fix). The quadrant cross-check now blocks any chamber that contradicts
+    the page's own control quadrants, and both workflows are serialised so runs cannot overwrite each other — but the
+    rendered DOM is never committed (7-day artifacts, unreachable from the sandbox), so a future layout change is
+    diagnosed from the row's `sample` and `consistencyFlags`, not from the page itself.

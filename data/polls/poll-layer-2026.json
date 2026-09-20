@@ -2,9 +2,9 @@
  "title": "Continuous poll layer — 2026 cycle (line-by-line verified primary releases)",
  "capturedFrom": "primary pollster releases listed per entry (fetched directly; syndication is never the only source)",
  "capturedAt": "2026-09-19T23:30:00Z",
- "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed.",
+ "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed. Session 7 (2026-09-20) rows: elon-2026-09-nc-senate, hpu-2026-04-nc-senate and harrisx-2026-08-generic (all carry methodFamily; HPU's 'moe' is the release's credibility interval, as its methodNote says); two pending items record what was verified but not transcribed.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
- "updated": "2026-09-19",
+ "updated": "2026-09-20",
  "genericBallot": [
   {
    "id": "nbc-2026-06",
@@ -292,6 +292,30 @@
    "source": "https://www.fandmpoll.org/franklin-marshall-college-poll-release-august-2026/",
    "verifiedVia": "F&M Poll August 2026 release page (fandmpoll.org, the poll's own site — NOT fandm.edu) fetched 2026-09-19 in full.",
    "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "harrisx-2026-08-generic",
+   "pollster": "Harvard CAPS / Harris Poll (The Harris Poll and HarrisX)",
+   "fieldDates": "2026-08-28..2026-08-30",
+   "population": "RV",
+   "n": 2100,
+   "moe": null,
+   "question": "Congressional midterm horserace as summarised in the release ('split 51-49 among general voters'; two-way, no undecided reported)",
+   "D": 51,
+   "R": 49,
+   "unsure": null,
+   "likelyVoterNote": "'among likely midterm voters, Republicans hold a 2-pt. lead' — the release gives no LV percentages, only the margin.",
+   "methodFamily": "online-optin-weighted",
+   "methodNote": "'conducted online within the United States on August 28-30, 2026, among 2,100 registered voters by The Harris Poll and HarrisX' — the release text states no margin of error (recorded as null, not estimated).",
+   "trumpApproval": {
+    "approve": 44,
+    "population": "RV",
+    "note": "'2 points up from July'"
+   },
+   "released": "2026-09-02",
+   "source": "https://www.harrisx.com/posts/august-harvard-caps-harrisx-poll",
+   "verifiedVia": "HarrisX release page fetched 2026-09-20 in full (3 chunks); horserace, turnout-intent and methodology lines transcribed verbatim.",
+   "verifiedOn": "2026-09-20"
   }
  ],
  "aggregatorReadings": [
@@ -814,6 +838,68 @@
    "source": "https://www.fandmpoll.org/franklin-marshall-college-poll-release-august-2026/",
    "verifiedVia": "F&M August 2026 release fetched 2026-09-19 in full (Shapiro 50 / Garrity 25; Shapiro approval 47% exc/good); June and March releases fetched 2026-09-19 for the trend.",
    "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "elon-2026-09-nc-senate",
+   "race": "U.S. Senate — North Carolina",
+   "pollster": "Elon University Poll (fielded by YouGov)",
+   "fieldDates": "2026-08-21..2026-08-31",
+   "population": "LV",
+   "n": 800,
+   "moe": 5.6,
+   "candidates": {
+    "D": {
+     "name": "Roy Cooper",
+     "pct": 49
+    },
+    "R": {
+     "name": "Michael Whatley",
+     "pct": 38
+    }
+   },
+   "undecidedOrCouldChange": "undecided 8; Shannon Bray (Libertarian) 2; Michael Dublin (Green) 2 (LV)",
+   "registeredVoterTrend": {
+    "note": "RV: Cooper 49 / Whatley 36; 14% undecided or someone else; 2% do not plan to vote. n is 800 adults matched down from 1,121 interviews; 72% said they are registered."
+   },
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "'fielded by ... YouGov as an online, web-based survey, self-administered through online panels ... interviewed 1,121 North Carolina adults ... matched down to a sample of 800'; margin of error stated for likely voters (5.6%).",
+   "kalshiEvent": "SENATENC-26",
+   "kalshiDemTicker": "SENATENC-26-D",
+   "source": "https://eloncdn.blob.core.windows.net/eu3/sites/819/2026/09/Elon-University-Poll-NR-9-10-26.pdf",
+   "toplinesPdf": "https://eloncdn.blob.core.windows.net/eu3/sites/819/2026/09/Elon-University-Poll-Topline-Methodology-9-10-26.pdf",
+   "verifiedVia": "Elon Poll index (elon.edu/u/elon-poll) and the September 10, 2026 news-release PDF fetched 2026-09-20; horse race, n, field dates, MoE and methodology paragraph transcribed.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "hpu-2026-04-nc-senate",
+   "race": "U.S. Senate — North Carolina",
+   "pollster": "HPU Poll 120 — High Point University Survey Research Center (fielded by YouGov)",
+   "fieldDates": "2026-03-26..2026-04-06",
+   "population": "LV",
+   "n": 703,
+   "moe": 4.3,
+   "candidates": {
+    "D": {
+     "name": "Roy Cooper",
+     "pct": 50
+    },
+    "R": {
+     "name": "Michael Whatley",
+     "pct": 42
+    }
+   },
+   "undecidedOrCouldChange": "Someone else/another party 2; Unsure/Would not vote 6 (LV)",
+   "registeredVoterTrend": {
+    "note": "914 responses matched down to 800 registered voters; likely voters (n = 703) scored 2–3 on political interest + 2020 vote + 2024 vote. Same release: NC Supreme Court Earls (D) 43 / Stevens (R) 43; U.S. House generic (NC LV) D 48 / R 44; NC House generic D 47 / R 43; NC Senate generic D 48 / R 44."
+   },
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "'fielded by YouGov on behalf of the High Point University Survey Research Center from March 26 through April 6, 2026, as an online survey using a panel of respondents ... collected 914 responses ... matched these responses down to 800'. The release states 'it is not appropriate to assign a classic margin of sampling error' and gives a credibility interval of ±4.1 (all 800) / ±4.3 (LV, n = 703) — the moe field here is that credibility interval, not a sampling MoE. Weighting: propensity-score matching to an ACS 2023 frame, raked on 2024 presidential vote and gender × age × race × education.",
+   "kalshiEvent": "SENATENC-26",
+   "kalshiDemTicker": "SENATENC-26-D",
+   "source": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
+   "toplinesPdf": null,
+   "verifiedVia": "HPU SRC index (highpoint.edu/src) and the April 16, 2026 release page fetched directly 2026-09-20; horse race, n, field dates, credibility interval and methodology paragraph transcribed. Memos: highpoint.edu/src/hpupoll/.",
+   "verifiedOn": "2026-09-20"
   }
  ],
  "exitPollStatus": {
@@ -1023,6 +1109,18 @@
    "status": "no 2026 horse-race survey published on the pollster's own site as of 2026-09-19",
    "evidence": "Poll library https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/ fetched 2026-09-19: latest political surveys are October 2024; 2026 items are the National Surveys on Energy and Environment and the Spring 2026 Pennsylvania Public Health Survey.",
    "action": "No row fabricated. Re-check the poll library each session; ingest the first 2026 PA governor/Senate release when it appears."
+  },
+  {
+   "id": "surveyusa-28000-mn",
+   "status": "archive fetched 2026-09-20, toplines not readable (client-rendered report page)",
+   "evidence": "results.surveyusa.com/PollHistory.aspx lists '09/16/26 Poll #28000 — All SurveyUSA clients in Minnesota' with Governor and U.S. Senate horse-race questions; client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708 returned an empty <body> to the fetcher.",
+   "action": "Render the report page with the headless-Chrome probe (data/probes/targets.json id surveyusa-poll-28000, render:true); transcribe Flanagan/Tafoya and Klobuchar/Demuth toplines with n, dates, MoE and the disclosed mode; map to SENATEMN-26 / GOVPARTYMN-26."
+  },
+  {
+   "id": "umass-lowell-2026-05-me-senate",
+   "status": "verified release, deliberately NOT ingested as a Maine Senate row (irregularity #60)",
+   "evidence": "UMass Lowell/YouGov release 2026-06-04: 'Platner 48 / Collins 43' among 650 likely Maine voters, May 13-26, MoE ±4.9, conditional on Platner winning the June 9 primary. The exchange's SENATEME-26-D market is 'Troy Jackson' (2026-09-20 universe capture), so the tested Democrat is not the nominee.",
+   "action": "Keep as source evidence only. Ingest a UMass Lowell Maine row only if a Jackson-vs-Collins release appears."
   }
  ]
 }

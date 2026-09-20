@@ -1,0 +1,115 @@
+# Collector probe — the fast lane for the third-layer collectors and the host re-test monitor (R14 / R15).
+#
+# Why a second workflow: daily-collection.yml takes ~30 minutes because it captures the whole Kalshi
+# universe first. Iterating on a parser or re-testing a blocked host should not cost that, so this
+# job runs ONLY the light steps, from the same GitHub-hosted vantage point (which is what matters for
+# hosts that block the sandbox's proxied fetch tool, irregularities #35/#40-#47/#51/#55/#58):
+#   1. scripts/probe-hosts.mjs          -> data/probes/{latest,history}.json (+ raw bodies as an artifact)
+#   2. scripts/collect-metaculus.mjs    -> data/crosslayer/{metaculus-daily,snapshots}.json
+#   3. scripts/collect-statenavigate.mjs-> data/statenavigate/{forecast-daily,api-probe}.json
+#   4. scripts/crosscheck-renderings.mjs-> data/kalshi/tracker/rendering-crosscheck.json
+# Headless Chrome (pre-installed on the ubuntu runner image) is used by the collectors for client-rendered
+# pages and after a bot interstitial; each output row records which fetch method produced it.
+# Triggers: manual (workflow_dispatch) and a push that touches the probe itself (GitHub only registers a new
+# workflow for manual dispatch once it exists on the default branch, so the push trigger is what runs it first
+# on a working branch). The daily workflow runs the same steps once a day.
+name: collector-probe
+on:
+  push:
+    branches: ['arena/**']
+    paths:
+      - '.github/workflows/collector-probe.yml'
+      - 'scripts/probe-hosts.mjs'
+      - 'data/probes/targets.json'
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Comma-separated probe target ids (blank = all)'
+        required: false
+        default: ''
+      commit:
+        description: 'Commit the small JSON outputs back to this branch'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+# One concurrency group is SHARED by daily-collection.yml and collector-probe.yml: both commit the same files
+# (data/crosslayer, data/statenavigate, rendering-crosscheck) and the commit step resolves conflicts with
+# `rebase -X theirs`, so two overlapping runs silently drop each other's rows (irregularity #63, 2026-09-20).
+concurrency:
+  group: collectors-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Runner browsers (recorded in the probe output)
+        run: |
+          for b in google-chrome google-chrome-stable chromium chromium-browser; do
+            if command -v "$b" >/dev/null 2>&1; then echo "$b: $("$b" --version 2>/dev/null || echo present)"; fi
+          done
+
+      - name: Host re-test monitor
+        continue-on-error: true
+        run: |
+          ONLY="${{ inputs.only }}"
+          if [ -n "$ONLY" ]; then node scripts/probe-hosts.mjs --only "$ONLY"; else node scripts/probe-hosts.mjs; fi
+
+      - name: Metaculus collector (hub + question pages)
+        continue-on-error: true
+        env:
+          METACULUS_API_TOKEN: ${{ secrets.METACULUS_API_TOKEN }}
+        run: node scripts/collect-metaculus.mjs || echo "::warning::metaculus capture parse/fetch failed - row recorded, nothing estimated"
+
+      - name: State Navigate collector (free pages, rendered when client-side)
+        continue-on-error: true
+        run: node scripts/collect-statenavigate.mjs || echo "::warning::state navigate capture failed - previous rows stay in place"
+
+      - name: R13 rendering cross-check
+        continue-on-error: true
+        run: node scripts/crosscheck-renderings.mjs || echo "::warning::rendering cross-check failed - previous rows stay in place"
+
+      - name: Offline checks still pass with the new rows
+        run: |
+          npm run lint
+          node --test test/crosslayer.test.mjs
+
+      - name: Upload raw bodies (7 days; never committed)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collector-probe-${{ github.run_id }}
+          path: |
+            data/probes
+            data/crosslayer
+            data/statenavigate
+            data/kalshi/tracker/rendering-crosscheck.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Commit small outputs
+        if: ${{ (github.event_name == 'push' || inputs.commit == 'true') && !cancelled() }}
+        run: |
+          git config user.name "elections-collector[bot]"
+          git config user.email "elections-collector[bot]@users.noreply.github.com"
+          git add -A data/probes data/crosslayer data/statenavigate data/kalshi/tracker/rendering-crosscheck.json
+          if git diff --cached --quiet; then echo "no data changes"; exit 0; fi
+          git commit -m "probe: collectors + host re-tests $(date -u +%F) (run ${{ github.run_id }})"
+          for i in 1 2 3; do
+            if git pull --rebase -X theirs origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          echo "push failed after retries" && exit 1

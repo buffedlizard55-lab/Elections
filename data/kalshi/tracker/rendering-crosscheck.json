@@ -5,14 +5,14 @@
  "rows": [
   {
    "date": "2026-09-20",
-   "capturedAt": "2026-09-20T01:22:21.562Z",
-   "kalshiCapturedAt": "2026-09-20T00:53:32.941Z",
+   "capturedAt": "2026-09-20T05:36:48.767Z",
+   "kalshiCapturedAt": "2026-09-20T05:05:36.072Z",
    "renderers": {
     "ebo": {
      "capturedFrom": "https://electionbettingodds.com/",
      "status": 200,
      "extract": "ok",
-     "stamp": "9:20PM EDT on Sep 19, 2026",
+     "stamp": "1:33AM EDT on Sep 20, 2026",
      "senateDemKalshi": {
       "bid": 0.584,
       "ask": 0.594
@@ -21,7 +21,7 @@
       "bid": 0.406,
       "ask": 0.416
      },
-     "eboHeadlineDem": 0.591,
+     "eboHeadlineDem": 0.595,
      "vsCaptured": {
       "comparable": true,
       "renderedMid": 0.589,
@@ -41,17 +41,47 @@
     "270towin": {
      "capturedFrom": "https://www.270towin.com/",
      "status": 200,
-     "note": "Kalshi panel on the homepage is the 2028 presidency (not a 2026 market); recorded, compared only when a matching captured market exists",
-     "extract": "failed",
-     "kalshiPanel": null,
-     "kpow": null,
-     "sample": " 270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 2"
+     "fetchMethod": "headless-chrome",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "ok",
+     "kalshiPanel": {
+      "dem": 0.57,
+      "rep": 0.41,
+      "asOf": "Sep. 20, 2026 at 05:37 UTC",
+      "basis": "most recent yes trade (page order: Democrats, Republicans)"
+     },
+     "kpow": {
+      "value": "+1.90 D",
+      "asOf": "9/17/26 11:53 AM EDT"
+     },
+     "vsCaptured": {
+      "dem": {
+       "comparable": true,
+       "rendered": 0.57,
+       "capturedLast": 0.58,
+       "capturedBidAsk": [
+        0.58,
+        0.59
+       ],
+       "diff": -0.01,
+       "flagged": false
+      },
+      "rep": {
+       "comparable": true,
+       "rendered": 0.41,
+       "capturedLast": 0.41,
+       "capturedBidAsk": [
+        0.41,
+        0.42
+       ],
+       "diff": 0,
+       "flagged": false
+      }
+     }
     }
    },
-   "flags": [
-    "270towin: not extractable this run (status 200) — recorded, nothing estimated"
-   ]
+   "flags": []
   }
  ],
- "capturedAt": "2026-09-20T01:22:21.562Z"
+ "capturedAt": "2026-09-20T05:36:48.767Z"
 }
