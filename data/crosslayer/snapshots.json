@@ -1,8 +1,8 @@
 {
- "title": "Cross-layer snapshots \u2014 Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
+ "title": "Cross-layer snapshots — Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
  "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
- "capturedAt": "2026-09-19T23:59:00Z",
- "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project \u2014 every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
+ "capturedAt": "2026-09-20T02:54:50.030Z",
+ "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project — every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
  "questions": {
   "SENATE-CONTROL-2026": {
    "text": "Democrats control the U.S. Senate after the 2026 midterms",
@@ -17,6 +17,22 @@
    "kalshiEvent": "CONTROLH-2026",
    "metaculusHub": "https://www.metaculus.com/midterms-2026/",
    "metaculusQuestion": "https://www.metaculus.com/questions/34484/us-congress-control-after-2026-midterms/"
+  },
+  "SENATE-MT-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in MT",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATEMT-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/44711/",
+   "seat": true,
+   "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other)."
+  },
+  "SENATE-NE-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in NE",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATENE-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/44710/",
+   "seat": true,
+   "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB)."
   }
  },
  "snapshots": [
@@ -43,7 +59,7 @@
     }
    },
    "observed": {
-    "metaculus": "Senate D 51.7 / R 48.3 on the hub; 'Senate median even'; '18 of 35 races lean Democrat \u00b7 3 too close to call'",
+    "metaculus": "Senate D 51.7 / R 48.3 on the hub; 'Senate median even'; '18 of 35 races lean Democrat · 3 too close to call'",
     "ddhq": "Senate D 52%",
     "kalshi": "CONTROLS-2026-D yes_bid 0.59 / yes_ask 0.60 / last 0.60"
    }
@@ -70,6 +86,44 @@
     "ddhq": "House D 70%",
     "kalshi": "CONTROLH-2026-D yes_bid 0.89 / yes_ask 0.90 / last 0.90"
    }
+  },
+  {
+   "id": "2026-09-20-senate-mt-2026",
+   "question": "SENATE-MT-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T02:54:50.030Z",
+   "layers": {
+    "metaculus": 0.01,
+    "kalshi": {
+     "ticker": "SENATEMT-26-D",
+     "bid": 0.002,
+     "ask": 0.013,
+     "last": 0.015,
+     "capturedAt": "2026-09-20T00:53:32.941Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44711/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-ne-2026",
+   "question": "SENATE-NE-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T02:54:50.030Z",
+   "layers": {
+    "metaculus": 0.001,
+    "kalshi": {
+     "ticker": "SENATENE-26-D",
+     "bid": 0,
+     "ask": 0.001,
+     "last": 0.001,
+     "capturedAt": "2026-09-20T00:53:32.941Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44710/",
+   "collector": "scripts/collect-metaculus.mjs"
   }
  ]
 }

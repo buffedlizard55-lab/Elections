@@ -1,20 +1,127 @@
 {
  "title": "Metaculus midterms-2026 hub — daily community forecast capture",
  "capturedFrom": "https://www.metaculus.com/midterms-2026/",
- "method": "Server-rendered hub parsed by scripts/collect-metaculus.mjs (parseHub). Numbers are community forecasts published by Metaculus, transcribed as-is; consistencyFlags records any D+R or quadrant-sum mismatch instead of correcting it. api2 requires authentication (#54) and is only queried when METACULUS_API_TOKEN is set.",
+ "method": "Server-rendered hub parsed by scripts/collect-metaculus.mjs (parseHub) plus the server-rendered question pages listed in QUESTION_PAGES (parseQuestionPage). Numbers are community forecasts published by Metaculus, transcribed as-is; consistencyFlags records any D+R or quadrant-sum mismatch instead of correcting it. fetchMethod says whether the row came from a plain fetch (and which header profile), a headless-Chrome render, or text saved from the rendering fetch tool during a session. The JSON API requires authentication (#54) and is only queried when METACULUS_API_TOKEN is set.",
  "rows": [
   {
    "date": "2026-09-20",
-   "capturedAt": "2026-09-20T01:22:08.642Z",
+   "capturedAt": "2026-09-20T02:54:50.030Z",
    "capturedFrom": "https://www.metaculus.com/midterms-2026/",
+   "fetchMethod": null,
    "parse": "failed",
    "houseD": null,
    "senateD": null,
    "control": {},
    "consistencyFlags": [],
-   "fetchError": "https://www.metaculus.com/midterms-2026/ -> HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam",
-   "api": null
+   "fetchError": "https://www.metaculus.com/midterms-2026/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam",
+   "questions": [
+    {
+     "id": "senate-states-group",
+     "office": "senate",
+     "state": null,
+     "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated).",
+     "capturedFrom": "https://www.metaculus.com/questions/40598/",
+     "fetchMethod": null,
+     "kind": "state-group",
+     "parse": "failed",
+     "fetchError": "https://www.metaculus.com/questions/40598/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
+    },
+    {
+     "id": "governor-states-group",
+     "office": "governor",
+     "state": null,
+     "note": "Democrat wins 2026 gubernatorial election in these states? — same rendering limit (four states + \"13 others\").",
+     "capturedFrom": "https://www.metaculus.com/questions/43448/",
+     "fetchMethod": null,
+     "kind": "state-group",
+     "parse": "failed",
+     "fetchError": "https://www.metaculus.com/questions/43448/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
+    },
+    {
+     "id": "senate-plurality",
+     "office": "senate-plurality",
+     "state": null,
+     "note": "US Senate plurality after 2026 midterms? (Democrats / Republicans / Other) — a different question from control: no tie-break, so it is stored beside the hub number, not merged with it.",
+     "capturedFrom": "https://www.metaculus.com/questions/36370/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will hold the most seats in the US Senate after the 2026 midterm elections?",
+     "parse": "ok",
+     "D": 50.6,
+     "R": 49.3,
+     "other": 0.1,
+     "forecasters": 459
+    },
+    {
+     "id": "ak-peltola",
+     "office": "senate",
+     "state": "AK",
+     "note": "Mary Peltola wins Alaska senate seat 2026? — a candidate question; paired with SENATEAK-26-D (party market) with that caveat recorded.",
+     "capturedFrom": "https://www.metaculus.com/questions/41678/",
+     "fetchMethod": null,
+     "kind": "binary",
+     "parse": "failed",
+     "fetchError": "https://www.metaculus.com/questions/41678/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
+    },
+    {
+     "id": "mt-party",
+     "office": "senate",
+     "state": "MT",
+     "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other).",
+     "capturedFrom": "https://www.metaculus.com/questions/44711/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will win the 2026 Montana Senate election?",
+     "parse": "ok",
+     "D": 1,
+     "R": 94,
+     "other": 5,
+     "forecasters": 55
+    },
+    {
+     "id": "ne-party",
+     "office": "senate",
+     "state": "NE",
+     "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB).",
+     "capturedFrom": "https://www.metaculus.com/questions/44710/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will win the 2026 Nebraska Senate election?",
+     "parse": "ok",
+     "D": 0.1,
+     "R": 73.5,
+     "other": 26.4,
+     "forecasters": 49
+    }
+   ],
+   "api": null,
+   "fetchLog": {
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5641,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5855,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "render": {
+     "ok": true,
+     "bin": "/usr/bin/google-chrome",
+     "challenge": "cloudflare-challenge",
+     "bytes": 28641
+    }
+   }
   }
  ],
- "capturedAt": "2026-09-20T01:22:08.642Z"
+ "capturedAt": "2026-09-20T02:54:50.030Z"
 }
