@@ -51,11 +51,11 @@ export async function probeTarget(t, { render = true } = {}) {
   };
   if (f.body && rawDir) { mkdirSync(rawDir, { recursive: true }); writeFileSync(join(rawDir, `${t.id}.fetch.html`), f.body); }
   if (render && t.render) {
-    const r = renderDom(t.url);
+    const r = renderDom(t.url, { retries: 1 }); // one retry keeps ~10 render targets inside the step budget; the profile persists across targets
     row.render = r.ok
-      ? { ok: true, bin: r.bin, challenge: r.challenge || null, title: pageTitle(r.html), textLength: htmlToText(r.html).length, sample: htmlToText(r.html).slice(0, 300) }
-      : { ok: false, reason: r.reason, bin: r.bin || null };
-    if (r.ok && rawDir) writeFileSync(join(rawDir, `${t.id}.rendered.html`), r.html);
+      ? { ok: true, bin: r.bin, challenge: r.challenge || null, title: pageTitle(r.html), textLength: htmlToText(r.html).length, sample: htmlToText(r.html).slice(0, 300), attempts: r.attempts }
+      : { ok: false, reason: r.reason, bin: r.bin || null, attempts: r.attempts || null };
+    if (r.ok && rawDir) { mkdirSync(rawDir, { recursive: true }); writeFileSync(join(rawDir, `${t.id}.rendered.html`), r.html); }
   }
   row.verdict = verdictFor(row.fetch, row.render);
   return row;
@@ -68,7 +68,13 @@ async function main() {
   const chrome = noRender ? null : findChrome();
   const rows = [];
   for (const t of targets) {
-    const row = await probeTarget(t, { render: !!chrome });
+    let row;
+    try {
+      row = await probeTarget(t, { render: !!chrome });
+    } catch (e) {
+      // One target must never take the whole run down (first live run, 2026-09-20: an ENOENT on the raw dir did).
+      row = { id: t.id, url: t.url, name: t.name, irregularity: t.irregularity ?? null, capturedAt: new Date().toISOString(), fetch: { ok: false, status: 0, attempts: [{ error: `probe crashed: ${String(e && e.message || e).slice(0, 200)}` }] }, verdict: 'error' };
+    }
     rows.push(row);
     console.log(`[probe] ${t.id.padEnd(28)} ${row.verdict.padEnd(28)} fetch=${row.fetch.status}${row.render ? ` render=${row.render.ok ? 'ok' : row.render.reason}` : ''}`);
     await new Promise((r) => setTimeout(r, 400));

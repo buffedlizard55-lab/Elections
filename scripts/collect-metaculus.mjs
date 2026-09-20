@@ -88,14 +88,22 @@ const cleanText = (html) => htmlToText(String(html).replace(/\*\*/g, ''));
 export function parseHub(html) {
   const text = cleanText(html);
   const N = '(\\d{1,3}(?:\\.\\d)?)\\s*%';
-  const chamber = (label) => {
-    // heading (markdown "#### House" or bare "House") followed within 400 chars by "Democrats N% Republicans M%"
-    const re = new RegExp(`\\b${label}\\b(?:(?!Congressional Control|Dem House|Rep House|####)[\\s\\S]){0,400}?Democrats?\\s*${N}\\s*Republicans?\\s*${N}`, 'i');
-    const m = text.match(re);
-    return m ? { d: Number(m[1]), r: Number(m[2]) } : null;
-  };
-  const house = chamber('House');
-  const senate = chamber('Senate');
+  // Every "Democrats N% Republicans M%" pair is assigned to the NEAREST preceding chamber word. The first live
+  // headless-Chrome render (2026-09-20, run 35484999487) showed why a "Senate … within 400 chars" search is not
+  // enough: the rendered page mentions "Senate" in its navigation before the House card, so both chambers read
+  // 88.8 (irregularity #63). The first pair per chamber in document order wins.
+  const pairRe = new RegExp(`Democrats?\\s*${N}\\s*Republicans?\\s*${N}`, 'gi');
+  const found = { house: null, senate: null };
+  for (let m = pairRe.exec(text); m; m = pairRe.exec(text)) {
+    const before = text.slice(Math.max(0, m.index - 400), m.index).toLowerCase();
+    const iH = before.lastIndexOf('house'); const iS = before.lastIndexOf('senate');
+    if (iH < 0 && iS < 0) continue;
+    const which = iH > iS ? 'house' : 'senate';
+    if (!found[which]) found[which] = { d: Number(m[1]), r: Number(m[2]) };
+    if (found.house && found.senate) break;
+  }
+  const house = found.house;
+  const senate = found.senate;
   const quad = (a, b) => pct(new RegExp(`${a}\\s+House\\s*/\\s*${b}\\s+Senate\\s*${N}`, 'i'), text);
   const DEM = '(?:Dem|Democratic)'; const REP = '(?:Rep|Republican)';
   const out = {
@@ -119,16 +127,24 @@ export function parseHub(html) {
   };
   // Consistency checks (recorded, never "fixed"): D+R should be ~100 and quadrants should sum to ~100.
   const checks = [];
-  if (out.houseD != null && out.houseR != null && Math.abs(out.houseD + out.houseR - 100) > 0.6) checks.push(`house D+R=${(out.houseD + out.houseR).toFixed(1)}`);
-  if (out.senateD != null && out.senateR != null && Math.abs(out.senateD + out.senateR - 100) > 0.6) checks.push(`senate D+R=${(out.senateD + out.senateR).toFixed(1)}`);
+  const inconsistent = { house: false, senate: false };
+  if (out.houseD != null && out.houseR != null && Math.abs(out.houseD + out.houseR - 100) > 0.6) { checks.push(`house D+R=${(out.houseD + out.houseR).toFixed(1)}`); inconsistent.house = true; }
+  if (out.senateD != null && out.senateR != null && Math.abs(out.senateD + out.senateR - 100) > 0.6) { checks.push(`senate D+R=${(out.senateD + out.senateR).toFixed(1)}`); inconsistent.senate = true; }
   const q = Object.values(out.control).filter((v) => v != null);
   if (q.length === 4 && Math.abs(q.reduce((a, b) => a + b, 0) - 100) > 0.6) checks.push(`quadrants sum=${q.reduce((a, b) => a + b, 0).toFixed(1)}`);
-  // Cross-derivation: P(Senate D) should equal DH_DS + RH_DS within rounding.
+  // Cross-derivation against the page's own control quadrants: P(Senate D) = DH_DS + RH_DS, P(House D) = DH_DS + DH_RS.
+  // A chamber whose headline disagrees with its quadrant sum is marked inconsistent and is NOT written to the
+  // scoreboard (appendSnapshots skips it) — the row keeps both numbers for review instead of choosing one.
   if (out.senateD != null && out.control.DH_DS != null && out.control.RH_DS != null) {
     const derived = out.control.DH_DS + out.control.RH_DS;
-    if (Math.abs(derived - out.senateD) > 0.6) checks.push(`senateD ${out.senateD} vs quadrant-derived ${derived.toFixed(1)}`);
+    if (Math.abs(derived - out.senateD) > 0.6) { checks.push(`senateD ${out.senateD} vs quadrant-derived ${derived.toFixed(1)}`); inconsistent.senate = true; }
   }
-  out.parse = out.houseD == null || out.senateD == null ? 'failed' : 'ok';
+  if (out.houseD != null && out.control.DH_DS != null && out.control.DH_RS != null) {
+    const derived = out.control.DH_DS + out.control.DH_RS;
+    if (Math.abs(derived - out.houseD) > 0.6) { checks.push(`houseD ${out.houseD} vs quadrant-derived ${derived.toFixed(1)}`); inconsistent.house = true; }
+  }
+  out.inconsistent = inconsistent;
+  out.parse = out.houseD == null || out.senateD == null ? 'failed' : (inconsistent.house || inconsistent.senate ? 'inconsistent' : 'ok');
   out.consistencyFlags = checks;
   if (out.parse === 'failed') out.sample = text.replace(/\s+/g, ' ').slice(0, 300);
   return out;
@@ -178,7 +194,7 @@ export function parseQuestionPage(html, kind) {
   return out;
 }
 
-async function fetchPage(url, { raw = null, allowRender = true } = {}) {
+async function fetchPage(url, { raw = null, allowRender = true, renderRetries = 1 } = {}) {
   const f = await fetchWithProfiles(url);
   const log = { attempts: f.attempts };
   if (f.ok) {
@@ -186,8 +202,9 @@ async function fetchPage(url, { raw = null, allowRender = true } = {}) {
     return { html: f.body, method: `fetch:${f.profile}`, log };
   }
   if (allowRender && findChrome()) {
-    const r = renderDom(url);
-    log.render = r.ok ? { ok: true, bin: r.bin, challenge: r.challenge || null, bytes: r.html.length } : { ok: false, reason: r.reason };
+    // One retry per page on the first pass (7 pages must fit the workflow step budget); the profile persists across pages.
+    const r = renderDom(url, { retries: renderRetries });
+    log.render = r.ok ? { ok: true, bin: r.bin, challenge: r.challenge || null, bytes: r.html.length, attempts: r.attempts } : { ok: false, reason: r.reason, attempts: r.attempts || null };
     if (r.ok && !r.challenge) {
       if (raw) writeFileSync(join(raw, `${url.replace(/[^a-z0-9]+/gi, '_')}.rendered.html`), r.html);
       return { html: r.html, method: 'headless-chrome', log };
@@ -199,12 +216,24 @@ async function fetchPage(url, { raw = null, allowRender = true } = {}) {
 
 function readJson(p, fallback) { return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : fallback; }
 
-/** Kalshi market from a same-day universe capture, or undefined (a stale capture is never paired). */
+export const STATE_NAMES = Object.fromEntries(Object.entries(STATE_CODES).map(([name, code]) => [code, name]));
+
+/**
+ * Kalshi market from a same-day universe capture, or undefined (a stale capture is never paired).
+ * When a state is given, the event's own title must name that state: Kalshi's Kentucky Senate event is
+ * tickered SENATELA-26 ("Kentucky Senate winner?", Barr/Booker — irregularity #59), so a ticker built from
+ * a state code can point at the wrong state. A title that names another state returns { mismatch } and
+ * the caller records the skipped pairing instead of inventing a leg.
+ */
 function kalshiLookup(universe, day) {
-  return (evt, tk) => {
+  return (evt, tk, stateName) => {
     if (!universe || (universe.capturedAt || '').slice(0, 10) !== day) return undefined;
     const e = (universe.events || []).find((x) => x.event_ticker === evt);
-    const m = e && e.markets.find((x) => x.ticker === tk);
+    if (!e) return undefined;
+    if (stateName && e.title && !new RegExp(stateName.replace(/\s+/g, '\\s+'), 'i').test(e.title)) {
+      return { mismatch: `event ${evt} is titled "${e.title}", which does not name ${stateName} (irregularity #59) — not paired` };
+    }
+    const m = e.markets.find((x) => x.ticker === tk);
     return m ? { ticker: tk, bid: m.yes_bid, ask: m.yes_ask, last: m.last_price, capturedAt: universe.capturedAt, capturedFrom: universe.capturedFrom } : undefined;
   };
 }
@@ -213,9 +242,10 @@ export function appendSnapshots(snapFile, parsed, { capturedAt, universe, source
   const day = capturedAt.slice(0, 10);
   const kalshiFor = kalshiLookup(universe, day);
   const add = [];
+  const bad = parsed.inconsistent || {};
   const defs = [
-    ['SENATE-CONTROL-2026', 'CONTROLS-2026', 'CONTROLS-2026-D', parsed.senateD],
-    ['HOUSE-CONTROL-2026', 'CONTROLH-2026', 'CONTROLH-2026-D', parsed.houseD],
+    ['SENATE-CONTROL-2026', 'CONTROLS-2026', 'CONTROLS-2026-D', bad.senate ? null : parsed.senateD],
+    ['HOUSE-CONTROL-2026', 'CONTROLH-2026', 'CONTROLH-2026-D', bad.house ? null : parsed.houseD],
   ];
   for (const [q, evt, tk, p] of defs) {
     if (p == null) continue;
@@ -236,7 +266,11 @@ export function appendSnapshots(snapFile, parsed, { capturedAt, universe, source
  * Questions are registered in snapFile.questions the first time they appear so the scorer can be fed an
  * official outcome per seat after Nov 3.
  */
-export const SENATE_EVENT = (st) => (st === 'OH' ? 'SENATEOHS-26' : st === 'FL' ? 'SENATEFLS-26' : `SENATE${st}-26`);
+// Ohio's and Florida's 2026 specials carry an S suffix; Kentucky's event is tickered SENATELA-26 on the exchange
+// (title "Kentucky Senate winner?", markets Andy Barr / Charles Booker in the 2026-09-20 capture — irregularity #59).
+// The alias is only ever used together with the title check in kalshiLookup, so a Louisiana question can never
+// be paired to it and the Kentucky pairing is confirmed by the event's own title.
+export const SENATE_EVENT = (st) => (st === 'OH' ? 'SENATEOHS-26' : st === 'FL' ? 'SENATEFLS-26' : st === 'KY' ? 'SENATELA-26' : `SENATE${st}-26`);
 export function appendSeatSnapshots(snapFile, questions, { capturedAt, universe }) {
   const day = capturedAt.slice(0, 10);
   const kalshiFor = kalshiLookup(universe, day);
@@ -252,9 +286,11 @@ export function appendSeatSnapshots(snapFile, questions, { capturedAt, universe 
     const id = `${day}-${qid.toLowerCase()}`;
     if (snapFile.snapshots.some((s) => s.id === id)) return;
     const layers = { metaculus: Number((p / 100).toFixed(4)) };
-    const k = kalshiFor(evt, `${evt}-D`);
-    if (k) layers.kalshi = k;
-    snapFile.snapshots.push({ id, question: qid, electionDate: '2026-11-03', capturedAt, layers, source: src, collector: 'scripts/collect-metaculus.mjs', ...(extra.caveat ? { caveat: extra.caveat } : {}) });
+    const k = kalshiFor(evt, `${evt}-D`, STATE_NAMES[st]);
+    const row = { id, question: qid, electionDate: '2026-11-03', capturedAt, layers, source: src, collector: 'scripts/collect-metaculus.mjs', ...(extra.caveat ? { caveat: extra.caveat } : {}) };
+    if (k && k.mismatch) row.kalshiSkipped = k.mismatch;
+    else if (k) layers.kalshi = k;
+    snapFile.snapshots.push(row);
     added += 1;
   };
   for (const q of questions) {
@@ -292,6 +328,21 @@ async function main() {
       questions.push({ id: q.id, office: q.office, state: q.state || null, note: q.note, capturedFrom: q.url, fetchMethod: rq.method, ...parsed });
       await new Promise((res) => setTimeout(res, 500));
     }
+    // Second pass: the headless profile keeps cookies for the whole run, so a bot check solved on a later page
+    // often clears the earlier ones (first live run 2026-09-20: 3 of 7 pages rendered, the hub did not).
+    if (findChrome() && questions.some((q) => q.fetchMethod === 'headless-chrome')) {
+      if (html == null) {
+        const r2 = await fetchPage(HUB_URL, { raw: rawDir, renderRetries: 0 });
+        if (r2.html) { html = r2.html; fetchMethod = `${r2.method} (second pass)`; fetchLog = { ...fetchLog, secondPass: r2.log }; fetchError = null; }
+      }
+      for (let i = 0; i < questions.length; i += 1) {
+        if (questions[i].parse !== 'failed' || !questions[i].fetchError) continue;
+        const q = QUESTION_PAGES[i];
+        const rq = await fetchPage(q.url, { raw: rawDir, renderRetries: 0 });
+        if (!rq.html) continue;
+        questions[i] = { id: q.id, office: q.office, state: q.state || null, note: q.note, capturedFrom: q.url, fetchMethod: `${rq.method} (second pass)`, ...parseQuestionPage(rq.html, q.kind) };
+      }
+    }
   }
   // A fetch failure is a row too (parse:'failed' + the error) — the first live run 2026-09-20 wrote nothing because
   // the process died before this point; that left no audit trail, which is the one thing the collector must never do.
@@ -316,8 +367,11 @@ async function main() {
   });
   daily.method = 'Server-rendered hub parsed by scripts/collect-metaculus.mjs (parseHub) plus the server-rendered question pages listed in QUESTION_PAGES (parseQuestionPage). Numbers are community forecasts published by Metaculus, transcribed as-is; consistencyFlags records any D+R or quadrant-sum mismatch instead of correcting it. fetchMethod says whether the row came from a plain fetch (and which header profile), a headless-Chrome render, or text saved from the rendering fetch tool during a session. The JSON API requires authentication (#54) and is only queried when METACULUS_API_TOKEN is set.';
   const row = { date: capturedAt.slice(0, 10), capturedAt, capturedFrom: via, fetchMethod, ...parsed, questions, api, fetchLog };
-  const existing = daily.rows.findIndex((r) => r.date === row.date && r.capturedFrom === via);
+  // One row per RUN (not per day): the 03:16 run on 2026-09-20 replaced the 02:54 row and with it the only successful
+  // reads of the Montana/Nebraska questions (#63). Rows are never overwritten; the file is capped at the last 730 runs.
+  const existing = daily.rows.findIndex((r) => r.capturedAt === capturedAt && r.capturedFrom === via);
   if (existing >= 0) daily.rows[existing] = row; else daily.rows.push(row);
+  if (daily.rows.length > 730) daily.rows = daily.rows.slice(-730);
   daily.capturedAt = capturedAt;
   if (!replayFile) writeFileSync(dailyPath, JSON.stringify(daily, null, 1) + '\n');
 
@@ -326,7 +380,7 @@ async function main() {
   let added = 0; let seats = 0;
   if (snap && !replayFile) {
     const universe = readJson(join(ROOT, 'data/kalshi/universe/latest.json'), null);
-    if (parsed.parse === 'ok') added = appendSnapshots(snap, parsed, { capturedAt, universe, source: via });
+    if (parsed.parse === 'ok' || parsed.parse === 'inconsistent') added = appendSnapshots(snap, parsed, { capturedAt, universe, source: via });
     seats = appendSeatSnapshots(snap, questions, { capturedAt, universe });
     if (added || seats) { snap.capturedAt = capturedAt; writeFileSync(snapPath, JSON.stringify(snap, null, 1) + '\n'); }
   }

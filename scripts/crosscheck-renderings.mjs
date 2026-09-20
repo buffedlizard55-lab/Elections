@@ -20,7 +20,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fetchWithProfiles } from './lib/render.mjs';
+import { fetchWithProfiles, renderDom, findChrome } from './lib/render.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const SOURCES = {
@@ -128,7 +128,16 @@ async function main() {
   const ddhq = await load('ddhq', replay.ddhq);
   row.renderers.ddhq = { capturedFrom: ddhq.capturedFrom, status: ddhq.status, layer: 'context (DDHQ odds, not Kalshi)', ...(ddhq.body ? parseDdhq(ddhq.body) : { extract: 'failed', error: ddhq.error }) };
   const t70 = await load('270', replay['270']);
-  row.renderers['270towin'] = { capturedFrom: t70.capturedFrom, status: t70.status, note: 'Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask', ...(t70.body ? parse270(t70.body) : { extract: 'failed', error: t70.error }) };
+  let p270 = t70.body ? parse270(t70.body) : { extract: 'failed', error: t70.error };
+  let via270 = t70.body ? 'fetch' : null;
+  // Second live run (2026-09-20): the raw homepage HTML carries the nav ("Kalshi Presidential Prediction Markets") but
+  // not the panel's numbers — they are filled in client-side. Render when available; the row says which path parsed.
+  if (p270.extract !== 'ok' && !isReplay && findChrome()) {
+    const r = renderDom(SOURCES['270'], { retries: 1 });
+    if (r.ok && !r.challenge) { const p2 = parse270(r.html); if (p2.extract === 'ok') { p270 = p2; via270 = 'headless-chrome'; } else { p270.render = { ok: true, extract: 'failed', sample: p2.sample }; } }
+    else p270.render = { ok: false, reason: r.reason || r.challenge };
+  }
+  row.renderers['270towin'] = { capturedFrom: t70.capturedFrom, status: t70.status, fetchMethod: via270, note: 'Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask', ...p270 };
   if (row.renderers['270towin'].kalshiPanel) {
     const p = row.renderers['270towin'].kalshiPanel;
     row.renderers['270towin'].vsCaptured = { dem: compareLast(p.dem, market('KXPRESPARTY-2028', 'KXPRESPARTY-2028-D')), rep: compareLast(p.rep, market('KXPRESPARTY-2028', 'KXPRESPARTY-2028-R')) };

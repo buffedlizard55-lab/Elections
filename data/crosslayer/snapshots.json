@@ -49,6 +49,22 @@
    "metaculusQuestion": "https://www.metaculus.com/questions/43448/",
    "seat": true,
    "note": "Democrat wins 2026 gubernatorial election in these states? — same rendering limit (four states + \"13 others\")."
+  },
+  "SENATE-MT-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in MT",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATEMT-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/44711/",
+   "seat": true,
+   "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other)."
+  },
+  "SENATE-NE-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in NE",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATENE-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/44710/",
+   "seat": true,
+   "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB)."
   }
  },
  "snapshots": [
@@ -102,25 +118,6 @@
     "ddhq": "House D 70%",
     "kalshi": "CONTROLH-2026-D yes_bid 0.89 / yes_ask 0.90 / last 0.90"
    }
-  },
-  {
-   "id": "2026-09-20-senate",
-   "question": "SENATE-CONTROL-2026",
-   "electionDate": "2026-11-03",
-   "capturedAt": "2026-09-20T03:16:55.893Z",
-   "layers": {
-    "metaculus": 0.888,
-    "kalshi": {
-     "ticker": "CONTROLS-2026-D",
-     "bid": 0.59,
-     "ask": 0.6,
-     "last": 0.59,
-     "capturedAt": "2026-09-20T02:50:00.005Z",
-     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
-    }
-   },
-   "source": "https://www.metaculus.com/midterms-2026/",
-   "collector": "scripts/collect-metaculus.mjs"
   },
   {
    "id": "2026-09-20-house",
@@ -216,6 +213,46 @@
    },
    "source": "https://www.metaculus.com/questions/43448/",
    "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-mt-2026",
+   "question": "SENATE-MT-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T02:54:50.030Z",
+   "layers": {
+    "metaculus": 0.01,
+    "kalshi": {
+     "ticker": "SENATEMT-26-D",
+     "bid": 0.002,
+     "ask": 0.013,
+     "last": 0.015,
+     "capturedAt": "2026-09-20T00:53:32.941Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44711/",
+   "collector": "scripts/collect-metaculus.mjs",
+   "restoredFrom": "commit 3976353 (run 35485210251 output, overwritten by run 35484999487 via rebase -X theirs — irregularity #63)"
+  },
+  {
+   "id": "2026-09-20-senate-ne-2026",
+   "question": "SENATE-NE-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T02:54:50.030Z",
+   "layers": {
+    "metaculus": 0.001,
+    "kalshi": {
+     "ticker": "SENATENE-26-D",
+     "bid": 0,
+     "ask": 0.001,
+     "last": 0.001,
+     "capturedAt": "2026-09-20T00:53:32.941Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44710/",
+   "collector": "scripts/collect-metaculus.mjs",
+   "restoredFrom": "commit 3976353 (run 35485210251 output, overwritten by run 35484999487 via rebase -X theirs — irregularity #63)"
   }
  ]
 }

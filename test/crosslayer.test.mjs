@@ -67,6 +67,30 @@ test('Metaculus hub parser reproduces the 2026-09-19 numbers and cross-checks qu
   assert.ok(bad.sample);
 });
 
+test('Metaculus hub parser (#63): a "Senate" in the navigation before the House card must not steal the House numbers; a chamber that contradicts the quadrants is marked inconsistent and not snapshotted', () => {
+  // Shape of the headless-Chrome DOM text on 2026-09-20 (run 35484999487): nav mentions both chambers, then the cards in order.
+  const dom = '<title>2026 US Midterm Elections | Metaculus</title><nav>Overview House Senate Governors Key drivers</nav>'
+    + '<h4>House</h4><div>1d1w2mall</div><div>Democrats88.8%Republicans11.2%</div><div>5%23%41%59%77%95%</div>'
+    + '<h4>Senate</h4><div>Democrats51.7%Republicans48.3%</div>'
+    + '<h4>Congressional Control</h4><div>Dem House / Dem Senate50.7%Dem House / Rep Senate38.1%Rep House / Rep Senate10.2%Rep House / Dem Senate1.0%</div>';
+  const p = parseHub(dom);
+  assert.deepEqual([p.parse, p.houseD, p.senateD, p.consistencyFlags], ['ok', 88.8, 51.7, []]);
+  // Pathological layout (both headings before both pairs): Senate reads the House pair → quadrant cross-check catches it.
+  const grid = '<div>House</div><div>Senate</div><div>Democrats88.8%Republicans11.2%</div><div>Democrats51.7%Republicans48.3%</div>'
+    + '<div>Dem House / Dem Senate50.7%Dem House / Rep Senate38.1%Rep House / Rep Senate10.2%Rep House / Dem Senate1.0%</div>';
+  const g = parseHub(grid);
+  assert.equal(g.inconsistent.senate, true);
+  assert.match(g.consistencyFlags.join(' '), /senateD 88.8 vs quadrant-derived 51.7/);
+  assert.notEqual(g.parse, 'ok');
+  const snap = { snapshots: [] };
+  assert.equal(appendSnapshots(snap, g, { capturedAt: '2026-09-20T03:16:55Z', universe: null }), 0, 'an inconsistent chamber is never written to the scoreboard');
+  // Inconsistent Senate but consistent House: only the House row is written.
+  const mixed = { ...g, houseD: 88.8, houseR: 11.2, inconsistent: { house: false, senate: true } };
+  const s2 = { snapshots: [] };
+  assert.equal(appendSnapshots(s2, mixed, { capturedAt: '2026-09-20T03:16:55Z', universe: null }), 1);
+  assert.equal(s2.snapshots[0].question, 'HOUSE-CONTROL-2026');
+});
+
 test('appendSnapshots adds one row per question per day and pairs Kalshi only from the same UTC day', () => {
   const parsed = parseHub(fx('metaculus-hub-2026-09-19.txt'));
   const snap = { snapshots: [] };
@@ -176,6 +200,16 @@ test('appendSeatSnapshots: one row per seat per day, Kalshi paired only from a s
   const stale = { snapshots: [] };
   appendSeatSnapshots(stale, [g], { capturedAt: '2026-09-21T03:00:00Z', universe });
   assert.equal(stale.snapshots.find((s) => s.question === 'SENATE-RI-2026').layers.kalshi, undefined); // yesterday's Kalshi is never paired
+  // Irregularity #59: Kalshi's Kentucky Senate event is tickered SENATELA-26. The title check pairs KY and refuses LA.
+  assert.equal(SENATE_EVENT('KY'), 'SENATELA-26');
+  const ky = { capturedAt: '2026-09-20T00:53:32Z', capturedFrom: 'fx', events: [{ event_ticker: 'SENATELA-26', title: 'Kentucky Senate winner?', markets: [{ ticker: 'SENATELA-26-D', yes_bid: 0.05, yes_ask: 0.061, last_price: 0.06 }] }] };
+  const s2 = { snapshots: [] };
+  const laQ = { kind: 'party-choice', parse: 'ok', office: 'senate', state: 'LA', D: 10, capturedFrom: 'u1' };
+  const kyQ = { kind: 'party-choice', parse: 'ok', office: 'senate', state: 'KY', D: 6, capturedFrom: 'u2' };
+  assert.equal(appendSeatSnapshots(s2, [laQ, kyQ], { capturedAt: '2026-09-20T03:00:00Z', universe: ky }), 2);
+  const la = s2.snapshots.find((s) => s.question === 'SENATE-LA-2026');
+  assert.equal(la.layers.kalshi, undefined); assert.match(la.kalshiSkipped, /does not name Louisiana/);
+  assert.equal(s2.snapshots.find((s) => s.question === 'SENATE-KY-2026').layers.kalshi.ticker, 'SENATELA-26-D');
   // scorer accepts the seat rows and keeps them pending
   const res = scoreSnapshots(snap.snapshots, {});
   assert.equal(res.pendingCount, 5);

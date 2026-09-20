@@ -1,4 +1,71 @@
-# NEXT_SESSION — handoff after the session-6 merge (`arena/01a0bb51-elections` → main)
+# NEXT_SESSION — handoff after session 7 (`arena/01a0bca8-elections` → main)
+
+Session 7 (2026-09-20, branch `arena/01a0bca8-elections`) worked the requested list end to end:
+**re-tests** (SurveyUSA and HarrisX now fetch on their live hosts and were admitted; CourtListener's v4 API
+root answers 200; PEC/Split Ticket still show no 2026 content — #53 stands; WI certified-results path,
+NV election-information page, CA `electionresults.sos.ca.gov`, MA electionstats and NH `sos.nh.gov` all
+fetched), **poll-layer rows** (Elon and HPU Poll 120 NC Senate → SENATENC-26, HarrisX generic; UMass Lowell ME and SurveyUSA MN
+kept as `pendingSources` with reasons — #60/#47), **collectors** (Metaculus per-seat pairing with the Kentucky
+`SENATELA-26` fix #59; first live seat rows for MT and NE; State Navigate now renders whenever the parser fails;
+R13 renders 270toWin; R15 host re-test monitor crash fixed #61), **live-run forensics** (#61, #62, #63 — read from
+committed files because Actions logs are unreachable from the sandbox; #63 is the high-severity one: a misread
+rendered hub reached the scoreboard and two overlapping runs overwrote each other — both repaired), **22 new master entries** (registry 147 →
+**169**; irregularities 58 → **63**; suite 82 → **88 tests**; site gained the per-question Metaculus table and the
+R15 host table). Evidence: `VERIFICATION.md` §12.
+
+## What to do first in session 8
+
+1. **Read the committed outputs of the first post-merge runs** (never the step badges — #58/#61):
+   `data/probes/latest.json` (should now exist: 30 verdicts), `data/statenavigate/forecast-daily.json`
+   (expect `fetchMethod: headless-chrome` and `parse: ok` on at least the national page — if still failed, the
+   stored `sample` shows what the rendered DOM contained), `data/crosslayer/metaculus-daily.json` (did the
+   persistent profile + second pass get the hub and q40598/q43448/q41678 through Cloudflare?),
+   `data/kalshi/tracker/rendering-crosscheck.json` (270toWin `fetchMethod: headless-chrome`, `extract: ok`?).
+2. **Promote probe verdicts**: any `reachable` verdict for an excluded host (surveypoll.com, thehillx.com,
+   `wi-elections-voting`, `nv-sos-elections`, `ca-elections-cdn`, `ma-elections-root`, `ga-clarity`, `wv-clarity`,
+   `selzerco`, `nyt-siena-ak-toplines`, `healthyelections-org`) is the cue to fetch it in-session and write an addendum
+   on the master entry (or admit it). A rendered `surveyusa-poll-28000` DOM with the MN toplines turns the pending
+   item into rows for SENATEMN-26 / GOVPARTYMN-26.
+3. **After Nov 3 (P0)**: fill `data/crosslayer/outcomes.json` from the per-state certifications (every 2026 Senate
+   state now has a master entry; CA's `electionresults.sos.ca.gov` and WI's certified-results page were verified
+   this session), then `npm run pipeline` publishes per-layer Brier/log-loss for control **and** the seat rows.
+   Before that, audit every place a ticker is built from a state code (#59 — `SENATELA-26` is Kentucky).
+4. **R12 leftovers**: HPU Poll 126 (August 2026) and Winthrop once their release pages are read
+   (probe targets `hpu-poll-120` — the 120 release was read and ingested this session — and `winthrop-poll-results`); Saint Anselm / CIRCLE / CES rows; `methodFamily` on the
+   15 legacy rows.
+5. **Metaculus coverage**: extend `QUESTION_PAGES` as more per-seat questions open (only questions actually
+   fetched — the id list is the audit trail); if Cloudflare stops clearing for headless Chrome, the layer stays
+   'recorded as failed', never estimated.
+6. **R9**: Polymarket / PredictIt collectors so EBO's other rows can be cross-checked the same way.
+
+## Session-7 gotchas
+
+- **A consistency flag means 'unparsed'.** The 03:16 run read Senate = House (88.8) from the rendered hub; the
+  parser now assigns each D/R pair to the nearest chamber word and refuses to snapshot a chamber that contradicts the
+  quadrant sums (#63). If `consistencyFlags` names a chamber, do not quote its headline cell.
+- **Workflows share one concurrency group** (`collectors-<ref>`): never re-split them — the commit step's
+  `rebase -X theirs` drops the other run's rows when they overlap (#63).
+- `metaculus-daily.json` keeps **one row per run** (capped 730); snapshot ids stay one per question per day.
+
+- **Kalshi tickers ≠ state codes**: `SENATELA-26` is Kentucky (Barr/Booker). Pair by event title (#59).
+- **SurveyUSA's live archive is `results.surveyusa.com`**, not surveypoll.com; report pages
+  (`PollReport.aspx?g=…`) are client-rendered — render before transcribing.
+- **HarrisX publishes no MoE** for its opt-in panel → `moe: null`, never estimated. Harvard CAPS releases are
+  co-authored 'by The Harris Poll and HarrisX' (#43 updated).
+- **UMass Lowell's Maine test names Platner**, not the priced nominee (Troy Jackson) → not a race row (#60).
+- **continue-on-error hides crashes**: the probe's first run died on ENOENT and showed green (#61). Judge by files.
+- **Render triggers must be the parser**, not a keyword (State Navigate's nav contains 'close seats', #62).
+- `renderDom` keeps one Chrome profile per process (`os.tmpdir()/elections-chrome-*`) and retries with larger
+  budgets; callers cap retries (`retries: 0/1`) to stay inside step budgets — daily third-layer step is now 30 min,
+  probe 20 min, collector-probe job 45 min.
+- `test/site-sources.test.mjs` asserts **22** entries dated 2026-09-20 and `>= 169` sources;
+  `test/outcomes.test.mjs` accepts 2026-09-20 as a session date.
+- Actions logs/artifacts are unreachable from the sandbox (`gh run view --log`, `gh run download` → EOF);
+  only committed files tell you what a run did.
+
+---
+
+# (Preserved) handoff after the session-6 merge (`arena/01a0bb51-elections` → main)
 
 Session 6 (2026-09-19, branch `arena/01a0bb51-elections`) executed the requested list end to end:
 **P0 machinery** (cross-layer scorer + empty official-outcome record, scored the day a canvass lands),

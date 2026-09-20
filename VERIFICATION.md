@@ -535,3 +535,109 @@ R13 parsers, seed-snapshot consistency with the captured universe) and three new
 `test/site-sources.test.mjs` (session-6 ids/statuses, #49 labels on the five rows, the Cross-layer section rendering
 its 7.8-point Senate spread). `npm run pipeline` regenerated the bundle and the headless render check passed all
 12 sections (Cross-layer added). New irregularities: #54–#57 (+ #58 from the first live collector run on 2026-09-20, see IRREGULARITIES.md).
+
+## 12 · 2026-09-20 session 7 (branch `arena/01a0bca8-elections`) — 22 new entries, re-tests, live-run repairs, first live Metaculus seat rows
+
+Everything below was fetched during the session through the fetch tool (the sandbox itself has no network) or
+observed in files committed by the GitHub Actions runs named. Where a fetch failed the failure is recorded;
+nothing was reconstructed from memory. Runs cited: collector-probe 35485210251 (push trigger), daily-collection
+35484999487; the runs' logs and artifacts are **not** downloadable from the sandbox — only their committed outputs were read.
+
+### 12a · The 22 new master-list entries (id → URL → what was observed), all `verified`, all fetched directly
+
+| `alabama-sos` | https://www.sos.alabama.gov/alabama-votes | Observed: 'Secretary of State Wes Allen'; '3,837,234 Registered Voters'; 'View the 2026 General Election Sample Ballots' (/alabama-votes/2026-general-election-sample-ballots); hub tiles Voter Registration, Election Information… |
+| `arkansas-sos` | https://www.sos.arkansas.gov/elections | Observed sections: For Voters (Register to Vote; VoterView at voterview.ar-nova.org; Absentee Voting; Ballot Issues; Candidate Search at candidates.arkansas.gov); Election Results — 'Current or Most Recent Election Results' and 'Historical Election Results'… |
+| `connecticut-elections-database` | https://electionhistory.ct.gov/ | Observed: 'A searchable database of historical election information, all from official source documents'; year range '1787' to '2026'; Data Inventory '35,795 Contests', '1,485 Ballot Questions', '56,426 Candidates'; Latest Results — 'Feb 3, 2026 - Special… |
+| `idaho-sos-voteidaho` | https://voteidaho.gov/election-results/ | Observed: '2026 Election Results — May 19 Primary Election ... Official Results' with a 'Statewide Results Page' at results.voteidaho.gov/results/public/id/elections/may2026 and per-county pages for all 44 counties; 'Audit & Canvass Reports' — 'Election Audit… |
+| `indiana-election-division` | https://www.in.gov/sos/elections/ | Observed: 'THE NEXT PRIMARY WILL BE ON TUESDAY, MAY 5, 2026'; 'THE NEXT INDIANA GENERAL ELECTION DAY WILL BE ON TUESDAY, NOVEMBER 3, 2026'; 'Primary Election Results' linking enr.indianavoters.in.gov/site/index.html; '2026 General Election Candidate List'… |
+| `kentucky-sbe-results` | https://elect.ky.gov/results/Pages/default.aspx | Observed verbatim: 'The State Board of Elections and county clerks maintain archives of Kentucky election results for research and public inspection. Choose from the menu to view the results available online from 1973 to present. View 1955-1972'… |
+| `louisiana-sos` | https://www.sos.la.gov/ | Observed on the live root: 'Upcoming Election — November 3, 2026 — U.S. Senate General / Open U.S. Representative Primary / Open Primary Election'; Elections links 'Election results & statistics' (/elections-voting/election-results-statistics), 'Election… |
+| `maryland-sbe-2026` | https://elections.maryland.gov/elections/2026/index.html | Observed: Timeline 'General Election Day November 03, 2026', 'Early Voting October 22, 2026 - October 29, 2026'; Results — 'Official Primary Results' (/elections/2026/primary_results/index.html) and 'Data files' (/elections/2026/election_data/index.html);… |
+| `mississippi-sos` | https://www.sos.ms.gov/elections-voting | Observed: tiles My Election Day, Update Voter Registration, Campaign Finance, 'Sample Ballot' (content/documents/Elections/2026/Sample Ballot 9-9-26.pdf), 'Elections Calendar' (2026 Election Calendar.pdf), 'Election Results'… |
+| `missouri-sos-elections` | https://www.sos.mo.gov/elections | Observed verbatim: 'The Elections Division of the Office of the Secretary of State is responsible for administering all statewide elections, initiative petitions ...'; 'Missouri's elections are decentralized, and the state is composed of 116 local election… |
+| `new-hampshire-sos` | https://www.sos.nh.gov/elections | Observed: '2026 Election Details' (/2026-election-details), '2026 Election Results' (/2026-state-primary-election-results), '2024 Election Results', '2025-2026 Special Elections', 'Party Registration History 1970-2026', 'Election Audits & Reports', 'Election… |
+| `utah-lt-governor-vote` | https://vote.utah.gov/ | Observed: '2026 Primary Election Results' linking electionresults.utah.gov/results/public/Utah/elections/Primary06232026; links 'Election Results, Historical Information & Data', 'Interactive Data Hub', 'Track my mail or provisional ballot', '2026 Election… |
+| `west-virginia-sos` | https://sos.wv.gov/elections | Observed: '2026 General Election' — '2026 General Candidate Listing' (candidates.wvsos.gov) and '2026 Primary Election Results' linking results.enr.clarityelections.com/WV/126209; 'Online Voter Registration' (ovr.sos.wv.gov); 'GoVoteWV'; 'Campaign Finance… |
+| `surveyusa` | https://results.surveyusa.com/PollHistory.aspx | Observed in the September 2026 list: '09/16/26 Poll #28000 — All SurveyUSA clients in Minnesota — Minnesota' with questions 'If the November election for Minnesota Governor were today ... who would you vote for? (candidate names rotated)' and 'If the November… |
+| `harrisx` | https://www.harrisx.com/ | Observed: post 'August Harvard CAPS / HarrisX Poll' dated September 2, 2026 (/posts/august-harvard-caps-harrisx-poll) headlined 'August Harvard CAPS / Harris Poll: Trump Approval Sees Slight Improvement at 44%' with 'MIDTERMS HORSERACE REMAINS TIGHT AT 51-49… |
+| `elon-poll` | https://www.elon.edu/u/elon-poll/ | Fetched directly 2026-09-20 (title 'Elon University Poll \| Elon University') plus the September 10, 2026 news-release PDF. Index observed: 'September 10, 2026: North Carolina Poll on U.S. Senate race ...', 'September 17, 2026: ... NC Constitutional amendments… |
+| `hpu-survey-research-center` | https://www.highpoint.edu/src/ | Observed: 'The SRC's HPU Poll surveys people in North Carolina and beyond ... reports the results as a public service'; 'The HPU Poll reports methodological details in accordance with the standards set out by AAPOR's Transparency Initiative, and the HPU… |
+| `umass-lowell-cpo` | https://www.uml.edu/research/public-opinion/ | Observed: 'The center is a member of the American Association of Public Opinion Research (AAPOR) Transparency Initiative'; 'Maine Poll: Platner Holds Slight Lead over Collins in U.S. Senate Race' (06/04/2026): 'The survey of 650 likely Maine voters shows… |
+| `roanoke-college-ipor` | https://www.roanoke.edu/ipor | Observed verbatim: 'From 1983 to 2026, the Institute for Policy and Opinion Research (IPOR) conducted regular surveys in the Commonwealth of Virginia ... Explore our archive of past polls below.'; recent items 'Virginia Consumer Sentiment Report for Aug.… |
+| `uh-hobby-school-elections` | https://www.uh.edu/hobby/research/elections/index.php | Observed report tiles: 'Texas Primaries 2026' (primary2026, senate report cover), 'Republican Primaries 2026', 'Democratic Primaries 2026', Harris County primaries 2026 (countyprimary), 'Texas Congressional District 18 Special Election 2025', 'Texas Trends… |
+| `fhsu-docking-kansas-speaks` | https://www.fhsu.edu/docking/kansas-speaks/ | Observed: 'Kansas Speaks is a statewide public opinion survey measuring Kansans' opinions on public issues and their evaluations of elected officials'; report PDFs from 'Kansas Speaks Fall 2025' (2025-kansas-speaks-report_final-10-27-20251.pdf) back to… |
+| `winthrop-poll` | https://www.winthrop.edu/winthroppoll/ | Observed verbatim: 'The Winthrop Poll is a long-term survey initiative ... citizens in South Carolina, the South as a region, and the nation as a whole'; 'The first statewide poll took place in fall 2006'; 'frequent Winthrop Polls focusing on the South as a… |
+
+Brand/host traps checked before admission: SurveyUSA was admitted on the archive host it actually serves
+(results.surveyusa.com), not surveypoll.com (dead since #47); HarrisX on harrisx.com (thehillx.com still fails);
+Louisiana's legacy paths return the site's own 404 (recorded on the entry); Noble Predictive's #50 domain lesson applied
+to every pollster (each URL fetched and its title recorded).
+
+### 12b · Re-tests (fetched 2026-09-20; recorded as dated addenda on the existing entries, never by overwriting `verifiedOn`)
+
+| Host | Result | Consequence |
+|---|---|---|
+| results.surveyusa.com (SurveyUSA) | **fetches** — archive index lists '09/16/26 Poll #28000 Minnesota'; the report page (PollReport.aspx?g=…) is client-rendered (empty body to the fetcher) | admitted (`surveyusa`); #47 resolved for the host, MN toplines pending a rendered read (pendingSources `surveyusa-28000-mn`; probe target `surveyusa-poll-28000`) |
+| www.harrisx.com | **fetches** — 'August Harvard CAPS / HarrisX Poll' (Sept 2, 2026) states the survey was conducted 'by The Harris Poll and HarrisX' | admitted (`harrisx`); #43's Harris Poll/HarrisX distinction now reads 'co-authors of the Harvard CAPS series' |
+| courtlistener.com/api/rest/v4/ | HTTP 200 (DRF API root listing) | #47 fully resolved for the host |
+| election.princeton.edu | **fetches** — newest posts still 'Geek's Guide to the Election 2024' / 'A final snapshot and House prediction' / 'Herding, or judgment?' (all November 5, 2024, Sam Wang) | #53 criteria not met — still declined; probe target `pec` keeps watching |
+| split-ticket.org | **fetches** — newest post still 'The Pendulum Effect' (October 20, 2025); 'What's Next: Split Ticket Partners With The Argument' (August 19, 2025) says the bulk of analysis now publishes at The Argument | #53 criteria not met — still declined; probe target `split-ticket` keeps watching |
+| elections.wi.gov/elections/election-results | **fetches** — Aug 11 2026 partisan primary certified Aug 25; WEC states it runs no statewide election-night reporting (media/AP collect from 72 county clerks) | #40 partially resolved (deep path reachable); canvass source for Nov 3 is the certified-results page |
+| nvsos.gov | /sos/elections and /elections/election-information fetch; the guessed results path is the office's own 404 behind a CAPTCHA | #41 stands as 'path unknown', not 'host blocked' |
+| electionresults.sos.ca.gov | **fetches** — CD-14 special: Wahab (DEM) 51,734 = 53.1% vs Hernandez (DEM) 45,700 = 46.9%, 323/323 precincts as of 2026-09-16, certification due 2026-09-25 | #42's CDN block is irrelevant for results; this host is the Nov 3 canvass source (probe target `ca-electionresults`) |
+| electionstats.state.ma.us | **fetches** (PD43+, 1970–2026) | #51 stands for the division root only |
+| sos.nh.gov/elections | **fetches** (title 'Elections \| New Hampshire Secretary of State') | #35 resolved for NH — admitted (`new-hampshire-sos`) |
+| results.enr.clarityelections.com/WV/126209 | West Virginia publishes primary results only through the Clarity ENR vendor host that blocked the Georgia fetch (#35) | probe target `wv-clarity` added; no numbers transcribed |
+| www.270towin.com | Kalshi panel = 2028 presidency: D 57 / R 41 vs captured KXPRESPARTY-2028 last prices (diff −0.01) | R13 evidence (rendering-crosscheck row); raw HTML lacks the numbers → render fallback added |
+| www.metaculus.com | plain fetch 403 on the runner (both profiles); headless Chrome rendered q36370, q44711, q44710 | first live seat rows (12c); persistent-profile + retry + second pass shipped |
+
+### 12c · Live-run evidence (files committed by the runner, read line by line)
+
+- `data/crosslayer/metaculus-daily.json` row 2026-09-20T02:54:50Z: q36370 Senate plurality D 50.6 / R 49.3 / other 0.1
+  (459 forecasters); q44711 Montana D 1 / R 94 (55 forecasters); q44710 Nebraska D 0.1 / R 73.5 (49). Hub, q40598,
+  q43448, q41678: HTTP 403 `cloudflare-challenge`, render still an interstitial → `parse:'failed'` rows with the error (#62).
+- `data/crosslayer/snapshots.json`: `2026-09-20-senate-mt-2026` (Metaculus D 0.01 vs Kalshi SENATEMT-26-D bid 0.002 /
+  ask 0.013 / last 0.015) and `2026-09-20-senate-ne-2026` (D 0.001 vs SENATENE-26-D 0 / 0.001 / 0.001) — both
+  `status: pending` until an official canvass lands in `outcomes.json` (P0 after Nov 3).
+- `data/kalshi/tracker/rendering-crosscheck.json` 2026-09-20T02:57:43Z: EBO Kalshi Senate-D 0.584–0.594 vs captured mid
+  0.595 (diff −0.006, not flagged); DDHQ House D 70 / Senate D 52; 270toWin `extract:'failed'` (#62).
+- `data/statenavigate/forecast-daily.json`: 35 pages `fetch:project` + `parse:'failed'` — the shell's navigation contains
+  'close seats', so the keyword trigger for rendering never fired (#62; fixed: the parser is now the trigger).
+- `data/probes/latest.json`: **absent** — the probe crashed on ENOENT before writing (#61; fixed and verified locally).
+- **Third run** (daily-collection 35484999487, committed 22a2766 at 03:18Z): the hub rendered (4,674,647-byte DOM) but was
+  misread — houseD 88.8 / senateD 88.8 with quadrants 50.7 / 38.1 / 10.2 / 1.0 and the collector's own flag
+  'senateD 88.8 vs quadrant-derived 51.7'; the wrong Senate value was still written to `snapshots.json`. The same
+  commit, made with `rebase -X theirs` over the 02:58 collector-probe commit, dropped the Montana/Nebraska rows (#63).
+  Repaired in this PR: parser rebuilt (nearest chamber word + quadrant cross-check that blocks scoreboard writes),
+  wrong row deleted, seat rows restored verbatim from commit 3976353, workflows serialised. The governor question
+  (q43448) did parse: HI 98 / NM 92.2 / OR 88 / MI 85 (76 forecasters) → four governor seat rows paired with
+  GOVPARTY{ST}-26-D (0.968/0.98, 0.91/0.941, 0.84/0.85, 0.906/0.924).
+- Kalshi universe 2026-09-20T00:53Z: SENATELA-26 is titled 'Kentucky Senate winner?' (Barr 0.940/0.952, Booker
+  0.050/0.061) — #59; the Maine event prices Troy Jackson 0.67/0.68 vs Collins 0.33/0.34 — #60.
+
+### 12d · Poll-layer ingestion (numbers transcribed into `data/polls/poll-layer-2026.json`, #49 labels)
+
+| Row id | Source (fetched 2026-09-20) | Transcribed | Label |
+|---|---|---|---|
+| `elon-2026-09-nc-senate` | Elon University Poll release PDF, Sept 10 2026 | Cooper (D) 49 / Whatley (R) 38 among 800 likely voters (from 1,121 adults), Aug 21–31, MoE ±5.6 | `online-nonprobability-matched` |
+| `hpu-2026-04-nc-senate` | HPU Poll 120 release page (highpoint.edu/blog/2026/04/…), April 16 2026 | Cooper (D) 50 / Whatley (R) 42 among 703 likely voters (914 responses matched to 800 RV), fielded by YouGov Mar 26–Apr 6; the release says a classic MoE is 'not appropriate' and gives a credibility interval of ±4.3 (LV) — stored as `moe` with that label in `methodNote` | `online-nonprobability-matched` |
+| `harrisx-2026-08-generic` | harrisx.com post 'August Harvard CAPS / HarrisX Poll' | n=2,100 RV, Aug 28–30; two-way generic D 51 / R 49; LV R+2; Trump approve 44; **no MoE published → `moe: null`** | `online-optin-weighted` |
+| pending `umass-lowell-2026-05-me-senate` | UMass Lowell CPO release | Platner (D) 48 / Collins (R) 43 — Platner is not the nominee Kalshi prices (Troy Jackson) | not ingested (#60) |
+| pending `surveyusa-28000-mn` | results.surveyusa.com archive | report page client-rendered — no numbers read | not ingested (#47) |
+
+### 12e · Verification evidence after the batch
+
+`npm run lint` → `checked 73 data JSON files, 169 sources, 4 outcomes, 5 markets, 63 irregularities (md rows 63),
+23 poll entries — lint: all verified-data provenance checks pass`. `npm test` → **88 tests, 87 pass, 1 skipped**
+(network live-capture test): `test/crosslayer.test.mjs` grew to 12 (Kentucky→SENATELA-26 pairing, title-check
+`kalshiSkipped`, the #63 hub-parser case: nav 'Senate' before the House card, and the inconsistent-chamber block), `test/site-sources.test.mjs` gained the session-7 registry assertions (22 ids dated 2026-09-20 and
+fetched directly, SurveyUSA/HarrisX admitted on their live hosts, re-test addenda without overwriting `verifiedOn`,
+≥169 entries) and the poll-row assertions (Elon NC 49/38 and HPU NC 50/42 → SENATENC-26-D, HarrisX `moe: null`, UMass Lowell ME and
+SurveyUSA MN only in `pendingSources`); `test/outcomes.test.mjs` accepts 2026-09-20 as a documented session date.
+`npm run pipeline` regenerated the bundle (Cross-layer section now lists the per-question Metaculus rows with how each
+was read, the State Navigate card says plainly that the latest automated row did not parse, and the Sources section ends
+with the R15 host re-test table — 'no run yet' until the first committed `latest.json`); the headless render check passed
+all 12 sections. `python scripts/sync_site_data.py` → synced=12 missing=0. Code changes verified offline: `renderDom`
+retry/profile logic against a stand-in Chrome that always returns an interstitial (3 attempts, budgets 20/35/50 s) and
+against one that returns a page (1 attempt); `probe-hosts.mjs` end-to-end over all 30 targets with the stand-in binary
+(no crash; local outputs deleted, never committed). New irregularities: #59–#63.

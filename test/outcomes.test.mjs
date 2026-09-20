@@ -62,7 +62,7 @@ test('master source list has >= 20 verified entries with http(s) URLs', () => {
   const master = JSON.parse(readFileSync(join(ROOT, 'data/sources/master.json'), 'utf8'));
   assert.ok(master.sources.length >= 20, `only ${master.sources.length} sources`);
   // Session dates must be the documented capture sessions (no invented dates).
-  const allowedDates = new Set(['2026-09-18', '2026-09-19']);
+  const allowedDates = new Set(['2026-09-18', '2026-09-19', '2026-09-20']); // sessions 1-5, 6, 7 (VERIFICATION.md §§1-12)
   const allowedStatuses = new Set(['verified', 'verified-claim', 'verified-via-search', 'needs-review']); // README 'Sources' vocabulary (needs-review first used in session 6 for two partisan-affiliated pollsters)
   const ids = new Set();
   for (const s of master.sources) {

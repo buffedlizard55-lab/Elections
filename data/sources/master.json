@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
-  "updated": "2026-09-19",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 §9, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md §9b) and never changes a source's verified content.",
+  "updated": "2026-09-20",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 §9, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md §9b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) — total 169.",
   "sources": [
     {
       "id": "kalshi",
@@ -946,7 +946,7 @@
       "name": "Wisconsin Elections Commission (WEC)",
       "type": "State election authority (official results & calendar; WI Governor 2026 — Kalshi GOVPARTYWI-26; WI U.S. Senate is SENATEWI-28)",
       "url": "https://elections.wi.gov/",
-      "verified": "Fetched directly 2026-09-19. Homepage: 'Your 2026 Election Roadmap' linking a 2026 Election Information Hub (key election dates, candidates on the ballot, in-person polling locations, voting statistics). About text verbatim: 'The Wisconsin Elections Commission is a six member, bipartisan commission charged with implementing Wisconsin's election statutes and supporting Wisconsin's 1,851 municipal clerks and 72 county clerks.' Elections & Important Dates listed on the page: Oct 14 2026 'Deadline to register to vote by mail or online', Oct 20 2026 'In-Person absentee voting may begin', Oct 30 2026 'Deadline for write-in candidates to file for the General Election' and 'Deadline to register in person before election day', Nov 03 2026 '2026 General Election'. Also linked: MyVote Wisconsin (myvote.wi.gov), ElectEd official training, commission meetings/minutes, sworn election complaints, election security & integrity, clerk communications. FETCH NOTE: the deep path /elections-voting returned 'Access denied | Wisconsin Elections Commission — You are not authorized to access this page' to this session's fetch tool while the site root fetched normally (irregularity #40).",
+      "verified": "Fetched directly 2026-09-19. Homepage: 'Your 2026 Election Roadmap' linking a 2026 Election Information Hub (key election dates, candidates on the ballot, in-person polling locations, voting statistics). About text verbatim: 'The Wisconsin Elections Commission is a six member, bipartisan commission charged with implementing Wisconsin's election statutes and supporting Wisconsin's 1,851 municipal clerks and 72 county clerks.' Elections & Important Dates listed on the page: Oct 14 2026 'Deadline to register to vote by mail or online', Oct 20 2026 'In-Person absentee voting may begin', Oct 30 2026 'Deadline for write-in candidates to file for the General Election' and 'Deadline to register in person before election day', Nov 03 2026 '2026 General Election'. Also linked: MyVote Wisconsin (myvote.wi.gov), ElectEd official training, commission meetings/minutes, sworn election complaints, election security & integrity, clerk communications. FETCH NOTE: the deep path /elections-voting returned 'Access denied | Wisconsin Elections Commission — You are not authorized to access this page' to this session's fetch tool while the site root fetched normally (irregularity #40). Re-test 2026-09-20: the deep path /elections/election-results fetched directly (irregularity #40 no longer reproduces). Observed: 'Official results of the August 11, 2026 Partisan Primary Election, which was certified on August 25, 2026'; 2026 Spring Election files (Ward by Ward / County by County .xlsx, signed canvass statements, certified May 15, 2026); 2024 General Election 'County by County Report_US Senate' PDF; and the commission's own statement: 'Wisconsin does not have a statewide system for reporting unofficial results on Election Night ... The unofficial statewide and county results numbers that the public sees on Election Night ... come from the news media, including the Associated Press, which collects them from the 72 county clerks' websites.'",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Wisconsin's 2026 open gubernatorial race is traded on Kalshi — GOVPARTYWI-26-D 'David Crowley' bid 0.80 / ask 0.81 and GOVPARTYWI-26-R 'Tom Tiffany' bid 0.19 / ask 0.20 in the project's 2026-09-19 full open-universe capture, with per-candidate vote-share ladders (KXVOTEGENERAL-GOVPARTYWI-26DCRO-* and …26TTIF-*). Wisconsin's U.S. Senate seat is class 1 and trades as SENATEWI-28. WEC is the bipartisan commission that publishes the official canvass/statement of votes and the statewide election calendar used for settlement-date checks.",
@@ -957,7 +957,7 @@
       "name": "Nevada Secretary of State — Elections",
       "type": "State election authority (official results & registration statistics; NV Governor 2026 — Kalshi GOVPARTYNV-26; NV U.S. Senate is SENATENV-28)",
       "url": "https://www.nvsos.gov/elections",
-      "verified": "Fetched directly 2026-09-19. The /elections hub links, all present on the fetched page: Election Information (/elections/election-information), Voter Information (/elections/voters), Voter Registration Statistics (/elections/voters/voter-registration-statistics), Information for Candidates (/elections/candidate-information), Initiatives & Referenda (/elections/initiatives-referenda), Resources (/elections/election-resources), plus the My Voter File lookup (nvsos.gov/votersearch/). URL CORRECTION: the older path /sos-elections returns the site's 404 page — 'Page Not Found... The page you are looking for, https://www.nvsos.gov/sos-elections, may have been removed, renamed, entered wrong, or is temporarily unavailable' — behind a BotDetect CAPTCHA (irregularity #41). Official results pages on the same host were located via live search (not fetched directly): /SOSelectionPages/results/2026StateWidePrimary/Clark.aspx headed 'Official Primary Election Results Clark' (showing '141 out of 141 Precincts Reporting' for a Justice of the Peace race) and /2026StateWidePrimary/Nye.aspx headed 'Official Primary Election Results Nye' ('21 out of 21 Precincts Reporting').",
+      "verified": "Fetched directly 2026-09-19. The /elections hub links, all present on the fetched page: Election Information (/elections/election-information), Voter Information (/elections/voters), Voter Registration Statistics (/elections/voters/voter-registration-statistics), Information for Candidates (/elections/candidate-information), Initiatives & Referenda (/elections/initiatives-referenda), Resources (/elections/election-resources), plus the My Voter File lookup (nvsos.gov/votersearch/). URL CORRECTION: the older path /sos-elections returns the site's 404 page — 'Page Not Found... The page you are looking for, https://www.nvsos.gov/sos-elections, may have been removed, renamed, entered wrong, or is temporarily unavailable' — behind a BotDetect CAPTCHA (irregularity #41). Official results pages on the same host were located via live search (not fetched directly): /SOSelectionPages/results/2026StateWidePrimary/Clark.aspx headed 'Official Primary Election Results Clark' (showing '141 out of 141 Precincts Reporting' for a Justice of the Peace race) and /2026StateWidePrimary/Nye.aspx headed 'Official Primary Election Results Nye' ('21 out of 21 Precincts Reporting'). Re-test 2026-09-20: /sos/elections and /elections/election-information fetched directly; the guessed path /sos/elections/election-information/election-results is the office's own 'Page Not Found' behind a CAPTCHA (same pattern as #41). The live hub lists '2026 ELECTION INFORMATION' (/elections/election-information/2026-election-information), '1962 - Present Election Results' (/elections/election-information/previous-elections) and 'Precinct-Level Election Results' (/elections/election-information/precinct-level-results).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Nevada's 2026 gubernatorial race is traded on Kalshi — GOVPARTYNV-26-R 'Joe Lombardo' bid 0.55 / ask 0.56 and GOVPARTYNV-26-D 'Aaron Ford' bid 0.44 / ask 0.45 in the project's 2026-09-19 capture (one of the closer state markets in that file), with vote-share ladders …NV-26JLOM-* and …NV-26AFOR-*; Nevada's U.S. Senate seat is class 1 and trades as SENATENV-28. SOS publishes the official statewide canvass, county-by-county results and voter-registration statistics — the registration series is a turnout-model input.",
@@ -968,7 +968,7 @@
       "name": "California Secretary of State — Elections & Voter Information Division",
       "type": "State election authority (official results, registration & candidate status; CA Governor 2026 — Kalshi KXGOVCA-26 / GOVPARTYCA-26; CA U.S. Senate is SENATECA-28)",
       "url": "https://www.sos.ca.gov/elections",
-      "verified": "Fetched directly 2026-09-19; page title 'Elections and Voter Information :: California Secretary of State' (English/Spanish toggle). Verbatim from the 'General Election - November 3, 2026' block: 'The last day to register to vote online for November 3, 2026, General Election is October 19'; 'County elections officials will begin mailing ballots by October 5'; 'Secure ballot drop-off locations open on October 6'; 'The first vote centers open for early in-person voting in all Voter's Choice Act counties on October 24. In-person early voting locations throughout California will be open on Saturday, October 31'; 'Mailed ballots must be postmarked on or before November 3'; 'November 3 is the last day to vote in-person or return a ballot by 8:00 p.m. Polls are open from 7:00 a.m. to 8:00 p.m.' Links verified on the page: registertovote.ca.gov, voterstatus.sos.ca.gov ('My Voter Status'), the November 3 2026 Official Voter Information Guide (voterguide.sos.ca.gov), Voting Rights Restored tool, conservatorship rules, pre-registration at 16, military & overseas voters, Safe At Home, Political Parties (qualified parties, statements of purpose, party qualification), Guide to Voter Registration Drives, NVRA list maintenance, VoteCal ('California's centralized voter registration database'), Same Day / Conditional Voter Registration, and Elections Division contact (800) 345-VOTE (8683). FETCH NOTE: the division's CDN host elections.cdn.sos.ca.gov returned an S3 'AccessDenied — Access Denied' error to this session's fetch tool (irregularity #42); www.sos.ca.gov pages fetched normally.",
+      "verified": "Fetched directly 2026-09-19; page title 'Elections and Voter Information :: California Secretary of State' (English/Spanish toggle). Verbatim from the 'General Election - November 3, 2026' block: 'The last day to register to vote online for November 3, 2026, General Election is October 19'; 'County elections officials will begin mailing ballots by October 5'; 'Secure ballot drop-off locations open on October 6'; 'The first vote centers open for early in-person voting in all Voter's Choice Act counties on October 24. In-person early voting locations throughout California will be open on Saturday, October 31'; 'Mailed ballots must be postmarked on or before November 3'; 'November 3 is the last day to vote in-person or return a ballot by 8:00 p.m. Polls are open from 7:00 a.m. to 8:00 p.m.' Links verified on the page: registertovote.ca.gov, voterstatus.sos.ca.gov ('My Voter Status'), the November 3 2026 Official Voter Information Guide (voterguide.sos.ca.gov), Voting Rights Restored tool, conservatorship rules, pre-registration at 16, military & overseas voters, Safe At Home, Political Parties (qualified parties, statements of purpose, party qualification), Guide to Voter Registration Drives, NVRA list maintenance, VoteCal ('California's centralized voter registration database'), Same Day / Conditional Voter Registration, and Elections Division contact (800) 345-VOTE (8683). FETCH NOTE: the division's CDN host elections.cdn.sos.ca.gov returned an S3 'AccessDenied — Access Denied' error to this session's fetch tool (irregularity #42); www.sos.ca.gov pages fetched normally. Re-test 2026-09-20: /elections fetched directly again, and the results host electionresults.sos.ca.gov fetched directly for the first time — it currently serves the '2026 Special Election' for 'U.S. Representative District 14': 'Unofficial Election Results ... (323 of 323) precincts partially reporting as of September 16, 2026, 8:29 a.m.'; 'Melissa Hernandez (Party Preference: DEM) 45,700 46.9%', 'Aisha Wahab (Party Preference: DEM) 51,734 53.1%'; 'county elections officials must report final official results by September 18, 2026. The Secretary of State will certify the results on September 25, 2026'. The CDN path in irregularity #42 was not re-tested.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "California's 2026 open gubernatorial race is one of the most-traded political events on Kalshi: KXGOVCA-26-SHIL ('Steve Hilton') ranks #11 by lifetime volume in the project's 2026-09-19 full open-universe capture (8,707,389 contracts), and the same capture prices the party markets GOVPARTYCA-26-D 'Xavier Becerra' bid 0.958 / ask 0.967 and GOVPARTYCA-26-R 'Steve Hilton' bid 0.029 / ask 0.043. California's U.S. Senate seat is class 1 and trades as SENATECA-28. CA SOS is the official publisher of statewide results, candidate party-preference designations and registration statistics used for settlement cross-checks.",
@@ -1089,7 +1089,7 @@
       "name": "270toWin (Electoral Ventures LLC)",
       "type": "Free election-data aggregator (interactive maps, 2026 forecasts & poll round-ups, Kalshi-derived market panel)",
       "url": "https://www.270towin.com/",
-      "verified": "Fetched directly 2026-09-19. The page carries a 'Prediction Markets' block: 'Which party will win the 2028 Presidential Election?' showing '57%' and '41%' with a Kalshi logo and the disclosure verbatim: 'Probability based on the most recent ‘yes’ trade for each party as of Sep. 19, 2026 at 18:17 UTC (2:17 PM EDT). May not total 100%.' Same-day cross-check against this project's own two independent Kalshi captures (both stamped 2026-09-19T15:59:45Z / 15:59:58Z): KXPRESPARTY-2028-D bid 0.58 / ask 0.59 / last 0.58 and KXPRESPARTY-2028-R bid 0.41 / ask 0.42 / last 0.41, identical in the Node events feed (data/kalshi/tracker/daily/2026-09-19.csv) and the Python markets feed (data/kalshi/markets_politics_latest.json) — the rendered 41% matches the Republican last trade exactly and 57% sits 1¢ below the Democratic last trade captured 2h18m earlier (party attribution inferred from that match; the page does not label which figure belongs to which party). Also verified on the page: a 'Kalshi American Power Index (+1.90 D, KPOW as of 9/17/26 11:53 AM EDT)' link; 2026 Forecast pages for Senate, House and Governor; 2026 Poll pages for Senate, House and Governor; interactive maps for President, Senate, House, Governor, State Senate and State House; dated headlines — 'Overview and Live Results: Delaware Primary' (Sep 15, 2026), Rhode Island primary (Sep 9, 2026), New Hampshire primary (Sep 8, 2026), 'New Interactive Maps: FiftyPlusOne Senate and House Forecast' (Sep 2, 2026), Massachusetts primary (Aug 31, 2026); footer '© 2026 Electoral Ventures LLC'. Freshness note: the 2024-margin base map is stamped 'Map Updated: Jan. 29, 2025 at 12:53 UTC'.",
+      "verified": "Fetched directly 2026-09-19. The page carries a 'Prediction Markets' block: 'Which party will win the 2028 Presidential Election?' showing '57%' and '41%' with a Kalshi logo and the disclosure verbatim: 'Probability based on the most recent ‘yes’ trade for each party as of Sep. 19, 2026 at 18:17 UTC (2:17 PM EDT). May not total 100%.' Same-day cross-check against this project's own two independent Kalshi captures (both stamped 2026-09-19T15:59:45Z / 15:59:58Z): KXPRESPARTY-2028-D bid 0.58 / ask 0.59 / last 0.58 and KXPRESPARTY-2028-R bid 0.41 / ask 0.42 / last 0.41, identical in the Node events feed (data/kalshi/tracker/daily/2026-09-19.csv) and the Python markets feed (data/kalshi/markets_politics_latest.json) — the rendered 41% matches the Republican last trade exactly and 57% sits 1¢ below the Democratic last trade captured 2h18m earlier (party attribution inferred from that match; the page does not label which figure belongs to which party). Also verified on the page: a 'Kalshi American Power Index (+1.90 D, KPOW as of 9/17/26 11:53 AM EDT)' link; 2026 Forecast pages for Senate, House and Governor; 2026 Poll pages for Senate, House and Governor; interactive maps for President, Senate, House, Governor, State Senate and State House; dated headlines — 'Overview and Live Results: Delaware Primary' (Sep 15, 2026), Rhode Island primary (Sep 9, 2026), New Hampshire primary (Sep 8, 2026), 'New Interactive Maps: FiftyPlusOne Senate and House Forecast' (Sep 2, 2026), Massachusetts primary (Aug 31, 2026); footer '© 2026 Electoral Ventures LLC'. Freshness note: the 2024-margin base map is stamped 'Map Updated: Jan. 29, 2025 at 12:53 UTC'. Re-test 2026-09-20: homepage fetched directly — the 'Prediction Markets' panel again reads 'Which party will win the 2028 Presidential Election?' 'Democrats 57%' / 'Republicans 41%' with 'Probability based on the most recent ‘yes’ trade for each party as of Sep. 19, 2026 at 02:44 UTC' and 'KPOW +1.90 D as of 9/17/26 11:53 AM EDT'; the R13 parser (parse270) was rewritten on this text after the first live run failed on it (#58) and now compares the panel to KXPRESPARTY-2028 last trades (D 0.58 / R 0.41 in the 2026-09-20 capture, diff -0.01, within tolerance).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Admitted as a free aggregator for electoral maps, 2026 forecast and poll round-ups, and as a documented third-party rendering of Kalshi prices that can be compared against the project's own captures (recorded as irregularity #46). Because its displayed probabilities are LAST-TRADE based and explicitly 'may not total 100%', they are never used as market prices here (see irregularities #2 and #7). VERIFICATION.md §8 deferred this entry pending fit; fit verified this session with the cross-check above.",
@@ -1111,7 +1111,7 @@
       "name": "The Harris Poll (political polling is published under the separate HarrisX brand)",
       "type": "Pollster / market-research firm (no political polling on this site)",
       "url": "https://theharrispoll.com/",
-      "verified": "Fetched directly 2026-09-19. Homepage positioning: 'See Tomorrow. Shape Today.'; self-description 'The Harris Poll is a global market research and advisory partner. Our companies help organizations understand people, anticipate change, and act with confidence.' Scale statements on the page: '70+ Years of trusted insights and proven methodology. Driving innovation and industry leadership since 1956', '40M Unique respondents', '67K+ Media mentions last year', '90 Countries surveyed worldwide'. Report library verified (The Six Types of AI Users; Sports Momentum Intelligence Report; The State of Pets 2026; America's World Cup Moment — 2026 FIFA Men's World Cup; The Algorithmic Aisle; AutoTECHCAST 2026). Sub-brands listed: Harris Quest, Storyline Strategies, Bera AI, Emerald Research Group. Practice areas: Market Understanding, Trends & Futures, Thought Leadership, Product & Message, Brand & Reputation. DISCREPANCY OBSERVED: no political or election polling is presented anywhere on the fetched homepage, and the political-polling brand known publicly as 'HarrisX' (thehillx.com) could NOT be fetched by this session's tool (irregularity #43).",
+      "verified": "Fetched directly 2026-09-19. Homepage positioning: 'See Tomorrow. Shape Today.'; self-description 'The Harris Poll is a global market research and advisory partner. Our companies help organizations understand people, anticipate change, and act with confidence.' Scale statements on the page: '70+ Years of trusted insights and proven methodology. Driving innovation and industry leadership since 1956', '40M Unique respondents', '67K+ Media mentions last year', '90 Countries surveyed worldwide'. Report library verified (The Six Types of AI Users; Sports Momentum Intelligence Report; The State of Pets 2026; America's World Cup Moment — 2026 FIFA Men's World Cup; The Algorithmic Aisle; AutoTECHCAST 2026). Sub-brands listed: Harris Quest, Storyline Strategies, Bera AI, Emerald Research Group. Practice areas: Market Understanding, Trends & Futures, Thought Leadership, Product & Message, Brand & Reputation. DISCREPANCY OBSERVED: no political or election polling is presented anywhere on the fetched homepage, and the political-polling brand known publicly as 'HarrisX' (thehillx.com) could NOT be fetched by this session's tool (irregularity #43). Re-test 2026-09-20: HarrisX's own release of the August Harvard CAPS / Harris poll (harrisx.com/posts/august-harvard-caps-harrisx-poll) says the survey was conducted 'by The Harris Poll and HarrisX' — for that monthly series the two brands are co-authors (irregularity #43 refined; see the new 'harrisx' entry).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Admitted ONLY as a large-sample survey-methodology and media-research source. Do NOT attribute 2026 political horse-race numbers to 'The Harris Poll' without a primary HarrisX release — conflating the two brands is a common attribution error, and this project records it as a flagged discrepancy rather than a silent assumption. thehillx.com is on the re-verify list for the next session.",
@@ -1210,7 +1210,7 @@
       "name": "Massachusetts Secretary of the Commonwealth — Elections Division",
       "type": "State election authority (certified-results-only publisher; MA U.S. Senate 2026 — Kalshi SENATEMA-26)",
       "url": "https://www.sec.state.ma.us/divisions/elections/elections-and-voting.htm",
-      "verified": "Reached through live search 2026-09-19, then fetched directly (title 'Elections Division'). Observed: 'Secretary of the Commonwealth of Massachusetts — William Francis Galvin'; Recent Updates — '2026 State Election Candidates', '2026 State Election Ballot Questions', '2026 Information for Voters', '2026 State Primary Results' (linking electionstats.state.ma.us/elections/search/date:2026-09-01), 'How to Run for Office in 2026'; Election Results block — 'Note: We publish election results here after they're certified. We don't publish results on Election Night.' with 'Certified Election Results' at electionstats.state.ma.us; 'Elections Data & Statistics Hub'; contact '1-800-462-VOTE (8683)'. The division landing page https://www.sec.state.ma.us/divisions/elections/ itself returned '403 - Forbidden: Access is denied.' the same day (irregularity #51).",
+      "verified": "Reached through live search 2026-09-19, then fetched directly (title 'Elections Division'). Observed: 'Secretary of the Commonwealth of Massachusetts — William Francis Galvin'; Recent Updates — '2026 State Election Candidates', '2026 State Election Ballot Questions', '2026 Information for Voters', '2026 State Primary Results' (linking electionstats.state.ma.us/elections/search/date:2026-09-01), 'How to Run for Office in 2026'; Election Results block — 'Note: We publish election results here after they're certified. We don't publish results on Election Night.' with 'Certified Election Results' at electionstats.state.ma.us; 'Elections Data & Statistics Hub'; contact '1-800-462-VOTE (8683)'. The division landing page https://www.sec.state.ma.us/divisions/elections/ itself returned '403 - Forbidden: Access is denied.' the same day (irregularity #51). Re-test 2026-09-20: electionstats.state.ma.us (PD43+) fetched directly — 'A searchable database of Massachusetts historical election results and statistics, all from Public Document 43', years 1970-2026, offices President through Council of Governments; the deep-page 403 in irregularity #51 did not reproduce for this host.",
       "verifiedOn": "2026-09-19",
       "status": "verified-via-search",
       "notes": "Massachusetts's 2026 U.S. Senate race is priced as effectively uncompetitive — SENATEMA-26-D 'Ed Markey' 0.975/0.980 vs SENATEMA-26-R 'John Deaton' 0.025/0.027 in the 2026-09-19 capture. The division's certified-only policy (no election-night numbers) means MA results reach official status later than night-of states; a UMass Amherst Poll row (added this session) is the in-state poll check on whether that one-sided pricing ever cracks.",
@@ -1309,7 +1309,7 @@
       "name": "Metaculus (crowd forecasting platform)",
       "type": "Aggregated community forecasts — dedicated 2026 US Midterms hub; a third intelligence layer beside markets and polls (free)",
       "url": "https://www.metaculus.com/midterms-2026/",
-      "verified": "Hub fetched directly 2026-09-19 (title '2026 US Midterm Elections | Metaculus'; 'Real-time forecasts from the Metaculus community. Forecasts from the Metaculus community on contested races and the policies they will shape. Updated in real time'). Observed same day: 'Senate — Democrats 51.7% Republicans 48.3%'; 'House — Democrats 88.8% Republicans 11.2%'; Congressional Control question 'Dem House / Dem Senate 50.7% · Dem House / Rep Senate 38.1% · Rep House / Rep Senate 10.2% · Rep House / Dem Senate 1.0%'; seat distributions 'HOUSE — Median: D +13 seats' and 'SENATE — Median: Even split'; Key Drivers dated 'Data from on Sep 19, 2026' including 'Will Donald Trump declare a national emergency related to election integrity before November 3, 2026? 35% chance' and 'Will federal courts block the USPS mail-in ballot restrictions before Election Day? 82% chance'.",
+      "verified": "Hub fetched directly 2026-09-19 (title '2026 US Midterm Elections | Metaculus'; 'Real-time forecasts from the Metaculus community. Forecasts from the Metaculus community on contested races and the policies they will shape. Updated in real time'). Observed same day: 'Senate — Democrats 51.7% Republicans 48.3%'; 'House — Democrats 88.8% Republicans 11.2%'; Congressional Control question 'Dem House / Dem Senate 50.7% · Dem House / Rep Senate 38.1% · Rep House / Rep Senate 10.2% · Rep House / Dem Senate 1.0%'; seat distributions 'HOUSE — Median: D +13 seats' and 'SENATE — Median: Even split'; Key Drivers dated 'Data from on Sep 19, 2026' including 'Will Donald Trump declare a national emergency related to election integrity before November 3, 2026? 35% chance' and 'Will federal courts block the USPS mail-in ballot restrictions before Election Day? 82% chance'. Re-test 2026-09-20: question pages fetched directly — q40598 'Which Democratic candidate win the 2026 US Senate election in the following states?' renders only four state rows server-side ('RI 99% / OR 99% / CO 98% / MN 92%', '19 others' hidden, 125 forecasters); related cards q43448 governors ('Hawaii 98% / New Mexico 92.2% / Oregon 88% / Michigan 85%', 13 others), q41678 'Mary Peltola wins Alaska senate seat 2026?' 54%, q36370 party plurality 'Democrats 50.6% / Republicans 49.3%', q44711 Montana 'Democrat 1% / Republican 94% / Other 5%'. The collector now records these per-seat pages (scripts/collect-metaculus.mjs QUESTION_PAGES).",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "This is the project's third intelligence layer: community forecasts are independent of price incentives (Kalshi) and of pollster process (poll layer), and resolvable election questions let the same Brier/log-loss scorer used for the exchange also score a non-market forecaster (calibration tracker). Live cross-check recorded 2026-09-19: Metaculus Senate D 51.7% vs Kalshi Senate D 59–60¢, while the two agree on the House (88.8% vs 89–90¢) — an 8-point Senate gap published for review (VERIFICATION.md §10e), scored after November 3.",
@@ -1375,7 +1375,7 @@
       "name": "CourtListener (Free Law Project)",
       "type": "Non-profit legal search engine + REST API (court opinions, dockets via RECAP) — election-litigation record",
       "url": "https://www.courtlistener.com/",
-      "verified": "Fetched directly 2026-09-19 (fourth attempt; the three 2026-09-19 session-4/5 attempts returned 500 — irregularity #47). Observed on the homepage: 'Non-Profit Free Legal Search Engine and Alert System'; '472 jurisdictions'; '8,300,000 precedential opinions'; '8,097 case-law additions in the last ten days'; sponsored by Free Law Project, which also runs Juriscraper and RECAP. Path note: api.courtlistener.com/api/rest/v3/courts/ and /v4/ were NOT reachable through this session's fetcher (documented API; reachable from a normal runner) — recorded, not assumed.",
+      "verified": "Fetched directly 2026-09-19 (fourth attempt; the three 2026-09-19 session-4/5 attempts returned 500 — irregularity #47). Observed on the homepage: 'Non-Profit Free Legal Search Engine and Alert System'; '472 jurisdictions'; '8,300,000 precedential opinions'; '8,097 case-law additions in the last ten days'; sponsored by Free Law Project, which also runs Juriscraper and RECAP. Path note: api.courtlistener.com/api/rest/v3/courts/ and /v4/ were NOT reachable through this session's fetcher (documented API; reachable from a normal runner) — recorded, not assumed. Re-test 2026-09-20: https://www.courtlistener.com/api/rest/v4/ fetched directly — 'HTTP 200 OK', the DRF 'Api Root' listing search, dockets, docket-entries, recap-documents, courts, opinions, clusters, people, financial-disclosures, alerts, citation-lookup and api-usage endpoints. The API path note above is therefore resolved: the v4 root is reachable from this fetcher.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
       "notes": "Used for the litigation layer only (certification challenges, recount suits) — never as a results source. Partially resolves #47: courtlistener.com now fetches; surveypoll.com and thehillx.com still do not.",
@@ -1611,6 +1611,248 @@
       "status": "verified",
       "notes": "Admission deferred in sessions 4–5 because only syndicated coverage had been fetched; resolved this session by fetching the pollster's own release (brand/domain trap: the poll lives at fandmpoll.org, NOT fandm.edu). Method family per #49: voter-file-mail-recruit. Rows ingested: fm-2026-08-pa-governor (GOVPARTYPA-26) and fm-2026-08-pa-house-preference.",
       "category": "Academic & university research"
+    },
+    {
+      "id": "alabama-sos",
+      "name": "Alabama Secretary of State — Alabama Votes",
+      "type": "Official state election authority — registration, results, sample ballots",
+      "url": "https://www.sos.alabama.gov/alabama-votes",
+      "verified": "Fetched directly 2026-09-20 (title 'Alabama Votes | Alabama Secretary of State'). Observed: 'Secretary of State Wes Allen'; '3,837,234 Registered Voters'; 'View the 2026 General Election Sample Ballots' (/alabama-votes/2026-general-election-sample-ballots); hub tiles Voter Registration, Election Information (/alabama-votes/voter/election-information), My Voting Information (myinfo.alabamavotes.gov/voterview), Absentee Voting, Proposed Statewide Constitutional Amendments, Upcoming Elections, State District Maps, Campaign Finance, Photo Voter ID; footer links to NASS, EAC, FEC and FVAP.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Official canvass source for Alabama's 2026 statewide races priced on Kalshi — SENATEAL-26 (Barry Moore R 0.956/0.980 vs Everett Wess D 0.022/0.040) and GOVPARTYAL-26 (Tommy Tuberville R 0.912/0.930 vs Doug Jones D 0.086/0.094) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Election-night numbers and the certified canvass both come from this office.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "arkansas-sos",
+      "name": "Arkansas Secretary of State — Elections",
+      "type": "Official state election authority — results (current + historical), candidates, calendar",
+      "url": "https://www.sos.arkansas.gov/elections",
+      "verified": "Fetched directly 2026-09-20 (title 'Arkansas Secretary of State', Elections hub). Observed sections: For Voters (Register to Vote; VoterView at voterview.ar-nova.org; Absentee Voting; Ballot Issues; Candidate Search at candidates.arkansas.gov); Election Results — 'Current or Most Recent Election Results' and 'Historical Election Results' (/elections/research/election-results), 'Historical Initiative and Referenda Election Results' (1938-2016 PDF); '2026 Election Calendar' PDF (uploads/elections/2026_Election_Calendar_Rev._6-2025_.pdf); Running for Public Office Handbook hosted by sbec.arkansas.gov (State Board of Election Commissioners).",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Arkansas' 2026 races on Kalshi: SENATEAR-26 (Tom Cotton R 0.941/0.944 vs Hallie Shoffner D 0.067/0.069) and GOVPARTYAR-26 (Sarah Huckabee Sanders R 0.955/0.996 vs Fred Love D 0.011/0.045) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Note the split of duties: the SoS publishes results, the State Board of Election Commissioners (sbec.arkansas.gov) handles candidate rules.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "connecticut-elections-database",
+      "name": "Connecticut Elections Database (Office of the Secretary of the State)",
+      "type": "Official searchable results database, 1787–2026 (ElectionStats platform)",
+      "url": "https://electionhistory.ct.gov/",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections Database | State of Connecticut'). Observed: 'A searchable database of historical election information, all from official source documents'; year range '1787' to '2026'; Data Inventory '35,795 Contests', '1,485 Ballot Questions', '56,426 Candidates'; Latest Results — 'Feb 3, 2026 - Special Election First Selectman - City/Town of Fairfield: Christine Vitale won (56%)', 'Jan 13, 2026 - Special Election State Representative District 139: Larry Pemberton Jr. won (64%)', 'Jan 6, 2026 - Special Election State Representative District 25: Iris Noemi Sanchez won (66%)'; feedback address lead@ct.gov. Path note: the SOTS portal pages (portal.ct.gov/sots/election-services) are client-rendered and returned no body text to this fetcher; the /election-services-home-page path is a 404.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Connecticut's certified results live in this database rather than on the portal. 2026 statewide race on Kalshi: GOVPARTYCT-26 (Ned Lamont D 0.952/0.982 vs Ryan Fazio R 0.005/0.046) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Same ElectionStats platform as Massachusetts' PD43+ (electionstats.state.ma.us), so one parser can serve both when official 2026 numbers are scored.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "idaho-sos-voteidaho",
+      "name": "Idaho Secretary of State — VoteIdaho.gov election results",
+      "type": "Official state election authority — statewide/county results, audit and canvass reports",
+      "url": "https://voteidaho.gov/election-results/",
+      "verified": "Fetched directly 2026-09-20 (title 'Election Results | VoteIdaho.Gov'). Observed: '2026 Election Results — May 19 Primary Election ... Official Results' with a 'Statewide Results Page' at results.voteidaho.gov/results/public/id/elections/may2026 and per-county pages for all 44 counties; 'Audit & Canvass Reports' — 'Election Audit Report' (archive.voteidaho.gov/results/2026/primary/audit_report_2026_primary.pdf) and 'Canvass Report' (canvass_report_2026_primary.pdf); 'Recent Election Results — Election results back to 2020 are available here' (2025 Consolidated Election, November 4, 2025); sections for Archived Election Results and Historical Registration & Turnout.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Idaho 2026 on Kalshi: SENATEID-26 (Jim Risch R 0.926/0.946, David Roth D 0.002/0.007, Todd Achilles independent 'TACH' 0.04/0.07 — a three-way event) and GOVPARTYID-26 (Brad Little R 0.964/0.989 vs Terri Pickens D 0.008/0.038) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Idaho publishes signed canvass and post-election audit PDFs alongside the results — the same document class this project scores against.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "indiana-election-division",
+      "name": "Indiana Election Division (Secretary of State)",
+      "type": "Official state election authority — ENR results, candidate lists, historical results",
+      "url": "https://www.in.gov/sos/elections/",
+      "verified": "Fetched directly 2026-09-20 (title 'Election Division: Home'). Observed: 'THE NEXT PRIMARY WILL BE ON TUESDAY, MAY 5, 2026'; 'THE NEXT INDIANA GENERAL ELECTION DAY WILL BE ON TUESDAY, NOVEMBER 3, 2026'; 'Primary Election Results' linking enr.indianavoters.in.gov/site/index.html; '2026 General Election Candidate List' (Candidate_List_Abbreviated_2026..9.11.xlsx); 'PAST ELECTION RESULTS' at indianavoters.in.gov/ENRHistorical/ElectionResults; contact elections@iec.in.gov, 317-232-3939; 'Official signature counts are based on certified documents'.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "No Indiana Senate or governor race in 2026 — the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z) prices only GOVPARTYIN-28 (2028, R 0.86/0.93). Indiana matters for the House layer (CONTROLH-26 district math) and as a certified-results source; its ENR site is a separate host (enr.indianavoters.in.gov) from the division page.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "kentucky-sbe-results",
+      "name": "Kentucky State Board of Elections — Election Results",
+      "type": "Official state election authority — results archive 1973–present (1955–1972 on a separate page)",
+      "url": "https://elect.ky.gov/results/Pages/default.aspx",
+      "verified": "Fetched directly 2026-09-20 (title 'Election Results - State Board of Elections'). Observed verbatim: 'The State Board of Elections and county clerks maintain archives of Kentucky election results for research and public inspection. Choose from the menu to view the results available online from 1973 to present. View 1955-1972' (elect.ky.gov/results/1973-1979/Pages/1972.aspx). The page itself is a menu shell — per-election result files hang off the year menus.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Kentucky's open 2026 Senate seat is on Kalshi under a mis-stated ticker: the event SENATELA-26 is titled 'Kentucky Senate winner?' with markets Andy Barr R 0.940/0.952 and Charles Booker D 0.050/0.061 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z) (irregularity #59); the KXVOTEGENERAL-SENATELA-26ABAR-* vote-share ladders carry the same Barr code. This office's certified result is what settles the question of which state that ticker really priced.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "louisiana-sos",
+      "name": "Louisiana Secretary of State — Elections & Voting",
+      "type": "Official state election authority — results & statistics, election dates, GeauxVote portal",
+      "url": "https://www.sos.la.gov/",
+      "verified": "Fetched directly 2026-09-20 (title 'Louisiana Secretary of State'; the site was redesigned — the legacy paths /ElectionsAndVoting/Pages/default.aspx and /elections-and-voting both return the site's own 'Oops! Page not found'). Observed on the live root: 'Upcoming Election — November 3, 2026 — U.S. Senate General / Open U.S. Representative Primary / Open Primary Election'; Elections links 'Election results & statistics' (/elections-voting/election-results-statistics), 'Election dates', 'Sample ballots', GeauxVote app (voterportal.sos.la.gov); news 'September 14, 2026 — STATEMENT ON VOTING-RELATED FEDERAL INDICTMENTS'; Secretary of State Nancy Landry.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "The root page's own wording — 'U.S. Senate General' on November 3, 2026 alongside an 'Open U.S. Representative Primary' — is the official statement of Louisiana's new split calendar (closed party primaries for the Senate, jungle primary for the House on the same day). No Louisiana Senate event appears in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z): the only 'SENATELA-26' ticker is Kalshi's Kentucky market (irregularity #59), so Louisiana's 2026 Senate race is currently unpriced in this project's data; GOVPARTYLA-27 (2027) is priced R 0.87/0.909.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "maryland-sbe-2026",
+      "name": "Maryland State Board of Elections — 2026 Gubernatorial Election",
+      "type": "Official state election authority — 2026 election hub, official primary results, data files",
+      "url": "https://elections.maryland.gov/elections/2026/index.html",
+      "verified": "Fetched directly 2026-09-20 (title '2026 Gubernatorial Election'). Observed: Timeline 'General Election Day November 03, 2026', 'Early Voting October 22, 2026 - October 29, 2026'; Results — 'Official Primary Results' (/elections/2026/primary_results/index.html) and 'Data files' (/elections/2026/election_data/index.html); Candidates — Primary and General Election candidate lists; mail-in ballot request deadlines 'Tuesday October 27, 2026 (mailed)' / 'Friday October 30, 2026 (download and print)'; ballots 'must be postmarked or placed in a designated ballot drop box by 8:00 pm on November 03, 2026'; Election Calendar PDF (2026_Election_Calendar.pdf).",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Maryland 2026 on Kalshi: GOVPARTYMD-26 (Wes Moore D 0.951/0.979 vs Dan Cox R 0.022/0.049) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Maryland posts machine-readable per-election data files next to the official results — useful for the precinct-level backtest once certified.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "mississippi-sos",
+      "name": "Mississippi Secretary of State — Elections & Voting",
+      "type": "Official state election authority — results, candidate qualifying list, Statewide Elections Management System",
+      "url": "https://www.sos.ms.gov/elections-voting",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections & Voting | MS SOS'). Observed: tiles My Election Day, Update Voter Registration, Campaign Finance, 'Sample Ballot' (content/documents/Elections/2026/Sample Ballot 9-9-26.pdf), 'Elections Calendar' (2026 Election Calendar.pdf), 'Election Results' (/elections-voting/election-results), Voter Registration Verification; division description 'managing the Statewide Elections Management System ... displaying election returns'; General Publications include 'Candidate Qualifying List', '2024 Post-Election Audit Report Final' and '2026 County Election Handbook (revised 12-30-2025)'.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "Mississippi 2026 on Kalshi: SENATEMS-26 (Cindy Hyde-Smith R 0.917/0.924 vs Scott Colom D 0.082/0.083) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z); the governor's race is 2027 (GOVPARTYMS-27 R 0.89/0.937). Official returns are displayed by this office; the county-level canvass is compiled in its Statewide Elections Management System.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "missouri-sos-elections",
+      "name": "Missouri Secretary of State — Elections & Voting Division",
+      "type": "Official state election authority — results & statistics, election calendar, 116 local jurisdictions",
+      "url": "https://www.sos.mo.gov/elections",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections & Voting Division'). Observed verbatim: 'The Elections Division of the Office of the Secretary of State is responsible for administering all statewide elections, initiative petitions ...'; 'Missouri's elections are decentralized, and the state is composed of 116 local election jurisdictions'; links 'Elections, Results & Statistics' (/elections/results), 'Election Calendar', 'ShowMO Votes', 'Missouri Election Results'; Latest News Feb 19 'Secretary of State Denny Hoskins, CPA, Hosts First Public Demonstration of Voting Equipment in Missouri'; contact (573) 751-2301, elections@sos.mo.gov.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "No Missouri Senate or governor race in 2026 (the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z) prices only GOVPARTYMO-28, R 0.92/0.975). Included as a certified-results source for the House layer and for the 2024 backtest (Missouri's 2024 Senate and governor canvasses).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "new-hampshire-sos",
+      "name": "New Hampshire Secretary of State — Elections",
+      "type": "Official state election authority — 2026 election details/results, special elections, audits",
+      "url": "https://www.sos.nh.gov/elections",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections | New Hampshire Secretary of State'; a host that had refused this fetcher in earlier sessions, irregularity #35). Observed: '2026 Election Details' (/2026-election-details), '2026 Election Results' (/2026-state-primary-election-results), '2024 Election Results', '2025-2026 Special Elections', 'Party Registration History 1970-2026', 'Election Audits & Reports', 'Election Procedure Manual' PDF (nhsos-2026-epm-complete-book-remediated.pdf), '2026-2027 Political Calendar', Voter Information Lookup (app.sos.nh.gov), Ballot Law Commission.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "New Hampshire 2026 on Kalshi: SENATENH-26 (Chris Pappas D 0.83/0.84 vs John E. Sununu R 0.17/0.18) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z) — one of the tighter Democratic-held seats and the market a Saint Anselm / UNH poll row should be read against. Governor is a 2028 event (GOVPARTYNH-28: Ayotte R 0.88/0.89).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "utah-lt-governor-vote",
+      "name": "Utah Lieutenant Governor — vote.utah.gov",
+      "type": "Official state election authority — election results, interactive data hub, historical data",
+      "url": "https://vote.utah.gov/",
+      "verified": "Fetched directly 2026-09-20 (title 'Regular General Election: November 3, 2026 - Utah Voter Information'). Observed: '2026 Primary Election Results' linking electionresults.utah.gov/results/public/Utah/elections/Primary06232026; links 'Election Results, Historical Information & Data', 'Interactive Data Hub', 'Track my mail or provisional ballot', '2026 Election Information', 'Learn About Judges on the Ballot', 'Securing Your Mail Ballot'.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "No Utah Senate or governor race in 2026 (the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z) prices only GOVPARTYUT-28, R 0.85/0.907). Utah is included as an official results source for the House layer — its 2026 House map is a live redistricting question after the 2025 court-ordered redraw — and for turnout data (vote-by-mail state).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "west-virginia-sos",
+      "name": "West Virginia Secretary of State — Elections",
+      "type": "Official state election authority — candidate listing, results (via Clarity ENR), campaign finance",
+      "url": "https://sos.wv.gov/elections",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections | WV Secretary of State'). Observed: '2026 General Election' — '2026 General Candidate Listing' (candidates.wvsos.gov) and '2026 Primary Election Results' linking results.enr.clarityelections.com/WV/126209; 'Online Voter Registration' (ovr.sos.wv.gov); 'GoVoteWV'; 'Campaign Finance Reporting System' (cfrs.wvsos.gov); office address State Capitol Building, Charleston, WV 25305.",
+      "status": "verified",
+      "category": "Government — state & local",
+      "notes": "West Virginia 2026 on Kalshi: SENATEWV-26 (Shelley Moore Capito R 0.971/0.984 vs Rachel Fetty Anderson D 0.006/0.027) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Results are served through the Clarity ENR host that blocked this fetcher for Georgia (irregularity #35) — the WV page itself is reachable, the ENR host is on the probe list.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "surveyusa",
+      "name": "SurveyUSA — public poll archive (results.surveyusa.com)",
+      "type": "Independent pollster — public archive of client polls 2002–present with questionnaire text",
+      "url": "https://results.surveyusa.com/PollHistory.aspx",
+      "verified": "Fetched directly 2026-09-20 (title 'SurveyUSA Polls'; the corporate site surveyusa.com points here as 'Visit our public polling archive data and crosstabs from 2002 - present'). Observed in the September 2026 list: '09/16/26 Poll #28000 — All SurveyUSA clients in Minnesota — Minnesota' with questions 'If the November election for Minnesota Governor were today ... who would you vote for? (candidate names rotated)' and 'If the November election for United States Senator from Minnesota were today ...'; '09/04/26 Poll #27971 — KGTV-TV (San Diego), San Diego Union-Tribune — CA 48th CD RBS'; '09/04/26 Poll #27975 — KOB-TV (Albuquerque) — NM-02' ('Republican Greg Cunningham? Or Democrat Gabe Vasquez?'). The per-poll report pages (client/PollReport.aspx?g=...) are client-rendered and returned an empty body to this fetcher, so no toplines were transcribed. Earlier sessions had tried surveypoll.com (irregularity #47), which still fails — the archive host is results.surveyusa.com.",
+      "status": "verified",
+      "category": "Pollsters & survey research",
+      "notes": "Admitted on the archive, not on numbers: the MN #28000 Senate/Governor toplines (SENATEMN-26 Peggy Flanagan D 0.903/0.904 and GOVPARTYMN-26 Amy Klobuchar D 0.943/0.951 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z)) become poll-layer rows only when the report page renders — it is a render:true target in data/probes/targets.json and listed in poll-layer pendingSources. Method family per #49 to be read from the rendered report (SurveyUSA discloses per-poll mode).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "harrisx",
+      "name": "HarrisX (Harvard CAPS / Harris Poll releases)",
+      "type": "Pollster / data-analytics firm — monthly Harvard CAPS / Harris national poll with The Harris Poll",
+      "url": "https://www.harrisx.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'HarrisX'; unreachable in sessions 4-6, irregularity #47). Observed: post 'August Harvard CAPS / HarrisX Poll' dated September 2, 2026 (/posts/august-harvard-caps-harrisx-poll) headlined 'August Harvard CAPS / Harris Poll: Trump Approval Sees Slight Improvement at 44%' with 'MIDTERMS HORSERACE REMAINS TIGHT AT 51-49 WITH DEMOCRATS HOLDING A 2-POINT LEAD, BUT LEAD FLIPS TO REPUBLICANS +2 AMONG LIKELY MIDTERM VOTERS'; methodology verbatim: 'The August Harvard CAPS / Harris poll survey was conducted online within the United States on August 28-30, 2026, among 2,100 registered voters by The Harris Poll and HarrisX'; 'a monthly collaboration between the Center for American Political Studies at Harvard (CAPS) and the Harris Poll and HarrisX'; elections dashboard elections.harrisx.com (2024). Path note: thehillx.com still fails.",
+      "status": "verified",
+      "category": "Pollsters & survey research",
+      "notes": "Refines irregularity #43: the Harvard CAPS poll is co-branded 'The Harris Poll and HarrisX', so the two brands are not fully separate for this series. Generic-ballot row harrisx-2026-08-generic ingested with methodFamily online-optin-weighted; the release states no margin of error in its text (recorded as null). Read against CONTROLH-26 / CONTROLS-2026 (D 0.59/0.60) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "elon-poll",
+      "name": "Elon University Poll",
+      "type": "University poll of North Carolina (fielded by YouGov) — releases with topline & methodology PDFs",
+      "url": "https://www.elon.edu/u/elon-poll/",
+      "verified": "Fetched directly 2026-09-20 (title 'Elon University Poll | Elon University') plus the September 10, 2026 news-release PDF. Index observed: 'September 10, 2026: North Carolina Poll on U.S. Senate race ...', 'September 17, 2026: ... NC Constitutional amendments', 'August 12, 2026: ... NC's U.S. Senate race', each with News release / Topline and methodology / Data charts PDFs. Release verbatim: 'Cooper maintains double-digit lead in North Carolina U.S. Senate race'; 'Among likely voters ... Cooper was favored by 49%, with Whatley favored by 38%. Eight percent were undecided and candidates Shannon Bray (Libertarian) and Michael Dublin (Green) were favored by two percent each'; registered voters 'Cooper 49% ... Whatley 36%'; 'The survey of 800 North Carolina adults was conducted August 21-31, 2026, and has a margin of error for likely voters of 5.6%'; 'fielded by ... YouGov as an online, web-based survey ... interviewed 1,121 North Carolina adults ... matched down to a sample of 800'; director Jason Husser.",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "Poll-layer row elon-2026-09-nc-senate (methodFamily online-nonprobability-matched) read against SENATENC-26 — Roy Cooper D 0.922/0.927 vs Michael Whatley R 0.079/0.080 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z): an 11-point LV lead priced as a 92% favourite.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "hpu-survey-research-center",
+      "name": "High Point University Survey Research Center (HPU Poll)",
+      "type": "University poll of North Carolina — AAPOR Transparency Initiative charter member",
+      "url": "https://www.highpoint.edu/src/",
+      "verified": "Fetched directly 2026-09-20 (title 'HPU Survey Research Center | Survey Research Center | High Point University'). Observed: 'The SRC's HPU Poll surveys people in North Carolina and beyond ... reports the results as a public service'; 'The HPU Poll reports methodological details in accordance with the standards set out by AAPOR's Transparency Initiative, and the HPU Survey Research Center is a Charter Member'; '42 stations equipped with Sensus and WinCati systems'; Executive Director Martin J. Kifer; news items 'HPU Poll 126: Majority of North Carolina Voters Say Country Headed in Wrong Direction' (August 2026) and 'HPU Poll 120: North Carolina Likely Voters Weigh in on U.S. Senate, North Carolina Supreme Court Races' (April 2026).",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "Second in-state academic pollster for SENATENC-26 (Cooper D 0.922/0.927 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z)); HPU Poll 120 (April 2026) carried a Senate horse race. HPU Poll 120 release page fetched directly 2026-09-20 (April 16, 2026: Cooper 50 / Whatley 42 among 703 LV, fielded by YouGov Mar 26–Apr 6, credibility interval ±4.3 — the poll is an online matched panel, NOT the lab's CATI operation) → poll-layer row hpu-2026-04-nc-senate with methodFamily online-nonprobability-matched. HPU Poll 126 (August 2026) not yet read.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "umass-lowell-cpo",
+      "name": "UMass Lowell Center for Public Opinion",
+      "type": "University survey center (polls fielded by YouGov) — AAPOR Transparency Initiative member",
+      "url": "https://www.uml.edu/research/public-opinion/",
+      "verified": "Fetched directly 2026-09-20 (title 'Center for Public Opinion | Research | UMass Lowell') plus the June 4, 2026 release. Observed: 'The center is a member of the American Association of Public Opinion Research (AAPOR) Transparency Initiative'; 'Maine Poll: Platner Holds Slight Lead over Collins in U.S. Senate Race' (06/04/2026): 'The survey of 650 likely Maine voters shows Platner has the support of 48% of respondents, compared to 43% for Collins, with 6% undecided and 2% supporting another candidate'; 'adjusted margin of error of +/-4.9 percentage points and was fielded from May 13 through May 26'; 'should he win next week's primary'; 'Funded by UMass Lowell ... designed and analyzed by the university's Center for Public Opinion and fielded by YouGov'; also national releases (Trump approval 39%, March 2026).",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "NOT ingested as a Maine Senate row: the poll tested Graham Platner against Susan Collins conditional on the June 9 primary, but the exchange's Democratic market for SENATEME-26 is 'Troy Jackson' (D 0.67/0.68 vs Collins 0.33/0.34 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z)), i.e. the tested candidate is not the nominee — irregularity #60. Kept as a verified source for future Massachusetts/New England and national releases.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "roanoke-college-ipor",
+      "name": "Roanoke College Institute for Policy and Opinion Research (Roanoke College Poll)",
+      "type": "University poll archive of Virginia (1983–2026) — political and consumer-sentiment releases",
+      "url": "https://www.roanoke.edu/ipor",
+      "verified": "Fetched directly 2026-09-20 (title 'Institute for Policy and Opinion Research - Roanoke College'). Observed verbatim: 'From 1983 to 2026, the Institute for Policy and Opinion Research (IPOR) conducted regular surveys in the Commonwealth of Virginia ... Explore our archive of past polls below.'; recent items 'Virginia Consumer Sentiment Report for Aug. 2026', 'Virginians support tougher gun laws but doubt the impact' (Feb 2026), 'Spanberger leads Earle-Sears by double digits; Jones now trails Miyares' (Oct 2025), 'RC Poll: Virginians want photo ID to vote but like mail voting' (Nov 2025).",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "The page's own past-tense wording ('From 1983 to 2026 ... conducted') reads as the end of the regular political series — treat as an archive, not a live 2026 horse-race source (flagged in irregularity #60). Backtest value: its October 2025 Virginia governor release can be scored against the Department of Elections' certified November 2025 result. Virginia 2026 on Kalshi: SENATEVA-26 (Mark Warner D 0.973/0.980) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z).",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "uh-hobby-school-elections",
+      "name": "University of Houston Hobby School of Public Affairs — Elections research",
+      "type": "University survey program — Texas and Harris County election surveys (2016–2026)",
+      "url": "https://www.uh.edu/hobby/research/elections/index.php",
+      "verified": "Fetched directly 2026-09-20 (title 'Elections | Hobby School of Public Affairs | University of Houston'). Observed report tiles: 'Texas Primaries 2026' (primary2026, senate report cover), 'Republican Primaries 2026', 'Democratic Primaries 2026', Harris County primaries 2026 (countyprimary), 'Texas Congressional District 18 Special Election 2025', 'Texas Trends 2024', 'Texas General Election 2022 Report', 'Texas Election 2020 Report', 'Texas 2016 Presidential Election Report'; parent page: 'forecasting electoral trends' listed among the school's research areas.",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "Texas has the closest priced Senate race in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z): SENATETX-26 James Talarico D 0.58/0.59 vs Ken Paxton R 0.41/0.42, and GOVPARTYTX-26 Greg Abbott R 0.77/0.78 vs Gina Hinojosa D 0.22/0.23. The Hobby School's 2026 primary reports are on the page; its general-election Texas survey (a fall tradition in prior cycles) is the row to ingest when published, with the #49 label read from the report's methodology.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "fhsu-docking-kansas-speaks",
+      "name": "Fort Hays State University Docking Institute — Kansas Speaks",
+      "type": "University statewide survey of Kansas (annual, 2009–2025 reports with methodology)",
+      "url": "https://www.fhsu.edu/docking/kansas-speaks/",
+      "verified": "Fetched directly 2026-09-20 (title 'Kansas Speaks - Fort Hays State University'). Observed: 'Kansas Speaks is a statewide public opinion survey measuring Kansans' opinions on public issues and their evaluations of elected officials'; report PDFs from 'Kansas Speaks Fall 2025' (2025-kansas-speaks-report_final-10-27-20251.pdf) back to 'Kansas Speaks 2009'; a 2024 'Addendum: Differential between the 2024 Kansas presidential vote and the Kansas Speaks survey presidential preference findings' and a '10/31/24 correction to Appendix C crosstabs Table 17 title'.",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "Kansas 2026 on Kalshi: SENATEKS-26 (Roger Marshall R 0.73/0.74 vs Adam Hamilton D 0.26/0.27) and GOVPARTYKS-27 (event dated 27 on the exchange; Ty Masterson R 0.72/0.73 vs Cindy Holscher D 0.28/0.30) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). The institute's self-published 2024 poll-vs-actual addendum is exactly the kind of error accounting this project's backtests do — a model for the post-November review.",
+      "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "winthrop-poll",
+      "name": "Winthrop University — Winthrop Poll (Center for Public Opinion & Policy Research)",
+      "type": "University poll of South Carolina, the South and (from 2026) the nation — AAPOR TI charter member",
+      "url": "https://www.winthrop.edu/winthroppoll/",
+      "verified": "Fetched directly 2026-09-20 (title 'Winthrop Poll | Winthrop University', 'Last Updated: 8/11/26'). Observed verbatim: 'The Winthrop Poll is a long-term survey initiative ... citizens in South Carolina, the South as a region, and the nation as a whole'; 'The first statewide poll took place in fall 2006'; 'frequent Winthrop Polls focusing on the South as a region (AL, AR, FL, GA, LA, MS, NC, SC, TN, TX, and VA). The Winthrop Poll began polling the entire United States in 2026'; 'the Center is a Charter Member of the American Association for Public Opinion Transparency Initiative'; director contact Scott Huffmon; Poll Results page /winthroppoll/poll-results.aspx.",
+      "status": "verified",
+      "category": "Academic & university research",
+      "notes": "South Carolina 2026 on Kalshi: SENATESC-26 (Darline Graham R 0.86/0.87 vs Annie Andrews D 0.13/0.14) and GOVPARTYSC-26 (Alan Wilson R 0.932/0.949 vs Jermaine Johnson D 0.05/0.068) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Poll results were not transcribed this session (results page not fetched); ingest from poll-results.aspx with the #49 label.",
+      "verifiedOn": "2026-09-20"
     }
   ],
   "categories": [
@@ -1620,7 +1862,7 @@
     },
     {
       "name": "Government — state & local",
-      "count": 40
+      "count": 53
     },
     {
       "name": "Official publishers & archives",
@@ -1628,11 +1870,11 @@
     },
     {
       "name": "Academic & university research",
-      "count": 13
+      "count": 20
     },
     {
       "name": "Pollsters & survey research",
-      "count": 26
+      "count": 28
     },
     {
       "name": "News outlets & wires",

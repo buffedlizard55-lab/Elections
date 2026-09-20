@@ -95,18 +95,21 @@ const rawName = (url, kind) => join(RAW_DIR, `${url.replace(/^https?:\/\//, '').
  * client-rendered shell — no "seats forecasted" / "favored to win" text — and Chrome is available, render it.
  * Returns { status, ok, body, fetchMethod, attempts } and keeps raw copies for parser work.
  */
-async function get(url, { render = true } = {}) {
+async function get(url, { render = true, parse = null } = {}) {
   const f = await fetchWithProfiles(url);
   let out = { status: f.status, ok: f.ok, body: f.body || '', fetchMethod: f.ok ? `fetch:${f.profile}` : 'fetch', attempts: f.attempts };
   if (f.body) { mkdirSync(RAW_DIR, { recursive: true }); writeFileSync(rawName(url, 'fetch'), f.body); }
-  const shellOnly = !/seats forecasted|favored to win|projected flips|close seats/i.test(htmlToText(f.body || ''));
+  // Second live run (2026-09-20, run 35485210251): the shell's navigation contains words like "close seats", so a
+  // keyword test let the shell through unrendered. The test is now the parser itself: render whenever the plain
+  // body does not parse, and keep the render outcome on the row either way.
+  const shellOnly = parse ? parse(f.body || '').parse !== 'ok' : !/seats forecasted|favored to win|projected flips/i.test(htmlToText(f.body || ''));
   if (render && shellOnly && findChrome()) {
-    const r = renderDom(url);
+    const r = renderDom(url, { retries: 0 }); // no bot check on this host: one render per page keeps 35 pages inside the step budget
     if (r.ok && !r.challenge) {
       writeFileSync(rawName(url, 'rendered'), r.html);
-      out = { status: f.status || 200, ok: true, body: r.html, fetchMethod: 'headless-chrome', attempts: f.attempts, renderBytes: r.html.length };
+      out = { status: f.status || 200, ok: true, body: r.html, fetchMethod: 'headless-chrome', attempts: f.attempts, renderBytes: r.html.length, renderAttempts: r.attempts };
     } else {
-      out.render = { ok: false, reason: r.reason || r.challenge };
+      out.render = { ok: false, reason: r.reason || r.challenge, attempts: r.attempts || null };
     }
   }
   return out;
@@ -160,16 +163,16 @@ async function main() {
   });
   const row = { date: capturedAt.slice(0, 10), capturedAt, renderer: render ? (findChrome() || 'none (plain fetch only)') : 'disabled (--no-render)', national: null, chambers: {}, errors: [] };
   try {
-    const r = await get(NATIONAL_URL, { render });
-    row.national = r.ok ? { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, ...parseNational(r.body) } : { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
+    const r = await get(NATIONAL_URL, { render, parse: parseNational });
+    row.national = r.ok ? { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, ...(r.render ? { render: r.render } : {}), ...parseNational(r.body) } : { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
   } catch (e) { row.errors.push(`national: ${e.message}`); }
   for (const st of states) {
     for (const ch of ['lower', 'upper']) {
       const url = stateUrl(st, ch);
       try {
-        const r = await get(url, { render });
+        const r = await get(url, { render, parse: parseChamber });
         if (r.status === 404) { row.chambers[`${st}-${ch}`] = { capturedFrom: url, parse: 'absent', status: 404 }; continue; }
-        row.chambers[`${st}-${ch}`] = r.ok ? { capturedFrom: url, fetchMethod: r.fetchMethod, ...parseChamber(r.body) } : { capturedFrom: url, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
+        row.chambers[`${st}-${ch}`] = r.ok ? { capturedFrom: url, fetchMethod: r.fetchMethod, ...(r.render ? { render: r.render } : {}), ...parseChamber(r.body) } : { capturedFrom: url, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
       } catch (e) { row.errors.push(`${st}-${ch}: ${e.message}`); }
       await new Promise((r) => setTimeout(r, 250));
     }

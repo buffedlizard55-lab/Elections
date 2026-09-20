@@ -83,8 +83,11 @@ on:
 permissions:
   contents: write
 
+# One concurrency group is SHARED by daily-collection.yml and collector-probe.yml: both commit the same files
+# (data/crosslayer, data/statenavigate, rendering-crosscheck) and the commit step resolves conflicts with
+# `rebase -X theirs`, so two overlapping runs silently drop each other's rows (irregularity #63, 2026-09-20).
 concurrency:
-  group: daily-collection-${{ github.ref }}
+  group: collectors-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -132,7 +135,7 @@ jobs:
 
       - name: Third-layer collectors — Metaculus hub + question pages, State Navigate free pages (rendered), R13 rendering cross-check (R14/R13)
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 30
         env:
           METACULUS_API_TOKEN: ${{ secrets.METACULUS_API_TOKEN }}
         run: |
@@ -142,7 +145,7 @@ jobs:
 
       - name: Host re-test monitor (R15) — previously unreachable URLs, re-tested from this runner
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 20
         run: node scripts/probe-hosts.mjs || echo "::warning::host probe failed - previous rows stay in place"
 
       - name: Forward-loop analytics (senate backtest + live 2026 calibration tracker)

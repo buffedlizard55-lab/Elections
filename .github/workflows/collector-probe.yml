@@ -35,14 +35,17 @@ on:
 permissions:
   contents: write
 
+# One concurrency group is SHARED by daily-collection.yml and collector-probe.yml: both commit the same files
+# (data/crosslayer, data/statenavigate, rendering-crosscheck) and the commit step resolves conflicts with
+# `rebase -X theirs`, so two overlapping runs silently drop each other's rows (irregularity #63, 2026-09-20).
 concurrency:
-  group: collector-probe-${{ github.ref }}
+  group: collectors-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:

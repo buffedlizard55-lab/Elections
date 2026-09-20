@@ -72,6 +72,20 @@ const crossLayer = crossSnapshots ? {
   stateNavigate: stateNavigateDaily ? { capturedFrom: stateNavigateDaily.capturedFrom, latest: stateNavigateDaily.rows[stateNavigateDaily.rows.length - 1] || null, days: stateNavigateDaily.rows.length } : null,
   renderings: renderingCrosscheck ? { method: renderingCrosscheck.method, rows: renderingCrosscheck.rows.slice(-14) } : null,
 } : null;
+// Host re-test monitor (R15): verdicts per previously unreachable URL, written by scripts/probe-hosts.mjs on the runner.
+const probeTargets = readOptional('data/probes/targets.json');
+const probeLatest = readOptional('data/probes/latest.json');
+const probeHistory = readOptional('data/probes/history.json');
+const probes = probeTargets ? {
+  targets: probeTargets.targets.map((t) => ({ id: t.id, url: t.url, name: t.name, irregularity: t.irregularity ?? null, why: t.why, render: !!t.render })),
+  method: probeTargets.method,
+  latest: probeLatest ? {
+    capturedAt: probeLatest.capturedAt,
+    runner: probeLatest.runner || null,
+    rows: probeLatest.rows.map((r) => ({ id: r.id, verdict: r.verdict, status: r.fetch ? r.fetch.status : null, challenge: r.fetch && r.fetch.attempts ? (r.fetch.attempts.find((a) => a.challenge) || {}).challenge || null : null, title: (r.fetch && r.fetch.title) || (r.render && r.render.title) || null, render: r.render ? { ok: r.render.ok, challenge: r.render.challenge || null, reason: r.render.reason || null } : null })),
+  } : null,
+  runs: probeHistory ? probeHistory.rows.length : 0,
+} : null;
 const testCount = readdirSync(join(ROOT, 'test')).filter((f) => f.endsWith('.test.mjs')).reduce((n, f) => n + (readFileSync(join(ROOT, 'test', f), 'utf8').match(/^test\(/gm) || []).length, 0);
 
 // Daily tracker history for the site: the implied-probability path of the most-traded open markets
@@ -208,6 +222,7 @@ const bundle = {
   pollSeries2024: pollSeries,
   pollLayer,
   crossLayer,
+  probes,
   universe: universeSite,
   seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
   // per-market lead scores stay in data/kalshi/tracker/calibration.json; the site gets the summary plus the scored markets only

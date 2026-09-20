@@ -18,6 +18,9 @@
  * statuses are recorded verbatim in the collector output, so the audit trail shows exactly what was sent.
  */
 import { execFileSync } from 'node:child_process';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 export const PROJECT_UA = 'elections-collector (github.com/buffedlizard55-lab/Elections)';
 export const BROWSER_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
@@ -91,27 +94,49 @@ export function findChrome() {
   return chromeBin;
 }
 
+let profileDir;
+/** One Chrome profile per process: a bot challenge solved on the first page (cf_clearance cookie) then carries to the next. */
+function chromeProfileDir() {
+  if (!profileDir) { profileDir = mkdtempSync(join(tmpdir(), 'elections-chrome-')); }
+  return profileDir;
+}
+
 /**
  * Render a page in headless Chrome and return the post-JavaScript DOM (`--dump-dom`).
  * `virtualTimeBudgetMs` lets the page's timers/XHRs run before the dump; `--timeout` is the hard cap.
- * Returns { ok:false, reason } when no Chrome binary exists or the render fails — never a guessed body.
+ * When the dumped DOM is still a bot interstitial the render is retried with a longer budget (the first
+ * live run, 2026-09-20, passed Metaculus' Cloudflare check on 3 of 7 pages — the check needs wall-clock
+ * time, not just virtual time). Every attempt is reported. Returns { ok:false, reason } when no Chrome
+ * binary exists or the render fails — never a guessed body.
  */
-export function renderDom(url, { virtualTimeBudgetMs = 20000, timeoutMs = 45000, userAgent = BROWSER_UA } = {}) {
+export function renderDom(url, { virtualTimeBudgetMs = 20000, timeoutMs = 45000, userAgent = BROWSER_UA, retries = 2 } = {}) {
   const bin = findChrome();
   if (!bin) return { ok: false, reason: 'no-chrome-binary', method: 'headless-chrome' };
-  const args = [
-    '--headless=new', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--hide-scrollbars', '--mute-audio',
-    '--disable-extensions', '--no-first-run', '--no-default-browser-check', '--window-size=1366,2400',
-    `--user-agent=${userAgent}`, `--virtual-time-budget=${virtualTimeBudgetMs}`, `--timeout=${timeoutMs - 5000}`,
-    '--dump-dom', url,
-  ];
-  try {
-    const html = execFileSync(bin, args, { encoding: 'utf8', timeout: timeoutMs, maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] });
-    if (!html || html.length < 50) return { ok: false, reason: `empty dom (${html ? html.length : 0} bytes)`, method: 'headless-chrome', bin };
-    return { ok: true, html, method: 'headless-chrome', bin, challenge: looksLikeChallenge(200, html) };
-  } catch (e) {
-    return { ok: false, reason: String(e && e.message || e).slice(0, 200), method: 'headless-chrome', bin };
+  const attempts = [];
+  let budget = virtualTimeBudgetMs; let cap = timeoutMs; let last = null;
+  for (let i = 0; i <= retries; i += 1) {
+    const args = [
+      '--headless=new', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--hide-scrollbars', '--mute-audio',
+      '--disable-extensions', '--no-first-run', '--no-default-browser-check', '--window-size=1366,2400',
+      `--user-data-dir=${chromeProfileDir()}`, `--user-agent=${userAgent}`, `--virtual-time-budget=${budget}`, `--timeout=${cap - 5000}`,
+      '--dump-dom', url,
+    ];
+    try {
+      const html = execFileSync(bin, args, { encoding: 'utf8', timeout: cap, maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] });
+      const challenge = looksLikeChallenge(200, html);
+      attempts.push({ budgetMs: budget, bytes: html ? html.length : 0, challenge });
+      if (!html || html.length < 50) { last = { ok: false, reason: `empty dom (${html ? html.length : 0} bytes)`, method: 'headless-chrome', bin, attempts }; }
+      else {
+        last = { ok: true, html, method: 'headless-chrome', bin, challenge, attempts };
+        if (!challenge) return last;
+      }
+    } catch (e) {
+      attempts.push({ budgetMs: budget, error: String(e && e.message || e).slice(0, 200) });
+      last = { ok: false, reason: String(e && e.message || e).slice(0, 200), method: 'headless-chrome', bin, attempts };
+    }
+    budget += 15000; cap += 15000; // give the interstitial more wall-clock and virtual time on the retry
   }
+  return last;
 }
 
 /** Minimal HTML -> text (script/style removed, entities decoded, whitespace collapsed). Shared by the parsers. */
