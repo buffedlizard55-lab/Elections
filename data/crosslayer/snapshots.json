@@ -1,7 +1,7 @@
 {
  "title": "Cross-layer snapshots — Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
  "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
- "capturedAt": "2026-09-20T03:16:55.893Z",
+ "capturedAt": "2026-09-20T04:59:57.415Z",
  "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project — every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
  "questions": {
   "SENATE-CONTROL-2026": {
@@ -65,6 +65,47 @@
    "metaculusQuestion": "https://www.metaculus.com/questions/44710/",
    "seat": true,
    "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB)."
+  },
+  "SENATE-RI-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in RI",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATERI-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
+   "seat": true,
+   "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
+  },
+  "SENATE-OR-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in OR",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATEOR-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
+   "seat": true,
+   "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
+  },
+  "SENATE-CO-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in CO",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATECO-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
+   "seat": true,
+   "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
+  },
+  "SENATE-MN-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in MN",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATEMN-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
+   "seat": true,
+   "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
+  },
+  "SENATE-AK-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in AK",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATEAK-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/41678/",
+   "seat": true,
+   "note": "Mary Peltola wins Alaska senate seat 2026? — a candidate question; paired with SENATEAK-26-D (party market) with that caveat recorded.",
+   "caveat": "candidate question (Peltola) paired with a party market (SENATEAK-26-D)"
   }
  },
  "snapshots": [
@@ -253,6 +294,102 @@
    "source": "https://www.metaculus.com/questions/44710/",
    "collector": "scripts/collect-metaculus.mjs",
    "restoredFrom": "commit 3976353 (run 35485210251 output, overwritten by run 35484999487 via rebase -X theirs — irregularity #63)"
+  },
+  {
+   "id": "2026-09-20-senate-ri-2026",
+   "question": "SENATE-RI-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T04:59:57.415Z",
+   "layers": {
+    "metaculus": 0.99,
+    "kalshi": {
+     "ticker": "SENATERI-26-D",
+     "bid": 0.974,
+     "ask": 0.984,
+     "last": 0.97,
+     "capturedAt": "2026-09-20T02:50:00.005Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-or-2026",
+   "question": "SENATE-OR-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T04:59:57.415Z",
+   "layers": {
+    "metaculus": 0.99,
+    "kalshi": {
+     "ticker": "SENATEOR-26-D",
+     "bid": 0.976,
+     "ask": 0.978,
+     "last": 0.974,
+     "capturedAt": "2026-09-20T02:50:00.005Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-co-2026",
+   "question": "SENATE-CO-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T04:59:57.415Z",
+   "layers": {
+    "metaculus": 0.98,
+    "kalshi": {
+     "ticker": "SENATECO-26-D",
+     "bid": 0.971,
+     "ask": 0.974,
+     "last": 0.989,
+     "capturedAt": "2026-09-20T02:50:00.005Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-mn-2026",
+   "question": "SENATE-MN-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T04:59:57.415Z",
+   "layers": {
+    "metaculus": 0.92,
+    "kalshi": {
+     "ticker": "SENATEMN-26-D",
+     "bid": 0.903,
+     "ask": 0.904,
+     "last": 0.904,
+     "capturedAt": "2026-09-20T02:50:00.005Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-20-senate-ak-2026",
+   "question": "SENATE-AK-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-20T04:59:57.415Z",
+   "layers": {
+    "metaculus": 0.54,
+    "kalshi": {
+     "ticker": "SENATEAK-26-D",
+     "bid": 0.69,
+     "ask": 0.7,
+     "last": 0.68,
+     "capturedAt": "2026-09-20T02:50:00.005Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/41678/",
+   "collector": "scripts/collect-metaculus.mjs",
+   "caveat": "candidate question (Peltola) paired with a party market (SENATEAK-26-D)"
   }
  ]
 }
