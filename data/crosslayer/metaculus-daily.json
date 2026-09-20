@@ -5,15 +5,29 @@
  "rows": [
   {
    "date": "2026-09-20",
-   "capturedAt": "2026-09-20T02:54:50.030Z",
+   "capturedAt": "2026-09-20T03:16:55.893Z",
    "capturedFrom": "https://www.metaculus.com/midterms-2026/",
-   "fetchMethod": null,
-   "parse": "failed",
-   "houseD": null,
-   "senateD": null,
-   "control": {},
-   "consistencyFlags": [],
-   "fetchError": "https://www.metaculus.com/midterms-2026/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam",
+   "fetchMethod": "headless-chrome",
+   "houseD": 88.8,
+   "houseR": 11.2,
+   "senateD": 88.8,
+   "senateR": 11.2,
+   "control": {
+    "DH_DS": 50.7,
+    "DH_RS": 38.1,
+    "RH_RS": 10.2,
+    "RH_DS": 1
+   },
+   "seatMedians": {
+    "house": "D +13",
+    "senate": "Even split"
+   },
+   "racesLine": "18 of 35 races lean Democrat · 3 too close to call",
+   "keyDriverDataDate": "Sep 20, 2026",
+   "parse": "ok",
+   "consistencyFlags": [
+    "senateD 88.8 vs quadrant-derived 51.7"
+   ],
    "questions": [
     {
      "id": "senate-states-group",
@@ -32,10 +46,18 @@
      "state": null,
      "note": "Democrat wins 2026 gubernatorial election in these states? — same rendering limit (four states + \"13 others\").",
      "capturedFrom": "https://www.metaculus.com/questions/43448/",
-     "fetchMethod": null,
+     "fetchMethod": "headless-chrome",
      "kind": "state-group",
-     "parse": "failed",
-     "fetchError": "https://www.metaculus.com/questions/43448/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
+     "title": "Will the Democratic candidate win the 2026 gubernatorial election in the following US states?",
+     "parse": "ok",
+     "states": {
+      "HI": 98,
+      "NM": 92.2,
+      "OR": 88,
+      "MI": 85
+     },
+     "othersHidden": 13,
+     "forecasters": 76
     },
     {
      "id": "senate-plurality",
@@ -69,14 +91,10 @@
      "state": "MT",
      "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other).",
      "capturedFrom": "https://www.metaculus.com/questions/44711/",
-     "fetchMethod": "headless-chrome",
+     "fetchMethod": null,
      "kind": "party-choice",
-     "title": "Which party will win the 2026 Montana Senate election?",
-     "parse": "ok",
-     "D": 1,
-     "R": 94,
-     "other": 5,
-     "forecasters": 55
+     "parse": "failed",
+     "fetchError": "https://www.metaculus.com/questions/44711/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
     },
     {
      "id": "ne-party",
@@ -84,14 +102,10 @@
      "state": "NE",
      "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB).",
      "capturedFrom": "https://www.metaculus.com/questions/44710/",
-     "fetchMethod": "headless-chrome",
+     "fetchMethod": null,
      "kind": "party-choice",
-     "title": "Which party will win the 2026 Nebraska Senate election?",
-     "parse": "ok",
-     "D": 0.1,
-     "R": 73.5,
-     "other": 26.4,
-     "forecasters": 49
+     "parse": "failed",
+     "fetchError": "https://www.metaculus.com/questions/44710/ -> HTTP 403 (cloudflare-challenge): <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam"
     }
    ],
    "api": null,
@@ -117,11 +131,11 @@
     "render": {
      "ok": true,
      "bin": "/usr/bin/google-chrome",
-     "challenge": "cloudflare-challenge",
-     "bytes": 28641
+     "challenge": null,
+     "bytes": 4674647
     }
    }
   }
  ],
- "capturedAt": "2026-09-20T02:54:50.030Z"
+ "capturedAt": "2026-09-20T03:16:55.893Z"
 }
