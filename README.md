@@ -13,13 +13,13 @@ on Kalshi's open political/election markets.
 
 | | Node pipeline (primary data engines) | Python toolkit (registry + collectors + validators) |
 |---|---|---|
-| Sources | `data/sources/master.json` — **125 verified entries** (32 on 2026-09-18 + 93 on 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4 + 20 from session 5; 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda, and 2 session-5 candidates were verified-reachable but declined for absence of current-cycle content — irregularity #53). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
+| Sources | `data/sources/master.json` — **147 verified entries** (32 on 2026-09-18 + 115 on 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4 + 20 from session 5 + 20 from session 6 + 2 re-test admissions (CourtListener, Franklin & Marshall); 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda, and 2 session-5 candidates were verified-reachable but declined for absence of current-cycle content — irregularity #53). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
 | Verification log | `VERIFICATION.md` | `data/verification_log.md` |
 | Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/universe/` + `tracker/` (daily, events feed) · `scripts/collect-senate-2024.mjs` → `historical/senate-2024.json` | `scripts/fetch_kalshi.py` → `data/kalshi/markets_politics_latest.json` (independent markets-feed sample, top 2,000) · cross-checked by `scripts/crosscheck-collectors.mjs` |
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (real Kalshi fees) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (70 tests) + `npm run lint` (provenance, irregularities md⇄json sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Checks | `npm test` (82 tests) + `npm run lint` (provenance, irregularities md⇄json sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
 | Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
@@ -33,7 +33,8 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, **2026 Markets** (from the daily capture), **2026 Polls** (poll layer vs market vs ratings), **Tracker** (forward loop + calibration + collector cross-check), backtests, contest, sources, irregularities, methodology, roadmap |
 | `docs/` | Toolkit site (served as `/docs/`): 20-source registry browser, Kalshi layer, contest leaderboard, methodology, verification evidence |
 | `data/kalshi/` | `universe/series.json` + `universe/latest.json` (today's registry + open events; per-market `status` when not active), `tracker/daily/YYYY-MM-DD.csv` (traded, not-yet-settled markets, one row per day, with the exchange `status`), `tracker/{index,settlements,calibration,discrepancy-watch,collector-crosscheck,history}.json` (descriptors · official results · look-ahead-guarded scorer · consistency findings · two-collector agreement · one record per run day), `historical/senate-2024.json` (36 settled 2024 Senate markets + 1,269 daily bars), `forward/` (**FULL open-universe capture**: `universe-open.json` 24,150 markets, `tracker.csv` daily bid/ask appends, `settled-2026-candles.json` 400-market candle seed), `historical-2024/senate-races.json` (same 36 Senate markets with candle series for the T-1..T-60 backtest), the 2026-09-18 hand snapshot; core 2024 markets in `src/kalshi-data.js` |
-| `data/sources/master.json` | **Master source list — 125 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note (session 3 added 8 state election authorities, LA County, Emerson, Marquette, Siena, UNH, Suffolk, SSRS Voter Poll, Cook, Inside Elections, NCSL, Kalshi API docs; the late batch added Sabato's Crystal Ball, Marist, Texas Politics Project, YouGov, Ipsos, Morning Consult, OpenSecrets, NIMSP, NASS, DOJ Civil Rights, Roper Center, CRS; session 4 added 20 more — FVAP, Wisconsin WEC, Nevada SoS, California SoS, Pennsylvania vote.pa.gov, Virginia Elections, GAO, CES (Tufts), Healthy Elections (MIT archive), VoteView, CIRCLE, Brennan Center, Bipartisan Policy Center, Decision Desk HQ, 270toWin, AtlasIntel, Harris Poll (with the HarrisX distinction), NPR Elections, PBS NewsHour Politics, Saint Anselm SASC; **session 5 added 20 more** — Minnesota/NJ/NY/Florida/Oregon/Massachusetts/Illinois election authorities, the American Presidency Project (UCSB), UW–Madison Elections Research Center, UMass Amherst Poll, Muhlenberg MCIPO, the Fox News Poll (Beacon/Shaw), Noble Predictive Insights, State Navigate (the rebranded CNalysis), Metaculus's 2026 midterms hub, Race to the WH, WSJ, Axios, The Texas Tribune and C-SPAN's Campaign 2026 hub) |
+| `data/crosslayer/` + `src/crosslayer.js` | **Cross-layer scoreboard (R14)** — Kalshi vs Metaculus vs DDHQ vs EBO-rendered Kalshi on the 2026 Senate/House control questions; snapshots stay `pending` until `outcomes.json` carries an official canvass with a source url, then Brier/log-loss per layer (look-ahead guarded). Collectors: `scripts/collect-metaculus.mjs` (hub HTML; api2 is auth-walled, #54), `scripts/collect-statenavigate.mjs` (free forecast pages + API-host probe, #55), `scripts/crosscheck-renderings.mjs` (R13 standing monitor → `data/kalshi/tracker/rendering-crosscheck.json`) |
+| `data/sources/master.json` | **Master source list — 147 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note (session 3 added 8 state election authorities, LA County, Emerson, Marquette, Siena, UNH, Suffolk, SSRS Voter Poll, Cook, Inside Elections, NCSL, Kalshi API docs; the late batch added Sabato's Crystal Ball, Marist, Texas Politics Project, YouGov, Ipsos, Morning Consult, OpenSecrets, NIMSP, NASS, DOJ Civil Rights, Roper Center, CRS; session 4 added 20 more — FVAP, Wisconsin WEC, Nevada SoS, California SoS, Pennsylvania vote.pa.gov, Virginia Elections, GAO, CES (Tufts), Healthy Elections (MIT archive), VoteView, CIRCLE, Brennan Center, Bipartisan Policy Center, Decision Desk HQ, 270toWin, AtlasIntel, Harris Poll (with the HarrisX distinction), NPR Elections, PBS NewsHour Politics, Saint Anselm SASC; **session 5 added 20 more** — Minnesota/NJ/NY/Florida/Oregon/Massachusetts/Illinois election authorities, the American Presidency Project (UCSB), UW–Madison Elections Research Center, UMass Amherst Poll, Muhlenberg MCIPO, the Fox News Poll (Beacon/Shaw), Noble Predictive Insights, State Navigate (the rebranded CNalysis), Metaculus's 2026 midterms hub, Race to the WH, WSJ, Axios, The Texas Tribune and C-SPAN's Campaign 2026 hub; **session 6 added 20 more + 2 re-test admissions** — SC/KS/MT/NE/NM/WY/CO/OK/TN/HI/WA/ND/DE/RI/VT/SD election authorities, Data for Progress and Civiqs (both `needs-review`: partisan-affiliated, methodology published), Election Betting Odds and OpenElections (`verified-claim`: renderers/transcribers), plus CourtListener (now fetchable) and the Franklin & Marshall College Poll (fandmpoll.org release fetched)) |
 | `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6–§10: new entries, URL corrections, fetch failures, live-run evidence; §10 is the session-5 20-entry batch with its two declined candidates and the Metaculus-vs-Kalshi cross-check) |
 | `data/master_sources.json` | **Live-only registry — 20 entries** (5 government · 5 academic · 6 pollsters · 4 analysis), independently verified 2026-09-18 |
 | `data/outcomes/verified-outcomes.json` | Verified official outcomes (2020/2024 presidency, 2024 Senate & House control) with per-claim sources and Kalshi-settlement cross-checks (all PASS) |
@@ -49,19 +50,19 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 
 ### Master source list: categories and status vocabulary
 
-Every one of the 125 entries carries a `category` (the site groups and filters by it) and a `status`.
+Every one of the 147 entries carries a `category` (the site groups and filters by it) and a `status`.
 Both are fixed vocabularies, enforced by `scripts/lint-verified.mjs` and asserted by
 `test/site-sources.test.mjs`:
 
 | Category | Entries | What belongs here |
 |---|---:|---|
 | Government — federal | 20 | Federal agencies, Congress, the FEC/EAC/NARA, federal archives |
-| Government — state & local | 24 | Secretaries of State, state boards of elections, county election offices |
-| Official publishers & archives | 1 | Official document publishers (GovInfo) |
-| Academic & university research | 12 | University survey centres, election labs, data archives |
-| Pollsters & survey research | 24 | Survey firms and their published methodology |
+| Government — state & local | 40 | Secretaries of State, state boards of elections, county election offices |
+| Official publishers & archives | 3 | Official document publishers (GovInfo) plus legal/transcription archives (CourtListener, OpenElections) |
+| Academic & university research | 13 | University survey centres, election labs, data archives |
+| Pollsters & survey research | 26 | Survey firms and their published methodology |
 | News outlets & wires | 17 | Wires, broadcasters, newspapers with named election desks |
-| Prediction markets & exchange data | 8 | Kalshi/Polymarket/Predictit/IEM data, rules and API docs |
+| Prediction markets & exchange data | 9 | Kalshi/Polymarket/Predictit/IEM data, rules and API docs |
 | Ratings, forecasts & analysis | 18 | Race-rating services, forecasters, aggregators |
 | Contest & methodology references | 1 | The Leap contest rules (methodology source, not an election source) |
 
@@ -70,7 +71,7 @@ Both are fixed vocabularies, enforced by `scripts/lint-verified.mjs` and asserte
 | `verified` | Page or PDF fetched directly; the `verified` field quotes only what was observed that day |
 | `verified-via-search` | Reached through a search-discovered official page, then fetched and recorded |
 | `verified-claim` | A third party's *rendering* was verified, not the underlying data (see the entry's notes) |
-| `needs-review` | Fetched, but flagged for a human before the source is relied on |
+| `needs-review` | Fetched, but flagged for a human before the source is relied on (first used in session 6 for Data for Progress and Civiqs — partisan-affiliated pollsters with published methodology) |
 | `unverified` | Candidate only — never used as evidence |
 
 A category says how this project files a source; it makes no claim about reliability or tier
@@ -82,7 +83,7 @@ exclusion was logged rather than reconstructed from memory (irregularities #40�
 Node pipeline (no dependencies, Node ≥ 18, no network needed):
 
 ```bash
-npm test          # 70 tests
+npm test          # 82 tests
 npm run lint      # no-fabrication provenance lint
 npm run backtest  # regenerate data/backtest-results.json
 npm run contest   # regenerate data/contest-results.json

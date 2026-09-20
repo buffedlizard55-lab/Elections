@@ -1,7 +1,7 @@
 {
  "title": "Continuous poll layer — 2026 cycle (line-by-line verified primary releases)",
  "capturedFrom": "primary pollster releases listed per entry (fetched directly; syndication is never the only source)",
- "capturedAt": "2026-09-19T01:30:00Z",
+ "capturedAt": "2026-09-19T23:30:00Z",
  "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
  "updated": "2026-09-19",
@@ -184,6 +184,114 @@
      }
     ]
    }
+  },
+  {
+   "id": "umass-2026-08-house-generic",
+   "pollster": "UMass Amherst Poll (fielded by YouGov)",
+   "fieldDates": "2026-08-21..2026-08-26",
+   "population": "adults (national)",
+   "n": 1000,
+   "moe": 3.5,
+   "question": "House generic ballot with leaners",
+   "D": 42,
+   "R": 34,
+   "unsure": 14,
+   "other": {
+    "independent": 10
+   },
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "YouGov opt-in panel matched to a 2023 ACS 1-year sampling frame; propensity-score weighted; raked on 2024 presidential vote; post-stratified on gender, age, race, education (as stated on the report page).",
+   "trumpApproval": {
+    "approve": 32,
+    "note": "per the companion UMass release on Iran; Congress approval 22/68, own representative 28/38"
+   },
+   "extra": {
+    "senateGenericBallot": {
+     "D": 40,
+     "R": 38,
+     "independent": 10,
+     "unsure": 12,
+     "note": "asked only in the 36 states with a 2026 Senate race listed on the report page"
+    },
+    "enthusiasm": {
+     "D": 67,
+     "R": 59,
+     "veryEnthusiastic": {
+      "D": 42,
+      "R": 30
+     }
+    }
+   },
+   "released": "2026-09-03",
+   "source": "https://www.umass.edu/poll/about/reports/2026-09-national-public-opinion-poll-0",
+   "toplinesPdf": "https://www.umass.edu/poll/sites/default/files/2026-09/August2026NationalPollMidtermCongressToplines.pdf",
+   "verifiedVia": "UMass Poll report page (dated 2026-09-03) fetched 2026-09-19 with its data tables; news release umass.edu/news/article/new-umass-amherst-poll-finds-just-22-americans-approve-congress-only-28-approve-their (2026-09-09) fetched 2026-09-19; toplines PDF fetched 2026-09-19.",
+   "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "fox-2026-09-generic",
+   "pollster": "Fox News Poll (Beacon Research (D) / Shaw & Company Research (R))",
+   "fieldDates": "2026-09-11..2026-09-14",
+   "population": "RV",
+   "n": 1211,
+   "moe": 3.0,
+   "question": "Q14 generic congressional ballot (All Voters)",
+   "D": 51,
+   "R": 44,
+   "unsure": 4,
+   "other": {
+    "other": "*"
+   },
+   "methodFamily": "voter-file-hybrid",
+   "methodNote": "Voter-file PPS sample; 96 landline + 821 cell live interviews and 294 text-to-web completes (as printed in the topline); fieldwork Braun Research; weighted to age, race, education, area from ACS, Fox News Voter Analysis and the voter file.",
+   "trumpApproval": {
+    "approve": 39,
+    "disapprove": 61,
+    "population": "RV"
+   },
+   "trend": [
+    {
+     "released": "2026-07",
+     "D": 53,
+     "R": 46
+    },
+    {
+     "released": "2026-04",
+     "D": 52,
+     "R": 47
+    },
+    {
+     "released": "2026-01",
+     "D": 52,
+     "R": 46
+    }
+   ],
+   "released": "2026-09-16",
+   "source": "https://static.foxnews.com/foxnews.com/content/uploads/2026/09/fox_september-11-14-2026_national_topline_september-16-release-1.pdf",
+   "verifiedVia": "Fox News topline PDF (Sept 16 release) fetched 2026-09-19 in full (6 chunks); Q14 and the methodology block transcribed.",
+   "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "fm-2026-08-pa-house-preference",
+   "pollster": "Franklin & Marshall College Poll",
+   "fieldDates": "2026-08-17..2026-08-23",
+   "population": "RV (Pennsylvania only)",
+   "n": 501,
+   "moe": 5.5,
+   "question": "U.S. House preference, Pennsylvania registered voters",
+   "D": 48,
+   "R": 36,
+   "unsure": null,
+   "methodFamily": "voter-file-mail-recruit",
+   "methodNote": "Sample of PA registered voters from Aristotle (213 D / 208 R / 80 Ind), notified by mail, completed by phone or online; weighted to PA Department of State registration and Nov 2022 CPS; MoE ±5.5 including design effects (as stated in the release).",
+   "scope": "state (PA) — not a national generic ballot; kept here because it is the same question family",
+   "trumpApproval": {
+    "note": "27% excellent/good job rating; Shapiro 47% excellent/good"
+   },
+   "released": "2026-08-27",
+   "source": "https://www.fandmpoll.org/franklin-marshall-college-poll-release-august-2026/",
+   "verifiedVia": "F&M Poll August 2026 release page (fandmpoll.org, the poll's own site — NOT fandm.edu) fetched 2026-09-19 in full.",
+   "verifiedOn": "2026-09-19"
   }
  ],
  "aggregatorReadings": [
@@ -605,6 +713,107 @@
    "verifiedOn": "2026-09-19",
    "review": true,
    "notes": "Kalshi lists the 2026 Ohio special election under SENATEOHS-26 (SENATEOH-28 is the regular 2028 seat)."
+  },
+  {
+   "id": "npi-2026-08-az-governor",
+   "race": "Governor — Arizona",
+   "pollster": "Noble Predictive Insights — Arizona Public Opinion Pulse (AZPOP)",
+   "fieldDates": "2026-08-10..2026-08-13",
+   "population": "LV",
+   "n": 923,
+   "moe": 3.23,
+   "candidates": {
+    "D": {
+     "name": "Katie Hobbs",
+     "pct": 48,
+     "incumbent": true
+    },
+    "R": {
+     "name": "Andy Biggs",
+     "pct": 35
+    }
+   },
+   "undecidedOrCouldChange": "third-party 4, undecided 12 (LV)",
+   "registeredVoterTrend": {
+    "n": 1040,
+    "moe": 3.04,
+    "May2026": {
+     "Hobbs": 41,
+     "Biggs": 37
+    },
+    "Aug2026": {
+     "Hobbs": 46,
+     "Biggs": 32
+    }
+   },
+   "methodFamily": "online-optin-weighted",
+   "methodNote": "Opt-in online panel weighted to the voter file by gender, region, age, party, race and education (as stated in the release).",
+   "downballotSameWave": {
+    "source": "https://www.noblepredictiveinsights.com/post/fontes-and-mayes-lead-down-ballot-yee-holds-narrow-edge-for-schools-chief",
+    "SoS": {
+     "Fontes (D)": 41,
+     "Kolodin (R)": 35
+    },
+    "AG": {
+     "Mayes (D)": 44,
+     "Petersen (R)": 38
+    },
+    "SPI": {
+     "Yee (R)": 40,
+     "Ruiz (D)": 37
+    }
+   },
+   "kalshiEvent": "GOVPARTYAZ-26",
+   "kalshiDemTicker": "GOVPARTYAZ-26-D",
+   "source": "https://www.noblepredictiveinsights.com/post/katie-hobbs-leads-andy-biggs-in-the-grand-canyon-state",
+   "toplinesPdf": "https://7453540.fs1.hubspotusercontent-na1.net/hubfs/7453540/AZPOP/2026/Aug%202026%20AZPOP/260810_AZPOP_Gov%20PR%20poll%20report.xlsx",
+   "verifiedVia": "NPI release (2026-08-20) fetched 2026-09-19 in full; down-ballot release (2026-08-25) fetched 2026-09-19.",
+   "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "fm-2026-08-pa-governor",
+   "race": "Governor — Pennsylvania",
+   "pollster": "Franklin & Marshall College Poll",
+   "fieldDates": "2026-08-17..2026-08-23",
+   "population": "RV",
+   "n": 501,
+   "moe": 5.5,
+   "candidates": {
+    "D": {
+     "name": "Josh Shapiro",
+     "pct": 50,
+     "incumbent": true
+    },
+    "R": {
+     "name": "Stacy Garrity",
+     "pct": 25
+    }
+   },
+   "trend": [
+    {
+     "released": "2026-06",
+     "fieldDates": "2026-06-08..2026-06-14",
+     "n": 546,
+     "D": 50,
+     "R": 28,
+     "source": "https://www.fandmpoll.org/franklin-marshall-college-poll-release-june-2026/"
+    },
+    {
+     "released": "2026-03",
+     "fieldDates": "2026-02-18..2026-03-01",
+     "n": 834,
+     "D": 48,
+     "R": 28,
+     "source": "https://www.fandmpoll.org/email/5417baaa-eb63-4f41-865d-b87bb829d520/"
+    }
+   ],
+   "methodFamily": "voter-file-mail-recruit",
+   "methodNote": "Aristotle voter-file sample (213 D / 208 R / 80 Ind), mail notification, phone or online completion; weighted to PA DOS registration + Nov 2022 CPS; ±5.5 incl. design effects.",
+   "kalshiEvent": "GOVPARTYPA-26",
+   "kalshiDemTicker": "GOVPARTYPA-26-D",
+   "source": "https://www.fandmpoll.org/franklin-marshall-college-poll-release-august-2026/",
+   "verifiedVia": "F&M August 2026 release fetched 2026-09-19 in full (Shapiro 50 / Garrity 25; Shapiro approval 47% exc/good); June and March releases fetched 2026-09-19 for the trend.",
+   "verifiedOn": "2026-09-19"
   }
  ],
  "exitPollStatus": {
@@ -795,5 +1004,25 @@
     0.1
    ]
   }
- }
+ },
+ "methodFamilies": {
+  "note": "Irregularity #49 labels. Every row added from 2026-09-19 (session 6) onward carries methodFamily; earlier rows are labelled where the release stated the design. Rows are never averaged across families without saying so.",
+  "families": {
+   "live-caller-rdd": "Live interviewers, random-digit-dial or listed sample (landline + cell).",
+   "voter-file-hybrid": "Voter-file (registration-based) sample contacted by phone and/or text-to-web; live + online completion.",
+   "voter-file-mail-recruit": "Voter-file sample notified by mail, completing by phone or online.",
+   "online-nonprobability-matched": "Opt-in online panel matched/weighted to a population frame (e.g. YouGov matched to ACS).",
+   "online-optin-weighted": "Opt-in online panel weighted to a voter file or census targets.",
+   "probability-panel": "Address-based-sample probability panel (KnowledgePanel, AmeriSpeak).",
+   "aggregator": "Published average, not a poll."
+  }
+ },
+ "pendingSources": [
+  {
+   "id": "muhlenberg-ciopo",
+   "status": "no 2026 horse-race survey published on the pollster's own site as of 2026-09-19",
+   "evidence": "Poll library https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/ fetched 2026-09-19: latest political surveys are October 2024; 2026 items are the National Surveys on Energy and Environment and the Spring 2026 Pennsylvania Public Health Survey.",
+   "action": "No row fabricated. Re-check the poll library each session; ingest the first 2026 PA governor/Senate release when it appears."
+  }
+ ]
 }

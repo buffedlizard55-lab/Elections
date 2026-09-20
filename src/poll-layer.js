@@ -59,6 +59,7 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
       withinMoe: margin !== null && e.moe !== null && e.moe !== undefined ? Math.abs(margin) <= e.moe : null,
       kalshiEvent: e.kalshiEvent || null,
       kalshiDemTicker: e.kalshiDemTicker || null,
+      methodFamily: e.methodFamily || null,
       marketDemProb: mk.p === null ? null : Number(mk.p.toFixed(4)),
       marketBasis: mk.basis,
       marketDate: universe ? universe.date : null,
