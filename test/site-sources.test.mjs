@@ -78,7 +78,7 @@ test('registry: the 20 session-4 entries are present, dated 2026-09-19 and verif
     assert.match(s.verified, /Fetched directly 2026-09-19|fetched directly 2026-09-19|Primary PDF fetched directly 2026-09-19/, `${id}: must state it was fetched this session`);
   }
   const dated = master.sources.filter((s) => s.verifiedOn === '2026-09-19').length;
-  assert.equal(dated, 93, `expected 93 entries verified on 2026-09-19, found ${dated}`);
+  assert.equal(dated, 115, `expected 115 entries verified on 2026-09-19 (93 through session 5 + 22 in session 6), found ${dated}`);
 });
 
 // ---- session-5 batch (2026-09-19, branch arena/01a0bb28-elections): 20 new entries ----
@@ -114,14 +114,75 @@ test('registry: the 20 session-5 entries are present, dated 2026-09-19, and eith
   }
 });
 
+// ---- session-6 batch (2026-09-19, branch arena/01a0bb51-elections): 20 new entries + 2 re-test admissions ----
+const SESSION6_NEW_IDS = [
+  'south-carolina-sec', 'kansas-sos', 'montana-sos', 'nebraska-sos', 'new-mexico-sos', 'wyoming-sos', 'colorado-sos',
+  'oklahoma-seb', 'tennessee-sos', 'hawaii-oe', 'washington-sos-results', 'north-dakota-sos-results', 'delaware-doe',
+  'rhode-island-boe', 'vermont-election-archive', 'south-dakota-sos-history', 'data-for-progress', 'civiqs',
+  'election-betting-odds', 'openelections',
+];
+const SESSION6_RETEST_ADMITTED = ['courtlistener', 'franklin-marshall-poll'];
+
+test('registry: the 20 session-6 entries + 2 re-test admissions are present, dated 2026-09-19, with observed text and notes', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  assert.equal(SESSION6_NEW_IDS.length, 20);
+  for (const id of [...SESSION6_NEW_IDS, ...SESSION6_RETEST_ADMITTED]) {
+    const s = byId[id];
+    assert.ok(s, `missing session-6 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-19', `${id}: verifiedOn`);
+    assert.match(s.verified, /Fetched directly 2026-09-19|fetched directly 2026-09-19|Reached 2026-09-19 via redirect/, `${id}: must state how it was observed this session`);
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+  }
+  // Two partisan-affiliated pollsters are admitted only with needs-review; two renderers/transcribers are verified-claim.
+  assert.deepEqual(SESSION6_NEW_IDS.filter((id) => byId[id].status === 'needs-review').sort(), ['civiqs', 'data-for-progress']);
+  assert.deepEqual(SESSION6_NEW_IDS.filter((id) => byId[id].status === 'verified-claim').sort(), ['election-betting-odds', 'openelections']);
+  // F&M must point at the poll's own domain (brand trap: not fandm.edu) and be tied to the ingested rows.
+  assert.match(byId['franklin-marshall-poll'].url, /^https:\/\/www\.fandmpoll\.org\//);
+  assert.match(byId['franklin-marshall-poll'].notes, /fm-2026-08-pa-governor/);
+  assert.ok(master.sources.length >= 147, `expected >= 147 sources, found ${master.sources.length}`);
+});
+
+test('poll layer: session-6 rows carry #49 methodFamily labels and map to captured Kalshi events', () => {
+  const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
+  const fams = new Set(Object.keys(PL.methodFamilies.families));
+  const rows = [...PL.genericBallot, ...PL.stateRaces].filter((r) => /^(umass-2026-08|fox-2026-09|fm-2026-08|npi-2026-08)/.test(r.id));
+  assert.equal(rows.length, 5, `expected 5 session-6 rows, found ${rows.map((r) => r.id)}`);
+  for (const r of rows) {
+    assert.ok(fams.has(r.methodFamily), `${r.id}: methodFamily ${r.methodFamily} not in the documented families`);
+    assert.equal(r.verifiedOn, '2026-09-19');
+    assert.match(r.source, /^https:\/\//);
+  }
+  const az = PL.stateRaces.find((r) => r.id === 'npi-2026-08-az-governor');
+  assert.equal(az.kalshiDemTicker, 'GOVPARTYAZ-26-D');
+  assert.deepEqual([az.candidates.D.pct, az.candidates.R.pct], [48, 35]);
+  const pa = PL.stateRaces.find((r) => r.id === 'fm-2026-08-pa-governor');
+  assert.equal(pa.kalshiDemTicker, 'GOVPARTYPA-26-D');
+  assert.deepEqual([pa.candidates.D.pct, pa.candidates.R.pct], [50, 25]);
+  const fox = PL.genericBallot.find((r) => r.id === 'fox-2026-09-generic');
+  assert.deepEqual([fox.D, fox.R, fox.n], [51, 44, 1211]);
+  const um = PL.genericBallot.find((r) => r.id === 'umass-2026-08-house-generic');
+  assert.deepEqual([um.D, um.R, um.extra.senateGenericBallot.D, um.extra.senateGenericBallot.R], [42, 34, 40, 38]);
+  // Muhlenberg: no fabricated row — recorded as pending.
+  assert.ok(PL.pendingSources.some((p) => p.id === 'muhlenberg-ciopo'));
+  assert.ok(!rows.some((r) => /muhlenberg/i.test(r.pollster)));
+});
+
+test('site: the Cross-layer section renders pending rows and the R14 spread', () => {
+  const { html } = renderSection('crosslayer');
+  assert.match(html, /Cross-layer scoreboard/);
+  assert.match(html, /pending canvass/);
+  assert.match(html, /SENATE-CONTROL-2026/);
+  assert.match(html, /7\.8 pts/); // Kalshi 0.595 mid vs Metaculus 0.517 on 2026-09-19
+});
+
 // ---- render the Sources section headlessly against the committed bundle ----
-function renderSources() {
+function renderSection(section) {
   const els = {};
   const mk = (id) => (els[id] = els[id] || { id, innerHTML: '', textContent: '', querySelectorAll: () => [], classList: { toggle() {} } });
   const listeners = {};
   const sandbox = {
     console,
-    location: { hash: '#/sources' },
+    location: { hash: `#/${section}` },
     requestAnimationFrame: (f) => f(),
     document: { getElementById: (id) => (['main', 'nav', 'footline'].includes(id) ? mk(id) : null) },
   };
@@ -137,7 +198,7 @@ function renderSources() {
 }
 
 test('site: the Sources section renders the filter toolbar and one block per category', () => {
-  const { html, bundle } = renderSources();
+  const { html, bundle } = renderSection('sources');
   for (const id of ['src-q', 'src-cat', 'src-date', 'src-reset', 'src-count']) {
     assert.ok(html.includes(`id="${id}"`), `missing control #${id}`);
   }
@@ -150,7 +211,7 @@ test('site: the Sources section renders the filter toolbar and one block per cat
 });
 
 test('site: the Sources section renders exactly one row per registry entry, correctly tagged', () => {
-  const { html, bundle } = renderSources();
+  const { html, bundle } = renderSection('sources');
   const rows = html.match(/<tr data-cat="/g) || [];
   assert.equal(rows.length, bundle.sources.sources.length, 'row count must equal the registry size');
   const dates = html.match(/data-date="(\d{4}-\d{2}-\d{2})"/g) || [];
@@ -164,7 +225,7 @@ test('site: the Sources section renders exactly one row per registry entry, corr
 });
 
 test('site: each category block shows the same count as the registry tally', () => {
-  const { html, bundle } = renderSources();
+  const { html, bundle } = renderSection('sources');
   for (const c of bundle.sources.categories) {
     const re = new RegExp(`<section class="src-cat" data-cat="${reEsc(esc(c.name))}">([\\s\\S]*?)</section>`);
     const m = html.match(re);
@@ -178,7 +239,7 @@ test('site: each category block shows the same count as the registry tally', () 
 });
 
 test('site: the bundle and data/sources/master.json describe the same registry', () => {
-  const { bundle } = renderSources();
+  const { bundle } = renderSection('sources');
   assert.equal(bundle.sources.sources.length, master.sources.length, 'entry count');
   // NOTE: the bundle is evaluated inside a vm context, so its arrays/objects carry that realm's
   // prototypes and assert.deepEqual would reject them on prototype identity alone. Compare content.

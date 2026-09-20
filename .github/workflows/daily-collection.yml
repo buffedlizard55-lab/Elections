@@ -22,6 +22,9 @@
 #                                              incl. candles) -> data/kalshi/historical-2024/
 #       node scripts/run-senate-backtest.mjs + run-calibration.mjs -> forward-loop analytics
 #                                              (data/senate-2024-backtest.json, data/calibration-2026.json)
+#   3c. node scripts/collect-metaculus.mjs      -> Metaculus hub numbers -> data/crosslayer/ (R14)
+#       node scripts/collect-statenavigate.mjs  -> State Navigate free forecast pages + API-host probe -> data/statenavigate/
+#       node scripts/crosscheck-renderings.mjs  -> EBO / DDHQ / 270toWin vs captured bid-ask -> tracker/rendering-crosscheck.json (R13)
 #   4. npm run pipeline + lint + tests      -> regenerated backtest/contest/site outputs
 #   5. commit data/ + src/data/ + docs/data/ back to the branch that ran it
 # Failure semantics:
@@ -67,6 +70,10 @@ on:
       - 'src/calibration-tracker.js'
       - 'src/senate2024-backtest.js'
       - 'test/collector.test.mjs' # the offline replay test must be proven against a live capture
+      - 'scripts/collect-metaculus.mjs'
+      - 'scripts/collect-statenavigate.mjs'
+      - 'scripts/crosscheck-renderings.mjs'
+      - 'src/crosslayer.js'
       - '.github/workflows/daily-collection.yml'
 
 permissions:
@@ -119,6 +126,16 @@ jobs:
         timeout-minutes: 15
         run: node scripts/collect-senate-2024-races.mjs || echo "::warning::senate-races capture failed - previous capture stays in place"
 
+      - name: Third-layer collectors — Metaculus hub, State Navigate free pages, R13 rendering cross-check (R14/R13)
+        continue-on-error: true
+        timeout-minutes: 10
+        env:
+          METACULUS_API_TOKEN: ${{ secrets.METACULUS_API_TOKEN }}
+        run: |
+          node scripts/collect-metaculus.mjs || echo "::warning::metaculus hub capture failed (parse or fetch) - row recorded as failed, nothing estimated"
+          node scripts/collect-statenavigate.mjs || echo "::warning::state navigate capture failed - previous rows stay in place"
+          node scripts/crosscheck-renderings.mjs || echo "::warning::rendering cross-check failed - previous rows stay in place"
+
       - name: Forward-loop analytics (senate backtest + live 2026 calibration tracker)
         continue-on-error: true
         timeout-minutes: 10
@@ -155,6 +172,8 @@ jobs:
             data/calibration-2026.json
             data/senate-2024-backtest.json
             data/polls/polls-2026-series.json
+            data/crosslayer
+            data/statenavigate
           retention-days: 7
           if-no-files-found: ignore
 

@@ -15,6 +15,7 @@
     ['polls', '2026 Polls'],
     ['tracker', 'Tracker'],
     ['forward', 'Forward Loop (full universe)'],
+    ['crosslayer', 'Cross-layer'],
     ['backtests', 'Backtests'],
     ['contest', 'Contest'],
     ['sources', 'Sources'],
@@ -217,17 +218,17 @@
   function polls() {
     if (!PL) return '<h1>2026 Polls</h1><p class="lead">Poll layer not built.</p>';
     const gb = PL.genericBallot.map((p) => `<tr>
-      <td><strong>${esc(p.pollster)}</strong><br><span class="small">${esc(p.question)}</span></td>
+      <td><strong>${esc(p.pollster)}</strong><br><span class="small">${esc(p.question)}</span>${p.methodFamily ? ` <span class="chip info" title="method family (irregularity #49): ${esc(p.methodNote || '')}">${esc(p.methodFamily)}</span>` : ''}${p.scope ? `<br><span class="small">${esc(p.scope)}</span>` : ''}</td>
       <td class="small">${esc(p.fieldDates)}</td><td class="small">${esc(p.population)}${p.n ? ` · n=${int(p.n)}` : ''}${p.moe ? ` · ±${p.moe}` : ''}</td>
       <td class="num">${p.D}</td><td class="num">${p.R}</td><td class="num ${cls(p.D - p.R)}">${pp(p.D - p.R, 0)}</td>
-      <td class="num">${p.trumpApproval ? `${p.trumpApproval.approve} / ${p.trumpApproval.disapprove}` : '—'}</td>
+      <td class="num">${p.trumpApproval && p.trumpApproval.approve != null ? `${p.trumpApproval.approve} / ${p.trumpApproval.disapprove == null ? '—' : p.trumpApproval.disapprove}` : '—'}</td>
       <td>${srcs([p.source])}</td></tr>`).join('');
     const agg = PL.aggregatorReadings.map((a) => `<tr><td><strong>${esc(a.aggregator)}</strong><br><span class="small">${esc(a.verifiedVia)}</span></td><td class="small">${esc(a.window)} (as of ${esc(a.asOf)})</td><td class="small">${a.pollsInAverage} polls</td><td class="num">${a.D}</td><td class="num">${a.R}</td><td class="num pos">${esc(a.spread)}</td><td></td><td>${srcs([a.source])}</td></tr>`).join('');
     const mc = PL.marketComparison;
     // group by race (state), newest field period first inside a race; JSON order stays provenance order
     const raceRows = mc.rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.race.localeCompare(b.r.race) || String(b.r.fieldDates).localeCompare(String(a.r.fieldDates)) || a.i - b.i).map((x) => x.r);
     const races = raceRows.map((r) => `<tr>
-      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}</span></td>
+      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}${r.methodFamily ? ` <span class="chip info" title="method family (irregularity #49)">${esc(r.methodFamily)}</span>` : ''}</span></td>
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
       <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
@@ -901,6 +902,43 @@
     </div>`;
   }
 
+
+  // ---------- CROSS-LAYER (R14) ----------
+  function crosslayer() {
+    const X = D.crossLayer;
+    if (!X) return '<h1>Cross-layer scoreboard</h1><p class="lead">No cross-layer snapshots yet (data/crosslayer/snapshots.json missing).</p>';
+    const S = X.scored;
+    const layerName = { kalshi: 'Kalshi (own capture, bid/ask mid)', metaculus: 'Metaculus (community, hub)', ddhq: 'DDHQ Votes (context)', ebo: 'EBO-rendered Kalshi (bid/ask mid)' };
+    const rows = S.rows.map((r) => `<tr>
+      <td><strong>${esc(r.question)}</strong><br><span class="small">captured ${esc(r.capturedAt)} · election ${esc(r.electionDate)}</span></td>
+      ${['kalshi', 'metaculus', 'ddhq', 'ebo'].map((L) => `<td class="num">${r.layers[L] ? pct(r.layers[L].p) + (r.layers[L].brier != null ? `<br><span class="small">Brier ${r.layers[L].brier}</span>` : '') : '—'}</td>`).join('')}
+      <td class="num">${r.spread == null ? '—' : (r.spread * 100).toFixed(1) + ' pts'}</td>
+      <td>${r.status === 'scored' ? `<span class="chip good">scored · y=${r.y}</span>` : r.status === 'pending' ? '<span class="chip warn">pending canvass</span>' : `<span class="chip warn">${esc(r.status)}</span>`}</td></tr>`).join('');
+    const byLayer = Object.entries(S.byLayer).map(([L, v]) => `<tr><td>${esc(layerName[L] || L)}</td><td class="num">${v.answered}</td><td class="num">${v.scored}</td><td class="num">${v.meanBrier == null ? '—' : v.meanBrier}</td><td class="num">${v.meanLogLoss == null ? '—' : v.meanLogLoss}</td></tr>`).join('');
+    const official = (X.officialSources || []).map((o) => `<li><a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.name)}</a></li>`).join('');
+    const q = Object.entries(X.questions || {}).map(([id, v]) => `<li><span class="mono">${esc(id)}</span> — ${esc(v.text)} · Kalshi event <span class="mono">${esc(v.kalshiEvent)}</span> · <a href="${esc(v.metaculusQuestion)}" target="_blank" rel="noopener">Metaculus question</a></li>`).join('');
+    const sn = X.stateNavigate && X.stateNavigate.latest && X.stateNavigate.latest.national ? X.stateNavigate.latest.national : null;
+    const snChambers = X.stateNavigate && X.stateNavigate.latest ? Object.entries(X.stateNavigate.latest.chambers || {}).filter(([, c]) => c.parse === 'ok').slice(0, 40).map(([k, c]) => `<tr><td class="mono">${esc(k)}</td><td>${c.D ? `D ${c.D.seats} (${c.D.change > 0 ? '+' : ''}${c.D.change})` : '—'}</td><td>${c.R ? `R ${c.R.seats} (${c.R.change > 0 ? '+' : ''}${c.R.change})` : '—'}</td><td class="num">${c.odds && c.odds.dMajority != null ? c.odds.dMajority + '%' : '—'}</td><td><a href="${esc(c.capturedFrom)}" target="_blank" rel="noopener">page</a></td></tr>`).join('') : '';
+    const rend = X.renderings && X.renderings.rows.length ? X.renderings.rows.slice().reverse().map((r) => `<tr><td>${esc(r.date)}</td><td>${r.renderers.ebo && r.renderers.ebo.senateDemKalshi ? `${pct(r.renderers.ebo.senateDemKalshi.bid)}–${pct(r.renderers.ebo.senateDemKalshi.ask)}` : esc((r.renderers.ebo || {}).extract || '—')}${r.renderers.ebo && r.renderers.ebo.vsCaptured && r.renderers.ebo.vsCaptured.comparable ? `<br><span class="small">vs captured mid ${pct(r.renderers.ebo.vsCaptured.capturedMid)} (diff ${(r.renderers.ebo.vsCaptured.diff * 100).toFixed(1)} pts)</span>` : ''}</td><td>${r.renderers.ddhq ? `House ${pct(r.renderers.ddhq.houseD, 0)} · Senate ${pct(r.renderers.ddhq.senateD, 0)}` : '—'}</td><td>${r.renderers['270towin'] && r.renderers['270towin'].kalshiPanel ? `${pct(r.renderers['270towin'].kalshiPanel.a, 0)} / ${pct(r.renderers['270towin'].kalshiPanel.b, 0)} (${esc(r.renderers['270towin'].kalshiPanel.asOf)})` : esc((r.renderers['270towin'] || {}).extract || '—')}</td><td>${r.flags.length ? `<span class="chip warn">${r.flags.length} flag(s)</span><div class="small">${r.flags.map(esc).join('<br>')}</div>` : '<span class="chip good">none</span>'}</td></tr>`).join('') : '';
+    const met = X.metaculusRows.length ? X.metaculusRows.slice().reverse().map((r) => `<tr><td>${esc(r.date)}</td><td class="num">${r.houseD == null ? '—' : r.houseD + '%'}</td><td class="num">${r.senateD == null ? '—' : r.senateD + '%'}</td><td class="num">${r.control ? [r.control.DH_DS, r.control.DH_RS, r.control.RH_RS, r.control.RH_DS].map((v) => v == null ? '—' : v).join(' / ') : '—'}</td><td>${r.parse === 'ok' ? '<span class="chip good">ok</span>' : '<span class="chip warn">parse failed</span>'}${r.consistencyFlags && r.consistencyFlags.length ? `<div class="small">${r.consistencyFlags.map(esc).join('; ')}</div>` : ''}</td></tr>`).join('') : '';
+    return `
+    <h1>Cross-layer scoreboard — market vs forecast vs model</h1>
+    <p class="lead">Three independent layers answer the same 2026 control questions. They are recorded side by side today and <strong>scored only against official canvasses</strong> after November 3 (Brier and log-loss per layer). Nothing is scored from a news call or a market settlement; see the method note below.</p>
+    <div class="card"><p class="small">${esc(X.method)}</p></div>
+    <h2>Snapshots (${S.pendingCount} pending · ${S.scoredCount} scored)</h2>
+    <div class="card"><table><thead><tr><th>Question</th><th>Kalshi</th><th>Metaculus</th><th>DDHQ</th><th>EBO→Kalshi</th><th>Max spread</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
+      <p class="small">Kalshi = this project's own API capture (<span class="mono">data/kalshi/universe/latest.json</span>). Metaculus = <a href="https://www.metaculus.com/midterms-2026/" target="_blank" rel="noopener">midterms hub</a>. DDHQ = <a href="https://votes.decisiondeskhq.com/" target="_blank" rel="noopener">DDHQ Votes</a>. EBO = <a href="https://electionbettingodds.com/" target="_blank" rel="noopener">Election Betting Odds</a>' Kalshi row. Irregularity #57 records the spread.</p></div>
+    <h2>Per-layer score</h2>
+    <div class="card"><table><thead><tr><th>Layer</th><th>Questions answered</th><th>Scored</th><th>Mean Brier</th><th>Mean log-loss</th></tr></thead><tbody>${byLayer}</tbody></table>
+      <p class="small">${esc(X.outcomesMethod || '')}</p><p class="small"><strong>Official outcome sources to be used:</strong></p><ul class="small">${official}</ul><p class="small"><strong>Questions:</strong></p><ul class="small">${q}</ul></div>
+    <h2>Metaculus daily capture</h2>
+    <div class="card">${met ? `<table><thead><tr><th>Date</th><th>House D</th><th>Senate D</th><th>DH/DS · DH/RS · RH/RS · RH/DS</th><th>Parse</th></tr></thead><tbody>${met}</tbody></table>` : '<p class="small">No automated Metaculus rows yet — <span class="mono">scripts/collect-metaculus.mjs</span> runs in the daily workflow (first row appears after the first networked run). The seed snapshot above was transcribed by hand from the hub on 2026-09-19.</p>'}</div>
+    <h2>State Navigate — state-legislative layer (not priced by Kalshi)</h2>
+    <div class="card">${sn ? `<div class="stats"><div class="stat"><div class="n">${int(sn.seatsForecasted)}</div><div class="l">seats forecasted</div></div><div class="stat"><div class="n">${int(sn.dPickups)}</div><div class="l">D pickups</div></div><div class="stat"><div class="n">${int(sn.rPickups)}</div><div class="l">R pickups</div></div><div class="stat"><div class="n">${int(sn.projectedFlips)}</div><div class="l">projected flips</div></div></div>${snChambers ? `<table><thead><tr><th>Chamber</th><th>D</th><th>R</th><th>D majority</th><th>Source</th></tr></thead><tbody>${snChambers}</tbody></table>` : ''}<p class="small">Captured ${esc(X.stateNavigate.latest.capturedAt)} from <a href="${esc(X.stateNavigate.capturedFrom)}" target="_blank" rel="noopener">${esc(X.stateNavigate.capturedFrom)}</a> (${X.stateNavigate.days} day(s) on file).</p>` : '<p class="small">No automated State Navigate rows yet — <span class="mono">scripts/collect-statenavigate.mjs</span> runs in the daily workflow. Verified by hand on 2026-09-19 from <a href="https://projects.statenavigate.com/25-26/national/" target="_blank" rel="noopener">the free national forecast page</a>: 2,306 seats forecasted · 124 D pickups · 11 R pickups · 27 chambers · 143 close seats · 135 projected flips. The API host <span class="mono">data.statenavigate.com</span> returned HTTP 500 and data downloads require a paid tier (irregularity #55) — no endpoint is used.</p>'}</div>
+    <h2>R13 — third-party renderings of Kalshi vs our capture</h2>
+    <div class="card">${rend ? `<table><thead><tr><th>Date</th><th>EBO Kalshi Senate-D</th><th>DDHQ odds</th><th>270toWin Kalshi panel</th><th>Flags</th></tr></thead><tbody>${rend}</tbody></table><p class="small">${esc(X.renderings.method)}</p>` : '<p class="small">No automated rows yet — <span class="mono">scripts/crosscheck-renderings.mjs</span> runs daily. Manual check 2026-09-19: EBO showed Kalshi Senate-D 58.4–59.4% against our captured 59/60¢ (within tolerance); DDHQ House 70% / Senate 52%; 270toWin\'s Kalshi panel 57% / 41% (2028 presidency, as of Sep. 19, 2026 20:29 UTC).</p>'}</div>`;
+  }
+
   // ---------- ROADMAP ----------
   function roadmap() {
     const items = D.roadmap.items.map((r) => `
@@ -919,7 +957,7 @@
   }
 
   // ---------- ROUTER ----------
-  const RENDER = { overview, markets, polls, tracker, forward, backtests, contest, sources, irregularities, methodology, roadmap };
+  const RENDER = { overview, markets, polls, tracker, forward, crosslayer, backtests, contest, sources, irregularities, methodology, roadmap };
   const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources };
 
   const nav = document.getElementById('nav');

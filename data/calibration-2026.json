@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-19T16:27:00.170Z",
+ "generatedAt": "2026-09-20T01:22:28.341Z",
  "inputs": [
   {
    "path": "data/kalshi/forward/open-prices.csv",
@@ -17,16 +17,24 @@
  "note": "Forward \"expected vs actual\" record: every settled 2026 Elections market scored at T-1..T-60 before close with the same metrics as the 2024 backtest, plus pooled calibration buckets and the upcoming-settlement watchlist (LA mayor general election is the first high-volume settlement, 2026-11-03; located from captured event tickers, never hard-coded).",
  "tracker": {
   "days": [
-   "2026-09-19"
+   "2026-09-19",
+   "2026-09-20"
   ],
   "rowsPerDay": {
-   "2026-09-19": 24162
+   "2026-09-19": 24162,
+   "2026-09-20": 24088
   },
-  "totalRows": 24162,
+  "totalRows": 48250,
   "headlineSeries": {
    "CONTROLS-2026-D": [
     {
      "date": "2026-09-19",
+     "bid": 0.59,
+     "ask": 0.6,
+     "mid": 0.595
+    },
+    {
+     "date": "2026-09-20",
      "bid": 0.59,
      "ask": 0.6,
      "mid": 0.595
@@ -38,6 +46,12 @@
      "bid": 0.41,
      "ask": 0.42,
      "mid": 0.415
+    },
+    {
+     "date": "2026-09-20",
+     "bid": 0.41,
+     "ask": 0.42,
+     "mid": 0.415
     }
    ],
    "CONTROLH-2026-R": [
@@ -46,11 +60,23 @@
      "bid": 0.1,
      "ask": 0.11,
      "mid": 0.10500000000000001
+    },
+    {
+     "date": "2026-09-20",
+     "bid": 0.1,
+     "ask": 0.11,
+     "mid": 0.10500000000000001
     }
    ],
    "CONTROLH-2026-D": [
     {
      "date": "2026-09-19",
+     "bid": 0.89,
+     "ask": 0.9,
+     "mid": 0.895
+    },
+    {
+     "date": "2026-09-20",
      "bid": 0.89,
      "ask": 0.9,
      "mid": 0.895
@@ -18671,6 +18697,46 @@
  "watch": {
   "laMayor": [
    {
+    "ticker": "KXCAGOVLAMAYOR-26NOV-RAM-HIL",
+    "event": "KXCAGOVLAMAYOR-26NOV",
+    "series": "KXCAGOVLAMAYOR",
+    "sub": "Nithya Raman and Steve Hilton",
+    "bid": "0.0000",
+    "ask": "0.0400",
+    "vol": "2778.71",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXCAGOVLAMAYOR-26NOV-RAM-BEC",
+    "event": "KXCAGOVLAMAYOR-26NOV",
+    "series": "KXCAGOVLAMAYOR",
+    "sub": "Nithya Raman and Xavier Becerra",
+    "bid": "0.3500",
+    "ask": "0.4500",
+    "vol": "14921.94",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXCAGOVLAMAYOR-26NOV-BAS-HIL",
+    "event": "KXCAGOVLAMAYOR-26NOV",
+    "series": "KXCAGOVLAMAYOR",
+    "sub": "Karen Bass and Steve Hilton",
+    "bid": "0.0000",
+    "ask": "0.0300",
+    "vol": "2903.63",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXCAGOVLAMAYOR-26NOV-BAS-BEC",
+    "event": "KXCAGOVLAMAYOR-26NOV",
+    "series": "KXCAGOVLAMAYOR",
+    "sub": "Karen Bass and Xavier Becerra",
+    "bid": "0.5400",
+    "ask": "0.7400",
+    "vol": "7244.06",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
     "ticker": "KXLAMOV-KXMAYORLA26KBAS-KBAS-P55",
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
@@ -18705,7 +18771,7 @@
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥4%",
-    "bid": "0.0200",
+    "bid": "0.1600",
     "ask": "0.4600",
     "vol": "2843.92",
     "close_time": "2027-11-03T15:00:00Z"
@@ -18756,7 +18822,7 @@
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥4%",
     "bid": "0.0700",
-    "ask": "0.8000",
+    "ask": "0.8100",
     "vol": "965.01",
     "close_time": "2027-11-03T15:00:00Z"
    },
@@ -18769,156 +18835,6 @@
     "ask": "0.7000",
     "vol": "1152.58",
     "close_time": "2027-11-03T15:00:00Z"
-   },
-   {
-    "ticker": "KXCAGOVLAMAYOR-26NOV-RAM-HIL",
-    "event": "KXCAGOVLAMAYOR-26NOV",
-    "series": "KXCAGOVLAMAYOR",
-    "sub": "Nithya Raman and Steve Hilton",
-    "bid": "0.0000",
-    "ask": "0.0400",
-    "vol": "2778.71",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXCAGOVLAMAYOR-26NOV-RAM-BEC",
-    "event": "KXCAGOVLAMAYOR-26NOV",
-    "series": "KXCAGOVLAMAYOR",
-    "sub": "Nithya Raman and Xavier Becerra",
-    "bid": "0.3400",
-    "ask": "0.4400",
-    "vol": "14621.43",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXCAGOVLAMAYOR-26NOV-BAS-HIL",
-    "event": "KXCAGOVLAMAYOR-26NOV",
-    "series": "KXCAGOVLAMAYOR",
-    "sub": "Karen Bass and Steve Hilton",
-    "bid": "0.0000",
-    "ask": "0.0300",
-    "vol": "2903.63",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXCAGOVLAMAYOR-26NOV-BAS-BEC",
-    "event": "KXCAGOVLAMAYOR-26NOV",
-    "series": "KXCAGOVLAMAYOR",
-    "sub": "Karen Bass and Xavier Becerra",
-    "bid": "0.5500",
-    "ask": "0.7000",
-    "vol": "7243.06",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXMAYORLA-26-NRAM",
-    "event": "KXMAYORLA-26",
-    "series": "KXMAYORLA",
-    "sub": "Nithya Raman",
-    "bid": "0.3700",
-    "ask": "0.3800",
-    "vol": "16567330.69",
-    "close_time": "2027-06-02T14:00:00Z"
-   },
-   {
-    "ticker": "KXMAYORLA-26-KBAS",
-    "event": "KXMAYORLA-26",
-    "series": "KXMAYORLA",
-    "sub": "Karen Bass",
-    "bid": "0.6200",
-    "ask": "0.6300",
-    "vol": "15815813.69",
-    "close_time": "2027-06-02T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-78",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 78%",
-    "bid": "0.0300",
-    "ask": "0.0700",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-76",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 76%",
-    "bid": "0.0800",
-    "ask": "0.1100",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-74",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 74%",
-    "bid": "0.1600",
-    "ask": "0.1900",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-72",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 72%",
-    "bid": "0.2000",
-    "ask": "0.3000",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-70",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 70%",
-    "bid": "0.3600",
-    "ask": "0.4200",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-68",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 68%",
-    "bid": "0.5300",
-    "ask": "0.5700",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-66",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 66%",
-    "bid": "0.6800",
-    "ask": "0.7100",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-64",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 64%",
-    "bid": "0.8000",
-    "ask": "0.8200",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
-   },
-   {
-    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-62",
-    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
-    "series": "KXVOTECOUNTY",
-    "sub": "At least 62%",
-    "bid": "0.8500",
-    "ask": "0.9000",
-    "vol": "0.00",
-    "close_time": "2027-11-03T14:00:00Z"
    },
    {
     "ticker": "KXUSTURNOUT-MAYORLA26-1450000",
@@ -19019,99 +18935,119 @@
     "ask": "0.9900",
     "vol": "1.00",
     "close_time": "2027-11-03T15:00:00Z"
+   },
+   {
+    "ticker": "KXMAYORLA-26-NRAM",
+    "event": "KXMAYORLA-26",
+    "series": "KXMAYORLA",
+    "sub": "Nithya Raman",
+    "bid": "0.3700",
+    "ask": "0.3800",
+    "vol": "16621430.30",
+    "close_time": "2027-06-02T14:00:00Z"
+   },
+   {
+    "ticker": "KXMAYORLA-26-KBAS",
+    "event": "KXMAYORLA-26",
+    "series": "KXMAYORLA",
+    "sub": "Karen Bass",
+    "bid": "0.6200",
+    "ask": "0.6300",
+    "vol": "15907935.92",
+    "close_time": "2027-06-02T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-78",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 78%",
+    "bid": "0.0300",
+    "ask": "0.0400",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-76",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 76%",
+    "bid": "0.0800",
+    "ask": "0.1000",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-74",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 74%",
+    "bid": "0.1300",
+    "ask": "0.1400",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-72",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 72%",
+    "bid": "0.2200",
+    "ask": "0.2300",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-70",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 70%",
+    "bid": "0.3700",
+    "ask": "0.3800",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-68",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 68%",
+    "bid": "0.5400",
+    "ask": "0.5700",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-66",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 66%",
+    "bid": "0.7000",
+    "ask": "0.7300",
+    "vol": "1851.32",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-64",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 64%",
+    "bid": "0.7800",
+    "ask": "0.8200",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
+   },
+   {
+    "ticker": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC-62",
+    "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
+    "series": "KXVOTECOUNTY",
+    "sub": "At least 62%",
+    "bid": "0.8600",
+    "ask": "0.9000",
+    "vol": "0.00",
+    "close_time": "2027-11-03T14:00:00Z"
    }
   ],
   "upcomingSettlements": [
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-U39.4",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "Below 39.4%",
-    "bid": "0.0100",
-    "ask": "0.0200",
-    "vol": "26371.01",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E40.0",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "40.0%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "10718.71",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.9",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.9%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "10942.21",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.8",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.8%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "17795.10",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.7",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.7%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "25964.99",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.6",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.6%",
-    "bid": "0.9700",
-    "ask": "0.9800",
-    "vol": "25909.70",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.5",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.5%",
-    "bid": "0.0100",
-    "ask": "0.0200",
-    "vol": "30074.69",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-E39.4",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "39.4%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "11501.05",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
-   {
-    "ticker": "KXTRUMPAPPROVE-26SEP19-A40.0",
-    "event": "KXTRUMPAPPROVE-26SEP19",
-    "series": "KXTRUMPAPPROVE",
-    "sub": "Above 40.0%",
-    "bid": "0.0000",
-    "ask": "0.0100",
-    "vol": "21868.35",
-    "close_time": "2026-09-19T16:59:00Z"
-   },
    {
     "ticker": "KXTRUTHSOCIAL-26SEP19-T80",
     "event": "KXTRUTHSOCIAL-26SEP19",
@@ -19139,7 +19075,7 @@
     "sub": "80-99",
     "bid": "0.0000",
     "ask": "0.0100",
-    "vol": "30645.04",
+    "vol": "30738.55",
     "close_time": "2026-09-20T13:59:00Z"
    },
    {
@@ -19157,9 +19093,9 @@
     "event": "KXTRUTHSOCIAL-26SEP19",
     "series": "KXTRUTHSOCIAL",
     "sub": "200-219",
-    "bid": "0.0100",
-    "ask": "0.0200",
-    "vol": "17710.97",
+    "bid": "0.0000",
+    "ask": "0.0100",
+    "vol": "19741.56",
     "close_time": "2026-09-20T13:59:00Z"
    },
    {
@@ -19169,8 +19105,98 @@
     "sub": "180-199",
     "bid": "0.0100",
     "ask": "0.0200",
-    "vol": "14740.94",
+    "vol": "16141.50",
     "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXTRUTHSOCIAL-26SEP19-B169",
+    "event": "KXTRUTHSOCIAL-26SEP19",
+    "series": "KXTRUTHSOCIAL",
+    "sub": "160-179",
+    "bid": "0.0100",
+    "ask": "0.0200",
+    "vol": "14813.63",
+    "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXTRUTHSOCIAL-26SEP19-B149",
+    "event": "KXTRUTHSOCIAL-26SEP19",
+    "series": "KXTRUTHSOCIAL",
+    "sub": "140-159",
+    "bid": "0.0200",
+    "ask": "0.0300",
+    "vol": "19236.89",
+    "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXTRUTHSOCIAL-26SEP19-B129",
+    "event": "KXTRUTHSOCIAL-26SEP19",
+    "series": "KXTRUTHSOCIAL",
+    "sub": "120-139",
+    "bid": "0.1700",
+    "ask": "0.2200",
+    "vol": "18483.23",
+    "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXTRUTHSOCIAL-26SEP19-B109",
+    "event": "KXTRUTHSOCIAL-26SEP19",
+    "series": "KXTRUTHSOCIAL",
+    "sub": "100-119",
+    "bid": "0.7700",
+    "ask": "0.8000",
+    "vol": "27693.93",
+    "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXMAMDANIEO-26SEP19-T0",
+    "event": "KXMAMDANIEO-26SEP19",
+    "series": "KXMAMDANIEO",
+    "sub": "Above 0",
+    "bid": "0.0000",
+    "ask": "0.0100",
+    "vol": "11389.11",
+    "close_time": "2026-09-20T13:59:00Z"
+   },
+   {
+    "ticker": "KXTRUMPUFC-26SEP-DJT",
+    "event": "KXTRUMPUFC-26SEP",
+    "series": "KXTRUMPUFC",
+    "sub": "Yes",
+    "bid": "0.0000",
+    "ask": "0.0100",
+    "vol": "359088.43",
+    "close_time": "2026-09-20T14:00:00Z"
+   },
+   {
+    "ticker": "KXTRUMPACT-26SEP13-T9",
+    "event": "KXTRUMPACT-26SEP13",
+    "series": "KXTRUMPACT",
+    "sub": "At least 9",
+    "bid": "0.9900",
+    "ask": "1.0000",
+    "vol": "25406.48",
+    "close_time": "2026-09-20T14:00:00Z"
+   },
+   {
+    "ticker": "KXTRUMPACT-26SEP13-T8",
+    "event": "KXTRUMPACT-26SEP13",
+    "series": "KXTRUMPACT",
+    "sub": "At least 8",
+    "bid": "0.9900",
+    "ask": "1.0000",
+    "vol": "18394.06",
+    "close_time": "2026-09-20T14:00:00Z"
+   },
+   {
+    "ticker": "KXTRUMPACT-26SEP13-T7",
+    "event": "KXTRUMPACT-26SEP13",
+    "series": "KXTRUMPACT",
+    "sub": "At least 7",
+    "bid": "0.9900",
+    "ask": "1.0000",
+    "vol": "13414.44",
+    "close_time": "2026-09-20T14:00:00Z"
    }
   ]
  }

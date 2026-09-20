@@ -1,0 +1,75 @@
+{
+ "title": "Cross-layer snapshots \u2014 Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
+ "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
+ "capturedAt": "2026-09-19T23:59:00Z",
+ "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project \u2014 every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
+ "questions": {
+  "SENATE-CONTROL-2026": {
+   "text": "Democrats control the U.S. Senate after the 2026 midterms",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "CONTROLS-2026",
+   "metaculusHub": "https://www.metaculus.com/midterms-2026/",
+   "metaculusQuestion": "https://www.metaculus.com/questions/34484/us-congress-control-after-2026-midterms/"
+  },
+  "HOUSE-CONTROL-2026": {
+   "text": "Democrats control the U.S. House after the 2026 midterms",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "CONTROLH-2026",
+   "metaculusHub": "https://www.metaculus.com/midterms-2026/",
+   "metaculusQuestion": "https://www.metaculus.com/questions/34484/us-congress-control-after-2026-midterms/"
+  }
+ },
+ "snapshots": [
+  {
+   "id": "2026-09-19-senate",
+   "question": "SENATE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-19T15:59:45.931Z",
+   "layers": {
+    "kalshi": {
+     "ticker": "CONTROLS-2026-D",
+     "bid": 0.59,
+     "ask": 0.6,
+     "last": 0.6,
+     "capturedAt": "2026-09-19T15:59:45.931Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    },
+    "metaculus": 0.517,
+    "ddhq": 0.52,
+    "ebo": {
+     "bid": 0.584,
+     "ask": 0.594,
+     "note": "EBO's Kalshi row (58.4-59.4%); EBO blended headline 59.1%; Polymarket 60.0-61.0; PredictIt 59.0-60.0; Betfair 56.6-58.2"
+    }
+   },
+   "observed": {
+    "metaculus": "Senate D 51.7 / R 48.3 on the hub; 'Senate median even'; '18 of 35 races lean Democrat \u00b7 3 too close to call'",
+    "ddhq": "Senate D 52%",
+    "kalshi": "CONTROLS-2026-D yes_bid 0.59 / yes_ask 0.60 / last 0.60"
+   }
+  },
+  {
+   "id": "2026-09-19-house",
+   "question": "HOUSE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-19T15:59:45.931Z",
+   "layers": {
+    "kalshi": {
+     "ticker": "CONTROLH-2026-D",
+     "bid": 0.89,
+     "ask": 0.9,
+     "last": 0.9,
+     "capturedAt": "2026-09-19T15:59:45.931Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    },
+    "metaculus": 0.888,
+    "ddhq": 0.7
+   },
+   "observed": {
+    "metaculus": "House D 88.8 / R 11.2 on the hub; 'House median D+13'",
+    "ddhq": "House D 70%",
+    "kalshi": "CONTROLH-2026-D yes_bid 0.89 / yes_ask 0.90 / last 0.90"
+   }
+  }
+ ]
+}

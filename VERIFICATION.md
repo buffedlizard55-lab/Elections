@@ -439,3 +439,99 @@ scored after Nov 3): Metaculus's midterms hub and this project's Kalshi capture,
 Senate** (Metaculus D 51.7% vs Kalshi Senate D 59–60¢ — an ~8-point gap). The divergence is exactly
 the kind of signal this project exists to score: after November 3 the calibration tracker will show
 which layer was right. No trade, model, or claim depends on either number today.
+
+## 11 · 2026-09-19 session 6 (branch `arena/01a0bb51-elections`) — re-tests, four-pollster ingestion, collectors, cross-layer scorer, 20 new entries
+
+Everything in this section was fetched during the session through the fetch tool (the sandbox itself has
+no network). Where a fetch failed the failure is recorded; nothing was reconstructed from memory.
+
+### 11a · The 20 new master-list entries (id → URL → what was observed) + 2 re-test admissions
+
+| id | URL (manual review) | Observed on 2026-09-19 |
+|---|---|---|
+| south-carolina-sec | https://scvotes.gov/ | '3,423,166 Current number of registered voters'; releases Sep 15 2026 (NVRD), Sep 1 2026 (SD-15 special primary hand-count audit), Aug 25 2026 ('Hand-Count Audits for 2026 U.S. Senate Special Republican Primary Runoff … all 46 counties') |
+| kansas-sos | https://sos.ks.gov/elections/elections.html | Elections Division statement; tiles VoterView, Advance Voting, Candidates, Election Results (election-results.html), Election Security; '800-262-VOTE' |
+| montana-sos | https://sosmt.gov/elections/ | 'Election Night Reporting' (mtelectionresults.gov); 'Visit Election Results Website'; registration/absentee counts by county; Ballot Measures |
+| nebraska-sos | https://sos.nebraska.gov/elections | 'Primary Election: May 12, 2026 / General Election: November 3, 2026'; 2026_Primary_Canvass_Book.pdf; general candidate filing list 9.11.26; Initiative Measures 440/441/442, LR19CA. `/elections/election-results` → site 404 |
+| new-mexico-sos | https://www.sos.nm.gov/voting-and-elections/ | '2026 General Election: Tuesday, November 3, 2026'; NMVOTE portal; results host electionresults.sos.state.nm.us; stale sidebar 'Results will become available after 7 PM on Election Day, November 2, 2021' (#56) |
+| wyoming-sos | https://sos.wyo.gov/Elections/Default.aspx | 'Primary Election: August 18, 2026 / General Election: November 3, 2026'; general candidates PDF + CSV; 'Primary Election - Official Results'; ballot propositions |
+| colorado-sos | https://www.coloradosos.gov/pubs/elections/main.html | Results & Data page: searchable historical database (historicalelectiondata.coloradosos.gov), results archive, registration statistics, TRACER |
+| oklahoma-seb | https://oklahoma.gov/elections.html | 'General Election Tuesday, November 3, 2026 Polls Open 7 a.m. - 7 p.m.'; registration deadline Oct 9 2026; absentee deadline Oct 19 2026; 'Last Modified on Sep 17, 2026'. `/elections/election-results.html` → Apache Sling 404 |
+| tennessee-sos | https://sos.tn.gov/elections | '2026 Congressional Redistricting' banner; 'Candidate Lists' (2026-candidate-lists); poll-worker release 'Ahead of November 3 Election' |
+| hawaii-oe | https://elections.hawaii.gov/election-results/ | 'Primary Election August 8, 2026 — Certified Reports (PDF)' + 'Certified Text Files' (summary.txt, media.txt); SD-20 (R) and HD-43 (R) recount reports; 2024 General 'Last Updated: November 27, 2024' |
+| washington-sos-results | https://results.votewa.gov/results/public/washington | '2026 Primary — August 4, 2026', April 28 and February 10 2026 specials (reached via redirect from results.vote.wa.gov/results/current/; sos.wa.gov data-and-maps path → 404) |
+| north-dakota-sos-results | https://results.sos.nd.gov/ | 'Official 2024 General Election Results — Results last updated: 4/21/2026'; turnout 62.61% (371,975 / 594,140); 385/385 precincts; Exports page |
+| delaware-doe | https://elections.delaware.gov/ | 'Primary Election Results — Official Results' (results/enr/PR2026.html); early voting 'October 22nd – November 1st'; 'General Election November 3, 2026' |
+| rhode-island-boe | https://elections.ri.gov/elections/previous-election-results | 'September 9, 2026 Statewide Primary Results'; Prim26_Summary.pdf, Prim26_PrecinctSummary.pdf; 2024 General summary PDF + XLSX |
+| vermont-election-archive | https://electionarchive.vermont.gov/ | 'all from official source documents'; 2024: Sanders 63%, Balint 62%, Harris/Walz 64%; '11,319 Contests', '5,209 Candidates' |
+| south-dakota-sos-history | https://sdsos.gov/elections-voting/election-resources/election-history/default.aspx | 2024…2014 election information pages; 'Official Election Returns and Registration Figures'; 1889-1970 summary; ballot questions 1890-2024 |
+| data-for-progress (needs-review) | https://www.dataforprogress.org/ | Methodology page: 'primarily using SMS text-to-web and web panels'; voter-file random sampling; weighting to TargetSmart likely-voter composition; 2026 briefs Apr 29 / May 20 / Jun 3 |
+| civiqs (needs-review) | https://civiqs.com/ | Tracked RV series ending Sep 17–19 2026 (Trump approval, National Popular Vote, Right Track/Wrong Track, party favorability); /results/house_generic_ballot resolved to the homepage — no generic-ballot page is cited |
+| election-betting-odds (verified-claim) | https://electionbettingodds.com/ | 'Last updated: 7:42PM EDT on Sep 19, 2026'; Senate Control 2026 '$14,598,871 bet so far'; DEM rows Kalshi 58.4-59.4%, Polymarket 60.0-61.0%, PredictIt 59.0-60.0%, Betfair 56.6-58.2%, blend 59.1%; 2028 presidency '$751,622,162 bet so far' |
+| openelections (verified-claim) | https://openelections.net/ | 'Certified election results. For everyone.'; per-state selector; GitHub-activity widget showed 'Unable to Load GitHub Activity' at fetch time |
+| courtlistener (re-test → admitted) | https://www.courtlistener.com/ | 'Non-Profit Free Legal Search Engine and Alert System'; '472 jurisdictions'; '8,300,000 precedential opinions'; '8,097 case-law additions in the last ten days'. api.courtlistener.com not reachable from this fetcher |
+| franklin-marshall-poll (deferred → admitted) | https://www.fandmpoll.org/ | August 2026 release: Aug 17–23, n=501 PA RV (213 D / 208 R / 80 I), Aristotle sample, mail-notify + phone/online, ±5.5; Shapiro 50 / Garrity 25; House preference D 48 / R 36. June (n=546: 50/28) and March (n=834: 48/28) releases fetched |
+
+Registry: 125 → **147**. Category tally re-counted by script and asserted by lint. No id or URL duplicates
+(lint). Candidates fetched and NOT admitted this session: none beyond the two standing declines in 11b —
+every candidate the session reached carried current-cycle content.
+
+### 11b · Re-tests (all fetched 2026-09-19)
+
+| Host | Result | Consequence |
+|---|---|---|
+| surveypoll.com (SurveyUSA) | fetch FAILED (4th consecutive) | stays excluded (#47) |
+| thehillx.com (HarrisX) | fetch FAILED | stays excluded (#47) |
+| courtlistener.com | **fetches** | admitted (11a); #47 partially resolved |
+| election.princeton.edu | fetches; newest posts still Nov 5 2024 | #53 criteria not met — still declined |
+| split-ticket.org | fetches; newest post still Oct 20 2025; Aug 19 2025 partnership note | #53 criteria not met — still declined |
+| elections.wi.gov/elections-voting | still 'Access denied' | #40 stands (root fetches) |
+| nvsos.gov/sos-elections | still 404 + CAPTCHA; /sos/elections fetches | #41 stands |
+| elections.cdn.sos.ca.gov | still S3 AccessDenied | #42 stands |
+| sec.state.ma.us/divisions/elections | root still 403; elections-and-voting.htm fetches ('2026 State Election Candidates', 'We publish election results here after they're certified. We don't publish results on Election Night.') | #51 stands |
+
+### 11c · Collector design and the endpoint evidence
+
+- **Metaculus** — `https://www.metaculus.com/api2/questions/?limit=2&order_by=-activity` → 'Permission Error: The
+  API is only available to authenticated users.' The hub `https://www.metaculus.com/midterms-2026/` is server-rendered:
+  House D 88.8 / R 11.2; Senate D 51.7 / R 48.3; Congressional Control (question 34484) DH/DS 50.7, DH/RS 38.1,
+  RH/RS 10.2, RH/DS 1.0; 'House median D+13'; 'Senate median even'; '18 of 35 races lean Democrat · 3 too close to
+  call'; Key Drivers 'Data from Sep 19, 2026'. `scripts/collect-metaculus.mjs` parses the hub (parser reproduces every
+  number above from a transcribed fixture in `test/fixtures/`), checks D+R and quadrant sums and the identity
+  senateD = DH/DS + RH/DS (50.7 + 1.0 = 51.7 ✓), and only touches api2 when `METACULUS_API_TOKEN` is set (#54).
+- **State Navigate** — `https://data.statenavigate.com/` and `/index.html` → HTTP 500; `/api/`, `/docs/` → 404;
+  `projects.statenavigate.com/downloads/data.html` → login, 'Required Tier: Tier 3'. Free pages parsed instead:
+  national ('2,306 seats forecasted, 124 D pickups, 11 R pickups, 14 states with current 2026 model, 27 chambers,
+  143 close seats within 5 pts, 135 projected flips'; launched states AK WI MN MI NY IA PA NJ UT CO WV VA NC SC GA TX
+  FL) and per-chamber pages (VA lower: 'Democrats favored to win 60 seats (+9)', 'Republicans 40 (−9)', D super 12%,
+  D majority 82%, tie <1%, R majority 3–4%; title '2025 Virginia State Legislative Forecast'). The collector probes the
+  API host every run and stores the answer (#55).
+- **R13 renderings** — 270toWin homepage: Kalshi panel '57% / 41% … as of Sep. 19, 2026 at 20:29 UTC … May not
+  total 100%' (2028 presidency), KPOW '+1.90 D as of 9/17/26'. DDHQ Votes: House D 70%, Senate D 52%, House & Senate
+  D 49 / R 27. EBO: see 11a. `scripts/crosscheck-renderings.mjs` compares EBO's Kalshi row with the captured
+  CONTROLS-2026-D midpoint (0.589 vs 0.595 → within the 3-point tolerance) and stores DDHQ/270toWin as context.
+
+### 11d · Poll-layer ingestion (numbers transcribed into `data/polls/poll-layer-2026.json`, #49 labels)
+
+| row id | primary source fetched | numbers | methodFamily |
+|---|---|---|---|
+| umass-2026-08-house-generic | umass.edu/poll/about/reports/2026-09-national-public-opinion-poll-0 (+ news release + toplines PDF) | Aug 21–26, n=1,000, ±3.5; House generic D 42 / R 34 / Ind 10 / DK 14; Senate generic (36 states) D 40 / R 38 / Ind 10 / DK 12; enthusiasm D 67 / R 59; Congress approval 22/68 | online-nonprobability-matched (YouGov, ACS frame) |
+| fox-2026-09-generic | static.foxnews.com/…/fox_september-11-14-2026_national_topline_september-16-release-1.pdf | Sep 11–14, 1,211 RV, ±3; Q14 D 51 / R 44 / DK 4; Trump 39/61; trend Jul 53/46, Apr 52/47, Jan 52/46 | voter-file-hybrid (96 landline + 821 cell + 294 text-to-web) |
+| npi-2026-08-az-governor | noblepredictiveinsights.com/post/katie-hobbs-leads-andy-biggs-in-the-grand-canyon-state (+ down-ballot post) | Aug 10–13; 1,040 RV (±3.04) / 923 LV (±3.23); LV Hobbs 48 / Biggs 35 / other 4 / undecided 12; RV trend Hobbs 41→46, Biggs 37→32 | online-optin-weighted |
+| fm-2026-08-pa-governor | fandmpoll.org/franklin-marshall-college-poll-release-august-2026/ | Aug 17–23, n=501 RV, ±5.5; Shapiro 50 / Garrity 25 (June 50/28, March 48/28) | voter-file-mail-recruit |
+| fm-2026-08-pa-house-preference | same release | PA U.S. House preference D 48 / R 36 | voter-file-mail-recruit |
+| muhlenberg-ciopo | poll library fetched | **no 2026 horse-race release exists on the site** → `pendingSources`, no row | — |
+
+Side-by-side after `npm run pipeline`: AZ governor poll-implied D 0.947 vs Kalshi GOVPARTYAZ-26-D 0.875 (gap −7.2 pts,
+review); PA governor poll-implied 0.996 vs GOVPARTYPA-26-D 0.9705 (−2.6 pts). Both rows are labelled with the
+logistic mapping caveat (#12); the k=4.5 mapping saturates on a 25-point lead and is not a probability claim.
+
+### 11e · Verification evidence after the batch
+
+`npm run lint` → `checked 64 data JSON files, 147 sources, 4 outcomes, 5 markets, 57 irregularities (md rows 57),
+20 poll entries — lint: all verified-data provenance checks pass`. `npm test` → **82 tests, 81 pass, 1 skipped**
+(network live-capture test), including the new `test/crosslayer.test.mjs` (8 tests: scorer, both collector parsers,
+R13 parsers, seed-snapshot consistency with the captured universe) and three new assertions in
+`test/site-sources.test.mjs` (session-6 ids/statuses, #49 labels on the five rows, the Cross-layer section rendering
+its 7.8-point Senate spread). `npm run pipeline` regenerated the bundle and the headless render check passed all
+12 sections (Cross-layer added). New irregularities: #54–#57 (+ #58 from the first live collector run on 2026-09-20, see IRREGULARITIES.md).

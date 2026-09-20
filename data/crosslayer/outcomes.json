@@ -1,0 +1,25 @@
+{
+ "title": "Official outcomes for cross-layer scoring \u2014 EMPTY until canvasses are certified",
+ "capturedFrom": "to be filled from the official canvass sources listed in officialSources (never from a news call, never from a market settlement)",
+ "capturedAt": "2026-09-19T23:59:00Z",
+ "method": "Key = question id in snapshots.json. Each record needs y (1 = Democrats control, 0 = otherwise), certifiedOn, and sources[] with an official url; src/crosslayer.js refuses to score a record without an official url. Senate/House control is derived from the 35 Senate and 435 House certified results \u2014 record the per-state certification links used. Kalshi's own settlement is recorded separately in data/kalshi/tracker/settlements.json and is a cross-check, not the ground truth.",
+ "officialSources": [
+  {
+   "name": "National Association of Secretaries of State \u2014 canvass/certification links per state (master id nass)",
+   "url": "https://www.nass.org/"
+  },
+  {
+   "name": "U.S. House Clerk \u2014 official election statistics (master id clerk-house)",
+   "url": "https://clerk.house.gov/"
+  },
+  {
+   "name": "U.S. Senate (master id senate \u2014 url as verified in master.json; use the per-state SoS certification for the result itself)",
+   "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/"
+  },
+  {
+   "name": "FEC Federal Elections publication (master id fec-results)",
+   "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/"
+  }
+ ],
+ "outcomes": {}
+}

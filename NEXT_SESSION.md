@@ -1,4 +1,51 @@
-# NEXT_SESSION — handoff after the session-5 merge (`arena/01a0bb28-elections` → main)
+# NEXT_SESSION — handoff after the session-6 merge (`arena/01a0bb51-elections` → main)
+
+Session 6 (2026-09-19, branch `arena/01a0bb51-elections`) executed the requested list end to end:
+**P0 machinery** (cross-layer scorer + empty official-outcome record, scored the day a canvass lands),
+**first poll-layer rows from the four new pollsters with #49 method labels** (5 rows; Muhlenberg has
+no 2026 horse-race release — recorded, not fabricated), **collectors** for Metaculus (hub HTML; api2
+is auth-walled, #54) and State Navigate (free forecast pages; API host 500 + Tier-3 paywall, #55),
+**all 8 re-tests** (CourtListener recovered → admitted; SurveyUSA/HarrisX still fail; PEC/Split Ticket
+still no current-cycle content; WI/NV/CA/MA blocks unchanged), **standing monitors** (R13
+`scripts/crosscheck-renderings.mjs`; Franklin & Marshall admitted after fetching fandmpoll.org's own
+release), and **20 new master entries** (registry 125 → **147**; irregularities 53 → **58**; suite
+71 → **82 tests**; site gained a **Cross-layer** section). Evidence: `VERIFICATION.md` §11.
+
+## What to do first in session 7
+
+1. **Watch the first networked run** of the three new collectors (daily workflow, continue-on-error).
+   Expect `data/crosslayer/metaculus-daily.json`, `data/statenavigate/{forecast-daily,api-probe}.json`
+   and `data/kalshi/tracker/rendering-crosscheck.json` to appear. If a row says `parse:'failed'` /
+   `extract:'failed'`, fix the regex against the stored `sample` — never type the number in.
+2. **Extend the scoreboard to the 35 Senate races**: pair Kalshi `SENATE{ST}-26-D` with the Metaculus
+   race pages (the hub says "18 of 35 races lean Democrat · 3 too close to call") so the Nov 3 scoring
+   is seat-by-seat, not just chamber control. Keep the look-ahead guard.
+3. **After Nov 3 (P0)**: fill `data/crosslayer/outcomes.json` from the per-state certifications
+   (master ids for every 2026 Senate state now exist — SC, KS, MT, NE, NM, WY, CO, OK, TN, DE, RI, SD
+   were added this session on top of the earlier ones), then `npm run pipeline` publishes per-layer
+   Brier/log-loss automatically.
+4. **R12 leftovers**: Saint Anselm / CIRCLE / CES rows; add `methodFamily` to the 15 pre-session-6 rows.
+5. **Re-tests**: SurveyUSA (5th), HarrisX, api.courtlistener.com, data.statenavigate.com (the collector
+   probes it daily), Muhlenberg poll library for a 2026 release, PEC / Split Ticket per #53.
+6. **R9**: Polymarket / PredictIt collectors so EBO's other rows can be cross-checked the same way.
+
+## Session-6 gotchas (add to the list below)
+
+- **F&M Poll lives at fandmpoll.org, not fandm.edu.** Nebraska `/elections/election-results`,
+  Oklahoma `/elections/election-results.html` and Washington's SoS data-and-maps path all 404 — the
+  verified hubs are `/elections`, `/elections/elections-results/` and `results.votewa.gov` (#56).
+- New Mexico's elections page still shows a 2021 election-night sidebar beside its 2026 date (#56):
+  take results links from the live results host only.
+- `test/site-sources.test.mjs` now asserts **115** entries dated 2026-09-19 and `>= 147` sources;
+  `test/outcomes.test.mjs` accepts `needs-review` (used by Data for Progress and Civiqs).
+- The render check now lists 12 sections (`crosslayer` added); the Cross-layer view degrades to
+  hand-verified text when the collector files are absent, so a missing file never breaks the site.
+- `src/crosslayer.js` refuses to score any outcome record without an official `url` and any snapshot
+  captured on/after `electionDate` — do not relax either guard.
+
+---
+
+# (Preserved) handoff after the session-5 merge (`arena/01a0bb28-elections` → main)
 
 Session 5 (2026-09-19, branch `arena/01a0bb28-elections`) executed the requested "search 20 new
 entries, verify no hallucinations before adding": **22 candidates were fetched and verified, 20 were
@@ -106,7 +153,7 @@ Sources view, R11–R13) are all preserved beneath this layer.
 - Sources toolbar filters are per-section and reset on navigation (by design, no persisted state).
   If a deep link such as `#/sources?cat=Pollsters…` is wanted, add it to the hash router, not to
   `wireSources`.
-- Test count references in README (`70 tests`) must match `npm test` output after every suite change.
+- Test count references in README (now `82 tests`) must match `npm test` output after every suite change.
 
 ## P2 — open roadmap items (see ROADMAP.md for all 13)
 

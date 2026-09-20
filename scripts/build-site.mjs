@@ -9,6 +9,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseCsv } from '../src/kalshi-api.js';
 import { compareRacesToMarkets, compareRatingsToMarkets } from '../src/poll-layer.js';
+import { scoreSnapshots } from '../src/crosslayer.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
@@ -52,6 +53,25 @@ const trackerIndex = readOptional('data/kalshi/tracker/index.json');
 const senate2024 = readOptional('data/kalshi/historical/senate-2024.json');
 const crosscheck = readOptional('data/kalshi/tracker/collector-crosscheck.json');
 const runHistory = readOptional('data/kalshi/tracker/history.json');
+// Cross-layer scoreboard (R14): pending until data/crosslayer/outcomes.json carries official canvasses.
+const crossSnapshots = readOptional('data/crosslayer/snapshots.json');
+const crossOutcomes = readOptional('data/crosslayer/outcomes.json');
+const metaculusDaily = readOptional('data/crosslayer/metaculus-daily.json');
+const stateNavigateDaily = readOptional('data/statenavigate/forecast-daily.json');
+const renderingCrosscheck = readOptional('data/kalshi/tracker/rendering-crosscheck.json');
+const crossLayer = crossSnapshots ? {
+  capturedFrom: crossSnapshots.capturedFrom,
+  capturedAt: crossSnapshots.capturedAt,
+  method: crossSnapshots.method,
+  questions: crossSnapshots.questions,
+  outcomesMethod: crossOutcomes ? crossOutcomes.method : null,
+  officialSources: crossOutcomes ? crossOutcomes.officialSources : [],
+  scored: scoreSnapshots(crossSnapshots.snapshots, (crossOutcomes && crossOutcomes.outcomes) || {}, { asOf: new Date().toISOString().slice(0, 10) }),
+  snapshots: crossSnapshots.snapshots,
+  metaculusRows: metaculusDaily ? metaculusDaily.rows.slice(-30) : [],
+  stateNavigate: stateNavigateDaily ? { capturedFrom: stateNavigateDaily.capturedFrom, latest: stateNavigateDaily.rows[stateNavigateDaily.rows.length - 1] || null, days: stateNavigateDaily.rows.length } : null,
+  renderings: renderingCrosscheck ? { method: renderingCrosscheck.method, rows: renderingCrosscheck.rows.slice(-14) } : null,
+} : null;
 const testCount = readdirSync(join(ROOT, 'test')).filter((f) => f.endsWith('.test.mjs')).reduce((n, f) => n + (readFileSync(join(ROOT, 'test', f), 'utf8').match(/^test\(/gm) || []).length, 0);
 
 // Daily tracker history for the site: the implied-probability path of the most-traded open markets
@@ -187,6 +207,7 @@ const bundle = {
   roadmap,
   pollSeries2024: pollSeries,
   pollLayer,
+  crossLayer,
   universe: universeSite,
   seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
   // per-market lead scores stay in data/kalshi/tracker/calibration.json; the site gets the summary plus the scored markets only

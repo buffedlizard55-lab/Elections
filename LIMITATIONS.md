@@ -96,9 +96,34 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
     (`healthyelections.org`, `surveypoll.com`, `thehillx.com`, `courtlistener.com`) and three official paths returned
     access-denied / 404 / S3 AccessDenied (WI `/elections-voting`, NV `/sos-elections`, CA
     `elections.cdn.sos.ca.gov`). Those candidates were **excluded or annotated**, never reconstructed from memory
-    (irregularities #40–#42, #45, #47). SurveyUSA, HarrisX and the Franklin & Marshall College Poll therefore remain
-    outside the registry until they can be fetched (R11).
+    (irregularities #40–#42, #45, #47). SurveyUSA and HarrisX remain outside the registry (re-tested and still unreachable in session 6);
+    CourtListener and the Franklin & Marshall College Poll were fetched in session 6 and admitted (R11 done).
 27. **Third-party market renderings are corroboration only.** 270toWin and DDHQ Votes both republish Kalshi prices; the
     one comparison run so far agreed with this project's captures within 1¢ but was manual, single-point, and the
     aggregator's own disclaimer says its figures "may not total 100%" (irregularity #46). No model, backtest or contest
-    fill uses a rendered percentage — only captured `yes_bid`/`yes_ask`. Automating this check is R13.
+    fill uses a rendered percentage — only captured `yes_bid`/`yes_ask`. Session 6 automated it (`scripts/crosscheck-renderings.mjs`, R13), but the first live run on the Actions
+    runner has not happened yet — until it does the file `data/kalshi/tracker/rendering-crosscheck.json` does not exist.
+
+## Cross-layer scoreboard, third-layer collectors, session-6 registry (2026-09-19)
+
+28. **Nothing is scored yet.** `data/crosslayer/outcomes.json` is empty by design; every snapshot is `pending` until an
+    official canvass with a source url is recorded after November 3. The Senate spread (Kalshi 59–60¢ vs Metaculus
+    51.7% vs DDHQ 52%) is an observation (#57), not a finding about who is right.
+29. **Two questions only.** The scoreboard covers Senate and House control. Metaculus's '18 of 35 races lean Democrat'
+    and Kalshi's 35 per-state Senate markets are not yet paired seat by seat (R14 remaining work).
+30. **Metaculus is parsed from HTML.** api2 is authentication-walled (#54). If the hub markup changes the daily row
+    reads `parse:'failed'` and the section shows the last good capture; no number is estimated.
+31. **State Navigate's API is not used.** `data.statenavigate.com` answered HTTP 500 and the data downloads are paid
+    (Tier 3, #55); the collector reads the free forecast pages, whose per-state titles still say "2025". It probes the
+    API host each run so a recovery is noticed automatically.
+32. **Collectors are proven offline only.** `collect-metaculus.mjs`, `collect-statenavigate.mjs` and
+    `crosscheck-renderings.mjs` pass fixture tests transcribed from the pages fetched on 2026-09-19, but their first
+    networked run happens in the daily workflow after this PR merges (continue-on-error, so a failure cannot block the
+    Kalshi loop). Until then `data/crosslayer/metaculus-daily.json`, `data/statenavigate/` and the rendering file are absent.
+33. **Two `needs-review` pollsters.** Data for Progress (self-described progressive) and Civiqs (Daily Kos-affiliated)
+    were admitted with `needs-review` because each publishes a methodology page; their rows, if ever ingested, must carry
+    the sponsor label and are not averaged with nonpartisan pollsters.
+34. **Method labels exist only on the new rows.** The five session-6 poll rows carry #49 `methodFamily`; the fifteen
+    earlier rows do not yet, so any cross-row aggregate still mixes designs (R12 remaining work).
+35. **Muhlenberg has no 2026 horse-race release** on its own site as of 2026-09-19 — recorded under `pendingSources`
+    rather than filled from syndication.
