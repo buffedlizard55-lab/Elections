@@ -1,0 +1,260 @@
+{
+ "title": "R12 cross-check — CIRCLE YESI 2026 top-10 lists vs Kalshi Senate-26/Gov-26/House-volume ranking",
+ "capturedAt": "2026-09-20T05:05:36.072Z",
+ "source": {
+  "circuit": "circle.tufts.edu/yesi2026 (fetched 2026-09-20, page updated 2026-07-24)",
+  "kalshi": "data/kalshi/universe/latest.json (Kalshi Midterms hub universe, 4,085 events)"
+ },
+ "method": "Event volume = sum of cumulative market 'volume' across the event's markets (USD notional). Senate = SENATE<ST>-26 events (FLS=2026 special seat mapped to FL; the 2028 class SENATE*-28 excluded). Governor = GOVPARTY<ST>-26. House: Kalshi prices state-level seat-COUNT events (KXHOUSEWINSTATE-<ST>D), not individual districts — so the house comparison is state-level only (districts aggregated to their states), an acknowledged basis mismatch.",
+ "senate": {
+  "kalshiVolumeTop10": [
+   "TX",
+   "ME",
+   "MI",
+   "OHS",
+   "IA",
+   "NC",
+   "SC",
+   "NE",
+   "GA",
+   "KS"
+  ],
+  "volume": {
+   "SENATETX-26": {
+    "volume": 13361132,
+    "volume_24h": 130704
+   },
+   "SENATEME-26": {
+    "volume": 5591206,
+    "volume_24h": 23691
+   },
+   "SENATEMI-26": {
+    "volume": 3743177,
+    "volume_24h": 27594
+   },
+   "SENATEOHS-26": {
+    "volume": 3523038,
+    "volume_24h": 35617
+   },
+   "SENATEIA-26": {
+    "volume": 2925606,
+    "volume_24h": 30140
+   },
+   "SENATENC-26": {
+    "volume": 2101580,
+    "volume_24h": 5637
+   },
+   "SENATESC-26": {
+    "volume": 1368336,
+    "volume_24h": 9273
+   },
+   "SENATENE-26": {
+    "volume": 1349415,
+    "volume_24h": 33598
+   },
+   "SENATEGA-26": {
+    "volume": 1330402,
+    "volume_24h": 11819
+   },
+   "SENATEKS-26": {
+    "volume": 1185886,
+    "volume_24h": 15643
+   },
+   "SENATEAK-26": {
+    "volume": 1085487,
+    "volume_24h": 27976
+   },
+   "SENATENH-26": {
+    "volume": 904576,
+    "volume_24h": 4378
+   }
+  },
+  "yesi2026": [
+   "ME",
+   "MI",
+   "OH",
+   "AK",
+   "GA",
+   "NH",
+   "NC",
+   "IA",
+   "MN",
+   "TX"
+  ],
+  "overlap": [
+   [
+    "GA",
+    "IA",
+    "ME",
+    "MI",
+    "NC",
+    "TX"
+   ],
+   6
+  ]
+ },
+ "governor": {
+  "kalshiVolumeTop10": [
+   "FL",
+   "OH",
+   "CA",
+   "NY",
+   "WI",
+   "TX",
+   "NV",
+   "GA",
+   "IA",
+   "AZ"
+  ],
+  "volume": {
+   "GOVPARTYFL-26": {
+    "volume": 1708763,
+    "volume_24h": 28168
+   },
+   "GOVPARTYOH-26": {
+    "volume": 1660457,
+    "volume_24h": 6027
+   },
+   "GOVPARTYCA-26": {
+    "volume": 1549550,
+    "volume_24h": 2632
+   },
+   "GOVPARTYNY-26": {
+    "volume": 1448281,
+    "volume_24h": 1675
+   },
+   "GOVPARTYWI-26": {
+    "volume": 1203722,
+    "volume_24h": 10439
+   },
+   "GOVPARTYTX-26": {
+    "volume": 1018411,
+    "volume_24h": 51742
+   },
+   "GOVPARTYNV-26": {
+    "volume": 775781,
+    "volume_24h": 5381
+   },
+   "GOVPARTYGA-26": {
+    "volume": 761386,
+    "volume_24h": 2978
+   },
+   "GOVPARTYIA-26": {
+    "volume": 699515,
+    "volume_24h": 10990
+   },
+   "GOVPARTYAZ-26": {
+    "volume": 591596,
+    "volume_24h": 422
+   },
+   "GOVPARTYPA-26": {
+    "volume": 502847,
+    "volume_24h": 161
+   },
+   "GOVPARTYMN-26": {
+    "volume": 377470,
+    "volume_24h": 1489
+   }
+  },
+  "yesi2026": [
+   "WI",
+   "GA",
+   "IA",
+   "MI",
+   "NV",
+   "AZ",
+   "OH",
+   "KS",
+   "ME",
+   "OR"
+  ],
+  "overlap": [
+   [
+    "AZ",
+    "GA",
+    "IA",
+    "NV",
+    "OH",
+    "WI"
+   ],
+   6
+  ]
+ },
+ "house": {
+  "kalshiVolumeTop10States": [
+   "MI",
+   "PA",
+   "SC",
+   "NY",
+   "AZ",
+   "NC",
+   "OH",
+   "AL",
+   "LA",
+   "UT"
+  ],
+  "volumeByStateTop10": {
+   "MI": 63138,
+   "PA": 56998,
+   "SC": 40342,
+   "NY": 31227,
+   "AZ": 23688,
+   "NC": 23570,
+   "OH": 14284,
+   "AL": 11172,
+   "LA": 7680,
+   "UT": 7193
+  },
+  "yesi2026Districts": [
+   "MI-7",
+   "NJ-7",
+   "VA-2",
+   "IA-1",
+   "CO-8",
+   "WI-3",
+   "PA-10",
+   "PA-7",
+   "AZ-1",
+   "AZ-6"
+  ],
+  "yesi2026StatesWeighted": {
+   "PA": [
+    "PA-10",
+    "PA-7"
+   ],
+   "AZ": [
+    "AZ-1",
+    "AZ-6"
+   ],
+   "MI": [
+    "MI-7"
+   ],
+   "NJ": [
+    "NJ-7"
+   ],
+   "VA": [
+    "VA-2"
+   ],
+   "IA": [
+    "IA-1"
+   ],
+   "CO": [
+    "CO-8"
+   ],
+   "WI": [
+    "WI-3"
+   ]
+  },
+  "overlap_states": [
+   [
+    "AZ",
+    "MI",
+    "PA"
+   ],
+   3
+  ],
+  "note": "Basis mismatch documented: Kalshi events are per-state seat counts; YESI lists individual districts."
+ },
+ "read": "Volume measures where bettors actually transact, not where the CIRCLE model thinks the race is close. A state absent from the Kalshi top-10 but present in YESI (or vice versa) is exactly the kind of divergence the backtest should watch: if the volume-ranked state wins more often, the market is better calibrated on attention; if the YESI-ranked state wins, the model's attention is better calibrated on outcomes. Scored at Nov 3 (outcomes.json).",
+ "verifiedOn": "2026-09-20"
+}

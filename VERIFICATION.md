@@ -641,3 +641,156 @@ all 12 sections. `python scripts/sync_site_data.py` → synced=12 missing=0. Cod
 retry/profile logic against a stand-in Chrome that always returns an interstitial (3 attempts, budgets 20/35/50 s) and
 against one that returns a page (1 attempt); `probe-hosts.mjs` end-to-end over all 30 targets with the stand-in binary
 (no crash; local outputs deleted, never committed). New irregularities: #59–#63.
+
+## 13 · Session 8 (2026-09-20, branch `arena/01a0bfa5-elections`)
+
+Baseline at session start: `npm test` = 88 tests (87 pass, 1 skip), `npm run lint` green, master.json 169
+entries, poll layer 15 stateRaces / 4 generic / 1 aggregator / 3 pending.
+
+### 13a · Poll-layer ingestion (P0 after Nov 3 — first rows from the four new pollsters, #49 labels)
+
+Eight rows were ingested into `data/polls/poll-layer-2026.json` (stateRaces 15 → 23). Every number was
+transcribed from a release fetched in-session on 2026-09-20; every row carries `methodFamily` (or an explicit
+`null` with the reason) and its Kalshi mapping was checked against the 2026-09-20T05:05Z universe capture
+(4,085 events).
+
+| Row id | Source (fetched 2026-09-20) | Transcribed | Market mapping | Label |
+|---|---|---|---|---|
+| `hpu-2026-08-nc-senate` | HPU Poll 126 release (highpoint.edu, Aug 21 2026), fielded by YouGov Aug 3–12 | Cooper (D) 50 / Whatley (R) 45 among 660 likely voters (819 NC RVs matched to 800); credibility interval ±5.2 (DE 1.86), not a sampling MoE | SENATENC-26 / SENATENC-26-D | `online-nonprobability-matched` |
+| `hpu-2026-08-nc-house-generic` | same release | NC U.S. House generic (LV) D 47 / R 47 | event KXHOUSEWINSTATE-NCD; **`kalshiDemTicker: null` by design** — no D/R delegation-control event exists; the seat-count event is not a race question (`marketBasis` says so) | `online-nonprobability-matched` |
+| `uh-hobby-2026-01-tx-governor` | UH Hobby 'Texas Primaries 2026' (uh.edu/hobby/primary2026), online Jan 20–31 2026 (EN+ES), YouGov-matched | Abbott (R) 49 / Hinojosa (D) 42, n = 1,502 Nov-general LV, ±2.53% | GOVPARTYTX-26 / GOVPARTYTX-26-D | `online-nonprobability-matched` |
+| `uh-hobby-2026-01-tx-senate` | same report | SIX candidate-matched general scenarios (Paxton/Cornyn/Hunt × Crockett/Talarico + Libertarian Brown): **median D 43 / R 45.5** (ranges D 42–44 / R 44–46); not a party question — the reduction to a median is stated in `methodNote` | SENATETX-26 / SENATETX-26-D | `online-nonprobability-matched` |
+| `saint-anselm-2026-06-nh-senate` | Saint Anselm College SASC June 24–25, 2026 poll PDF | Pappas (D) 47 / Sununu (R) 41 (hypothetical general; 12 other/undecided); alternate scenario Pappas 48 / Brown 36; n = 1,614 RVs, MoE ±2.4, weighted age/gender/geography/education (not party); primary context: D Pappas 62 / Manzur 20, R Sununu 59 / Brown 21 | SENATENH-26 / SENATENH-26-D; `marketGap`: market ≈0.83 vs poll D +6 — recorded as a published gap, not a correction | **new family** `random-cellphone-rv-panel` (random cells from the RV frame, live interviews) |
+| `stetson-2026-04-fl-governor` | Stetson Today (www2.stetson.edu) April 24, 2026 — CPOR Spring 2026 Survey | Donalds (R) 47 / Jolly (D) 40 (~7% undecided); alternate Donalds 46 / Demings 42; 848 likely FL voters, Mar 25–Apr 13 2026, ±4.1; Qualtrics online non-probability panel, modeled-turnout LV screen, weighted race/ethnicity/education/gender/region (methodology paragraph transcribed verbatim into `methodNote`) | GOVPARTYFL-26 / GOVPARTYFL-26-D | `online-nonprobability-matched` |
+| `stetson-2026-04-fl-senate` | same release | Moody (R) 49 / Vindman (D) 42; alternate Moody 51 / Nixon 38 | **SENATEFLS-26** / SENATEFLS-26-D — the 2026 FL Senate seat is the short-term seat (verified in the universe; SENATEFL-28 is the 2028 class) | `online-nonprobability-matched` |
+| `ppp-2026-07-nc-senate` | Public Policy Polling release (publicpolicypolling.com, July 13, 2026) | Cooper (D) 48 / Whatley (R) 44; n = 759 NC voters, July 10–11, ±3.6; same release: NC Supreme Court Earls 44 / Stevens 42, legislative generic D 46 / R 44 (context only) | SENATENC-26 / SENATENC-26-D | **`methodFamily: null`** — the mode/weighting paragraph lives in the linked full-methodology PDF and was not transcribed verbatim; #49 discipline says null, not a guess |
+
+Also recorded: CIRCLE's 2026 Youth Poll (ages 18–29, n = 5,549, fielded Jan 26–Feb 12 2026; 57% partisan /
+43% no affiliation; 62% wrong direction; 89% willing to vote) as a second `aggregatorReadings` entry with
+`D: null / R: null` — a subpopulation, deliberately not comparable to Kalshi likely-voter prices; and CIRCLE
+YESI 2026's top-10 battleground lists (senate/governor/house, page updated 2026-07-24) as a new
+`independentPriors` entry.
+
+Deliberately NOT ingested (evidence-only, in `pendingSources`, 3 → 6):
+
+- `fhsu-2025-fall-kansas-speaks` — the Fall 2025 Kansas Speaks PDF (QualtricsXM, Sep 26–Oct 14 2025, n = 526 →
+  488 weighted) is a **policy** survey: the only gubernatorial items are candidate recognition and general
+  evaluation (Figures 14–15); no head-to-head, no generic ballot.
+- `winthrop-2026-07-national` — the first national Winthrop poll (YouGov, June 18–23 2026, n = 2,150, ±2.11):
+  **all 26 tables are issues-only** (verified by full table read + full methodology — 832 of 11 southern states
+  + 1,552 rest matched down to 750/1,400, DE ±1.208, 'too small to report any single state'). No 2026 horse
+  race, generic ballot or party-ID question anywhere. The Oct 2025 SC gubernatorial R-primary field poll
+  (Mace 17.1 / Evette 16.3 / Norman 8.0 / Wilson 7.8 / Kimbrell 3.4 / Undecided 46.7, GOP registered, ±3.94,
+  with the report's own note that Mace–Evette are tied at this MoE) predates the primary — historical context,
+  not a row.
+- `roanoke-2026-02` — newest Roanoke (ipor) release is Feb 2026, issues-only (guns / redistricting).
+
+### 13b · 20 new master-list entries (verified line by line, 169 → 189)
+
+All 20 were verified in-session on 2026-09-20 before admission (the standing rule: no hallucinations). 18
+were fetched directly; 2 were located via live search of their official domains where the direct fetch 404/500'd
+at verification time, and both entries say so verbatim plus require a direct-200 re-fetch before machine use:
+
+| # | id | Category | Evidence (2026-09-20) |
+|---|---|---|---|
+| 1 | `dcboe` | Gov — state & local | **Fetched** dcboe.org: DCBOE homepage — ranked-choice banner, Sept 11 ballot-order lottery, Sept 14 pre-election equipment testing, Nov 3, 2026 UOCAVA reminder, June 16, 2026 special-election manual-audit results PDF |
+| 2 | `maricopa-county-az` | Gov — state & local | **Fetched** elections.maricopa.gov: 'Maricopa County Elections'; 2,538,491 active registered voters (Jan 2, 2026); 1,966,254 active early-voting list; '3rd largest voting jurisdiction' (transcribed as displayed) |
+| 3 | `king-county-wa` | Gov — state & local | **Fetched** kingcounty.gov/en/dept/elections/: 'King County Elections'; Nov 3, 2026 general (measures + candidates, eid=55); 10-year results archive; data & statistics |
+| 4 | `harris-county-tx` | Gov — state & local | **Fetched** harrisvotes.com: Nov 3, 2026 general + special; early voting Oct 19–30; mail-ballot deadline Oct 23; Election Results (live/archives/rosters/reports); ENG-SPA sample ballot. Located via the county's own menu (the /departments/clerk/elections path is a 404 — recorded) |
+| 5 | `wayne-county-mi` | Gov — state & local | **Fetched** waynecountymi.gov Clerk page: Elections section (voter info, candidate info, campaign finance, results archive 2011–2024, Board of Canvassers, Election Commission). waynecounty.com now redirects to waynecountymi.gov (observed) |
+| 6 | `clark-county-nv` | Gov — state & local | **Fetched** clarkcountynv.gov elections page: full services menu, historical documentation 1910–1996, reports/data/maps |
+| 7 | `cook-county-il` | Gov — state & local | **Live search 2026-09-20** (direct fetches 500'd): official-domain pages show results326.cookcountyclerkil.gov 'March 17, 2026 Gubernatorial Primary — 100.00% / 1430 of 1430 Precincts' (394,256 ballots, 1,727,843 registered) and the Nov 26, 2024 certification release. Direct-200 re-fetch required before machine ingestion |
+| 8 | `ippsr-msu` | Academic | **Fetched** ippsr.msu.edu: 'Institute for Public Policy and Social Research' (Michigan State) — Sept 1, 2026 'MSU Poll Shows Democrats Lead, Republicans Coalesce Behind Rogers' (State of the State Survey / OSR); April 20, 2026 'MSU Governors Poll Shows Slight Benson Lead' |
+| 9 | `stetson-cpor` | Pollsters | **Fetched** Stetson Today release (see 13a) — both FL rows ingested |
+| 10 | `rasmussen-reports` | Pollsters | **Fetched** rasmussenreports.com: 'Public opinion polling since 2003'; daily presidential tracking (Sep 18); generic congressional ballot (Sep 14, 'five-point lead'); 'Election 2026: Georgia Governor'. Paywall banner for full access ($4.95/mo Platinum) — recorded |
+| 11 | `public-policy-polling` | Pollsters | **Fetched** publicpolicypolling.com: 'Latest Poll: Cooper leads, but Whatley has a path' (July 13, 2026) — row ingested (13a) |
+| 12 | `echelon-insights` | Pollsters | **Fetched** echeloninsights.com: 'strategic research firm … 2026 Political Tribes … cluster analysis of verified voters'; client logos incl. NRSC. No 2026 horse-race release on the homepage yet — admitted for the polling program |
+| 13 | `unf-porl` | Pollsters | **Live search 2026-09-20** on unf.edu (contact page + newsroom): Public Opinion Research Lab, porl@unf.edu, 'one of only two dedicated live caller academic survey centers in Florida', 538 #12 pollster (2024). Live 2026 FL polls confirmed by dated press (Jul 2026: Donalds 46 / Jolly 41, 848 voters). Lab home page direct-200 re-fetch required |
+| 14 | `usatoday` | News | **Fetched** usatoday.com: live front page Sept 20, 2026 |
+| 15 | `latimes` | News | **Fetched** latimes.com: live front page — 'The Race for Mayor' (Bass / Raman), CA midterms coverage; 'For Subscribers' articles labelled |
+| 16 | `theguardian-us` | News | **Fetched** theguardian.com/us-news: live section — Fetterman PA profile, midterms anger piece, primary-season takeaways, Newsom election-security bills (Sept 19) |
+| 17 | `ajc` | News | **Fetched** ajc.com: live front page Sept 20, 2026 (Atlanta/Georgia) |
+| 18 | `desmoinesregister` | News | **Fetched** desmoinesregister.com: live front page — Iowa politics incl. Sept 20 elections-path article; official domain per the Wikipedia entry (Aug 30, 2026) |
+| 19 | `manifold-markets` | Prediction markets | **Fetched** manifold.markets: '2026 Midterms' tag, '2026 US Congressional Elections' forum, active 2028 presidential market. Honest limits stated in the entry: user-created, community-scored, not a regulated exchange — never merged into the Kalshi backtest |
+| 20 | `clarity-enr` | Official publishers & archives | **Fetched** results.enr.clarityelections.com/GA/ → '403 Forbidden (nginx)' to the plain fetcher; probe runner (run 35490431271, 05:38Z) records ga-clarity and wv-clarity 'reachable'. Parse path documented at github.com/openelections/clarify (detailxml.zip). Vendor: SOE Software |
+
+The DC gap is closed: with `dcboe`, every state-level board among the 51 jurisdictions is in the master list.
+Re-test addenda (original `verifiedOn` untouched) were appended to `harrisx` (probe verdict 'reachable') and
+`surveyusa` (archive fetches; report pages still client-rendered — #28000 MN still pending).
+
+### 13c · Re-tests (SurveyUSA / HarrisX / CourtListener, declined candidates #53, blocked official paths)
+
+All re-tests ran 2026-09-20. Blocked-path verdicts are from the daily probe runner (run 35490431271,
+05:38Z, browser profile + headless Chrome — the sanctioned re-test path for the hosts that block plain fetchers);
+in-session `fetch_page` readings are recorded where they differ:
+
+| Target | Session 7 state | 2026-09-20 re-test | Verdict |
+|---|---|---|---|
+| SurveyUSA #28000 (MN horse-races) | report page client-rendered | PollHistory.aspx fetches: full 09/16/26 question list (governor, US Senate, AG, SOS, Auditor + top issue; 09/20/26 priorities + approvals waves). Report page: probe 'reachable', in-session render returns empty `<body>` | **Still pending** — question text only, no numbers; no row fabricated |
+| HarrisX (harrisx.com) | #47 exclusion (fetch failed in both profiles) | probe 'reachable' + fetched directly in session 7 | **Re-opened** — the August Harvard CAPS / HarrisX poll row already stands |
+| CourtListener API v4 | #47 (v3/v4 paths unreachable) | probe 'reachable' + session-7 direct fetch 'HTTP 200 OK' | **Resolved** — the API root is reachable; the path note in the entry was updated in session 7 |
+| PEC (election.princeton.edu) | declined candidate (#53) | fetched: latest content 2024-11-05 | **#53 stands** — no 2026-cycle content |
+| Split Ticket (split-ticket.org) | declined candidate (#53) | fetched: latest content 2025-10-20 | **#53 stands** |
+| Selzer & Co (selzerco.com) | #48 exclusion | fetched: empty client-rendered shell | **#48 stands** |
+| WI (WECC /elections-voting) | blocked (Cloudflare) | probe 'blocked-cloudflare-challenge' | **Still blocked** |
+| NV (SoS legacy /sos-elections) | blocked (Akamai) | probe 'blocked-akamai-block' | **Still blocked** (#41: 404 legacy path; canonical /elections is in the registry) |
+| CA (SoS results/statements CDN) | blocked (403) | probe 'http-403' | **Still blocked** |
+| MA (Elections Division root) | blocked (Imperva) | probe 'blocked-imperva-block' | **Still blocked** |
+| GA (Clarity ENR) | #35: 403 to the fetcher | probe 'reachable' (browser profile); in-session plain fetch still 403 (nginx) | **Split result recorded exactly** — the probe runner's path is the one that will pull post-Nov-3 GA certification; the plain-fetcher 403 is kept, not papered over (see also the `clarity-enr` entry) |
+| WV (Clarity ENR) | blocked/timeout era (sessions 3–6) | probe 'reachable' | **Improved** — WV results are now accessible through the probe path |
+| thehillx.com | excluded (dead host) | probe 'error' | **Still excluded** — harrisx.com remains the live HarrisX host |
+
+### 13d · State Navigate parser fix (R14) — irregularity #64
+
+The first live run (run 35490431271) committed a 2026-09-20 row whose national parse is 'failed' (only the D/R
+pickup counts matched) and whose 34 chamber rows are 'failed'. In-session rendering of the live pages showed
+State Navigate reworded the layout (see #64 for the exact before/after strings). `parseNational` / `parseChamber`
+are now dual-format and the 2026-09-20 rendered text is transcribed into two new fixtures
+(`statenavigate-national-2026-09-20.txt`, `statenavigate-mn-lower-2026-09-20.txt`) asserted alongside the
+2026-09-19 ones. The failed 2026-09-20 row was NOT backfilled (provenance rule); the next live run should parse
+cleanly. No Chrome exists in this sandbox, so the in-session rendering went through the fetch tool, not
+`scripts/lib/render.mjs`; the runner's Chrome path is unchanged and untested here (it is what produced the
+05:38Z run).
+
+### 13e · CIRCLE YESI 2026 ↔ Kalshi volume cross-check (R12)
+
+`data/polls/yesi-vs-kalshi-volume.json` ranks the Kalshi events by summed cumulative market volume (from the
+2026-09-20T05:05Z universe) against CIRCLE's top-10 lists. Overlap: **senate 6/10** (GA, IA, ME, MI, NC, TX —
+note Kalshi prices Ohio as SENATEOHS-26, the same alias the Metaculus collector uses); **governor 6/10** (AZ,
+GA, IA, NV, OH, WI); **house 3 states** (AZ, MI, PA) with the basis mismatch documented (Kalshi prices
+state-level seat counts, YESI lists districts). Scored at Nov 3 into `data/crosslayer/outcomes.json`.
+
+### 13f · Metaculus layer (P0 scoring stays pending by design)
+
+No change to the scorer: Nov 3, 2026 is ~6.5 weeks out, so `scoreSnapshots` keeps pending snapshots pending
+(refused-lookahead when capturedAt ≥ certifiedOn; y ∈ {0,1}; source-less outcomes refused — all unit-tested).
+The 2026-09-20T03:16Z pre-gate daily row (the #63 misread audit trail) remains in `metaculus-daily.json` and the
+site marks its Senate cell; #63 is the documented explanation — no new irregularity was filed for it. The
+committed `snapshots.json` carries no senate-control metaculus row dated 2026-09-20, which is the correct state
+after the #63 fix.
+
+### 13g · Standing monitors
+
+- **R13 third-party rendering cross-check** — `data/kalshi/tracker/rendering-crosscheck.json` gained its first
+  fully clean live row on 2026-09-20 (EBO + DDHQ parsed; 270toWin client-side fill documented); the daily
+  workflow renders when the raw HTML does not parse.
+- **Franklin & Marshall admission after direct fetch** — already in the master (session 6); the probe target
+  `fandmpoll` stayed 'reachable' today, and the `fm-2026-08-pa-governor` row remains the template for the
+  PA-governor market (GOVPARTYPA-26-D).
+- **R15 host monitor** — first committed verdicts landed today (run 35490431271); 14 of the 30 targets are the
+  re-test set exercised in 13c.
+
+### 13h · Verification evidence after the batch
+
+`npm run lint` → `checked 77 data JSON files, 189 sources, 4 outcomes, 5 markets, 63 irregularities (md rows 63),
+31 poll entries — lint: all verified-data provenance checks pass` (run before #64 was appended; re-run in the
+final pass). `npm test` → **90 tests, 89 pass, 1 skipped** (the network live-capture skip): `test/crosslayer.test.mjs`
+gained the dual-format State Navigate assertions (both layouts), and `test/site-sources.test.mjs` gained the
+session-8 registry block (20 ids; 18 'fetched directly 2026-09-20', 2 documented live-search admissions with the
+re-fetch requirement; non-200 hosts quoted verbatim) and the session-8 poll-row block (all 8 rows, the null
+NC-house ticker + `marketBasis`, the median Texas Senate reduction, the new `random-cellphone-rv-panel` family,
+PPP's `methodFamily: null`, the CIRCLE subpopulation entry with `D: null`, the YESI prior, and the three new
+pending ids). `npm run pipeline` regenerated the site bundle (Sources now 189 rows) and `ROADMAP.md` (15 items,
+24 limitations); the headless render check passed all sections.
+
+New irregularity: #64. Next id: 65.

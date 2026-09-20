@@ -61,7 +61,10 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
       kalshiDemTicker: e.kalshiDemTicker || null,
       methodFamily: e.methodFamily || null,
       marketDemProb: mk.p === null ? null : Number(mk.p.toFixed(4)),
-      marketBasis: mk.basis,
+      // A row's own marketBasis is a DESIGN note (e.g. "no D/R market exists; the closest event is a
+      // seat-count market, not a race question") and must reach the UI — the lookup basis only fills in
+      // when the row carries no design note.
+      marketBasis: e.marketBasis || mk.basis,
       marketDate: universe ? universe.date : null,
       gap: pollP !== null && mk.p !== null ? Number((mk.p - pollP).toFixed(4)) : null,
       source: e.source,

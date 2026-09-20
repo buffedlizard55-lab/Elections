@@ -2,7 +2,7 @@
  "title": "Continuous poll layer — 2026 cycle (line-by-line verified primary releases)",
  "capturedFrom": "primary pollster releases listed per entry (fetched directly; syndication is never the only source)",
  "capturedAt": "2026-09-19T23:30:00Z",
- "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed. Session 7 (2026-09-20) rows: elon-2026-09-nc-senate, hpu-2026-04-nc-senate and harrisx-2026-08-generic (all carry methodFamily; HPU's 'moe' is the release's credibility interval, as its methodNote says); two pending items record what was verified but not transcribed.",
+ "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed. Session 7 (2026-09-20) rows: elon-2026-09-nc-senate, hpu-2026-04-nc-senate and harrisx-2026-08-generic (all carry methodFamily; HPU's 'moe' is the release's credibility interval, as its methodNote says); two pending items record what was verified but not transcribed. Session 8 (2026-09-20) rows: hpu-2026-08-nc-senate + hpu-2026-08-nc-house-generic (Poll 126, both with the credibility-interval label; the house row's kalshiDemTicker is null by design — see marketBasis), uh-hobby-2026-01-tx-governor + uh-hobby-2026-01-tx-senate (the Senate row is the median of six candidate-matched scenarios, stated in methodNote), saint-anselm-2026-06-nh-senate (new family random-cellphone-rv-panel, with the published marketGap), stetson-2026-04-fl-governor + stetson-2026-04-fl-senate (SENATEFLS-26 = the short-term seat), ppp-2026-07-nc-senate (methodFamily null by #49 discipline). The CIRCLE youth poll is an aggregator reading with D/R null (subpopulation, not a race), and CIRCLE YESI 2026 top-10 lists are independentPriors — neither is a poll.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
  "updated": "2026-09-20",
  "genericBallot": [
@@ -331,6 +331,24 @@
    "source": "https://www.realclearpolling.com/polls/state-of-the-union/generic-congressional-vote",
    "verifiedVia": "Page fetched 2026-09-19; the table lists each component poll with a link to the pollster's release (RMG, Fox News, Big Data Poll, NYT/Siena, Marquette, Economist/YouGov, Reuters/Ipsos, Morning Consult, CBS News, Rasmussen, Cygnal, Quinnipiac, Financial Times/Focaldata). Aggregator methodology is not published in full — recorded as a reading, not as a poll. Resolves Python-track re-check #15 (page is current).",
    "verifiedOn": "2026-09-19"
+  },
+  {
+   "id": "circle-2026-youth-poll",
+   "aggregator": "CIRCLE (Tufts) / When We All Vote — 2026 Youth Poll (ages 18–29, national, oversampled Black and Latino youth)",
+   "asOf": "2026-07-24",
+   "fieldDates": "2026-01-26..2026-02-12",
+   "n": 5549,
+   "D": null,
+   "R": null,
+   "partyIdentification": {
+    "partisan": 57,
+    "noAffiliation": 43
+   },
+   "countryWrongDirection": 62,
+   "willingToVote": 89,
+   "source": "https://circle.tufts.edu/2026-election",
+   "verifiedVia": "CIRCLE 2026 election page and the 2026 Youth Poll key findings fetched 2026-09-20. Youth subpopulation (18–29): deliberately NOT comparable to Kalshi likely-voter prices — recorded here as an independent reading with its own population label, per the no-mixing rule in methodFamilies.note.",
+   "verifiedOn": "2026-09-20"
   }
  ],
  "stateRaces": [
@@ -900,6 +918,238 @@
    "toplinesPdf": null,
    "verifiedVia": "HPU SRC index (highpoint.edu/src) and the April 16, 2026 release page fetched directly 2026-09-20; horse race, n, field dates, credibility interval and methodology paragraph transcribed. Memos: highpoint.edu/src/hpupoll/.",
    "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "hpu-2026-08-nc-senate",
+   "race": "U.S. Senate — North Carolina",
+   "pollster": "HPU Poll 126 — High Point University Survey Research Center (fielded by YouGov)",
+   "fieldDates": "2026-08-03..2026-08-12",
+   "population": "LV",
+   "n": 660,
+   "moe": 5.2,
+   "candidates": {
+    "D": {
+     "name": "Roy Cooper",
+     "pct": 50
+    },
+    "R": {
+     "name": "Michael Whatley",
+     "pct": 45
+    }
+   },
+   "undecidedOrCouldChange": "Someone else/another party 3; Unsure/Would not vote 3 (LV)",
+   "registeredVoterTrend": {
+    "note": "819 North Carolina registered voters matched down to n = 800; likely voters (n = 660) form the top line above. The release states a classic sampling margin of error is not appropriate and gives credibility intervals of ±4.3 (all 800) / ±5.2 (LV, n = 660) including design effects 1.57 / 1.86 — the moe field is that LV credibility interval. Same release: NC State Senate generic (LV) D 48 / R 46; NC State House generic (LV) D 48 / R 46."
+   },
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "'fielded by YouGov on behalf of the High Point University Survey Research Center from August 3 through August 12, 2026' as an online survey of its opt-in panel; 819 NC registered voters matched down to 800; credibility interval, not a sampling MoE (see registeredVoterTrend).",
+   "kalshiEvent": "SENATENC-26",
+   "kalshiDemTicker": "SENATENC-26-D",
+   "source": "https://www.highpoint.edu/blog/2026/08/hpu-poll-126-majority-of-north-carolina-voters-say-country-headed-in-wrong-direction/",
+   "toplinesPdf": null,
+   "verifiedVia": "HPU SRC index (highpoint.edu/src) and the August 21, 2026 Poll 126 release page fetched directly 2026-09-20; horse race, n, field dates, credibility interval and methodology paragraph transcribed.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "hpu-2026-08-nc-house-generic",
+   "race": "U.S. House generic ballot — North Carolina",
+   "pollster": "HPU Poll 126 — High Point University Survey Research Center (fielded by YouGov)",
+   "fieldDates": "2026-08-03..2026-08-12",
+   "population": "LV",
+   "n": 660,
+   "moe": 5.2,
+   "candidates": {
+    "D": {
+     "name": "Democratic Party",
+     "pct": 47
+    },
+    "R": {
+     "name": "Republican Party",
+     "pct": 47
+    }
+   },
+   "undecidedOrCouldChange": "Someone else/another party 1; Unsure/Would not vote 5 (LV)",
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "Same release and method as hpu-2026-08-nc-senate; credibility interval ±5.2 (LV, n = 660).",
+   "kalshiEvent": "KXHOUSEWINSTATE-NCD",
+   "kalshiDemTicker": null,
+   "marketBasis": "No Kalshi market asks the NC House D/R delegation-control question (checked against the 2026-09-20 universe capture, 4,085 events). The closest event, KXHOUSEWINSTATE-NCD ('How many House seats will Democrats win in North Carolina?'), is a seat-count market, not a D/R race question — kalshiDemTicker is therefore deliberately null, not missing.",
+   "source": "https://www.highpoint.edu/blog/2026/08/hpu-poll-126-majority-of-north-carolina-voters-say-country-headed-in-wrong-direction/",
+   "toplinesPdf": null,
+   "verifiedVia": "HPU SRC index and the August 21, 2026 Poll 126 release fetched directly 2026-09-20; generic-ballot numbers transcribed. Kalshi universe check 2026-09-20T05:05Z.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "uh-hobby-2026-01-tx-governor",
+   "race": "Governor — Texas",
+   "pollster": "University of Houston Hobby School — Texas Primaries 2026 survey",
+   "fieldDates": "2026-01-20..2026-01-31",
+   "population": "LV",
+   "n": 1502,
+   "moe": 2.53,
+   "candidates": {
+    "D": {
+     "name": "James Hinojosa",
+     "pct": 42
+    },
+    "R": {
+     "name": "Greg Abbott",
+     "pct": 49
+    }
+   },
+   "undecidedOrCouldChange": "Remaining share other/undecided (LV); no major candidate tested between the two",
+   "registeredVoterTrend": {
+    "note": "Statewide online survey, English + Spanish, matched with YouGov; n = 1,502 likely voters for the November general election (±2.53%); n = 550 per primary (±4.18%). Report also publishes the LT-governor general: Patrick 46 / Goodwin 41 (not ingested as a separate row — see pendingSources note in VERIFICATION §13)."
+   },
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "'online, statewide survey ... fielded between January 20 and January 31, 2026' (English and Spanish), YouGov-matched panel; margin of error ±2.53% for the November-general likely-voter sample (n = 1,502).",
+   "kalshiEvent": "GOVPARTYTX-26",
+   "kalshiDemTicker": "GOVPARTYTX-26-D",
+   "source": "https://uh.edu/hobby/primary2026/index.php",
+   "toplinesPdf": "https://uh.edu/hobby/primary2026/senate.pdf",
+   "verifiedVia": "UH Hobby 'Texas Primaries 2026' index (uh.edu/hobby/primary2026) fetched directly 2026-09-20; general-election gubernatorial matchup, n, field dates and MoE transcribed from the report.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "uh-hobby-2026-01-tx-senate",
+   "race": "U.S. Senate — Texas",
+   "pollster": "University of Houston Hobby School — Texas Primaries 2026 survey",
+   "fieldDates": "2026-01-20..2026-01-31",
+   "population": "LV",
+   "n": 1502,
+   "moe": 2.53,
+   "candidates": {
+    "D": {
+     "name": "Median of the six candidate-matched general scenarios (Democrat: Crockett/Talarico)",
+     "pct": 43
+    },
+    "R": {
+     "name": "Median of the six candidate-matched general scenarios (Republican: Paxton/Cornyn/Hunt, plus Libertarian Brown)",
+     "pct": 45.5
+    }
+   },
+   "undecidedOrCouldChange": "Democrat range across scenarios 42–44; Republican range 44–46 (candidate-matched, not party)",
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "The release reports SIX candidate-matched November general scenarios (Paxton/Cornyn/Hunt × Crockett/Talarico, plus the Libertarian Brown cross-scenarios); this is NOT a party question. Top line recorded as the median: Democrat 43 / Republican 45.5. No single scenario is elevated; all six are in the report.",
+   "kalshiEvent": "SENATETX-26",
+   "kalshiDemTicker": "SENATETX-26-D",
+   "source": "https://uh.edu/hobby/primary2026/index.php",
+   "toplinesPdf": "https://uh.edu/hobby/primary2026/senate.pdf",
+   "verifiedVia": "UH Hobby 'Texas Primaries 2026' index fetched directly 2026-09-20; all six Senate general matchups transcribed and reduced to medians/ranges as noted.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "saint-anselm-2026-06-nh-senate",
+   "race": "U.S. Senate — New Hampshire",
+   "pollster": "Saint Anselm College Survey & Analysis Service Center (SASC)",
+   "fieldDates": "2026-06-24..2026-06-25",
+   "population": "RV",
+   "n": 1614,
+   "moe": 2.4,
+   "candidates": {
+    "D": {
+     "name": "Chris Pappas",
+     "pct": 47
+    },
+    "R": {
+     "name": "Kevin Sununu",
+     "pct": 41
+    }
+   },
+   "undecidedOrCouldChange": "12% other/undecided in the Pappas–Sununu scenario; alternate scenario Pappas 48 / Brown (R primary field) 36 / 16",
+   "methodFamily": "random-cellphone-rv-panel",
+   "methodNote": "Cell phones randomly drawn from New Hampshire's registered-voter sample, live interviews June 24–25, 2026 (n = 1,614 RVs); weighted on age/gender/geography/education (NOT party); MoE ±2.4%. Top line is the Pappas–Sununu hypothetical general: Pappas was the D primary front-runner (primary: Pappas 62 / Manzur 20 / 18 unsure) and Sununu the R primary front-runner (Sununu 59 / Brown 21 / 20 unsure).",
+   "marketGap": "SENATENH-26-D captured ≈0.83 on 2026-09-20 (implied ~83% for the Democrat) vs this June pre-primary matchup of D 47 / R 41 (D +6). The market is far more one-sided than the poll — recorded as a published gap for the post-primary re-poll, not a correction of either number.",
+   "kalshiEvent": "SENATENH-26",
+   "kalshiDemTicker": "SENATENH-26-D",
+   "source": "https://www.anselm.edu/sites/default/files/2026-06/June%2024-25%202026%20Poll.pdf",
+   "toplinesPdf": null,
+   "verifiedVia": "SASC June 24–25, 2026 poll PDF fetched directly 2026-09-20; primary and hypothetical-general tables, n, field dates, weighting and MoE transcribed.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "stetson-2026-04-fl-governor",
+   "race": "Governor — Florida",
+   "pollster": "Stetson University Center for Public Opinion Research (CPOR) — Spring 2026 Survey",
+   "fieldDates": "2026-03-25..2026-04-13",
+   "population": "LV",
+   "n": 848,
+   "moe": 4.1,
+   "candidates": {
+    "D": {
+     "name": "David Jolly",
+     "pct": 40
+    },
+    "R": {
+     "name": "Byron Donalds",
+     "pct": 47
+    }
+   },
+   "undecidedOrCouldChange": "~7% undecided (Donalds–Jolly); separate matchup Donalds 46 / Jerry Demings 42 (~7% undecided)",
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "'collected 848 responses from Florida adults via an online non-probability sample from Qualtrics's panels from March 25 to April 13, 2026'; likely voters identified with a modeled turnout score; weighted by race, ethnicity, education, gender and region; margin of error ±4.1 points.",
+   "kalshiEvent": "GOVPARTYFL-26",
+   "kalshiDemTicker": "GOVPARTYFL-26-D",
+   "source": "https://www2.stetson.edu/today/2026/04/stetson-poll-republicans-lead-in-florida-2026-races-but-many-voters-still-undecided/",
+   "toplinesPdf": null,
+   "verifiedVia": "Stetson Today (www2.stetson.edu) April 24, 2026 release fetched directly 2026-09-20; both gubernatorial matchups, n, field dates, MoE and the methodology paragraph transcribed.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "stetson-2026-04-fl-senate",
+   "race": "U.S. Senate — Florida (short-term / special seat)",
+   "pollster": "Stetson University Center for Public Opinion Research (CPOR) — Spring 2026 Survey",
+   "fieldDates": "2026-03-25..2026-04-13",
+   "population": "LV",
+   "n": 848,
+   "moe": 4.1,
+   "candidates": {
+    "D": {
+     "name": "Alexander Vindman",
+     "pct": 42
+    },
+    "R": {
+     "name": "Ashley Moody",
+     "pct": 49
+    }
+   },
+   "undecidedOrCouldChange": "Separate matchup Moody 51 / Angie Nixon 38 (D field); remainder undecided",
+   "methodFamily": "online-nonprobability-matched",
+   "methodNote": "Same release and method as stetson-2026-04-fl-governor (Qualtrics online non-probability panel, ±4.1). The 2026 Florida Senate seat is the short-term (special) seat held by Moody — the Kalshi event is SENATEFLS-26 (verified in the 2026-09-20 universe; SENATEFL-28 is the 2028 class).",
+   "kalshiEvent": "SENATEFLS-26",
+   "kalshiDemTicker": "SENATEFLS-26-D",
+   "source": "https://www2.stetson.edu/today/2026/04/stetson-poll-republicans-lead-in-florida-2026-races-but-many-voters-still-undecided/",
+   "toplinesPdf": null,
+   "verifiedVia": "Stetson Today April 24, 2026 release fetched directly 2026-09-20; both Senate matchups transcribed. Kalshi event class confirmed against the 2026-09-20T05:05Z universe capture.",
+   "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "ppp-2026-07-nc-senate",
+   "race": "U.S. Senate — North Carolina",
+   "pollster": "Public Policy Polling (PPP)",
+   "fieldDates": "2026-07-10..2026-07-11",
+   "population": "VOTERS",
+   "n": 759,
+   "moe": 3.6,
+   "candidates": {
+    "D": {
+     "name": "Roy Cooper",
+     "pct": 48
+    },
+    "R": {
+     "name": "Michael Whatley",
+     "pct": 44
+    }
+   },
+   "undecidedOrCouldChange": "Balance other/undecided (759 NC voters, general population — not a likely-voter screen)",
+   "methodFamily": null,
+   "methodNote": "PPP text-based opt-in panel (the pollster's standard SMS-recruited mode; the exact mode and weighting are in the full-methodology PDF linked from the release — not re-transcribed here to avoid paraphrase drift). Same release: NC Supreme Court Earls (D) 44 / Stevens (R) 42; NC legislative generic ballot D 46 / R 44. methodFamily left null rather than guessed (#49 discipline).",
+   "kalshiEvent": "SENATENC-26",
+   "kalshiDemTicker": "SENATENC-26-D",
+   "source": "https://www.publicpolicypolling.com/polls/cooper-leads-but-whatley-has-a-path/",
+   "toplinesPdf": "https://e1.nmcdn.io/assets/ppp/wp-content/uploads/2026/07/NorthCarolinaPollJuly2026.pdf",
+   "verifiedVia": "PPP homepage 'Latest Poll' and the July 13, 2026 release page fetched directly 2026-09-20; horse race, n, field dates and MoE transcribed verbatim from the release.",
+   "verifiedOn": "2026-09-20"
   }
  ],
  "exitPollStatus": {
@@ -1100,7 +1350,8 @@
    "online-nonprobability-matched": "Opt-in online panel matched/weighted to a population frame (e.g. YouGov matched to ACS).",
    "online-optin-weighted": "Opt-in online panel weighted to a voter file or census targets.",
    "probability-panel": "Address-based-sample probability panel (KnowledgePanel, AmeriSpeak).",
-   "aggregator": "Published average, not a poll."
+   "aggregator": "Published average, not a poll.",
+   "random-cellphone-rv-panel": "Random cell-phone numbers drawn from a registered-voter frame, live interviews (e.g. Saint Anselm College SASC). Probability-based on the RV frame; distinct from RDD and from panel designs."
   }
  },
  "pendingSources": [
@@ -1121,6 +1372,70 @@
    "status": "verified release, deliberately NOT ingested as a Maine Senate row (irregularity #60)",
    "evidence": "UMass Lowell/YouGov release 2026-06-04: 'Platner 48 / Collins 43' among 650 likely Maine voters, May 13-26, MoE ±4.9, conditional on Platner winning the June 9 primary. The exchange's SENATEME-26-D market is 'Troy Jackson' (2026-09-20 universe capture), so the tested Democrat is not the nominee.",
    "action": "Keep as source evidence only. Ingest a UMass Lowell Maine row only if a Jackson-vs-Collins release appears."
+  },
+  {
+   "id": "fhsu-2025-fall-kansas-speaks",
+   "status": "2025 Fall release is the latest; it is a POLICY survey — no head-to-head or generic horse-race question (as of 2026-09-20)",
+   "evidence": "FHSU 'Kansas Speaks' Fall 2025 PDF fetched 2026-09-20: QualtricsXM online panel, Sep 26 – Oct 14, 2025; n = 526 unweighted -> 488 weighted (quotas gender/age/county; weighted age/gender/education/party registration). The only gubernatorial items are candidate RECOGNITION and GENERAL EVALUATION (Figures 14–15); no 2026 head-to-head, no party/generic ballot.",
+   "action": "Keep pending like muhlenberg-ciopo. Ingest the first Kansas Speaks release that contains a 2026 head-to-head (governor or Senate) or generic ballot, mapped to GOVPARTYKS-26 / SENATEKS-26 when it appears."
+  },
+  {
+   "id": "winthrop-2026-07-national",
+   "status": "FIRST national Winthrop poll (2026) — all 26 tables are issues-only; no 2026 horse-race, generic-ballot or party-ID question anywhere (verified by full table read + full methodology, 2026-09-20)",
+   "evidence": "Winthrop 2026-july release fetched 2026-09-20: YouGov partnership, fielded June 18–23, 2026, n = 2,150, MoE ±2.11%; 832 of 11 southern states + 1,552 rest-of-country matched down to 750/1,400; weighted by 2024 presidential vote + gender/age/race/education; design effect ±1.208; 'too small to report any single state'. Trump approval 34/59; 60% economy bad; Epstein 66% cover-up. No race content.",
+   "action": "No row fabricated. Historical context only: the October 2025 SC gubernatorial R-primary field poll (Mace 17.1 / Evette 16.3 / Norman 8.0 / Wilson 7.8 / Kimbrell 3.4 / Undecided 46.7, GOP registered, ±3.94, with the report's own note that Mace–Evette are tied at this MoE) predates the primary — kept as source evidence, not ingested as a 2026 horse race. Watch for a 2026 Winthrop release with race questions (GOVPARTYSC-26 exists on Kalshi)."
+  },
+  {
+   "id": "roanoke-2026-02",
+   "status": "Newest Roanoke (ipor) release is Feb 2026 — issues-only (guns/redistricting); no 2026 horse race (as of 2026-09-20)",
+   "evidence": "Roanoke index (roanoke.ipor) fetched 2026-09-20: most recent release Feb 2026 covers gun policy and redistricting opinions; no candidate matchup or generic ballot in 2026-cycle releases.",
+   "action": "Keep pending. Ingest the first Roanoke release containing a 2026 matchup, mapped to the relevant GOVPARTY/SENATE event for its state."
+  }
+ ],
+ "independentPriors": [
+  {
+   "id": "circle-yesi-2026",
+   "label": "CIRCLE 50 Million — YESI 2026: top-10 most-watched battleground lists (independent prior, not a probability)",
+   "asOf": "2026-07-24",
+   "senate": [
+    "ME",
+    "MI",
+    "OH",
+    "AK",
+    "GA",
+    "NH",
+    "NC",
+    "IA",
+    "MN",
+    "TX"
+   ],
+   "governor": [
+    "WI",
+    "GA",
+    "IA",
+    "MI",
+    "NV",
+    "AZ",
+    "OH",
+    "KS",
+    "ME",
+    "OR"
+   ],
+   "house": [
+    "MI-07",
+    "NJ-07",
+    "VA-02",
+    "IA-01",
+    "CO-08",
+    "WI-03",
+    "PA-10",
+    "PA-07",
+    "AZ-01",
+    "AZ-06"
+   ],
+   "source": "https://circle.tufts.edu/yesi2026",
+   "verifiedVia": "Fetched 2026-09-20 (page updated July 24, 2026). R12 cross-check against Kalshi Senate-26 volume recorded in data/polls/yesi-vs-kalshi-volume.json (computed from the 2026-09-20T05:05Z universe capture).",
+   "verifiedOn": "2026-09-20"
   }
  ]
 }
