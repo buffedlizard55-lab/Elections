@@ -375,6 +375,16 @@ async function main() {
     bySeries[k].traded += ev.markets.filter((m) => isTraded(m) && !isFinalized(m)).length;
     bySeries[k].volume += ev.markets.reduce((s, m) => s + (m.volume || 0), 0);
   }
+  // Self-consistency guard (irregularity #65, 2026-09-20): the derived summary blocks must reconcile
+  // with the event list they were computed from. A file where bySeries totals more events than the file
+  // holds is an in-run fetch anomaly (or a rebased-in chimera of two captures) and must never be written.
+  {
+    const bsEvents = Object.values(bySeries).reduce((s, x) => s + x.events, 0);
+    const bsMarkets = Object.values(bySeries).reduce((s, x) => s + x.markets, 0);
+    if (bsEvents !== projected.length || bsMarkets !== openMarketsTotal) {
+      throw new Error(`universe self-consistency check failed: bySeries totals ${bsEvents} events / ${bsMarkets} markets but the projected feed holds ${projected.length} events / ${openMarketsTotal} markets — refusing to write an internally inconsistent universe (rerun; if it repeats, the events feed is returning different pages per request)`);
+    }
+  }
 
   // 3. index + 4. settlements + 5. calibration + 6. consistency
   const index = loadIndex(join(TRACKER_DIR, 'index.json'));

@@ -793,4 +793,34 @@ PPP's `methodFamily: null`, the CIRCLE subpopulation entry with `D: null`, the Y
 pending ids). `npm run pipeline` regenerated the site bundle (Sources now 189 rows) and `ROADMAP.md` (15 items,
 24 limitations); the headless render check passed all sections.
 
-New irregularity: #64. Next id: 65.
+
+### 13i · Bot-run universe chimera — repaired (irregularity #65)
+
+While resolving the merge against main (the 12:30 UTC collect run, d9bbbd7, captured 16:22:34Z, committed
+16:51Z), the offline replay test failed: the committed `data/kalshi/universe/latest.json` does not reconcile
+with itself — `counts.openEvents` = 4,087 = `len(events)`, but `bySeries` (1,355 rows) sums to **4,124**
+events / **24,444** markets (vs `counts.openMarkets` = 24,319), and `bySeries` rolls the CA-22 event up under
+the label HOUSENY17 (two rows, 110,508.87 + 107,536.97) where the event list correctly carries
+HOUSECA22-26 / HOUSENY17-26. The committed daily CSV is from a different fetch state too (KX2028DRUN-28-REMA
+yes_ask 0.82 in the CSV vs 0.83 in the saved event). The bot's own run passed its tests, so the splice
+arose between its verification and the commit — consistent with the documented push-race rebase (run started
+~16:22Z from a main predating PR #9's 16:26Z merge; 3-way merge of a ~4MB JSON can splice clean hunks from
+the other side despite `-X theirs`; run logs not downloadable from this sandbox — recorded as 'consistent
+with, not proven').
+
+Repair (all verifiable in this PR):
+1. **Data** — the four derived files (`universe/latest.json`, `universe/series.json`,
+   `tracker/calibration.json`, `tracker/daily/2026-09-20.csv`) were rebuilt deterministically from the
+   file's own saved event list (`node scripts/collect-kalshi.mjs --replay --date 2026-09-20`); the committed
+   universe now reconciles (bySeries = 4,087 events / 24,319 markets) and carries the `replayedAt` marker.
+   `tracker/index`, `settlements`, `discrepancy-watch` were already byte-identical to the replay; the live
+   daily `.meta.json` (fetch audit) was kept.
+2. **Collector** — a pre-write self-consistency guard now throws when bySeries totals do not reconcile with
+   the projected event list; an internally inconsistent universe can never be written again.
+3. **Workflow** — the commit step anchors the collector's output files (sha256, after all data steps) and,
+   after any rebase, re-hashes them and re-captures + re-verifies + amends before pushing if they changed:
+   what gets pushed is always one consistent run's snapshot.
+4. **Rule** — if a committed universe's bySeries/topMarkets/CSV ever disagree with its event list again,
+   treat the derived blocks as corrupted and rebuild with the replay command before reading summary numbers.
+
+New irregularities this session: #64 (State Navigate rewording), #65 (universe chimera). Next id: 66.
