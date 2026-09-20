@@ -171,8 +171,43 @@ test('registry: the 22 session-7 entries are present, dated 2026-09-20, fetched 
     assert.match(byId[id].verified, /Re-test 2026-09-20/, `${id}: re-test addendum`);
     assert.notEqual(byId[id].verifiedOn, '2026-09-20', `${id}: re-test must not overwrite the original verification date`);
   }
-  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-20').length, 22);
-  assert.ok(master.sources.length >= 169, `expected >= 169 sources, found ${master.sources.length}`);
+  // Session 8 (2026-09-20, branch arena/01a0bfa5-elections) admits 20 more entries the same day —
+  // 42 entries dated 2026-09-20 in total (22 + 20).
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-20').length, 42);
+  assert.ok(master.sources.length >= 189, `expected >= 189 sources, found ${master.sources.length}`);
+});
+
+// ---- session-8 batch (2026-09-20, branch arena/01a0bfa5-elections): 20 new entries ----
+// 7 county/DC official boards, 5 pollsters/academic (Stetson CPOR, Rasmussen, PPP, Echelon, UNF PORL),
+// 1 academic institute (MSU IPPSR), 5 news desks, 1 crowd-forecast platform (Manifold), 1 results host (Clarity ENR).
+const SESSION8_NEW_IDS = [
+  'dcboe', 'maricopa-county-az', 'king-county-wa', 'harris-county-tx', 'wayne-county-mi', 'clark-county-nv',
+  'cook-county-il', 'ippsr-msu', 'stetson-cpor', 'rasmussen-reports', 'public-policy-polling', 'echelon-insights',
+  'unf-porl', 'usatoday', 'latimes', 'theguardian-us', 'ajc', 'desmoinesregister', 'manifold-markets', 'clarity-enr',
+];
+// These two were located via live search on the official domains; the direct fetches 404/500'd at
+// verification time, so they carry the honest "live search" wording plus a required direct-200 re-fetch note.
+const SESSION8_SEARCH_ADMITTED = ['cook-county-il', 'unf-porl'];
+
+test('registry: the 20 session-8 entries are present, dated 2026-09-20, with notes; 18 fetched directly, 2 via documented live search', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  assert.equal(SESSION8_NEW_IDS.length, 20);
+  for (const id of SESSION8_NEW_IDS) {
+    const s = byId[id];
+    assert.ok(s, `missing session-8 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-20', `${id}: verifiedOn`);
+    assert.equal(s.status, 'verified', `${id}: status`);
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+    if (SESSION8_SEARCH_ADMITTED.includes(id)) {
+      assert.match(s.verified, /live search on 2026-09-20/, `${id}: admitted via documented live search`);
+      assert.match(s.notes, /re-fetch/i, `${id}: must require a direct 200 re-fetch before machine use`);
+    } else {
+      assert.match(s.verified, /[Ff]etched directly 2026-09-20/, `${id}: must state it was fetched this session`);
+    }
+  }
+  // The two hosts that answered a non-200 to the plain fetcher must say so in the entry text itself.
+  assert.match(byId['clarity-enr'].verified, /403 Forbidden/, 'GA Clarity 403 to the plain fetcher is recorded, not papered over');
+  assert.match(byId['cook-county-il'].verified, /500/, 'Cook County 500 at verification time is recorded, not papered over');
 });
 
 test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {
@@ -199,6 +234,76 @@ test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #
   assert.ok(pendingIds.includes('umass-lowell-2026-05-me-senate'), 'ME row must not be ingested as a race row');
   assert.ok(pendingIds.includes('surveyusa-28000-mn'), 'MN report pending until rendered');
   assert.ok(!PL.stateRaces.some((r) => /umass-lowell-2026-05-me/.test(r.id)));
+});
+
+test('poll layer: session-8 rows (HPU 126 ×2, UH Hobby ×2, Saint Anselm, Stetson ×2, PPP) carry #49 labels and honest market mapping', () => {
+  const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
+  const fams = new Set(Object.keys(PL.methodFamilies.families));
+  const find = (id) => PL.stateRaces.find((r) => r.id === id);
+  const hpu126 = find('hpu-2026-08-nc-senate');
+  assert.ok(hpu126, 'hpu-2026-08-nc-senate row');
+  assert.equal(hpu126.kalshiDemTicker, 'SENATENC-26-D');
+  assert.deepEqual([hpu126.candidates.D.pct, hpu126.candidates.R.pct, hpu126.n, hpu126.moe], [50, 45, 660, 5.2]);
+  assert.equal(hpu126.methodFamily, 'online-nonprobability-matched');
+  assert.match(hpu126.methodNote, /credibility interval/i, 'Poll 126, like 120, publishes a credibility interval, not a sampling MoE');
+  const hpuHouse = find('hpu-2026-08-nc-house-generic');
+  assert.ok(hpuHouse, 'hpu-2026-08-nc-house-generic row');
+  assert.deepEqual([hpuHouse.candidates.D.pct, hpuHouse.candidates.R.pct], [47, 47]);
+  assert.equal(hpuHouse.kalshiDemTicker, null, 'no Kalshi D/R delegation-control event exists — the ticker is null BY DESIGN');
+  assert.match(hpuHouse.marketBasis, /KXHOUSEWINSTATE-NCD/, 'the null must be explained against the seat-count event that does exist');
+  assert.match(hpuHouse.marketBasis, /not a D\/R race question/);
+  const uhtxg = find('uh-hobby-2026-01-tx-governor');
+  assert.ok(uhtxg, 'uh-hobby-2026-01-tx-governor row');
+  assert.equal(uhtxg.kalshiDemTicker, 'GOVPARTYTX-26-D');
+  assert.deepEqual([uhtxg.candidates.D.pct, uhtxg.candidates.R.pct, uhtxg.n, uhtxg.moe], [42, 49, 1502, 2.53]);
+  const uhtxs = find('uh-hobby-2026-01-tx-senate');
+  assert.ok(uhtxs, 'uh-hobby-2026-01-tx-senate row');
+  assert.equal(uhtxs.kalshiDemTicker, 'SENATETX-26-D');
+  assert.deepEqual([uhtxs.candidates.D.pct, uhtxs.candidates.R.pct], [43, 45.5], 'median of the six candidate-matched scenarios');
+  assert.match(uhtxs.methodNote, /median/i, 'a candidate-matched multi-scenario poll must state the reduction to a median, not silently pick one scenario');
+  const sa = find('saint-anselm-2026-06-nh-senate');
+  assert.ok(sa, 'saint-anselm-2026-06-nh-senate row');
+  assert.equal(sa.kalshiDemTicker, 'SENATENH-26-D');
+  assert.deepEqual([sa.candidates.D.pct, sa.candidates.R.pct, sa.n, sa.moe], [47, 41, 1614, 2.4]);
+  assert.equal(sa.methodFamily, 'random-cellphone-rv-panel', 'SASC draws random cells from the RV frame — a new family, not an online panel');
+  assert.ok(fams.has(sa.methodFamily));
+  assert.ok(sa.marketGap, 'the ≈0.83 market vs D 47/R 41 pre-primary poll must be recorded as a published gap');
+  const stg = find('stetson-2026-04-fl-governor');
+  assert.ok(stg, 'stetson-2026-04-fl-governor row');
+  assert.equal(stg.kalshiDemTicker, 'GOVPARTYFL-26-D');
+  assert.deepEqual([stg.candidates.D.pct, stg.candidates.R.pct, stg.n, stg.moe], [40, 47, 848, 4.1]);
+  assert.equal(stg.methodFamily, 'online-nonprobability-matched', 'CPOR: Qualtrics online non-probability panel, per its own methodology paragraph');
+  const sts = find('stetson-2026-04-fl-senate');
+  assert.ok(sts, 'stetson-2026-04-fl-senate row');
+  assert.equal(sts.kalshiEvent, 'SENATEFLS-26', 'the 2026 FL Senate seat is the short-term seat — SENATEFLS-26, not the 2028 class');
+  assert.equal(sts.kalshiDemTicker, 'SENATEFLS-26-D');
+  assert.deepEqual([sts.candidates.D.pct, sts.candidates.R.pct], [42, 49]);
+  const ppp = find('ppp-2026-07-nc-senate');
+  assert.ok(ppp, 'ppp-2026-07-nc-senate row');
+  assert.equal(ppp.kalshiDemTicker, 'SENATENC-26-D');
+  assert.deepEqual([ppp.candidates.D.pct, ppp.candidates.R.pct, ppp.n, ppp.moe], [48, 44, 759, 3.6]);
+  assert.equal(ppp.methodFamily, null, 'PPP mode/weighting not transcribed verbatim — methodFamily stays null (#49 discipline), the PDF link carries the methodology');
+  for (const r of [hpu126, hpuHouse, uhtxg, uhtxs, sa, stg, sts, ppp]) {
+    assert.equal(r.verifiedOn, '2026-09-20', `${r.id} verifiedOn`);
+    assert.match(r.source, /^https?:\/\//, `${r.id} source`);
+    assert.ok(fams.has(r.methodFamily) || r.methodFamily === null, `${r.id} methodFamily`);
+  }
+  // CIRCLE: youth poll is a subpopulation reading (no D/R race numbers), YESI lists are an independent prior.
+  const circ = PL.aggregatorReadings.find((a) => a.id === 'circle-2026-youth-poll');
+  assert.ok(circ, 'circle-2026-youth-poll aggregator reading');
+  assert.equal(circ.n, 5549);
+  assert.equal(circ.D, null, 'youth party-ID is not a race number — D/R stay null');
+  assert.ok(circ.partyIdentification, 'the 57/43 partisan split is recorded under its own key');
+  const prior = (PL.independentPriors || []).find((x) => x.id === 'circle-yesi-2026');
+  assert.ok(prior, 'circle-yesi-2026 independent prior');
+  assert.equal(prior.senate.length, 10);
+  assert.ok(prior.senate.includes('ME') && prior.senate.includes('TX'));
+  // Pending: FHSU (policy-only), Winthrop first national (issues-only), Roanoke (issues-only) — all verified, none ingested.
+  const pendingIds = PL.pendingSources.map((x) => x.id);
+  for (const id of ['fhsu-2025-fall-kansas-speaks', 'winthrop-2026-07-national', 'roanoke-2026-02']) {
+    assert.ok(pendingIds.includes(id), `pending: ${id}`);
+  }
+  assert.ok(!PL.stateRaces.some((r) => /winthrop|fhsu|roanoke/.test(r.id)), 'no rows fabricated from issues-only releases');
 });
 
 test('poll layer: session-6 rows carry #49 methodFamily labels and map to captured Kalshi events', () => {

@@ -1763,7 +1763,7 @@
       "verified": "Fetched directly 2026-09-20 (title 'SurveyUSA Polls'; the corporate site surveyusa.com points here as 'Visit our public polling archive data and crosstabs from 2002 - present'). Observed in the September 2026 list: '09/16/26 Poll #28000 — All SurveyUSA clients in Minnesota — Minnesota' with questions 'If the November election for Minnesota Governor were today ... who would you vote for? (candidate names rotated)' and 'If the November election for United States Senator from Minnesota were today ...'; '09/04/26 Poll #27971 — KGTV-TV (San Diego), San Diego Union-Tribune — CA 48th CD RBS'; '09/04/26 Poll #27975 — KOB-TV (Albuquerque) — NM-02' ('Republican Greg Cunningham? Or Democrat Gabe Vasquez?'). The per-poll report pages (client/PollReport.aspx?g=...) are client-rendered and returned an empty body to this fetcher, so no toplines were transcribed. Earlier sessions had tried surveypoll.com (irregularity #47), which still fails — the archive host is results.surveyusa.com.",
       "status": "verified",
       "category": "Pollsters & survey research",
-      "notes": "Admitted on the archive, not on numbers: the MN #28000 Senate/Governor toplines (SENATEMN-26 Peggy Flanagan D 0.903/0.904 and GOVPARTYMN-26 Amy Klobuchar D 0.943/0.951 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z)) become poll-layer rows only when the report page renders — it is a render:true target in data/probes/targets.json and listed in poll-layer pendingSources. Method family per #49 to be read from the rendered report (SurveyUSA discloses per-poll mode).",
+      "notes": "Admitted on the archive, not on numbers: the MN #28000 Senate/Governor toplines (SENATEMN-26 Peggy Flanagan D 0.903/0.904 and GOVPARTYMN-26 Amy Klobuchar D 0.943/0.951 in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z)) become poll-layer rows only when the report page renders — it is a render:true target in data/probes/targets.json and listed in poll-layer pendingSources. Method family per #49 to be read from the rendered report (SurveyUSA discloses per-poll mode). Re-test 2026-09-20: PollHistory.aspx fetches (full 09/16/26 question list for #28000 — MN horse-races for governor, US Senate, AG, SOS, Auditor + top issue + priorities + approvals waves on 09/20/26); report pages remain client-rendered (empty <body> in-session; probe verdict 'reachable' for the report URL) — #28000 MN toplines still NOT ingested (pendingSources).",
       "verifiedOn": "2026-09-20"
     },
     {
@@ -1774,7 +1774,7 @@
       "verified": "Fetched directly 2026-09-20 (title 'HarrisX'; unreachable in sessions 4-6, irregularity #47). Observed: post 'August Harvard CAPS / HarrisX Poll' dated September 2, 2026 (/posts/august-harvard-caps-harrisx-poll) headlined 'August Harvard CAPS / Harris Poll: Trump Approval Sees Slight Improvement at 44%' with 'MIDTERMS HORSERACE REMAINS TIGHT AT 51-49 WITH DEMOCRATS HOLDING A 2-POINT LEAD, BUT LEAD FLIPS TO REPUBLICANS +2 AMONG LIKELY MIDTERM VOTERS'; methodology verbatim: 'The August Harvard CAPS / Harris poll survey was conducted online within the United States on August 28-30, 2026, among 2,100 registered voters by The Harris Poll and HarrisX'; 'a monthly collaboration between the Center for American Political Studies at Harvard (CAPS) and the Harris Poll and HarrisX'; elections dashboard elections.harrisx.com (2024). Path note: thehillx.com still fails.",
       "status": "verified",
       "category": "Pollsters & survey research",
-      "notes": "Refines irregularity #43: the Harvard CAPS poll is co-branded 'The Harris Poll and HarrisX', so the two brands are not fully separate for this series. Generic-ballot row harrisx-2026-08-generic ingested with methodFamily online-optin-weighted; the release states no margin of error in its text (recorded as null). Read against CONTROLH-26 / CONTROLS-2026 (D 0.59/0.60) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z).",
+      "notes": "Refines irregularity #43: the Harvard CAPS poll is co-branded 'The Harris Poll and HarrisX', so the two brands are not fully separate for this series. Generic-ballot row harrisx-2026-08-generic ingested with methodFamily online-optin-weighted; the release states no margin of error in its text (recorded as null). Read against CONTROLH-26 / CONTROLS-2026 (D 0.59/0.60) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Re-test 2026-09-20 (daily probe run 35490431271, 05:38Z): probe verdict 'reachable' — the sessions 4-6 fetch failures (#47) do not reproduce through the probe runner's browser profile.",
       "verifiedOn": "2026-09-20"
     },
     {
@@ -1853,6 +1853,226 @@
       "category": "Academic & university research",
       "notes": "South Carolina 2026 on Kalshi: SENATESC-26 (Darline Graham R 0.86/0.87 vs Annie Andrews D 0.13/0.14) and GOVPARTYSC-26 (Alan Wilson R 0.932/0.949 vs Jermaine Johnson D 0.05/0.068) in the 2026-09-20 universe capture (data/kalshi/universe/latest.json, 2026-09-20T00:53Z). Poll results were not transcribed this session (results page not fetched); ingest from poll-results.aspx with the #49 label.",
       "verifiedOn": "2026-09-20"
+    },
+    {
+      "id": "dcboe",
+      "name": "District of Columbia Board of Elections (DCBOE)",
+      "type": "Official state-level election authority — DC delegate, mayor, council, AG; results, audits, ballot-order lottery",
+      "url": "https://dcboe.org/",
+      "verified": "Fetched directly 2026-09-20 (title 'Home | District of Columbia Board of Elections'). Observed on the homepage: ranked-choice-voting banner; news 'DCBOE to Conduct Public Lottery for Ballot Order on September 11' (GE2026_Ballot-Lottery_09092026_FINAL.pdf); 'DCBOE to Begin Pre-Election Testing of Voting Equipment on September 14' (GE2026_LA-Testing-Notice_090426_FINAL.pdf); 'DCBOE Reminds Military, Overseas Voters to Plan for the November 3, 2026 General Election' (GE2026_UOCAVA-notice_090326_FINAL.pdf); 'Manual Audit for the June 16, 2026 Special Election' (SE2026_Audit-Results_final_07162026.pdf); September 2026 voter-registration/RCS outreach events. 2026 calendar PDF (2026-General-Election-Calendar-Version-08072025.pdf, via search of dcboe.org) lists the Nov 3, 2026 contests: US House delegate, Mayor, Council Chairman, at-large + Ward 1/3/5/6 council, Attorney General, US Senator (UOCAVA-only).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Fills the only missing state-level board among the 51 jurisdictions in the master list. DC's contests are not individually priced on Kalshi as of the 2026-09-20 universe capture — DC rows would map to event-level notes, not tickers. The June 16, 2026 special-election audit PDF is a useful integrity artifact for the irregularities monitor.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "maricopa-county-az",
+      "name": "Maricopa County Elections (Recorder & Elections)",
+      "type": "Official county election authority — the nation's 3rd-largest voting jurisdiction; voter dashboard, early-voting list, mail-ballot tracking",
+      "url": "https://elections.maricopa.gov/",
+      "verified": "Fetched directly 2026-09-20 (title 'Maricopa County Elections'). Observed: '2,538,491 Active Registered Voters as of January 2, 2026'; '1,966,254 Active Early Voting List as of January 2, 2026'; '3rd largest — Maricopa county is the 3rd largest voting jurisdiction in the country' (transcribed as displayed); links: Where-to-Vote, Election Calendar, Voter Dashboard login, 'Just the Facts' myth-response page. The Recorder's Office (recorder.maricopa.gov) carries the same election menu and posts, as of September 13, 2026, a photo-ID requirement for in-person/kiosk recordings per ARS §11-472 (observed via search of the official domain).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "County-level downballot and mail-ballot tracking layer for Arizona after Nov 3 (senate + AG/SOT + countywide). Pair with the AZ SOS for certification. The '2nd largest' vs '3rd largest' phrasing differs between press and the county's own page — the county's page is the record here.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "king-county-wa",
+      "name": "King County Elections (Clerk of the Court)",
+      "type": "Official county election authority — ~1.4M registered voters; ballots, results (10-year archive), data & statistics",
+      "url": "https://kingcounty.gov/en/dept/elections/",
+      "verified": "Fetched directly 2026-09-20 (title 'King County Elections - King County, Washington'). Observed: 'Find election results' (/en/dept/elections/results and /results/2026); 'November 2026 General Election — Election Day is November 3, 2026' with ballot-measures (eid=55) and candidates pages; 'Past election results — Find archived election results from the past 10 years'; 'Data and statistics' and data-request links; ballot-tracking app (info.kingcounty.gov, 1.4M+ registered voters per the department).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Washington county layer for the Nov 3 ballot measures (WA measures are a Kalshi-adjacent topic) and certification. The old /elections-and-voting.aspx path is a 404 — the canonical path is /en/dept/elections/ (recorded so a future fetcher does not chase the stale URL).",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "harris-county-tx",
+      "name": "Harris County Elections ('Harris Votes')",
+      "type": "Official county election authority — Houston countywide; live results, sample ballot, early voting, vote centers",
+      "url": "https://www.harrisvotes.com/",
+      "verified": "Fetched directly 2026-09-20 (harrisvotes.com homepage, menu fully rendered). Observed: 'November 3, 2026 - General and Special Elections'; early voting 'OCT 19 - OCT 30' with hours; mail-ballot deadline 'OCT 23'; Election Results section (Live Results, Archives, Election Rosters, Election Reports); 2026 sample-ballot PDF (ENG-SPA); Harris Votes app; 'Harris County Elections Administrator, 1001 Preston St, 439, Houston, TX, 77002'.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Official portal located via the county site's own menu (the direct /departments/clerk/elections path on harriscountytx.gov is a 404 — recorded). Countywide Texas downballot layer (Harris County ≈ 2M+ voters; the most populous US county) for post-Nov-3 verification of KXSTATELEG-TX results context.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "wayne-county-mi",
+      "name": "Wayne County Clerk — Elections Division",
+      "type": "Official county election authority — Detroit area; voter info, candidate info, campaign finance, results archive 2011-2024",
+      "url": "https://www.waynecountymi.gov/Government/Elected-Officials/Clerk",
+      "verified": "Fetched directly 2026-09-20 (title 'Clerk - Wayne County, Michigan'). Observed: Elections section — Voter Information, Michigan Voter Information Center, Candidate Information, Campaign Finance Information, 'Election Results & Candidates' (archives 2011-2024), Election FAQs, Election Commission (Chairperson David Braxton, Chief Judge Probate Court; Secretary Cathy M. Garrett, Wayne County Clerk; Member Eric Sabree, Treasurer), Board of Canvassers; Elections Division contact (313) 224-5525, 2 Woodward Avenue Suite 502.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "waynecounty.com now redirects to waynecountymi.gov (observed 2026-09-20 — update any stale bookmarks). Michigan is on the CIRCLE YESI 2026 governor list (WI, GA, IA, MI, ...) and Senate top-10 — Wayne County results are the urban-Detroit counterweight for post-Nov-3 canvass checks against the state totals.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "clark-county-nv",
+      "name": "Clark County Election Department",
+      "type": "Official county election authority — southern NV (Las Vegas); candidate filing, mail ballots, historical results 1910-1996",
+      "url": "https://www.clarkcountynv.gov/government/departments/elections/",
+      "verified": "Fetched directly 2026-09-20 (title 'Clark County Election Department | Official Site'). Observed: full services menu — Campaign Finance, Candidate Filing, Elections and Voting, Mail Ballots, Petitions, Voter Registration (incl. same-day registration, felons' voting-rights page, field registrars); 'All Elected Officials' index (federal, statewide, state senate/assembly, countywide, judicial, municipal); 'Historical Election Documentation (1910-1996)'; 'Reports, Data, Maps'.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Nevada's largest county (Las Vegas valley) — the urban counterweight for NV downballot checks; NV is on the CIRCLE YESI 2026 governor list. The legacy /sos-elections state path remains Akamai-blocked (probe 2026-09-20: 'blocked-akamai-block'), so the county layer is the practical results path for the metro area.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "cook-county-il",
+      "name": "Cook County Clerk — Elections (suburban Cook County)",
+      "type": "Official county election authority — suburban Cook County precinct-level results, certification, write-ins",
+      "url": "https://www.cookcountyclerkil.gov/",
+      "verified": "Located via live search on 2026-09-20; direct fetch of the results hosts returned 500 at verification time (cookcountyelections.com → 500; the cookcountyil.gov department path → 404), so the observed content comes from dated pages on the official domain surfaced by the search: results326.cookcountyclerkil.gov shows 'March 17, 2026 Gubernatorial Primary — Suburban Cook County Election Results — 100.00% / 1430 of 1430 Precincts Reporting' (posted 05/06/2026 05:17 PM; Ballots Cast 394,256; Registered Voters 1,727,843; note that write-in totals are summary-only and official certificates follow the canvas) and a November 26, 2024 press release ('Cook County Clerk Certifies Presidential Election Results' — township and precinct-level certified results at cookcountyclerk.com/results).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Covers suburban Cook County (the City of Chicago runs a separate office) — the distinction matters for IL delegation checks. DIRECT 200 re-fetch is required before machine ingestion (next session); until then treat as verified-by-search with a live 2026 results page, per the per-entry evidence standard.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "ippsr-msu",
+      "name": "Michigan State University — Institute for Public Policy and Social Research (IPPSR)",
+      "type": "University research institute — State of the State Survey (quarterly), OSR fieldwork, Michigan political polling",
+      "url": "https://ippsr.msu.edu/",
+      "verified": "Fetched directly 2026-09-20 (title 'Homepage | Institute for Public Policy and Social Research'). Observed: '1 September, 2026 — MSU Poll Shows Democrats Lead, Republicans Coalesce Behind Rogers — The Institute for Public Policy and Social Research at Michigan State University (IPPSR) released the latest iteration of the long-running State of the State Survey. Conducted by the Office for Survey Research at Michigan State University (OSR)'; '20 April, 2026 — MSU Governors Poll Shows Slight Benson Lead, But No Clear-Cut Frontrunner'; program pages for SOSS, OSR, MPLP, MAPPR.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Active 2026 Michigan horse-race pollster (MI = CIRCLE YESI senate + governor state). The September 1, 2026 MSU Senate release and the April 2026 governors release are the first two 2026-cycle MSU candidates for poll-layer rows (SENATEMI-26 / GOVPARTYMI-26) once their full methodology pages are fetched and transcribed.",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "stetson-cpor",
+      "name": "Stetson University — Center for Public Opinion Research (CPOR)",
+      "type": "University polling center (founded 2022) — Florida polls; Spring 2026 survey with 2026 governor + senate horse races",
+      "url": "https://www2.stetson.edu/today/2026/04/stetson-poll-republicans-lead-in-florida-2026-races-but-many-voters-still-undecided/",
+      "verified": "Fetched directly 2026-09-20 (Stetson Today, 'Stetson Poll: Republicans Lead in Florida 2026 Races, But Many Voters Undecided', April 24, 2026, by Cory Lancaster). Observed: 'The survey of 848 likely Florida voters, conducted between March 25 and April 13, finds Republican candidates leading in both the governor's race and U.S. Senate contest'; Donalds 47 / Jolly 40 and Donalds 46 / Demings 42 (~7% undecided each); Moody 49 / Vindman 42 and Moody 51 / Nixon 38; methodology paragraph: 'collected 848 responses from Florida adults via an online non-probability sample from Qualtrics's panels from March 25 to April 13, 2026', LV by 'modeled turnout score', weighted 'by race, ethnicity, education, gender, and region', 'margin of error is ±4.1 percentage points'; 'About Stetson University's Center for Public Opinion Research (CPOR) — Founded in 2022 ... independent, non-partisan'.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Both rows ingested: stetson-2026-04-fl-governor (GOVPARTYFL-26-D) and stetson-2026-04-fl-senate (SENATEFLS-26-D — the 2026 FL Senate seat is the short-term/special seat; verified against the 2026-09-20 universe, where SENATEFL-28 is the 2028 class). FL = 2026 governor + senate; the release's '85%–91% of voters supporting their party's candidate' and the gender split are recorded in the rows' context notes.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "rasmussen-reports",
+      "name": "Rasmussen Reports",
+      "type": "Long-running commercial polling firm (since 2003) — daily presidential tracking, generic congressional ballot, state race polls",
+      "url": "https://www.rasmussenreports.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'Rasmussen Reports®: The Most Comprehensive Public Opinion Data Anywhere'). Observed: 'Public opinion polling since 2003'; 'Daily Presidential Tracking Poll' (prez_track_sep18); 'Generic Congressional Ballot' (mood_of_america/generic_congressional_ballot_sep14 — 'The Democratic Party continues to hold a five-point lead over Republicans in the battle to control the House of Representatives'); 'Election 2026: Georgia Governor' page (elections/election_2026/election_2026_georgia_governor); economic index series; 'What They Told Us: Reviewing Last Week's Key Polls' (Sep 19).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Rasmussen is a named component of the RCP generic-ballot average (see rcp-generic-2026-09-17 in poll-layer-2026.json). Paywall note (observed banner): full article/poll access is behind the 'Platinum' subscription ($4.95/month) — headline toplines and the tracking summary are public. Method: landline+cell RDD (the firm's standard) — confirm per release before ingesting a row (methodFamily is assigned from each release's own wording).",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "public-policy-polling",
+      "name": "Public Policy Polling (PPP)",
+      "type": "Commercial polling firm — fast, low-cost voter polls (text-based opt-in panel); national + state race series",
+      "url": "https://www.publicpolicypolling.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'Home - Public Policy Polling'). Observed: 'Accurate, Affordable, Across the Country'; 'Latest Poll: Cooper leads, but Whatley has a path' — 'PPP's newest North Carolina poll finds that Roy Cooper continues to lead Michael Whatley, 48-44' (released July 13, 2026; 'PPP interviewed 759 North Carolina voters on July 10th and 11th. The survey's margin of error is +/-3.6%'; full results PDF linked); 'How Our Polls Did in 2024' retrospective; SMS opt-in signup form ('Want to be polled? ... Cell Phone ... Reply STOP to opt out').",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "NC Senate row ingested: ppp-2026-07-nc-senate (SENATENC-26-D; Cooper 48 / Whatley 44; n=759 NC voters; ±3.6). methodFamily left null (#49 discipline) until the full-methodology PDF's mode/weighting paragraph is transcribed verbatim. Same release also carries NC Supreme Court (Earls 44 / Stevens 42) and the legislative generic (D 46 / R 44) — recorded in the row's methodNote, not as separate rows (no Kalshi equivalents).",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "echelon-insights",
+      "name": "Echelon Insights",
+      "type": "Strategic research / polling firm — public opinion, voter analytics, message testing; publishes analysis (2026 Political Tribes)",
+      "url": "https://echeloninsights.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'Echelon Insights'). Observed: 'Echelon Insights is a strategic research firm providing leaders across industries and institutions with the most comprehensive understanding of what their voters, customers, and key audiences really think and feel'; featured '2026 Political Tribes — ... the beliefs, coalitions, and tensions shaping the American electorate ... track shifts in public opinion from 2021 to 2026'; 'The New Politics of American Business — Using a cluster analysis of verified voters'; client logos (NRSC, New York Times, Club for Growth, EdChoice, NetChoice, Walton Family Foundation); Substack presence.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Cited in 2026 FL gubernatorial press (floridianpress.com, Apr 27, 2026: 'Stetson's poll follows similar findings showing Donalds with a steady lead ... The poll of 848 likely voters' refers to Stetson; Echelon's own FL release is cited as 'a similar Echelon Insights poll'). No 2026 horse-race release posted on the homepage as of 2026-09-20 — admitted for the firm's polling program; ingest the first public FL (or other 2026-state) release with full methodology.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "unf-porl",
+      "name": "University of North Florida — Public Opinion Research Lab (PORL)",
+      "type": "University polling lab (since 2001) — one of only two dedicated live-caller academic survey centers in Florida; 538-rated #12 (2024)",
+      "url": "https://www.unf.edu/coas/porl/",
+      "verified": "Located via live search on 2026-09-20 across the official unf.edu domain: contact page (unf.edu/coas/porl/contact.html — 'Public Opinion Research Lab | porl@unf.edu | 904-620-2784', faculty director Sean Freeder) and newsroom (unf.edu/newsroom/2024/01/PORL-best-pollster-rating.html — 'The University of North Florida Public Opinion Research Lab (PORL) has been named the 12th best pollster in America by 538 ... opened in 2001, is one of only two dedicated live caller academic survey centers in Florida ... In 2023, PORL conducted 31 large polling projects with over 14,150 surveys completed'). Live 2026 series confirmed by press coverage of official lab polls: floridapolitics.com (Jul 20, 2026) 'A poll from the University of North Florida's Public Opinion Research Lab shows ... Byron Donalds ahead of likely Democratic pick David Jolly 46% to 41%' (848 voters, Jul 17) and floridaphoenix.com (Oct 28, 2025) 728 likely voters, Donalds 45 / Jolly 34.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Method: live-caller academic (per the newsroom — 'dedicated live caller academic survey centers'); the live-caller-rdd family is the expected label once a release's own methodology is transcribed (not assumed). First UNF release to ingest: the July 2026 FL governor poll (GOVPARTYFL-26) — fetch the lab's full release + topline PDF before row creation. MI? No — FL state lab; watch for a 2026 senate (Moody) poll too. The /coas/porl/ lab home page itself was NOT directly fetched this session (contact + newsroom pages read via search of the unf.edu domain) — a direct 200 re-fetch of the lab home page is required before it is cited as the canonical URL in any row.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "usatoday",
+      "name": "USA Today",
+      "type": "National newspaper (Gannett/USA Today Co.) — news, election coverage and results",
+      "url": "https://www.usatoday.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'USA TODAY - Breaking News and Latest News Today'). Observed: live front page dated September 20, 2026 (NFL scoreboard + national news tiles); sister paper of the Des Moines Register (same corporate family, Gannett/USA Today Co).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Session-8 news expansion (5 of 20 new entries): national cross-check desk for the Nov 3 results cycle. No dedicated 2026 election hub URL was observed on the front page at fetch time — the general news front is the admitted page.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "latimes",
+      "name": "Los Angeles Times (LA Times Media Group)",
+      "type": "Major metropolitan newspaper — California + national; 2026 LA mayoral race coverage",
+      "url": "https://www.latimes.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'News from California, across the nation and world - Los Angeles Times'). Observed: live front page (September 20, 2026) — 'The Race for Mayor' section (Mayor Karen Bass reelection interview, Sept 16, 2026; Councilmember Nithya Raman announcing her run, Sept 20, 2026); 'California Republicans walk a tightrope as Trump jumps into midterms campaigning' (Sept 20, 2026, RNC Dallas coverage); LA Times Media Group streaming + eNewspaper; subscriber-marked articles labelled 'For Subscribers'.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Key California desk for the Nov 3 ballot measures and the LA mayoral race (a Kalshi-adjacent market topic); some stories are subscriber-only (label observed and recorded — free cross-checks use the headline/summary text only).",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "theguardian-us",
+      "name": "The Guardian — US news",
+      "type": "International (UK) newspaper with a US news desk — free to read; US politics, midterms, state coverage",
+      "url": "https://www.theguardian.com/us-news",
+      "verified": "Fetched directly 2026-09-20 (title 'US news from the Guardian | The Guardian'). Observed: live US section (September 20, 2026) — \"'I don't trust him any more': Pennsylvanians come to grips with John Fetterman's rightwing turn\" (PA profile); \"'People are pissed off': anger at the elite and the establishment is fueling this year's midterms\"; 'Leftists make waves and Trump flexes muscles: US primary season takeaways'; 'Gavin Newsom signs election security bills to thwart federal interference by Trump' (Sept 19, 2026).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Free (no paywall observed) — useful as an independent non-US wire cross-check on the PA/CA/Newsom stories that overlap the Kalshi state events. UK outlet: used for news cross-checks, never as a pollster or results source.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "ajc",
+      "name": "The Atlanta Journal-Constitution (AJC)",
+      "type": "Major metropolitan newspaper — Atlanta/Georgia news; long history in Georgia polling",
+      "url": "https://www.ajc.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'Atlanta news, Georgia news, Breaking news from The Atlanta Journal-Constitution - AJC.com'). Observed: live front page (September 20, 2026) — Georgia/Atlanta coverage (Corpay FTC settlement, MARTA, Falcons, Shaky Knees Festival).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Georgia is a CIRCLE YESI 2026 state (senate + governor) and has a Kalshi GOVPARTYGA-26 / SENATEGA-26 pair. The AJC's historical Georgia polling (incl. with Gallup) makes it the state paper to watch for a 2026 GA horse-race release; none posted at fetch time — admitted as news desk, poll ingestion only when a release with methodology appears.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "desmoinesregister",
+      "name": "The Des Moines Register",
+      "type": "Iowa's daily newspaper (since 1849, Gannett/USA Today Co.) — 16 Pulitzer Prizes; long-running Iowa polling tradition",
+      "url": "https://www.desmoinesregister.com/",
+      "verified": "Fetched directly 2026-09-20 (title 'The Des Moines Register - Des Moines, Iowa, News and Sports'). Observed: live front page (September 20, 2026) — Iowa coverage incl. politics ('In Iowa, Sen. Kennedy blames Iran war for inflation, sees end ahead', Sept 20, 2026, in the /news/politics/elections/ path); official domain confirmed by the Wikipedia entry (retrieved Aug 30, 2026).",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Iowa 2026 = senate + governor (both on the CIRCLE YESI lists; Kalshi events SENATEIA-26 / GOVPARTYIA-26 exist). Watch for a 2026 Des Moines Register Poll release — if it publishes a horse race with methodology, it is a poll-layer row candidate; until then this is the news desk.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "manifold-markets",
+      "name": "Manifold Markets",
+      "type": "Free community forecasting platform — user-created markets, community-scored (NOT a regulated exchange; no USD settlement guarantee)",
+      "url": "https://manifold.markets/",
+      "verified": "Fetched directly 2026-09-20 (title 'Manifold'). Observed: live site with a '2026 Midterms' tag, a '2026 US Congressional Elections' forum, and a '2028 US Presidential Election' topic market (JD Vance 21%, Other 16%, Jon Ossoff 10%, Marco Rubio 10%, Gavin Newsom 10%, plus a long candidate tail); active politics/AI/sports markets with bettor counts and volume glyphs.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Third forecasting layer alongside Kalshi (exchange) and Metaculus (question forums, scored continuously by scripts/collect-metaculus.mjs). Honest limitations, stated: user-created markets, no guarantee of resolution quality, community scoring rather than financial settlement — used as a crowd-price cross-layer with those caveats, never merged into the official Kalshi backtest. No collector yet — see ROADMAP.",
+      "category": "Prediction markets & exchange data"
+    },
+    {
+      "id": "clarity-enr",
+      "name": "Clarity ENR — official election results host (SOE Software)",
+      "type": "Private vendor hosting OFFICIAL election-results sites for dozens of jurisdictions (GA, WV, MS, WI, ...); structured XML/CSV/XLS exports documented",
+      "url": "https://results.enr.clarityelections.com/GA/",
+      "verified": "Fetched directly 2026-09-20: the host answers the plain fetcher with '403 Forbidden (nginx)'; the daily probe runner (browser profile, run 35490431271, 2026-09-20T05:38Z) records ga-clarity 'reachable' and wv-clarity 'reachable'. The parse path is publicly documented at github.com/openelections/clarify (OpenElections): Clarity sites are 'recognizable by URLs that begin with http://results.enr.clarityelections.com', carry 'statewide summary results, voter turnout statistics, and a page linking to county-specific results', and expose structured data at .../reports/detailxml.zip (XML/CSV/XLS). Vendor: SOE Software (Florida), formerly branded 'Election Management Solutions' / 'Clarity'.",
+      "verifiedOn": "2026-09-20",
+      "status": "verified",
+      "notes": "Treated as an official results PUBLISHER (the state's contracted results host), not a private tracker. Daily probe re-tests GA/WV/MS/CA/WI paths (data/probes/targets.json; verdicts in latest.json). The GA plain-fetcher 403 vs probe-runner 'reachable' split is recorded exactly as observed — the probe runner (GitHub-hosted, browser UA) is the path that will pull post-Nov-3 GA certification. WV improving from blocked (sessions 3-6) to 'reachable' (2026-09-20) is flagged as a positive change for the WV results layer.",
+      "category": "Official publishers & archives"
     }
   ],
   "categories": [
@@ -1862,27 +2082,27 @@
     },
     {
       "name": "Government — state & local",
-      "count": 53
+      "count": 60
     },
     {
       "name": "Official publishers & archives",
-      "count": 3
+      "count": 4
     },
     {
       "name": "Academic & university research",
-      "count": 20
+      "count": 21
     },
     {
       "name": "Pollsters & survey research",
-      "count": 28
+      "count": 33
     },
     {
       "name": "News outlets & wires",
-      "count": 17
+      "count": 22
     },
     {
       "name": "Prediction markets & exchange data",
-      "count": 9
+      "count": 10
     },
     {
       "name": "Ratings, forecasts & analysis",

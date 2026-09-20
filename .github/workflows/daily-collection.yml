@@ -155,6 +155,28 @@ jobs:
           node scripts/run-senate-backtest.mjs || echo "::warning::senate backtest rerun failed"
           node scripts/run-calibration.mjs || echo "::warning::calibration tracker rerun failed"
 
+      - name: Snapshot this run's kalshi capture (integrity anchor for the commit step)
+        id: kanchor
+        run: |
+          # Hash exactly the files collect-kalshi.mjs writes (taken AFTER the cross-check merge of
+          # tracker/history.json, since that rewrite is expected within this run). The commit step
+          # re-hashes them after any rebase and re-captures if a push race mixed another run's rows
+          # into them: a 3-way merge of the ~4MB universe JSON can splice two captures' blocks
+          # together (irregularity #65, 2026-09-20: bySeries from one fetch state, events from
+          # another). The commit must stay a single-run snapshot.
+          sha256sum \
+            data/kalshi/universe/latest.json \
+            data/kalshi/universe/series.json \
+            data/kalshi/tracker/index.json \
+            data/kalshi/tracker/settlements.json \
+            data/kalshi/tracker/calibration.json \
+            data/kalshi/tracker/discrepancy-watch.json \
+            data/kalshi/tracker/history.json \
+            "data/kalshi/tracker/daily/$(date -u +%F).csv" \
+            "data/kalshi/tracker/daily/$(date -u +%F).meta.json" \
+            | sha256sum | awk '{print $1}' > "$RUNNER_TEMP/kalshi-capture.sha256"
+          echo "kalshi-capture-hash=$(cat "$RUNNER_TEMP/kalshi-capture.sha256")" >> "$GITHUB_OUTPUT"
+
       - name: Regenerate backtests, contest, site bundle
         id: pipeline
         run: npm run pipeline
@@ -208,8 +230,38 @@ jobs:
           # Push race: a human commit may land while this job runs. Rebase onto it; if a generated file
           # conflicts (site bundle, tracker files) keep THIS run's version (-X theirs during a rebase means
           # the commit being replayed, i.e. the bot commit) — those files are regenerated every run anyway.
+          #
+          # Single-run-snapshot guard (irregularity #65, 2026-09-20): -X theirs resolves whole conflicts in
+          # the bot's favour, but a 3-way merge of the ~4MB universe JSON can still splice clean hunks from
+          # the other side into it (bySeries/topMarkets from one capture next to events from another — the
+          # committed file then fails the offline replay test). After every rebase, re-hash the files this
+          # run wrote and, if they changed, recapture so the pushed commit is again one consistent run.
+          recapture_if_mixed() {
+            local now
+            now=$(sha256sum \
+                data/kalshi/universe/latest.json \
+                data/kalshi/universe/series.json \
+                data/kalshi/tracker/index.json \
+                data/kalshi/tracker/settlements.json \
+                data/kalshi/tracker/calibration.json \
+                data/kalshi/tracker/discrepancy-watch.json \
+                data/kalshi/tracker/history.json \
+                "data/kalshi/tracker/daily/$(date -u +%F).csv" \
+                "data/kalshi/tracker/daily/$(date -u +%F).meta.json" \
+                2>/dev/null | sha256sum | awk '{print $1}')
+            if [ "$now" = "${{ steps.kanchor.outputs.kalshi-capture-hash }}" ]; then return 0; fi
+            echo "::warning::rebase changed this run's kalshi files — recapturing so the commit stays a single-run snapshot (#65)"
+            node scripts/collect-kalshi.mjs
+            npm run pipeline
+            npm run lint
+            npm test
+            git add -A data/ src/data/ docs/data/
+            git commit --amend --no-edit
+          }
           for i in 1 2 3; do
-            if git pull --rebase -X theirs origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            if git pull --rebase -X theirs origin "${{ github.ref_name }}"; then
+              if recapture_if_mixed && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            fi
             git rebase --abort 2>/dev/null || true
             sleep 10
           done

@@ -117,6 +117,18 @@ test('State Navigate parsers reproduce the national headline and the VA lower-ch
   assert.equal(c.odds.tie, 0.5); // "<1%" recorded as 0.5, documented
   assert.equal(c.title, '2025 Virginia State Legislative Forecast');
   assert.equal(parseChamber('<p>no forecast</p>').parse, 'failed');
+  // 2026-09-20 reworded layout (session 8): labels before numbers, "state legislative seats", "seats. +14"
+  const n2 = parseNational(fx('statenavigate-national-2026-09-20.txt'));
+  assert.equal(n2.parse, 'ok');
+  assert.deepEqual([n2.seatsForecasted, n2.dPickups, n2.rPickups, n2.statesWithModel, n2.chambers, n2.closeSeats, n2.projectedFlips], [2306, 126, 11, 14, 27, 142, 137]);
+  const c2 = parseChamber(fx('statenavigate-mn-lower-2026-09-20.txt'));
+  assert.equal(c2.parse, 'ok');
+  assert.deepEqual(c2.D, { seats: 81, change: 14 });
+  assert.deepEqual(c2.R, { seats: 53, change: -14 });
+  assert.equal(c2.odds.dTrifecta, 93.5);
+  assert.equal(c2.odds.rTrifecta, 0.6);
+  assert.equal(c2.odds.dividedGovernment, 5.9);
+  assert.equal(c2.title, '2026 Minnesota State Legislative Forecast');
 });
 
 test('R13 parsers: EBO Kalshi row, DDHQ context odds, 270toWin panel; compareRange flags beyond tolerance', () => {

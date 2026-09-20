@@ -47,17 +47,28 @@ const keepJson = (html) => String(html).replace(/<script[^>]*type=["']applicatio
 const strip = (html) => keepJson(html).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;?/g, ' ').replace(/&#x[0-9a-f]+;?/gi, ' ').replace(/&#\d+;?/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/(\d)\s+%/g, '$1%').replace(/\s+/g, ' ');
 const int = (re, t) => { const m = t.match(re); return m ? Number(m[1].replace(/,/g, '')) : null; };
 
-/** National page: headline counts. Regexes match the phrases observed on 2026-09-19. */
+/**
+ * National page: headline counts. Dual-format regexes: the 2026-09-19 layout ("2,306 seats
+ * forecasted", "14 states with current 2026 model", "27 chambers") was reworded by 2026-09-20
+ * ("2,306 state legislative seats forecasted", "States 14 with a current 2026 model",
+ * "Chambers 27 included in this view", "Close seats 142 within 5 projected points",
+ * "Projected flips 137 where the modeled leader changes the seat's party") — both observed
+ * rendered texts are in the test fixtures; each number must still be transcribed, never filled in.
+ */
 export function parseNational(html) {
   const t = strip(html);
+  const first = (res) => res.find((x) => x != null);
   const out = {
-    seatsForecasted: int(/([\d,]+)\s+seats forecasted/i, t),
+    seatsForecasted: int(/([\d,]+)\s+(?:state legislative\s+)?seats forecasted/i, t),
     dPickups: int(/([\d,]+)\s+D pickups/i, t),
     rPickups: int(/([\d,]+)\s+R pickups/i, t),
-    statesWithModel: int(/(\d+)\s+states with current 2026 model/i, t),
-    chambers: int(/(\d+)\s+chambers/i, t),
-    closeSeats: int(/(\d+)\s+close seats/i, t),
-    projectedFlips: int(/(\d+)\s+projected flips/i, t),
+    statesWithModel: first([
+      int(/(\d+)\s+states with (?:a\s+)?current 2026 model/i, t),
+      int(/states\s*(\d+)\s+with (?:a\s+)?current 2026 model/i, t),
+    ]),
+    chambers: first([int(/(\d+)\s+chambers/i, t), int(/chambers\s*(\d+)/i, t)]),
+    closeSeats: first([int(/(\d+)\s+close seats/i, t), int(/close seats\s*(\d+)/i, t)]),
+    projectedFlips: first([int(/(\d+)\s+projected flips/i, t), int(/projected flips\s*(\d+)/i, t)]),
   };
   out.parse = out.seatsForecasted == null ? 'failed' : 'ok';
   if (out.parse === 'failed') out.sample = t.slice(0, 300);
@@ -67,20 +78,30 @@ export function parseNational(html) {
 /** Per-chamber page: "Democrats favored to win 60 seats (+9)" / "Republicans ... 40 (−9)" and majority odds. */
 export function parseChamber(html) {
   const t = strip(html);
+  // Seat line, three observed formats:
+  //   2026-09-19 VA:  "Democrats favored to win 60 seats (+9)" / "Republicans 40 (−9)"
+  //   2026-09-20 MN:  "Democrats are favored to win 81 seats. +14" / "Republicans are favored to win 53 seats. -14"
   const seat = (party) => {
     const m = t.match(new RegExp(`${party}s?[^.]{0,40}?favored to win\\s+(\\d+)\\s+seats?\\s*\\(([+\\-−–]?\\d+)\\)`, 'i'))
+      || t.match(new RegExp(`${party}s?(?:\\s+are|\\s+is)?\\s+favored to win\\s+(\\d+)\\s+seats?\\s*[.:;]?\\s*([+\\-−–]\\d+)`, 'i'))
       || t.match(new RegExp(`${party}s?\\s+(\\d+)\\s*\\(([+\\-−–]?\\d+)\\)`, 'i'));
-    return m ? { seats: Number(m[1]), change: Number(m[2].replace(/[−–]/, '-')) } : null;
+    return m ? { seats: Number(m[1]), change: Number(m[2].replace(/[−–]/g, '-')) } : null;
   };
   const p = (re) => { const m = t.match(re); return m ? (m[1] === '<1' ? 0.5 : Number(m[1])) : null; };
+  const pct = (re) => { const m = t.match(re); return m ? Number(m[1]) : null; };
   const out = {
     title: (t.match(/(\d{4} [A-Z][a-z]+(?: [A-Z][a-z]+)? State Legislative Forecast)/) || [])[1] || null,
     D: seat('Democrat'),
     R: seat('Republican'),
     odds: {
+      // 2026-09-19 layout: "D majority 82%" / "Tie <1%" / "R majority 4%"
       dMajority: p(/D(?:emocratic)? majority[^\d<]{0,20}(<1|\d{1,3})%/i),
       rMajority: p(/R(?:epublican)? majority[^\d<]{0,20}(<1|\d{1,3})%/i),
       tie: p(/tie[^\d<]{0,20}(<1|\d{1,3})%/i),
+      // 2026-09-20 layout: "93.5% Democratic trifecta" / "5.9% Divided government" / "0.6% Republican trifecta"
+      dTrifecta: pct(/(\d{1,3}(?:\.\d+)?)%\s*Democratic trifecta/i),
+      rTrifecta: pct(/(\d{1,3}(?:\.\d+)?)%\s*Republican trifecta/i),
+      dividedGovernment: pct(/(\d{1,3}(?:\.\d+)?)%\s*Divided government/i),
     },
   };
   out.parse = out.D || out.R ? 'ok' : 'failed';

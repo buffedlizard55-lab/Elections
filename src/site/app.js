@@ -232,7 +232,7 @@
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
       <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
-      <td class="num"><strong>${pct(r.marketDemProb, 1)}</strong> <span class="small">${esc(r.kalshiDemTicker)} · ${esc(r.marketBasis)}</span></td>
+      <td class="num"><strong>${pct(r.marketDemProb, 1)}</strong> <span class="small">${r.kalshiDemTicker ? esc(r.kalshiDemTicker) : '— (null by design)'} · ${esc(r.marketBasis)}</span></td>
       <td class="num ${cls(r.gap)}">${r.gap == null ? '—' : pp(r.gap * 100, 1)}</td>
       <td>${srcs([r.source])}</td></tr>`).join('');
     const rc = PL.ratingsComparison;
