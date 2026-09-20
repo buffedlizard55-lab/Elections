@@ -5,9 +5,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { brier, logLoss, midpoint, spread, scoreSnapshots } from '../src/crosslayer.js';
-import { parseHub, appendSnapshots } from '../scripts/collect-metaculus.mjs';
+import { parseHub, appendSnapshots, parseQuestionPage, appendSeatSnapshots, SENATE_EVENT } from '../scripts/collect-metaculus.mjs';
 import { parseNational, parseChamber } from '../scripts/collect-statenavigate.mjs';
-import { parseEbo, parseDdhq, parse270, compareRange } from '../scripts/crosscheck-renderings.mjs';
+import { parseEbo, parseDdhq, parse270, compareRange, compareLast } from '../scripts/crosscheck-renderings.mjs';
+import { looksLikeChallenge, htmlToText, pageTitle } from '../scripts/lib/render.mjs';
+import { verdictFor } from '../scripts/probe-hosts.mjs';
 
 const fx = (n) => readFileSync(new URL(`./fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -103,8 +105,18 @@ test('R13 parsers: EBO Kalshi row, DDHQ context odds, 270toWin panel; compareRan
   assert.equal(d.houseD, 0.7); assert.equal(d.senateD, 0.52);
   const t = parse270(fx('270towin-2026-09-19.txt'));
   assert.equal(t.extract, 'ok');
-  assert.deepEqual(t.kalshiPanel, { a: 0.57, b: 0.41, asOf: 'Sep. 19, 2026 at 20:29 UTC' });
+  assert.equal(t.kalshiPanel.dem, 0.57); assert.equal(t.kalshiPanel.rep, 0.41); assert.equal(t.kalshiPanel.asOf, 'Sep. 19, 2026 at 20:29 UTC');
   assert.equal(t.kpow.value, '+1.90 D');
+  // 2026-09-20 homepage text (the first live run failed on this panel, #58): heading-anchored, last-trade basis, KPOW token before "as of"
+  const t2 = parse270(fx('270towin-2026-09-20.txt'));
+  assert.equal(t2.extract, 'ok');
+  assert.deepEqual([t2.kalshiPanel.dem, t2.kalshiPanel.rep, t2.kalshiPanel.asOf], [0.57, 0.41, 'Sep. 19, 2026 at 02:44 UTC']);
+  assert.match(t2.kalshiPanel.basis, /most recent yes trade/);
+  assert.deepEqual(t2.kpow, { value: '+1.90 D', asOf: '9/17/26 11:53 AM EDT' });
+  const last = compareLast(t2.kalshiPanel.dem, { last_price: 0.58, yes_bid: 0.58, yes_ask: 0.59 });
+  assert.equal(last.comparable, true); assert.equal(last.diff, -0.01); assert.equal(last.flagged, false);
+  assert.equal(compareLast(0.57, { last_price: 0.7 }).flagged, true);
+  assert.equal(compareLast(null, { last_price: 0.7 }).comparable, false);
   const cmp = compareRange(e.senateDemKalshi, { yes_bid: 0.59, yes_ask: 0.6 });
   assert.equal(cmp.comparable, true);
   assert.equal(cmp.flagged, false); // 0.589 vs 0.595
@@ -123,4 +135,61 @@ test('seed snapshot file is consistent with the captured Kalshi universe and sta
   assert.ok(Math.abs(spread(sen.layers) - 0.078) < 1e-9);
   const hse = snap.snapshots.find((s) => s.id === '2026-09-19-house');
   assert.equal(hse.layers.kalshi.bid, 0.89); assert.equal(hse.layers.metaculus, 0.888);
+});
+
+// ---- session 7 (2026-09-20): per-seat Metaculus pages, seat pairing, fetch helpers, probe verdicts ----
+test('Metaculus question-page parser: state group (four rendered states + hidden count), party choice, binary', () => {
+  const g = parseQuestionPage(fx('metaculus-q40598-2026-09-20.txt'), 'state-group');
+  assert.equal(g.parse, 'ok');
+  assert.deepEqual(g.states, { RI: 99, OR: 99, CO: 98, MN: 92 }); // only what the server rendered — never the "19 others"
+  assert.equal(g.othersHidden, 19);
+  assert.equal(g.forecasters, 125);
+  assert.match(g.title, /Democratic candidate win the 2026 US Senate election/);
+  // the related-question cards AFTER "Forecast Timeline" (HI 98 / NM 92.2 / Peltola 54 / MT 94) must not leak into this question
+  assert.equal(g.states.HI, undefined); assert.equal(g.states.NM, undefined); assert.equal(g.states.AK, undefined);
+  const mt = parseQuestionPage('<h1>Which party will win the 2026 Montana Senate election?</h1><ul><li>Democrat</li><li>1 %</li><li>Republican</li><li>94%</li><li>Other</li><li>5%</li></ul><h2>Forecast Timeline</h2><p>Democrats 50.6% Republicans 49.3%</p>', 'party-choice');
+  assert.deepEqual([mt.parse, mt.D, mt.R, mt.other, mt.consistencyFlag], ['ok', 1, 94, 5, undefined]);
+  const ak = parseQuestionPage('<h1>Mary Peltola wins Alaska senate seat 2026?</h1><span>54%</span><span>chance</span><div>Forecast Timeline</div><p>60%chance</p>', 'binary');
+  assert.deepEqual([ak.parse, ak.p], ['ok', 54]);
+  const bad = parseQuestionPage('<html><body><title>Just a moment...</title></body></html>', 'state-group');
+  assert.equal(bad.parse, 'failed'); assert.ok(bad.sample !== undefined);
+});
+
+test('appendSeatSnapshots: one row per seat per day, Kalshi paired only from a same-day capture, specials mapped, idempotent', () => {
+  assert.equal(SENATE_EVENT('OH'), 'SENATEOHS-26'); assert.equal(SENATE_EVENT('FL'), 'SENATEFLS-26'); assert.equal(SENATE_EVENT('RI'), 'SENATERI-26');
+  const g = { ...parseQuestionPage(fx('metaculus-q40598-2026-09-20.txt'), 'state-group'), office: 'senate', capturedFrom: 'https://www.metaculus.com/questions/40598/', note: 'n' };
+  const ak = { ...parseQuestionPage('<h1>Mary Peltola wins Alaska senate seat 2026?</h1>54%chance Forecast Timeline', 'binary'), office: 'senate', state: 'AK', capturedFrom: 'https://www.metaculus.com/questions/41678/' };
+  const universe = { capturedAt: '2026-09-20T00:53:32Z', capturedFrom: 'fx', events: [
+    { event_ticker: 'SENATERI-26', markets: [{ ticker: 'SENATERI-26-D', yes_bid: 0.974, yes_ask: 0.984, last_price: 0.97 }] },
+    { event_ticker: 'SENATEAK-26', markets: [{ ticker: 'SENATEAK-26-D', yes_bid: 0.69, yes_ask: 0.7, last_price: 0.68 }] },
+  ] };
+  const snap = { snapshots: [] };
+  assert.equal(appendSeatSnapshots(snap, [g, ak], { capturedAt: '2026-09-20T03:00:00Z', universe }), 5);
+  const ri = snap.snapshots.find((s) => s.question === 'SENATE-RI-2026');
+  assert.equal(ri.layers.metaculus, 0.99); assert.equal(ri.layers.kalshi.ticker, 'SENATERI-26-D'); assert.equal(ri.layers.kalshi.bid, 0.974);
+  const or = snap.snapshots.find((s) => s.question === 'SENATE-OR-2026');
+  assert.equal(or.layers.kalshi, undefined); // no OR market in the fixture universe -> no leg invented
+  const akRow = snap.snapshots.find((s) => s.question === 'SENATE-AK-2026');
+  assert.equal(akRow.layers.metaculus, 0.54); assert.match(akRow.caveat, /candidate question/);
+  assert.equal(snap.questions['SENATE-AK-2026'].kalshiEvent, 'SENATEAK-26');
+  assert.equal(appendSeatSnapshots(snap, [g, ak], { capturedAt: '2026-09-20T05:00:00Z', universe }), 0); // idempotent per day
+  const stale = { snapshots: [] };
+  appendSeatSnapshots(stale, [g], { capturedAt: '2026-09-21T03:00:00Z', universe });
+  assert.equal(stale.snapshots.find((s) => s.question === 'SENATE-RI-2026').layers.kalshi, undefined); // yesterday's Kalshi is never paired
+  // scorer accepts the seat rows and keeps them pending
+  const res = scoreSnapshots(snap.snapshots, {});
+  assert.equal(res.pendingCount, 5);
+});
+
+test('render helpers: interstitial detection, entity-safe text, title; probe verdicts', () => {
+  assert.equal(looksLikeChallenge(403, '<!DOCTYPE html><html><head><title>Just a moment...</title></head></html>'), 'cloudflare-challenge');
+  assert.equal(looksLikeChallenge(200, '<html><title>2026 US Midterm Elections | Metaculus</title></html>'), null);
+  assert.equal(looksLikeChallenge(429, ''), 'rate-limited');
+  assert.equal(htmlToText('<p>D&nbsp70 %</p><script>x=1</script>&#x1F1FA;&amp;'), 'D 70% &');
+  assert.equal(pageTitle('<html><head><title> Hello &amp; bye </title></head></html>'), 'Hello & bye');
+  assert.equal(verdictFor({ ok: true, attempts: [] }), 'reachable');
+  assert.equal(verdictFor({ ok: false, attempts: [{ status: 403, challenge: 'cloudflare-challenge' }] }, { ok: true, textLength: 5000 }), 'reachable-rendered-only');
+  assert.equal(verdictFor({ ok: false, attempts: [{ status: 403, challenge: 'cloudflare-challenge' }] }, { ok: true, challenge: 'cloudflare-challenge', textLength: 5000 }), 'blocked-cloudflare-challenge');
+  assert.equal(verdictFor({ ok: false, attempts: [{ status: 404 }] }), 'http-404');
+  assert.equal(verdictFor({ ok: false, attempts: [{ error: 'fetch failed' }] }), 'error');
 });

@@ -20,6 +20,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { fetchWithProfiles } from './lib/render.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const SOURCES = {
@@ -57,14 +58,36 @@ export function parseDdhq(html) {
   return out;
 }
 
-/** 270toWin: Kalshi 2028 panel "57% ... 41% ... as of Sep. 19, 2026 at 20:29 UTC". */
+/**
+ * 270toWin: the homepage "Prediction Markets" panel — "Which party will win the 2028 Presidential Election?
+ * 57% 41% [Kalshi] Probability based on the most recent 'yes' trade for each party as of Sep. 19, 2026 at 02:44 UTC
+ * (10:44 PM EDT). May not total 100%." (observed 2026-09-20). Page order is Democrats then Republicans, so the
+ * two numbers are stored as dem/rep; the panel is LAST-TRADE based, so it is compared with captured last_price of
+ * KXPRESPARTY-2028-D / -R, never with the bid/ask. The first live run (#58) failed because the old regex allowed
+ * only 60 characters between the two percentages and 200 before the timestamp — the raw HTML has more. The panel
+ * is now anchored on its own heading and the footer KPOW line tolerates the "KPOW" token before "as of".
+ */
 export function parse270(html) {
   const t = strip(html);
-  const m = t.match(/(\d{1,3})%[^%]{0,60}?(\d{1,3})%[^]{0,200}?as of ([A-Z][a-z]+\.? \d{1,2}, 20\d\d at \d{1,2}:\d{2} UTC)/);
-  const kpow = (t.match(/([+\-−]\d+(?:\.\d+)?\s*[DR])\s*as of\s*(\d{1,2}\/\d{1,2}\/\d{2})/) || []);
-  const out = { extract: m ? 'ok' : 'failed', kalshiPanel: m ? { a: Number(m[1]) / 100, b: Number(m[2]) / 100, asOf: m[3] } : null, kpow: kpow[1] ? { value: kpow[1], asOf: kpow[2] } : null };
+  const STAMP = 'as of ([A-Z][a-z]+\\.? \\d{1,2}, 20\\d\\d at \\d{1,2}:\\d{2} UTC)';
+  const m = t.match(new RegExp(`(?:Prediction Markets|Which party will win the 2028 Presidential Election\\?)[\\s\\S]{0,600}?(\\d{1,3})%\\s*(\\d{1,3})%[\\s\\S]{0,600}?${STAMP}`))
+    || t.match(new RegExp(`(\\d{1,3})%\\s*(\\d{1,3})%[\\s\\S]{0,600}?most recent[\\s\\S]{0,200}?${STAMP}`))
+    || t.match(new RegExp(`Kalshi[\\s\\S]{0,200}?(\\d{1,3})%\\s*(\\d{1,3})%[\\s\\S]{0,300}?${STAMP}`));
+  const kpow = (t.match(/([+\-−]\d+(?:\.\d+)?\s*[DR])[\s\\]*(?:KPOW\s*)?as of\s*(\d{1,2}\/\d{1,2}\/\d{2}(?:[^A-Za-z]{0,12}(?:AM|PM)\s*[A-Z]{2,4})?)/) || []);
+  const out = {
+    extract: m ? 'ok' : 'failed',
+    kalshiPanel: m ? { dem: Number(m[1]) / 100, rep: Number(m[2]) / 100, asOf: m[3], basis: 'most recent yes trade (page order: Democrats, Republicans)' } : null,
+    kpow: kpow[1] ? { value: kpow[1], asOf: kpow[2].trim() } : null,
+  };
   if (!m) out.sample = t.slice(0, 300);
   return out;
+}
+
+/** Compare a rendered last-trade percentage with the captured last_price of the same market (tolerance in probability points). */
+export function compareLast(rendered, captured, tolerance = TOLERANCE) {
+  if (typeof rendered !== 'number' || !captured || typeof captured.last_price !== 'number') return { comparable: false };
+  const diff = Number((rendered - captured.last_price).toFixed(4));
+  return { comparable: true, rendered, capturedLast: captured.last_price, capturedBidAsk: [captured.yes_bid, captured.yes_ask], diff, flagged: Math.abs(diff) > tolerance };
 }
 
 /** Compare a rendered {bid,ask} with the captured market; flag when the ranges are further apart than TOLERANCE. */
@@ -77,8 +100,8 @@ export function compareRange(rendered, captured, tolerance = TOLERANCE) {
 }
 
 async function get(url) {
-  const res = await fetch(url, { headers: { 'user-agent': 'elections-collector (github.com/buffedlizard55-lab/Elections)' } });
-  return { status: res.status, ok: res.ok, body: await res.text() };
+  const f = await fetchWithProfiles(url);
+  return { status: f.status, ok: f.ok, body: f.body, profile: f.profile || null, attempts: f.attempts };
 }
 const readJson = (p, fb) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : fb);
 const arg = (name) => { const i = process.argv.indexOf(name); return i >= 0 ? process.argv[i + 1] : null; };
@@ -105,7 +128,15 @@ async function main() {
   const ddhq = await load('ddhq', replay.ddhq);
   row.renderers.ddhq = { capturedFrom: ddhq.capturedFrom, status: ddhq.status, layer: 'context (DDHQ odds, not Kalshi)', ...(ddhq.body ? parseDdhq(ddhq.body) : { extract: 'failed', error: ddhq.error }) };
   const t70 = await load('270', replay['270']);
-  row.renderers['270towin'] = { capturedFrom: t70.capturedFrom, status: t70.status, note: 'Kalshi panel on the homepage is the 2028 presidency (not a 2026 market); recorded, compared only when a matching captured market exists', ...(t70.body ? parse270(t70.body) : { extract: 'failed', error: t70.error }) };
+  row.renderers['270towin'] = { capturedFrom: t70.capturedFrom, status: t70.status, note: 'Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask', ...(t70.body ? parse270(t70.body) : { extract: 'failed', error: t70.error }) };
+  if (row.renderers['270towin'].kalshiPanel) {
+    const p = row.renderers['270towin'].kalshiPanel;
+    row.renderers['270towin'].vsCaptured = { dem: compareLast(p.dem, market('KXPRESPARTY-2028', 'KXPRESPARTY-2028-D')), rep: compareLast(p.rep, market('KXPRESPARTY-2028', 'KXPRESPARTY-2028-R')) };
+    for (const side of ['dem', 'rep']) {
+      const c = row.renderers['270towin'].vsCaptured[side];
+      if (c.flagged) row.flags.push(`270toWin's Kalshi 2028 ${side} panel ${p[side]} (as of ${p.asOf}) vs captured last ${c.capturedLast} (diff ${c.diff}) — review (timestamps differ)`);
+    }
+  }
   for (const [k, r] of Object.entries(row.renderers)) if (r.extract === 'failed') row.flags.push(`${k}: not extractable this run (status ${r.status}) — recorded, nothing estimated`);
 
   const outPath = join(ROOT, 'data/kalshi/tracker/rendering-crosscheck.json');

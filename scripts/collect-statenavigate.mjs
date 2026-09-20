@@ -19,14 +19,19 @@
  * plus data/statenavigate/api-probe.json (what data.statenavigate.com answered, every run).
  * Anything that fails to parse is recorded as parse:'failed' with a text sample — never filled in.
  * KNOWN LIMIT (first live run 2026-09-20): the pages are client-rendered, so the raw-HTML fetch here sees only
- * the shell and every row parses 'failed'. A headless-browser step (or a recovered API) is needed to collect the
- * numbers automatically; until then the site shows the hand-verified 2026-09-19 figures and says so.
+ * the shell and every row parses 'failed'. Session 7 therefore renders each page in headless Chrome when a binary
+ * exists (GitHub's ubuntu runners ship one; scripts/lib/render.mjs) and falls back to the plain fetch otherwise.
+ * Each chamber row records fetchMethod ('fetch' | 'headless-chrome') so a reader can tell which path produced it.
+ * The API-doc host is rendered too: if its client-side documentation ever describes endpoints, the text sample is
+ * stored for a human to read (reachableDocs=true) — no endpoint is called until a session has verified it.
+ * Raw bodies go to data/statenavigate/raw/ (git-ignored, uploaded as a workflow artifact) for parser development.
  *
- * Usage: node scripts/collect-statenavigate.mjs [--replay national.html] [--states va,wi,...]
+ * Usage: node scripts/collect-statenavigate.mjs [--replay national.html] [--states va,wi,...] [--no-render]
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { fetchWithProfiles, renderDom, findChrome, htmlToText } from './lib/render.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const NATIONAL_URL = 'https://projects.statenavigate.com/25-26/national/';
@@ -83,10 +88,28 @@ export function parseChamber(html) {
   return out;
 }
 
-async function get(url) {
-  const res = await fetch(url, { headers: { 'user-agent': 'elections-collector (github.com/buffedlizard55-lab/Elections)' } });
-  const body = await res.text();
-  return { status: res.status, ok: res.ok, body };
+const RAW_DIR = join(ROOT, 'data/statenavigate/raw');
+const rawName = (url, kind) => join(RAW_DIR, `${url.replace(/^https?:\/\//, '').replace(/[^a-z0-9]+/gi, '_')}.${kind}.html`);
+/**
+ * Plain fetch (project UA, browser profile only after a 403/503/interstitial). When the body is only the
+ * client-rendered shell — no "seats forecasted" / "favored to win" text — and Chrome is available, render it.
+ * Returns { status, ok, body, fetchMethod, attempts } and keeps raw copies for parser work.
+ */
+async function get(url, { render = true } = {}) {
+  const f = await fetchWithProfiles(url);
+  let out = { status: f.status, ok: f.ok, body: f.body || '', fetchMethod: f.ok ? `fetch:${f.profile}` : 'fetch', attempts: f.attempts };
+  if (f.body) { mkdirSync(RAW_DIR, { recursive: true }); writeFileSync(rawName(url, 'fetch'), f.body); }
+  const shellOnly = !/seats forecasted|favored to win|projected flips|close seats/i.test(htmlToText(f.body || ''));
+  if (render && shellOnly && findChrome()) {
+    const r = renderDom(url);
+    if (r.ok && !r.challenge) {
+      writeFileSync(rawName(url, 'rendered'), r.html);
+      out = { status: f.status || 200, ok: true, body: r.html, fetchMethod: 'headless-chrome', attempts: f.attempts, renderBytes: r.html.length };
+    } else {
+      out.render = { ok: false, reason: r.reason || r.challenge };
+    }
+  }
+  return out;
 }
 const readJson = (p, fb) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : fb);
 
@@ -95,6 +118,7 @@ async function main() {
   const replayIdx = argv.indexOf('--replay');
   const statesIdx = argv.indexOf('--states');
   const states = statesIdx >= 0 ? argv[statesIdx + 1].split(',') : LAUNCHED_STATES;
+  const render = !argv.includes('--no-render');
   const capturedAt = new Date().toISOString();
   const outDir = join(ROOT, 'data/statenavigate');
   mkdirSync(outDir, { recursive: true });
@@ -107,16 +131,24 @@ async function main() {
   }
 
   // 1. API-doc host probe — recorded, not relied on (irregularity #55 re-test).
-  const probe = { capturedAt, capturedFrom: API_DOC_HOST, results: [] };
+  const probe = { capturedAt, capturedFrom: API_DOC_HOST, chrome: render ? findChrome() : null, results: [] };
   for (const path of ['', 'index.html', 'api/', 'docs/']) {
     try {
-      const r = await get(API_DOC_HOST + path);
+      const r = await get(API_DOC_HOST + path, { render: false });
       probe.results.push({ path: '/' + path, status: r.status, sample: strip(r.body).slice(0, 160) });
     } catch (e) { probe.results.push({ path: '/' + path, error: String(e.message).slice(0, 160) }); }
   }
-  // 2026-09-20: the host now answers 200 but the body is an empty client-rendered shell ("Document") — still no
-  // readable documentation. reachableDocs stays false unless the text actually describes endpoints.
-  probe.reachableDocs = probe.results.some((r) => r.status === 200 && /endpoint|\/api\/v\d|GET \/|openapi|swagger/i.test(r.sample));
+  // 2026-09-20: the host answers 200 but the body is an empty client-rendered shell ("Document") — still no
+  // readable documentation. Session 7: render the root in headless Chrome and keep a longer sample of whatever the
+  // client draws, so a human can read the documentation if it appears. reachableDocs stays false unless the text
+  // actually describes endpoints; even then nothing is called automatically.
+  if (render && findChrome()) {
+    const r = renderDom(API_DOC_HOST);
+    probe.rendered = r.ok ? { ok: true, bytes: r.html.length, sample: htmlToText(r.html).slice(0, 1200) } : { ok: false, reason: r.reason };
+    if (r.ok) { mkdirSync(RAW_DIR, { recursive: true }); writeFileSync(rawName(API_DOC_HOST, 'rendered'), r.html); }
+  }
+  const docText = [...probe.results.map((r) => r.sample || ''), probe.rendered && probe.rendered.sample || ''].join(' ');
+  probe.reachableDocs = /endpoint|\/api\/v\d|GET \/|openapi|swagger/i.test(docText);
   writeFileSync(join(outDir, 'api-probe.json'), JSON.stringify(probe, null, 1) + '\n');
 
   // 2. Free forecast pages.
@@ -126,18 +158,18 @@ async function main() {
     method: 'Headline numbers parsed from the free national and per-state forecast pages (parseNational / parseChamber in scripts/collect-statenavigate.mjs). These are State Navigate\'s model outputs, transcribed as published; the project does not re-model them. The documented API host (data.statenavigate.com) and the Tier-3 data downloads are NOT used (see api-probe.json and irregularity #55). Chamber-page titles still read "2025 … Forecast" on some states — recorded as observed.',
     rows: [],
   });
-  const row = { date: capturedAt.slice(0, 10), capturedAt, national: null, chambers: {}, errors: [] };
+  const row = { date: capturedAt.slice(0, 10), capturedAt, renderer: render ? (findChrome() || 'none (plain fetch only)') : 'disabled (--no-render)', national: null, chambers: {}, errors: [] };
   try {
-    const r = await get(NATIONAL_URL);
-    row.national = r.ok ? { capturedFrom: NATIONAL_URL, ...parseNational(r.body) } : { capturedFrom: NATIONAL_URL, parse: 'failed', status: r.status };
+    const r = await get(NATIONAL_URL, { render });
+    row.national = r.ok ? { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, ...parseNational(r.body) } : { capturedFrom: NATIONAL_URL, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
   } catch (e) { row.errors.push(`national: ${e.message}`); }
   for (const st of states) {
     for (const ch of ['lower', 'upper']) {
       const url = stateUrl(st, ch);
       try {
-        const r = await get(url);
+        const r = await get(url, { render });
         if (r.status === 404) { row.chambers[`${st}-${ch}`] = { capturedFrom: url, parse: 'absent', status: 404 }; continue; }
-        row.chambers[`${st}-${ch}`] = r.ok ? { capturedFrom: url, ...parseChamber(r.body) } : { capturedFrom: url, parse: 'failed', status: r.status };
+        row.chambers[`${st}-${ch}`] = r.ok ? { capturedFrom: url, fetchMethod: r.fetchMethod, ...parseChamber(r.body) } : { capturedFrom: url, fetchMethod: r.fetchMethod, parse: 'failed', status: r.status };
       } catch (e) { row.errors.push(`${st}-${ch}: ${e.message}`); }
       await new Promise((r) => setTimeout(r, 250));
     }
@@ -147,7 +179,7 @@ async function main() {
   daily.capturedAt = capturedAt;
   writeFileSync(join(outDir, 'forecast-daily.json'), JSON.stringify(daily, null, 1) + '\n');
   const okCh = Object.values(row.chambers).filter((c) => c.parse === 'ok').length;
-  console.log('[statenavigate]', JSON.stringify({ national: row.national && row.national.parse, chambersOk: okCh, chambersTotal: Object.keys(row.chambers).length, apiDocsReachable: probe.reachableDocs, errors: row.errors.length }));
+  console.log('[statenavigate]', JSON.stringify({ national: row.national && row.national.parse, nationalVia: row.national && row.national.fetchMethod, chambersOk: okCh, chambersTotal: Object.keys(row.chambers).length, renderer: row.renderer, apiDocsReachable: probe.reachableDocs, errors: row.errors.length }));
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
