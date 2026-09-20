@@ -5,27 +5,38 @@
  "rows": [
   {
    "date": "2026-09-20",
-   "capturedAt": "2026-09-20T00:33:00.623Z",
-   "kalshiCapturedAt": "2026-09-20T00:05:48.078Z",
+   "capturedAt": "2026-09-20T01:22:21.562Z",
+   "kalshiCapturedAt": "2026-09-20T00:53:32.941Z",
    "renderers": {
     "ebo": {
      "capturedFrom": "https://electionbettingodds.com/",
      "status": 200,
-     "extract": "failed",
-     "stamp": "8:30PM EDT on Sep 19, 2026",
-     "senateDemKalshi": null,
-     "senateRepKalshi": null,
+     "extract": "ok",
+     "stamp": "9:20PM EDT on Sep 19, 2026",
+     "senateDemKalshi": {
+      "bid": 0.584,
+      "ask": 0.594
+     },
+     "senateRepKalshi": {
+      "bid": 0.406,
+      "ask": 0.416
+     },
      "eboHeadlineDem": 0.591,
-     "sample": "Senate Control 2026 Senate Control 2026 $14,602,024 bet so far DEM details Markets &nbsp&nbsp&nbsp Range (Bid-Ask) &nbsp&nbsp&nbsp Total $ Bet Kalshi &#x1F1FA&#x1F1F8 58.4-59.4% $9,248,313 Polymarket &#x1F30E 60.0-61.0% $4,750,747 PredictIt &#x1F1FA&#x1F1F8 59.0-60.0% $450,824 Betfair &#x1F1EC&#x1F1"
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.589,
+      "capturedMid": 0.595,
+      "diff": -0.006,
+      "flagged": false
+     }
     },
     "ddhq": {
      "capturedFrom": "https://votes.decisiondeskhq.com/",
      "status": 200,
      "layer": "context (DDHQ odds, not Kalshi)",
-     "extract": "failed",
-     "houseD": null,
-     "senateD": null,
-     "sample": " Decision Desk HQ Votes | All Things Elections Decision Desk HQ Votes | All Things Elections Open menu Home Elections Vault Polling Markets Forecast Precinct Map Ticker Admin Decision View Find a race... Find a race... Ctrl K Search Forecast House D 70 % Senate D 52 % House &amp; Senate D 49 % R 27 "
+     "extract": "ok",
+     "houseD": 0.7,
+     "senateD": 0.52
     },
     "270towin": {
      "capturedFrom": "https://www.270towin.com/",
@@ -38,11 +49,9 @@
     }
    },
    "flags": [
-    "ebo: not extractable this run (status 200) — recorded, nothing estimated",
-    "ddhq: not extractable this run (status 200) — recorded, nothing estimated",
     "270towin: not extractable this run (status 200) — recorded, nothing estimated"
    ]
   }
  ],
- "capturedAt": "2026-09-20T00:33:00.623Z"
+ "capturedAt": "2026-09-20T01:22:21.562Z"
 }
