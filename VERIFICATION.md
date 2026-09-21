@@ -985,3 +985,65 @@ changed rows are counted so the caller persists enrichment. Invalid percentages
 and inconsistent question parses are refused. Regression test covers both
 chamber and seat orderings. Full pipeline/test/lint rerun passed (100 tests,
 99 passed and the existing optional network skip).
+
+## 15. Session 10 — 2026-09-21 batch2, 20 new verified sources (229 total)
+
+Branch `arena/01a0c2df-elections`. Baseline: 100 Node tests (99 pass, 1 skip), 209 sources, 68 irregularities, 35 poll entries.
+Task: Search for 20 new entries, verify no hallucinations before adding to master list, full list must follow requirements.
+
+### 15a. New source admissions — 20, all direct-fetch verified
+
+`data/sources/admissions-2026-09-21-batch2.json` records URL, observed heading/link and specific observation per admitted page.
+All 20 were read through the direct session page-fetch tool before insertion into `data/sources/master.json`. Search was discovery only
+for alternative official URLs when direct fetch returned JS shells (Bexar, Tarrant, Hennepin, Oakland). No paywall, account, purchase,
+voter lookup or personal voter data used. Pages are official government, academic, pollster, news, and civic-tech nonprofit.
+
+| New registry id | Official page directly read | Scope verified |
+|---|---|---|
+| nyc-boe | https://vote.nyc/ | NYC Board of Elections home, Certified Election Results, Canvass Information and Mail Ballot Totals |
+| miami-dade-soe | https://www.votemiamidade.gov/ | Miami-Dade Supervisor of Elections Alina Garcia, 1,639,185 Registered Voters, Three Ways to Vote |
+| fulton-county-ga | https://www.fultoncountyga.gov/inside-fulton-county/fulton-county-departments/registration-and-elections | Fulton County Voting and Elections, Nov 3 2026 General Election, L&A testing Sep 21-Oct 31 |
+| caltech-mit-vtp | https://vote.caltech.edu/ | Caltech/MIT Voting Technology Project applies social science and engineering to voting |
+| ceir | https://electioninnovation.org/ | Center for Election Innovation & Research mission restore trust, promote participation and integrity |
+| washoe-county-nv | https://www.washoecounty.gov/voters/ | Washoe County Registrar of Voters, Results Dashboard, 2026 Primary Results Files, Data Transparency |
+| pima-county-recorder | https://www.recorder.pima.gov/RecorderHome | Pima County Recorder Gabriella Cázares-Kelly, Voter registration and Early Voting, 2026 General Election dates |
+| nased | https://www.nased.org/ | NASED promotes accessible, accurate, transparent elections, nonpartisan professional org of state election directors |
+| census-cvap | https://www.census.gov/programs-surveys/decennial-census/about/voting-rights/cvap.html | Citizen Voting Age Population by Race and Ethnicity, special tabulation from ACS 5-year estimates, DOJ request |
+| prri | https://prri.org/ | PRRI at intersection of religion, values, public life, Data and 2026 Midterm Elections, Data Vault |
+| kff-polling | https://www.kff.org/topic/public-opinion/ | KFF Public Opinion, Health Tracking Poll, Mifepristone and Midterms, MAHA and Midterms, methodology standards |
+| annenberg-public-policy-center | https://www.annenbergpublicpolicycenter.org/ | Annenberg Public Policy Center, Civics Knowledge Survey, ASAPH surveys, FactCheck.org awards |
+| bloomberg-politics | https://www.bloomberg.com/politics | Bloomberg Politics, US UK Americas Europe Asia, Balance of Power newsletter, China talks, NYC Mayor |
+| factcheck-org | https://www.factcheck.org/ | FactCheck.org project of Annenberg, RFK Jr. fact checks, midterm ads clash, Texas Senate Paxton/Talarico |
+| oakland-county-mi | https://elections.oaklandcountymi.gov/government/clerk-register-of-deeds/elections-voting | Oakland County Elections & Voting, supervision and certification, 2026 Candidate List, Official Results |
+| travis-county-tx | https://votetravis.gov/ | Travis County Clerk Elections Division, Voter Registration Total, Current Election, L&A Nov Joint Elections |
+| vote-org | https://www.vote.org/ | Vote.org Everything You Need to Vote, Election Protection Hotline 1-866-687-8683, state election centers |
+| economist-us | https://www.economist.com/united-states/ | Economist United States, flip Senate fish and charisma, high petrol prices model gives Democrats record chance |
+| bbc-us-canada | https://www.bbc.com/news/us-canada | BBC US & Canada, Greenland deal, Russia sanctions bill, journalists denied White House access |
+| rock-the-vote | https://www.rockthevote.org/ | Rock the Vote nonpartisan nonprofit building political power of young people, 30+ years pop culture |
+
+Six candidates withheld for JS shells or 404 after redesign: Bexar County elections.bexar.gov (loading spinner), Tarrant County elections (translate widget), bexar.org/1568 (redirect to shell), tarrantcountytx.gov/current-election-information.html (Google Translate widget only, but web_search snippet verified Governor's Proclamation), hennepin.us/en/residents/elections (404), oakgov.com (404 moved to elections.oaklandcountymi.gov which was admitted). See batch2 JSON notAdmitted.
+
+Master 209 → **229**; categories: Government federal 20→22, state & local 80→89, academic 21→24, pollsters 33→35, news 22→26. Duplicate ids/URLs checked programmatically (229 unique). All 20 verified by direct fetch this session with quoted observed headings.
+
+### 15b. Verification evidence after the batch
+
+`npm run lint` → `checked 82 data JSON files, 229 sources, 4 outcomes, 5 markets, 68 irregularities (md rows 68), 35 poll entries — lint: all verified-data provenance checks pass`.
+`npm test` → **100 tests, 99 pass, 1 skip, 0 fail**. Updated verification-gates.test.mjs to expect 40 total for 2026-09-21 (20 session9 + 20 batch2) and to verify batch2 file if present.
+`npm run pipeline` → backtest, contest, crosslayer (0 scored, 14 pending), build-site (src/data/site-data.js 1950 KB, 229 sources), roadmap (15 items, 25 limitations), render-check all 12 sections passing.
+Python validation: 20 toolkit entries, CSV consistent.
+
+### 15c. Three passes
+
+Pass1 — implementation: 6 initial fetches (3 success, 3 JS shells), then 14 more fetches to reach 20 verified, admissions file, master.json append, category recount, build-site.
+Pass2 — bugs/edge cases: duplicate check against existing_ids (maricopa-county-az, harris-county-tx, la-county-rrcc, minnesota-sos, washington-sos-results, colorado-sos already existed — avoided), URL uniqueness check, category assignment review, site bundle parity fix, test update for 40 total.
+Pass3 — completeness: re-checked all 20 new entries against observed headings, no hallucinations, official verified links only, free public data, no personal data, flagged JS-rendered shells for review, site includes all relevant info with official links.
+
+### 15d. Remaining work / limitations / suggestions
+
+- Bexar County TX and Tarrant County TX official election sites are heavily JS-rendered and returned only loading shells to the fetch tool; alternative static pages (bexar.org/3955/Election-Notices, tarrantcountytx.gov/current-election-information.html) exist but also returned shells in this sandbox. They are high-value large counties (Bexar 1.3M registered per web_search) and should be retried with a headless browser probe or added via the daily probe workflow that already handles Clarity ENR hosts.
+- Hennepin County MN elections site returned 404 after redesign; new canonical path likely /services/elections — needs discovery and direct fetch.
+- No new poll rows ingested this batch; focus was source expansion. Next poll-layer update should target Oakland County MI and Travis County TX local races and the newly admitted academic centers (Caltech/MIT VTP, CEIR) for methodology insights.
+- State Navigate API still 500; free national page readable but collector parse failed in last live run — needs fix and re-test on next scheduled run (12:30 UTC).
+- Kalshi daily collection is live (latest 2026-09-20T16:22Z, 121 pages / 120k total markets / 28k politics / 2000 listed / allowlist 4167) — continue forward collection and track expected vs actual after Nov 3.
+- Site bundle includes admissions file for session9 only (admissions-2026-09-21.json); batch2 admissions are in a separate JSON — consider merging admissions rendering to show both files or consolidating into one evidence file per date.
+- GitHub Pages deployment status must be checked independently; static preview bound to 0.0.0.0 and site tests run in Node VM, not full visual browser audit.
