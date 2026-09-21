@@ -20,6 +20,12 @@ on:
     paths:
       - '.github/workflows/collector-probe.yml'
       - 'scripts/probe-hosts.mjs'
+      - 'scripts/collect-metaculus.mjs'
+      - 'scripts/collect-statenavigate.mjs'
+      - 'scripts/crosscheck-renderings.mjs'
+      - 'scripts/lib/render.mjs'
+      - 'scripts/run-crosslayer.mjs'
+      - 'src/crosslayer.js'
       - 'data/probes/targets.json'
   workflow_dispatch:
     inputs:
@@ -36,8 +42,8 @@ permissions:
   contents: write
 
 # One concurrency group is SHARED by daily-collection.yml and collector-probe.yml: both commit the same files
-# (data/crosslayer, data/statenavigate, rendering-crosscheck) and the commit step resolves conflicts with
-# `rebase -X theirs`, so two overlapping runs silently drop each other's rows (irregularity #63, 2026-09-20).
+# (data/crosslayer, data/statenavigate, rendering-crosscheck). Serialization prevents overlapping captures
+# (#63); this probe refuses rebase conflicts and revalidates after a clean rebase rather than forcing JSON merges.
 concurrency:
   group: collectors-${{ github.ref }}
   cancel-in-progress: false
@@ -63,8 +69,10 @@ jobs:
 
       - name: Host re-test monitor
         continue-on-error: true
+        env:
+          PROBE_ONLY: ${{ inputs.only }}
         run: |
-          ONLY="${{ inputs.only }}"
+          ONLY="$PROBE_ONLY"
           if [ -n "$ONLY" ]; then node scripts/probe-hosts.mjs --only "$ONLY"; else node scripts/probe-hosts.mjs; fi
 
       - name: Metaculus collector (hub + question pages)
@@ -81,10 +89,14 @@ jobs:
         continue-on-error: true
         run: node scripts/crosscheck-renderings.mjs || echo "::warning::rendering cross-check failed - previous rows stay in place"
 
-      - name: Offline checks still pass with the new rows
+      - name: Rebuild scores and site, then validate the actual outputs
+        id: verify
         run: |
+          npm run crosslayer
+          npm run build-site
+          node scripts/render-check.cjs
           npm run lint
-          node --test test/crosslayer.test.mjs
+          npm test
 
       - name: Upload raw bodies (7 days; never committed)
         if: always()
@@ -100,15 +112,15 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit small outputs
-        if: ${{ (github.event_name == 'push' || inputs.commit == 'true') && !cancelled() }}
+        if: ${{ steps.verify.outcome == 'success' && (github.event_name == 'push' || inputs.commit == 'true') && !cancelled() }}
         run: |
           git config user.name "elections-collector[bot]"
           git config user.email "elections-collector[bot]@users.noreply.github.com"
-          git add -A data/probes data/crosslayer data/statenavigate data/kalshi/tracker/rendering-crosscheck.json
+          git add -A data/probes data/crosslayer data/statenavigate data/kalshi/tracker/rendering-crosscheck.json src/data/site-data.js
           if git diff --cached --quiet; then echo "no data changes"; exit 0; fi
           git commit -m "probe: collectors + host re-tests $(date -u +%F) (run ${{ github.run_id }})"
           for i in 1 2 3; do
-            if git pull --rebase -X theirs origin "${{ github.ref_name }}" && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
+            if git pull --rebase origin "${{ github.ref_name }}" && npm run crosslayer && npm run build-site && node scripts/render-check.cjs && npm run lint && npm test && git add data/crosslayer/scores.json src/data/site-data.js && git commit --amend --no-edit && git push origin HEAD:"${{ github.ref_name }}"; then exit 0; fi
             git rebase --abort 2>/dev/null || true
             sleep 10
           done

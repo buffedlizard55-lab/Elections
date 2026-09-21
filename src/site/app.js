@@ -74,7 +74,13 @@
     const fav1 = (BT.favoriteAccuracy || []).find((a) => a.nDays === 1);
     const days = D.tracker ? D.tracker.days.length : 0;
     return `
-    <h1>Elections — collect, analyze, project &amp; estimate</h1>
+    <div class="eyebrow">PUBLIC DATA · REPRODUCIBLE RESEARCH · PAPER TRADING ONLY</div>
+    <h1>Election intelligence, with evidence.</h1>
+    <div class="evidence-strip" aria-label="Data status">
+      <div><span class="chip info">Source review</span><strong>${esc(D.sources.updated)}</strong><span>${sources} registered sources · <a href="#/sources">Review the evidence →</a></span></div>
+      <div><span class="chip info">Market snapshot</span><strong>${U ? esc(day(U.capturedAt)) : 'Not available'}</strong><span>Capture time, not real-time prices · <a href="#/markets">Browse markets →</a></span></div>
+      <div><span class="chip warn">Official scoring</span><strong>${D.crossLayer ? D.crossLayer.scored.scoredCount : 0} scored snapshots</strong><span>2026 outcomes await certified canvasses · <a href="#/crosslayer">View comparisons →</a></span></div>
+    </div>
     <p class="lead">A verification-first election intelligence project: <strong>official, free, public data only</strong>.
     It collects the open political/election prediction-market universe every day, backtests <em>polls and markets</em> against
     <em>verified official outcomes</em>, tracks a live 2026 poll layer, flags every irregularity it finds, and runs a paper-trading
@@ -86,8 +92,8 @@
       <div class="stat"><div class="n">${U ? int(U.counts.openMarketsTraded) : '—'}</div><div class="l">traded open political markets in the daily tracker (${U ? int(U.counts.openEvents) : '—'} events · ${days} day${days === 1 ? '' : 's'} collected)</div></div>
       <div class="stat"><div class="n">${irregular}</div><div class="l">irregularities &amp; discrepancies flagged for review</div></div>
     </div>
-    <div class="callout good"><strong>Honesty contract.</strong> Every number on this site traces to a captured URL recorded in <span class="mono">data/</span>
-    (machine-checked by <span class="mono">npm run lint</span>). Captured-vs-inferred values are labeled; modelled mappings are called modelled.
+    <div class="callout good"><strong>Evidence, not guarantees.</strong> Source links and capture metadata are recorded in <span class="mono">data/</span>.
+    <span class="mono">npm run lint</span> checks provenance structure, not the truth of a source. Registry admission does not certify every linked result. Captured-vs-inferred values are labeled; modelled mappings are called modelled.
     Strategies contain no hard-coded outcomes — only executable <span class="mono">decide()</span> rules. Fills are refused on days with no trade and capped at 10% of the day's volume.</div>
     <div class="grid cols2">
       <div class="card"><h3>What's inside</h3>
@@ -228,7 +234,7 @@
     // group by race (state), newest field period first inside a race; JSON order stays provenance order
     const raceRows = mc.rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.race.localeCompare(b.r.race) || String(b.r.fieldDates).localeCompare(String(a.r.fieldDates)) || a.i - b.i).map((x) => x.r);
     const races = raceRows.map((r) => `<tr>
-      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ' <span class="chip warn" title="toplines transcribed from the pollster release page; n / MoE / field dates not fetchable (publisher page blocked) — review manually">review</span>' : ''}${r.methodFamily ? ` <span class="chip info" title="method family (irregularity #49)">${esc(r.methodFamily)}</span>` : ''}</span></td>
+      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ` <span class="chip warn" title="${esc(r.candidateMismatch || r.methodNote || 'Incomplete source metadata; see primary release')}">review</span>` : ''}${r.methodFamily ? ` <span class="chip info" title="${esc(r.methodNote || 'method family (irregularity #49)')}">${esc(r.methodFamily)}</span>` : ' <span class="chip warn">method unclassified</span>'}</span></td>
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
       <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
@@ -658,7 +664,7 @@
     (or, where a direct fetch failed, located via live search — noted in the entry), and the expandable
     <em>What was verified</em> panel records <strong>exactly what was observed</strong>. Nothing is listed on assumption; every row
     carries a link for manual review. Machine-checked by <span class="mono">scripts/lint-verified.mjs</span>; full audit trail in
-    <span class="mono">VERIFICATION.md</span> (§1–§9).</p>
+    <a href="VERIFICATION.md">VERIFICATION.md</a>. <a href="data/sources/master.json">Download source registry (JSON)</a>.</p>
     <div class="toolbar">
       <input type="search" id="src-q" placeholder="Filter ${all.length} sources — name, domain, keyword, method…" aria-label="Filter sources by text">
       <select id="src-cat" aria-label="Filter by category">
@@ -673,6 +679,7 @@
     </div>
     <p class="small" id="src-count" aria-live="polite" style="margin:2px 0 0"></p>
     ${blocks}
+    ${D.sessionReview ? `<h2>Latest session re-tests · ${esc(D.sessionReview.verifiedOn)}</h2><p class="small">Direct page-fetch observations, separate from the automated runner below. Reachability is not admission or certification.</p><div class="card"><table><thead><tr><th>Source</th><th>Status</th><th>Observed / limitation</th></tr></thead><tbody>${D.sessionReview.rows.map((r) => `<tr><td><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.id)}</a></td><td><span class="chip ${r.status === 'readable' ? 'good' : 'warn'}">${esc(r.status)}</span></td><td>${esc(r.observation)}</td></tr>`).join('')}</tbody></table></div>` : ''}
     ${probeCard()}`;
   }
 
@@ -937,7 +944,7 @@
     const sn = snLatest && snLatest.national && snLatest.national.parse === 'ok' ? snLatest.national : null;
     const snFailed = snLatest && !sn ? `<p class="small"><strong>Latest automated attempt ${esc(snLatest.date || snLatest.capturedAt)}:</strong> national page read via <span class="mono">${esc((snLatest.national && snLatest.national.fetchMethod) || 'fetch')}</span> but <span class="chip warn">parse failed</span> — the free pages are client-rendered (irregularities #58, #62); ${Object.values(snLatest.chambers || {}).filter((c) => c.parse === 'ok').length} of ${Object.keys(snLatest.chambers || {}).length} chamber pages parsed. Nothing is estimated from the shell; the hand-verified 2026-09-19 figures below stay labelled as such until a rendered row parses.</p>` : '';
     const snChambers = X.stateNavigate && X.stateNavigate.latest ? Object.entries(X.stateNavigate.latest.chambers || {}).filter(([, c]) => c.parse === 'ok').slice(0, 40).map(([k, c]) => `<tr><td class="mono">${esc(k)}</td><td>${c.D ? `D ${c.D.seats} (${c.D.change > 0 ? '+' : ''}${c.D.change})` : '—'}</td><td>${c.R ? `R ${c.R.seats} (${c.R.change > 0 ? '+' : ''}${c.R.change})` : '—'}</td><td class="num">${c.odds && c.odds.dMajority != null ? c.odds.dMajority + '%' : '—'}</td><td><a href="${esc(c.capturedFrom)}" target="_blank" rel="noopener">page</a></td></tr>`).join('') : '';
-    const rend = X.renderings && X.renderings.rows.length ? X.renderings.rows.slice().reverse().map((r) => `<tr><td>${esc(r.date)}</td><td>${r.renderers.ebo && r.renderers.ebo.senateDemKalshi ? `${pct(r.renderers.ebo.senateDemKalshi.bid)}–${pct(r.renderers.ebo.senateDemKalshi.ask)}` : esc((r.renderers.ebo || {}).extract || '—')}${r.renderers.ebo && r.renderers.ebo.vsCaptured && r.renderers.ebo.vsCaptured.comparable ? `<br><span class="small">vs captured mid ${pct(r.renderers.ebo.vsCaptured.capturedMid)} (diff ${(r.renderers.ebo.vsCaptured.diff * 100).toFixed(1)} pts)</span>` : ''}</td><td>${r.renderers.ddhq ? `House ${pct(r.renderers.ddhq.houseD, 0)} · Senate ${pct(r.renderers.ddhq.senateD, 0)}` : '—'}</td><td>${r.renderers['270towin'] && r.renderers['270towin'].kalshiPanel ? `${pct(r.renderers['270towin'].kalshiPanel.a, 0)} / ${pct(r.renderers['270towin'].kalshiPanel.b, 0)} (${esc(r.renderers['270towin'].kalshiPanel.asOf)})` : esc((r.renderers['270towin'] || {}).extract || '—')}</td><td>${r.flags.length ? `<span class="chip warn">${r.flags.length} flag(s)</span><div class="small">${r.flags.map(esc).join('<br>')}</div>` : '<span class="chip good">none</span>'}</td></tr>`).join('') : '';
+    const rend = X.renderings && X.renderings.rows.length ? X.renderings.rows.slice().reverse().map((r) => `<tr><td>${esc(r.date)}</td><td>${r.renderers.ebo && r.renderers.ebo.senateDemKalshi ? `${pct(r.renderers.ebo.senateDemKalshi.bid)}–${pct(r.renderers.ebo.senateDemKalshi.ask)}` : esc((r.renderers.ebo || {}).extract || '—')}${r.renderers.ebo && r.renderers.ebo.vsCaptured && r.renderers.ebo.vsCaptured.comparable ? `<br><span class="small">vs captured mid ${pct(r.renderers.ebo.vsCaptured.capturedMid)} (diff ${(r.renderers.ebo.vsCaptured.diff * 100).toFixed(1)} pts)</span>` : ''}</td><td>${r.renderers.ddhq ? `House ${pct(r.renderers.ddhq.houseD, 0)} · Senate ${pct(r.renderers.ddhq.senateD, 0)}` : '—'}</td><td>${r.renderers['270towin'] && r.renderers['270towin'].kalshiPanel ? `${pct(r.renderers['270towin'].kalshiPanel.dem, 0)} / ${pct(r.renderers['270towin'].kalshiPanel.rep, 0)} (${esc(r.renderers['270towin'].kalshiPanel.asOf)})` : esc((r.renderers['270towin'] || {}).extract || '—')}</td><td>${r.flags.length ? `<span class="chip warn">${r.flags.length} flag(s)</span><div class="small">${r.flags.map(esc).join('<br>')}</div>` : '<span class="chip good">none</span>'}</td></tr>`).join('') : '';
     // Per-seat / plurality questions from the latest collector row: each row says HOW it was read (fetch, headless
     // render, or nothing) so a rendered number is never confused with a missing one (#62).
     const lastMet = X.metaculusRows.length ? X.metaculusRows[X.metaculusRows.length - 1] : null;
@@ -953,8 +960,12 @@
     <h2>Snapshots (${S.pendingCount} pending · ${S.scoredCount} scored)</h2>
     <div class="card"><table><thead><tr><th>Question</th><th>Kalshi</th><th>Metaculus</th><th>DDHQ</th><th>EBO→Kalshi</th><th>Max spread</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>
       <p class="small">Kalshi = this project's own API capture (<span class="mono">data/kalshi/universe/latest.json</span>). Metaculus = <a href="https://www.metaculus.com/midterms-2026/" target="_blank" rel="noopener">midterms hub</a>. DDHQ = <a href="https://votes.decisiondeskhq.com/" target="_blank" rel="noopener">DDHQ Votes</a>. EBO = <a href="https://electionbettingodds.com/" target="_blank" rel="noopener">Election Betting Odds</a>' Kalshi row. Irregularity #57 records the spread.</p></div>
-    <h2>Per-layer score</h2>
-    <div class="card"><table><thead><tr><th>Layer</th><th>Questions answered</th><th>Scored</th><th>Mean Brier</th><th>Mean log-loss</th></tr></thead><tbody>${byLayer}</tbody></table>
+    <h2>Paired Metaculus vs Kalshi evaluation</h2>
+    <div class="card"><p>${S.pairedComparison.questions} jointly scored question(s). <strong>Mean Brier difference: ${S.pairedComparison.meanBrierDelta == null ? 'pending certification' : S.pairedComparison.meanBrierDelta}</strong></p><p class="small">${esc(S.pairedComparison.method)}</p>
+    ${S.pairedComparison.rows.length ? `<table><thead><tr><th>Question</th><th>Probability gap</th><th>Brier difference</th><th>Official evidence</th></tr></thead><tbody>${S.pairedComparison.rows.map((r) => `<tr><td>${esc(r.question)}</td><td>${pp(r.gap * 100)}</td><td>${r.brierDelta}</td><td>${srcs(r.sources.map((s) => s.url))}</td></tr>`).join('')}</tbody></table>` : '<p class="small">A forecast gap is not an error until a matching official outcome is available. November 3 is election day, not an automatic certification deadline.</p>'}</div>
+    ${S.refused.length ? `<details><summary>Scoring / input refusals (${S.refused.length})</summary><ul>${S.refused.map((r) => `<li><span class="mono">${esc(r.id)} ${esc(r.layer || '')}</span>: ${esc(r.reason)}</li>`).join('')}</ul></details>` : ''}
+    <h2>Per-layer snapshot scores</h2><p class="small">These aggregates count repeated dated snapshots, not independent elections; question sets may differ. Use the paired evaluation above for the same-question comparison.</p>
+    <div class="card"><table><thead><tr><th>Layer</th><th>Snapshots answered</th><th>Scored</th><th>Mean Brier</th><th>Mean log-loss</th></tr></thead><tbody>${byLayer}</tbody></table>
       <p class="small">${esc(X.outcomesMethod || '')}</p><p class="small"><strong>Official outcome sources to be used:</strong></p><ul class="small">${official}</ul><p class="small"><strong>Questions:</strong></p><ul class="small">${q}</ul></div>
     <h2>Metaculus daily capture</h2>
     ${metQ}

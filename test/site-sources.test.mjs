@@ -332,9 +332,10 @@ test('poll layer: session-6 rows carry #49 methodFamily labels and map to captur
 });
 
 test('site: the Cross-layer section renders pending rows and the R14 spread', () => {
-  const { html } = renderSection('crosslayer');
+  const { html, bundle } = renderSection('crosslayer');
   assert.match(html, /Cross-layer scoreboard/);
-  assert.match(html, /pending canvass/);
+  if (bundle.crossLayer.scored.pendingCount) assert.match(html, /pending canvass/);
+  if (bundle.crossLayer.scored.scoredCount) assert.match(html, /scored · y=/);
   assert.match(html, /SENATE-CONTROL-2026/);
   assert.match(html, /7\.8 pts/); // Kalshi 0.595 mid vs Metaculus 0.517 on 2026-09-19
 });
@@ -437,4 +438,24 @@ test('site: irregularities rendered include the session-4 items (#40-#49) and se
   for (let id = 40; id <= 53; id += 1) {
     assert.ok(els.main.innerHTML.includes(`#${id} ·`), `irregularity #${id} not rendered on the site`);
   }
+});
+
+test('site: session 9 evidence status and paired comparison are visible without overstating verification', () => {
+  const { html: overview } = renderSection('overview');
+  assert.match(overview, /Election intelligence, with evidence/);
+  assert.match(overview, /Market snapshot/);
+  assert.match(overview, /checks provenance structure, not the truth/);
+  const { html: cross, bundle } = renderSection('crosslayer');
+  assert.match(cross, /Paired Metaculus vs Kalshi evaluation/);
+  if (!bundle.crossLayer.scored.pairedComparison.questions) assert.match(cross, /pending certification/);
+  for (const row of bundle.crossLayer.renderings.rows) {
+    const p = row.renderers['270towin']?.kalshiPanel;
+    if (p) assert.ok(cross.includes(`${(p.dem * 100).toFixed(0)}% / ${(p.rep * 100).toFixed(0)}%`), '270toWin uses dem/rep, not obsolete a/b');
+  }
+  const { html: polls } = renderSection('polls');
+  assert.match(polls, /method unclassified/);
+  assert.match(polls, /Candidate mismatch: poll Alexander Vindman; market Angie Nixon/);
+  const { html: sources } = renderSection('sources');
+  assert.match(sources, /Latest session re-tests/);
+  assert.match(sources, /session-review|Direct page-fetch observations/);
 });

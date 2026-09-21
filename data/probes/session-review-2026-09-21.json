@@ -1,0 +1,109 @@
+{
+ "title": "Session 9 re-tests — direct page-fetch observations, not runner probe verdicts",
+ "verifiedOn": "2026-09-21",
+ "capturedFrom": "Session page-fetch tool at each listed URL; direct sandbox Node fetch separately noted",
+ "rows": [
+  {
+   "id": "surveyusa-poll-28000",
+   "url": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
+   "status": "pending-toplines",
+   "observation": "Metadata only: Minnesota, September 9–14 field dates, September 15 release; then blank body. No candidate percentages extracted."
+  },
+  {
+   "id": "harrisx",
+   "url": "https://www.harrisx.com/",
+   "status": "readable",
+   "observation": "Official page links August Harvard CAPS / HarrisX poll. Homepage still advertises its 2024 dashboard; this does not establish current-cycle dashboard coverage."
+  },
+  {
+   "id": "courtlistener-api",
+   "url": "https://www.courtlistener.com/api/rest/v4/",
+   "status": "readable",
+   "observation": "API root displays HTTP 200 OK and endpoint links. Access to each downstream endpoint was not tested; no blanket claim of anonymous API access."
+  },
+  {
+   "id": "pec",
+   "url": "https://election.princeton.edu/",
+   "status": "declined",
+   "observation": "Newest visible posts November 5, 2024; no on-site 2026/2028 forecast observed. #53 criteria unchanged."
+  },
+  {
+   "id": "split-ticket",
+   "url": "https://split-ticket.org/",
+   "status": "declined",
+   "observation": "Newest visible post October 20, 2025; August 19, 2025 partnership with The Argument still displayed. No current free ratings/model observed; #53 criteria unchanged."
+  },
+  {
+   "id": "wi-elections-voting",
+   "url": "https://elections.wi.gov/elections-voting",
+   "status": "blocked",
+   "observation": "Body says Access denied / You are not authorized to access this page."
+  },
+  {
+   "id": "nv-canonical",
+   "url": "https://www.nvsos.gov/elections",
+   "status": "readable",
+   "observation": "Canonical page now readable: Election Information, Voter Registration Statistics, Candidates, Initiatives & Referenda links. No result file ingested."
+  },
+  {
+   "id": "nv-legacy",
+   "url": "https://www.nvsos.gov/sos-elections",
+   "status": "missing",
+   "observation": "Body says Page Not Found. Canonical recovery does not repair the obsolete path."
+  },
+  {
+   "id": "ca-cdn",
+   "url": "https://elections.cdn.sos.ca.gov/",
+   "status": "blocked",
+   "observation": "Root returns XML AccessDenied. This does not imply all deep PDFs are blocked."
+  },
+  {
+   "id": "ma-root",
+   "url": "https://www.sec.state.ma.us/divisions/elections/",
+   "status": "blocked",
+   "observation": "Body says 403 - Forbidden: Access is denied. No general claim about deeper pages."
+  },
+  {
+   "id": "fandmpoll",
+   "url": "https://www.fandmpoll.org/",
+   "status": "readable",
+   "observation": "Official newsletter identifies F&M Center for Opinion Research, with August 27 and June 18, 2026 releases. Already admitted; no duplicate source."
+  },
+  {
+   "id": "statenavigate-api",
+   "url": "https://data.statenavigate.com/",
+   "status": "blocked",
+   "observation": "Session page-fetch returned HTTP 500. Direct sandbox Node fetch separately failed ECONNRESET; no free API schema or endpoint verified, none fabricated."
+  },
+  {
+   "id": "statenavigate-national",
+   "url": "https://projects.statenavigate.com/25-26/national/",
+   "status": "readable",
+   "observation": "Free national page: 2,306 seats, 126 D pickups, 11 R pickups, 14 states, 27 chambers, 142 close seats, 137 flips. Paid Tier 2 gates visible for full flips; not accessed. This is a session observation, not an automated API capture."
+  },
+  {
+   "id": "metaculus-hub",
+   "url": "https://www.metaculus.com/midterms-2026/",
+   "status": "readable",
+   "observation": "Session observation: House Democrats 89.0%, Republicans 11.0%; Senate Democrats 49.2%, Republicans 50.8%. Control quadrants 48.2 / 40.8 / 10.0 / 1.0 sum to 100 and reconcile with chamber marginals. No same-day Kalshi capture available locally; no fabricated paired gap."
+  },
+  {
+   "id": "muhlenberg-library",
+   "url": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
+   "status": "pending-toplines",
+   "observation": "Latest visible items 2025/2026 energy/environment and spring 2026 public-health surveys. Political horse-race entries shown are October 2024; no new 2026 horse-race admitted."
+  },
+  {
+   "id": "unf-porl",
+   "url": "https://www.unf.edu/coas/porl/",
+   "status": "readable",
+   "observation": "University page links full releases to unfporl.org; July PDF toplines and methods directly verified, two rows ingested."
+  },
+  {
+   "id": "cook-county-il",
+   "url": "https://www.cookcountyclerkil.gov/",
+   "status": "readable",
+   "observation": "Official page identifies suburban Cook County election authority. Separate results326 host not verified in this pass."
+  }
+ ]
+}

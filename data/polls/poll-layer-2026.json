@@ -4,7 +4,7 @@
  "capturedAt": "2026-09-19T23:30:00Z",
  "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed. Session 7 (2026-09-20) rows: elon-2026-09-nc-senate, hpu-2026-04-nc-senate and harrisx-2026-08-generic (all carry methodFamily; HPU's 'moe' is the release's credibility interval, as its methodNote says); two pending items record what was verified but not transcribed. Session 8 (2026-09-20) rows: hpu-2026-08-nc-senate + hpu-2026-08-nc-house-generic (Poll 126, both with the credibility-interval label; the house row's kalshiDemTicker is null by design — see marketBasis), uh-hobby-2026-01-tx-governor + uh-hobby-2026-01-tx-senate (the Senate row is the median of six candidate-matched scenarios, stated in methodNote), saint-anselm-2026-06-nh-senate (new family random-cellphone-rv-panel, with the published marketGap), stetson-2026-04-fl-governor + stetson-2026-04-fl-senate (SENATEFLS-26 = the short-term seat), ppp-2026-07-nc-senate (methodFamily null by #49 discipline). The CIRCLE youth poll is an aggregator reading with D/R null (subpopulation, not a race), and CIRCLE YESI 2026 top-10 lists are independentPriors — neither is a poll.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
- "updated": "2026-09-20",
+ "updated": "2026-09-21",
  "genericBallot": [
   {
    "id": "nbc-2026-06",
@@ -1150,6 +1150,119 @@
    "toplinesPdf": "https://e1.nmcdn.io/assets/ppp/wp-content/uploads/2026/07/NorthCarolinaPollJuly2026.pdf",
    "verifiedVia": "PPP homepage 'Latest Poll' and the July 13, 2026 release page fetched directly 2026-09-20; horse race, n, field dates and MoE transcribed verbatim from the release.",
    "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "unf-2026-07-fl-governor",
+   "race": "Governor — Florida",
+   "pollster": "University of North Florida Public Opinion Research Lab",
+   "fieldDates": "2026-07-08..2026-07-17",
+   "population": "LV",
+   "n": 848,
+   "moe": 3.8,
+   "candidates": {
+    "D": {
+     "name": "David Jolly",
+     "pct": 41
+    },
+    "R": {
+     "name": "Byron Donalds",
+     "pct": 46
+    }
+   },
+   "undecidedOrCouldChange": "See source and method note; unreported categories not inferred.",
+   "methodFamily": "voter-file-hybrid",
+   "methodNote": "Random voter-file sample; 459 live telephone / 389 text-to-web completions; English/Spanish; geographic stratification, two-step weighting; MoE includes design effect. Other 5%, would not vote 2%, undecided 6%.",
+   "kalshiEvent": "GOVPARTYFL-26",
+   "kalshiDemTicker": "GOVPARTYFL-26-D",
+   "source": "https://www.unfporl.org/s/UNF-PORL-Summer-Statewide-2026-FLLV-Press-Release.pdf",
+   "verifiedVia": "Primary publisher release fetched directly 2026-09-21. UNF PDF toplines and methodology read; MSU September 1 release LV figures and subset bases read. Candidate labels checked against saved Kalshi universe dated 2026-09-20.",
+   "verifiedOn": "2026-09-21",
+   "review": false
+  },
+  {
+   "id": "unf-2026-07-fl-senate",
+   "race": "U.S. Senate — Florida (special)",
+   "pollster": "University of North Florida Public Opinion Research Lab",
+   "fieldDates": "2026-07-08..2026-07-17",
+   "population": "LV",
+   "n": 848,
+   "moe": 3.8,
+   "candidates": {
+    "D": {
+     "name": "Angie Nixon",
+     "pct": 42
+    },
+    "R": {
+     "name": "Ashley Moody",
+     "pct": 50
+    }
+   },
+   "undecidedOrCouldChange": "See source and method note; unreported categories not inferred.",
+   "methodFamily": "voter-file-hybrid",
+   "methodNote": "Same sample as July governor row, NOT an independent poll. Use Nixon scenario to match the captured market nominee; Vindman 40/Moody 50 is a different scenario, not averaged into this row. Other 1%, would not vote 1%, undecided 6%. Random voter-file live phone/text-to-web design; MoE includes weighting design effect.",
+   "kalshiEvent": "SENATEFLS-26",
+   "kalshiDemTicker": "SENATEFLS-26-D",
+   "source": "https://www.unfporl.org/s/UNF-PORL-Summer-Statewide-2026-FLLV-Press-Release.pdf",
+   "verifiedVia": "Primary publisher release fetched directly 2026-09-21. UNF PDF toplines and methodology read; MSU September 1 release LV figures and subset bases read. Candidate labels checked against saved Kalshi universe dated 2026-09-20.",
+   "verifiedOn": "2026-09-21",
+   "review": false
+  },
+  {
+   "id": "msu-2026-08-mi-senate",
+   "race": "U.S. Senate — Michigan",
+   "pollster": "Michigan State University IPPSR / Office for Survey Research",
+   "fieldDates": "2026-08-10..2026-08-20",
+   "population": "LV",
+   "n": 779,
+   "moe": null,
+   "candidates": {
+    "D": {
+     "name": "Abdul El-Sayed",
+     "pct": 50
+    },
+    "R": {
+     "name": "Mike Rogers",
+     "pct": 45
+    }
+   },
+   "undecidedOrCouldChange": "See source and method note; unreported categories not inferred.",
+   "methodFamily": null,
+   "methodNote": "Likely-voter subset n=779, not full adult sample n=1,000 or RV n=913. Release describes YouGov web panel matched to Michigan adult sampling frame. Recruitment probability, full weighting and MoE not stated in fetched release; methodFamily left null under #49, not assumed from brand. Microdata release expected February 2027 per source.",
+   "kalshiEvent": "SENATEMI-26",
+   "kalshiDemTicker": "SENATEMI-26-D",
+   "source": "https://ippsr.msu.edu/news/msu-poll-shows-democrats-lead-republicans-coalesce-behind-rogers",
+   "verifiedVia": "Primary publisher release fetched directly 2026-09-21. UNF PDF toplines and methodology read; MSU September 1 release LV figures and subset bases read. Candidate labels checked against saved Kalshi universe dated 2026-09-20.",
+   "verifiedOn": "2026-09-21",
+   "review": true
+  },
+  {
+   "id": "msu-2026-08-mi-governor",
+   "race": "Governor — Michigan",
+   "pollster": "Michigan State University IPPSR / Office for Survey Research",
+   "fieldDates": "2026-08-10..2026-08-20",
+   "population": "LV",
+   "n": 779,
+   "moe": null,
+   "candidates": {
+    "D": {
+     "name": "Jocelyn Benson",
+     "pct": 52
+    },
+    "R": {
+     "name": "John James",
+     "pct": 43
+    }
+   },
+   "undecidedOrCouldChange": "See source and method note; unreported categories not inferred.",
+   "methodFamily": null,
+   "methodNote": "Same LV subset n=779 as Senate row. Source reports Benson/James but does not enumerate Mike Duggan share or full question wording; third-candidate coverage requires review. MoE, detailed weighting and recruitment probability absent from fetched release, so methodFamily null under #49. Do not treat this as an independent poll from the Senate row.",
+   "kalshiEvent": "GOVPARTYMI-26",
+   "kalshiDemTicker": "GOVPARTYMI-26-D",
+   "source": "https://ippsr.msu.edu/news/msu-poll-shows-democrats-lead-republicans-coalesce-behind-rogers",
+   "verifiedVia": "Primary publisher release fetched directly 2026-09-21. UNF PDF toplines and methodology read; MSU September 1 release LV figures and subset bases read. Candidate labels checked against saved Kalshi universe dated 2026-09-20.",
+   "verifiedOn": "2026-09-21",
+   "review": true,
+   "comparisonBlockedReason": "MSU release does not enumerate the Mike Duggan option or full question wording; multi-candidate comparability is unverified. Poll margin retained; win-probability and market-gap comparison withheld."
   }
  ],
  "exitPollStatus": {
@@ -1357,14 +1470,14 @@
  "pendingSources": [
   {
    "id": "muhlenberg-ciopo",
-   "status": "no 2026 horse-race survey published on the pollster's own site as of 2026-09-19",
-   "evidence": "Poll library https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/ fetched 2026-09-19: latest political surveys are October 2024; 2026 items are the National Surveys on Energy and Environment and the Spring 2026 Pennsylvania Public Health Survey.",
-   "action": "No row fabricated. Re-check the poll library each session; ingest the first 2026 PA governor/Senate release when it appears."
+   "status": "Re-tested 2026-09-21: no current-cycle horse-race observed",
+   "evidence": "Latest visible items 2025/2026 energy/environment and spring 2026 public-health surveys. Political horse-race entries shown are October 2024; no new 2026 horse-race admitted.",
+   "action": "No row fabricated. Re-check the poll library each session; ingest the first 2026 PA governor/Senate release when it appears. No new horse-race row verified in session 9; remains pending, not marked complete."
   },
   {
    "id": "surveyusa-28000-mn",
-   "status": "archive fetched 2026-09-20, toplines not readable (client-rendered report page)",
-   "evidence": "results.surveyusa.com/PollHistory.aspx lists '09/16/26 Poll #28000 — All SurveyUSA clients in Minnesota' with Governor and U.S. Senate horse-race questions; client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708 returned an empty <body> to the fetcher.",
+   "status": "Re-tested 2026-09-21: report metadata readable, toplines still absent",
+   "evidence": "Direct report fetch returned Minnesota, field dates 09/09/2026–09/14/2026, release 09/15/2026, methodology link, then blank <body>. Prior archive date 09/16/26 is not the report release date.",
    "action": "Render the report page with the headless-Chrome probe (data/probes/targets.json id surveyusa-poll-28000, render:true); transcribe Flanagan/Tafoya and Klobuchar/Demuth toplines with n, dates, MoE and the disclosed mode; map to SENATEMN-26 / GOVPARTYMN-26."
   },
   {
@@ -1390,6 +1503,12 @@
    "status": "Newest Roanoke (ipor) release is Feb 2026 — issues-only (guns/redistricting); no 2026 horse race (as of 2026-09-20)",
    "evidence": "Roanoke index (roanoke.ipor) fetched 2026-09-20: most recent release Feb 2026 covers gun policy and redistricting opinions; no candidate matchup or generic ballot in 2026-cycle releases.",
    "action": "Keep pending. Ingest the first Roanoke release containing a 2026 matchup, mapped to the relevant GOVPARTY/SENATE event for its state."
+  },
+  {
+   "id": "msu-2026-03-governor",
+   "status": "Not ingested: April release has toplines embedded as image, and describes web-based probability panel alongside YouGov matching",
+   "evidence": "https://ippsr.msu.edu/news/msu-governors-poll-shows-slight-benson-lead-no-clear-cut-frontrunner fetched 2026-09-21: March 2–24; n=1,000 adults; full toplines not in fetched text.",
+   "action": "Read the primary image/full methods before using this historical scenario. Do not transfer methodology from the August release."
   }
  ],
  "independentPriors": [

@@ -16,7 +16,7 @@ import { impliedProb } from './kalshi-api.js';
 export const LOGISTIC_K = 4.5;
 
 export function marginToProb(marginPts, k = LOGISTIC_K) {
-  if (marginPts === null || marginPts === undefined || !Number.isFinite(marginPts)) return null;
+  if (marginPts === null || marginPts === undefined || !Number.isFinite(marginPts) || !Number.isFinite(k) || k <= 0) return null;
   return 1 / (1 + Math.exp(-marginPts / k));
 }
 
@@ -24,7 +24,7 @@ export function marginToProb(marginPts, k = LOGISTIC_K) {
 export function demMargin(entry) {
   const d = entry.candidates && entry.candidates.D ? entry.candidates.D.pct : null;
   const r = entry.candidates && entry.candidates.R ? entry.candidates.R.pct : null;
-  if (d === null || r === null) return null;
+  if (![d, r].every((v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 100) || d + r > 100) return null;
   return d - r;
 }
 
@@ -36,13 +36,31 @@ function marketFor(universe, eventTicker, ticker) {
   return m ? { ...m, event_title: ev.title } : null;
 }
 
+// Conservative identity check: no fuzzy name inference. A mismatch retains the poll
+// as historical evidence but suppresses a misleading comparison to another nominee.
+const normalName = (s) => String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+export function candidateMismatch(entry, universe) {
+  if (!entry.kalshiEvent || !entry.kalshiDemTicker) return null;
+  const event = universe?.events?.find((e) => e.event_ticker === entry.kalshiEvent);
+  if (!event) return null;
+  for (const side of ['D', 'R']) {
+    const ticker = side === 'D' ? entry.kalshiDemTicker : `${entry.kalshiEvent}-R`;
+    const market = event.markets.find((m) => m.ticker === ticker);
+    const name = entry.candidates?.[side]?.name;
+    if (!market?.yes_sub_title || !name) return `Candidate identity unavailable for ${side}; comparison withheld`;
+    if (normalName(name) !== normalName(market.yes_sub_title)) return `Candidate mismatch: poll ${name}; market ${market.yes_sub_title}. Historical scenario retained; comparison withheld`;
+  }
+  return null;
+}
+
 export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) {
   const rows = [];
   for (const e of layer.stateRaces || []) {
     const margin = demMargin(e);
-    const pollP = marginToProb(margin, k);
+    const pollP = e.comparisonBlockedReason ? null : marginToProb(margin, k);
     const m = e.kalshiEvent && e.kalshiDemTicker ? marketFor(universe, e.kalshiEvent, e.kalshiDemTicker) : null;
-    const mk = m ? impliedProb(m) : { p: null, basis: 'none' };
+    const mismatch = e.comparisonBlockedReason || candidateMismatch(e, universe);
+    const mk = m && !mismatch ? impliedProb(m) : { p: null, basis: mismatch || 'none' };
     rows.push({
       id: e.id,
       race: e.race,
@@ -60,15 +78,17 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
       kalshiEvent: e.kalshiEvent || null,
       kalshiDemTicker: e.kalshiDemTicker || null,
       methodFamily: e.methodFamily || null,
+      methodNote: e.methodNote || null,
       marketDemProb: mk.p === null ? null : Number(mk.p.toFixed(4)),
       // A row's own marketBasis is a DESIGN note (e.g. "no D/R market exists; the closest event is a
       // seat-count market, not a race question") and must reach the UI — the lookup basis only fills in
       // when the row carries no design note.
-      marketBasis: e.marketBasis || mk.basis,
+      marketBasis: mismatch || e.marketBasis || mk.basis,
       marketDate: universe ? universe.date : null,
       gap: pollP !== null && mk.p !== null ? Number((mk.p - pollP).toFixed(4)) : null,
       source: e.source,
-      review: !!e.review,
+      review: !!e.review || !!mismatch,
+      candidateMismatch: mismatch,
     });
   }
   return {

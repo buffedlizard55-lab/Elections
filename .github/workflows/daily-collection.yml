@@ -54,6 +54,8 @@ on:
         description: 'Force re-capture of the 2024 per-state Senate markets'
         required: false
         default: 'false'
+  # Lightweight collectors/scorers are exercised by collector-probe instead.
+  # Schedule and manual dispatch still execute the entire universe collection.
   push:
     branches: ['arena/**']
     paths:
@@ -72,13 +74,6 @@ on:
       - 'src/calibration-tracker.js'
       - 'src/senate2024-backtest.js'
       - 'test/collector.test.mjs' # the offline replay test must be proven against a live capture
-      - 'scripts/collect-metaculus.mjs'
-      - 'scripts/collect-statenavigate.mjs'
-      - 'scripts/crosscheck-renderings.mjs'
-      - 'scripts/probe-hosts.mjs'
-      - 'scripts/lib/render.mjs'
-      - 'src/crosslayer.js'
-      - '.github/workflows/daily-collection.yml'
 
 permissions:
   contents: write

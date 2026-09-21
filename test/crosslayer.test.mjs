@@ -15,7 +15,8 @@ const fx = (n) => readFileSync(new URL(`./fixtures/${n}`, import.meta.url), 'utf
 
 test('brier / logLoss clamp and score', () => {
   assert.ok(Math.abs(brier(0.6, 1) - 0.16) < 1e-12);
-  assert.ok(Math.abs(brier(1.5, 1) - 0.000025) < 1e-12); // clamped
+  assert.equal(brier(1.5, 1), null); // invalid input, not silently clamped
+  assert.equal(brier(1, 1), 0);
   assert.ok(logLoss(0.995, 0) > 5 && Number.isFinite(logLoss(1, 0)));
   assert.equal(brier('x', 1), null);
 });
@@ -36,14 +37,14 @@ test('scoreSnapshots stays pending without an outcome, refuses look-ahead and so
   const noSrc = scoreSnapshots(snaps, { Q: { y: 1, sources: [] } });
   assert.equal(noSrc.rows[0].status, 'pending');
   assert.equal(noSrc.refused.length, 1);
-  const scored = scoreSnapshots(snaps, { Q: { y: 1, certifiedOn: '2026-12-01', sources: [{ name: 'x', url: 'https://example.gov' }] } });
+  const scored = scoreSnapshots(snaps, { Q: { y: 1, certifiedOn: '2026-12-01', sources: [{ sourceId: 'test-authority', url: 'https://example.gov/canvass', kind: 'certified-canvass', certificationQuote: 'Certified results for the test election.', retrievedAt: '2026-12-02T00:00:00Z' }] } }, { asOf: '2026-12-02', authorities: [{ id: 'test-authority', url: 'https://example.gov/', category: 'Government — state & local', status: 'verified' }] });
   assert.equal(scored.rows[0].status, 'scored');
   assert.ok(scored.rows[0].layers.metaculus.brier > scored.rows[0].layers.kalshi.brier); // D win favours the higher-D layer
   assert.equal(scored.byLayer.metaculus.scored, 1);
   const badY = scoreSnapshots(snaps, { Q: { y: 2, sources: [{ url: 'https://example.gov' }] } });
   assert.equal(badY.rows[0].status, 'pending');
   assert.match(badY.refused[0].reason, /must be 0 or 1/);
-  const late = scoreSnapshots([{ ...snaps[0], capturedAt: '2026-11-04T01:00:00Z' }], { Q: { y: 1, sources: [{ url: 'https://example.gov' }] } });
+  const late = scoreSnapshots([{ ...snaps[0], capturedAt: '2026-11-04T01:00:00Z' }], { Q: { y: 1, sources: [{ url: 'https://example.gov' }] } }, { asOf: '2026-12-02' });
   assert.equal(late.rows[0].status, 'refused-lookahead');
 });
 
@@ -238,4 +239,27 @@ test('render helpers: interstitial detection, entity-safe text, title; probe ver
   assert.equal(verdictFor({ ok: false, attempts: [{ status: 403, challenge: 'cloudflare-challenge' }] }, { ok: true, challenge: 'cloudflare-challenge', textLength: 5000 }), 'blocked-cloudflare-challenge');
   assert.equal(verdictFor({ ok: false, attempts: [{ status: 404 }] }), 'http-404');
   assert.equal(verdictFor({ ok: false, attempts: [{ error: 'fetch failed' }] }), 'error');
+});
+
+test('Metaculus: a pre-Kalshi probe can acquire its missing same-day leg later without overwriting forecasts', () => {
+  const snap = { snapshots: [] };
+  const first = '2026-09-21T04:00:00Z';
+  appendSnapshots(snap, { senateD: 49.2, houseD: 89 }, { capturedAt: first, universe: null });
+  const universe = { capturedAt: '2026-09-21T12:30:00Z', events: [{ event_ticker: 'CONTROLS-2026', markets: [{ ticker: 'CONTROLS-2026-D', yes_bid: 0.59, yes_ask: 0.6 }] }] };
+  const later = '2026-09-21T13:00:00Z';
+  assert.equal(appendSnapshots(snap, { senateD: 50, houseD: 90 }, { capturedAt: later, universe }), 1, 'count enrichment as a change so caller writes it');
+  assert.equal(snap.snapshots.length, 2);
+  assert.equal(snap.snapshots[0].layers.metaculus, 0.492);
+  assert.equal(snap.snapshots[0].capturedAt, first);
+  assert.equal(snap.snapshots[0].layers.kalshi.capturedAt, universe.capturedAt);
+  assert.equal(snap.snapshots[0].pairedAt, later);
+  assert.equal(appendSnapshots(snap, { senateD: 51, houseD: 91 }, { capturedAt: later, universe }), 0, 'existing complete pair is immutable');
+  assert.equal(appendSnapshots({ snapshots: [] }, { senateD: 101, houseD: '90' }, { capturedAt: first, universe: null }), 0);
+  const seats = { snapshots: [] };
+  const qs = [{ id: 'test', parse: 'ok', office: 'senate', kind: 'state-group', states: { MI: 60 }, capturedFrom: 'fixture' }];
+  appendSeatSnapshots(seats, qs, { capturedAt: first, universe: null });
+  const u2 = { ...universe, events: [{ event_ticker: 'SENATEMI-26', title: 'Michigan Senate winner?', markets: [{ ticker: 'SENATEMI-26-D', yes_bid: 0.7, yes_ask: 0.71 }] }] };
+  assert.equal(appendSeatSnapshots(seats, qs, { capturedAt: later, universe: u2 }), 1);
+  assert.equal(seats.snapshots.length, 1);
+  assert.equal(seats.snapshots[0].layers.metaculus, 0.6);
 });

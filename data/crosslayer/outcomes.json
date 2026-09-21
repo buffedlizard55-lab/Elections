@@ -1,19 +1,19 @@
 {
- "title": "Official outcomes for cross-layer scoring \u2014 EMPTY until canvasses are certified",
+ "title": "Official outcomes for cross-layer scoring — EMPTY until canvasses are certified",
  "capturedFrom": "to be filled from the official canvass sources listed in officialSources (never from a news call, never from a market settlement)",
  "capturedAt": "2026-09-19T23:59:00Z",
- "method": "Key = question id in snapshots.json. Each record needs y (1 = Democrats control, 0 = otherwise), certifiedOn, and sources[] with an official url; src/crosslayer.js refuses to score a record without an official url. Senate/House control is derived from the 35 Senate and 435 House certified results \u2014 record the per-state certification links used. Kalshi's own settlement is recorded separately in data/kalshi/tracker/settlements.json and is a cross-check, not the ground truth.",
+ "method": "Scoring is blocked until each question has y=0|1, certifiedOn, and sources with sourceId, HTTPS url on that verified government authority origin, kind=certified-canvass, certificationQuote and retrievedAt. Dates must be valid, certification must follow election day and be available by asOf. All forecasts (including layer timestamps) must precede election day UTC. Brier uses exact valid probabilities; only log-loss clips endpoints. Registry resultOrigins can authorize a verified vendor/CDN origin. This is a structural/provenance gate, not automatic proof that text establishes a winner. Derive chamber control from certified contest results and carried seats under the question resolution rules, never from a news call or Kalshi settlement. The repository does not yet have jurisdiction-specific automatic canvass ingestion. See backtest/crosslayer-outcomes.md.",
  "officialSources": [
   {
-   "name": "National Association of Secretaries of State \u2014 canvass/certification links per state (master id nass)",
+   "name": "National Association of Secretaries of State — canvass/certification links per state (master id nass)",
    "url": "https://www.nass.org/"
   },
   {
-   "name": "U.S. House Clerk \u2014 official election statistics (master id clerk-house)",
+   "name": "U.S. House Clerk — official election statistics (master id clerk-house)",
    "url": "https://clerk.house.gov/"
   },
   {
-   "name": "U.S. Senate (master id senate \u2014 url as verified in master.json; use the per-state SoS certification for the result itself)",
+   "name": "U.S. Senate (master id senate — url as verified in master.json; use the per-state SoS certification for the result itself)",
    "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/"
   },
   {

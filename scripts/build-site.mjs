@@ -66,7 +66,7 @@ const crossLayer = crossSnapshots ? {
   questions: crossSnapshots.questions,
   outcomesMethod: crossOutcomes ? crossOutcomes.method : null,
   officialSources: crossOutcomes ? crossOutcomes.officialSources : [],
-  scored: scoreSnapshots(crossSnapshots.snapshots, (crossOutcomes && crossOutcomes.outcomes) || {}, { asOf: new Date().toISOString().slice(0, 10) }),
+  scored: scoreSnapshots(crossSnapshots.snapshots, (crossOutcomes && crossOutcomes.outcomes) || {}, { asOf: new Date().toISOString().slice(0, 10), authorities: sources.sources }),
   snapshots: crossSnapshots.snapshots,
   metaculusRows: metaculusDaily ? metaculusDaily.rows.slice(-30) : [],
   stateNavigate: stateNavigateDaily ? { capturedFrom: stateNavigateDaily.capturedFrom, latest: stateNavigateDaily.rows[stateNavigateDaily.rows.length - 1] || null, days: stateNavigateDaily.rows.length } : null,
@@ -223,6 +223,8 @@ const bundle = {
   pollLayer,
   crossLayer,
   probes,
+  sessionReview: readOptional('data/probes/session-review-2026-09-21.json'),
+  admissions: readOptional('data/sources/admissions-2026-09-21.json'),
   universe: universeSite,
   seriesRegistry: seriesRegistry ? { capturedFrom: seriesRegistry.capturedFrom, capturedAt: seriesRegistry.capturedAt, count: seriesRegistry.count, byCategory: seriesRegistry.series.reduce((acc, s) => { acc[s.category] = (acc[s.category] || 0) + 1; return acc; }, {}) } : null,
   // per-market lead scores stay in data/kalshi/tracker/calibration.json; the site gets the summary plus the scored markets only
