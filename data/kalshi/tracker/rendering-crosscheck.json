@@ -1,7 +1,7 @@
 {
  "title": "R13 standing monitor — third-party renderings of Kalshi vs this project's captured yes_bid/yes_ask",
  "capturedFrom": "https://www.270towin.com/ ; https://electionbettingodds.com/ ; https://votes.decisiondeskhq.com/",
- "method": "Daily. Renderers that display Kalshi (EBO's Kalshi row; 270toWin's panel) are compared with data/kalshi/universe/latest.json at the bid/ask midpoint; |diff| > 0.03 is flagged for review, never asserted as an error, because the renderer refreshes every 1-20 minutes and our capture is daily. DDHQ's odds are its own model and are stored as the context layer. Parse failures are recorded verbatim.",
+ "method": "Daily: EBO Kalshi bid/ask midpoint and 270toWin last-trade compared only with valid non-crossed quotes from a Kalshi capture within 24 hours. Absolute difference > 0.03 is a review flag, not proof of error (intraday timestamps differ). DDHQ is context, not Kalshi. Failures are retained.",
  "rows": [
   {
    "date": "2026-09-20",
@@ -81,7 +81,64 @@
     }
    },
    "flags": []
+  },
+  {
+   "date": "2026-09-21",
+   "capturedAt": "2026-09-21T04:25:40.680Z",
+   "kalshiCapturedAt": "2026-09-20T16:22:34.763Z",
+   "renderers": {
+    "ebo": {
+     "capturedFrom": "https://electionbettingodds.com/",
+     "status": 200,
+     "extract": "ok",
+     "stamp": "12:22AM EDT on Sep 21, 2026",
+     "senateDemKalshi": {
+      "bid": 0.59,
+      "ask": 0.6
+     },
+     "senateRepKalshi": {
+      "bid": 0.4,
+      "ask": 0.41
+     },
+     "eboHeadlineDem": 0.6,
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.595,
+      "capturedMid": 0.595,
+      "diff": 0,
+      "flagged": false
+     }
+    },
+    "ddhq": {
+     "capturedFrom": "https://votes.decisiondeskhq.com/",
+     "status": 200,
+     "layer": "context (DDHQ odds, not Kalshi)",
+     "extract": "ok",
+     "houseD": 0.7,
+     "senateD": 0.52
+    },
+    "270towin": {
+     "capturedFrom": "https://www.270towin.com/",
+     "status": 200,
+     "fetchMethod": "fetch",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "failed",
+     "kalshiPanel": null,
+     "kpow": {
+      "value": "+3.10 D",
+      "asOf": "9/20/26 4:14 PM EDT"
+     },
+     "sample": " 270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 2",
+     "render": {
+      "ok": false,
+      "reason": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
+     }
+    }
+   },
+   "flags": [
+    "270towin: not extractable this run (status 200) — recorded, nothing estimated"
+   ]
   }
  ],
- "capturedAt": "2026-09-20T16:50:54.524Z"
+ "capturedAt": "2026-09-21T04:25:40.680Z"
 }
