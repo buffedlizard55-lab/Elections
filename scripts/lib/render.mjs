@@ -48,6 +48,7 @@ export function looksLikeChallenge(status, body) {
   if (/Access Denied.{0,200}(Reference|akamai)/is.test(b) || /AkamaiGHost/i.test(b)) return 'akamai-block';
   if (/Request unsuccessful\. Incapsula incident/i.test(b) || /_Incapsula_Resource/i.test(b)) return 'imperva-block';
   if (/Pardon Our Interruption/i.test(b)) return 'distil-block';
+  if (/<(?:title|h[12])[^>]*>\s*(?:403\s*[-–:]?\s*(?:Forbidden[^<]*)?|Access denied|Page Not Found[^<]*)\s*</i.test(b) || /<Code>AccessDenied<\/Code>/i.test(b)) return 'access-denied-or-missing';
   if (status === 429) return 'rate-limited';
   return null;
 }

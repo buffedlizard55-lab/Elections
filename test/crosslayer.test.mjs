@@ -15,7 +15,8 @@ const fx = (n) => readFileSync(new URL(`./fixtures/${n}`, import.meta.url), 'utf
 
 test('brier / logLoss clamp and score', () => {
   assert.ok(Math.abs(brier(0.6, 1) - 0.16) < 1e-12);
-  assert.ok(Math.abs(brier(1.5, 1) - 0.000025) < 1e-12); // clamped
+  assert.equal(brier(1.5, 1), null); // invalid input, not silently clamped
+  assert.equal(brier(1, 1), 0);
   assert.ok(logLoss(0.995, 0) > 5 && Number.isFinite(logLoss(1, 0)));
   assert.equal(brier('x', 1), null);
 });
@@ -36,14 +37,14 @@ test('scoreSnapshots stays pending without an outcome, refuses look-ahead and so
   const noSrc = scoreSnapshots(snaps, { Q: { y: 1, sources: [] } });
   assert.equal(noSrc.rows[0].status, 'pending');
   assert.equal(noSrc.refused.length, 1);
-  const scored = scoreSnapshots(snaps, { Q: { y: 1, certifiedOn: '2026-12-01', sources: [{ name: 'x', url: 'https://example.gov' }] } });
+  const scored = scoreSnapshots(snaps, { Q: { y: 1, certifiedOn: '2026-12-01', sources: [{ sourceId: 'test-authority', url: 'https://example.gov/canvass', kind: 'certified-canvass', certificationQuote: 'Certified results for the test election.', retrievedAt: '2026-12-02T00:00:00Z' }] } }, { asOf: '2026-12-02', authorities: [{ id: 'test-authority', url: 'https://example.gov/', category: 'Government — state & local', status: 'verified' }] });
   assert.equal(scored.rows[0].status, 'scored');
   assert.ok(scored.rows[0].layers.metaculus.brier > scored.rows[0].layers.kalshi.brier); // D win favours the higher-D layer
   assert.equal(scored.byLayer.metaculus.scored, 1);
   const badY = scoreSnapshots(snaps, { Q: { y: 2, sources: [{ url: 'https://example.gov' }] } });
   assert.equal(badY.rows[0].status, 'pending');
   assert.match(badY.refused[0].reason, /must be 0 or 1/);
-  const late = scoreSnapshots([{ ...snaps[0], capturedAt: '2026-11-04T01:00:00Z' }], { Q: { y: 1, sources: [{ url: 'https://example.gov' }] } });
+  const late = scoreSnapshots([{ ...snaps[0], capturedAt: '2026-11-04T01:00:00Z' }], { Q: { y: 1, sources: [{ url: 'https://example.gov' }] } }, { asOf: '2026-12-02' });
   assert.equal(late.rows[0].status, 'refused-lookahead');
 });
 

@@ -1,5 +1,24 @@
 # Elections — collect, analyze, project & estimate
 
+## Latest review — September 21, 2026
+
+[GitHub Pages dashboard](https://buffedlizard55-lab.github.io/Elections/) ·
+[Source registry](data/sources/master.json) · [Session verification](VERIFICATION.md#14-session-9--2026-09-21-verification-and-three-pass-audit) ·
+[Next session](NEXT_SESSION.md)
+
+**209 sources**, including 20 newly verified local election authority pages; four
+new primary-release poll rows (UNF and MSU). The 2026 poll layer now has 27 state-race
+and 8 generic-ballot entries. Provenance checks are structural, not guarantees of
+source truth. New evidence and re-tests are visible on the dashboard.
+
+Cross-layer scoring now requires dated certified-canvass evidence on an approved
+registry authority origin and rejects malformed probabilities and look-ahead
+captures. `npm run crosslayer` produces the report; all 2026 outcomes remain pending.
+[Outcome contract and limitations](backtest/crosslayer-outcomes.md). State Navigate's
+API is still blocked; no endpoint or result has been fabricated. Candidate-mismatched
+poll scenarios are retained as history but no longer shown as current-market gaps.
+
+
 **A verification-first election intelligence project.** Free, public, official data only.
 Backtests **polls and prediction markets** against **verified official outcomes**, flags every
 irregularity it finds, and runs a **paper-trading forecasting contest** (reverse-engineered from

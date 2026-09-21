@@ -496,6 +496,33 @@
       "detail": "Observed in the committed file (d9bbbd7, capture 2026-09-20T16:22:34Z): counts.openEvents = 4,087 = len(events), but bySeries holds 1,355 rows summing to 4,124 events and 24,444 markets (vs counts.openMarkets = 24,319). bySeries carries TWO rows labelled HOUSENY17 (volumes 110,508.87 and 107,536.97) while the event list correctly labels those events HOUSENY17-26 (107,536.97) and HOUSECA22-26 (110,508.87) — the CA-22 series is misrolled-up in the summary block. The committed daily CSV is from a different fetch state too: it prices KX2028DRUN-28-REMA yes_ask 0.82 while the saved event carries 0.83. The bot's own run (35522506094, main, scheduled) PASSED npm test at its verification step, so the inconsistency arose between that verification and the commit — consistent with the documented push-race rebase resolution: the run started ~16:22Z from a main that predated PR #9's 16:26Z merge (which brought the session-7 05:05Z universe) and committed at 16:51Z on top of it; a 3-way merge of the ~4MB universe JSON can splice clean hunks from the other side into the 'theirs' file even when -X theirs is in force. Run logs are not downloadable from this sandbox (same constraint as #61), so the exact splice is recorded as 'consistent with, not proven'.",
       "action": "(1) Data repair (this PR): the four derived files (universe/latest.json, universe/series.json, tracker/calibration.json, tracker/daily/2026-09-20.csv) were rebuilt deterministically from the file's own saved event list via `node scripts/collect-kalshi.mjs --replay --date 2026-09-20` — the committed universe is again internally consistent (bySeries sums to 4,087 events = the event list; 24,319 markets = counts) and carries the replayedAt marker; tracker/index, settlements and discrepancy-watch were already byte-identical to the replay and were left alone, and the live daily .meta.json (the audit of what the 16:22Z run actually fetched — api requests/retries/bytes) was kept. (2) Collector: a pre-write self-consistency guard now throws when bySeries totals do not reconcile with the projected event list, so an internally inconsistent universe can never be written again. (3) Workflow: the commit step takes a sha256 anchor of the collector's output files after all data steps (kanchor) and, after ANY rebase, re-hashes them and — if they changed — re-captures, re-runs pipeline/lint/tests and amends the commit, so what gets pushed is always one consistent run's snapshot. (4) Reviewers: whenever bySeries/topMarkets/CSV disagree with the events list of a committed universe, treat the derived blocks as corrupted and rebuild with the replay command above before reading any summary number off that file.",
       "source": "git show d9bbbd7 -- data/kalshi/universe/latest.json + https://github.com/buffedlizard55-lab/Elections/actions/runs/35522506094"
+    },
+    {
+      "id": 66,
+      "severity": "high",
+      "area": "Outcome scoring",
+      "title": "Cross-layer scorer previously accepted uncertified URLs and malformed probabilities",
+      "detail": "Code audit 2026-09-21: any nonempty URL satisfied the source gate; certifiedOn was optional; probabilities outside [0,1] were clamped; invalid timestamp strings could pass lexical comparisons. No 2026 outcome has been entered, so no published 2026 score was affected.",
+      "action": "Require certification evidence and approved government origins; parsed dates and per-layer look-ahead checks; exact Brier and validated probabilities; same-question paired comparison with one observation per question. Structural checks cannot certify truth: jurisdiction-specific ingestion remains pending.",
+      "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/src/crosslayer.js"
+    },
+    {
+      "id": 67,
+      "severity": "high",
+      "area": "Poll/market identity",
+      "title": "Florida Senate Vindman poll incorrectly compared with Nixon market",
+      "detail": "The saved September 20 Kalshi universe labels SENATEFLS-26-D Angie Nixon. Existing Stetson April row tests Alexander Vindman. An event ticker alone is insufficient to establish identical candidates.",
+      "action": "Retain historical scenarios; suppress candidate-mismatched market probabilities/gaps, flag for review. Newly admitted UNF July Senate row uses the published Nixon 42 / Moody 50 scenario. Check both D and R names conservatively across all polls.",
+      "source": "https://www.unfporl.org/s/UNF-PORL-Summer-Statewide-2026-FLLV-Press-Release.pdf"
+    },
+    {
+      "id": 68,
+      "severity": "medium",
+      "area": "Standing monitor",
+      "title": "R13 accepted incomplete quote pairs; dashboard read obsolete 270toWin fields",
+      "detail": "Code audit: compareRange checked only captured yes_bid, so a missing ask could yield NaN; no timestamp-age limit. Site used panel.a/panel.b although parser emits panel.dem/panel.rep.",
+      "action": "Validate both quotes and ordering, withhold comparisons more than 24 hours apart, fix dem/rep rendering, expose scoring refusals on site. Compare EBO midpoint and 270toWin last trade, not the same basis.",
+      "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/scripts/crosscheck-renderings.mjs"
     }
   ]
 }

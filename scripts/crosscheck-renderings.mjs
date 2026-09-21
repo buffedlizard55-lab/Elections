@@ -20,6 +20,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isProbability, midpoint, timestamp } from '../src/crosslayer.js';
 import { fetchWithProfiles, renderDom, findChrome } from './lib/render.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -85,18 +86,23 @@ export function parse270(html) {
 
 /** Compare a rendered last-trade percentage with the captured last_price of the same market (tolerance in probability points). */
 export function compareLast(rendered, captured, tolerance = TOLERANCE) {
-  if (typeof rendered !== 'number' || !captured || typeof captured.last_price !== 'number') return { comparable: false };
+  if (!isProbability(rendered) || !captured || !isProbability(captured.last_price)) return { comparable: false };
   const diff = Number((rendered - captured.last_price).toFixed(4));
   return { comparable: true, rendered, capturedLast: captured.last_price, capturedBidAsk: [captured.yes_bid, captured.yes_ask], diff, flagged: Math.abs(diff) > tolerance };
 }
 
 /** Compare a rendered {bid,ask} with the captured market; flag when the ranges are further apart than TOLERANCE. */
 export function compareRange(rendered, captured, tolerance = TOLERANCE) {
-  if (!rendered || !captured || typeof captured.yes_bid !== 'number') return { comparable: false };
-  const rMid = (rendered.bid + rendered.ask) / 2;
-  const cMid = (captured.yes_bid + captured.yes_ask) / 2;
+  const rMid = midpoint(rendered);
+  const cMid = captured ? midpoint({ bid: captured.yes_bid, ask: captured.yes_ask }) : null;
+  if (rMid === null || cMid === null) return { comparable: false };
   const diff = Number((rMid - cMid).toFixed(4));
   return { comparable: true, renderedMid: rMid, capturedMid: cMid, diff, flagged: Math.abs(diff) > tolerance };
+}
+
+export function comparableCapture(renderedAt, kalshiAt, maxHours = 24) {
+  const delta = timestamp(renderedAt) - timestamp(kalshiAt);
+  return Number.isFinite(delta) && Math.abs(delta) <= maxHours * 3600000;
 }
 
 async function get(url) {
@@ -108,7 +114,7 @@ const arg = (name) => { const i = process.argv.indexOf(name); return i >= 0 ? pr
 
 async function load(key, replay) {
   if (replay) return { capturedFrom: `replay:${replay}`, body: readFileSync(replay, 'utf8'), status: 200 };
-  try { const r = await get(SOURCES[key]); return { capturedFrom: SOURCES[key], ...r }; } catch (e) { return { capturedFrom: SOURCES[key], status: 0, error: String(e.message).slice(0, 200) }; }
+  try { const r = await get(SOURCES[key]); return { capturedFrom: SOURCES[key], ...r, body: r.ok ? r.body : null, error: r.ok ? null : `HTTP ${r.status}; content withheld because fetch failed` }; } catch (e) { return { capturedFrom: SOURCES[key], status: 0, error: String(e.message).slice(0, 200) }; }
 }
 
 async function main() {
@@ -116,9 +122,11 @@ async function main() {
   const replay = { ebo: arg('--replay-ebo'), ddhq: arg('--replay-ddhq'), '270': arg('--replay-270') };
   const isReplay = Object.values(replay).some(Boolean);
   const universe = readJson(join(ROOT, 'data/kalshi/universe/latest.json'), null);
-  const market = (evt, tk) => { const e = universe && universe.events.find((x) => x.event_ticker === evt); return e ? e.markets.find((m) => m.ticker === tk) : null; };
+  const fresh = comparableCapture(capturedAt, universe?.capturedAt);
+  const market = (evt, tk) => { if (!fresh) return null; const e = universe && universe.events.find((x) => x.event_ticker === evt); return e ? e.markets.find((m) => m.ticker === tk) : null; };
 
   const row = { date: capturedAt.slice(0, 10), capturedAt, kalshiCapturedAt: universe ? universe.capturedAt : null, renderers: {}, flags: [] };
+  if (!fresh) row.flags.push('Kalshi comparison withheld: capture missing, invalid or more than 24 hours apart.');
   const ebo = await load('ebo', replay.ebo);
   row.renderers.ebo = { capturedFrom: ebo.capturedFrom, status: ebo.status, ...(ebo.body ? parseEbo(ebo.body) : { extract: 'failed', error: ebo.error }) };
   if (row.renderers.ebo.senateDemKalshi) {
@@ -152,10 +160,11 @@ async function main() {
   const file = readJson(outPath, {
     title: 'R13 standing monitor — third-party renderings of Kalshi vs this project\'s captured yes_bid/yes_ask',
     capturedFrom: Object.values(SOURCES).join(' ; '),
-    method: `Daily. Renderers that display Kalshi (EBO's Kalshi row; 270toWin's panel) are compared with data/kalshi/universe/latest.json at the bid/ask midpoint; |diff| > ${TOLERANCE} is flagged for review, never asserted as an error, because the renderer refreshes every 1-20 minutes and our capture is daily. DDHQ's odds are its own model and are stored as the context layer. Parse failures are recorded verbatim.`,
+    method: `Daily. Renderers that display Kalshi (EBO's Kalshi row; 270toWin's panel) are compared with data/kalshi/universe/latest.json at the bid/ask midpoint for EBO and last-trade for 270toWin, only when capture times are within 24 hours; |diff| > ${TOLERANCE} is flagged for review, never asserted as an error, because the renderer refreshes every 1-20 minutes and our capture is daily. DDHQ's odds are its own model and are stored as the context layer. Parse failures are recorded verbatim.`,
     rows: [],
   });
   if (!isReplay) {
+    file.method = 'Daily: EBO Kalshi bid/ask midpoint and 270toWin last-trade compared only with valid non-crossed quotes from a Kalshi capture within 24 hours. Absolute difference > 0.03 is a review flag, not proof of error (intraday timestamps differ). DDHQ is context, not Kalshi. Failures are retained.';
     const i = file.rows.findIndex((x) => x.date === row.date);
     if (i >= 0) file.rows[i] = row; else file.rows.push(row);
     file.capturedAt = capturedAt;

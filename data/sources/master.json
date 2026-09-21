@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
-  "updated": "2026-09-20",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 §9, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md §9b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) — total 169.",
+  "updated": "2026-09-21",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed — noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 §6) + 20 (2026-09-19 session-3 §7) + 12 unique entries from the independent late batch (§8; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 §9, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md §9b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) — total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json.",
   "sources": [
     {
       "id": "kalshi",
@@ -1609,7 +1609,7 @@
       "verified": "Fetched directly 2026-09-19: site index (Ghost newsletter site) and the release 'Franklin & Marshall College Poll Release: August 2026' (fandmpoll.org/franklin-marshall-college-poll-release-august-2026/). Observed in the August release: fielded 'August 17–23, 2026'; '501 registered Pennsylvania voters' (213 Democrats, 208 Republicans, 80 independents); sample 'from Aristotle', respondents notified by mail and completing by phone or online; weighted to PA Department of State registration and the November 2022 CPS; margin of error '±5.5' including design effects; Governor: Shapiro 50% / Garrity 25%; U.S. House preference D 48 / R 36; Shapiro job rating 47% excellent/good, Trump 27%. June release (Jun 8–14, n=546: Shapiro 50 / Garrity 28) and March release (Feb 18–Mar 1, n=834: 48 / 28) also fetched.",
       "verifiedOn": "2026-09-19",
       "status": "verified",
-      "notes": "Admission deferred in sessions 4–5 because only syndicated coverage had been fetched; resolved this session by fetching the pollster's own release (brand/domain trap: the poll lives at fandmpoll.org, NOT fandm.edu). Method family per #49: voter-file-mail-recruit. Rows ingested: fm-2026-08-pa-governor (GOVPARTYPA-26) and fm-2026-08-pa-house-preference.",
+      "notes": "Admission deferred in sessions 4–5 because only syndicated coverage had been fetched; resolved this session by fetching the pollster's own release (brand/domain trap: the poll lives at fandmpoll.org, NOT fandm.edu). Method family per #49: voter-file-mail-recruit. Rows ingested: fm-2026-08-pa-governor (GOVPARTYPA-26) and fm-2026-08-pa-house-preference. Direct re-test 2026-09-21: the poll-owned newsletter remains readable, with August 27 and June 18, 2026 release links; no duplicate admission needed.",
       "category": "Academic & university research"
     },
     {
@@ -1928,7 +1928,7 @@
       "verified": "Located via live search on 2026-09-20; direct fetch of the results hosts returned 500 at verification time (cookcountyelections.com → 500; the cookcountyil.gov department path → 404), so the observed content comes from dated pages on the official domain surfaced by the search: results326.cookcountyclerkil.gov shows 'March 17, 2026 Gubernatorial Primary — Suburban Cook County Election Results — 100.00% / 1430 of 1430 Precincts Reporting' (posted 05/06/2026 05:17 PM; Ballots Cast 394,256; Registered Voters 1,727,843; note that write-in totals are summary-only and official certificates follow the canvas) and a November 26, 2024 press release ('Cook County Clerk Certifies Presidential Election Results' — township and precinct-level certified results at cookcountyclerk.com/results).",
       "verifiedOn": "2026-09-20",
       "status": "verified",
-      "notes": "Covers suburban Cook County (the City of Chicago runs a separate office) — the distinction matters for IL delegation checks. DIRECT 200 re-fetch is required before machine ingestion (next session); until then treat as verified-by-search with a live 2026 results page, per the per-entry evidence standard.",
+      "notes": "Covers suburban Cook County (the City of Chicago runs a separate office) — the distinction matters for IL delegation checks. DIRECT 200 re-fetch is required before machine ingestion (next session); until then treat as verified-by-search with a live 2026 results page, per the per-entry evidence standard. Direct re-fetch 2026-09-21: https://www.cookcountyclerkil.gov/ read successfully; it identifies the Clerk as chief election authority for suburban Cook County, not Chicago. This does not validate the separate results326 host. Original admission date retained.",
       "category": "Government — state & local"
     },
     {
@@ -1994,7 +1994,7 @@
       "verified": "Located via live search on 2026-09-20 across the official unf.edu domain: contact page (unf.edu/coas/porl/contact.html — 'Public Opinion Research Lab | porl@unf.edu | 904-620-2784', faculty director Sean Freeder) and newsroom (unf.edu/newsroom/2024/01/PORL-best-pollster-rating.html — 'The University of North Florida Public Opinion Research Lab (PORL) has been named the 12th best pollster in America by 538 ... opened in 2001, is one of only two dedicated live caller academic survey centers in Florida ... In 2023, PORL conducted 31 large polling projects with over 14,150 surveys completed'). Live 2026 series confirmed by press coverage of official lab polls: floridapolitics.com (Jul 20, 2026) 'A poll from the University of North Florida's Public Opinion Research Lab shows ... Byron Donalds ahead of likely Democratic pick David Jolly 46% to 41%' (848 voters, Jul 17) and floridaphoenix.com (Oct 28, 2025) 728 likely voters, Donalds 45 / Jolly 34.",
       "verifiedOn": "2026-09-20",
       "status": "verified",
-      "notes": "Method: live-caller academic (per the newsroom — 'dedicated live caller academic survey centers'); the live-caller-rdd family is the expected label once a release's own methodology is transcribed (not assumed). First UNF release to ingest: the July 2026 FL governor poll (GOVPARTYFL-26) — fetch the lab's full release + topline PDF before row creation. MI? No — FL state lab; watch for a 2026 senate (Moody) poll too. The /coas/porl/ lab home page itself was NOT directly fetched this session (contact + newsroom pages read via search of the unf.edu domain) — a direct 200 re-fetch of the lab home page is required before it is cited as the canonical URL in any row.",
+      "notes": "Method: live-caller academic (per the newsroom — 'dedicated live caller academic survey centers'); the live-caller-rdd family is the expected label once a release's own methodology is transcribed (not assumed). First UNF release to ingest: the July 2026 FL governor poll (GOVPARTYFL-26) — fetch the lab's full release + topline PDF before row creation. MI? No — FL state lab; watch for a 2026 senate (Moody) poll too. The /coas/porl/ lab home page itself was NOT directly fetched this session (contact + newsroom pages read via search of the unf.edu domain) — a direct 200 re-fetch of the lab home page is required before it is cited as the canonical URL in any row. Direct re-fetch 2026-09-21: UNF university page read successfully, linking its full press releases at https://www.unfporl.org/. July PDF directly read; July governor and Nixon-vs-Moody Senate rows ingested. Original admission date retained.",
       "category": "Pollsters & survey research"
     },
     {
@@ -2073,6 +2073,226 @@
       "status": "verified",
       "notes": "Treated as an official results PUBLISHER (the state's contracted results host), not a private tracker. Daily probe re-tests GA/WV/MS/CA/WI paths (data/probes/targets.json; verdicts in latest.json). The GA plain-fetcher 403 vs probe-runner 'reachable' split is recorded exactly as observed — the probe runner (GitHub-hosted, browser UA) is the path that will pull post-Nov-3 GA certification. WV improving from blocked (sessions 3-6) to 'reachable' (2026-09-20) is flagged as a positive change for the WV results layer.",
       "category": "Official publishers & archives"
+    },
+    {
+      "id": "san-diego-rov",
+      "name": "San Diego County Registrar of Voters",
+      "type": "Official local election authority — free public election information",
+      "url": "https://www.sdvote.com/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"San Diego County Registrar of Voters\". The page identifies the county registrar and links the November 3, 2026 gubernatorial general election, candidate filing, voting options and election security.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "orange-ca-rov",
+      "name": "Orange County Registrar of Voters (California)",
+      "type": "Official local election authority — free public election information",
+      "url": "https://ocvote.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Orange County Registrar of Voters\". The page links Previous Results at /data/election-results-archives, Data Central, Maps & GIS and the Election Library. Paid voter-data purchases are outside this project.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "riverside-rov",
+      "name": "Riverside County Registrar of Voters",
+      "type": "Official local election authority — free public election information",
+      "url": "https://voteinfo.net/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Registrar of Voters\". The County of Riverside page links November 3, 2026 General Election, June 2, 2026 Statewide Direct Primary Election, and November 4, 2025 Statewide Special Election.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "san-bernardino-rov",
+      "name": "San Bernardino County Registrar of Voters",
+      "type": "Official local election authority — free public election information",
+      "url": "https://elections.sbcounty.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Past Elections\". The county registrar page links the November 3, 2026 election, offices up for election PDF, past elections and a voter-registration dashboard.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "sacramento-vre",
+      "name": "Sacramento County Voter Registration & Elections",
+      "type": "Official local election authority — free public election information",
+      "url": "https://elections.saccounty.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Election Results\". The page links Local Election Results at results.saccounty.gov, statewide results at electionresults.sos.ca.gov, and an Election Results - HTML service at eresults.saccounty.gov.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "santa-clara-rov",
+      "name": "Santa Clara County Registrar of Voters",
+      "type": "Official local election authority — free public election information",
+      "url": "https://vote.santaclaracounty.gov/home",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Official Election Results\". The county page links Official Election Results to its Santa_Clara Clarity host and offers View Election Results for contests and measures.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "alameda-rov",
+      "name": "Alameda County Registrar of Voters",
+      "type": "Official local election authority — free public election information",
+      "url": "https://acvote.alamedacountyca.gov/index",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Alameda County Official Election Site\". Reached through www.acvote.org redirect. The official site links CD14 Special Election Results Available for August 18, 2026 and county registration, ballot and maps resources.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "san-francisco-elections",
+      "name": "San Francisco Department of Elections",
+      "type": "Official local election authority — free public election information",
+      "url": "https://www.sf.gov/departments--department-elections",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Department of Elections\". Reached through www.sfelections.gov redirect. The page links Election results, downloadable election datasets and the June 25, 2026 certification announcement for the June 2 primary.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "san-mateo-elections",
+      "name": "San Mateo County Elections (ACRE)",
+      "type": "Official local election authority — free public election information",
+      "url": "https://smcacre.gov/november-3-2026",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Statewide General Election\". Reached through www.smcvote.org redirect. The page links November 3, 2026 Election and Candidate Information and the elections homepage, with a registrar@smcacre.gov contact. This is a calendar/candidate source, not a fetched result.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "broward-soe",
+      "name": "Broward County Supervisor of Elections",
+      "type": "Official local election authority — free public election information",
+      "url": "https://browardvotes.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"November 3, 2026 Election – Canvassing Board\". The page links the November election canvassing board administrative order and master schedule, important forms for elections, and candidate information. A schedule is not a certified result.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "orange-fl-soe",
+      "name": "Orange County Supervisor of Elections (Florida)",
+      "type": "Official local election authority — free public election information",
+      "url": "https://voteorangefl.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"2026 general  election center\". Reached through www.ocfelections.com redirect. The page offers the 2026 general election center with turnout updates and election-night results, and public canvassing-board and independent audit notices.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "denton-elections",
+      "name": "Denton County Elections Administration",
+      "type": "Official local election authority — free public election information",
+      "url": "https://www.votedenton.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Denton County Elections Administration\". The page states the administration mission of impartial, accessible, secure and transparent voting and provides election and voter-registration information. Embedded social-media claims were not imported as election data.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "dallas-elections",
+      "name": "Dallas County Elections Department",
+      "type": "Official local election authority — free public election information",
+      "url": "https://www.dallascountyvotes.org/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Election Results & Reports\". The department page links Election Results & Reports, the November 3, 2026 General and Joint Election, sample ballots, and dated public logic-and-accuracy test notices.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "waukesha-clerk",
+      "name": "Waukesha County Clerk — official results",
+      "type": "Official local election authority — free public election information",
+      "url": "https://www.waukeshacounty.gov/county-clerks-office/election-information/official-election-results/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"2026 OFFICIAL ELECTION RESULTS\". The page lists August 11, April 7 and February 17 official results for 2026, with summary PDFs and detail files; 2024 entries separate federal/state and county results. Linked files were not individually validated here.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "dane-clerk",
+      "name": "Dane County Clerk — elections",
+      "type": "Official local election authority — free public election information",
+      "url": "https://elections.countyofdane.com/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Election and Voting Information\". The page identifies the County Clerk office and links past Election Dates and Results, Ballot Information, and Election Auditing (ballot images and auditing reports).",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "philadelphia-commissioners",
+      "name": "Philadelphia City Commissioners",
+      "type": "Official local election authority — free public election information",
+      "url": "https://vote.phila.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"2026 Primary Election Results\". The page identifies itself as an official Philadelphia government website and links 2026 Primary Election Results, the Citizens Handbook and election notices.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "franklin-oh-boe",
+      "name": "Franklin County Board of Elections (Ohio)",
+      "type": "Official local election authority — free public election information",
+      "url": "https://vote.franklincountyohio.gov/home",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Franklin County Board of Elections\". The official government page describes county election services and links current 2026 election information, elected officials, voter data and publications. No personal voter data was collected.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "cuyahoga-boe",
+      "name": "Cuyahoga County Board of Elections",
+      "type": "Official local election authority — free public election information",
+      "url": "https://boe.cuyahogacounty.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"NOVEMBER 3, 2026 GENERAL ELECTION\". The county board page links the November 3 general election details, election-integrity information and polling-location changes. A current calendar is not a result or forecast.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "hamilton-oh-boe",
+      "name": "Hamilton County Board of Elections (Ohio)",
+      "type": "Official local election authority — free public election information",
+      "url": "https://votehamiltoncountyohio.gov/",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"Election Results\". The page links public Election Results at /results/, a November 2026 election calendar, and the 46-day notice. Individual voter lookup forms were not used.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
+    },
+    {
+      "id": "milwaukee-clerk",
+      "name": "Milwaukee County Clerk — election-night results",
+      "type": "Official local election authority — free public election information",
+      "url": "https://county.milwaukee.gov/EN/County-Clerk/Off-Nav/Election-Results/4-1-25-Spring-Election",
+      "verified": "Fetched directly 2026-09-21 with the session page-fetch tool. Observed heading/link: \"2025 Spring Election — Unofficial Results\". The county page explicitly labels April 1, 2025 results UNOFFICIAL and Milwaukee County ONLY. It warns reporting units can reach 100% before central-count absentee ballots arrive, and election-day registration can produce ward participation above 100%. Not eligible as certified scoring truth.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admission verifies the authority page and the stated public resources only; no linked numeric result is ingested by admission. County/city coverage is not statewide. Use certified contest-specific canvasses for scoring, never an election-night total or a calendar. No account, purchase or personal voter lookup used.",
+      "category": "Government — state & local"
     }
   ],
   "categories": [
@@ -2082,7 +2302,7 @@
     },
     {
       "name": "Government — state & local",
-      "count": 60
+      "count": 80
     },
     {
       "name": "Official publishers & archives",

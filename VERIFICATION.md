@@ -824,3 +824,150 @@ Repair (all verifiable in this PR):
    treat the derived blocks as corrupted and rebuild with the replay command before reading summary numbers.
 
 New irregularities this session: #64 (State Navigate rewording), #65 (universe chimera). Next id: 66.
+
+## 14. Session 9 — 2026-09-21, verification and three-pass audit
+
+Branch `arena/01a0c21f-elections`. Baseline: 90 Node tests (89 pass, 1 skip),
+189 sources, 65 irregularities, 31 poll entries. The `#49` and `#53` references
+are **irregularity ledger ids**, not GitHub issues (GitHub has no issues with those
+numbers). Existing collectors, workflows, contest/backtests and Pages were reviewed;
+Pages API confirmed branch `main`, root `/`, HTTPS, already built. No duplicate site
+or master list was created.
+
+### 14a. New source admissions — 20, not 20 unverified search hits
+
+`data/sources/admissions-2026-09-21.json` records one URL, observed heading/link and
+specific observation per admitted page. All 20 were read through the direct session
+page-fetch tool before insertion into `data/sources/master.json`; canonical redirects
+are stated. Search was discovery only. No paywall, account, purchase, voter lookup or
+personal voter data was used. The pages are official local authorities, not 20 new
+certified outcomes. The 20 new records have date 2026-09-21; old dates unchanged.
+
+| New registry id | Official page directly read | Scope verified |
+|---|---|---|
+| san-diego-rov | https://www.sdvote.com/ | Registrar identity; current election and candidate links |
+| orange-ca-rov | https://ocvote.gov/ | Results archives, Data Central, election library links |
+| riverside-rov | https://voteinfo.net/ | Registrar identity; current/past election links |
+| san-bernardino-rov | https://elections.sbcounty.gov/ | County registrar; offices PDF and past elections links |
+| sacramento-vre | https://elections.saccounty.gov/ | Local, statewide and HTML results links |
+| santa-clara-rov | https://vote.santaclaracounty.gov/home | County official-results link to Clarity |
+| alameda-rov | https://acvote.alamedacountyca.gov/index | Official site; CD14 special results link |
+| san-francisco-elections | https://www.sf.gov/departments--department-elections | Department, datasets, certification announcement link |
+| san-mateo-elections | https://smcacre.gov/november-3-2026 | Election/candidate information, not result data |
+| broward-soe | https://browardvotes.gov/ | Canvassing schedule/orders, not certification |
+| orange-fl-soe | https://voteorangefl.gov/ | Election center, audit and canvassing notices |
+| denton-elections | https://www.votedenton.gov/ | County administration identity and election information |
+| dallas-elections | https://www.dallascountyvotes.org/ | Results/reports, election and public-test notice links |
+| waukesha-clerk | https://www.waukeshacounty.gov/county-clerks-office/election-information/official-election-results/ | Official summary/detail archive index; files not individually verified |
+| dane-clerk | https://elections.countyofdane.com/ | Clerk, results, ballot and auditing links |
+| philadelphia-commissioners | https://vote.phila.gov/ | Official city site, 2026 primary results link |
+| franklin-oh-boe | https://vote.franklincountyohio.gov/home | Board identity; election info and publications |
+| cuyahoga-boe | https://boe.cuyahogacounty.gov/ | Board, election details and location changes |
+| hamilton-oh-boe | https://votehamiltoncountyohio.gov/ | Results link, calendar, 46-day notice |
+| milwaukee-clerk | https://county.milwaukee.gov/EN/County-Clerk/Off-Nav/Election-Results/4-1-25-Spring-Election | Explicit UNOFFICIAL county-only results; central-count warning |
+
+Eight additional candidates were withheld: Ventura (HTTP 500), Contra Costa
+(branding/navigation only), Hillsborough/Duval (loading shells), Palm Beach (closure
+notice/shell), Pinellas (welcome but no usable election resources), Travis (navigation
+shell), Hennepin (redirect/heading only). See the evidence JSON for exact attempted URLs.
+Master 189 → **209**; government state/local 60 → **80**. Duplicate ids/URLs and
+category counts are checked in tests. These concise observations are not archived
+full page bodies or a verification of every linked file.
+
+### 14b. Primary-release poll rows and identity review
+
+- **UNF July FL governor**: Jolly 41, Donalds 46; **Senate Nixon 42, Moody 50**.
+  Field July 8–17, 2026; n=848 likely voters; MoE ±3.8 including design effect.
+  University page https://www.unf.edu/coas/porl/ directly links
+  https://www.unfporl.org/, which links the primary PDF
+  https://www.unfporl.org/s/UNF-PORL-Summer-Statewide-2026-FLLV-Press-Release.pdf.
+  PDF toplines and methodology read: random voter-file sample, live phone 459 /
+  text-to-web 389; `voter-file-hybrid`. Two questions, **one sample**, not independent
+  surveys. Vindman 40/Moody 50 is a different published scenario; we select Nixon
+  to match the saved market, not average candidates. The university link and PDF
+  establish the publisher chain despite its separate Squarespace-hosted domain.
+- **MSU August MI Senate**: El-Sayed 50/Rogers 45 LV; **governor** Benson 52/James 43
+  LV. Source https://ippsr.msu.edu/news/msu-poll-shows-democrats-lead-republicans-coalesce-behind-rogers
+  directly read (initial tool HTTP 500, successful retry). Field August 10–20;
+  adult n=1,000, RV n=913, **LV n=779**. Only LV figures ingested. No MoE supplied;
+  matched YouGov panel mentioned but detailed recruitment not specified, so method
+  family null/review, not inferred from brand. Governor full wording and Duggan
+  option unclear: margin preserved, model probability and gap withheld.
+- April MSU release read but **not** ingested: image-only toplines, probability-panel
+  wording alongside YouGov matching requires full methods review. UNF March PDF
+  read for context only; its headline/prose Senate margin inconsistency was not
+  resolved and no March numbers were added to the poll layer.
+- Existing four-source poll batch (UMass Amherst, Fox, F&M, NPI) already has entries.
+  Muhlenberg re-test still issues-only/current horse race absent. SurveyUSA report
+  metadata read (Sep 9–14 field, Sep 15 release), then blank body. Neither filled by
+  guessing. Poll-layer stateRaces 23 → **27**, generic 8 unchanged = **35** entries.
+- Saved Kalshi universe September 20 names **Angie Nixon**, not Alexander Vindman,
+  for `SENATEFLS-26-D`. Existing Stetson row is a historical Vindman scenario (#67).
+  New conservative D/R name gates retain polls but suppress mismatched market gaps.
+  A ticker is not proof of candidate identity; normalization is punctuation/case only,
+  not fuzzy name inference.
+
+### 14c. Re-tests and limits
+
+All requested re-tests and observed content are in
+`data/probes/session-review-2026-09-21.json`, rendered separately from runner probes:
+HarrisX and CourtListener API **root** readable (downstream API access not claimed);
+PEC/Split Ticket remain declined under #53; F&M directly readable and already admitted.
+WI path denied; CA root AccessDenied; MA root 403. **NV canonical `/elections`
+recovered**, legacy `/sos-elections` remains Page Not Found. Cook home page read,
+not its separate results326 host. UNF home/primary release chain now directly read.
+
+State Navigate API tool fetch still **HTTP 500**; local Node attempt **ECONNRESET**.
+No guessed API endpoint, schema or paid tier used. Free national page is readable
+(2,306 seats, 126 D pickups, 11 R pickups, 14 states, 27 chambers, 142 close seats,
+137 flips) but this is a **session observation**, not proof the scheduled collector
+parsed it. Next scheduled run is September 21 at 12:30 UTC.
+Metaculus hub session observation House D 89.0 / R 11.0, Senate D 49.2 / R 50.8;
+control quadrants 48.2 / 40.8 / 10.0 / 1.0 reconcile. No same-day local Kalshi capture,
+so no contemporaneous paired gap invented. Existing collectors remain the daily path.
+
+### 14d. Three passes
+
+**Pass 1 — implementation and verification:** baseline test/lint audit; direct source
+admissions and poll extraction; certification-gated cross-layer scorer/report; source
+and market date cards, paired score/refusal UI, R13 validation/display fixes. Pipeline
+and render checks passed. Full tests caught a stale allowed-date test (only dates
+through Sep 20); updated it with the documented session, never re-dated evidence.
+
+**Pass 2 — bugs/edge cases:** added tests for invalid/out-of-range/nonfinite values,
+partial/crossed books, certification dates and origin spoofing, missing evidence,
+future and timezone-offset captures, duplicate snapshots, per-layer look-ahead,
+paired repeated captures, nominee mismatch and multi-candidate ambiguity. Only
+log-loss clamps endpoints; Brier is exact. Fixed soft error pages, >24h R13 comparisons,
+review tooltips and method-unclassified labels. Render tests caught a quotation error
+in the new tooltip template; fixed and reran the complete pipeline. Suppressed MSU
+governor modeling pending full question wording. Avoided the former forced JSON
+conflict resolution in the lightweight probe; revalidate after clean rebase and
+commit only verified outputs. Light collector changes now use the probe, rather
+than unnecessarily launching the full universe fetch.
+
+**Pass 3 — request/completeness review:** checked all new admissions against their
+observations, all four new poll rows against the primary-release figures/methods,
+nominee labels against saved market data, site registry parity and refusal visibility.
+Added explicit outcome record contract and next-session priorities. Did **not** claim
+future canvasses, an inaccessible State Navigate API, a general automatic poll scraper,
+all 209 historical pages re-fetched, or live paper-trading PnL as completed. Outstanding
+limitations are preserved in NEXT_SESSION.md, LIMITATIONS.md and the roadmap.
+
+Final commands and GitHub results are recorded in the completion addendum below.
+
+### 14e. Local completion checks
+
+- `npm run pipeline`: passed, including all 12 section render checks. Cross-layer
+  report: **0 scored, 14 pending, 0 refusals, 0 paired questions** on the saved inputs.
+- `npm test`: **99 tests, 98 pass, 1 skip, 0 fail**. The pre-existing skip is the
+  optional network Kalshi smoke test; no live network proof is implied.
+- `npm run lint`: **81 data JSON files**, 209 Node sources, 4 historic outcomes,
+  5 anchor markets, 68 irregularities mirrored in Markdown, 35 poll-layer entries.
+- Python source schema validation: 20 independent toolkit entries, CSV consistent,
+  no errors/warnings; `live_check_performed: false` (correctly not a live verification).
+- Python contest demo, synthetic backtest demo and compile checks passed. Temporary
+  demo outputs removed; they are not published as evidence or live PnL.
+- `git diff --check`: passed. Static preview bound to 0.0.0.0:8000; no browser API
+  localhost dependencies. Site tests execute templates in Node VM, not a full visual
+  browser audit. GitHub CI/deployment status must be checked independently.
