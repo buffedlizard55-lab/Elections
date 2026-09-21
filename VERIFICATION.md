@@ -960,7 +960,7 @@ Final commands and GitHub results are recorded in the completion addendum below.
 
 - `npm run pipeline`: passed, including all 12 section render checks. Cross-layer
   report: **0 scored, 14 pending, 0 refusals, 0 paired questions** on the saved inputs.
-- `npm test`: **99 tests, 98 pass, 1 skip, 0 fail**. The pre-existing skip is the
+- `npm test`: **100 tests, 99 pass, 1 skip, 0 fail**. The pre-existing skip is the
   optional network Kalshi smoke test; no live network proof is implied.
 - `npm run lint`: **81 data JSON files**, 209 Node sources, 4 historic outcomes,
   5 anchor markets, 68 irregularities mirrored in Markdown, 35 poll-layer entries.
@@ -971,3 +971,17 @@ Final commands and GitHub results are recorded in the completion addendum below.
 - `git diff --check`: passed. Static preview bound to 0.0.0.0:8000; no browser API
   localhost dependencies. Site tests execute templates in Node VM, not a full visual
   browser audit. GitHub CI/deployment status must be checked independently.
+
+### 14f. Final collector ordering edge case
+
+The final workflow review found an additional daily-ordering defect: a lightweight
+Metaculus probe before the daily Kalshi fetch could create a forecast-only row;
+subsequent same-day runs would skip its id forever, leaving that day's comparison
+unpaired. Both chamber and seat appenders now attach only a missing, valid,
+same-day Kalshi leg when it arrives. They preserve the first Metaculus value,
+its capture time, the separate Kalshi time, and add `pairedAt` plus an explicit
+non-simultaneous-pairing note. Existing complete pairs are never overwritten;
+changed rows are counted so the caller persists enrichment. Invalid percentages
+and inconsistent question parses are refused. Regression test covers both
+chamber and seat orderings. Full pipeline/test/lint rerun passed (100 tests,
+99 passed and the existing optional network skip).

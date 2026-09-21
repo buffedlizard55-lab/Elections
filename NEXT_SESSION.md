@@ -19,6 +19,9 @@ independent confirmation of the source's truth.
   paired latest-per-question scores. `npm run crosslayer` writes `scores.json`;
   daily pipeline and lightweight probe rebuild the site and scores. **No certified
   2026 outcomes exist yet.** See `backtest/crosslayer-outcomes.md`.
+- Metaculus early-probe rows can now receive a missing same-day Kalshi leg after
+  the market fetch, preserving original forecasts and both capture times. No complete
+  pair is overwritten; added regression coverage for chamber and seat ordering.
 - R13 invalid quotes and >24h capture separation withheld; 270toWin dem/rep display
   fixed (#68). Soft AccessDenied/Not Found HTML is no longer accepted as good content.
 - Pages dashboard improved: source/market dates, pending certification, paired

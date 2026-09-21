@@ -35,6 +35,7 @@
  *   node scripts/collect-metaculus.mjs --replay f.html       parse a saved hub page (offline tests; writes nothing)
  *   node scripts/collect-metaculus.mjs --record-text f.txt --url https://www.metaculus.com/midterms-2026/
  */
+import { isProbability, midpoint, timestamp } from '../src/crosslayer.js';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -238,26 +239,42 @@ function kalshiLookup(universe, day) {
   };
 }
 
+/** A probe can run before today's Kalshi capture. Attach only its missing leg
+ * when that capture arrives; never overwrite an observed forecast or quote.
+ * Preserve both capture times and disclose the later pairing operation.
+ */
+export function enrichMissingKalshi(row, market, pairedAt) {
+  if (!row || row.layers?.kalshi || !market || market.mismatch || midpoint(market) === null) return false;
+  if (!Number.isFinite(timestamp(row.capturedAt)) || !Number.isFinite(timestamp(market.capturedAt)) || row.capturedAt.slice(0, 10) !== market.capturedAt.slice(0, 10)) return false;
+  row.layers = { ...row.layers, kalshi: market };
+  row.pairedAt = pairedAt;
+  row.pairingNote = 'Kalshi leg attached later from the same UTC day; original Metaculus observation and both capture times preserved. Not simultaneous quotes.';
+  delete row.kalshiSkipped;
+  return true;
+}
+
 export function appendSnapshots(snapFile, parsed, { capturedAt, universe, source = HUB_URL }) {
   const day = capturedAt.slice(0, 10);
   const kalshiFor = kalshiLookup(universe, day);
   const add = [];
+  let enriched = 0;
   const bad = parsed.inconsistent || {};
   const defs = [
     ['SENATE-CONTROL-2026', 'CONTROLS-2026', 'CONTROLS-2026-D', bad.senate ? null : parsed.senateD],
     ['HOUSE-CONTROL-2026', 'CONTROLH-2026', 'CONTROLH-2026-D', bad.house ? null : parsed.houseD],
   ];
   for (const [q, evt, tk, p] of defs) {
-    if (p == null) continue;
+    if (!isProbability(p / 100) || typeof p !== 'number') continue;
     const id = `${day}-${q === 'SENATE-CONTROL-2026' ? 'senate' : 'house'}`;
-    if (snapFile.snapshots.some((s) => s.id === id)) continue; // one auto row per question per day
-    const layers = { metaculus: Number((p / 100).toFixed(4)) };
     const k = kalshiFor(evt, tk);
-    if (k) layers.kalshi = k;
+    const existing = snapFile.snapshots.find((s) => s.id === id);
+    if (existing) { if (enrichMissingKalshi(existing, k, capturedAt)) enriched += 1; continue; }
+    const layers = { metaculus: Number((p / 100).toFixed(4)) };
+    if (k && midpoint(k) !== null) layers.kalshi = k;
     add.push({ id, question: q, electionDate: '2026-11-03', capturedAt, layers, source, collector: 'scripts/collect-metaculus.mjs' });
   }
   snapFile.snapshots.push(...add);
-  return add.length;
+  return add.length + enriched; // count changed rows so a later missing-leg attachment is persisted
 }
 
 /**
@@ -277,24 +294,25 @@ export function appendSeatSnapshots(snapFile, questions, { capturedAt, universe 
   let added = 0;
   snapFile.questions = snapFile.questions || {};
   const put = (office, st, p, src, extra = {}) => {
-    if (p == null) return;
+    if (typeof p !== 'number' || !isProbability(p / 100)) return;
     const qid = office === 'senate' ? `SENATE-${st}-2026` : `GOVERNOR-${st}-2026`;
     const evt = office === 'senate' ? SENATE_EVENT(st) : `GOVPARTY${st}-26`;
     if (!snapFile.questions[qid]) {
       snapFile.questions[qid] = { text: office === 'senate' ? `Democratic candidate wins the 2026 U.S. Senate election in ${st}` : `Democratic candidate wins the 2026 gubernatorial election in ${st}`, electionDate: '2026-11-03', kalshiEvent: evt, metaculusQuestion: src, seat: true, ...extra };
     }
     const id = `${day}-${qid.toLowerCase()}`;
-    if (snapFile.snapshots.some((s) => s.id === id)) return;
-    const layers = { metaculus: Number((p / 100).toFixed(4)) };
     const k = kalshiFor(evt, `${evt}-D`, STATE_NAMES[st]);
+    const existing = snapFile.snapshots.find((s) => s.id === id);
+    if (existing) { if (enrichMissingKalshi(existing, k, capturedAt)) added += 1; return; }
+    const layers = { metaculus: Number((p / 100).toFixed(4)) };
     const row = { id, question: qid, electionDate: '2026-11-03', capturedAt, layers, source: src, collector: 'scripts/collect-metaculus.mjs', ...(extra.caveat ? { caveat: extra.caveat } : {}) };
     if (k && k.mismatch) row.kalshiSkipped = k.mismatch;
-    else if (k) layers.kalshi = k;
+    else if (k && midpoint(k) !== null) layers.kalshi = k;
     snapFile.snapshots.push(row);
     added += 1;
   };
   for (const q of questions) {
-    if (!q || q.parse !== 'ok') continue;
+    if (!q || q.parse !== 'ok' || q.consistencyFlag) continue;
     if (q.kind === 'state-group' && q.states) for (const [st, p] of Object.entries(q.states)) put(q.office, st, p, q.capturedFrom, { note: q.note });
     if (q.kind === 'party-choice' && q.state) put(q.office, q.state, q.D, q.capturedFrom, { note: q.note });
     if (q.kind === 'binary' && q.state) put(q.office, q.state, q.p, q.capturedFrom, { note: q.note, caveat: 'candidate question (Peltola) paired with a party market (SENATEAK-26-D)' });
@@ -384,7 +402,7 @@ async function main() {
     seats = appendSeatSnapshots(snap, questions, { capturedAt, universe });
     if (added || seats) { snap.capturedAt = capturedAt; writeFileSync(snapPath, JSON.stringify(snap, null, 1) + '\n'); }
   }
-  console.log('[metaculus]', JSON.stringify({ parse: parsed.parse, fetchMethod, houseD: parsed.houseD, senateD: parsed.senateD, control: parsed.control, flags: parsed.consistencyFlags, questionsOk: questions.filter((q) => q.parse === 'ok').length, questionsTotal: questions.length, snapshotsAdded: added, seatSnapshotsAdded: seats, api: api && api.ok, error: fetchError }));
+  console.log('[metaculus]', JSON.stringify({ parse: parsed.parse, fetchMethod, houseD: parsed.houseD, senateD: parsed.senateD, control: parsed.control, flags: parsed.consistencyFlags, questionsOk: questions.filter((q) => q.parse === 'ok').length, questionsTotal: questions.length, snapshotsChanged: added, seatSnapshotsChanged: seats, api: api && api.ok, error: fetchError }));
   if (parsed.parse === 'failed') process.exitCode = 2;
 }
 
