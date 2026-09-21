@@ -157,3 +157,25 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
     the page's own control quadrants, and both workflows are serialised so runs cannot overwrite each other — but the
     rendered DOM is never committed (7-day artifacts, unreachable from the sandbox), so a future layout change is
     diagnosed from the row's `sample` and `consistencyFlags`, not from the page itself.
+
+## Session 9 update (2026-09-21)
+
+- `backtest/crosslayer-outcomes.md` specifies the stricter certification gate. It is
+  a metadata/origin gate, **not** a semantic verifier or an automated jurisdiction
+  canvass scraper. 2026 outcomes stay empty. Election night is not certification.
+- State Navigate API root is still unavailable (session fetch HTTP 500; local Node
+  ECONNRESET). Existing free-page collector is not an API implementation; paid-tier
+  districts were not accessed. Examine parsed output, not a green workflow badge.
+- Source admission is scoped to the observed page. This session added 20 official
+  local pages, not 20 datasets or statewide certified canvasses, and did not
+  independently re-fetch all 209 historical registry entries.
+- New MSU LV sample n=779 is distinct from adult n=1,000. MoE/recruitment remain
+  unknown. Governor modeling withheld until full multi-candidate wording is verified.
+  SurveyUSA and Muhlenberg pending requirements were not filled with guessed numbers.
+- Conservative nominee matching can withhold legitimate aliases; resolve them only
+  with evidence, not fuzzy matching. Historical scenario polls remain visible.
+- Session evidence consists of URL-linked observations/excerpts, not retained complete
+  byte-identical responses. Long-term public-data evidence storage and licensing
+  review remain necessary; current workflow artifacts expire after seven days.
+- Existing contest results are historical simulations, not a full persistent
+  execution/PnL ledger for today's open markets. See the next-session worklist.

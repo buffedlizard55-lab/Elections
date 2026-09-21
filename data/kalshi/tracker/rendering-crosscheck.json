@@ -1,7 +1,7 @@
 {
  "title": "R13 standing monitor — third-party renderings of Kalshi vs this project's captured yes_bid/yes_ask",
  "capturedFrom": "https://www.270towin.com/ ; https://electionbettingodds.com/ ; https://votes.decisiondeskhq.com/",
- "method": "Daily. Renderers that display Kalshi (EBO's Kalshi row; 270toWin's panel) are compared with data/kalshi/universe/latest.json at the bid/ask midpoint; |diff| > 0.03 is flagged for review, never asserted as an error, because the renderer refreshes every 1-20 minutes and our capture is daily. DDHQ's odds are its own model and are stored as the context layer. Parse failures are recorded verbatim.",
+ "method": "Daily: EBO Kalshi bid/ask midpoint and 270toWin last-trade compared only with valid non-crossed quotes from a Kalshi capture within 24 hours. Absolute difference > 0.03 is a review flag, not proof of error (intraday timestamps differ). DDHQ is context, not Kalshi. Failures are retained.",
  "rows": [
   {
    "date": "2026-09-20",
@@ -81,7 +81,86 @@
     }
    },
    "flags": []
+  },
+  {
+   "date": "2026-09-21",
+   "capturedAt": "2026-09-21T18:47:17.563Z",
+   "kalshiCapturedAt": "2026-09-21T18:16:44.622Z",
+   "renderers": {
+    "ebo": {
+     "capturedFrom": "https://electionbettingodds.com/",
+     "status": 200,
+     "extract": "ok",
+     "stamp": "2:43PM EDT on Sep 21, 2026",
+     "senateDemKalshi": {
+      "bid": 0.6,
+      "ask": 0.61
+     },
+     "senateRepKalshi": {
+      "bid": 0.39,
+      "ask": 0.4
+     },
+     "eboHeadlineDem": 0.608,
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.605,
+      "capturedMid": 0.605,
+      "diff": 0,
+      "flagged": false
+     }
+    },
+    "ddhq": {
+     "capturedFrom": "https://votes.decisiondeskhq.com/",
+     "status": 200,
+     "layer": "context (DDHQ odds, not Kalshi)",
+     "extract": "ok",
+     "houseD": 0.7,
+     "senateD": 0.52
+    },
+    "270towin": {
+     "capturedFrom": "https://www.270towin.com/",
+     "status": 200,
+     "fetchMethod": "headless-chrome",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "ok",
+     "kalshiPanel": {
+      "dem": 0.57,
+      "rep": 0.42,
+      "asOf": "Sep. 21, 2026 at 18:46 UTC",
+      "basis": "most recent yes trade (page order: Democrats, Republicans)"
+     },
+     "kpow": {
+      "value": "+3.30 D",
+      "asOf": "9/21/26 8:23 AM EDT"
+     },
+     "vsCaptured": {
+      "dem": {
+       "comparable": true,
+       "rendered": 0.57,
+       "capturedLast": 0.58,
+       "capturedBidAsk": [
+        0.58,
+        0.59
+       ],
+       "diff": -0.01,
+       "flagged": false
+      },
+      "rep": {
+       "comparable": true,
+       "rendered": 0.42,
+       "capturedLast": 0.42,
+       "capturedBidAsk": [
+        0.41,
+        0.42
+       ],
+       "diff": 0,
+       "flagged": false
+      }
+     }
+    }
+   },
+   "flags": []
   }
  ],
- "capturedAt": "2026-09-20T16:50:54.524Z"
+ "capturedAt": "2026-09-21T18:47:17.563Z"
 }
