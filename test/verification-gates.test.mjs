@@ -81,13 +81,32 @@ test('session 9: twenty unique direct-fetch admissions match their evidence and 
   const m = read('data/sources/master.json'), a = read('data/sources/admissions-2026-09-21.json');
   assert.equal(a.entries.length, 20);
   assert.equal(new Set(a.entries.map((x) => x.id)).size, 20);
-  assert.equal(m.sources.filter((x) => x.verifiedOn === '2026-09-21').length, 20);
+  // After session 10 batch2, total verifiedOn 2026-09-21 is 40 (20 session9 + 20 batch2). Allow >=20 to keep backward compat.
+  const totalForDate = m.sources.filter((x) => x.verifiedOn === '2026-09-21').length;
+  assert.ok(totalForDate >= 20, `expected >=20 for 2026-09-21, got ${totalForDate}`);
+  assert.equal(totalForDate, 40, `session 10 batch2 adds 20 more, total should be 40, got ${totalForDate}`);
   for (const e of a.entries) {
     const s = m.sources.find((x) => x.id === e.id);
     assert.equal(s.url, e.url); assert.equal(s.status, 'verified'); assert.ok(s.verified.includes(e.observation));
     assert.equal(s.category, 'Government — state & local');
   }
   for (const e of a.notAdmitted) assert.ok(!m.sources.some((s) => s.url === e.url));
+  // Also verify batch2 file if present
+  try {
+    const b = read('data/sources/admissions-2026-09-21-batch2.json');
+    assert.equal(b.entries.length, 20);
+    assert.equal(new Set(b.entries.map((x) => x.id)).size, 20);
+    for (const e of b.entries) {
+      const s = m.sources.find((x) => x.id === e.id);
+      assert.ok(s, `batch2 id ${e.id} not in master`);
+      assert.equal(s.url, e.url);
+      assert.equal(s.status, 'verified');
+    }
+    for (const e of b.notAdmitted) assert.ok(!m.sources.some((s) => s.url === e.url));
+  } catch (e) {
+    // if batch2 file not present, skip (backward compat)
+    if (!String(e).includes('no such file') && !String(e).includes('ENOENT')) throw e;
+  }
 });
 
 test('session 9 polls: primary-release subset sizes, method labels and nominee-specific scenarios', () => {
