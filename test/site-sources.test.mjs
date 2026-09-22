@@ -103,9 +103,13 @@ test('registry: the 20 session-5 entries are present, dated 2026-09-19, and eith
     );
     assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
   }
-  // Exactly two entries in this batch came in through search-discovered pages; both must say so.
+  // massachusetts-elections came in through a search-discovered page and stays verified-via-search
+  // (its root 403s the fetcher). oregon-sos ALSO started verified-via-search but was promoted to
+  // 'verified' on 2026-09-21 (session 11) after a direct re-fetch with a dated note, so it must
+  // no longer appear here.
   const viaSearch = SESSION5_IDS.filter((id) => byId[id].status === 'verified-via-search');
-  assert.deepEqual(viaSearch.sort(), ['massachusetts-elections', 'oregon-sos']);
+  assert.deepEqual(viaSearch.sort(), ['massachusetts-elections']);
+  assert.equal(byId['oregon-sos'].status, 'verified', 'oregon-sos was promoted to verified 2026-09-21');
   // No session-5 entry may quote a Kalshi price without referencing the capture date.
   for (const id of SESSION5_IDS) {
     if (/0\.\d{3}\/0\.\d{3}/.test(byId[id].notes)) {

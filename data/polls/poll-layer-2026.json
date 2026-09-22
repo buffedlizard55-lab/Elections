@@ -1,7 +1,7 @@
 {
  "title": "Continuous poll layer — 2026 cycle (line-by-line verified primary releases)",
  "capturedFrom": "primary pollster releases listed per entry (fetched directly; syndication is never the only source)",
- "capturedAt": "2026-09-19T23:30:00Z",
+ "capturedAt": "2026-09-21T22:53:18.000Z",
  "method": "Every number below was transcribed from the pollster's own release (PDF or release page) or, for CNN/SSRS, from CNN's publication of its own poll with the SSRS methodology note. Field dates, population (RV/LV/adults), n and margin of error are recorded as published. Poll margins are converted to a Democratic win probability only for the side-by-side with Kalshi using the same logistic mapping as the 2024 poll backtest, p = 1/(1+exp(-margin/4.5)) — a labelled modelling choice, not a pollster claim. Aggregator readings (RealClearPolling) are recorded as aggregator readings, not as polls. Entries marked review:true carry toplines transcribed from the pollster's release page but their n / margin of error / field dates could not be fetched (publisher page blocked); they are shown with that caveat until reviewed. Session 7 (2026-09-20) rows: elon-2026-09-nc-senate, hpu-2026-04-nc-senate and harrisx-2026-08-generic (all carry methodFamily; HPU's 'moe' is the release's credibility interval, as its methodNote says); two pending items record what was verified but not transcribed. Session 8 (2026-09-20) rows: hpu-2026-08-nc-senate + hpu-2026-08-nc-house-generic (Poll 126, both with the credibility-interval label; the house row's kalshiDemTicker is null by design — see marketBasis), uh-hobby-2026-01-tx-governor + uh-hobby-2026-01-tx-senate (the Senate row is the median of six candidate-matched scenarios, stated in methodNote), saint-anselm-2026-06-nh-senate (new family random-cellphone-rv-panel, with the published marketGap), stetson-2026-04-fl-governor + stetson-2026-04-fl-senate (SENATEFLS-26 = the short-term seat), ppp-2026-07-nc-senate (methodFamily null by #49 discipline). The CIRCLE youth poll is an aggregator reading with D/R null (subpopulation, not a race), and CIRCLE YESI 2026 top-10 lists are independentPriors — neither is a poll.",
  "policy": "Only free, publicly available releases from school/academic research centres, established pollsters with published methodology, or the outlets that commission and publish them. Sponsored one-off polls without a methodology statement are not admitted. Nothing here is used to trade; the contest reads pollSignal only from the 2024 archive.",
  "updated": "2026-09-21",
@@ -12,7 +12,7 @@
    "fieldDates": "2026-05-29..2026-06-07",
    "population": "RV",
    "n": 2400,
-   "moe": 2.0,
+   "moe": 2,
    "question": "Prefer Democrats or Republicans to control Congress as a result of this year's elections",
    "D": 49,
    "R": 44,
@@ -234,7 +234,7 @@
    "fieldDates": "2026-09-11..2026-09-14",
    "population": "RV",
    "n": 1211,
-   "moe": 3.0,
+   "moe": 3,
    "question": "Q14 generic congressional ballot (All Voters)",
    "D": 51,
    "R": 44,
@@ -316,6 +316,25 @@
    "source": "https://www.harrisx.com/posts/august-harvard-caps-harrisx-poll",
    "verifiedVia": "HarrisX release page fetched 2026-09-20 in full (3 chunks); horserace, turnout-intent and methodology lines transcribed verbatim.",
    "verifiedOn": "2026-09-20"
+  },
+  {
+   "id": "rasmussen-2026-09-generic",
+   "pollster": "Rasmussen Reports (field work by Pulse Opinion Research)",
+   "fieldDates": "2026-09-10,2026-09-13..2026-09-16",
+   "population": "LV",
+   "n": 1746,
+   "moe": 2,
+   "question": "If the elections for Congress were held today, would you vote for the Democratic candidate or the Republican candidate in your district (release summary; exact wording at the linked questions page)",
+   "D": 49,
+   "R": 41,
+   "unsure": null,
+   "likelyVoterNote": "Likely U.S. Voters; 'some other candidate' 4% and 'not sure' 5% are reported separately (D+R=90, remainder 9).",
+   "methodFamily": "ivr-rdd-online-panel-blend",
+   "methodNote": "'The latest Rasmussen Reports national telephone and online survey'; field work by Pulse Opinion Research per the release. The firm's methodology page (fetched 2026-09-21) describes automated recorded-voice calls to randomly selected numbers plus 'an online survey tool to interview randomly selected participants from a demographically diverse panel' for landline-less households, with dynamic partisan weighting — labelled per #49, not pooled with other families.",
+   "released": "2026-09-21",
+   "source": "https://www.rasmussenreports.com/public_content/politics/mood_of_america/generic_congressional_ballot",
+   "verifiedVia": "Rasmussen Generic Congressional Ballot page fetched directly 2026-09-21: '49% of Likely U.S. Voters would vote for the Democratic candidate, while 41% would vote for the Republican. Four percent (4%) say they would vote for some other candidate, while five percent (5%) are not sure'; 'The survey of 1,746 U.S. Likely Voters was conducted on September 10 and 13-16, 2026 … margin of sampling error is +/- 2 percentage points with a 95% level of confidence.'",
+   "verifiedOn": "2026-09-21"
   }
  ],
  "aggregatorReadings": [
@@ -432,7 +451,7 @@
    "fieldDates": "2026-09-12..2026-09-14",
    "population": "LV",
    "n": 1000,
-   "moe": 3.0,
+   "moe": 3,
    "candidates": {
     "D": {
      "name": "Abdul El-Sayed",
@@ -473,7 +492,7 @@
    "fieldDates": "2026-09-12..2026-09-14",
    "population": "LV",
    "n": 1000,
-   "moe": 3.0,
+   "moe": 3,
    "candidates": {
     "D": {
      "name": "James Talarico",
@@ -1263,6 +1282,123 @@
    "verifiedOn": "2026-09-21",
    "review": true,
    "comparisonBlockedReason": "MSU release does not enumerate the Mike Duggan option or full question wording; multi-candidate comparability is unverified. Poll margin retained; win-probability and market-gap comparison withheld."
+  },
+  {
+   "id": "rasmussen-2026-09-ga-governor",
+   "race": "Governor — Georgia",
+   "pollster": "Rasmussen Reports (field work by Pulse Opinion Research)",
+   "fieldDates": "2026-09-14",
+   "population": "LV",
+   "n": 1019,
+   "moe": 3,
+   "candidates": {
+    "D": {
+     "name": "Keisha Lance Bottoms",
+     "pct": 45
+    },
+    "R": {
+     "name": "Rick Jackson",
+     "pct": 48
+    }
+   },
+   "undecidedOrCouldChange": "Not sure 7%",
+   "methodFamily": "ivr-rdd-online-panel-blend",
+   "methodNote": "'The latest Rasmussen Reports national telephone and online survey'; field work by Pulse Opinion Research per the release. The firm's methodology page (fetched 2026-09-21) describes automated recorded-voice calls to randomly selected numbers plus 'an online survey tool to interview randomly selected participants from a demographically diverse panel' for landline-less households, with dynamic partisan weighting — labelled per #49, not pooled with other families.",
+   "kalshiEvent": "GOVPARTYGA-26",
+   "kalshiDemTicker": "GOVPARTYGA-26-D",
+   "marketBasis": "Candidate names corroborated 2026-09-21 against the saved universe vote-share markets KXVOTEGENERAL-GOVPARTYGA-26RJAC / -KBOT and the D/R yes_sub_titles (\"Keisha Lance Bottoms\" / \"Rick Jackson\").",
+   "source": "https://www.rasmussenreports.com/public_content/politics/elections/election_2026/election_2026_georgia_governor",
+   "toplinesPdf": null,
+   "verifiedVia": "Rasmussen release page fetched directly 2026-09-21: '48% of Likely Georgia voters would vote for Jackson, while 45% would vote for Bottoms. Seven percent (7%) are not sure'; 'The survey of 1,019 Georgia Likely Voters was conducted on September 14, 2026 … margin of sampling error is +/- 3 percentage points'.",
+   "verifiedOn": "2026-09-21"
+  },
+  {
+   "id": "rasmussen-2026-09-ga-senate",
+   "race": "U.S. Senate — Georgia",
+   "pollster": "Rasmussen Reports (field work by Pulse Opinion Research)",
+   "fieldDates": "2026-09-14",
+   "population": "LV",
+   "n": 1019,
+   "moe": 3,
+   "candidates": {
+    "D": {
+     "name": "Jon Ossoff",
+     "pct": 51,
+     "incumbent": true
+    },
+    "R": {
+     "name": "Mike Collins",
+     "pct": 42
+    }
+   },
+   "undecidedOrCouldChange": "Not sure 6%",
+   "methodFamily": "ivr-rdd-online-panel-blend",
+   "methodNote": "'The latest Rasmussen Reports national telephone and online survey'; field work by Pulse Opinion Research per the release. The firm's methodology page (fetched 2026-09-21) describes automated recorded-voice calls to randomly selected numbers plus 'an online survey tool to interview randomly selected participants from a demographically diverse panel' for landline-less households, with dynamic partisan weighting — labelled per #49, not pooled with other families.",
+   "kalshiEvent": "SENATEGA-26",
+   "kalshiDemTicker": "SENATEGA-26-D",
+   "source": "https://www.rasmussenreports.com/public_content/politics/elections/election_2026/election_2026_georgia_senate",
+   "toplinesPdf": null,
+   "verifiedVia": "Rasmussen release page fetched directly 2026-09-21: '51% of Likely Georgia voters would vote for Ossoff, while 42% would vote for Collins. Six percent (6%) are not sure'; n=1,019 Georgia LV, September 14, 2026, +/- 3. Market names ('Jon Ossoff' / 'Mike Collins') corroborate the nominees.",
+   "verifiedOn": "2026-09-21"
+  },
+  {
+   "id": "rasmussen-2026-09-sc-senate",
+   "race": "U.S. Senate — South Carolina (special)",
+   "pollster": "Rasmussen Reports (field work by Pulse Opinion Research)",
+   "fieldDates": "2026-09-14",
+   "population": "LV",
+   "n": 1006,
+   "moe": 3,
+   "candidates": {
+    "R": {
+     "name": "Darline Graham",
+     "pct": 48
+    },
+    "D": {
+     "name": "Annie Andrews",
+     "pct": 43
+    }
+   },
+   "undecidedOrCouldChange": "Not sure 9%",
+   "methodFamily": "ivr-rdd-online-panel-blend",
+   "methodNote": "'The latest Rasmussen Reports national telephone and online survey'; field work by Pulse Opinion Research per the release. The firm's methodology page (fetched 2026-09-21) describes automated recorded-voice calls to randomly selected numbers plus 'an online survey tool to interview randomly selected participants from a demographically diverse panel' for landline-less households, with dynamic partisan weighting — labelled per #49, not pooled with other families.",
+   "kalshiEvent": "SENATESC-26",
+   "kalshiDemTicker": "SENATESC-26-D",
+   "marketBasis": "Identity corroborated against SENATESC-26 yes_sub_titles ('Darline Graham' / 'Annie Andrews'). The release's biographical narrative ('the seat formerly held by the late Sen. Lindsey Graham', an appointment by Gov. McMaster) is the publisher's own framing and is NOT corroborated by this project — see irregularity #69; only the toplines are ingested.",
+   "source": "https://www.rasmussenreports.com/public_content/politics/elections/election_2026/election_2026_south_carolina_senate",
+   "toplinesPdf": null,
+   "verifiedVia": "Rasmussen release page fetched directly 2026-09-21: '48% of Likely South Carolina voters would vote for Graham, while 43% would vote for Andrews. Nine percent (9%) are not sure'; n=1,006 South Carolina LV, September 14, 2026, +/- 3.",
+   "verifiedOn": "2026-09-21"
+  },
+  {
+   "id": "rasmussen-2026-09-ak-senate",
+   "race": "U.S. Senate — Alaska (ranked-choice, four named candidates)",
+   "pollster": "Rasmussen Reports (field work by Pulse Opinion Research)",
+   "fieldDates": "2026-09-13..2026-09-14",
+   "population": "LV",
+   "n": 1188,
+   "moe": 3,
+   "candidates": {
+    "R": {
+     "name": "Dan S. Sullivan",
+     "pct": 39,
+     "incumbent": true
+    },
+    "D": {
+     "name": "Mary Peltola",
+     "pct": 39
+    }
+   },
+   "undecidedOrCouldChange": "Also named on the ballot per the release: 'Daniel J. Sullivan' (R) 7%, Gerald Heikes (R) 6%; not sure 9%. Under Alaska's RCV the two-way D/R split is not the whole ballot — the party-market comparison is an approximation and is withheld by the candidate check by design.",
+   "methodFamily": "ivr-rdd-online-panel-blend",
+   "methodNote": "'The latest Rasmussen Reports national telephone and online survey'; field work by Pulse Opinion Research per the release. The firm's methodology page (fetched 2026-09-21) describes automated recorded-voice calls to randomly selected numbers plus 'an online survey tool to interview randomly selected participants from a demographically diverse panel' for landline-less households, with dynamic partisan weighting — labelled per #49, not pooled with other families.",
+   "kalshiEvent": "SENATEAK-26",
+   "kalshiDemTicker": "SENATEAK-26-D",
+   "marketBasis": "SENATEAK-26 markets are PARTY markets (yes_sub_title \"Democratic party\" / \"Republican party\"), not candidate markets; the conservative identity check withholds the comparison. Recorded so the row is visible beside the market without an implied pairing.",
+   "source": "https://www.rasmussenreports.com/public_content/politics/elections/election_2026/election_2026_alaska_senate",
+   "toplinesPdf": null,
+   "verifiedVia": "Rasmussen release page fetched directly 2026-09-21: '39% of Likely Alaska voters would vote for Sullivan, while 39% would vote for Peltola'; 'Daniel J. Sullivan' 7%, Heikes 6%, not sure 9%; n=1,188 Alaska LV, September 13-14, 2026, +/- 3.",
+   "verifiedOn": "2026-09-21"
   }
  ],
  "exitPollStatus": {
@@ -1434,7 +1570,7 @@
    ],
    "Solid D": [
     0.9,
-    1.0
+    1
    ],
    "Tilt R": [
     0.25,
@@ -1449,7 +1585,7 @@
     0.25
    ],
    "Solid R": [
-    0.0,
+    0,
     0.1
    ]
   }
@@ -1464,7 +1600,8 @@
    "online-optin-weighted": "Opt-in online panel weighted to a voter file or census targets.",
    "probability-panel": "Address-based-sample probability panel (KnowledgePanel, AmeriSpeak).",
    "aggregator": "Published average, not a poll.",
-   "random-cellphone-rv-panel": "Random cell-phone numbers drawn from a registered-voter frame, live interviews (e.g. Saint Anselm College SASC). Probability-based on the RV frame; distinct from RDD and from panel designs."
+   "random-cellphone-rv-panel": "Random cell-phone numbers drawn from a registered-voter frame, live interviews (e.g. Saint Anselm College SASC). Probability-based on the RV frame; distinct from RDD and from panel designs.",
+   "ivr-rdd-online-panel-blend": "Automated (recorded-voice) calls to randomly selected phone numbers plus an online survey panel for households without a landline (Rasmussen Reports / Pulse Opinion Research field work). Probability-flavoured RDD phone core blended with a non-probability online panel; distinct from live-caller RDD and from pure online panels. Do not pool unlabeled with either."
   }
  },
  "pendingSources": [
@@ -1476,9 +1613,9 @@
   },
   {
    "id": "surveyusa-28000-mn",
-   "status": "Re-tested 2026-09-21: report metadata readable, toplines still absent",
-   "evidence": "Direct report fetch returned Minnesota, field dates 09/09/2026–09/14/2026, release 09/15/2026, methodology link, then blank <body>. Prior archive date 09/16/26 is not the report release date.",
-   "action": "Render the report page with the headless-Chrome probe (data/probes/targets.json id surveyusa-poll-28000, render:true); transcribe Flanagan/Tafoya and Klobuchar/Demuth toplines with n, dates, MoE and the disclosed mode; map to SENATEMN-26 / GOVPARTYMN-26."
+   "status": "Re-tested 2026-09-21 (session 11): report metadata + methodology statement readable, toplines still absent (percentages load client-side)",
+   "evidence": "PollReport page fetched 2026-09-21: Minnesota, field 09/09/2026-09/14/2026, release 09/15/2026, sponsors KAAL/KSTP/WDIO, body still \"blank\"; the linked Statement of Methodology (methodology.aspx?g=d7f40035…) IS now readable: mixed-mode (landline via Aristotle + cell/online), credibility interval since 01/01/17, NCPP disclosure.",
+   "action": "When toplines render, label methodFamily from the release itself (mixed-mode per that statement), never from the brand."
   },
   {
    "id": "umass-lowell-2026-05-me-senate",
@@ -1509,6 +1646,24 @@
    "status": "Not ingested: April release has toplines embedded as image, and describes web-based probability panel alongside YouGov matching",
    "evidence": "https://ippsr.msu.edu/news/msu-governors-poll-shows-slight-benson-lead-no-clear-cut-frontrunner fetched 2026-09-21: March 2–24; n=1,000 adults; full toplines not in fetched text.",
    "action": "Read the primary image/full methods before using this historical scenario. Do not transfer methodology from the August release."
+  },
+  {
+   "id": "echelon-2026-04-fl",
+   "status": "Not ingested: no primary release with methodology on echeloninsights.com; the April 2026 Florida poll was conducted on behalf of NetChoice (sponsor) and is only visible through secondary press",
+   "evidence": "echeloninsights.com fetched directly 2026-09-21: featured analysis is '2026 Political Tribes' (segmentation) and 'The New Politics of American Business' — no public 2026 horse-race release. Secondary report floridianpress.com (Apr 27, 2026): Donalds 49 / Jolly 43 and Donalds 48 / Demings 44; Senate Moody 50 / Vindman 43, 'on behalf of NetChoice'.",
+   "action": "Admit only from an Echelon primary release with a published methodology statement. Note the Senate scenario uses Vindman while the saved market (per #67) names Nixon — candidate-conservative handling applies."
+  },
+  {
+   "id": "prri-2026-ava-midterms",
+   "status": "Verified 2026-09-21 directly, deliberately NOT ingested as a race row: the midterms project publishes American Values Atlas demographics/attitudes (party ID, religious landscape, Trump favorability, issue views) for GA/MI/NC/OH/TX — no 2026 horse-race or generic-ballot question",
+   "evidence": "prri.org/data-and-the-2026-midterm-elections/ fetched directly 2026-09-21: five state explorers with published per-year n and MoE (e.g. 2026 partial-year GA n=306 MoE 6.4; TX n=907 MoE 3.7), AVA 2022–2026 series; no candidate preference question.",
+   "action": "Use as covariate/context data for the five states' models if ever needed; a horse-race row requires a PRRI poll release with candidate preference."
+  },
+  {
+   "id": "kff-2026-06-mifepristone-midterms",
+   "status": "Verified 2026-09-21 directly, deliberately NOT ingested as a race row: KFF Health Tracking Poll on mifepristone/abortion policy is issue-only (no candidate preference or generic ballot)",
+   "evidence": "kff.org/public-opinion/kff-health-tracking-poll-mifepristone-and-the-midterms/ fetched directly 2026-09-21: published Jul 30, 2026; chart source line 'KFF Health Tracking Poll (June 25-30, 2026)'; election relevance is issue salience ('a majority of voters (57%) say it is extremely or very important for candidates to discuss abortion policy').",
+   "action": "Issue-salience context only; a race row would require a KFF candidate-preference question (not in this release)."
   }
  ],
  "independentPriors": [

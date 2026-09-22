@@ -243,6 +243,30 @@
    "irregularity": null,
    "why": "Admitted source (winthrop-poll) whose results index was not read this session.",
    "render": false
+  },
+  {
+   "id": "bexar-county-elections",
+   "url": "https://elections.bexar.gov/",
+   "name": "Bexar County Elections (TX)",
+   "irregularity": null,
+   "why": "Not admitted: two session fetches (2026-09-19 and 2026-09-21) returned only a JS loading shell (\"Loading\" ajax placeholder, no readable content). Needs headless-Chrome render to expose San Antonio election content.",
+   "render": true
+  },
+  {
+   "id": "tarrant-county-elections",
+   "url": "https://www.tarrantcountytx.gov/en/elections.html",
+   "name": "Tarrant County Elections (TX)",
+   "irregularity": null,
+   "why": "Not admitted: two session fetches returned a chat-widget/empty-grid shell with no election content. Needs headless-Chrome render.",
+   "render": true
+  },
+  {
+   "id": "hennepin-county-elections",
+   "url": "https://www.hennepincounty.gov/services/elections",
+   "name": "Hennepin County Elections (MN)",
+   "irregularity": null,
+   "why": "Partial verification only: 2026-09-21 fetch rendered a header/\"Elections\" heading but no readable body (JS-heavy page). Needs headless-Chrome render before admission.",
+   "render": true
   }
  ]
 }
