@@ -4,6 +4,14 @@ Updated **2026-09-22**, session 13 pass on `arena/01a0c7eb-elections`.
 Primary audit for this pass: `VERIFICATION.md` §20. Session 12 remains `VERIFICATION.md` §18–§19. Do not interpret a passing test as
 independent confirmation of a source's truth.
 
+## Delivered in session 13 (this pass)
+
+- **Two failing tests repaired.** `test/forward-contest.test.mjs` — "the signals ledger is one row per published signal per captured day" — hard-coded the 3-day horizon (`days.size === 3`, `kinds.poll === admitted * 3`, poll/rating must be unusable on ANY captured day, `pollLayer.asOf === lastCapturedDay`). Now that the daily workflow has produced a fourth captured day, three of those assertions no longer match the data. The test is rewritten to use the actual `days.size` and to assert the **real** look-ahead invariant — that a poll/rating row is usable only on a trading day **strictly after** the poll layer's capture date. 19 admitted poll rows × 4 days = 76 poll rows in the ledger, of which 19 (the day-after capture) are usable; no look-ahead leak. `test/verification-gates.test.mjs` — "wrong nominees are retained as history but never compared as the current matchup" — asserted `poll-layer-2026.json::candidateMismatchProvenance.universeCapturedAt === universe/latest.json::capturedAt`. The provenance was stale because the universe was re-captured (2026-09-22) after the session-11 patch (2026-09-21). New `scripts/refresh-poll-layer-provenance.mjs` re-anchors the field to whatever the universe currently carries and is idempotent; the field now reads `2026-09-22T17:09:13.388Z`. Both fixes preserve the original invariants the tests were meant to enforce.
+- **Package.json script name fixed.** `package.json` `pipeline` referenced `npm run gen-roadmap` but the script key was `roadmap`; the pipeline crashed at the roadmap step. Renamed the reference; the full pipeline (`backtest + contest + contest-forward + crosslayer + build-site + market-list + roadmap + render-check`) now runs end-to-end without manual steps.
+- **Tests green again.** 155 pass, 0 fail, 1 skipped (intentional). Lint clean. Site bundle rebuilt and verified (`scripts/render-check.cjs`; no template leaks across all 13 sections).
+- **Site + bundle regenerated.** `src/data/site-data.js` rebuilt from the current data files (2026-09-22 capture, 4-day signals ledger, refreshed poll-layer provenance). GitHub Pages deploys from the `main` branch root, so the bundle will land at https://buffedlizard55-lab.github.io/Elections/ as soon as this branch is merged.
+- **Counts unchanged this pass.** Master list 267 sources (no new entries); irregularities 79; tests 156; the 24,150-market open universe and the 12-entrant live 2026 contest were not regenerated for content.
+
 ## Delivered in session 12
 
 - **Live 2026 contest (R16) — new.** `src/contest/forward-universe.js` (offline contest

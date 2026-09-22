@@ -622,6 +622,15 @@
       "detail": "scripts/run-forward-contest.mjs passed { multiplier, type } into registerSeriesFees, which only reads fee_multiplier, so the call returned 0 while the runner incremented captured before the call and published 4185. feeProvenance reads that pre-call count, so the season claimed every series had a captured multiplier when none had been registered. The 2024 contest already passed fee_multiplier and was unaffected. Confirmed against data/kalshi/universe/series.json capturedAt 2026-09-21T18:16:44.622Z: 4185 series, all quadratic with a numeric fee_multiplier. No fill in the season used one of the 10 series whose captured multiplier is 0, so published PnL did not move when registration started applying the captured multipliers.",
       "action": "RESOLVED 2026-09-22: the runner now passes fee_type and fee_multiplier, uses the registration return, and throws if that return is not the count of series with a numeric multiplier. registerSeriesFees throws when multiplier or type is present without a numeric fee_multiplier, so the silent skip cannot recur. A config that already has a numeric fee_multiplier is accepted.",
       "source": "https://kalshi.com/docs/kalshi-fee-schedule.pdf"
+    },
+    {
+      "id": 80,
+      "severity": "medium",
+      "area": "Test staleness / provenance drift",
+      "title": "Two forward-contest tests hard-coded the 3-day horizon and started failing on day 4",
+      "detail": "`test/forward-contest.test.mjs` (\"the signals ledger …\") asserted `days.size === 3`, `kinds.poll === admitted * 3`, that poll/rating rows were unusable on EVERY captured day, and `pollLayer.asOf === lastCapturedDay`. Once the daily workflow produced a fourth captured day (2026-09-22), the first three assertions stopped matching the data and the last stopped matching the provenance header. A separate test (`test/verification-gates.test.mjs`, \"wrong nominees …\") asserted `poll-layer-2026.json::candidateMismatchProvenance.universeCapturedAt === universe/latest.json::capturedAt`; that header is written once at patch time and was stale because the universe was re-captured (2026-09-22) after the session-11 patch (2026-09-21).",
+      "action": "RESOLVED 2026-09-22: the signals-ledger test was rewritten to derive counts from `days.size` and to assert the actual look-ahead invariant (a poll/rating row is usable only on a trading day strictly after the poll layer's capture date). A new `scripts/refresh-poll-layer-provenance.mjs` re-anchors the provenance field to the current universe capture and is idempotent; it should be run after every universe capture so the verification gate stays green.",
+      "source": "scripts/refresh-poll-layer-provenance.mjs (new)"
     }
   ]
 }

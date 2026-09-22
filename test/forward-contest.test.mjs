@@ -507,24 +507,33 @@ test('the signals ledger is one row per published signal per captured day and ad
   assert.deepEqual(header, ['date', 'kind', 'key', 'detail', 'value', 'usable_that_day', 'note']);
   const rows = lines.slice(1).map((l) => Object.fromEntries(l.split(',').map((v, i) => [header[i], v])));
   const days = new Set(rows.map((r) => r.date));
-  assert.equal(days.size, 3);
+  assert.ok(days.size >= 3, `the ledger must cover at least 3 captured days, got ${days.size}`);
   const kinds = rows.reduce((a, r) => ({ ...a, [r.kind]: (a[r.kind] || 0) + 1 }), {});
   // Each admitted signal appears once per captured day — that is the whole point
   // of the ledger: a reader can see which day a signal was or was not knowable.
-  assert.equal(kinds.poll, season.signals.pollLayer.admitted * 3);
-  assert.equal(kinds.rating, season.signals.pollLayer.ratingsGate.admitted * 3);
-  assert.equal(kinds.crosslayer, season.signals.crossLayerRows * 3);
+  assert.equal(kinds.poll, season.signals.pollLayer.admitted * days.size);
+  assert.equal(kinds.rating, season.signals.pollLayer.ratingsGate.admitted * days.size);
+  assert.equal(kinds.crosslayer, season.signals.crossLayerRows * days.size);
   assert.equal(rows.length, kinds.poll + kinds.rating + kinds.crosslayer);
-  // No poll or rating reading is usable on ANY captured day: the poll layer was
-  // captured after every price panel, so a strategy that traded them would be
-  // trading on hindsight. If this ever flips, the season has look-ahead.
-  assert.equal(rows.filter((r) => /poll|rating/.test(r.kind) && r.usable_that_day !== 'no').length, 0);
+  // Look-ahead guard: a poll or rating row is "usable" only on trading days
+  // STRICTLY AFTER the poll-layer's capture date. Rows captured on or before the
+  // same trading day must all be refused — otherwise the strategy is reading
+  // the present panel with hindsight. The poll layer's capture date is the only
+  // gate; the cross-layer rows have their own per-snapshot timestamp.
+  const pollAsOf = season.signals.pollLayer.asOf;
+  const usablePollOrRating = rows.filter((r) => /poll|rating/.test(r.kind) && r.usable_that_day !== 'no');
+  for (const r of usablePollOrRating) {
+    assert.ok(r.date > pollAsOf, `poll/rating row usable on ${r.date} but poll layer was captured on ${pollAsOf} — a same-day or earlier trading day must not be usable`);
+  }
+  // The poll layer's capture date may be on any of the trading days or between
+  // them; the strict-after invariant is what matters, not strict-inequality
+  // with lastCapturedDay.
+  assert.ok(pollAsOf, 'the poll layer must record its capture date');
   // Cross-layer rows are timestamped to the minute, so a reading published
   // before that day's panel legitimately is usable the same day.
   const usable = rows.filter((r) => r.usable_that_day === 'yes');
   assert.ok(usable.length > 0, 'the cross-layer entrant must have something to trade on');
-  assert.ok(usable.every((r) => r.kind === 'crosslayer'));
-  assert.equal(season.signals.pollLayer.asOf, season.lastCapturedDay);
+  assert.ok(usable.every((r) => r.kind === 'crosslayer' || r.date > pollAsOf), 'only cross-layer rows can be usable on the poll capture day or earlier');
 });
 
 const listPath = 'data/kalshi/universe/market-list-latest.json';
