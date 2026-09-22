@@ -10,7 +10,7 @@ independent confirmation of a source's truth.
 - **Package.json script name fixed.** `package.json` `pipeline` referenced `npm run gen-roadmap` but the script key was `roadmap`; the pipeline crashed at the roadmap step. Renamed the reference; the full pipeline (`backtest + contest + contest-forward + crosslayer + build-site + market-list + roadmap + render-check`) now runs end-to-end without manual steps.
 - **Tests green again.** 155 pass, 0 fail, 1 skipped (intentional). Lint clean. Site bundle rebuilt and verified (`scripts/render-check.cjs`; no template leaks across all 13 sections).
 - **Site + bundle regenerated.** `src/data/site-data.js` rebuilt from the current data files (2026-09-22 capture, 4-day signals ledger, refreshed poll-layer provenance). GitHub Pages deploys from the `main` branch root, so the bundle will land at https://buffedlizard55-lab.github.io/Elections/ as soon as this branch is merged.
-- **Counts unchanged this pass.** Master list 267 sources (no new entries); irregularities 79; tests 156; the 24,150-market open universe and the 12-entrant live 2026 contest were not regenerated for content.
+- **Counts unchanged this pass.** Master list 267 sources (no new entries); irregularities 79 → **80** (#80 filed this pass); tests 156; the 24,150-market open universe and the 12-entrant live 2026 contest were not regenerated for content.
 
 ## Delivered in session 12
 
