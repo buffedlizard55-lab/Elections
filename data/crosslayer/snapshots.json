@@ -1,7 +1,7 @@
 {
  "title": "Cross-layer snapshots — Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
  "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
- "capturedAt": "2026-09-21T18:44:03.401Z",
+ "capturedAt": "2026-09-22T00:24:27.800Z",
  "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project — every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
  "questions": {
   "SENATE-CONTROL-2026": {
@@ -635,6 +635,50 @@
      "capturedAt": "2026-09-21T18:16:44.622Z",
      "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
     }
+   },
+   "source": "https://www.metaculus.com/questions/44710/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-22-senate",
+   "question": "SENATE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-22T00:24:27.800Z",
+   "layers": {
+    "metaculus": 0.505
+   },
+   "source": "https://www.metaculus.com/midterms-2026/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-22-house",
+   "question": "HOUSE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-22T00:24:27.800Z",
+   "layers": {
+    "metaculus": 0.909
+   },
+   "source": "https://www.metaculus.com/midterms-2026/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-22-senate-mt-2026",
+   "question": "SENATE-MT-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-22T00:24:27.800Z",
+   "layers": {
+    "metaculus": 0.01
+   },
+   "source": "https://www.metaculus.com/questions/44711/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-22-senate-ne-2026",
+   "question": "SENATE-NE-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-22T00:24:27.800Z",
+   "layers": {
+    "metaculus": 0.001
    },
    "source": "https://www.metaculus.com/questions/44710/",
    "collector": "scripts/collect-metaculus.mjs"

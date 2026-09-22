@@ -160,7 +160,86 @@
     }
    },
    "flags": []
+  },
+  {
+   "date": "2026-09-22",
+   "capturedAt": "2026-09-22T00:25:25.371Z",
+   "kalshiCapturedAt": "2026-09-21T18:16:44.622Z",
+   "renderers": {
+    "ebo": {
+     "capturedFrom": "https://electionbettingodds.com/",
+     "status": 200,
+     "extract": "ok",
+     "stamp": "8:21PM EDT on Sep 21, 2026",
+     "senateDemKalshi": {
+      "bid": 0.6,
+      "ask": 0.61
+     },
+     "senateRepKalshi": {
+      "bid": 0.39,
+      "ask": 0.4
+     },
+     "eboHeadlineDem": 0.616,
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.605,
+      "capturedMid": 0.605,
+      "diff": 0,
+      "flagged": false
+     }
+    },
+    "ddhq": {
+     "capturedFrom": "https://votes.decisiondeskhq.com/",
+     "status": 200,
+     "layer": "context (DDHQ odds, not Kalshi)",
+     "extract": "ok",
+     "houseD": 0.7,
+     "senateD": 0.52
+    },
+    "270towin": {
+     "capturedFrom": "https://www.270towin.com/",
+     "status": 200,
+     "fetchMethod": "headless-chrome",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "ok",
+     "kalshiPanel": {
+      "dem": 0.59,
+      "rep": 0.42,
+      "asOf": "Sep. 21, 2026 at 00:25 UTC",
+      "basis": "most recent yes trade (page order: Democrats, Republicans)"
+     },
+     "kpow": {
+      "value": "+3.30 D",
+      "asOf": "9/21/26 8:23 AM EDT"
+     },
+     "vsCaptured": {
+      "dem": {
+       "comparable": true,
+       "rendered": 0.59,
+       "capturedLast": 0.58,
+       "capturedBidAsk": [
+        0.58,
+        0.59
+       ],
+       "diff": 0.01,
+       "flagged": false
+      },
+      "rep": {
+       "comparable": true,
+       "rendered": 0.42,
+       "capturedLast": 0.42,
+       "capturedBidAsk": [
+        0.41,
+        0.42
+       ],
+       "diff": 0,
+       "flagged": false
+      }
+     }
+    }
+   },
+   "flags": []
   }
  ],
- "capturedAt": "2026-09-21T18:47:17.563Z"
+ "capturedAt": "2026-09-22T00:25:25.371Z"
 }
