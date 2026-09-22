@@ -1583,3 +1583,36 @@ than explained away.
 The limit of the scoped text check is stated in the code: rows filed before #72 are deliberate
 human paraphrases of the same finding, so they are held to the structured fields only.
 
+
+## 20. Session 13 — 2026-09-22: stored identity flags, fee registration return, fill reconciliation, basket edges
+
+**What this pass did not do.** No Metaculus question was scored. No canvass was run. `controlQuestion.resolutionRule.confirmed` was not touched and stays false. Election day remains 2026-11-03. No TLS connection was opened to Kalshi. Every number below was recomputed from committed captures or from a re-run of `npm run contest-forward`.
+
+**20a. Identity flags are stored, not only computed (#77 resolved).** `candidateMismatch()` was applied to all 31 `stateRaces` rows against `data/kalshi/universe/latest.json` (`capturedAt` `2026-09-21T18:16:44.622Z`) and the return was written onto each row. `review` and `comparisonBlockedReason` were not modified. Six rows store a refusal string: the five rows that previously had neither `review` nor `comparisonBlockedReason` (`uh-hobby-2026-01-tx-governor`, `uh-hobby-2026-01-tx-senate`, `saint-anselm-2026-06-nh-senate`, `stetson-2026-04-fl-senate`, `rasmussen-2026-09-ak-senate`) plus `nyt-siena-2026-07-ak-senate`, which already had `review: true`. A test asserts every stored flag equals a fresh recompute. The contest still calls the live function: the gate remains 31 considered, 19 admitted, 12 refused. The site shows an `identity` chip (title = the mismatch text) distinct from the review chip, and a `stored/live disagree` chip if those two ever diverge.
+
+**20b. Fee registration publishes the return, not a pre-call counter (#79).** The forward runner had passed `{ multiplier, type }` into `registerSeriesFees`, which only reads `fee_multiplier`, so the call returned 0 while the runner incremented `captured` first and published 4,185. This run passes `fee_type`, `fee_multiplier` and `capturedFrom`, and throws if the return is not the count of series with a numeric multiplier. Result: `seriesWithCapturedConfig` 4185, `seriesUsingDocumentedDefault` 0, matching `data/kalshi/universe/series.json` (`capturedAt` `2026-09-21T18:16:44.622Z`, 4185 quadratic series, all with a numeric `fee_multiplier`). A config that only has `multiplier`/`type` now throws. A config that already has a numeric `fee_multiplier` is accepted, so the 2024 contest's `SENATE_SERIES_FEES` shape still registers. Maker fee is `round up(M × 0.0175 × C × P × (1−P))` with maker M defaulting to 0 (#76 resolved). The captured taker multiplier is not copied onto maker M. `quadratic_with_maker_fees` is not in this registry; if it appears without an explicit maker multiplier, maker M stays 0 and is labelled unstated. The contest remains taker-only. Published PnL did not move (`longshot-fader` $99,908.87896, `favorite-cash` $99,565.5374, `longshot-lotto` $98,505.55783): no fill used one of the 10 series whose captured multiplier is 0, and every traded series has multiplier 1, which is also the documented taker default.
+
+**20c. The three `crosslayer-arb` fills are tied.** `data/contest/forward-2026/crosslayer-fills.json` uses the same crowd extraction as `buildSignals` (`asOf|question`, first wins, metaculus else ddhq). The binding snapshot is the prior row (`asOf` strictly before the trading day) with the largest absolute gap of crowd probability minus that day's panel mid that clears 0.05; an equal absolute gap keeps the first. All three entries tied. The runner does not file an irregularity.
+
+| fill | binding snapshot | crowd | snapshot mid | panel mid | price / fee check |
+|---|---|---|---|---|---|
+| 2026-09-20 `CONTROLS-2026-D` NO 2111.25 @ 0.41, fee 35.7498 | `2026-09-19-senate` | 0.517 | 0.595 | 0.595 | taker cross and `takerFee` on `CONTROLS` |
+| 2026-09-21 `GOVPARTYMI-26-D` NO 1.74 @ 0.09, fee 0.01 | `2026-09-20-governor-mi-2026` | 0.85 | 0.915 | 0.9165 | taker cross and `takerFee` on `GOVPARTYMI` |
+| 2026-09-21 `SENATEAK-26-D` NO 151.51 @ 0.3, fee 2.2272 | `2026-09-20-senate-ak-2026` | 0.54 | 0.695 | 0.705 | taker cross and `takerFee` on `SENATEAK` |
+
+**20d. Basket edges are recorded on every priceable day.** A day is priceable when all four Balance-of-Power legs are eligible and `tradedToday`. The fee series is the universe entry's `series`, not the ticker prefix. An independent scan after fee registration throws if it disagrees with `combo-coherence`. All three captured days were priceable. Best edge remains 2026-09-21 (ask sum 1.002, fee 0.0375, edge −0.0395). 2026-09-20, recomputed from the panel, is ask sum 1.002, fee 0.0389, edge −0.0409. 2026-09-19 is ask sum 1.012, fee 0.0395, edge −0.0515. Pair attempts 6. Trades 0: no row cleared `edge > 0.005`. `poll-anchor-26`'s dead first `state` was left in place. `signalsForTradingDay` is what the runner filters with, and `poll-anchor-26` and `ratings-ratchet` also refuse a row whose `asOf` is not strictly before the trading day. Published orders did not change.
+
+**20e. Checks.** `npm test` → **156 tests, 155 pass, 1 skipped, 0 fail**. `npm run lint` → passes (79 irregularities, md rows match JSON from #72 on). `npm run build-site` → 2,125 KB. `node scripts/render-check.cjs` → exit 0. The required-content lists are now applied, including the cross-layer fill reconciliation heading, the basket-edge heading, and the identity chip. `node scripts/gen-roadmap.mjs` regenerated `ROADMAP.md` from `data/roadmap.json`.
+
+**Artifacts re-read or written in this pass** (SHA-256, first 12 hex; sizes in bytes):
+
+| artifact | bytes | sha256[:12] |
+|---|---|---|
+| `data/contest/forward-2026/season.json` | 779,174 | `b1462d4d3822` |
+| `data/contest/forward-2026/leaderboard.json` | 16,516 | `bf2414989cd8` |
+| `data/contest/forward-2026/combo-edges.json` | 3,626 | `1df7ea2fb9f7` |
+| `data/contest/forward-2026/crosslayer-fills.json` | 3,638 | `a9e60b63254a` |
+| `data/polls/poll-layer-2026.json` | 78,025 | `a6e247470d63` |
+| `data/irregularities.json` | 86,518 | `9dfa0a8cf393` |
+| `src/fees.js` | 7,906 | `69dd8215acb2` |
+| `scripts/run-forward-contest.mjs` | 22,568 | `39bdebefbe86` |

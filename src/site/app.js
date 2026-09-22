@@ -237,7 +237,7 @@
     // group by race (state), newest field period first inside a race; JSON order stays provenance order
     const raceRows = mc.rows.map((r, i) => ({ r, i })).sort((a, b) => a.r.race.localeCompare(b.r.race) || String(b.r.fieldDates).localeCompare(String(a.r.fieldDates)) || a.i - b.i).map((x) => x.r);
     const races = raceRows.map((r) => `<tr>
-      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ` <span class="chip warn" title="${esc(r.candidateMismatch || r.methodNote || 'Incomplete source metadata; see primary release')}">review</span>` : ''}${r.methodFamily ? ` <span class="chip info" title="${esc(r.methodNote || 'method family (irregularity #49)')}">${esc(r.methodFamily)}</span>` : ' <span class="chip warn">method unclassified</span>'}</span></td>
+      <td><strong>${esc(r.race)}</strong><br><span class="small">${esc(r.pollster)} · ${esc(r.fieldDates)}${r.n ? ` · n=${int(r.n)}` : ''}${r.moe ? ` · ±${r.moe}` : ''}${r.review ? ` <span class="chip warn" title="${esc(r.candidateMismatch || r.methodNote || 'Incomplete source metadata; see primary release')}">review</span>` : ''}${typeof r.identityMismatch === 'string' && r.identityMismatch ? ` <span class="chip warn" title="${esc(r.identityMismatch)}">identity</span>` : ''}${r.candidateMismatchStored && r.storedCandidateMismatch !== r.identityMismatch ? ` <span class="chip bad" title="stored ${esc(String(r.storedCandidateMismatch))} vs live ${esc(String(r.identityMismatch))}">stored/live disagree</span>` : ''}${r.methodFamily ? ` <span class="chip info" title="${esc(r.methodNote || 'method family (irregularity #49)')}">${esc(r.methodFamily)}</span>` : ' <span class="chip warn">method unclassified</span>'}</span></td>
       <td>${esc(r.dem)} <strong>${r.demPct}</strong> · ${esc(r.rep)} <strong>${r.repPct}</strong></td>
       <td class="num ${cls(r.demMargin)}">${pp(r.demMargin, 0)}${r.withinMoe ? ' <span class="small">(within MoE)</span>' : ''}</td>
       <td class="num">${pct(r.pollImpliedDemProb, 1)}</td>
@@ -257,6 +257,7 @@
     <h1>2026 Polls — verified poll layer vs the market</h1>
     <p class="lead">${esc(PL.method)}</p>
     <div class="callout"><strong>Admission rule.</strong> ${esc(PL.policy)}</div>
+    ${PL.candidateMismatchProvenance ? `<p class="small">Identity flags stored from <span class="mono">${esc(PL.candidateMismatchProvenance.computedBy)}</span> against universe capture ${esc(PL.candidateMismatchProvenance.universeCapturedAt)}. ${esc(PL.candidateMismatchProvenance.note || '')}</p>` : ''}
 
     <h2>Generic congressional ballot</h2>
     <div class="card" style="overflow-x:auto"><table>
@@ -630,6 +631,27 @@
   // Nothing on this page is typed in by hand, and the season's own disclosures
   // (which rules are The Leap's and which are this project's adaptations) are
   // rendered verbatim from the artifact rather than summarised.
+
+  function renderCrosslayerFills(fills) {
+    if (!fills || !fills.fills) return '<div class="callout">No cross-layer fill reconciliation in this build.</div>';
+    const body = fills.fills.map((f) => {
+      const b = f.binding || {};
+      const tied = f.tied ? '<span class="chip good">tied</span>' : `<span class="chip bad" title="${esc(f.reason || '')}">untied</span>`;
+      return `<tr><td class="mono">${esc(f.date)}</td><td class="mono">${esc(f.ticker)}</td><td>${esc(f.side)} ${esc(f.shares)} @ ${esc(f.price)}</td><td class="mono">${esc(b.snapshotId || '—')}</td><td class="num">${b.crowdProb == null ? '—' : esc(b.crowdProb)}</td><td class="num">${b.kalshiSnapshotMid == null ? '—' : esc(b.kalshiSnapshotMid)}</td><td class="num">${b.panelMid == null ? '—' : esc(b.panelMid)}</td><td class="num">${esc(f.fee)}</td><td>${tied}</td></tr>`;
+    }).join('');
+    return `<p class="small">${esc(fills.method || '')}</p><p class="small">Threshold ${esc(fills.threshold)} · untied ${esc(fills.untied)} · <span class="mono">data/contest/forward-2026/crosslayer-fills.json</span></p><div class="card" style="overflow-x:auto"><table><thead><tr><th>Day</th><th>Ticker</th><th>Fill</th><th>Snapshot</th><th class="num">Crowd</th><th class="num">Snapshot mid</th><th class="num">Panel mid</th><th class="num">Fee</th><th>Tied</th></tr></thead><tbody>${body}</tbody></table></div>`;
+  }
+  function renderComboEdges(edges) {
+    if (!edges || !edges.days) return '<div class="callout">No basket-edge artifact in this build.</div>';
+    const body = edges.days.map((d) => {
+      const series = (d.legs || []).map((l) => l.series).filter((v, i, a) => a.indexOf(v) === i).join(', ');
+      return `<tr><td class="mono">${esc(d.date)}</td><td>${d.priceable ? 'yes' : 'no'}</td><td class="num">${d.askSum == null ? '—' : esc(d.askSum)}</td><td class="num">${d.feePerContract == null ? '—' : esc(d.feePerContract)}</td><td class="num">${d.edge == null ? '—' : esc(d.edge)}</td><td>${d.priceable ? (d.feeClears ? 'yes' : 'no') : '—'}</td><td class="small mono">${esc(series)}</td></tr>`;
+    }).join('');
+    const best = edges.bestObservedEdge;
+    const bestLine = best ? `<p class="small">Best observed edge ${esc(best.date)}: ask sum ${esc(best.askSum)}, fee ${esc(best.feePerContract)}, edge ${esc(best.edge)}.</p>` : '';
+    return `<p class="small">${esc(edges.method || '')}</p><p class="small">Threshold ${esc(edges.threshold)} · priceable days ${esc(edges.daysTheFullBasketWasPriceable)} · pair attempts ${esc(edges.daysThePairTradeWasPriceable)} · trades ${esc(edges.trades)} · agrees with strategy ${esc(edges.agreesWithStrategy)} · <span class="mono">data/contest/forward-2026/combo-edges.json</span></p><div class="card" style="overflow-x:auto"><table><thead><tr><th>Day</th><th>Priceable</th><th class="num">Ask sum</th><th class="num">Fee</th><th class="num">Edge</th><th>Clears fee</th><th>Fee series</th></tr></thead><tbody>${body}</tbody></table>${bestLine}</div>`;
+  }
+
   function contest2026() {
     if (!C26) {
       return `<h1>Live 2026 contest</h1><div class="callout warn"><strong>No season artifact yet.</strong>
@@ -713,7 +735,7 @@
       <tr><td><strong>Participation cap</strong></td><td>fill ≤ ${(m.fillCapOfDayVolume * 100).toFixed(0)}% of the day's volume and ≤ ${(m.fillCapOfOpenInterest * 100).toFixed(0)}% of open interest</td></tr>
       <tr><td><strong>Concentration rule</strong><br><span class="small">ADAPTATION</span></td><td>${esc(m.dailyDeploymentNote)}</td></tr>
       <tr><td><strong>Fees</strong></td><td>${esc(m.feeProvenance.formula)} · ${int(m.feeProvenance.seriesWithCapturedConfig)} series with a captured multiplier, ${int(m.feeProvenance.seriesUsingDocumentedDefault)} using the documented default ·
-        <a href="${esc(m.feeProvenance.schedule)}" target="_blank" rel="noopener">official fee schedule</a></td></tr>
+        <a href="${esc(m.feeProvenance.schedule)}" target="_blank" rel="noopener">official fee schedule</a>${m.feeProvenance.makerFormula ? ` Maker: ${esc(m.feeProvenance.makerFormula)}.` : ''}${m.feeProvenance.contestCharges ? ` Contest charges: ${esc(m.feeProvenance.contestCharges)}.` : ''}</td></tr>
       </tbody></table></div>
 
     <h2>Universe — which markets the contest may trade</h2>
@@ -736,6 +758,12 @@
     <p class="small">${esc((C26.signals && C26.signals.pollLayer && C26.signals.pollLayer.ratingsBandsLabel) || '')}</p>
     <p class="small">Per-signal audit rows (every poll and rating against every captured day, with the verdict) are in
       <span class="mono">data/contest/forward-2026/signals-ledger.csv</span>.</p>
+
+    <h2>Cross-layer fill reconciliation</h2>
+    ${renderCrosslayerFills(C26.crosslayerFills)}
+
+    <h2>Basket edge by captured day</h2>
+    ${renderComboEdges(C26.comboEdges)}
 
     <h2>The full open-market list</h2>
     ${ML ? `<p class="lead">${int(ML.totalListed)} open Kalshi political/election markets captured

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { brier, logLoss, midpoint, scoreSnapshots, timestamp } from '../src/crosslayer.js';
-import { compareRacesToMarkets, demMargin } from '../src/poll-layer.js';
+import { compareRacesToMarkets, demMargin, candidateMismatch } from '../src/poll-layer.js';
 import { comparableCapture, compareRange, compareLast } from '../scripts/crosscheck-renderings.mjs';
 import { looksLikeChallenge } from '../scripts/lib/render.mjs';
 const read = (p) => JSON.parse(readFileSync(new URL('../' + p, import.meta.url)));
@@ -64,6 +64,22 @@ test('polls: wrong nominees are retained as history but never compared as the cu
   assert.equal(multi.pollImpliedDemProb, null); assert.equal(multi.gap, null);
   assert.equal(current.candidateMismatch, null); assert.equal(typeof current.gap, 'number');
   assert.equal(demMargin({ candidates: { D: { pct: '50' }, R: { pct: 45 } } }), null);
+  assert.equal(layer.candidateMismatchProvenance.universeCapturedAt, u.capturedAt);
+  assert.equal(layer.stateRaces.length, 31);
+  for (const e of layer.stateRaces) {
+    assert.equal(e.candidateMismatch, candidateMismatch(e, u), `${e.id} stored flag drifted from a fresh recompute`);
+  }
+  for (const r of rows) {
+    const e = layer.stateRaces.find((x) => x.id === r.id);
+    assert.equal(r.identityMismatch, e.candidateMismatch);
+    assert.equal(r.storedCandidateMismatch, e.candidateMismatch);
+    assert.equal(r.candidateMismatch, e.comparisonBlockedReason || e.candidateMismatch);
+  }
+  for (const id of ['uh-hobby-2026-01-tx-governor', 'uh-hobby-2026-01-tx-senate', 'saint-anselm-2026-06-nh-senate', 'stetson-2026-04-fl-senate', 'rasmussen-2026-09-ak-senate']) {
+    const e = layer.stateRaces.find((x) => x.id === id);
+    assert.equal(typeof e.candidateMismatch, 'string', `${id} must store the refusal`);
+    assert.notEqual(e.review, true, `${id} review flag must not be flipped on`);
+  }
 });
 
 test('R13: reject invalid/partial quotes and stale timestamps; soft error pages are not reachable content', () => {

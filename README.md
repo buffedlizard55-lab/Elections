@@ -11,7 +11,7 @@
 each, scored every day on **open** Kalshi election markets. See
 [§ The live 2026 contest](#the-live-2026-contest-r16).
 
-**267 sources · 78 irregularities · 146 tests.** This session closed the queued
+**267 sources · 79 irregularities · 156 tests.** This session closed the queued
 control-market question from the exchange's own rule text, published the canonical
 open-market list with an arithmetic reconciliation gate, and built the forward
 paper-trading engine, and rebuilt the forward contest layer around the captured panels.
@@ -29,7 +29,7 @@ really is on this exchange.
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (2024, settled, real Kalshi fees) · `src/contest/forward-*.js` → `data/contest/forward-2026/` (**live 2026 season**, 12 entrants, daily scoring) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (146 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Checks | `npm test` (156 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
 | Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
@@ -46,7 +46,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `data/crosslayer/` + `src/crosslayer.js` | **Cross-layer scoreboard (R14)** — Kalshi vs Metaculus vs DDHQ vs EBO-rendered Kalshi on the 2026 Senate/House control questions; snapshots stay `pending` until `outcomes.json` carries an official canvass with a source url, then Brier/log-loss per layer (look-ahead guarded). Collectors: `scripts/collect-metaculus.mjs` (hub HTML; api2 is auth-walled, #54), `scripts/collect-statenavigate.mjs` (free forecast pages + API-host probe, #55), `scripts/crosscheck-renderings.mjs` (R13 standing monitor → `data/kalshi/tracker/rendering-crosscheck.json`) |
 | `data/probes/` + `scripts/probe-hosts.mjs` | **Host re-test monitor (R15)** — every URL that ever refused the fetch tool (`data/probes/targets.json`, 30 targets: SurveyUSA hosts and the #28000 report page, HarrisX/The Hill, CourtListener API, PEC, Split Ticket, WI/NV/CA/MA/NH official paths, Clarity ENR for GA + WV, Metaculus, State Navigate, Muhlenberg, F&M, 270toWin, HPU, Winthrop) is re-tested from the Actions runner each run; `latest.json`/`history.json` record status, challenge type, title, a text sample and the headless-Chrome verdict for `render:true` targets (raw bodies are a workflow artifact, never committed). First live run crashed before writing (#61, fixed); the first committed verdicts landed with run 35490431271 (2026-09-20, 05:38Z) — the session-8 re-test batch is tabled in VERIFICATION.md §13c (WI/NV/CA/MA still blocked; GA + WV Clarity now 'reachable' through the runner's browser profile) |
 | `data/statenavigate/` | State Navigate collector output (R14 third layer): `forecast-daily.json` (national + 34 chamber pages, one row per day with `fetchMethod` and `parse` per page) and `api-probe.json` (daily check of the documented-but-unusable API host, #55). Pages are client-rendered: rows parse only when the runner's headless Chrome renders them (#58/#62) |
-| `data/contest/forward-2026/` + `src/contest/forward-*.js` | **The live 2026 contest (R16)** — `season.json` (entrants, theses, fills, skip reasons, provenance), `leaderboard.{json,csv}`, `equity.csv`, `attribution.json` (per-series and per-market P&L), `universe.json` (per-day eligibility + exclusion reasons), `signals-ledger.csv` (every admitted poll, rating and cross-layer signal against every captured day, with a `usable_that_day` column). Engine: `forward-universe.js` (offline universe from captured files), `forward-engine.js` (mark-to-market replay + accounting identity), `strategies-forward.js` (the 12-entrant field + the identity gate); tests `test/forward-contest.test.mjs` (35 — the biggest single test file in the repo). |
+| `data/contest/forward-2026/` + `src/contest/forward-*.js` | **The live 2026 contest (R16)** — `season.json` (entrants, theses, fills, skip reasons, provenance), `leaderboard.{json,csv}`, `equity.csv`, `attribution.json` (per-series and per-market P&L), `universe.json` (per-day eligibility + exclusion reasons), `signals-ledger.csv` (every admitted poll, rating and cross-layer signal against every captured day, with a `usable_that_day` column), `combo-edges.json`, `crosslayer-fills.json`. Engine: `forward-universe.js` (offline universe from captured files), `forward-engine.js` (mark-to-market replay + accounting identity), `strategies-forward.js` (the 12-entrant field + the identity gate); tests `test/forward-contest.test.mjs` (41). |
 | `data/kalshi/universe/market-list-latest.csv` | **The full open political/election market list** — every market in the latest full capture with a contest-eligibility verdict, overwritten each run to bound repository growth (the append-only record is `forward/open-prices.csv`). Its JSON twin carries the reconciliation ladder and the arithmetic gate. |
 | `data/sources/master.json` | **Master source list — 267 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note. The 2026-09-21 follow-up added Fairfax, Montgomery MD, Shelby, Allegheny, Cobb, Prince George's, Collin, Mecklenburg, Wake, Gwinnett, DeKalb, Bernalillo, Ramsey, and Fort Bend, plus the League of Women Voters homepage and Verified Voting, and moved Vote.org and Rock the Vote out of government (irregularity #70). Earlier batches remain in VERIFICATION.md. |
 | `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6–§11 + 2026-09-20 §12: 22 new entries, re-tests, live-run repairs, first live Metaculus seat rows; 2026-09-20 §13 (session 8): 8 poll-layer rows from HPU Poll 126 / UH Hobby / Saint Anselm SASC / Stetson CPOR / PPP, 20 new master entries, the full re-test batch, the State Navigate dual-format parser fix (#64) and the CIRCLE YESI 2026 ↔ Kalshi-volume cross-check; new entries, URL corrections, fetch failures, live-run evidence; §10 is the session-5 20-entry batch with its two declined candidates and the Metaculus-vs-Kalshi cross-check) |
@@ -97,7 +97,7 @@ exclusion was logged rather than reconstructed from memory (irregularities #40�
 Node pipeline (no dependencies, Node ≥ 18, no network needed):
 
 ```bash
-npm test          # 146 tests
+npm test          # 156 tests
 npm run lint      # no-fabrication provenance lint
 npm run backtest  # regenerate data/backtest-results.json
 npm run contest   # regenerate data/contest-results.json (2024, in-sample)
@@ -202,7 +202,7 @@ when the exchange has officially settled it.
 | Universe | US-election-tagged series, present in that day's captured panel, two-sided book, close after that day — **6,942 eligible on 2026-09-21, of which 1,049 traded that day** |
 | Execution | Taker only, at the captured book: BUY YES pays `yes_ask`, BUY NO pays `1 − yes_bid`. A market can only fill on a day it actually traded. |
 | Caps | Fill ≤ 10% of the day's volume **and** 10% of open interest; gross new deployment ≤ 20% of start-of-day equity per day, allocated **pro-rata** so the result cannot depend on iteration order (**adaptation**, not a Leap rule) |
-| Fees | Kalshi's published quadratic taker fee; 4,185 captured series fee configs registered; **no settlement fee** |
+| Fees | Kalshi's published quadratic taker fee; 4,185 series with a numeric `fee_multiplier` registered (the registration return, not a pre-call counter — #79); maker M defaults to 0 and is not applied; **no settlement fee** |
 | Ranking | Net equity = cash + open positions marked to the last captured book, with the look-ahead label attached until markets settle. A settlement closes at the **official captured result**, never an assumed one. |
 | Identity | Both the audit trail and the arithmetic are in `VERIFICATION.md` §18 |
 
@@ -228,7 +228,7 @@ The script **fails** when the ladder does not close:
 | Claim | Source | Result |
 |---|---|---|
 | How control markets resolve | `GET /markets?series_ticker=CONTROLS\|CONTROLH` | Resolved by the party of the **President pro tempore / Speaker on 2027-02-01**, with an early media-call determination permitted. The queued "majority 51 + VP tiebreak" reading is **withdrawn** (#72). |
-| Fee formula | [Kalshi fee schedule PDF](https://kalshi.com/docs/kalshi-fee-schedule.pdf) | `round up(M × 0.07 × C × P × (1−P))`, no settlement fee — matches `src/fees.js` exactly. The maker default is 0, not 1 (#76). |
+| Fee formula | [Kalshi fee schedule PDF](https://kalshi.com/docs/kalshi-fee-schedule.pdf) | `round up(M × 0.07 × C × P × (1−P))`, no settlement fee — matches `src/fees.js` exactly. Maker default M=0 is enforced in makerFee and is not copied from the captured taker multiplier (#76). The contest stays taker-only. |
 | Contest mechanics | [The Leap official rules](https://www.tradingview.com/the-leap/february-2026-eurex/rules/) | "activity for at least 3 days" to qualify; ranked "based on the realized profit/loss … on closed positions"; open positions auto-closed at the end. |
 | The $100,000 bankroll | [May 2026 crypto leaderboard](https://www.tradingview.com/the-leap/crypto-series-may-2026/) | Not printed on the page — **derived** from five top rows: realized $ ÷ realized % = 100,000 ± $3. Parameters are per-edition (#74). |
 | Capture fidelity | Independent re-read on 2026-09-22 | `CONTROLS-2026-D/R` identical to the 2026-09-21 capture; `CONTROLH-2026-*` within the overnight move. |

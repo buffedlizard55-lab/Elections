@@ -141,14 +141,19 @@ export function attributeStrategy(result) {
 /** Provenance for the fee schedule actually applied to this season. */
 export function feeProvenance(seriesConfigs) {
   const total = seriesConfigs.total || 0;
+  const captured = seriesConfigs.seriesWithCapturedConfig ?? seriesConfigs.captured ?? 0;
+  const assumed = seriesConfigs.seriesUsingDocumentedDefault ?? seriesConfigs.assumed ?? 0;
   return {
-    formula: 'taker fee per order = roundUp(multiplier x 0.07 x contracts x price x (1 - price)), rounded up to the cent at whole-contract granularity',
+    formula: 'taker fee per order = roundUp(multiplier x 0.07 x contracts x price x (1 - price)), rounded up to the cent at whole-contract granularity; taker M defaults to 1',
+    makerFormula: 'maker fee = roundUp(M x 0.0175 x contracts x price x (1 - price)); maker M defaults to 0 and is not copied from the captured taker fee_multiplier',
+    makerDefault: 0,
     schedule: 'https://kalshi.com/docs/kalshi-fee-schedule.pdf',
     scheduleReadOn: '2026-09-22',
     settlementFee: 'none — the official schedule lists no settlement fee',
-    seriesWithCapturedConfig: seriesConfigs.captured || 0,
-    seriesUsingDocumentedDefault: seriesConfigs.assumed || 0,
+    seriesWithCapturedConfig: captured,
+    seriesUsingDocumentedDefault: assumed,
     totalSeriesRegistered: total,
+    contestCharges: 'taker-only',
   };
 }
 

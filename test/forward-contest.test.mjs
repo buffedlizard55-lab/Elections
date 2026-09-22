@@ -14,7 +14,9 @@ import { fileURLToPath } from 'node:url';
 
 import { parsePanelRow, seriesOf, buildTickerIndex, buildContestUniverse, withinSeasonWindow, SEASON } from '../src/contest/forward-universe.js';
 import { runForwardStrategy, executionPrice, sideMark, participationCap, attributeStrategy, STARTING_CAPITAL, MIN_TRADING_DAYS_TO_RANK, DAILY_DEPLOYMENT_OF_EQUITY } from '../src/contest/forward-engine.js';
-import { FORWARD_FIELD, TRANSFERRED_FROM_2024, EXCLUDED_FROM_FORWARD_FIELD, identityGate, buildSignals, COMBO_LEGS } from '../src/contest/strategies-forward.js';
+import { FORWARD_FIELD, TRANSFERRED_FROM_2024, EXCLUDED_FROM_FORWARD_FIELD, identityGate, buildSignals, COMBO_LEGS, HOUSE_CONTROL, SENATE_CONTROL, signalsForTradingDay, comboCoherence } from '../src/contest/strategies-forward.js';
+import { scanComboEdges } from '../src/contest/combo-scan.js';
+import { registerSeriesFees } from '../src/fees.js';
 import { STRATEGIES } from '../src/contest/strategies.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -361,6 +363,79 @@ test('the combo legs are exactly the four mutually exclusive outcomes', () => {
   assert.equal(new Set(COMBO_LEGS.map((l) => l.ticker)).size, 4);
 });
 
+test('signalsForTradingDay keeps only rows captured strictly before the trading day', () => {
+  const signals = {
+    pollRaces: [{ id: 'prior', asOf: '2026-09-19' }, { id: 'same', asOf: '2026-09-20' }, { id: 'blank', asOf: '' }],
+    polls: { ratings: [{ state: 'XX', asOf: '2026-09-19' }, { state: 'YY', asOf: '2026-09-20' }] },
+    crossLayer: [{ question: 'Q', asOf: '2026-09-19' }, { question: 'R', asOf: '2026-09-20' }],
+  };
+  const day = signalsForTradingDay(signals, '2026-09-20');
+  assert.deepEqual(day.pollRaces.map((r) => r.id), ['prior']);
+  assert.deepEqual(day.polls.ratings.map((r) => r.state), ['XX']);
+  assert.deepEqual(day.crossLayer.map((r) => r.question), ['Q']);
+});
+
+test('poll-anchor-26 and ratings-ratchet refuse a same-day capture even if the runner forgets the filter', () => {
+  const dates = ['2026-09-20'];
+  const poll = FORWARD_FIELD.find((s) => s.username === 'poll-anchor-26');
+  const ratings = FORWARD_FIELD.find((s) => s.username === 'ratings-ratchet');
+  const priorPoll = runForwardStrategy({
+    strategy: poll,
+    universe: makeUniverse([row({ ticker: 'TEST-26-D', date: '2026-09-20', bid: 0.40, ask: 0.42 })], dates),
+    settlements: {},
+    signalsByDate: { '2026-09-20': { pollRaces: [{ kalshiTicker: 'TEST-26-D', pollProb: 0.9, asOf: '2026-09-19' }], polls: { ratings: [] }, crossLayer: [] } },
+  }).result;
+  const samePoll = runForwardStrategy({
+    strategy: poll,
+    universe: makeUniverse([row({ ticker: 'TEST-26-D', date: '2026-09-20', bid: 0.40, ask: 0.42 })], dates),
+    settlements: {},
+    signalsByDate: { '2026-09-20': { pollRaces: [{ kalshiTicker: 'TEST-26-D', pollProb: 0.9, asOf: '2026-09-20' }], polls: { ratings: [] }, crossLayer: [] } },
+  }).result;
+  assert.equal(priorPoll.trades, 1, 'a prior-day poll signal must be allowed to order');
+  assert.equal(samePoll.trades, 0, 'a same-day poll capture must not order');
+  const band = { kalshiTicker: 'TEST-26-D', bandLow: 0.35, bandHigh: 0.65, state: 'XX' };
+  const priorRatings = runForwardStrategy({
+    strategy: ratings,
+    universe: makeUniverse([row({ ticker: 'TEST-26-D', date: '2026-09-20', bid: 0.80, ask: 0.82 })], dates),
+    settlements: {},
+    signalsByDate: { '2026-09-20': { pollRaces: [], polls: { ratings: [{ ...band, asOf: '2026-09-19' }] }, crossLayer: [] } },
+  }).result;
+  const sameRatings = runForwardStrategy({
+    strategy: ratings,
+    universe: makeUniverse([row({ ticker: 'TEST-26-D', date: '2026-09-20', bid: 0.80, ask: 0.82 })], dates),
+    settlements: {},
+    signalsByDate: { '2026-09-20': { pollRaces: [], polls: { ratings: [{ ...band, asOf: '2026-09-20' }] }, crossLayer: [] } },
+  }).result;
+  assert.equal(priorRatings.trades, 1, 'a price outside the band on a prior-day rating must order');
+  assert.equal(sameRatings.trades, 0, 'a same-day rating capture must not order');
+});
+
+test('combo-coherence records the best edge across every priceable day, and the fee series is the universe entry', () => {
+  registerSeriesFees({ ZZCOMBO: { fee_type: 'quadratic', fee_multiplier: 0 } });
+  const dates = ['2026-09-20', '2026-09-21'];
+  const rows = [];
+  for (const date of dates) {
+    const ask = date === '2026-09-20' ? 0.20 : 0.40;
+    for (const l of COMBO_LEGS) rows.push(row({ ticker: l.ticker, date, bid: ask - 0.01, ask, v24: 100 }));
+    rows.push(row({ ticker: HOUSE_CONTROL.D, date, bid: 0.50, ask: 0.52, v24: 100 }));
+    rows.push(row({ ticker: SENATE_CONTROL.D, date, bid: 0.50, ask: 0.52, v24: 100 }));
+  }
+  const index = { byTicker: new Map(), usElectionSeries: new Set(['ZZCOMBO', 'CONTROLH', 'CONTROLS']) };
+  for (const l of COMBO_LEGS) index.byTicker.set(l.ticker, { series: 'ZZCOMBO', sub: l.key, closeTime: '2027-02-01T00:00:00Z' });
+  index.byTicker.set(HOUSE_CONTROL.D, { series: 'CONTROLH', sub: 'D', closeTime: '2027-02-01T00:00:00Z' });
+  index.byTicker.set(SENATE_CONTROL.D, { series: 'CONTROLS', sub: 'D', closeTime: '2027-02-01T00:00:00Z' });
+  const universe = buildContestUniverse({ panelRows: rows, index });
+  const { result } = runForwardStrategy({ strategy: comboCoherence, universe, settlements: {}, signalsByDate: {} });
+  const scan = scanComboEdges({ dates, eligible: universe.eligible });
+  assert.equal(result.strategyMetrics.daysTheFullBasketWasPriceable, 2);
+  assert.equal(result.strategyMetrics.bestObservedEdge.date, '2026-09-20', 'the cheaper earlier day must beat the last day');
+  assert.equal(result.strategyMetrics.bestObservedEdge.feePerContract, 0, 'fee series is ZZCOMBO (M=0), not the ticker prefix');
+  assert.equal(result.strategyMetrics.daysThePairTradeWasPriceable, 4, 'both control pairs on both priceable days');
+  assert.deepEqual(scan.bestObservedEdge, result.strategyMetrics.bestObservedEdge);
+  assert.equal(scan.daysThePairTradeWasPriceable, result.strategyMetrics.daysThePairTradeWasPriceable);
+  assert.ok(result.trades > 0, 'a fee-clearing basket must trade');
+});
+
 // ---------------------------------------------------------------------------
 // 6. The committed season artifact must satisfy the same invariants
 // ---------------------------------------------------------------------------
@@ -485,5 +560,47 @@ test('the published season states the rules it follows and the ones it adapts', 
   assert.match(model.marks, /carriedMark|one-sided/i);
   assert.ok(model.feeProvenance.formula.includes('0.07'));
   assert.ok(model.feeProvenance.schedule.startsWith('https://'), 'the fee schedule must link to the official document');
+  assert.equal(model.feeProvenance.makerDefault, 0);
+  assert.ok(String(model.feeProvenance.makerFormula).includes('0.0175'));
+  const reg = readJson('data/kalshi/universe/series.json');
+  const numeric = reg.series.filter((s) => typeof s.fee_multiplier === 'number' && Number.isFinite(s.fee_multiplier)).length;
+  assert.equal(model.feeProvenance.seriesWithCapturedConfig, numeric, 'the published count must be the registration return, not a pre-call counter');
+  assert.equal(model.feeProvenance.seriesUsingDocumentedDefault, reg.series.length - numeric);
   assert.ok(lastCapturedDay && status.length > 20);
+});
+
+test('the combo-edge artifact matches the strategy and records every priceable day', { skip: !existsSync(join(ROOT, 'data/contest/forward-2026/combo-edges.json')) && 'run `npm run contest-forward` first' }, () => {
+  const edges = readJson('data/contest/forward-2026/combo-edges.json');
+  const season = readJson(seasonPath);
+  const entrant = season.results.find((r) => r.username === 'combo-coherence');
+  assert.deepEqual(edges.bestObservedEdge, entrant.strategyMetrics.bestObservedEdge);
+  assert.equal(edges.daysTheFullBasketWasPriceable, entrant.strategyMetrics.daysTheFullBasketWasPriceable);
+  assert.equal(edges.daysThePairTradeWasPriceable, entrant.strategyMetrics.daysThePairTradeWasPriceable);
+  assert.equal(edges.agreesWithStrategy, true);
+  assert.equal(edges.trades, entrant.trades);
+  assert.equal(edges.days.filter((d) => d.priceable).length, edges.daysTheFullBasketWasPriceable);
+  for (const d of edges.days.filter((x) => x.priceable)) {
+    assert.equal(d.legs.length, 4);
+    assert.ok(d.legs.every((l) => typeof l.series === 'string' && l.series.length > 0));
+  }
+});
+
+test('crosslayer fills are tied to a prior snapshot, the taker cross, and takerFee', { skip: !existsSync(join(ROOT, 'data/contest/forward-2026/crosslayer-fills.json')) && 'run `npm run contest-forward` first' }, () => {
+  const recon = readJson('data/contest/forward-2026/crosslayer-fills.json');
+  const season = readJson(seasonPath);
+  const fills = season.results.find((r) => r.username === 'crosslayer-arb').fillLog.filter((f) => f.action === 'enter');
+  assert.equal(recon.fills.length, fills.length);
+  assert.equal(recon.untied, 0);
+  assert.equal(recon.threshold, 0.05);
+  for (const f of recon.fills) {
+    assert.equal(f.tied, true, f.reason || f.ticker);
+    assert.equal(typeof f.binding.snapshotId, 'string');
+    assert.equal(typeof f.binding.crowdProb, 'number');
+    assert.equal(typeof f.binding.kalshiSnapshotMid, 'number');
+    assert.equal(typeof f.binding.panelMid, 'number');
+    assert.equal(typeof f.binding.expectedFee, 'number');
+    assert.equal(f.binding.priceMatches, true);
+    assert.equal(f.binding.feeMatches, true);
+    assert.equal(f.binding.sideMatches, true);
+  }
 });

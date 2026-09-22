@@ -59,8 +59,10 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
     const margin = demMargin(e);
     const pollP = e.comparisonBlockedReason ? null : marginToProb(margin, k);
     const m = e.kalshiEvent && e.kalshiDemTicker ? marketFor(universe, e.kalshiEvent, e.kalshiDemTicker) : null;
-    const mismatch = e.comparisonBlockedReason || candidateMismatch(e, universe);
+    const identity = candidateMismatch(e, universe);
+    const mismatch = e.comparisonBlockedReason || identity;
     const mk = m && !mismatch ? impliedProb(m) : { p: null, basis: mismatch || 'none' };
+    const stored = Object.prototype.hasOwnProperty.call(e, 'candidateMismatch');
     rows.push({
       id: e.id,
       race: e.race,
@@ -89,6 +91,9 @@ export function compareRacesToMarkets(layer, universe, { k = LOGISTIC_K } = {}) 
       source: e.source,
       review: !!e.review || !!mismatch,
       candidateMismatch: mismatch,
+      identityMismatch: identity,
+      storedCandidateMismatch: stored ? e.candidateMismatch : null,
+      candidateMismatchStored: stored,
     });
   }
   return {

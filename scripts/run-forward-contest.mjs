@@ -19,9 +19,11 @@ import { fileURLToPath } from 'node:url';
 
 import { loadContestInputs, SEASON } from '../src/contest/forward-universe.js';
 import { runForwardStrategy, STARTING_CAPITAL, MIN_TRADING_DAYS_TO_RANK, FILL_CAP_OF_DAY_VOLUME, FILL_CAP_OF_OPEN_INTEREST, DAILY_DEPLOYMENT_OF_EQUITY, feeProvenance } from '../src/contest/forward-engine.js';
-import { FORWARD_FIELD, buildSignals, isoDate, EXCLUDED_FROM_FORWARD_FIELD, TRANSFERRED_FROM_2024 } from '../src/contest/strategies-forward.js';
-import { registerSeriesFees, seriesFeeConfig } from '../src/fees.js';
+import { FORWARD_FIELD, buildSignals, isoDate, EXCLUDED_FROM_FORWARD_FIELD, TRANSFERRED_FROM_2024, signalsForTradingDay } from '../src/contest/strategies-forward.js';
+import { registerSeriesFees } from '../src/fees.js';
 import { candidateMismatch } from '../src/poll-layer.js';
+import { scanComboEdges } from '../src/contest/combo-scan.js';
+import { reconcileCrosslayerFills } from '../src/contest/reconcile-crosslayer.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'data/contest/forward-2026');
@@ -37,14 +39,31 @@ const readJsonIfExists = (rel) => (existsSync(join(ROOT, rel)) ? readJson(rel) :
 function registerFees() {
   const reg = readJsonIfExists('data/kalshi/universe/series.json');
   const series = (reg && reg.series) || [];
-  let captured = 0;
+  const configs = {};
+  let numeric = 0;
   for (const s of series) {
-    if (s && s.ticker && typeof s.fee_multiplier === 'number') {
-      registerSeriesFees({ [s.ticker]: { multiplier: s.fee_multiplier, type: s.fee_type || 'quadratic' } });
-      captured += 1;
-    }
+    if (!s || !s.ticker) continue;
+    if (typeof s.fee_multiplier === 'number' && Number.isFinite(s.fee_multiplier)) numeric += 1;
+    configs[s.ticker] = {
+      fee_type: s.fee_type,
+      fee_multiplier: s.fee_multiplier,
+      capturedFrom: (reg && reg.capturedFrom) || null,
+      capturedAt: (reg && reg.capturedAt) || null,
+    };
   }
-  return { total: series.length, captured, assumed: series.length - captured };
+  const registered = registerSeriesFees(configs);
+  if (registered !== numeric) {
+    throw new Error(`fee registration registered ${registered} of ${numeric} series with a numeric fee_multiplier`);
+  }
+  const assumed = series.length - registered;
+  return {
+    total: series.length,
+    seriesWithCapturedConfig: registered,
+    seriesUsingDocumentedDefault: assumed,
+    captured: registered,
+    assumed,
+    capturedAt: (reg && reg.capturedAt) || null,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -89,13 +108,7 @@ function buildSignalLedger({ pollLayer, crossLayer, universeDoc }) {
  */
 function signalsByDate({ signals, dates }) {
   const out = {};
-  for (const date of dates) {
-    out[date] = {
-      pollRaces: signals.pollRaces.filter((r) => r.asOf && r.asOf < date),
-      polls: { ratings: signals.polls.ratings.filter((r) => r.asOf && r.asOf < date) },
-      crossLayer: signals.crossLayer.filter((r) => r.asOf && r.asOf < date),
-    };
-  }
+  for (const date of dates) out[date] = signalsForTradingDay(signals, date);
   return out;
 }
 
@@ -103,7 +116,7 @@ function signalsByDate({ signals, dates }) {
 // 4. Score the season
 // ---------------------------------------------------------------------------
 const fees = registerFees();
-log(`registered ${fees.captured} captured series fee configs from the series registry`);
+log(`registered ${fees.seriesWithCapturedConfig} captured series fee configs (${fees.seriesUsingDocumentedDefault} using the documented default)`);
 
 const inputs = loadContestInputs(ROOT);
 const { latest, universe, settlements, settlementCount, seriesFlags } = inputs;
@@ -150,6 +163,27 @@ const identityCheck = {
   allHold: results.every((r) => r.accountingIdentityHolds),
 };
 log(`accounting identity holds for all entrants: ${identityCheck.allHold}`);
+
+// Independent of combo-coherence. Fees are already registered, so takerFee
+// sees the captured multiplier rather than the documented default.
+const comboScan = scanComboEdges({ dates: universe.dates, eligible: universe.eligible });
+const comboResult = results.find((r) => r.username === 'combo-coherence');
+const comboMetrics = comboResult && comboResult.strategyMetrics;
+const sameEdge = (a, b) => (a == null && b == null) || (a && b && a.date === b.date && a.askSum === b.askSum && a.feePerContract === b.feePerContract && a.edge === b.edge);
+if (!comboMetrics
+  || !sameEdge(comboScan.bestObservedEdge, comboMetrics.bestObservedEdge)
+  || comboScan.daysTheFullBasketWasPriceable !== comboMetrics.daysTheFullBasketWasPriceable
+  || comboScan.daysThePairTradeWasPriceable !== comboMetrics.daysThePairTradeWasPriceable) {
+  throw new Error(`combo scan disagrees with combo-coherence metrics: scan ${JSON.stringify({ best: comboScan.bestObservedEdge, days: comboScan.daysTheFullBasketWasPriceable, pairs: comboScan.daysThePairTradeWasPriceable })} vs strategy ${JSON.stringify(comboMetrics)}`);
+}
+
+const arb = results.find((r) => r.username === 'crosslayer-arb');
+const crosslayerRecon = reconcileCrosslayerFills({
+  fills: (arb && arb.fillLog) || [],
+  snapshots: (crossLayer && crossLayer.snapshots) || [],
+  eligible: universe.eligible,
+});
+if (crosslayerRecon.untied) log(`crosslayer fills untied: ${crosslayerRecon.untied} — not auto-filed; see crosslayer-fills.json`);
 
 // ---------------------------------------------------------------------------
 // 5. Artifacts
@@ -271,7 +305,30 @@ for (const date of universe.dates) {
 }
 writeFileSync(join(OUT, 'signals-ledger.csv'), ledger.join('\n') + '\n');
 
+writeFileSync(join(OUT, 'combo-edges.json'), JSON.stringify({
+  capturedFrom: 'data/kalshi/tracker/daily/*.csv via the contest universe eligible map; fees from the registered series registry',
+  capturedAt: asOf,
+  method: 'A day is priceable when all four Balance-of-Power legs are in that day\'s eligible map and tradedToday. The fee series is the universe entry\'s series, not the ticker prefix. edge = 1 - (sum of the four yes asks + the quadratic taker fee on one contract of each leg). bestObservedEdge is the maximum edge across priceable days; an equal edge keeps the earlier day. A trade requires edge greater than the threshold. pairAttempts counts each control pair on each priceable basket day whose control market also traded. This scan is independent of combo-coherence and the run throws if the two disagree.',
+  threshold: comboScan.threshold,
+  days: comboScan.days,
+  bestObservedEdge: comboScan.bestObservedEdge,
+  daysTheFullBasketWasPriceable: comboScan.daysTheFullBasketWasPriceable,
+  daysThePairTradeWasPriceable: comboScan.daysThePairTradeWasPriceable,
+  trades: comboResult.trades,
+  agreesWithStrategy: true,
+}, null, 2) + '\n');
+
+writeFileSync(join(OUT, 'crosslayer-fills.json'), JSON.stringify({
+  capturedFrom: 'data/crosslayer/snapshots.json + the crosslayer-arb fill log + that day\'s eligible panel',
+  capturedAt: asOf,
+  method: crosslayerRecon.method,
+  threshold: crosslayerRecon.threshold,
+  entrant: crosslayerRecon.entrant,
+  fills: crosslayerRecon.fills,
+  untied: crosslayerRecon.untied,
+}, null, 2) + '\n');
+
 log(`season written: ${FORWARD_FIELD.length} entrants, ${TRANSFERRED_FROM_2024.length} transferred + ${FORWARD_FIELD.length - TRANSFERRED_FROM_2024.length} new`);
 for (const r of ranked) log(`  #${r.rank} ${r.username} (${r.origin}) $${r.netEquity} (${r.netReturnPct.toFixed(6)}%) trades=${r.trades} open=${r.openPositions}`);
 for (const r of unranked) log(`  unranked ${r.username}: ${r.reason}`);
-log(`artifacts: ${['season.json', 'universe.json', 'leaderboard.json', 'leaderboard.csv', 'equity.csv', 'fills.csv', 'signals-ledger.csv', 'attribution.json'].join(', ')}`);
+log(`artifacts: ${['season.json', 'universe.json', 'leaderboard.json', 'leaderboard.csv', 'equity.csv', 'fills.csv', 'signals-ledger.csv', 'attribution.json', 'combo-edges.json', 'crosslayer-fills.json'].join(', ')}`);

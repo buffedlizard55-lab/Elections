@@ -1,7 +1,7 @@
 # Next session (13) — handoff
 
-Updated **2026-09-22**, end of session 12 on `arena/01a0c732-elections`.
-Primary audit for this session: `VERIFICATION.md` §18–§19. Do not interpret a passing test as
+Updated **2026-09-22**, session 13 pass on `arena/01a0c7eb-elections`.
+Primary audit for this pass: `VERIFICATION.md` §20. Session 12 remains `VERIFICATION.md` §18–§19. Do not interpret a passing test as
 independent confirmation of a source's truth.
 
 ## Delivered in session 12
@@ -31,51 +31,44 @@ independent confirmation of a source's truth.
   tiebreak" reading is **withdrawn** (irregularity #72).
 - **Counts.** Master 265 → 267 sources; irregularities → **#78**; tests 110 → **146**.
 
+
+## Delivered this pass
+
+- **Identity flags stored (#77 resolved).** `candidateMismatch()` is written onto every `stateRaces` row in `data/polls/poll-layer-2026.json`, with `candidateMismatchProvenance.universeCapturedAt` equal to the universe capture `2026-09-21T18:16:44.622Z`. `review` and `comparisonBlockedReason` were not flipped. The contest still calls the live function. Six rows store a refusal string (the five previously unflagged identity rows, plus `nyt-siena-2026-07-ak-senate`, which already had `review: true`). The site shows an `identity` chip whose title is that string, and a `stored/live disagree` chip if the stored flag and a fresh recompute ever diverge.
+- **Fee registration no longer counts a silent skip (#79).** The runner passes `fee_type` and `fee_multiplier`, uses the registration return, and throws if that return is not the count of series with a numeric multiplier. This run registered **4185** and used the documented default for **0**. Maker M defaults to 0 (`makerFee`, coefficient 0.0175) and is not copied from the captured taker multiplier (#76 resolved). The contest remains taker-only. Published PnL did not move: no fill used one of the 10 series whose captured multiplier is 0, and every traded series has multiplier 1.
+- **Cross-layer fills reconciled.** `data/contest/forward-2026/crosslayer-fills.json` ties all three `crosslayer-arb` entries to a prior snapshot. `2026-09-20` `CONTROLS-2026-D` NO binds to `2026-09-19-senate` (crowd 0.517, snapshot mid 0.595, panel mid 0.595). `2026-09-21` `GOVPARTYMI-26-D` binds to `2026-09-20-governor-mi-2026` (crowd 0.85, snapshot mid 0.915, panel mid 0.9165). `2026-09-21` `SENATEAK-26-D` binds to `2026-09-20-senate-ak-2026` (crowd 0.54, snapshot mid 0.695, panel mid 0.705). Each fill price is the taker cross and each fee equals `takerFee` on the fill's series. Nothing was auto-filed.
+- **Basket edges recorded for every priceable day.** All three captured days had the four legs eligible and traded. Best edge remains **2026-09-21** (ask sum 1.002, fee 0.0375, edge −0.0395). **2026-09-20** recomputed from the panel is ask sum 1.002, fee 0.0389, edge −0.0409 — not the earlier hand figure. **2026-09-19** is ask sum 1.012, fee 0.0395, edge −0.0515. Pair attempts 6. Trades 0. The independent scan agrees with `combo-coherence`.
+- **Look-ahead guard is inside `decide()`.** `signalsForTradingDay` is what the runner uses. `poll-anchor-26` and `ratings-ratchet` also refuse a row whose `asOf` is not strictly before the trading day. Published orders did not change: 19 of 31 poll rows admitted, 12 refused, poll and rating signals still unusable on every captured day.
+
 ## Remaining work (priority order)
 
-1. **Persist the computed candidate-mismatch flag onto the poll-layer rows** (irregularity
-   #77). It is computed at read time by `src/poll-layer.js`, so a consumer that reads
-   `data/polls/poll-layer-2026.json` directly can pair a poll with a market that resolves on a
-   different person — five rows are refused by the canonical check today
-   (`uh-hobby-2026-01-tx-governor`, `uh-hobby-2026-01-tx-senate`, `saint-anselm-2026-06-nh-senate`,
-   `stetson-2026-04-fl-senate`, `rasmussen-2026-09-ak-senate`). Apply in one pass with the site
-   bundle so the JSON, the site and the contest cannot disagree.
-2. **Correct the maker default in `src/fees.js`** (irregularity #76): the schedule gives the
-   maker multiplier default as 0, the comment says 1. No published number is affected.
-3. **Reconcile the `crosslayer-arb` fills against the captured snapshot set.** The entrant
-   traded two days on signals from a 27-row snapshot file; the exact question-to-ticker mapping
-   is not yet published row by row. Either publish it or widen the refusal.
-4. **Score the Metaculus-vs-Kalshi gap (P0 for the project).** `crosslayer-arb` has three days
+1. **Score the Metaculus-vs-Kalshi gap (P0 for the project).** `crosslayer-arb` has three days
    of signal and no settlement; the question stays unscored until the canvass runs.
    `controlQuestion.resolutionRule.confirmed` must stay false — the confirmed rule is the one
-   captured in §18c, not the withdrawn assumption.
-5. **First post-election canvass pass (after 2026-11-03).** Then the 2026 contest converts from
+   captured in §18c, not the withdrawn assumption. Do not score Metaculus from this handoff.
+2. **First post-election canvass pass (after 2026-11-03).** Then the 2026 contest converts from
    mark-to-market to realised, and the live calibration scorer gets its first `scoreableMarkets`
-   (still 0 today by design).
-6. **Open the entry windows the entrants are waiting on.** `momentum-mule`, `fader-flipper` and
+   (still 0 today by design). Election day remains 2026-11-03.
+3. **Open the entry windows the entrants are waiting on.** `momentum-mule`, `fader-flipper` and
    `shock-surfer` need 5–7 days of history; `yield-yak` and `breakout-bandit` need to be inside
    14/7 days of the election; `poll-anchor-26` and `ratings-ratchet` need a poll capture that
    predates a price panel. All are published as unranked with a reason; verify each fires when
    its window opens rather than assuming it will.
-7. **`combo-coherence` has no trade and no published edge.** Its `bestObservedEdge` was
-   **negative** at the only capture where all four legs quoted together (2026-09-20:
-   cost 0.986 + fees 0.0377 → −0.0237). Either find the row where the basket clears fee-aware
-   cost or record that the complex was not arbitrageable in this window.
-8. **Modelling gaps that bound the current results.** No maker modelling and no order-book
-   depth (fills are taker-only at the captured top of book); `logistic(k=4.5)` is still a
-   labelled heuristic imported from the 2024 national backtest and is the binding assumption
-   behind every poll "gap".
-9. **Poll-layer backlog:** pendingSources `echelon-2026-04-fl`, `prri-2026-ava-midterms`,
+4. **Modelling gaps that bound the current results.** Maker M now defaults to 0 and the contest
+   stays taker-only; there is still no order-book depth (fills are taker-only at the captured
+   top of book). `logistic(k=4.5)` is still a labelled heuristic imported from the 2024 national
+   backtest and is the binding assumption behind every poll gap.
+5. **Poll-layer backlog:** pendingSources `echelon-2026-04-fl`, `prri-2026-ava-midterms`,
    `kff-2026-06-mifepristone-midterms`, `surveyusa-28000-mn`; candidate re-tests per #53;
    SurveyUSA/HarrisX/CourtListener re-tests; blocked official paths (WI/NV/CA/MA) re-probe;
    Bexar/Tarrant/Hennepin headless-render re-test.
-10. **Third-party corroboration of the contest's own numbers.** The 2026-09-21 capture of
-    `CONTROLH-2026-D/R` and `CONTROLS-2026-D/R` has been re-read once (§18d) and matches.
-    Extend that to a standing daily re-read so a capture-pipeline regression is caught the day
-    it happens.
-11. **Bound repository growth.** `season.json` is ~0.78 MB with three days of fills;
-    `attribution.json` is bounded by design (top 100 markets per entrant + counts). Decide
-    whether to rotate the fill log monthly, and record the decision.
+6. **Third-party corroboration of the contest's own numbers.** The 2026-09-21 capture of
+   `CONTROLH-2026-D/R` and `CONTROLS-2026-D/R` has been re-read once (§18d) and matches.
+   Extend that to a standing daily re-read so a capture-pipeline regression is caught the day
+   it happens.
+7. **Bound repository growth.** `season.json` is about 0.78 MB with three days of fills;
+   `attribution.json` is bounded by design (top 100 markets per entrant + counts). Decide
+   whether to rotate the fill log monthly, and record the decision.
 
 ## Limitations (unchanged + new)
 
