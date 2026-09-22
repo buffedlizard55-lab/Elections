@@ -99,6 +99,40 @@ const mdIds = [...irrMd.matchAll(/^\| (\d+) \|/gm)].map((m) => Number(m[1]));
 for (const id of irrIds) if (!mdIds.includes(id)) errors.push(`irregularity #${id} is in the JSON but has no row in IRREGULARITIES.md`);
 for (const id of mdIds) if (!irrIds.includes(id)) errors.push(`IRREGULARITIES.md row #${id} has no machine-readable twin in data/irregularities*.json`);
 
+// The table and the JSON must agree.
+//
+// Entries filed from #72 onward are generated from the JSON, so they are compared
+// VERBATIM — row #77 kept citing an artifact path that had already been renamed in
+// the JSON and nothing noticed. Earlier rows are deliberate human paraphrases of
+// the same finding, so for those only the structured fields (severity, area) are
+// required to match; asserting text equality on them would force a rewrite of the
+// historical record rather than a fix.
+const STRICT_TEXT_FROM_ID = 72;
+const mdRows = new Map();
+for (const line of irrMd.split('\n')) {
+  const m = line.match(/^\| (\d+) \|/);
+  if (!m) continue;
+  const cells = line.split('| ');
+  mdRows.set(Number(m[1]), {
+    severity: (cells[2] || '').trim(),
+    area: (cells[3] || '').trim(),
+    // A pipe inside a table cell is written `\|` in the markdown; unescape it
+    // before comparing, or every entry that cites an API query looks like drift.
+    titleDetail: (cells[4] || '').trim().replace(/\|$/, '').trim().replaceAll('\\|', '|'),
+    action: (cells[5] || '').trim().replace(/\|$/, '').trim().replaceAll('\\|', '|'),
+  });
+}
+for (const i of irrNode) {
+  const row = mdRows.get(i.id);
+  if (!row) continue;
+  if (row.severity !== i.severity) errors.push(`irregularity #${i.id}: md severity "${row.severity}" != json "${i.severity}"`);
+  if (row.area !== i.area) errors.push(`irregularity #${i.id}: md area "${row.area}" != json "${i.area}"`);
+  if (i.id >= STRICT_TEXT_FROM_ID) {
+    if (row.titleDetail !== `**${i.title}** — ${i.detail}`) errors.push(`irregularity #${i.id}: md title/detail text has drifted from data/irregularities.json`);
+    if (row.action !== i.action) errors.push(`irregularity #${i.id}: md action text has drifted from data/irregularities.json`);
+  }
+}
+
 // Poll layer: every 2026 poll entry needs a source URL and a verification note; a Kalshi ticker, when given, must exist in the tracker index.
 const pollLayer = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
 let indexTickers = null;

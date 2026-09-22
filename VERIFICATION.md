@@ -1572,3 +1572,14 @@ than explained away.
 | `scripts/run-forward-contest.mjs` | 18,961 | `af74019b65e8` |
 | `scripts/build-market-list.mjs` | 16,110 | `dac5a49ae08a` |
 | `test/forward-contest.test.mjs` | 31,904 | `1659aa1bd678` |
+
+**19g. Two more silent-failure classes, found by this pass and closed.**
+
+| # | What was wrong | How it showed up | Fix | Now caught by |
+|---|---|---|---|---|
+| 1 | The site's 2026-contest renderer read `signals.pollLayer.identityGate`, a key that no longer exists on the artifact | The refusals block rendered its fallback *"No signal ledger in this build."* — no template leak, so `render-check` passed | `src/site/app.js` reads the published shape (`considered` / `admitted` / `excluded` + `ratingsGate`) | `render-check.cjs` now asserts each section **contains** what it is for, and that `contest2026` never renders that fallback |
+| 2 | `IRREGULARITIES.md` and `data/irregularities.json` were only checked for id parity, so the text could drift | Row #77 kept citing an artifact path that had been renamed in the JSON | Markdown row #77 resynced from the JSON | `lint-verified.mjs` now compares severity, area and (from #72 on) the title/detail/action text field by field, unescaping the markdown pipe |
+
+The limit of the scoped text check is stated in the code: rows filed before #72 are deliberate
+human paraphrases of the same finding, so they are held to the structured fields only.
+

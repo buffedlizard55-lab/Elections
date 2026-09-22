@@ -20,6 +20,17 @@ vm.runInContext(src, sandbox);
 sandbox.Chart2 = { lines() {} };
 vm.runInContext(app, sandbox);
 const sections = ['overview', 'markets', 'polls', 'tracker', 'forward', 'crosslayer', 'backtests', 'contest', 'contest2026', 'sources', 'irregularities', 'methodology', 'roadmap'];
+// Sections must also CONTAIN what they are for. A renamed key in the bundle once
+// made the 2026 contest's refusals block render its "no signal ledger" fallback
+// with no template leak for the check below to catch.
+const REQUIRED = {
+  contest2026: ['admitted', 'closes-after-season-window', 'Live 2026 contest'],
+  contest: ['Rank'],
+  sources: ['http'],
+};
+const FORBIDDEN = {
+  contest2026: ['No signal ledger in this build'],
+};
 let ok = true;
 for (const s of sections) {
   sandbox.location.hash = '#/' + s;
