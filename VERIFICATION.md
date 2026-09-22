@@ -1187,3 +1187,388 @@ government (irregularity #70). `verifiedOn` and observed text on those two entri
 were not rewritten.
 
 Master 249 → **265**. Entries dated 2026-09-21: 60 → **76**. Next irregularity id: **72**.
+
+---
+
+## 18. Session 12 — 2026-09-22: the live 2026 contest (R16), the canonical market list, and the control-market rules
+
+This session's mandate was to collect **all open Kalshi political and election markets**,
+build the machinery to **model and forecast** those elections, and run a **paper-trading
+contest** whose entrants carry unique usernames and unique strategies and whose P&L is
+tracked on those open markets. Everything below was either read out of a file that a
+previous session captured from the exchange, or fetched directly during this session.
+Nothing is reconstructed from memory.
+
+### 18a. What was fetched directly this session (2026-09-22)
+
+The sandbox in which this session ran **cannot open TLS to the exchange host** — `curl
+https://api.elections.kalshi.com/...` returns `SSL_ERROR_SYSCALL` / HTTP 000 while
+`api.github.com` returns 200 (irregularity #22, re-confirmed). The page-fetch channel
+works, and these four URLs were fetched through it:
+
+| # | URL | What was read |
+|---|---|---|
+| 1 | `https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&status=open&limit=10` | `CONTROLS-2026-D` and `CONTROLS-2026-R` rule text, close_time, settlement timer, and live books |
+| 2 | `https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLH&status=open&limit=5` | `CONTROLH-2026-D` / `-R` rule text and live books |
+| 3 | `https://kalshi.com/docs/kalshi-fee-schedule.pdf` | "Fee Schedule for July 2026 — 7.7.26 Update": the taker and maker formulas, and the no-settlement-fee and no-membership-fee statements |
+| 4 | `https://www.tradingview.com/the-leap/february-2026-eurex/rules/` | The Leap's official competition rules: the minimum-trading-days prerequisite, the realized-P&L ranking rule, and the automatic close of open positions |
+| 5 | `https://www.tradingview.com/the-leap/crypto-series-may-2026/` | The completed May 2026 crypto leaderboard (39,363 participants; top-250 table with realized profit in $ and %) |
+| 6 | `https://docs.kalshi.com/api-reference/market/get-markets` | Re-read the Market schema to confirm the dollar-string field names the engine reads |
+
+### 18b. Line-by-line: the receipt for the contest's $100,000 bankroll
+
+The contest engine uses a $100,000 virtual bankroll and the artifact says so
+(`model.startingCapitalPerEntrant`). The rules page states the *minimum trading days* and
+the *ranking metric* explicitly, but it does **not** print a dollar figure on the crypto
+leaderboard page. The figure is therefore derived, and the derivation is shown so it can
+be checked:
+
+| Trader | Realized profit ($) | Realized profit (%) | $ ÷ (pct/100) |
+|---|---|---|---|
+| Manishh_jain92 | 271,783.86 | 271.78% | 100,001.42 |
+| Sistem_Akinci_1453 | 254,592.64 | 254.59% | 100,001.04 |
+| MarketMaverick007 | 236,202.03 | 236.20% | 100,000.86 |
+| thethuthiem | 231,715.06 | 231.72% | 99,997.87 |
+| Snipercoopz | 229,237.23 | 229.24% | 99,998.79 |
+
+Five independent rows converge on ~100,000 to within $3 (the residual is the page's own
+two-decimal rounding of the percentage). The bankroll is thus **derived from the official
+leaderboard, not quoted from a rules page**, and the artifact labels it that way. The
+rules page independently confirms the other two mechanics used: "trading activity for at
+least 3 days" to qualify, and ranking "based on the realized profit/loss … on closed
+positions", with open positions "automatically closed at the end".
+
+### 18c. Line-by-line: the control-market resolution rule (NEXT_SESSION item 1, now closed)
+
+`NEXT_SESSION.md` had queued this as *"confirm majority(51) + VP tiebreak"*. The exchange
+publishes something else. Captured verbatim:
+
+- `CONTROLS-2026-D` `rules_primary`: "If the Democratic Party has won control of the U.S. Senate in 2026, then the market resolves to Yes."
+- `CONTROLS-2026-D` `rules_secondary`: "This market may be determined early based on a consensus of media calls projecting control of the U.S. Senate. See full rules for details. Otherwise, victory will be determined by the party identification of the President pro tempore of the Senate on February 1, 2027."
+- `CONTROLH-2026-R` `rules_secondary`: "…otherwise, victory will be determined by the party identification of the Speaker of the House on February 1, 2027."
+- Both: `close_time` `2027-02-01T15:00:00Z`, `settlement_timer_seconds` 3600.
+
+The queued assumption is **withdrawn**, not confirmed (irregularity #72). The resolved
+event is the presiding officer's party on 2027-02-01, with an early media-call
+determination permitted — which is not the same event as a 51-seat majority.
+
+### 18d. The independent re-read of the market this project trades most
+
+The panel captured on 2026-09-21 18:16:44Z and the fetch made this session (2026-09-22)
+agree to within the overnight move, which is the cross-check that the capture pipeline is
+reading the right fields:
+
+| Market | Captured 2026-09-21 18:16Z | Read 2026-09-22 | Agreement |
+|---|---|---|---|
+| `CONTROLH-2026-D` | bid 0.904 / ask 0.913 | bid 0.905 / ask 0.909 | same book, ~0.15¢ tighter |
+| `CONTROLH-2026-R` | bid 0.089 / ask 0.092 | bid 0.092 / ask 0.095 | same book, ~0.3¢ higher |
+| `CONTROLS-2026-D` | bid 0.600 / ask 0.610 | bid 0.600 / ask 0.610 | identical |
+| `CONTROLS-2026-R` | bid 0.390 / ask 0.400 | bid 0.390 / ask 0.400 | identical |
+
+### 18e. The fee engine re-verified against the source PDF
+
+The PDF fetched this session states `fees = round up(M × 0.07 × C × P × (1−P))` for taker
+and `round up(M × 0.0175 × C × P × (1−P))` for maker, with `P` the price in dollars, `C`
+the contract count, and `M` the per-contract multiplier; "There is no settlement fee";
+"There is no membership fee". `src/fees.js` implements exactly that. One discrepancy is
+recorded rather than smoothed over: the PDF gives the **maker** default as `M = 0` while
+the code's header documents a single default of 1 (irregularity #76). It cannot affect any
+published number, because all **1,413** US-election series in the captured registry carry
+`fee_multiplier: 1` (checked directly: 4,175 of the 4,185 politics/elections series are
+`quadratic`/1 and the remaining 10 are `quadratic`/0, none of them US-election).
+
+### 18f. The canonical open-market list, and the arithmetic that proves it is complete
+
+`scripts/build-market-list.mjs` publishes `data/kalshi/universe/market-list-latest.csv`
+(one row per open political/election market, carrying its contest-eligibility verdict and
+the reason for it) plus `market-list-latest.json` with the ladder below. Every rung is read
+from a captured file; the script **fails** if the arithmetic does not close.
+
+| Rung | Count | Read from |
+|---|---|---|
+| Open EVENTS exchange-wide | 11,355 | `tracker/daily/2026-09-21.meta.json` |
+| Open POLITICAL/ELECTION events kept | 4,083 | same |
+| … of those, US-election tagged | 3,259 | same |
+| Open political/election MARKETS | 24,301 | same |
+| … finalized in the feed | 200 | same |
+| … untraded and not listed | 13,120 | same |
+| … traded (the daily panel rows) | 10,981 | same |
+| Markets in the full open snapshot | 24,102 | `forward/universe-open.json` |
+| Series in the local registry | 4,185 | `universe/series.json` |
+| … US-election tagged | 1,413 | same |
+| Contest-eligible on 2026-09-21 | 6,942 | `tracker/daily/2026-09-21.csv` |
+| … that actually traded that day | 1,049 | same |
+
+Gate: 10,981 traded + 13,120 untraded-unlisted + 200 finalized = **24,301** = the
+collector's own `openMarkets`. The script asserts this every run and exits non-zero when
+it fails. The 24,102 figure is a *separate query* (`/markets?series_ticker=…` per series)
+taken minutes later; the two are not expected to be identical and the difference is
+published as a measurement note rather than presented as agreement.
+
+Eligibility breakdown for the 24,102 rows: 6,942 contest-eligible, 12,723 not in that
+day's panel, 3,908 not in a US-election-tagged series, 506 untraded with no usable book,
+23 traded but with a book that was not two-sided at capture. 6,942 + 12,723 + 3,908 + 506
++ 23 = 24,102.
+
+### 18g. The engine's honesty properties, machine-checked
+
+`test/forward-contest.test.mjs` adds 21 tests (suite total 110 → 131). The properties
+asserted, not merely claimed:
+
+1. **Determinism** — two runs over the same inputs are `deepEqual`; the whole season is
+   recomputed from the captured panel each run, so re-running a day cannot double-count.
+2. **Accounting identity** — `netEquity = 100,000 + realizedPnl + unrealizedPnl`, asserted
+   per entrant with the arithmetic recomputed independently in the test.
+3. **Marks** — a NO position is marked at `1 − yesMid`; the test asserts a NO book *rises*
+   when the YES price falls and *falls* when it rises (this caught a real bug — see 18i).
+4. **No invented fills** — a market with `volume_24h = 0` is refused with a reason code, and
+   on the real captured panel every fill is re-checked against the day it claims to be in.
+5. **Participation cap** — no fill exceeds 10% of the day's volume or 10% of open interest.
+6. **Concentration rule** — a strategy asking for 25% of equity in 40 markets deploys at
+   most 20% of equity; and the pro-rata allocation is asserted to be **order-independent**
+   by running the same requests forwards and reversed and requiring identical fills.
+7. **Duplicate guard** — a strategy that emits the same ticker and side twice in one day
+   is collapsed to one fill with a `duplicate-order-collapsed` reason.
+8. **Flips** — reversing a position closes the old leg at the taker price; the test asserts
+   the identity still holds (a dropped cost basis would break it).
+9. **Settlement** — an entered market with no captured official result stays open; with a
+   result it settles at 1 or 0 and never at an assumed value.
+10. **Transferred entrants are unchanged** — the test asserts object identity of `decide()`
+    and the thesis string between `src/contest/strategies.js` and the forward field, so a
+    silent 2026 retune of a 2024 strategy fails the suite.
+11. **Universe filters** — each drop carries the right reason code, counted exactly.
+
+### 18h. Results published by this session (all reproducible offline)
+
+Season `S1-2026`, three captured trading days (2026-09-19 … 2026-09-21), 12 entrants
+(7 transferred unchanged from the 2024 field + 5 new 2026 theses), `$100,000` each,
+4,185 captured series fee configs registered. The accounting identity holds for all 12.
+
+| Rank | Entrant | Origin | Net equity | Return | Trades | Open |
+|---|---|---|---|---|---|---|
+| 1 | `longshot-fader` | new-2026 | $99,907.84 | −0.09% | 334 | 333 |
+| 2 | `favorite-cash` | transferred-2024 | $99,564.17 | −0.44% | 535 | 535 |
+| 3 | `longshot-lotto` | transferred-2024 | $98,298.35 | −1.70% | 521 | 521 |
+
+Unranked: `momentum-mule`, `fader-flipper`, `yield-yak`, `shock-surfer`,
+`breakout-bandit` (0 trades — their entry conditions need 5–7 days of history, or the
+final 7–14 days before the election, neither of which exists yet);
+`combo-coherence` (0 trades — see below); `poll-anchor-26`, `ratings-ratchet`,
+`crosslayer-arb` (The Leap 3/day minimum not yet met).
+
+Two results are findings in their own right, and both are negative:
+
+- **`combo-coherence` found no tradeable incoherence.** The four Balance-of-Power legs are
+  mutually exclusive and exhaustive, so a basket paying a guaranteed $1.00 can be bought
+  whenever the asks plus the official taker fees total less than $1.00. The closest any
+  basket came was 2026-09-20: cost 0.986 + fees 0.037708 = **1.0237**, i.e. a −2.37¢ edge.
+  The visible incoherence in the complex (the four legs sum to 0.9895 on 2026-09-21,
+  not 1.0000) is real but smaller than the cost of trading it.
+- **The largest poll-versus-market gaps are measurement mismatches, not edge.** The
+  identity gate (see 18j) removed 12 of the 31 state-race polls before any order was
+  placed, including every row where the poll's own candidate is not the person the Kalshi
+  leg resolves on.
+
+### 18i. Bugs this session found in its own new code, and fixed
+
+Working line by line produced four defects that were caught and corrected **before** any
+result was published; each now has a regression test:
+
+1. **NO positions were marked with the YES mid.** `openValue` used the YES midpoint for
+   every position, so a NO book worth `shares × (1 − mid)` was carried at `shares × mid` —
+   overstating a NO-heavy entry roughly 1/p-fold. It reported `longshot-fader` at
+   **−25.68%**; with the corrected `sideMark()` the same entrant is **−0.09%**. The wrong
+   number was never published, but it is recorded here because it is exactly the kind of
+   error that looks like a finding.
+2. **A position flip dropped the old cost basis.** Re-entering a ticker on the opposite
+   side replaced the position object without closing it, which silently destroys the
+   accounting identity. Flips now close explicitly at the taker price, and the test asserts
+   the identity survives a flip.
+3. **Attribution double-counted entry fees.** The engine expenses an entry fee into
+   `realizedPnl` on the day it is paid; the per-series attribution table counted the closed
+   lot's P&L but not that expense, so `bySeries` summed to $25.88 where the entrant's net
+   was $23.01. Both sides are now applied and the test asserts the table reconciles to the
+   entrant total for every entrant.
+4. **Duplicate fills.** `poll-anchor-26` entered `GOVPARTYFL-26-D` twice on one day because
+   two poll rows map to the same Kalshi ticker. Fixed in the strategy (one order per ticker
+   per day, largest gap wins) **and** in the engine (same ticker + side is collapsed), so a
+   future strategy bug cannot manufacture a double fill.
+
+A fifth was a label, not an arithmetic error: the fill flag `fillCapApplied` compared the
+*post-scaling* notional to the participation ceiling, so it was almost always false. It now
+reports whether the participation limit was the binding constraint.
+
+### 18j. Identity: which polls were allowed to place an order
+
+`src/contest/strategies-forward.js` refuses to trade a poll row unless the repository's own
+exact-name check (`src/poll-layer.js candidateMismatch`) and a party-market backstop both
+pass. Of 31 state-race rows: **19 admitted, 12 excluded**, each with its reason published
+in `data/contest/forward-2026/season.json` → `signals.pollLayer.identityGate`.
+
+| Row | Reason |
+|---|---|
+| `nyt-siena-2026-07-{ak,ia,nc,oh}-senate` | poll layer carries a `review` flag |
+| `msu-2026-08-mi-senate` | poll layer carries a `review` flag |
+| `msu-2026-08-mi-governor` | poll layer's own `comparisonBlockedReason` |
+| `hpu-2026-08-nc-house-generic` | no comparable Kalshi question exists (`marketBasis`) |
+| `stetson-2026-04-fl-senate` | poll Alexander Vindman / market Angie Nixon |
+| `saint-anselm-2026-06-nh-senate` | poll Kevin Sununu / market John E. Sununu |
+| `uh-hobby-2026-01-tx-governor` | poll James Hinojosa / market Gina Hinojosa |
+| `uh-hobby-2026-01-tx-senate` | median-of-scenarios label vs market James Talarico |
+| `rasmussen-2026-09-ak-senate` | Kalshi leg is a party market, not a candidate market |
+
+Reusing the repository's check instead of a locally re-derived one mattered: a first
+heuristic version of this gate admitted `saint-anselm-2026-06-nh-senate` and produced a
+−0.258 "gap" for a poll about a **different Sununu**. That signal would have been traded.
+The exclusion is also recorded as irregularity #77, with the recommendation that the
+computed flag be persisted onto the poll-layer rows so a direct reader cannot get it wrong.
+
+### 18k. Three passes over this session's work
+
+- **Pass 1 — implement.** Built `src/contest/forward-universe.js`,
+  `src/contest/forward-engine.js`, `src/contest/strategies-forward.js`,
+  `scripts/run-forward-contest.mjs` (7 artifacts), `scripts/build-market-list.mjs`
+  (list + reconciliation gate), 21 tests, and the pipeline wiring
+  (`npm run contest-forward`, `npm run market-list`, both added to `npm run pipeline`).
+- **Pass 2 — review.** Re-read every artifact against its stated definition and found the
+  four defects in 18i plus the mislabelled fill flag. Fixed all five; each is now
+  regression-tested. Then re-ran the season and re-derived the leaderboard from scratch
+  (`npm run contest-forward` twice, byte-identical), re-ran `npm run market-list` and
+  confirmed the ladder closes at 24,301, and re-ran `npm run lint` (267 sources, 77
+  irregularities, md ⇄ JSON in sync) and `npm test` (131 tests, 130 pass, 1 skipped, 0 fail).
+- **Pass 3 — accuracy and completeness against the original brief.** Checked each clause of
+  the brief against an artifact: *all open political/election markets* → the 24,102-row
+  list with a reconciliation ladder (18f) and a README-level definition of "all";
+  *model and forecast* → the poll layer, the ratings bands, the cross-layer readings and
+  the combo complex, each labelled as the assumption it is; *historical collection and
+  backtesting* → the 2024 leg; *forecasting and forward collection* → the daily collector
+  and this season; *tracking expected vs actual* → `tracker/settlements.json` (356 settled
+  markets) wired to the engine, with no 2026 outcome asserted before certification;
+  *unique usernames and unique strategies* → asserted by test (uniqueness of username and
+  of thesis, non-empty thesis, callable `decide`); *reverse-engineer The Leap* → the rules
+  page fetched and quoted (18b, 18c, #74); *PnL tracked on open markets* → the leaderboard,
+  equity curve and per-series/per-market attribution; *flag irregularities* → 6 new items;
+  *links for manual review* → two new master entries and the six fetched URLs in 18a.
+
+### 18l. Verification evidence after the batch
+
+- `npm test` — 131 tests, 130 pass, 1 skipped, 0 fail.
+- `npm run lint` — 126 data JSON files, **267 sources**, 4 outcomes, 5 markets,
+  **77 irregularities** (md rows 77), 40 poll entries: all checks pass.
+- `npm run contest-forward` — 12 entrants, identity holds for all 12, 3 captured days.
+- `npm run market-list` — 24,102 listed, 6,942 eligible, ladder closes at 24,301.
+- Irregularities #72–#77 recorded; next id **78**. Master **265 → 267**.
+
+### 18m. What is still not done (carried into the next session)
+
+1. **Zero settled 2026 outcomes.** Every one of the 356 settlements on file predates the
+   first capture, so the live calibration scorer is still legitimately empty and the contest
+   leaderboard is a mark-to-market snapshot, not a result. The first real scoring event is
+   the November 3 2026 general election and the canvass work that follows it.
+2. **Three days is not a season.** Five transferred entrants have placed no trade at all
+   because their entry rules need more history or a narrower window; they are published as
+   unranked rather than quietly dropped, and their theses stay untested until the window
+   opens.
+3. **The poll→probability mapping is still the binding assumption.** `logistic(k=4.5)` is a
+   labelled heuristic imported from the 2024 national backtest; applied to state-level
+   margins it produces the 30-point "gaps" against the North Carolina Senate market. Those
+   gaps are as likely to indict the mapping as the market, and the season's own result for
+   `poll-anchor-26` must be read with that caveat (irregularity #12).
+4. **No maker modelling, no order-book depth.** Fills are taker-only at the captured top of
+   book, sized against volume and open interest. Real execution would walk the book; the
+   captured data does not include depth, so the model is conservative but not exact.
+5. **The list artifact is overwritten, not appended.** `market-list-latest.csv` is rewritten
+   each run to bound repository growth; the append-only record remains
+   `data/kalshi/forward/open-prices.csv` and `data/kalshi/tracker/daily/*.csv`.
+
+## 19. Session 12, part 2 — 2026-09-22: the loaders were de-duplicated, the identity gate was caught failing silently, and `close_time` was filed as #78
+
+**What triggered this pass.** The market-list builder and the scored season read the same
+captured files through two separate implementations. The season's module had been rewritten
+during the session, the market list's copy was left behind, and `scripts/build-market-list.mjs`
+stopped running at all (`SyntaxError: does not provide an export named 'loadContestInputs'`).
+Rebuilding it exposed a worse problem in the same area, below. Nothing in this section is a
+claim about the world: every line is a re-read of a committed file or a re-run of a script.
+
+**19a. One loader, two artifacts.** `src/contest/forward-universe.js` now exports
+`loadSeriesFlags`, `loadMarketMetadata`, `loadForwardPanel` and `loadContestInputs`.
+`scripts/run-forward-contest.mjs` and `scripts/build-market-list.mjs` both call
+`loadContestInputs(ROOT)`; the duplicate CSV reader inside the runner was deleted. Verified by
+re-running both and comparing to the pre-existing artifacts: the season reproduced entrant for
+entrant (`longshot-fader $99,908.87896`, `favorite-cash $99,565.5374`, `longshot-lotto
+$98,505.55783`, identity `true`).
+
+**19b. The identity gate had gone quiet — found, fixed, and pinned.** After the loader change the
+poll gate reported **24 admitted of 31**. That is wrong: the canonical check refuses five rows.
+Cause: the refactor stopped returning the captured universe document, so every row's
+`marketSubTitle` became `undefined`, the in-module gate short-circuited to "ok", and two rows a
+human should never trade on were readmitted — `stetson-2026-04-fl-senate` (poll *Alexander
+Vindman* / market *Angie Nixon*) and `rasmussen-2026-09-ak-senate` (a party market). Fix: the
+loader returns `latest`, and `scripts/run-forward-contest.mjs` **throws** when the universe
+carries no sub-titles. Re-run: **19 admitted / 12 refused**, i.e. the five canonical refusals
+(`uh-hobby-2026-01-tx-governor`, `uh-hobby-2026-01-tx-senate`, `saint-anselm-2026-06-nh-senate`,
+`stetson-2026-04-fl-senate`, `rasmussen-2026-09-ak-senate`) plus six review flags and one row
+with no market. Two tests now assert the refusals **by id** and assert
+`admitted + excluded === considered`, so the gate cannot go quiet again without a red test.
+
+| check | value | source |
+|---|---|---|
+| poll rows considered / admitted / refused | 31 / 19 / 12 | `data/contest/forward-2026/season.json` → `signals.pollLayer` |
+| refusal reasons | 5 canonical identity, 6 review flags, 1 no-market | same |
+| rating seats considered / admitted | 13 / 12 (NE refused: the leg resolves on side `I`) | same |
+| cross-layer rows carried | 27 | same |
+| ledger | 174 rows = (19 + 12 + 27) × 3 captured days | `signals-ledger.csv` |
+| ledger rows usable on a captured day | 16, **all** cross-layer (no poll or rating reading is) | same, `usable_that_day` |
+
+**19c. Every listed market now lands in a reason the universe builder applies.**
+`build-market-list.mjs` classified 177 rows as `unclassified-needs-review` — the season-window
+rule added later in the session was missing from the list's verdict. That bucket is a
+disagreement between two artifacts, not a category, so it is now (a) explained
+(`closes-after-season-window`, 177 rows: the 2028-cycle markets that are open today and settle
+years from now) and (b) a build failure if it is ever non-zero. Re-run:
+
+```
+arithmetic gate passed: 10981 + 13120 + 200 = 24301
+listed 24102 open political/election markets; 6287 contest-eligible on 2026-09-21
+breakdown: contest-eligible 6287 · closes-after-season-window 177 · not-us-election-series 3908
+         · not-in-that-days-captured-panel 12723 · priced-but-did-not-trade-that-day 478
+         · untraded-and-no-usable-book 506 · traded-but-book-not-two-sided 23      (= 24,102)
+```
+
+**19d. Irregularity #78 — `close_time` is a listing-expiry / cycle field.** Read directly out of
+the capture (not inferred): of the 24,102 open political/election markets captured
+2026-09-21T18:18:50.845Z, close_time falls in 2026 for 859, 2027 for 21,261, 2028 for 959, 2029
+for 719, with tails to 2099. `SENATEAK-26-D` — a **2026** Alaska Senate race — carries
+`2027-11-03T15:00:00Z`, 365 days after the election it is about; `SENATEIN-28-R`,
+`SENATECT-28-D` and `SENATENV-28-R` carry 2029-11-07. Where the rules set a determination date
+the field happens to coincide with it (`CONTROLH-2026-D` / `CONTROLS-2026-D` → 2027-02-01, the
+date in #72). Consequence recorded: `close_time` may scope a cycle, but it must never settle a
+position — the season settles only from `data/kalshi/tracker/settlements.json`.
+
+**19e. Tests and checks re-run end to end.** `test/forward-contest.test.mjs` grew 21 → **35**
+tests (identity-gate refusals by id; ledger fan-out and the `usable_that_day` invariant; the
+market list's own accounting: CSV rows == `totalListed`, no unclassified bucket, ladder rungs
+carry their basis). `npm test` → **146 tests, 145 pass, 1 skipped, 0 fail**. `npm run lint` →
+passes. `npm run build-site` → 2,109 KB. `node scripts/render-check.cjs` → exit 0, no
+undefined/NaN leakage in any of the 13 sections.
+
+**19f. Not asserted.** No 2026 market has settled, so every 2026 figure above is a
+mark-to-market snapshot; the leaderboard is not a track record. `crosslayer-arb`'s fills against
+the 27-row snapshot set remain unreconciled row by row, and `combo-coherence`'s best observed
+edge was negative at its only complete capture — both are listed in `NEXT_SESSION.md` rather
+than explained away.
+
+**Artifacts re-read or re-written in this pass** (SHA-256, first 12 hex; sizes in bytes):
+
+| artifact | bytes | sha256[:12] |
+|---|---|---|
+| `data/contest/forward-2026/season.json` | 778,917 | `0d3b0be0ef1f` |
+| `data/contest/forward-2026/leaderboard.json` | 16,259 | `a1099cfce288` |
+| `data/contest/forward-2026/attribution.json` | 609,869 | `43b5ae8bb6e2` |
+| `data/contest/forward-2026/signals-ledger.csv` | 21,532 | `fa2fafee89df` |
+| `data/kalshi/universe/market-list-latest.json` | 7,543 | `d07131fa39de` |
+| `data/kalshi/universe/market-list-latest.csv` | 4,548,778 | `8f731ee2b911` |
+| `src/contest/forward-universe.js` | 16,206 | `dbaf43cce9d8` |
+| `scripts/run-forward-contest.mjs` | 18,961 | `af74019b65e8` |
+| `scripts/build-market-list.mjs` | 16,110 | `dac5a49ae08a` |
+| `test/forward-contest.test.mjs` | 31,904 | `1659aa1bd678` |

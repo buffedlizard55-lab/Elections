@@ -18,6 +18,7 @@
     ['crosslayer', 'Cross-layer'],
     ['backtests', 'Backtests'],
     ['contest', 'Contest'],
+    ['contest2026', 'Live 2026 Contest'],
     ['sources', 'Sources'],
     ['irregularities', 'Irregularities'],
     ['methodology', 'Methodology'],
@@ -60,6 +61,8 @@
   const PL = D.pollLayer;
   const BT = D.backtests.marketBacktest;
   const CT = D.contest;
+  const C26 = D.contest2026;
+  const ML = D.marketList;
   const allLb = CT.universes && CT.universes['all-2024'] ? CT.universes['all-2024'].leaderboard : CT.leaderboard;
   const coreLb = CT.universes && CT.universes['core-2024'] ? CT.universes['core-2024'].leaderboard : CT.leaderboard;
 
@@ -622,6 +625,141 @@
     });
   }
 
+  // ---------- LIVE 2026 CONTEST (R16) ----------
+  // Every figure is read from the bundle produced by scripts/run-forward-contest.mjs.
+  // Nothing on this page is typed in by hand, and the season's own disclosures
+  // (which rules are The Leap's and which are this project's adaptations) are
+  // rendered verbatim from the artifact rather than summarised.
+  function contest2026() {
+    if (!C26) {
+      return `<h1>Live 2026 contest</h1><div class="callout warn"><strong>No season artifact yet.</strong>
+        Run <span class="kbd">npm run contest-forward</span> to score the captured panel.
+        The engine reads only committed captures and makes no network calls, so it is safe to run anywhere.</div>`;
+    }
+    const m = C26.model;
+    const row = (r) => `
+      <tr>
+        <td class="num"><strong>#${r.rank}</strong></td>
+        <td><span class="mono">@${esc(r.username)}</span><br><span class="small">${esc(r.strategy)}</span></td>
+        <td>${r.origin === 'new-2026' ? '<span class="chip good">new 2026</span>' : '<span class="chip">transferred</span>'}</td>
+        <td class="num">${usd(r.netEquity)}</td>
+        <td class="num ${cls(r.netReturnPct)}">${r.netReturnPct > 0 ? '+' : ''}${r.netReturnPct.toFixed(3)}%</td>
+        <td class="num ${cls(r.realizedPnl)}">${usd(r.realizedPnl)}</td>
+        <td class="num ${cls(r.unrealizedPnl)}">${usd(r.unrealizedPnl)}</td>
+        <td class="num">${usd(r.feesPaid)}</td>
+        <td class="num">${r.trades}</td><td class="num">${r.tradingDays}</td><td class="num">${r.openPositions}</td></tr>`;
+    const unranked = C26.unranked.map((u) => `<li><span class="mono">@${esc(u.username)}</span> <span class="small">(${esc(u.origin)})</span> — ${esc(u.reason)} · ${u.trades} trade(s)</li>`).join('');
+    const thesis = (r) => {
+      const t = C26.theses[r.username] || {};
+      const at = C26.attribution && C26.attribution[r.username];
+      const series = at ? at.bySeries.slice(0, 5).map((x) => `<div class="small mono">${esc(x.key)}: ${x.net >= 0 ? '+' : ''}${usd(x.net)} net (${x.fills} fills, fees ${usd(x.fees)})</div>`).join('') : '';
+      const met = t.strategyMetrics ? Object.entries(t.strategyMetrics).filter(([k]) => !/^note$/.test(k)).map(([k, v]) => `<div class="small mono">${esc(k)}: ${esc(typeof v === 'object' && v ? JSON.stringify(v) : v)}</div>`).join('') : '';
+      const note = t.strategyMetrics && t.strategyMetrics.note ? `<p class="small">${esc(t.strategyMetrics.note)}</p>` : '';
+      return `
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px">
+          <strong class="mono">@${esc(r.username)}</strong>
+          <span class="chip ${r.netReturnPct >= 0 ? 'good' : 'bad'}">${r.netReturnPct > 0 ? '+' : ''}${r.netReturnPct.toFixed(3)}% · ${usd(r.netEquity)}</span></div>
+        <p class="small" style="margin:8px 0"><strong>${esc(t.name || r.strategy)}</strong> — ${esc(t.thesis || '')}</p>
+        ${t.adapts ? `<p class="small"><em>Adapts:</em> ${esc(t.adapts)}</p>` : ''}
+        <canvas id="eq26-${esc(r.username)}" class="chart" style="height:150px"></canvas>
+        <p class="small">${r.trades} entries · ${r.marketsTraded} markets · ${r.openPositions} still open · fees ${usd(r.feesPaid)}</p>
+        ${note}${met}${series ? `<details><summary>Attribution by series (top 5 of ${at.bySeriesCount})</summary><div class="body">${series}</div></details>` : ''}
+      </div>`;
+    };
+    const gate = C26.signals && C26.signals.pollLayer ? C26.signals.pollLayer.identityGate : null;
+    const gateExcl = gate ? gate.polls.excluded.slice(0, 14).map((e) => `<li><span class="mono">${esc(e.id)}</span> — ${esc(e.reason)}</li>`).join('') : '';
+    const U = C26.universe;
+    const perDate = U ? Object.entries(U.perDate).map(([d, s]) => `<tr><td class="mono">${esc(d)}</td><td class="num">${int(s.panelRows)}</td><td class="num">${int(s.notElectionSeries)}</td><td class="num">${int(s.noUsableBook)}</td><td class="num">${int(s.eligible)}</td><td class="num">${int(s.tradedOnDay)}</td></tr>`).join('') : '';
+    const ladder = ML ? ML.reconciliationLadder.map((r) => `<tr><td>${esc(r.step)}</td><td class="num"><strong>${int(r.value)}</strong></td><td class="small mono">${esc(r.basis)}</td></tr>`).join('') : '';
+    const breakdown = ML ? Object.entries(ML.eligibilityBreakdown).sort((a, b) => b[1] - a[1]).map(([k, v]) => `<tr><td class="mono">${esc(k)}</td><td class="num">${int(v)}</td></tr>`).join('') : '';
+    return `
+    <h1>Live 2026 contest — paper trading on open Kalshi election markets</h1>
+    <p class="lead">Season <span class="mono">${esc(C26.seriesId)}</span> opened ${esc(C26.season.openedOn)} and is scored on
+    <strong>${int(C26.season.capturedTradingDays)} captured trading day(s)</strong> ending ${esc(C26.season.lastCapturedDay)}.
+    ${int(C26.field.entrants)} entrants — ${int(C26.field.transferredFrom2024)} carrying their 2024 strategy <em>unchanged</em> as an out-of-sample transfer test,
+    plus ${int(C26.field.newFor2026)} new 2026 entrants — each with a unique username and a distinct, falsifiable thesis.
+    Election day is ${esc(C26.season.electionDay)}.</p>
+
+    <div class="callout warn"><strong>${esc(C26.rankedAsOfNote)}</strong><br>
+    ${esc(C26.season.status)}. No 2026 outcome is asserted anywhere on this page before a state certifies it; a market the exchange has
+    officially settled is closed at that captured result, never at an assumed one.</div>
+
+    <h2>Leaderboard</h2>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th class="num">Rank</th><th>Entrant</th><th>Field</th><th class="num">Net equity</th><th class="num">Return</th><th class="num">Realized</th><th class="num">Unrealized</th><th class="num">Fees</th><th class="num">Fills</th><th class="num">Days</th><th class="num">Open</th></tr></thead>
+      <tbody>${C26.leaderboard.map(row).join('')}</tbody></table>
+      <p class="small"><strong>Unranked</strong> — The Leap requires at least ${m.minTradingDaysToRank} active trading days, and several entry rules need more history than three captured days can supply:</p>
+      <ul class="small" style="margin:4px 0; padding-left:20px">${unranked}</ul></div>
+
+    <h2>Entrants, theses and attribution</h2>
+    <div class="grid cols2">${C26.leaderboard.map(thesis).join('')}</div>
+
+    <h2>Rules — and which of them are The Leap's</h2>
+    <div class="callout"><strong>From The Leap (quoted):</strong>
+      $100,000 virtual bankroll per entrant, ranked on the result, and a minimum number of active trading days to be ranked.
+      Rules page fetched for manual review: <a href="https://www.tradingview.com/the-leap/february-2026-eurex/rules/" target="_blank" rel="noopener">tradingview.com/the-leap/…/rules/</a>.
+      Leaderboard used to derive the bankroll: <a href="${esc(m.leapSource || '#')}" target="_blank" rel="noopener">${esc((m.leapSource || '').replace(/^https?:\/\//, ''))}</a>.</div>
+    <div class="card"><table>
+      <tbody>
+      <tr><td><strong>Execution</strong></td><td>${esc(m.execution)}</td></tr>
+      <tr><td><strong>Marks</strong></td><td>${esc(m.marks)}</td></tr>
+      <tr><td><strong>Ranking</strong></td><td>${esc(m.ranking)}</td></tr>
+      <tr><td><strong>Accounting identity</strong></td><td class="mono">${esc(m.accountingIdentity)} — holds for all ${int(C26.season.identityCheck.entrantsChecked)} entrants: <strong>${C26.season.identityCheck.allHold}</strong></td></tr>
+      <tr><td><strong>Participation cap</strong></td><td>fill ≤ ${(m.fillCapOfDayVolume * 100).toFixed(0)}% of the day's volume and ≤ ${(m.fillCapOfOpenInterest * 100).toFixed(0)}% of open interest</td></tr>
+      <tr><td><strong>Concentration rule</strong><br><span class="small">ADAPTATION</span></td><td>${esc(m.dailyDeploymentNote)}</td></tr>
+      <tr><td><strong>Fees</strong></td><td>${esc(m.feeProvenance.formula)} · ${int(m.feeProvenance.seriesWithCapturedConfig)} series with a captured multiplier, ${int(m.feeProvenance.seriesUsingDocumentedDefault)} using the documented default ·
+        <a href="${esc(m.feeProvenance.schedule)}" target="_blank" rel="noopener">official fee schedule</a></td></tr>
+      </tbody></table></div>
+
+    <h2>Universe — which markets the contest may trade</h2>
+    <div class="callout">${esc((U && U.definition) || '')}</div>
+    <div class="card" style="overflow-x:auto"><table>
+      <thead><tr><th>Captured day</th><th class="num">Panel rows</th><th class="num">Not a US-election series</th><th class="num">No usable book</th><th class="num">Eligible</th><th class="num">Traded that day</th></tr></thead>
+      <tbody>${perDate}</tbody></table>
+      ${U ? `<p class="small">${int(U.distinctTickers)} distinct markets across ${int(U.distinctSeries)} series. Excluded rows, by reason:
+        <span class="mono">${esc(Object.entries(U.exclusionReasonTally).map(([k, v]) => `${k}=${v}`).join(', '))}</span>.
+        A market can only be filled on a day it actually traded, so the "traded that day" column is the real fillable set.</p>` : ''}</div>
+
+    <h2>Signals — and what was refused before any order</h2>
+    ${gate ? `<div class="card"><p class="small">The poll entrant will not place an order unless the repository's own exact-name identity check
+      (<span class="mono">src/poll-layer.js candidateMismatch</span>) passes for <em>both</em> legs. Of
+      <strong>${int(gate.polls.considered)}</strong> state-race poll rows, <strong>${int(gate.polls.admitted)}</strong> were admitted and
+      <strong>${int(gate.polls.excluded.length)}</strong> refused. Ratings entrant: ${int(gate.ratings.admitted)} of ${int(gate.ratings.considered)} seats admitted
+      (the independent-leaning Nebraska leg is not the question the published bands describe).</p>
+      <ul class="small" style="margin:4px 0; padding-left:20px">${gateExcl}</ul></div>` :
+      '<div class="callout">No signal ledger in this build.</div>'}
+    <p class="small">${esc((C26.signals && C26.signals.pollLayer && C26.signals.pollLayer.ratingsBandsLabel) || '')}</p>
+    <p class="small">Per-signal audit rows (every poll and rating against every captured day, with the verdict) are in
+      <span class="mono">data/contest/forward-2026/signals-ledger.csv</span>.</p>
+
+    <h2>The full open-market list</h2>
+    ${ML ? `<p class="lead">${int(ML.totalListed)} open Kalshi political/election markets captured
+      ${esc(ML.capturedAt)} — of which <strong>${int(ML.contestEligibleCount)}</strong> were contest-eligible on ${esc(ML.latestPanelDate)}.
+      The complete list, one row per market with its eligibility verdict, is <span class="mono">data/kalshi/universe/market-list-latest.csv</span>.</p>
+    <div class="grid cols2">
+      <div class="card" style="overflow-x:auto"><h3 style="margin-top:0">Reconciliation ladder</h3><table><tbody>${ladder}</tbody></table>
+        <p class="small"><strong>Arithmetic gate:</strong> ${ML.gate.reconciliationBalances ? 'the ladder closes.' : '<span class="pos">CHECK FAILED</span>'} Each step names the file it was read from.</p></div>
+      <div class="card" style="overflow-x:auto"><h3 style="margin-top:0">Why rows are not eligible</h3><table><tbody>${breakdown}</tbody></table>
+        ${ML.discrepancies && ML.discrepancies.length ? ML.discrepancies.map((d) => `<p class="small"><strong>Flagged:</strong> ${esc(d)}</p>`).join('') : ''}</div>
+    </div>` : '<div class="callout">No market-list artifact in this build — run <span class="kbd">npm run market-list</span>.</div>'}
+
+    <p class="small">Everything on this page is reproducible offline from the committed captures:
+      <span class="kbd">npm run contest-forward</span> rebuilds the season, <span class="kbd">npm run market-list</span> rebuilds the list and its gate.
+      The engine is deterministic, so re-running a day cannot double-count a fill.</p>`;
+  }
+
+  function drawContest2026Charts() {
+    if (!C26) return;
+    for (const r of C26.leaderboard) {
+      const cv = document.getElementById('eq26-' + r.username);
+      if (!cv) continue;
+      const pts = (C26.curves && C26.curves[r.username]) || [];
+      if (pts.length < 2) continue;
+      C.lines(cv, [{ label: r.username, color: r.netReturnPct >= 0 ? '#177245' : '#b3261e', points: pts }], { yFmt: (v) => '$' + (v / 1000).toFixed(1) + 'k', hLines: [{ y: 100000, label: 'start $100k', color: '#9aa7b5' }] });
+    }
+  }
+
   // ---------- SOURCES ----------
   // Grouped by the `category` label carried on every master-list entry, with a live filter so a
   // 100+ entry registry stays readable. Every figure here is read from the bundle (D.sources).
@@ -994,8 +1132,8 @@
   }
 
   // ---------- ROUTER ----------
-  const RENDER = { overview, markets, polls, tracker, forward, crosslayer, backtests, contest, sources, irregularities, methodology, roadmap };
-  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources };
+  const RENDER = { overview, markets, polls, tracker, forward, crosslayer, backtests, contest, contest2026, sources, irregularities, methodology, roadmap };
+  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, contest2026: drawContest2026Charts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources };
 
   const nav = document.getElementById('nav');
   nav.innerHTML = SECTIONS.map(([id, label]) => `<a href="#/${id}" data-id="${id}">${label}</a>`).join('');

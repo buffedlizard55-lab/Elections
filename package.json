@@ -12,11 +12,13 @@
     "contest": "node scripts/run-contest.mjs",
     "build-site": "node scripts/build-site.mjs",
     "collect": "node scripts/collect-kalshi.mjs",
-    "pipeline": "npm run backtest && npm run contest && npm run crosslayer && npm run build-site && node scripts/gen-roadmap.mjs && node scripts/render-check.cjs",
+    "pipeline": "npm run backtest && npm run contest && npm run contest-forward && npm run crosslayer && npm run build-site && npm run market-list && npm run gen-roadmap && node scripts/render-check.cjs",
     "roadmap": "node scripts/gen-roadmap.mjs",
     "lint": "node scripts/lint-verified.mjs",
     "test": "node --test test/*.test.mjs",
-    "crosslayer": "node scripts/run-crosslayer.mjs"
+    "crosslayer": "node scripts/run-crosslayer.mjs",
+    "contest-forward": "node scripts/run-forward-contest.mjs",
+    "market-list": "node scripts/build-market-list.mjs"
   },
   "license": "MIT"
 }
