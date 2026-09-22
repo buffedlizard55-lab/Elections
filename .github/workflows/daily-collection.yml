@@ -143,6 +143,13 @@ jobs:
         timeout-minutes: 20
         run: node scripts/probe-hosts.mjs || echo "::warning::host probe failed - previous rows stay in place"
 
+      - name: Certified-canvass ingestion (P0, post-Nov 3) — stages certified outcomes; before election night this records no-url-yet rows
+        continue-on-error: true
+        timeout-minutes: 20
+        run: |
+          node scripts/gen-canvass-config.mjs
+          node scripts/ingest-canvass.mjs || echo "::warning::canvass ingestion failed - staging stays at the previous run"
+
       - name: Forward-loop analytics (senate backtest + live 2026 calibration tracker)
         continue-on-error: true
         timeout-minutes: 10
