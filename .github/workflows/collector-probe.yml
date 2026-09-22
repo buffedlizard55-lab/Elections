@@ -23,6 +23,10 @@ on:
       - 'scripts/collect-metaculus.mjs'
       - 'scripts/collect-statenavigate.mjs'
       - 'scripts/crosscheck-renderings.mjs'
+      - 'scripts/ingest-canvass.mjs'
+      - 'scripts/gen-canvass-config.mjs'
+      - 'src/canvass.js'
+      - 'data/crosslayer/canvass-jurisdictions.json'
       - 'scripts/lib/render.mjs'
       - 'scripts/run-crosslayer.mjs'
       - 'src/crosslayer.js'
@@ -88,6 +92,12 @@ jobs:
       - name: R13 rendering cross-check
         continue-on-error: true
         run: node scripts/crosscheck-renderings.mjs || echo "::warning::rendering cross-check failed - previous rows stay in place"
+
+      - name: Certified-canvass ingestion (P0) — stages certified outcomes; pre-election runs record no-url-yet rows
+        continue-on-error: true
+        run: |
+          node scripts/gen-canvass-config.mjs
+          node scripts/ingest-canvass.mjs || echo "::warning::canvass ingestion failed - staging stays at the previous run"
 
       - name: Rebuild scores and site, then validate the actual outputs
         id: verify

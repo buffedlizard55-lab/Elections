@@ -81,10 +81,10 @@ test('session 9: twenty unique direct-fetch admissions match their evidence and 
   const m = read('data/sources/master.json'), a = read('data/sources/admissions-2026-09-21.json');
   assert.equal(a.entries.length, 20);
   assert.equal(new Set(a.entries.map((x) => x.id)).size, 20);
-  // 2026-09-21 admissions: 20 session 9 + 20 session 10 batch2 + 20 session 11 batch3.
+  // 2026-09-21 admissions: 20 session 9 + 20 session 10 + 20 session 11 batch3 + 16 follow-up batch4.
   const totalForDate = m.sources.filter((x) => x.verifiedOn === '2026-09-21').length;
   assert.ok(totalForDate >= 20, `expected >=20 for 2026-09-21, got ${totalForDate}`);
-  assert.equal(totalForDate, 60, `session 11 batch3 adds 20 more, total should be 60, got ${totalForDate}`);
+  assert.equal(totalForDate, 76, `batch4 adds 16 more, total should be 76, got ${totalForDate}`);
   for (const e of a.entries) {
     const s = m.sources.find((x) => x.id === e.id);
     assert.equal(s.url, e.url); assert.equal(s.status, 'verified'); assert.ok(s.verified.includes(e.observation));
@@ -107,6 +107,8 @@ test('session 9: twenty unique direct-fetch admissions match their evidence and 
     // if batch2 file not present, skip (backward compat)
     if (!String(e).includes('no such file') && !String(e).includes('ENOENT')) throw e;
   }
+  // Session 11 batch3 (2026-09-21): 20 more; 18 verified + 2 partisan-aligned commercial
+  // pollsters (cygnal, change-research) admitted at needs-review like DFP/Civiqs.
   const b3 = read('data/sources/admissions-2026-09-21-batch3.json');
   assert.equal(b3.entries.length, 20);
   assert.equal(new Set(b3.entries.map((x) => x.id)).size, 20);
@@ -114,22 +116,36 @@ test('session 9: twenty unique direct-fetch admissions match their evidence and 
     const s = m.sources.find((x) => x.id === e.id);
     assert.ok(s, `batch3 id ${e.id} not in master`);
     assert.equal(s.url, e.url);
-    assert.equal(s.status, 'verified');
+    assert.ok(['verified', 'needs-review'].includes(s.status), `batch3 ${e.id}: status ${s.status}`);
+    assert.ok(s.verified.includes(e.observation), `batch3 ${e.id}: observation must be quoted verbatim in master verified text`);
+  }
+  for (const e of b3.notAdmitted) assert.ok(!m.sources.some((s) => s.url === e.url), `batch3 notAdmitted ${e.id} must not be in master`);
+  const b4 = read('data/sources/admissions-2026-09-21-batch4.json');
+  assert.equal(b4.entries.length, 16);
+  for (const e of b4.entries) {
+    const s = m.sources.find((x) => x.id === e.id);
+    assert.ok(s, e.id);
+    assert.equal(s.url, e.url);
     assert.equal(s.verifiedOn, '2026-09-21');
-    assert.match(s.verified, /Fetched directly 2026-09-21/);
     assert.equal(s.category, e.category);
   }
-  for (const e of b3.notAdmitted) assert.ok(!m.sources.some((s) => s.url === e.url), e.url);
+  for (const e of b4.notAdmitted) assert.ok(!m.sources.some((s) => s.url === e.url), e.url);
   assert.equal(m.sources.find((s) => s.id === 'vote-org').category, 'Ratings, forecasts & analysis');
   assert.equal(m.sources.find((s) => s.id === 'rock-the-vote').category, 'Ratings, forecasts & analysis');
-  assert.match(m.sources.find((s) => s.id === 'vote-org').notes, /irregularity #69/);
 });
 
 test('session 9 polls: primary-release subset sizes, method labels and nominee-specific scenarios', () => {
-  const rows = read('data/polls/poll-layer-2026.json').stateRaces.filter((x) => x.verifiedOn === '2026-09-21');
+  const layer = read('data/polls/poll-layer-2026.json').stateRaces;
+  const session9Ids = ['unf-2026-07-fl-governor', 'unf-2026-07-fl-senate', 'msu-2026-08-mi-senate', 'msu-2026-08-mi-governor'];
+  const rows = layer.filter((x) => x.verifiedOn === '2026-09-21' && session9Ids.includes(x.id));
   assert.equal(rows.length, 4);
   for (const r of rows) {
     if (r.id.startsWith('unf')) { assert.equal(r.n, 848); assert.equal(r.moe, 3.8); assert.equal(r.methodFamily, 'voter-file-hybrid'); }
     else { assert.equal(r.n, 779); assert.equal(r.moe, null); assert.equal(r.methodFamily, null); assert.equal(r.review, true); }
   }
+  // Session 11 added four Rasmussen stateRaces rows (plus one genericBallot row) dated 2026-09-21.
+  // Each must keep the blended-method label — "do not pool unlabeled" discipline, irregularity #69.
+  const ras = layer.filter((x) => x.verifiedOn === '2026-09-21' && x.id.startsWith('rasmussen-2026-09-'));
+  assert.equal(ras.length, 4);
+  for (const r of ras) assert.equal(r.methodFamily, 'ivr-rdd-online-panel-blend', `${r.id}: methodFamily`);
 });

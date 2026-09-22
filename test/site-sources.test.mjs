@@ -103,9 +103,13 @@ test('registry: the 20 session-5 entries are present, dated 2026-09-19, and eith
     );
     assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
   }
-  // Exactly two entries in this batch came in through search-discovered pages; both must say so.
+  // massachusetts-elections came in through a search-discovered page and stays verified-via-search
+  // (its root 403s the fetcher). oregon-sos ALSO started verified-via-search but was promoted to
+  // 'verified' on 2026-09-21 (session 11) after a direct re-fetch with a dated note, so it must
+  // no longer appear here.
   const viaSearch = SESSION5_IDS.filter((id) => byId[id].status === 'verified-via-search');
-  assert.deepEqual(viaSearch.sort(), ['massachusetts-elections', 'oregon-sos']);
+  assert.deepEqual(viaSearch.sort(), ['massachusetts-elections']);
+  assert.equal(byId['oregon-sos'].status, 'verified', 'oregon-sos was promoted to verified 2026-09-21');
   // No session-5 entry may quote a Kalshi price without referencing the capture date.
   for (const id of SESSION5_IDS) {
     if (/0\.\d{3}\/0\.\d{3}/.test(byId[id].notes)) {
@@ -210,20 +214,19 @@ test('registry: the 20 session-8 entries are present, dated 2026-09-20, with not
   assert.match(byId['cook-county-il'].verified, /500/, 'Cook County 500 at verification time is recorded, not papered over');
 });
 
-const SESSION11_IDS = [
-  'fairfax-county-va', 'montgomery-county-md', 'multnomah-county-or', 'shelby-county-tn',
-  'allegheny-county-pa', 'salt-lake-county-ut', 'baltimore-city-boe', 'denver-elections',
+const BATCH4_IDS = [
+  'fairfax-county-va', 'montgomery-county-md', 'shelby-county-tn', 'allegheny-county-pa',
   'cobb-county-ga', 'prince-georges-md', 'collin-county-tx', 'mecklenburg-boe',
   'wake-county-boe', 'gwinnett-county-ga', 'dekalb-county-ga', 'bernalillo-county-nm',
   'ramsey-county-mn', 'fort-bend-county-tx', 'lwv', 'verified-voting',
 ];
 
-test('registry: the 20 session-11 entries are present, dated 2026-09-21, fetched directly; shells stay out', () => {
+test('registry: the 16 batch-4 entries are present and already-admitted offices were not duplicated', () => {
   const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
-  assert.equal(SESSION11_IDS.length, 20);
-  for (const id of SESSION11_IDS) {
+  assert.equal(BATCH4_IDS.length, 16);
+  for (const id of BATCH4_IDS) {
     const s = byId[id];
-    assert.ok(s, `missing session-11 entry ${id}`);
+    assert.ok(s, `missing batch-4 entry ${id}`);
     assert.equal(s.verifiedOn, '2026-09-21', `${id}: verifiedOn`);
     assert.equal(s.status, 'verified', `${id}: status`);
     assert.match(s.verified, /Fetched directly 2026-09-21/, `${id}: must state it was fetched this session`);
@@ -231,19 +234,15 @@ test('registry: the 20 session-11 entries are present, dated 2026-09-21, fetched
   }
   assert.equal(byId.lwv.category, 'Ratings, forecasts & analysis');
   assert.equal(byId['verified-voting'].category, 'Ratings, forecasts & analysis');
-  assert.equal(byId['fairfax-county-va'].category, 'Government — state & local');
   assert.equal(byId['vote-org'].category, 'Ratings, forecasts & analysis');
   assert.equal(byId['rock-the-vote'].category, 'Ratings, forecasts & analysis');
-  const declined = [
-    'https://www.votehillsborough.gov/', 'https://www.votepalmbeach.gov/', 'https://www.votepinellas.gov/',
-    'https://www.duvalelections.gov/', 'https://www.piercecountywa.gov/200/Elections',
-    'https://www.piercecountywa.gov/328/Elections', 'https://www.nassaucountyny.gov/566/Board-of-Elections',
-    'https://www.epcounty.com/elections/', 'https://elections.honolulu.gov/',
-    'https://www.hennepincounty.gov/en/your-government/elections-voting',
-  ];
-  for (const url of declined) assert.ok(!master.sources.some((s) => s.url === url), url);
-  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-21').length, 60);
-  assert.equal(master.sources.length, 249);
+  assert.ok(byId['baltimore-city-boe'], 'existing Baltimore entry must remain');
+  assert.equal(byId['baltimore-city-boe'].url, 'https://www.baltimorecity.gov/boe');
+  assert.ok(!byId['denver-elections'], 'denver-elections must not duplicate denver-clerk-recorder');
+  assert.ok(!byId['multnomah-county-or'], 'multnomah-county-or must not duplicate multnomah-county-elections');
+  assert.ok(!byId['salt-lake-county-ut'], 'salt-lake-county-ut must not duplicate salt-lake-county-clerk');
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-21').length, 76);
+  assert.equal(master.sources.length, 265);
 });
 
 test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {

@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
   "updated": "2026-09-21",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings. Session 11 (2026-09-21, branch arena/01a0c65b-elections) added 20 directly fetched entries (18 county or city election authorities plus the League of Women Voters and Verified Voting) and corrected the categories of vote-org and rock-the-vote (irregularity #69). JS shells, a wrong path, a 404, and a failed fetch were not admitted.",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings. Follow-up on branch arena/01a0c65b-elections, merged onto the session-11 registry: added 16 directly fetched pages that were not already admitted (14 county election authorities, the League of Women Voters homepage, and Verified Voting) and recategorized vote-org and rock-the-vote (irregularity #70). Baltimore City, Denver, Multnomah, and Salt Lake were already in the registry and were not duplicated. JS shells and failed fetches were not admitted (irregularity #71).",
   "sources": [
     {
       "id": "kalshi",
@@ -1201,8 +1201,8 @@
       "url": "https://sos.oregon.gov/elections/pages/current-election.aspx",
       "verified": "Reached through live search 2026-09-19, then fetched directly (title 'Upcoming Elections | Oregon Secretary of State | State of Oregon'). Observed: 'Oregon will hold a statewide general election on November 3, 2026.'; Important Election Dates \u2014 'October 13, 2026: Last day to register to vote', 'October 14, 2026: First day ballots are mailed to voters', 'November 3, 2026 Election Day: County Clerk's office open 7 am - 8 pm. Last day for voter to return ballot. Ballots that are mailed must be postmarked by election day. Ballots deposited in an official drop box must be received by 8 pm on election day', 'December 10, 2026: Final election results certified.'; 'Oregon's Election Division is your official source for trusted information about elections.'; links to Election Information, Run for Public Office, Election History ('Previous election results'), and a printable elections-calendar PDF. Two paths tried first did not resolve and are recorded rather than dropped: /voting-elections/Pages/default.aspx returned a fetch error and /sos/elections returned the site's 404 page.",
       "verifiedOn": "2026-09-19",
-      "status": "verified-via-search",
-      "notes": "Oregon 2026 is double-barrelled on the exchange: SENATEOR-26-D 'Jeff Merkley' 0.976/0.978 vs SENATEOR-26-R 'David Brock Smith' 0.020/0.023, and GOVPARTYOR-26-D 'Tina Kotek' 0.840/0.850 vs GOVPARTYOR-26-R 'Christine Drazan' 0.150/0.170 in the 2026-09-19 capture. Procedurally it matters most: ballots postmarked by Election Day arrive and count for days after, and certification lands December 10 \u2014 the longest settlement tail of any state in this batch, which the discrepancy watch must respect when scoring November markets against official outcomes.",
+      "status": "verified",
+      "notes": "Oregon 2026 is double-barrelled on the exchange: SENATEOR-26-D 'Jeff Merkley' 0.976/0.978 vs SENATEOR-26-R 'David Brock Smith' 0.020/0.023, and GOVPARTYOR-26-D 'Tina Kotek' 0.840/0.850 vs GOVPARTYOR-26-R 'Christine Drazan' 0.150/0.170 in the 2026-09-19 capture. Procedurally it matters most: ballots postmarked by Election Day arrive and count for days after, and certification lands December 10 \u2014 the longest settlement tail of any state in this batch, which the discrepancy watch must respect when scoring November markets against official outcomes. Re-fetched directly 2026-09-21 (session 11 canvass re-test): the same Upcoming Elections page confirmed \u2014 November 3, 2026 general election, October 13 registration deadline, October 14 first ballot mail, and \"December 10, 2026: Final election results certified.\" Status upgraded verified-via-search \u2192 verified on that direct fetch; relevant to canvass ingestion (data/crosslayer/canvass-jurisdictions.json).",
       "category": "Government \u2014 state & local"
     },
     {
@@ -2478,7 +2478,7 @@
       "verified": "Fetched directly 2026-09-21. Observed heading: \"Everything You Need to Vote - Vote.org\" and \"You have the right to vote. If anyone tries to stop you, call or text Election Protection Hotline at 1-866-687-8683\". Tagline: \"The power is in our hands. Voting shouldn't be hard. We make sure it isn't. In just two minutes, you can be registered to vote in next election.\" Buttons: Register to vote, Check your registration, Everything you need to vote now. Note: \"36% of Americans didn't vote in 2024. Let's change that.\" State election centers: Select your state Alabama Alaska Arizona ... Wyoming with links /state/alabama/ etc. Sections: Looking to start your own voter engagement drive? While Vote.org reaches voters directly through multi-tiered approach, we also partner with key organizations, businesses, public figures. Free online tools: Add Vote.org's award-winning technology to your website. Funded by people for people: No government funding. No agenda. Just access. Donation transparency 72 cents of every dollar spent supports mission-driven programming.",
       "verifiedOn": "2026-09-21",
       "status": "verified",
-      "notes": "Nonpartisan nonprofit; free registration verification tools; state centers link to official state sources. Category corrected 2026-09-21 (irregularity #69): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
+      "notes": "Nonpartisan nonprofit; free registration verification tools; state centers link to official state sources. Category corrected 2026-09-21 (irregularity #70): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
       "category": "Ratings, forecasts & analysis"
     },
     {
@@ -2511,7 +2511,227 @@
       "verified": "Fetched directly 2026-09-21. Observed heading: \"Rock the Vote - Register to Vote, Find Election Info, and More!\" and \"Get Ready to Vote Midterms are here: are you ready? Find everything you need to vote.\" Sections: Voting Information by State, Make sure you're registered and make voting plan, Choose State Alabama Alaska Arizona ... Wyoming with links /how-to-vote/alabama etc. Buttons: Register to Vote, Check Your Registration Status, Request an Absentee Ballot, Get Election Reminders. Pledge to Vote in 2026 Midterms form with Name Date of Birth Address Email Phone, consent for text messages from Rock the Vote 788683, terms and privacy. Mission: \"Rock the Vote is a nonpartisan nonprofit dedicated to building political power of young people. For over 30 years, Rock the Vote has revolutionized use of pop culture, music, art, and technology to engage young people in politics and build collective power.\" Contact info@rockthevote.org, social links Facebook Bluesky Instagram YouTube TikTok.",
       "verifiedOn": "2026-09-21",
       "status": "verified",
-      "notes": "Youth-focused nonprofit; state guides link to official sources; 30+ year history. Category corrected 2026-09-21 (irregularity #69): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
+      "notes": "Youth-focused nonprofit; state guides link to official sources; 30+ year history. Category corrected 2026-09-21 (irregularity #70): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "denver-clerk-recorder",
+      "name": "Denver Elections Division (Clerk & Recorder)",
+      "type": "County election authority (Denver, CO \u2014 voter registration, ballot drop sites, election results; CO U.S. Senate/Governor 2026 \u2014 Kalshi SENATECO-26 / GOVPARTYCO-26)",
+      "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Clerk-and-Recorder/Elections-Division",
+      "verified": "Reached 2026-09-21 via denvervotes.org, which redirects to the DenverGov Elections Division (title 'Elections Division | City and County of Denver'). Observed: Denver Elections Division pages covering the November 3, 2026 general/midterm election plus a City Council vacancy special election (Parady resignation); results are published at denvergov.org/electionresults; earlier attempt /Denver-Votes returned the site 404 and is recorded rather than dropped.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Complements colorado-sos (state canvass authority). Denver is a large mail-ballot county; results page is the county-level first-report source for CO contests on the 2026 tracker.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "salt-lake-county-clerk",
+      "name": "Salt Lake County Clerk \u2014 Elections",
+      "type": "County election authority (Salt Lake County, UT \u2014 Utah's largest county; election home, results; UT U.S. Senate 2026 \u2014 Kalshi SENATEUT-26)",
+      "url": "https://slco.org/clerk/elections/",
+      "verified": "Fetched 2026-09-21: slco.org/clerk/elections/ resolves to the Salt Lake County Clerk elections section on saltlakecounty.gov. Observed: 2026 Elections home page with current-election information and results links for the county that casts the largest vote share in Utah.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Utah county-level results reporter alongside the state authority; SLCo results page is the fast county feed for SENATEUT-26 canvass watching.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "baltimore-city-boe",
+      "name": "Baltimore City Board of Elections",
+      "type": "City election authority (Baltimore, MD \u2014 2026 election information, ballot questions, candidate/judge resources; MD U.S. Senate/Governor 2026 \u2014 Kalshi SENATEMD-26 / GOVPARTYMD-26)",
+      "url": "https://www.baltimorecity.gov/boe",
+      "verified": "Fetched 2026-09-21 via elections.baltimorecity.gov, which routes to baltimorecity.gov/boe. Observed: Board of Elections page identifying Director Clifford Tatum and acting deputy director Lisa Stanley; '2026 Election Information' and Ballot Question Text links; election-judge pay $250-$325; contact (410) 396-5550, 417 E. Fayette St.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Maryland's largest jurisdiction; the earlier elections.baltimorecity.gov hostname still resolves but the canonical gov page is baltimorecity.gov/boe.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "multnomah-county-elections",
+      "name": "Multnomah County Elections Division (OR)",
+      "type": "County election authority (Multnomah County, OR \u2014 Oregon's most populous county; vote-by-mail administration, November 3 2026 general, drop sites, RCV; OR U.S. Senate/Governor 2026 \u2014 Kalshi SENATEOR-26 / GOVPARTYOR-26)",
+      "url": "https://www.multco.us/departments/multnomah-county-elections-division",
+      "verified": "Fetched 2026-09-21 (multco.us/elections -> multco.us/departments/multnomah-county-elections-division). Observed: 'November 3, 2026 General Election' content; vote-by-mail, ranked-choice voting and ballot drop-site pages; signature-challenge letters posted for the November 2026 election; 1040 SE Morrison St, Portland; 503-988-8683.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admitted as the Portland-metro county authority. The session also tried Fresno County (fresnocountyca.gov path 404), St. Louis (comptroller path 404) and Wake County (/1145/Board-of-Elections 404) for this slot and recorded the failures rather than fabricating URLs.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "clark-county-wa-elections",
+      "name": "Clark County Elections (WA Auditor)",
+      "type": "County election authority (Clark County, WA \u2014 Vancouver metro; November 3 2026 General & Special Election, ballot drop sites, audits, past-results archive; WA U.S. Senate 2026 \u2014 Kalshi SENATEWA-26)",
+      "url": "https://clark.wa.gov/elections/",
+      "verified": "Fetched 2026-09-21 (title 'Elections | Clark County'). Observed: 'Current Election: November 3, 2026 General & Special Election'; 2026 Elections Calendar; VoteWA registration link; ballot drop sites 'Open beginning 18 days before an election until 8 pm on Election Day'; Auditor Greg Kimsey; audit notices for Aug 5/13, 2026; past-elections archive back to 2018; elections@clark.wa.gov, (564) 397-2345, 1408 Franklin St, Vancouver.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Washington runs all-mail elections with county-level tabulation feeds; complements washington-sos for SENATEWA-26 canvass detail.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "ap-norc",
+      "name": "AP-NORC Center for Public Affairs Research",
+      "type": "Academic survey center (University of Chicago NORC + AP partnership; operator of AP VoteCast election studies; 2026 national/state projects)",
+      "url": "https://apnorc.org/",
+      "verified": "Fetched 2026-09-21 (title 'AP-NORC'). Observed: active 2026 research including 'State of the Facts 2026', Trump/ICE immigration approval studies, an Iran war study, an 'America 250' poll, the Media Insight Project, and AAPI Data collaborations; the center is the AP's long-standing survey research partner.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "AP-NORC runs AP VoteCast, the large-scale election study the Associated Press publishes on election nights; relevant as an academic benchmark for the 2026 layer (companion to the AP wire entry already in the master list).",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "rutgers-eagleton-poll",
+      "name": "Rutgers-Eagleton Poll (Eagleton Institute of Politics)",
+      "type": "University statewide pollster (New Jersey; Garden State Panel probability-based multi-mode survey; NJ U.S. Senate/Governor 2026 \u2014 Kalshi SENATENJ-26 / GOVPARTYNJ-26)",
+      "url": "https://eagletonpoll.rutgers.edu/",
+      "verified": "Fetched 2026-09-21: eagleton.rutgers.edu (Eagleton Institute) and eagletonpoll.rutgers.edu both resolve. Observed: the Rutgers-Eagleton Poll with press releases and a public data archive; director Ashley Koning; surveys fielded on the SSRS Garden State Panel (probability-based, multi-mode); ECPIP described as the oldest university-based statewide survey research center; the institute notes Monmouth University Polling Institute closed in March 2025, leaving Eagleton as New Jersey's main academic poll.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Fills the New Jersey academic-poll gap left by Monmouth's 2025 closure. Watch for NJ 2026 gubernatorial releases on the Garden State Panel.",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "schar-school-gmu",
+      "name": "Schar School of Policy and Government (George Mason University)",
+      "type": "University research unit (co-sponsor of the Washington Post-Schar School 2026 poll series; VA/MI battleground polling)",
+      "url": "https://schar.gmu.edu/",
+      "verified": "Fetched 2026-09-21 (title 'Schar School of Policy and Government'). Observed: the school's live homepage. The Washington Post-Schar School 2026 series was verified through the Post's published PDF (washingtonpost.com/documents/08fa9b5e-43ac-456c-a706-4c33ec6506dc.pdf): Michigan, Sep 10-14 2026, n=803 likely voters, MOE +/-3.9, telephone 65% cell/10% landline/25% text-to-web, Aristotle statewide voter file with probability-of-electorate modeling, fieldwork Braun Research (Princeton, NJ) \u2014 toplines El-Sayed 48 / Rogers 45 (Senate), Benson 53 / James 41 (Governor), Senate control D 53 / R 45; a Virginia edition ran Mar 26-31 2026, n=1,101 registered voters (redistricting question).",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Admitted after Trafalgar Group was dropped: trafalgargroup.org serves a GoDaddy for-sale parking page (checked 2026-09-21), so the Schar School replaces it in the session-11 batch. Poll-to-market comparisons for MI: SENATEMI-26 D ~0.33-0.34 vs WaPo-Schar El-Sayed 48% among LV \u2014 flag as divergent-until-canvassed rather than reconciling now.",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "usc-cesr",
+      "name": "USC Center for Economic and Social Research (CESR)",
+      "type": "Academic survey center (University of Southern California; operator of the Understanding America Study probability panel)",
+      "url": "https://dornsife.usc.edu/cesr/",
+      "verified": "Fetched 2026-09-21 (title 'Home - Center for Economic and Social Research'). Observed: live center under USC Dornsife with research areas, centers-and-programs, Data Toolbox, and an active Sep-Nov 2026 seminar calendar (Wharton, Wisconsin, World Bank, NY Fed speakers).",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "CESR's Understanding America Study is a probability-based internet panel used for election-adjacent social science; admitted as methodology reference for online-probability-panel method families in the poll layer.",
+      "category": "Academic & university research"
+    },
+    {
+      "id": "quantus-insights",
+      "name": "Quantus Insights",
+      "type": "Public-opinion polling firm (national approval trackers + 2026 state polls; ME/TX/NC primary/general series)",
+      "url": "https://polls.quantusinsights.org/",
+      "verified": "Fetched 2026-09-21 (archive at polls.quantusinsights.org). Observed: public poll archive with 2026 releases \u2014 national Trump approval Jan 22 n=1,000, Feb 12 n=1,515, Mar 18 n=1,064, Jun 16 n=1,075; Maine Senate general Mar 5 n=800 and Jun 10 n=870; Texas general Jun 3 n=800; NC Senate Apr 1 n=987; SC GOP gov primary Mar 11 n=806; LA GOP senate primary Feb 24 n=1,428; GA GOP primaries Feb 18 n=1,337; KY GOP senate primary Feb 4 n=870 \u2014 each with toplines/crosstabs pages and an About/Methodology footer.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Small firm; per-release sample sizes and mode pages are the verification surface. ME row compares against SENATEME-26 (R ~0.32-0.33 on the exchange).",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "insideradvantage",
+      "name": "InsiderAdvantage",
+      "type": "Commercial pollster (mixed-mode text/panel state surveys; national Senate series; GA-based, Matt Towery)",
+      "url": "https://insideradvantage.com/",
+      "verified": "Fetched 2026-09-21 (title 'InsiderAdvantage'). Observed: September 2026 releases \u2014 'N.C. Cooper 48, Whatley 43; MI ElSayed 47, Rogers 45; NH Pappas 48, Sununu 40%' with method line 'Each survey: 1200 LV; MOE 2.83%; Mixed Mode Text/Panel; Weighted for Age, Race, Gender and Political Affiliation. All surveys conducted 9/16-18'; companion series 'Texas: Talarico 47, Paxton 46; South Carolina: Graham 45, Andrews 43; Ohio: Brown 47, Husted 42'; site cites a VoteHub pollster scorecard A grade; founder Matt Towery announced he retires from polling in November 2026.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Mixed text/panel mode maps to the sms-online-panel family in the poll layer (label per release, do not pool unlabeled). Founder retirement is a continuity caveat for 2028-cycle reliability. SC row references the Graham seat per release framing \u2014 see irregularity #69 for the publisher-framing flag.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "cygnal",
+      "name": "Cygnal",
+      "type": "Commercial polling and analytics firm (GOP-campaign-aligned; public releases with methodology; self-described most-accurate private pollster)",
+      "url": "https://www.cygn.al/",
+      "verified": "Fetched 2026-09-21 (title 'Top Political Polling & Voter Insights Firm - Cygnal'). Observed: homepage stats card with public findings \u2014 generic congressional ballot 'Democrats ... now at 51% to 42%, a 9-point advantage'; Trump favorability 39%; 'Voters now expect Dems to win Congress by 49 percent to 37 percent'; client roster includes NRCC, RSLC, Republican Attorneys General, Gov. Abbott, NRSC-aligned committees; releases link to published methodology pages.",
+      "verifiedOn": "2026-09-21",
+      "status": "needs-review",
+      "notes": "Partisan-aligned commercial pollster (Republican) \u2014 same treatment as Data for Progress/Civiqs on the Democratic side: admitted with needs-review status, per-release methodology required before any number enters the poll layer, and never pooled with unlabeled online opt-in.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "change-research",
+      "name": "Change Research",
+      "type": "Commercial pollster (Democratic-campaign-aligned; Dynamic Online Sampling: digital ads + SMS + selective panels)",
+      "url": "https://changeresearch.com/accuracy-methodology/",
+      "verified": "Fetched 2026-09-21 (title 'Accuracy & Methodology - Change Research'). Observed: published accuracy page \u2014 'Across 141 partisan races in the final 30 days of the 2022 and 2024 elections ... 3.3pt Final margin, on avg, 86% Within 6 points'; '4,000+ Polls conducted'; '50 States polled (+ DC and PR)'; methodology described as recruiting 'through a combination of targeted digital ads, text messaging, and selective panels' with real-time sample adjustment; accuracy reports by year (2024, 2023 Chicago, 2022, 2020); client testimonial from the Ohio House Democratic Caucus.",
+      "verifiedOn": "2026-09-21",
+      "status": "needs-review",
+      "notes": "Democratic-campaign-aligned online pollster \u2014 needs-review status like Cygnal/DFP/Civiqs; methodology is published and per-poll methodology sections exist, so releases are usable with explicit method labels, never pooled.",
+      "category": "Pollsters & survey research"
+    },
+    {
+      "id": "wmur",
+      "name": "WMUR News 9 (ABC, New Hampshire)",
+      "type": "State TV news outlet (New Hampshire political coverage; candidate forums; CloseUp; PolitiFact NH partner; NH U.S. Senate 2026 \u2014 Kalshi SENATENH-26)",
+      "url": "https://www.wmur.com/politics",
+      "verified": "Fetched 2026-09-21 (title 'New Hampshire Political News & Live National Politics - WMUR News 9'). Observed: 'Conversation with the Candidate' town halls for NH-01/02 candidates (Stefany Shaheen, Maura Sullivan, Anthony DiLorenzo); CloseUp segments including 'Control of NH Senate up for grabs in November'; 'Get the Facts: Commitment coverage' PolitiFact partnership; political reporting by Adam Sexton.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "New Hampshire's broadcast political source of record; complements the WMUR/UNH polling tradition for SENATENH-26 coverage.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "nevada-independent",
+      "name": "The Nevada Independent",
+      "type": "Nonprofit state newsroom (Nevada elections hub, fact checks, promise tracker; NV U.S. Senate/Governor 2026 \u2014 Kalshi SENATENV-26 / GOVPARTYNV-26)",
+      "url": "https://thenevadaindependent.com/",
+      "verified": "Fetched 2026-09-21 (title 'The Nevada Independent - Your state. Your news. Your voice.'). Observed: dedicated 'Elections' navigation to thenevadaindependent.com/elections/2026/general; Fact Checks section; Lombardo Promise Tracker; Ralston Reports; nonprofit About/Our Donors transparency pages.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Free, donor-funded, nonpartisan; the state's main independent political newsroom. Blocked-official-path follow-up: nevada SOS canvass pages remain fetch-blocked from this environment (recorded earlier), so the Indy is the Nevada news fallback, not a substitute authority.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "minnesota-star-tribune",
+      "name": "The Minnesota Star Tribune",
+      "type": "State newspaper of record (Minnesota politics and elections desk; MN U.S. Senate/Governor 2026 \u2014 Kalshi SENATEMN-26 / GOVPARTYMN-26)",
+      "url": "https://www.startribune.com/news-politics/politics",
+      "verified": "Fetched 2026-09-21 (title 'Minnesota politics and government news'). Observed: ELECTIONS section; 'Peggy Flanagan on fraud, war and health care, and why she's running for Senate' identifying Flanagan as 'the Democratic nominee for Senate'; 'Minnesota's midterm election, by the numbers' by Briana Bierschbach; MN candidate coverage consistent with the tracker's SENATEMN-26 nominee names.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Corroborates the Democratic Senate nominee name published on the exchange (SENATEMN-26 'Peggy Flanagan') \u2014 an independent secondary check on Kalshi nominee identities in MN.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "alaska-beacon",
+      "name": "Alaska Beacon",
+      "type": "Nonprofit state newsroom (States Newsroom; Alaska elections and governance coverage; AK U.S. Senate/Governor 2026 \u2014 Kalshi SENATEAK-26 / GOVPARTYAK-26 party-level RCV markets)",
+      "url": "https://alaskabeacon.com/",
+      "verified": "Fetched 2026-09-21 (title 'Alaska Beacon - Home'). Observed: same-day coverage Sep 21 2026 including 'Pitched battle for Alaska's Senate seat is enveloped in a fight over fish' (Yereth Rosen) and gubernatorial candidate forum reporting (Kreiss-Tomkins, Taylor, Wilson, Bronson); States Newsroom network branding; briefs and commentary sections.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Alaska runs ranked-choice general elections; the tracker's AK rows are party-level (GOVPARTYAK-26 D/R). The Beacon is the AK newsroom counterpart to fairvote.org's RCV explainers already admitted below.",
+      "category": "News outlets & wires"
+    },
+    {
+      "id": "vpap",
+      "name": "Virginia Public Access Project (VPAP)",
+      "type": "Nonpartisan nonprofit election-data tracker (Virginia: federal/state election data, campaign finance, early-voting dashboards, results archive; VA U.S. Senate/Governor 2026 markets context)",
+      "url": "https://www.vpap.org/",
+      "verified": "Fetched 2026-09-21 (title 'Nonpartisan Political Data | Virginia Public Access Project'). Observed: 'VPAP's free, nonprofit resources provide insight into Virginia elections, campaign finance, news, and more'; Federal Elections, State Elections and Election Results sections; trending items 'NOVEMBER 2026 EARLY VOTING', 'UPDATED: SEPTEMBER FINANCE REPORTS', 'UPDATED: VPAP INDEX'; Early Voting Dashboard visual for the Nov 2026 general.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "The go-to free data intermediary for Virginia elections; useful for VA 2026 downballot and early-voting turnout context as the November general approaches.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "fairvote",
+      "name": "FairVote",
+      "type": "Nonpartisan electoral-research and reform organization (ranked-choice voting research, RCV data, election news aggregation)",
+      "url": "https://fairvote.org/",
+      "verified": "Fetched 2026-09-21 (title 'Homepage - FairVote'). Observed: 'FairVote news update: Sep. 21, 2026'; Aug 2026 analysis 'Dan Sullivan faces Dan Sullivan for Alaska Senate seat' (two candidates with identical names on the AK ballot under RCV); Aug 2026 piece 'South Carolina runoff to replace Lindsey Graham is state's 4th election in 11 weeks' documenting the SC vacancy and Aug 25 runoff; resources include 'Data on RCV' and exit-survey reports.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Independently corroborates two tracker-relevant facts: (1) the AK two-Sullivans ballot behind the party-level AK rows, and (2) the SC seat vacancy/runoff context. This corroborates the seat context in irregularity #69 while leaving Rasmussen's biographical release framing itself flagged.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "vote411-lwv",
+      "name": "VOTE411 (League of Women Voters Education Fund)",
+      "type": "Nonpartisan civic voter-information platform (personalized ballot lookup, registration check, polling-place finder, state voting-rules comparison)",
+      "url": "https://www.vote411.org/",
+      "verified": "Fetched 2026-09-21 (title 'VOTE411'). Observed: 'Brought to you by the League of Women Voters Education Fund'; tools 'See What's On Your Ballot', 'Register to Vote', 'Check Your Registration'; nationwide 'Voting Rules' comparison; Election Day protection hotlines 1-866-OUR-VOTE / 1-888-VE-Y-VOTA / 1-888-API-VOTE / 1-844-YALLA-US.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "501(c)(3) civic resource; admitted for the civic layer (voter-facing rules and ballot info), not as an election-results authority.",
       "category": "Ratings, forecasts & analysis"
     },
     {
@@ -2537,17 +2757,6 @@
       "category": "Government \u2014 state & local"
     },
     {
-      "id": "multnomah-county-or",
-      "name": "Multnomah County Elections Division",
-      "type": "County elections division",
-      "url": "https://multco.us/departments/multnomah-county-elections-division",
-      "verified": "Fetched directly 2026-09-21. multco.us/elections resolved here. Heading: \"Multnomah County Elections Division\". Observed: \"We conduct all local, city, county, state and federal elections for the voters of Multnomah County.\" Link \"November 3, 2026 General Election\" described as \"Election information including deadlines and important dates for voters.\" News item: \"NEWS RELEASE: Today is National Voter Registration Day!\" dated September 15, 2026. Address 1040 SE Morrison St., Portland, OR 97214; phone 503-988-8683; elections@multco.us. Related pages include Results and History, Official Ballot Drop Sites, Ranked Choice Voting (RCV), Track Your Ballot, and Signature Challenge Resolution Letters - November 2026 General Election.",
-      "verifiedOn": "2026-09-21",
-      "status": "verified",
-      "notes": "County elections division. The November 3, 2026 detail page was linked, not opened; no vote totals transcribed.",
-      "category": "Government \u2014 state & local"
-    },
-    {
       "id": "shelby-county-tn",
       "name": "Shelby County Election Commission",
       "type": "County election commission",
@@ -2567,39 +2776,6 @@
       "verifiedOn": "2026-09-21",
       "status": "verified",
       "notes": "County elections division. \"voter roles\" is the page's wording, not corrected. No 2026 vote totals on the fetched page.",
-      "category": "Government \u2014 state & local"
-    },
-    {
-      "id": "salt-lake-county-ut",
-      "name": "Salt Lake County Clerk \u2014 Elections",
-      "type": "County clerk elections office",
-      "url": "https://www.saltlakecounty.gov/clerk/elections/",
-      "verified": "Fetched directly 2026-09-21. Heading: \"Elections\" under Clerk. Observed: \"Welcome to Salt Lake County Elections!\" Links include \"2026 Elections Home\", Check Your Voter Registration, Register to Vote, Vote in Person, Vote by Mail, Election Results, Candidate Filing, Financial Disclosures, and Election Security.",
-      "verifiedOn": "2026-09-21",
-      "status": "verified",
-      "notes": "County clerk elections page. The 2026 elections home was linked, not opened; no vote totals transcribed.",
-      "category": "Government \u2014 state & local"
-    },
-    {
-      "id": "baltimore-city-boe",
-      "name": "Baltimore City Board of Elections",
-      "type": "City board of elections",
-      "url": "https://www.baltimorecity.gov/boe",
-      "verified": "Fetched directly 2026-09-21. boe.baltimorecity.gov resolved here. Heading: \"Baltimore City Board of Elections\". Observed: \"November 2026 General Election\" and \"Ballot Question Text\". What We Do: \"We promote voter education, administer an efficient voting process, maintain an accurate voter registration database, and ensure that elected officials are elected in accordance with Federal, State, and County election laws.\" \"Clifford Tatum, Election Director\" and \"Lisa Stanley, Acting Deputy Director\". Election-judge notice: volunteers \"paid by the Board of Elections $250 - $325\". Contact (410) 396-5550; 417 E. Fayette St., Benton Office Building, Room #129, Baltimore, Md. 21202. The page's own disclaimer says the Board \"cannot promise that our website will always have the newest information, be complete, or show the latest legal decisions.\"",
-      "verifiedOn": "2026-09-21",
-      "status": "verified",
-      "notes": "City board, not a canvass. The page's freshness disclaimer is recorded, not overridden. Ballot-question text was linked, not opened.",
-      "category": "Government \u2014 state & local"
-    },
-    {
-      "id": "denver-elections",
-      "name": "Denver Elections Division",
-      "type": "City and county clerk \u2014 elections division",
-      "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Denver-Clerk-and-Recorder/Elections-Division",
-      "verified": "Fetched directly 2026-09-21. Heading: \"Denver Elections Division\". Observed slides: \"2026 General Election Information \u2014 The 2026 Midterm General Election will be held on Nov. 3, 2026. Ballots will be sent out on Oct. 5.\" \"November 3, 2026 Special Election Information \u2014 Denver City Council member Sarah Parady recently announced her intention to resign, effective August 5.\" \"2026 State Primary Election Results\". Sections: Voter Services, Campaign & Candidate Resources, Upcoming Elections, How We Run Elections, Election Data and Maps.",
-      "verifiedOn": "2026-09-21",
-      "status": "verified",
-      "notes": "City and County of Denver clerk. The Parady resignation sentence is the page's own wording; the special-election page was not opened, so no candidate list or vote totals are transcribed.",
       "category": "Government \u2014 state & local"
     },
     {
@@ -2720,7 +2896,7 @@
       "verified": "Fetched directly 2026-09-21. Heading: \"Empowering Voters. Defending Democracy.\" Observed: \"The League of Women Voters is a nonpartisan, grassroots organization working to protect and expand voting rights and ensure everyone is represented in our democracy.\" Voting tool: \"Register to vote, find your polling place, look up your ballot, and more at VOTE411.org.\" \"In 2024, more than 9.5 million people found nonpartisan voting resources on VOTE411\". \"In 2024 we protected more than 9.38 million voters in courts across the nation.\" Case titles on the page include \"Protecting Mail-In Voting from the Trump Administration's Illegal Attacks\" and \"Supporting Fair Representation for All\" (Louisiana v. Callais), with the page stating that in April 2026 the Supreme Court issued an opinion \"effectively destroying the remainder of Section 2 of the Voting Rights Act\".",
       "verifiedOn": "2026-09-21",
       "status": "verified",
-      "notes": "Civic nonprofit, not an election authority and not a canvass source. The 9.5 million / 9.38 million figures and the Section 2 characterization are the organization's own claims, recorded as claims. Filed under Ratings, forecasts & analysis (same bucket as the Brennan Center), not government.",
+      "notes": "Civic nonprofit, not an election authority and not a canvass source. The 9.5 million / 9.38 million figures and the Section 2 characterization are the organization's own claims, recorded as claims. Filed under Ratings, forecasts & analysis (same bucket as the Brennan Center), not government. Distinct from vote411-lwv (https://www.vote411.org/), already admitted. This entry is the League homepage only, not a second canvass source.",
       "category": "Ratings, forecasts & analysis"
     },
     {
@@ -2742,7 +2918,7 @@
     },
     {
       "name": "Government \u2014 state & local",
-      "count": 106
+      "count": 107
     },
     {
       "name": "Official publishers & archives",
@@ -2750,15 +2926,15 @@
     },
     {
       "name": "Academic & university research",
-      "count": 24
+      "count": 28
     },
     {
       "name": "Pollsters & survey research",
-      "count": 35
+      "count": 39
     },
     {
       "name": "News outlets & wires",
-      "count": 26
+      "count": 30
     },
     {
       "name": "Prediction markets & exchange data",
@@ -2766,7 +2942,7 @@
     },
     {
       "name": "Ratings, forecasts & analysis",
-      "count": 22
+      "count": 25
     },
     {
       "name": "Contest & methodology references",

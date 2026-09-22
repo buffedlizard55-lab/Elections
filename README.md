@@ -3,16 +3,16 @@
 ## Latest review — September 21, 2026
 
 [GitHub Pages dashboard](https://buffedlizard55-lab.github.io/Elections/) ·
-[Source registry](data/sources/master.json) · [Session verification](VERIFICATION.md#16-session-11--2026-09-21-batch-3-20-directly-fetched-sources-249-total) ·
+[Source registry](data/sources/master.json) · [Session verification](VERIFICATION.md#17-follow-up--16-more-directly-fetched-sources-265-total) ·
 [Next session](NEXT_SESSION.md)
 
-**249 sources.** This session added 18 county or city election-authority pages plus
-the League of Women Voters and Verified Voting, each fetched directly on 2026-09-21.
-Those pages are not certified canvasses. Ten other candidate URLs were shells, a
-wrong path, a 404, or a failed fetch and were not admitted. Vote.org and Rock the
-Vote were recategorized out of government (irregularity #69). No new poll rows and
-no vote totals were added. Provenance checks are structural, not guarantees of
-source truth.
+**265 sources.** After the session-11 registry on main, this follow-up added 14
+county election-authority pages plus the League of Women Voters homepage and
+Verified Voting, each fetched directly on 2026-09-21. Baltimore City, Denver,
+Multnomah, and Salt Lake were already admitted and were not duplicated. Ten other
+candidate URLs were shells, a wrong path, a 404, or a failed fetch. Vote.org and
+Rock the Vote were recategorized out of government (irregularity #70). No new poll
+rows and no vote totals were added.
 
 Cross-layer scoring now requires dated certified-canvass evidence on an approved
 registry authority origin and rejects malformed probabilities and look-ahead
@@ -35,13 +35,13 @@ on Kalshi's open political/election markets.
 
 | | Node pipeline (primary data engines) | Python toolkit (registry + collectors + validators) |
 |---|---|---|
-| Sources | `data/sources/master.json` — **249 verified entries** (32 on 2026-09-18 + 115 on 2026-09-19 + 42 on 2026-09-20 + 60 on 2026-09-21, including 20 added 2026-09-21 in session 11: 18 county/city election authorities plus the League of Women Voters and Verified Voting; historical detail: 22 on 2026-09-20 (session 7) + 20 on 2026-09-20 (session 8: DC Board of Elections — closing the DC gap — plus six major county election offices (Maricopa AZ, King WA, Harris TX, Wayne MI, Clark NV, Cook County IL), MSU IPPSR, Stetson CPOR, Rasmussen Reports, Public Policy Polling, Echelon Insights, UNF Public Opinion Research Lab, five news desks (USA Today, LA Times, The Guardian US, AJC, Des Moines Register), Manifold Markets and the Clarity ENR official results host); session 7: 13 more state election authorities incl. New Hampshire (#35 host now reachable) and 9 pollsters incl. SurveyUSA and HarrisX admitted on their live hosts (#47 resolved); 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4 + 20 from session 5 + 20 from session 6 + 2 re-test admissions (CourtListener, Franklin & Marshall); 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda, and 2 session-5 candidates were verified-reachable but declined for absence of current-cycle content — irregularity #53). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
+| Sources | `data/sources/master.json` — **265 verified entries** (32 on 2026-09-18 + 115 on 2026-09-19 + 42 on 2026-09-20 + 76 on 2026-09-21). The latest follow-up added 14 county election authorities plus the League of Women Voters homepage and Verified Voting, and did not duplicate Baltimore, Denver, Multnomah, or Salt Lake. Historical detail: 22 on 2026-09-20 (session 7) + 20 on 2026-09-20 (session 8: DC Board of Elections — closing the DC gap — plus six major county election offices (Maricopa AZ, King WA, Harris TX, Wayne MI, Clark NV, Cook County IL), MSU IPPSR, Stetson CPOR, Rasmussen Reports, Public Policy Polling, Echelon Insights, UNF Public Opinion Research Lab, five news desks (USA Today, LA Times, The Guardian US, AJC, Des Moines Register), Manifold Markets and the Clarity ENR official results host); session 7: 13 more state election authorities incl. New Hampshire (#35 host now reachable) and 9 pollsters incl. SurveyUSA and HarrisX admitted on their live hosts (#47 resolved); 2026-09-19: 21 + 20 + 12 unique from the late independent batch + 20 from session 4 + 20 from session 5 + 20 from session 6 + 2 re-test admissions (CourtListener, Franklin & Marshall); 8 institutions verified in two 2026-09-19 batches were merged into single entries with labelled addenda, and 2 session-5 candidates were verified-reachable but declined for absence of current-cycle content — irregularity #53). Every entry carries a manual-review link, the observed verification text, a date, a status and a category | `data/master_sources.json` + `.csv` — 20 live-only entries + `data/flagged_sources.json` (7 excluded with reasons) |
 | Verification log | `VERIFICATION.md` | `data/verification_log.md` |
 | Kalshi | `scripts/collect-kalshi.mjs` → `data/kalshi/universe/` + `tracker/` (daily, events feed) · `scripts/collect-senate-2024.mjs` → `historical/senate-2024.json` | `scripts/fetch_kalshi.py` → `data/kalshi/markets_politics_latest.json` (independent markets-feed sample, top 2,000) · cross-checked by `scripts/crosscheck-collectors.mjs` |
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (real Kalshi fees) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (101 tests) + `npm run lint` (provenance, irregularities md⇄json sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Checks | `npm test` (110 tests) + `npm run lint` (provenance, irregularities md⇄json sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
 | Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
@@ -58,7 +58,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `data/crosslayer/` + `src/crosslayer.js` | **Cross-layer scoreboard (R14)** — Kalshi vs Metaculus vs DDHQ vs EBO-rendered Kalshi on the 2026 Senate/House control questions; snapshots stay `pending` until `outcomes.json` carries an official canvass with a source url, then Brier/log-loss per layer (look-ahead guarded). Collectors: `scripts/collect-metaculus.mjs` (hub HTML; api2 is auth-walled, #54), `scripts/collect-statenavigate.mjs` (free forecast pages + API-host probe, #55), `scripts/crosscheck-renderings.mjs` (R13 standing monitor → `data/kalshi/tracker/rendering-crosscheck.json`) |
 | `data/probes/` + `scripts/probe-hosts.mjs` | **Host re-test monitor (R15)** — every URL that ever refused the fetch tool (`data/probes/targets.json`, 30 targets: SurveyUSA hosts and the #28000 report page, HarrisX/The Hill, CourtListener API, PEC, Split Ticket, WI/NV/CA/MA/NH official paths, Clarity ENR for GA + WV, Metaculus, State Navigate, Muhlenberg, F&M, 270toWin, HPU, Winthrop) is re-tested from the Actions runner each run; `latest.json`/`history.json` record status, challenge type, title, a text sample and the headless-Chrome verdict for `render:true` targets (raw bodies are a workflow artifact, never committed). First live run crashed before writing (#61, fixed); the first committed verdicts landed with run 35490431271 (2026-09-20, 05:38Z) — the session-8 re-test batch is tabled in VERIFICATION.md §13c (WI/NV/CA/MA still blocked; GA + WV Clarity now 'reachable' through the runner's browser profile) |
 | `data/statenavigate/` | State Navigate collector output (R14 third layer): `forecast-daily.json` (national + 34 chamber pages, one row per day with `fetchMethod` and `parse` per page) and `api-probe.json` (daily check of the documented-but-unusable API host, #55). Pages are client-rendered: rows parse only when the runner's headless Chrome renders them (#58/#62) |
-| `data/sources/master.json` | **Master source list — 249 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note. Session 11 (2026-09-21) added 18 county or city election authorities (Fairfax, Montgomery MD, Multnomah, Shelby, Allegheny, Salt Lake, Baltimore City, Denver, Cobb, Prince George's, Collin, Mecklenburg, Wake, Gwinnett, DeKalb, Bernalillo, Ramsey, Fort Bend) plus the League of Women Voters and Verified Voting, and moved Vote.org and Rock the Vote out of government categories (irregularity #69). Earlier batches remain in VERIFICATION.md §6–§15. |
+| `data/sources/master.json` | **Master source list — 265 verified entries**, each with a manual-review link, the observed verification text, a date/status/category and a line-by-line note. The 2026-09-21 follow-up added Fairfax, Montgomery MD, Shelby, Allegheny, Cobb, Prince George's, Collin, Mecklenburg, Wake, Gwinnett, DeKalb, Bernalillo, Ramsey, and Fort Bend, plus the League of Women Voters homepage and Verified Voting, and moved Vote.org and Rock the Vote out of government (irregularity #70). Earlier batches remain in VERIFICATION.md. |
 | `VERIFICATION.md` | Line-by-line audit log for the Node track's capture sessions (2026-09-18 base + 2026-09-19 §6–§11 + 2026-09-20 §12: 22 new entries, re-tests, live-run repairs, first live Metaculus seat rows; 2026-09-20 §13 (session 8): 8 poll-layer rows from HPU Poll 126 / UH Hobby / Saint Anselm SASC / Stetson CPOR / PPP, 20 new master entries, the full re-test batch, the State Navigate dual-format parser fix (#64) and the CIRCLE YESI 2026 ↔ Kalshi-volume cross-check; new entries, URL corrections, fetch failures, live-run evidence; §10 is the session-5 20-entry batch with its two declined candidates and the Metaculus-vs-Kalshi cross-check) |
 | `data/master_sources.json` | **Live-only registry — 20 entries** (5 government · 5 academic · 6 pollsters · 4 analysis), independently verified 2026-09-18 |
 | `data/outcomes/verified-outcomes.json` | Verified official outcomes (2020/2024 presidency, 2024 Senate & House control) with per-claim sources and Kalshi-settlement cross-checks (all PASS) |
@@ -74,20 +74,20 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 
 ### Master source list: categories and status vocabulary
 
-Every one of the 249 entries carries a `category` (the site groups and filters by it) and a `status`.
+Every one of the 265 entries carries a `category` (the site groups and filters by it) and a `status`.
 Both are fixed vocabularies, enforced by `scripts/lint-verified.mjs` and asserted by
 `test/site-sources.test.mjs`:
 
 | Category | Entries | What belongs here |
 |---|---:|---|
 | Government — federal | 21 | Federal agencies, Congress, the FEC/EAC/NARA, federal archives |
-| Government — state & local | 106 | Secretaries of State, state boards of elections, county election offices |
+| Government — state & local | 107 | Secretaries of State, state boards of elections, county election offices |
 | Official publishers & archives | 4 | Official document publishers (GovInfo) plus legal/transcription archives (CourtListener, OpenElections) |
-| Academic & university research | 24 | University survey centres, election labs, data archives |
-| Pollsters & survey research | 35 | Survey firms and their published methodology |
-| News outlets & wires | 26 | Wires, broadcasters, newspapers with named election desks |
+| Academic & university research | 28 | University survey centres, election labs, data archives |
+| Pollsters & survey research | 39 | Survey firms and their published methodology |
+| News outlets & wires | 30 | Wires, broadcasters, newspapers with named election desks |
 | Prediction markets & exchange data | 10 | Kalshi/Polymarket/Predictit/IEM data, rules and API docs |
-| Ratings, forecasts & analysis | 22 | Race-rating services, forecasters, aggregators, and civic nonprofits that are not election authorities |
+| Ratings, forecasts & analysis | 25 | Race-rating services, forecasters, aggregators, and civic nonprofits that are not election authorities |
 | Contest & methodology references | 1 | The Leap contest rules (methodology source, not an election source) |
 
 | Status | Meaning |
@@ -107,7 +107,7 @@ exclusion was logged rather than reconstructed from memory (irregularities #40�
 Node pipeline (no dependencies, Node ≥ 18, no network needed):
 
 ```bash
-npm test          # 101 tests
+npm test          # 110 tests
 npm run lint      # no-fabrication provenance lint
 npm run backtest  # regenerate data/backtest-results.json
 npm run contest   # regenerate data/contest-results.json

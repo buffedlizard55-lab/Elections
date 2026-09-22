@@ -1,68 +1,66 @@
 # Next session (12) — handoff
 
-Updated **2026-09-21**. Session 11 branch: `arena/01a0c65b-elections`.
-Primary audit: `VERIFICATION.md` §16. Do not treat a successful schema test as
-confirmation that a page's claims are true.
+Updated **2026-09-21** after the follow-up on `arena/01a0c65b-elections`.
+Session 11 (`arena/01a0c626-elections`) is already on main. This follow-up added
+16 sources that were not already there (249 → **265**) and did not duplicate
+Baltimore City, Denver, Multnomah, or Salt Lake. Evidence:
+`data/sources/admissions-2026-09-21-batch4.json`. Irregularities #70 (Vote.org /
+Rock the Vote recategorized) and #71 (10 shells/404s withheld). No new poll rows
+and no vote totals.
+Primary audit: `VERIFICATION.md` §16. Do not interpret successful schema tests as independent
+confirmation of a source's truth.
 
-## Delivered
+## Delivered in session 11
 
-- Master registry **249 entries**. Session 11 added 20 directly fetched pages:
-  18 county or city election authorities, plus the League of Women Voters and
-  Verified Voting. Evidence: `data/sources/admissions-2026-09-21-batch3.json`.
-- Ten other candidate URLs were not admitted (irregularity #70): CivicPlus
-  loading shells, a welcome-only page, a path that resolved to Entertainment,
-  a Custom404, a failed fetch, and a post-redesign 404. Do not reconstruct those
-  offices from memory.
-- Vote.org and Rock the Vote were recategorized from government to
-  Ratings, forecasts & analysis (irregularity #69). Their `verifiedOn` dates and
-  observed text were not rewritten.
-- No poll rows, turnout figures, or vote totals were added. Linked result files
-  and registration widgets that did not expose numbers were not opened and not
-  invented. County pages are not certified canvasses.
+- **P0 canvass machinery**: `src/canvass.js` (9/9 tests), `scripts/gen-canvass-config.mjs`
+  (32-jurisdiction config, idempotent), `scripts/ingest-canvass.mjs` (default / `--set-url` /
+  `--set-certified-on` / `--promote`), staging + per-run evidence under `data/crosslayer/canvass/`.
+  Both workflows run it after Nov 3. First run: 32 jurisdictions, 0 staged (`no-url-yet` by design).
+- **Master 229 → 249** (batch3): 20 direct-fetch admissions — 5 gov (Denver, Salt Lake, Baltimore,
+  Multnomah, Clark WA), 4 academic (AP-NORC, Rutgers-Eagleton, Schar School, USC CESR), 4 pollsters
+  (Quantus, InsiderAdvantage; Cygnal + Change Research at **needs-review**), 4 news (WMUR, Nevada
+  Independent, MN Star Tribune, Alaska Beacon), 3 analysis/civic (VPAP, FairVote, VOTE411).
+  Evidence: `data/sources/admissions-2026-09-21-batch3.json`, `data/probes/session-review-2026-09-21-s11.json`.
+- **Poll layer 35 → 40**: 5 Rasmussen/Pulse rows with `ivr-rdd-online-panel-blend` labels;
+  framing flag = irregularity #69 (FairVote fetch corroborates seat context, publisher framing stays flagged).
+- `oregon-sos` promoted to `verified` (direct re-fetch). MA intentionally still `verified-via-search`.
 
-## Counts
+## Remaining work (priority order)
 
-| Category | Entries |
-|---|---:|
-| Government — federal | 21 |
-| Government — state & local | 106 |
-| Official publishers & archives | 4 |
-| Academic & university research | 24 |
-| Pollsters & survey research | 35 |
-| News outlets & wires | 26 |
-| Prediction markets & exchange data | 10 |
-| Ratings, forecasts & analysis | 22 |
-| Contest & methodology references | 1 |
-| **Total** | **249** |
+1. **Kalshi CONTROLS-2026 rules page** (`kalshi.com/markets/controls-2026` event rules): confirm
+   majority(51) + VP tiebreak, then set `controlQuestion.resolutionRule.confirmed=true` and fill
+   `carriedSeats` in `data/crosslayer/canvass-jurisdictions.json`. The rules fetch was queued but
+   not completed this session.
+2. **First post-election canvass pass (after Nov 3)**: for each jurisdiction set
+   `--set-url` to its results page as URLs publish, then run nightly ingest; `--promote` only dated,
+   validated rows. Score the Metaculus-vs-Kalshi Senate/House gap (`pairedComparison` in
+   `src/crosslayer.js`) against certified outcomes — the P0 question.
+3. **JS-shell counties**: headless-Chrome render re-test for `bexar-county-elections`,
+   `tarrant-county-elections`, `hennepin-county-elections` (queued render:true in
+   `data/probes/targets.json`). Admit only from readable renders.
+4. **Poll-layer backlog**: pendingSources `echelon-2026-04-fl`, `prri-2026-ava-midterms`,
+   `kff-2026-06-mifepristone-midterms`, `surveyusa-28000-mn` (toplines-only re-fetch); candidate
+   re-tests per #53 criteria; SurveyUSA/HarrisX/CourtListener re-tests; blocked official paths
+   (WI/NV/CA/MA) re-probe.
+5. **Metaculus duplication check** (2026-09-20 senate/house question rewrites) → irregularity #70
+   if confirmed. Next irregularity id = **70**.
+6. **Collectors**: State Navigate API (`data.statenavigate.com` — endpoints 404 as of #55; re-probe
+   for the unpriced downballot layer); keep Metaculus daily collector running so layer 3 scores
+   continuously.
+7. **Contest reverse-engineering (The Leap)**: unique usernames/strategies per trader, paper-trading
+   PnL on Kalshi political markets — scaffolding exists (`contest/`, `data/contest-results.json`);
+   needs per-strategy attribution.
+8. **Standing monitors**: R13 third-party-rendering cross-checks automation; Franklin & Marshall
+   admission after a direct fetch; re-admit Daily Kos when the 500s clear.
 
-Entries dated 2026-09-21: **60** (20 session 9 + 20 session 10 + 20 session 11).
-Next irregularity id: **71**. Keep the independent Python 20-source registry
-separate from this Node registry.
+## Limitations (unchanged + new)
 
-## Next work, in priority order
-
-1. **After November 3 and certification:** jurisdiction-specific canvass parsers,
-   retained evidence, certified-versus-unofficial detection, and contest mapping.
-   Do not use an exchange settlement or a news call as official ground truth.
-   Chamber control still needs carried seats, independents, vacancies, and the
-   market's own resolution rule.
-2. **Shells still withheld:** Hillsborough, Duval, Palm Beach, Pinellas, Pierce,
-   Nassau, El Paso, Honolulu, and Hennepin. Retry with a headless browser before
-   any canvass use. A loading shell is not an official results page.
-3. **State Navigate:** do not invent an API. Inspect the next scheduled rendered
-   capture. Free pages are not proof the collector parsed them.
-4. **Outstanding polls:** SurveyUSA #28000 still has no readable toplines.
-   Muhlenberg still has no 2026 horse-race on its own site. Do not fill either
-   from memory. MSU governor modeling stays withheld until the full wording is read.
-5. **Old registry:** this session checked the 20 new pages and the two category
-   corrections, not all 249 historical pages. Do not re-date prior admissions.
-
-## Reproduce
-
-```sh
-npm run pipeline
-npm test
-npm run lint
-python scripts/validate_sources.py
-python scripts/sync_site_data.py
-```
+- Sandbox has **no general egress**: node fetches fail TLS; live collection runs in GitHub Actions
+  only. All session verification used the page-fetch tool.
+- Four hosts are fetch-blocked or bot-walled (WI/NV/CA/MA officials); MA cannot pass the promote-gate
+  by design until that changes.
+- Bexar/Tarrant/Hennepin render only in real browsers; the runner probe (headless Chrome) is the path.
+- Cygnal + Change Research are partisan-aligned commercial pollsters admitted at `needs-review`:
+  per-release methodology required before any number enters the poll layer; never pool unlabeled.
+- InsiderAdvantage founder retires from polling Nov 2026 — continuity caveat for future cycles.
+- No certified 2026 outcomes exist yet; nothing is scored against canvasses until certification.
