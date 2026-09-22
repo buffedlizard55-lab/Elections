@@ -98,6 +98,7 @@ const pollAnchor26 = {
     const races = ctx.signals && ctx.signals.pollRaces ? ctx.signals.pollRaces : [];
     const orders = [];
     for (const r of races) {
+      if (!r.asOf || !(r.asOf < ctx.date)) continue;
       const p = curMid(ctx, r.kalshiTicker);
       if (p === null) continue;
       const gap = r.pollProb - p;
@@ -142,6 +143,7 @@ const ratingsRatchet = {
     const ratings = ctx.signals && ctx.signals.polls ? ctx.signals.polls.ratings : [];
     const orders = [];
     for (const r of ratings) {
+      if (!r.asOf || !(r.asOf < ctx.date)) continue;
       const p = curMid(ctx, r.kalshiTicker);
       if (p === null) continue;
       if (ctx.i === ctx.signals.finalDayIndex) {
@@ -176,6 +178,8 @@ const ratingsRatchet = {
 // ---------------------------------------------------------------------------
 // 3. crosslayer-arb — Metaculus versus Kalshi on the same control question
 // ---------------------------------------------------------------------------
+export const CROSSLAYER_ENTRY_GAP = 0.05;
+
 const crosslayerArb = {
   username: 'crosslayer-arb',
   name: 'LayerDisagreement',
@@ -199,7 +203,7 @@ const crosslayerArb = {
         if (Math.abs(gap) < 0.02) orders.push({ ticker: r.kalshiTicker, exit: true, conviction: 0 });
         continue;
       }
-      if (Math.abs(gap) < 0.05) continue;
+      if (Math.abs(gap) < CROSSLAYER_ENTRY_GAP) continue;
       orders.push({ ticker: r.kalshiTicker, side: gap > 0 ? 'YES' : 'NO', fractionOfEquity: 0.10, conviction: gap });
     }
     return bestPerTicker(orders);
@@ -274,6 +278,11 @@ export const COMBO_LEGS = Object.freeze([
 ]);
 export const HOUSE_CONTROL = Object.freeze({ D: 'CONTROLH-2026-D', R: 'CONTROLH-2026-R' });
 export const SENATE_CONTROL = Object.freeze({ D: 'CONTROLS-2026-D', R: 'CONTROLS-2026-R' });
+export const COMBO_EDGE_THRESHOLD = 0.005;
+export const COMBO_CONTROL_PAIRS = Object.freeze([
+  { comboKeys: ['DD', 'DR'], control: HOUSE_CONTROL.D, label: 'Democrats win the House' },
+  { comboKeys: ['DD', 'RD'], control: SENATE_CONTROL.D, label: 'Democrats win the Senate' },
+]);
 
 
 const comboCoherence = {
@@ -289,13 +298,16 @@ const comboCoherence = {
     const askSum = legs.reduce((s, l) => s + l.m.current.yesAsk, 0);
     const feeSum = legs.reduce((s, l) => s + takerFee({ count: 1, price: l.m.current.yesAsk, series: l.m.series }), 0);
     const edge = 1 - (askSum + feeSum);
-    if (ctx.i === ctx.signals.finalDayIndex) {
-      st.fullBasketAttempts += 1;
-      st.bestObservedEdge = st.bestObservedEdge === null || edge > st.bestObservedEdge.edge
-        ? { date: ctx.date, askSum: Math.round(askSum * 1e6) / 1e6, feePerContract: Math.round(feeSum * 1e6) / 1e6, edge: Math.round(edge * 1e6) / 1e6 }
-        : st.bestObservedEdge;
+    st.fullBasketAttempts += 1;
+    const recorded = { date: ctx.date, askSum: Math.round(askSum * 1e6) / 1e6, feePerContract: Math.round(feeSum * 1e6) / 1e6, edge: Math.round(edge * 1e6) / 1e6 };
+    st.bestObservedEdge = st.bestObservedEdge === null || edge > st.bestObservedEdge.edge ? recorded : st.bestObservedEdge;
+    for (const cp of COMBO_CONTROL_PAIRS) {
+      const legMs = cp.comboKeys.map((k) => ctx.markets[COMBO_LEGS.find((l) => l.key === k).ticker]);
+      const ctl = ctx.markets[cp.control];
+      if (legMs.some((m) => !m || !m.current || !m.current.hasTrade) || !ctl || !ctl.current || !ctl.current.hasTrade) continue;
+      st.pairAttempts += 1;
     }
-    if (edge > 0.005) {
+    if (edge > COMBO_EDGE_THRESHOLD) {
       if (!ctx.positions[legs[0].ticker]) {
         for (const l of legs) orders.push({ ticker: l.ticker, side: 'YES', fractionOfEquity: 0.04, conviction: edge });
       }
@@ -303,11 +315,7 @@ const comboCoherence = {
     }
 
     // Marginal pair trades: combo pair vs the chamber-control market.
-    const controlPairs = [
-      { comboKeys: ['DD', 'DR'], control: HOUSE_CONTROL.D, label: 'Democrats win the House' },
-      { comboKeys: ['DD', 'RD'], control: SENATE_CONTROL.D, label: 'Democrats win the Senate' },
-    ];
-    for (const cp of controlPairs) {
+    for (const cp of COMBO_CONTROL_PAIRS) {
       const legMs = cp.comboKeys.map((k) => ctx.markets[COMBO_LEGS.find((l) => l.key === k).ticker]);
       const ctl = ctx.markets[cp.control];
       if (legMs.some((m) => !m || !m.current || !m.current.hasTrade) || !ctl || !ctl.current || !ctl.current.hasTrade) continue;
@@ -316,7 +324,6 @@ const comboCoherence = {
       const buyComboSellCtl = ctl.current.yesBid - comboAsk;   // receive the control bid, pay the combo ask
       const sellComboBuyCtl = comboBid - ctl.current.yesAsk;   // receive the combo bid, pay the control ask
       const feeEstimate = 0.07 * (comboAsk + comboBid + ctl.current.yesAsk + ctl.current.yesBid) / 2 * 0.25 * 3;
-      if (ctx.i === ctx.signals.finalDayIndex) st.pairAttempts += 1;
       if (buyComboSellCtl > feeEstimate) {
         orders.push({ ticker: cp.control, side: 'NO', fractionOfEquity: 0.03, conviction: buyComboSellCtl });
         for (const k of cp.comboKeys) orders.push({ ticker: COMBO_LEGS.find((l) => l.key === k).ticker, side: 'YES', fractionOfEquity: 0.02, conviction: buyComboSellCtl });
@@ -477,6 +484,57 @@ export function isoDate(v) {
   if (!v) return null;
   const m = String(v).match(/^\d{4}-\d{2}-\d{2}/);
   return m ? m[0] : null;
+}
+
+/**
+ * Crowd readings from cross-layer snapshots, in file order.
+ * Dedupe key is `${asOf}|${question}`; the first row wins. Metaculus is used
+ * when it is a number, otherwise DDHQ. The snapshot id is kept so a fill can
+ * be cited back to the row that produced the signal.
+ */
+export function crowdSignalsFromSnapshots(snapshots) {
+  const crossLayer = [];
+  const seen = new Set();
+  for (const snap of snapshots || []) {
+    const k = (snap.layers && snap.layers.kalshi) || null;
+    const crowd = snap.layers
+      ? (typeof snap.layers.metaculus === 'number'
+        ? { layer: 'metaculus', prob: snap.layers.metaculus }
+        : typeof snap.layers.ddhq === 'number'
+          ? { layer: 'ddhq', prob: snap.layers.ddhq }
+          : null)
+      : null;
+    if (!k || !k.ticker || !crowd) continue;
+    const asOf = isoDate(snap.capturedAt || snap.id);
+    const key = `${asOf}|${snap.question}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    crossLayer.push({
+      snapshotId: snap.id || null,
+      question: snap.question,
+      kalshiTicker: k.ticker,
+      kalshiSnapshotMid: typeof k.bid === 'number' && typeof k.ask === 'number' ? Math.round(((k.bid + k.ask) / 2) * 1e6) / 1e6 : null,
+      crowdLayer: crowd.layer,
+      crowdProb: crowd.prob,
+      asOf,
+      source: snap.source || null,
+    });
+  }
+  return crossLayer;
+}
+
+/**
+ * Signals a trading day may see. A row is kept only when it carries an asOf
+ * strictly before the trading day. decide() also checks this, so a caller that
+ * forgets the filter cannot trade a same-day capture.
+ */
+export function signalsForTradingDay(signals, date) {
+  const before = (rows) => (rows || []).filter((s) => s.asOf && s.asOf < date);
+  return {
+    pollRaces: before(signals && signals.pollRaces),
+    polls: { ratings: before(signals && signals.polls && signals.polls.ratings) },
+    crossLayer: before(signals && signals.crossLayer),
+  };
 }
 
 export { pollAnchor26, ratingsRatchet, crosslayerArb, longshotFader, comboCoherence };

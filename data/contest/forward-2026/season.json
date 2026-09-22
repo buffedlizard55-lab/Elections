@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv + data/kalshi/universe/latest.json + data/kalshi/forward/universe-open.json + data/polls/poll-layer-2026.json + data/crosslayer/snapshots.json + data/kalshi/tracker/settlements.json (all read offline; the runner makes no network calls)",
-  "capturedAt": "2026-09-22T03:59:36.653Z",
+  "capturedAt": "2026-09-22T07:45:47.643Z",
   "capturedBy": "scripts/run-forward-contest.mjs",
   "model": {
     "seasonId": "S1-2026",
@@ -17,13 +17,16 @@
     "dailyDeploymentOfEquity": 0.2,
     "dailyDeploymentNote": "ADAPTATION (not a Leap rule): an entrant may put at most 20% of start-of-day equity into NEW positions on one captured day. Without it, a strategy that wants 25% of equity in every one of ~1,000 markets would spend the whole bankroll on whichever markets the loop happened to reach first, and the leaderboard would measure ticker ordering. When the day's orders exceed the budget every order is scaled pro-rata, so the allocation is order-independent.",
     "feeProvenance": {
-      "formula": "taker fee per order = roundUp(multiplier x 0.07 x contracts x price x (1 - price)), rounded up to the cent at whole-contract granularity",
+      "formula": "taker fee per order = roundUp(multiplier x 0.07 x contracts x price x (1 - price)), rounded up to the cent at whole-contract granularity; taker M defaults to 1",
+      "makerFormula": "maker fee = roundUp(M x 0.0175 x contracts x price x (1 - price)); maker M defaults to 0 and is not copied from the captured taker fee_multiplier",
+      "makerDefault": 0,
       "schedule": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
       "scheduleReadOn": "2026-09-22",
       "settlementFee": "none — the official schedule lists no settlement fee",
       "seriesWithCapturedConfig": 4185,
       "seriesUsingDocumentedDefault": 0,
-      "totalSeriesRegistered": 4185
+      "totalSeriesRegistered": 4185,
+      "contestCharges": "taker-only"
     },
     "leapSource": "https://www.tradingview.com/the-leap/february-2026-eurex/rules/",
     "leapLeaderboardSource": "https://www.tradingview.com/the-leap/crypto-series-may-2026/",
@@ -27080,8 +27083,8 @@
           "feePerContract": 0.0375,
           "edge": -0.0395
         },
-        "daysTheFullBasketWasPriceable": 1,
-        "daysThePairTradeWasPriceable": 2,
+        "daysTheFullBasketWasPriceable": 3,
+        "daysThePairTradeWasPriceable": 6,
         "note": "edge = 1 - (sum of the four captured asks + the quadratic taker fee per contract). Reported even when negative, because \"the basket never got cheap enough\" is the result this thesis is testing for."
       },
       "attributionReconciles": true

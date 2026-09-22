@@ -54,6 +54,8 @@ const cf2026Season = readOptional('data/contest/forward-2026/season.json');
 const cf2026Universe = readOptional('data/contest/forward-2026/universe.json');
 const cf2026Attribution = readOptional('data/contest/forward-2026/attribution.json');
 const marketList = readOptional('data/kalshi/universe/market-list-latest.json');
+const crosslayerFills = readOptional('data/contest/forward-2026/crosslayer-fills.json');
+const comboEdges = readOptional('data/contest/forward-2026/combo-edges.json');
 const contest2026 = cf2026 && cf2026Season ? {
   asOf: cf2026.asOf,
   seriesId: cf2026.seasonId,
@@ -77,6 +79,8 @@ const contest2026 = cf2026 && cf2026Season ? {
   theses: Object.fromEntries((cf2026Season.results || []).map((r) => [r.username, { thesis: r.thesis, name: r.name, origin: r.origin, adapts: r.adapts || null, strategyMetrics: r.strategyMetrics }])),
   attribution: cf2026Attribution ? Object.fromEntries((cf2026Attribution.attribution || []).map((a) => [a.username, { bySeries: a.bySeries.slice(0, 6), byMarket: a.byMarket.slice(0, 6), byMarketCount: a.byMarketCount, bySeriesCount: a.bySeriesCount, totals: a.totals }])) : null,
   universe: cf2026Universe ? { captureDate: cf2026Universe.dates[cf2026Universe.dates.length - 1], perDate: cf2026Universe.perDate, exclusionReasonTally: cf2026Universe.exclusionReasonTally, distinctTickers: cf2026Universe.distinctTickers, distinctSeries: cf2026Universe.distinctSeries, definition: cf2026Universe.definition } : null,
+  crosslayerFills,
+  comboEdges,
 } : null;
 const pollLayerRaw = readOptional('data/polls/poll-layer-2026.json');
 

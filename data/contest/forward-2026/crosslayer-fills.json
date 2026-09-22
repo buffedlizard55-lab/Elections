@@ -1,0 +1,121 @@
+{
+  "capturedFrom": "data/crosslayer/snapshots.json + the crosslayer-arb fill log + that day's eligible panel",
+  "capturedAt": "2026-09-22T07:45:47.643Z",
+  "method": "Crowd extraction matches buildSignals: dedupe key is asOf|question, first row wins, metaculus when it is a number else ddhq. The binding snapshot is the prior row (asOf strictly before the trading day) for that ticker with the largest absolute gap of crowdProb minus that day's panel mid that clears the strategy threshold. An equal absolute gap keeps the first row. The fill price is checked against the taker cross (a NO entry pays 1 - yes_bid) and the fee against takerFee on the fill's series.",
+  "threshold": 0.05,
+  "entrant": "crosslayer-arb",
+  "fills": [
+    {
+      "date": "2026-09-20",
+      "ticker": "CONTROLS-2026-D",
+      "series": "CONTROLS",
+      "side": "NO",
+      "shares": 2111.25,
+      "price": 0.41,
+      "fee": 35.7498,
+      "executedAt": "derived(1 - yes_bid)",
+      "tied": true,
+      "reason": null,
+      "binding": {
+        "snapshotId": "2026-09-19-senate",
+        "question": "SENATE-CONTROL-2026",
+        "asOf": "2026-09-19",
+        "crowdLayer": "metaculus",
+        "crowdProb": 0.517,
+        "kalshiSnapshotMid": 0.595,
+        "panelMid": 0.595,
+        "gap": -0.078,
+        "expectedSide": "NO",
+        "expectedPrice": 0.41,
+        "expectedFee": 35.7498,
+        "priceMatches": true,
+        "feeMatches": true,
+        "sideMatches": true
+      },
+      "candidates": [
+        {
+          "snapshotId": "2026-09-19-senate",
+          "asOf": "2026-09-19",
+          "crowdProb": 0.517,
+          "gap": -0.078,
+          "clears": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "ticker": "GOVPARTYMI-26-D",
+      "series": "GOVPARTYMI",
+      "side": "NO",
+      "shares": 1.74,
+      "price": 0.09,
+      "fee": 0.01,
+      "executedAt": "derived(1 - yes_bid)",
+      "tied": true,
+      "reason": null,
+      "binding": {
+        "snapshotId": "2026-09-20-governor-mi-2026",
+        "question": "GOVERNOR-MI-2026",
+        "asOf": "2026-09-20",
+        "crowdLayer": "metaculus",
+        "crowdProb": 0.85,
+        "kalshiSnapshotMid": 0.915,
+        "panelMid": 0.9165,
+        "gap": -0.0665,
+        "expectedSide": "NO",
+        "expectedPrice": 0.09,
+        "expectedFee": 0.01,
+        "priceMatches": true,
+        "feeMatches": true,
+        "sideMatches": true
+      },
+      "candidates": [
+        {
+          "snapshotId": "2026-09-20-governor-mi-2026",
+          "asOf": "2026-09-20",
+          "crowdProb": 0.85,
+          "gap": -0.0665,
+          "clears": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "ticker": "SENATEAK-26-D",
+      "series": "SENATEAK",
+      "side": "NO",
+      "shares": 151.51,
+      "price": 0.3,
+      "fee": 2.2272,
+      "executedAt": "derived(1 - yes_bid)",
+      "tied": true,
+      "reason": null,
+      "binding": {
+        "snapshotId": "2026-09-20-senate-ak-2026",
+        "question": "SENATE-AK-2026",
+        "asOf": "2026-09-20",
+        "crowdLayer": "metaculus",
+        "crowdProb": 0.54,
+        "kalshiSnapshotMid": 0.695,
+        "panelMid": 0.705,
+        "gap": -0.165,
+        "expectedSide": "NO",
+        "expectedPrice": 0.3,
+        "expectedFee": 2.2272,
+        "priceMatches": true,
+        "feeMatches": true,
+        "sideMatches": true
+      },
+      "candidates": [
+        {
+          "snapshotId": "2026-09-20-senate-ak-2026",
+          "asOf": "2026-09-20",
+          "crowdProb": 0.54,
+          "gap": -0.165,
+          "clears": true
+        }
+      ]
+    }
+  ],
+  "untied": 0
+}

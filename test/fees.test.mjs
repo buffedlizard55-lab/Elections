@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { takerFee, roundUpToIncrement, seriesFeeConfig } from '../src/fees.js';
+import { takerFee, makerFee, roundUpToIncrement, seriesFeeConfig, registerSeriesFees } from '../src/fees.js';
 
 test('taker fee: 100 contracts @ 0.50, M=1 -> 0.07*100*0.5*0.5 = 1.75', () => {
   assert.equal(takerFee({ count: 100, price: 0.5, series: 'PRES' }), 1.75);
@@ -43,4 +43,42 @@ test('registry fee configs match the captured API values (M=1, quadratic)', () =
     assert.equal(cfg.fee_type, 'quadratic');
     assert.ok(cfg.capturedFrom.includes('api.elections.kalshi.com'));
   }
+});
+
+test('registerSeriesFees throws when multiplier/type is present without a numeric fee_multiplier', () => {
+  assert.throws(() => registerSeriesFees({ BADSHAPE: { multiplier: 1, type: 'quadratic' } }), /fee_multiplier/);
+});
+
+test('registerSeriesFees accepts a numeric fee_multiplier and returns the count', () => {
+  const n = registerSeriesFees({ ZZTESTFEE: { fee_type: 'quadratic', fee_multiplier: 1, capturedFrom: 'https://example.test/series' } });
+  assert.equal(n, 1);
+  assert.equal(seriesFeeConfig('ZZTESTFEE').fee_multiplier, 1);
+  assert.equal(seriesFeeConfig('ZZTESTFEE').assumed, undefined);
+});
+
+test('a config that already has fee_multiplier is accepted even if multiplier/type are also present', () => {
+  const n = registerSeriesFees({ ZZBOTH: { multiplier: 0, type: 'quadratic', fee_multiplier: 1, fee_type: 'quadratic' } });
+  assert.equal(n, 1);
+  assert.equal(seriesFeeConfig('ZZBOTH').fee_multiplier, 1);
+});
+
+test('maker fee defaults to M=0 and is not the captured taker multiplier', () => {
+  registerSeriesFees({ ZZMAKER: { fee_type: 'quadratic', fee_multiplier: 1 } });
+  const cfg = seriesFeeConfig('ZZMAKER');
+  assert.equal(cfg.maker_multiplier, 0);
+  assert.notEqual(cfg.maker_multiplier, cfg.fee_multiplier);
+  assert.equal(cfg.makerMultiplierSource, 'schedule-default');
+  assert.equal(makerFee({ count: 100, price: 0.5, series: 'ZZMAKER' }), 0);
+  assert.equal(makerFee({ count: 100, price: 0.5, series: 'PRES' }), 0);
+  assert.equal(makerFee({ count: 100, price: 0.5, series: 'UNKNOWN-MAKER' }), 0);
+  // 0.0175 * 100 * 0.5 * 0.5 = 0.4375, only when the caller passes maker M explicitly
+  assert.equal(makerFee({ count: 100, price: 0.5, series: 'ZZMAKER', makerMultiplier: 1 }), 0.4375);
+});
+
+test('quadratic_with_maker_fees without an explicit maker multiplier stays 0 and is labelled unstated', () => {
+  registerSeriesFees({ ZZQWM: { fee_type: 'quadratic_with_maker_fees', fee_multiplier: 1 } });
+  const cfg = seriesFeeConfig('ZZQWM');
+  assert.equal(cfg.maker_multiplier, 0);
+  assert.equal(cfg.makerMultiplierSource, 'unstated');
+  assert.equal(makerFee({ count: 100, price: 0.5, series: 'ZZQWM' }), 0);
 });
