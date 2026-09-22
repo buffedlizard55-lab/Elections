@@ -242,7 +242,12 @@ test('registry: the 16 batch-4 entries are present and already-admitted offices 
   assert.ok(!byId['multnomah-county-or'], 'multnomah-county-or must not duplicate multnomah-county-elections');
   assert.ok(!byId['salt-lake-county-ut'], 'salt-lake-county-ut must not duplicate salt-lake-county-clerk');
   assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-21').length, 76);
-  assert.equal(master.sources.length, 265);
+  // Session 12 added two entries fetched that day — the live Kalshi
+  // market-resolution rule text and The Leap's official competition rules —
+  // so the registry total moves 265 -> 267 and the count is asserted, not
+  // merely described.
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-22').length, 2);
+  assert.equal(master.sources.length, 267);
 });
 
 test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {

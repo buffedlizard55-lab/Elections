@@ -1,0 +1,450 @@
+{
+  "capturedFrom": "data/contest/forward-2026/season.json",
+  "capturedAt": "2026-09-22T03:59:36.653Z",
+  "seasonId": "S1-2026",
+  "asOf": "2026-09-21",
+  "rankedAsOfNote": "MARK-TO-MARKET SNAPSHOT at the 2026-09-21 capture — NOT a final result. No 2026 market in this season has settled; a position the exchange settles is closed at the captured official value and nothing else is closed at all.",
+  "leaderboard": [
+    {
+      "rank": 1,
+      "username": "longshot-fader",
+      "strategy": "ExtremeLongshotFade",
+      "origin": "new-2026",
+      "netEquity": 99908.87896,
+      "netReturnPct": -0.091121,
+      "realizedPnl": -18.5783,
+      "unrealizedPnl": -72.54274,
+      "feesPaid": 23.4231,
+      "trades": 200,
+      "tradingDays": 3,
+      "marketsTraded": 200,
+      "openPositions": 199
+    },
+    {
+      "rank": 2,
+      "username": "favorite-cash",
+      "strategy": "FavoriteHold",
+      "origin": "transferred-2024",
+      "netEquity": 99565.5374,
+      "netReturnPct": -0.434463,
+      "realizedPnl": -256.8702,
+      "unrealizedPnl": -177.5924,
+      "feesPaid": 256.8702,
+      "trades": 500,
+      "tradingDays": 3,
+      "marketsTraded": 500,
+      "openPositions": 500
+    },
+    {
+      "rank": 3,
+      "username": "longshot-lotto",
+      "strategy": "LongshotDCA",
+      "origin": "transferred-2024",
+      "netEquity": 98505.55783,
+      "netReturnPct": -1.494442,
+      "realizedPnl": -430.4705,
+      "unrealizedPnl": -1063.97167,
+      "feesPaid": 430.4705,
+      "trades": 438,
+      "tradingDays": 3,
+      "marketsTraded": 438,
+      "openPositions": 438
+    }
+  ],
+  "unranked": [
+    {
+      "username": "momentum-mule",
+      "strategy": "MomentumChase",
+      "origin": "transferred-2024",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "fader-flipper",
+      "strategy": "OverreactionFade",
+      "origin": "transferred-2024",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "yield-yak",
+      "strategy": "LateFavoriteYield",
+      "origin": "transferred-2024",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "shock-surfer",
+      "strategy": "VolumeShock",
+      "origin": "transferred-2024",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "breakout-bandit",
+      "strategy": "FinalWeekConsensus",
+      "origin": "transferred-2024",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "poll-anchor-26",
+      "strategy": "StatePollVsMarket",
+      "origin": "new-2026",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "ratings-ratchet",
+      "strategy": "TwoPublisherBandGap",
+      "origin": "new-2026",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    },
+    {
+      "username": "crosslayer-arb",
+      "strategy": "LayerDisagreement",
+      "origin": "new-2026",
+      "netEquity": 99929.57539,
+      "netReturnPct": -0.070425,
+      "trades": 3,
+      "reason": "only 2 active trading day(s); The Leap minimum is 3"
+    },
+    {
+      "username": "combo-coherence",
+      "strategy": "MutuallyExclusiveBasket",
+      "origin": "new-2026",
+      "netEquity": 100000,
+      "netReturnPct": 0,
+      "trades": 0,
+      "reason": "no qualifying entry appeared in the contest universe on any captured day (0 trades)"
+    }
+  ],
+  "model": {
+    "seasonId": "S1-2026",
+    "startingCapitalPerEntrant": 100000,
+    "minTradingDaysToRank": 3,
+    "electionDay": "2026-11-03",
+    "closesBy": "2027-12-31T23:59:59Z",
+    "ranking": "Ranked by NET EQUITY at the last captured book = 100000 + realized P&L + unrealized P&L. The Leap ranks on realized P&L with all open positions auto-closed at the end; a live season on unsettled markets must mark the open book, so this is an ADAPTATION and every published figure is labelled mark-to-market until the exchange settles the market. When every position has settled the two definitions agree.",
+    "execution": "Taker-only against the captured book: a BUY YES pays that day's yes_ask; a BUY NO pays 1 - that day's yes_bid; exits cross the other way. A market can only fill on a day it actually traded (volume_24h > 0) and only if the day's book was two-sided. No maker fill is ever claimed, because the captured data cannot show queue position.",
+    "marks": "A position is marked at the captured midpoint of yes_bid/yes_ask. When the captured book is one-sided or crossed there is NO midpoint: the position keeps its last known mark and the carry is recorded as carriedMark=true. No price is ever interpolated or invented.",
+    "accountingIdentity": "netEquity = startingCapital + realizedPnl + unrealizedPnl",
+    "fillCapOfDayVolume": 0.1,
+    "fillCapOfOpenInterest": 0.1,
+    "dailyDeploymentOfEquity": 0.2,
+    "dailyDeploymentNote": "ADAPTATION (not a Leap rule): an entrant may put at most 20% of start-of-day equity into NEW positions on one captured day. Without it, a strategy that wants 25% of equity in every one of ~1,000 markets would spend the whole bankroll on whichever markets the loop happened to reach first, and the leaderboard would measure ticker ordering. When the day's orders exceed the budget every order is scaled pro-rata, so the allocation is order-independent.",
+    "feeProvenance": {
+      "formula": "taker fee per order = roundUp(multiplier x 0.07 x contracts x price x (1 - price)), rounded up to the cent at whole-contract granularity",
+      "schedule": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+      "scheduleReadOn": "2026-09-22",
+      "settlementFee": "none — the official schedule lists no settlement fee",
+      "seriesWithCapturedConfig": 4185,
+      "seriesUsingDocumentedDefault": 0,
+      "totalSeriesRegistered": 4185
+    },
+    "leapSource": "https://www.tradingview.com/the-leap/february-2026-eurex/rules/",
+    "leapLeaderboardSource": "https://www.tradingview.com/the-leap/crypto-series-may-2026/",
+    "bankrollDerivation": "The Leap's leaderboard prints realized profit in dollars and in percent; 271,783.86 / 2.7178 = 100,001.42 and four further top rows agree to within $3. The rules page does not print a balance, so the $100,000 is DERIVED from the leaderboard, not quoted from the rules.",
+    "lookAhead": "A signal captured on UTC date D is first usable on a LATER captured day, because the price it would pay was captured before the signal existed. The poll layer as captured (2026-09-21T22:53Z) postdates every price panel in this seed, so poll-anchor-26 and ratings-ratchet place no orders until the next capture.",
+    "seasonWindow": "A market is only eligible if its close_time is on or before 2027-12-31T23:59:59Z — the season trades the 2026 cycle. A 2028 Senate market is collected and published in the market list, but pricing it against a days-to-election clock would be meaningless."
+  },
+  "field": {
+    "entrants": 12,
+    "transferredFrom2024": 7,
+    "newFor2026": 5,
+    "entryPolicy": [
+      {
+        "username": "favorite-cash",
+        "name": "FavoriteHold",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "longshot-lotto",
+        "name": "LongshotDCA",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "momentum-mule",
+        "name": "MomentumChase",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "fader-flipper",
+        "name": "OverreactionFade",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "yield-yak",
+        "name": "LateFavoriteYield",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "shock-surfer",
+        "name": "VolumeShock",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "breakout-bandit",
+        "name": "FinalWeekConsensus",
+        "origin": "transferred-2024",
+        "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test."
+      },
+      {
+        "username": "poll-anchor-26",
+        "name": "StatePollVsMarket",
+        "origin": "new-2026",
+        "adapts": null
+      },
+      {
+        "username": "ratings-ratchet",
+        "name": "TwoPublisherBandGap",
+        "origin": "new-2026",
+        "adapts": null
+      },
+      {
+        "username": "crosslayer-arb",
+        "name": "LayerDisagreement",
+        "origin": "new-2026",
+        "adapts": null
+      },
+      {
+        "username": "longshot-fader",
+        "name": "ExtremeLongshotFade",
+        "origin": "new-2026",
+        "adapts": null
+      },
+      {
+        "username": "combo-coherence",
+        "name": "MutuallyExclusiveBasket",
+        "origin": "new-2026",
+        "adapts": null
+      }
+    ]
+  },
+  "signals": {
+    "pollLedger": {
+      "considered": 31,
+      "admitted": 19,
+      "excluded": [
+        {
+          "id": "nyt-siena-2026-07-ak-senate",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "nyt-siena-2026-07-ia-senate",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "nyt-siena-2026-07-nc-senate",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "nyt-siena-2026-07-oh-senate",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "hpu-2026-08-nc-house-generic",
+          "reason": "no Kalshi market recorded for this race"
+        },
+        {
+          "id": "uh-hobby-2026-01-tx-governor",
+          "reason": "repository identity check: Candidate mismatch: poll James Hinojosa; market Gina Hinojosa. Historical scenario retained; comparison withheld"
+        },
+        {
+          "id": "uh-hobby-2026-01-tx-senate",
+          "reason": "repository identity check: Candidate mismatch: poll Median of the six candidate-matched general scenarios (Democrat: Crockett/Talarico); market James Talarico. Historical scenario retained; comparison withheld"
+        },
+        {
+          "id": "saint-anselm-2026-06-nh-senate",
+          "reason": "repository identity check: Candidate mismatch: poll Kevin Sununu; market John E. Sununu. Historical scenario retained; comparison withheld"
+        },
+        {
+          "id": "stetson-2026-04-fl-senate",
+          "reason": "repository identity check: Candidate mismatch: poll Alexander Vindman; market Angie Nixon. Historical scenario retained; comparison withheld"
+        },
+        {
+          "id": "msu-2026-08-mi-senate",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "msu-2026-08-mi-governor",
+          "reason": "poll layer carries a review flag — not traded until a human clears it"
+        },
+        {
+          "id": "rasmussen-2026-09-ak-senate",
+          "reason": "repository identity check: Candidate mismatch: poll Mary Peltola; market Democratic party. Historical scenario retained; comparison withheld"
+        }
+      ],
+      "asOf": "2026-09-21"
+    },
+    "ratingsLedger": {
+      "considered": 13,
+      "admitted": 12,
+      "excluded": [
+        {
+          "state": "NE",
+          "reason": "Kalshi leg resolves on side \"I\", but the bands describe the non-Republican side — different question"
+        }
+      ],
+      "asOf": "2026-09-21"
+    }
+  },
+  "identityCheck": {
+    "checked": [
+      {
+        "username": "favorite-cash",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": -256.8702,
+          "unrealizedPnl": -177.5924,
+          "sum": 99565.5374,
+          "netEquity": 99565.5374
+        }
+      },
+      {
+        "username": "longshot-lotto",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": -430.4705,
+          "unrealizedPnl": -1063.97167,
+          "sum": 98505.55783,
+          "netEquity": 98505.55783
+        }
+      },
+      {
+        "username": "momentum-mule",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "fader-flipper",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "yield-yak",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "shock-surfer",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "breakout-bandit",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "poll-anchor-26",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "ratings-ratchet",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      },
+      {
+        "username": "crosslayer-arb",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": -37.987,
+          "unrealizedPnl": -32.43761,
+          "sum": 99929.57539,
+          "netEquity": 99929.57539
+        }
+      },
+      {
+        "username": "longshot-fader",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": -18.5783,
+          "unrealizedPnl": -72.54274,
+          "sum": 99908.87896,
+          "netEquity": 99908.87896
+        }
+      },
+      {
+        "username": "combo-coherence",
+        "holds": true,
+        "legs": {
+          "startingCapital": 100000,
+          "realizedPnl": 0,
+          "unrealizedPnl": 0,
+          "sum": 100000,
+          "netEquity": 100000
+        }
+      }
+    ],
+    "allHold": true
+  }
+}

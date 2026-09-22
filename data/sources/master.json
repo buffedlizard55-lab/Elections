@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
-  "updated": "2026-09-21",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings. Follow-up on branch arena/01a0c65b-elections, merged onto the session-11 registry: added 16 directly fetched pages that were not already admitted (14 county election authorities, the League of Women Voters homepage, and Verified Voting) and recategorized vote-org and rock-the-vote (irregularity #70). Baltimore City, Denver, Multnomah, and Salt Lake were already in the registry and were not duplicated. JS shells and failed fetches were not admitted (irregularity #71).",
+  "updated": "2026-09-22",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings. Follow-up on branch arena/01a0c65b-elections, merged onto the session-11 registry: added 16 directly fetched pages that were not already admitted (14 county election authorities, the League of Women Voters homepage, and Verified Voting) and recategorized vote-org and rock-the-vote (irregularity #70). Baltimore City, Denver, Multnomah, and Salt Lake were already in the registry and were not duplicated. JS shells and failed fetches were not admitted (irregularity #71). Session 12 (2026-09-22) added 2 further directly fetched entries: the live Kalshi market-resolution rule text and The Leap's official competition rules. 265 -> 267.",
   "sources": [
     {
       "id": "kalshi",
@@ -2909,6 +2909,29 @@
       "status": "verified",
       "notes": "Nonprofit research and advocacy, not an official canvass authority. The Verifier is their equipment and audit-law database, not certified returns. Filed under Ratings, forecasts & analysis, not government.",
       "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "kalshi-market-rules",
+      "name": "Kalshi market resolution rules (rules_primary / rules_secondary on the live Market object)",
+      "type": "Official exchange rule text, read from the public API",
+      "url": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=CONTROLS&status=open",
+      "docs": "https://docs.kalshi.com/api-reference/market/get-markets",
+      "verified": "Fetched 2026-09-22. CONTROLS-2026-D rules_primary: 'If the Democratic Party has won control of the U.S. Senate in 2026, then the market resolves to Yes.' rules_secondary: 'This market may be determined early based on a consensus of media calls projecting control of the U.S. Senate. See full rules for details. Otherwise, victory will be determined by the party identification of the President pro tempore of the Senate on February 1, 2027.' CONTROLH-2026-R rules_primary: 'If the Republican Party has won control of the House in 2026, then the market resolves to Yes.' rules_secondary names the party identification of the Speaker of the House on February 1, 2027. Both carry close_time 2027-02-01T15:00:00Z and settlement_timer_seconds 3600.",
+      "verifiedOn": "2026-09-22",
+      "status": "verified",
+      "notes": "Fetched through the page-fetch channel because this sandbox cannot open TLS to the exchange host directly (irregularity #22); the same endpoint is what the collectors call on GitHub runners. This capture DISPROVES the 'majority 51 + VP tiebreak' assumption that session 11 had queued: the published rule names the President pro tempore (Senate) and the Speaker (House) on February 1 of the following year, and permits an early determination on a consensus of media calls. See irregularity #72. Netting or share-count arithmetic must not be written into controlQuestion.resolutionRule from an assumed rule.",
+      "category": "Prediction markets & exchange data"
+    },
+    {
+      "id": "the-leap-rules",
+      "name": "TradingView 'The Leap' \u2014 Official Competition Rules",
+      "type": "Contest rules document (the mechanics this project reverse-engineers)",
+      "url": "https://www.tradingview.com/the-leap/february-2026-eurex/rules/",
+      "verified": "Fetched 2026-09-22. Quoted: 'A prerequisite that a Competition participant must fulfill in order to qualify for a prize is trading activity for at least 3 days of the Competition. Trading activity within one day is considered to be actions that resulted in the opening or closing of positions from 00:00:00 to 23:59:59 UTC.' and 'A participant's place during the Competition and at the end of the Competition is determined based on the realized profit/loss on the Competition account. Realized profit/loss for the purposes of the Competition is considered to be profit/loss on closed positions.' and 'All open positions of the Competition participants will be automatically closed at the end of the Competition Period. The realized profit/loss of the automatically closed positions will be taken into account in the final calculation of the places of the participants.' Prizes go to the top 250.",
+      "verifiedOn": "2026-09-22",
+      "status": "verified",
+      "notes": "This is one edition's rulebook (Eurex, February 2026). The Leap's parameters are per-edition: 3-day minimum and $100,000 balance for the May 2026 crypto and July 2026 TradeStation editions; 5-day minimum and $250,000 balance for the September 2026 AMP Futures edition. The $100,000 bankroll used by the 2026 season in this repo is corroborated arithmetically from the May 2026 crypto leaderboard (realized profit $ / realized profit % = 100,000 for at least five of the top traders). See irregularity #74; edition parameters must never be presented as universal.",
+      "category": "Contest & methodology references"
     }
   ],
   "categories": [
@@ -2938,7 +2961,7 @@
     },
     {
       "name": "Prediction markets & exchange data",
-      "count": 10
+      "count": 11
     },
     {
       "name": "Ratings, forecasts & analysis",
@@ -2946,7 +2969,7 @@
     },
     {
       "name": "Contest & methodology references",
-      "count": 1
+      "count": 2
     }
   ]
 }

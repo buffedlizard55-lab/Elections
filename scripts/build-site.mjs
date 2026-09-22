@@ -41,6 +41,43 @@ const irregularities = {
   ].sort((a, b) => a.id - b.id),
 };
 const roadmap = read('data/roadmap.json');
+
+// ---------------------------------------------------------------------------
+// Live 2026 contest (R16) — written by scripts/run-forward-contest.mjs.
+// Slimmed for the browser: the leaderboard, the season model (so every
+// adaptation is visible on the page), the identity-gate tally, per-entrant
+// attribution headlines, and the universe counts. Full fill logs stay in
+// data/contest/forward-2026/season.json.
+// ---------------------------------------------------------------------------
+const cf2026 = readOptional('data/contest/forward-2026/leaderboard.json');
+const cf2026Season = readOptional('data/contest/forward-2026/season.json');
+const cf2026Universe = readOptional('data/contest/forward-2026/universe.json');
+const cf2026Attribution = readOptional('data/contest/forward-2026/attribution.json');
+const marketList = readOptional('data/kalshi/universe/market-list-latest.json');
+const contest2026 = cf2026 && cf2026Season ? {
+  asOf: cf2026.asOf,
+  seriesId: cf2026.seasonId,
+  rankedAsOfNote: cf2026.rankedAsOfNote,
+  leaderboard: cf2026.leaderboard,
+  unranked: cf2026.unranked,
+  model: cf2026Season.model,
+  field: cf2026Season.field,
+  season: {
+    openedOn: cf2026Season.openedOn,
+    lastCapturedDay: cf2026Season.lastCapturedDay,
+    capturedTradingDays: cf2026Season.capturedTradingDays,
+    electionDay: cf2026Season.electionDay,
+    status: cf2026Season.status,
+    identityCheck: cf2026Season.identityCheck,
+  },
+  signals: cf2026Season.signals,
+  // equity curves, one series per entrant (dates + net equity only)
+  curves: Object.fromEntries((cf2026Season.results || []).map((r) => [r.username, (r.equityCurve || []).map((p) => ({ x: p.date, y: p.netEquity }))])),
+  // keeps the thesis and the headline attribution without the fill log
+  theses: Object.fromEntries((cf2026Season.results || []).map((r) => [r.username, { thesis: r.thesis, name: r.name, origin: r.origin, adapts: r.adapts || null, strategyMetrics: r.strategyMetrics }])),
+  attribution: cf2026Attribution ? Object.fromEntries((cf2026Attribution.attribution || []).map((a) => [a.username, { bySeries: a.bySeries.slice(0, 6), byMarket: a.byMarket.slice(0, 6), byMarketCount: a.byMarketCount, bySeriesCount: a.bySeriesCount, totals: a.totals }])) : null,
+  universe: cf2026Universe ? { captureDate: cf2026Universe.dates[cf2026Universe.dates.length - 1], perDate: cf2026Universe.perDate, exclusionReasonTally: cf2026Universe.exclusionReasonTally, distinctTickers: cf2026Universe.distinctTickers, distinctSeries: cf2026Universe.distinctSeries, definition: cf2026Universe.definition } : null,
+} : null;
 const pollLayerRaw = readOptional('data/polls/poll-layer-2026.json');
 
 // Forward-collection layer (written by scripts/collect-kalshi.mjs on networked runs; absent until the first run)
@@ -217,6 +254,8 @@ const bundle = {
   polls,
   backtests,
   contest,
+  contest2026,
+  marketList,
   irregularities,
   roadmap,
   pollSeries2024: pollSeries,
