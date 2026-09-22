@@ -157,6 +157,16 @@ jobs:
           node scripts/run-senate-backtest.mjs || echo "::warning::senate backtest rerun failed"
           node scripts/run-calibration.mjs || echo "::warning::calibration tracker rerun failed"
 
+      - name: Refresh poll-layer provenance (universe capturedAt anchor)
+        # Re-anchors data/polls/poll-layer-2026.json::candidateMismatchProvenance.universeCapturedAt
+        # to the universe capture just written by collect-kalshi.mjs. The field is the
+        # audit header that says "every stateRaces[].candidateMismatch was computed against
+        # THIS universe snapshot" — when the universe is re-captured and the header is left
+        # stale, the verification gate (test/verification-gates.test.mjs "wrong nominees") fails.
+        # Idempotent; depends on the universe step succeeding (which is the collect step itself).
+        continue-on-error: true
+        run: node scripts/refresh-poll-layer-provenance.mjs || echo "::warning::poll-layer provenance refresh failed - header stays at its previous value"
+
       - name: Snapshot this run's kalshi capture (integrity anchor for the commit step)
         id: kanchor
         run: |
