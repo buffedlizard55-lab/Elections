@@ -19,7 +19,7 @@ vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 sandbox.Chart2 = { lines() {} };
 vm.runInContext(app, sandbox);
-const sections = ['overview', 'markets', 'polls', 'tracker', 'forward', 'crosslayer', 'backtests', 'contest', 'contest2026', 'sources', 'irregularities', 'methodology', 'roadmap'];
+const sections = ['overview', 'allmarkets', 'markets', 'polls', 'tracker', 'forward', 'crosslayer', 'backtests', 'contest', 'contest2026', 'sources', 'irregularities', 'methodology', 'roadmap'];
 // Sections must also CONTAIN what they are for. A renamed key in the bundle once
 // made the 2026 contest's refusals block render its "no signal ledger" fallback
 // with no template leak for the check below to catch.
@@ -28,9 +28,13 @@ const REQUIRED = {
   contest: ['Rank'],
   sources: ['http'],
   polls: ['identity'],
+  // The "full list" is the project's headline deliverable: the section must carry the
+  // browsable table shell, the search controls and the link to the canonical CSV.
+  allmarkets: ['mk-body', 'mk-q', 'market-list-latest.csv', 'contest-eligible', 'Every series in the list'],
 };
 const FORBIDDEN = {
   contest2026: ['No signal ledger in this build'],
+  allmarkets: ['No browsable market list in this build'],
 };
 let ok = true;
 for (const s of sections) {

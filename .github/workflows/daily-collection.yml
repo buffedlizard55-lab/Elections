@@ -118,10 +118,36 @@ jobs:
         continue-on-error: true
         run: node scripts/crosscheck-collectors.mjs
 
+      # Runtime budget (irregularity #81): the script's own --budget-minutes must stay
+      # STRICTLY BELOW this step timeout, or the runner kills it mid-phase and the
+      # settled-2026 seed never reaches its writeFileSync — which is exactly what
+      # silently froze the seed at its 2026-09-19 content on 2026-09-21 and 2026-09-22
+      # (both steps ran 25.2 min against a 25 min limit and were reported "success"
+      # by continue-on-error). 30 min timeout / 24 min budget leaves a 6 min margin for
+      # the final writes, and --concurrency 6 keeps the open-universe phase at roughly
+      # a fifth of Kalshi's documented 20 req/s Basic read ceiling.
       - name: FULL open-market universe snapshot (forward loop -> data/kalshi/forward/)
         continue-on-error: true
-        timeout-minutes: 25
-        run: node scripts/collect-universe.mjs || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+        timeout-minutes: 30
+        run: node scripts/collect-universe.mjs --concurrency 6 --budget-minutes 24 || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+
+      # A truncated capture is legitimate (the budget is a safety valve), but it must be
+      # VISIBLE. This surfaces it as a workflow warning instead of leaving it only in meta.
+      - name: Report universe capture completeness
+        continue-on-error: true
+        run: |
+          META="data/kalshi/forward/meta-$(date -u +%F).json"
+          if [ ! -f "$META" ]; then
+            echo "::warning::no universe meta for today ($META) - the capture step wrote nothing"
+            exit 0
+          fi
+          node -e '
+            const m = require("./" + process.argv[1]);
+            const r = m.runtime || {};
+            console.log(`universe capture: ${m.openMarkets} open markets, ${m.settled2026Markets} settled-2026 (${m.settled2026WithBars} with bars), ${r.elapsedMinutes} min at concurrency ${r.concurrency}`);
+            for (const p of r.phasesTruncated || []) console.log(`::warning::universe capture truncated - ${p}`);
+            if (r.complete === false) console.log("::warning::universe capture INCOMPLETE - the next run resumes where this one stopped");
+          ' "$META"
 
       - name: 2024 per-state Senate races capture (forward loop -> data/kalshi/historical-2024/)
         continue-on-error: true

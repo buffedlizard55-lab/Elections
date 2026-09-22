@@ -25,7 +25,31 @@
  * series are excluded from candle capture to bound repo growth; they remain
  * in the registry, the open universe, and the tracker CSV).
  *
+ * Runtime budget (irregularity #81, 2026-09-22)
+ * --------------------------------------------
+ * The workflow step that runs this script has a hard 25-minute timeout. Before
+ * this revision the script fetched the ~4,200 politics series strictly one at a
+ * time (measured 0.254 s/series = 3.94 req/s, so ~17.9 min for the open universe
+ * alone) and then started the settled-2026 seed phase, which never got to its
+ * writeFileSync: the runner killed the step mid-phase on both 2026-09-21 and
+ * 2026-09-22, so settled-2026-seed.json stayed frozen at its 2026-09-19 content
+ * (9,350 markets / 400 bars) while the step still reported "success" because of
+ * continue-on-error. Two changes fix that class of failure for good:
+ *
+ *   1. Bounded concurrency (--concurrency, default 6). Kalshi's documented Basic
+ *      tier read budget is 200 tokens/s and a default request costs 10 tokens =
+ *      20 req/s sustained (https://docs.kalshi.com/getting_started/rate_limits.md,
+ *      read 2026-09-22). Serial fetching used 3.94 req/s; 6-way concurrency with
+ *      the existing per-request pacing stays well inside that ceiling, and
+ *      getJson() already retries 429/5xx with backoff.
+ *   2. A wall-clock DEADLINE (--budget-minutes, default 20 < the step's 25). Each
+ *      phase checks the remaining budget and stops enqueuing new work when it is
+ *      exhausted. Whatever has been collected is still written, and the run
+ *      records `budgetExhausted` + `phasesTruncated` in meta so a short capture is
+ *      visible as data rather than inferred from a missing file.
+ *
  * Usage: node scripts/collect-universe.mjs [--no-candles] [--max-candles N]
+ *                                          [--concurrency N] [--budget-minutes N]
  */
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -36,8 +60,15 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'data/kalshi/forward');
 const argv = process.argv.slice(2);
 const NO_CANDLES = argv.includes('--no-candles');
-const maxCandlesArg = argv.indexOf('--max-candles');
-const MAX_NEW_CANDLES = maxCandlesArg >= 0 ? Number(argv[maxCandlesArg + 1]) : 400;
+const numArg = (flag, dflt) => {
+  const i = argv.indexOf(flag);
+  if (i < 0) return dflt;
+  const v = Number(argv[i + 1]);
+  return Number.isFinite(v) && v > 0 ? v : dflt;
+};
+const MAX_NEW_CANDLES = numArg('--max-candles', 400);
+const CONCURRENCY = Math.max(1, Math.floor(numArg('--concurrency', 6)));
+const BUDGET_MINUTES = numArg('--budget-minutes', 20);
 
 const now = new Date();
 const day = now.toISOString().slice(0, 10);
@@ -45,8 +76,36 @@ const capturedAt = now.toISOString();
 const SEED_MIN_CLOSE = '2026-01-01T00:00:00Z';
 const CANDLE_WINDOW_DAYS = 95; // T-95d .. close+2d: covers every backtest lead time (T-1..T-60) + convergence
 
+const START_MS = Date.now();
+const DEADLINE_MS = START_MS + BUDGET_MINUTES * 60_000;
+const timeLeftMs = () => DEADLINE_MS - Date.now();
+const outOfTime = () => timeLeftMs() <= 0;
+const elapsedMin = () => (Date.now() - START_MS) / 60_000;
+
 const errors = [];
+const phasesTruncated = [];
 const log = (...a) => console.log('[universe]', ...a);
+
+/**
+ * Run `worker` over `items` with at most `limit` in flight, stopping early when
+ * the wall-clock budget is gone. Returns how many items were actually attempted
+ * so the caller can record truncation honestly.
+ */
+async function mapPool(items, limit, worker) {
+  let next = 0;
+  let attempted = 0;
+  const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      if (outOfTime()) return;
+      attempted++;
+      await worker(items[i], i);
+    }
+  });
+  await Promise.all(runners);
+  return attempted;
+}
 
 function readJsonIfExists(p) {
   try { return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null; } catch { return null; }
@@ -137,10 +196,10 @@ async function main() {
     series: all,
   }, null, 1) + '\n');
 
-  // --- open universe ---
+  // --- open universe (bounded concurrency, deadline-aware) ---
   const openRows = [];
   const perSeries = {};
-  for (const s of politics) {
+  const openAttempted = await mapPool(politics, CONCURRENCY, async (s) => {
     try {
       const ms = await fetchOpenMarkets(s.ticker);
       perSeries[s.ticker] = ms.length;
@@ -150,15 +209,25 @@ async function main() {
       errors.push(`open ${s.ticker}: ${e.message}`);
       perSeries[s.ticker] = null;
     }
+  });
+  if (openAttempted < politics.length) {
+    const msg = `open-universe phase stopped at ${openAttempted}/${politics.length} series after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min)`;
+    phasesTruncated.push(msg);
+    log(`WARNING: ${msg}`);
   }
-  log(`open universe: ${openRows.length} markets across ${politics.length} series`);
+  // Deterministic order regardless of completion order under concurrency, so the
+  // committed file diffs cleanly day over day and the offline replay test is stable.
+  openRows.sort((a, b) => (a.ticker < b.ticker ? -1 : a.ticker > b.ticker ? 1 : 0));
+  log(`open universe: ${openRows.length} markets across ${openAttempted} series (${elapsedMin().toFixed(1)} min elapsed)`);
   writeFileSync(join(OUT, 'universe-open.json'), JSON.stringify({
     capturedFrom: `${API_BASE}/markets?series_ticker={each politics/elections series}&status=open (cursor-paginated)`,
     capturedAt,
     capturedBy: 'scripts/collect-universe.mjs',
     date: day,
     count: openRows.length,
-    seriesQueried: politics.length,
+    seriesQueried: openAttempted,
+    seriesEligible: politics.length,
+    complete: openAttempted === politics.length,
     markets: openRows,
   }, null, 1) + '\n');
 
@@ -201,36 +270,66 @@ async function main() {
     return cats.includes('Elections') && s.frequency !== 'daily';
   });
   let newCandles = 0;
-  for (const s of electionsSeries) {
+  // Phase A — discover settled 2026 markets (bounded concurrency, deadline-aware).
+  const pendingCandles = [];
+  const seedAttempted = await mapPool(electionsSeries, CONCURRENCY, async (s) => {
     let settled;
     try {
       settled = await fetchSettled2026(s.ticker);
     } catch (e) {
       errors.push(`settled ${s.ticker}: ${e.message}`);
-      continue;
+      return;
     }
     for (const m of settled) {
-      const row = {
+      seed.markets[m.ticker] = {
         ticker: m.ticker, event_ticker: m.event_ticker, series: s.ticker,
         sub: m.yes_sub_title || null, result: m.result || null,
         status: m.status || null, close_time: m.close_time || null,
         settlement_ts: m.settlement_ts || null, expiration_value: m.expiration_value ?? null,
         volume: m.volume_fp ?? null, open_interest: m.open_interest_fp ?? null,
       };
-      seed.markets[m.ticker] = row;
-      if (!seed.bars[m.ticker] && !NO_CANDLES && m.close_time) {
-        if (newCandles >= MAX_NEW_CANDLES) { seed.skipped.push(`${m.ticker} (max-candles ${MAX_NEW_CANDLES} reached this run)`); continue; }
-        const got = await fetchCandles(m);
-        if (got) {
-          seed.bars[m.ticker] = got.bars;
-          seed.candleEndpoint[m.ticker] = got.endpoint;
-          newCandles++;
-        }
-        await sleep(80);
-      }
+      if (!seed.bars[m.ticker] && !NO_CANDLES && m.close_time) pendingCandles.push(m);
     }
+  });
+  if (seedAttempted < electionsSeries.length) {
+    const msg = `settled-2026 discovery stopped at ${seedAttempted}/${electionsSeries.length} Elections series after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min)`;
+    phasesTruncated.push(msg);
+    log(`WARNING: ${msg}`);
   }
-  log(`settled-2026 seed: ${Object.keys(seed.markets).length} markets, ${Object.keys(seed.bars).length} with bars (+${newCandles} new this run)`);
+
+  // Phase B — candles for newly discovered markets, oldest close first so the
+  // accumulating seed fills in a stable, reproducible order across runs. Ticker
+  // breaks close_time ties: discovery order is nondeterministic under concurrency,
+  // so without the tiebreak two runs could pick different markets at the cap.
+  pendingCandles.sort((a, b) => (a.close_time < b.close_time ? -1 : a.close_time > b.close_time ? 1
+    : a.ticker < b.ticker ? -1 : a.ticker > b.ticker ? 1 : 0));
+  const candleTargets = pendingCandles.slice(0, MAX_NEW_CANDLES);
+  for (const m of pendingCandles.slice(MAX_NEW_CANDLES)) {
+    seed.skipped.push(`${m.ticker} (max-candles ${MAX_NEW_CANDLES} reached this run)`);
+  }
+  const candlesAttempted = await mapPool(candleTargets, CONCURRENCY, async (m) => {
+    const got = await fetchCandles(m);
+    if (got) {
+      seed.bars[m.ticker] = got.bars;
+      seed.candleEndpoint[m.ticker] = got.endpoint;
+      newCandles++;
+    }
+    await sleep(80);
+  });
+  if (candlesAttempted < candleTargets.length) {
+    const msg = `candle phase stopped at ${candlesAttempted}/${candleTargets.length} new markets after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min)`;
+    phasesTruncated.push(msg);
+    log(`WARNING: ${msg}`);
+    for (const m of candleTargets.slice(candlesAttempted)) seed.skipped.push(`${m.ticker} (time budget exhausted this run)`);
+  }
+  // Key order in the written JSON must not depend on which worker finished first,
+  // or the committed diff churns every day for no substantive reason.
+  const sortKeys = (o) => Object.fromEntries(Object.keys(o).sort().map((k) => [k, o[k]]));
+  seed.markets = sortKeys(seed.markets);
+  seed.bars = sortKeys(seed.bars);
+  seed.candleEndpoint = sortKeys(seed.candleEndpoint);
+  seed.skipped.sort();
+  log(`settled-2026 seed: ${Object.keys(seed.markets).length} markets, ${Object.keys(seed.bars).length} with bars (+${newCandles} new this run, ${elapsedMin().toFixed(1)} min elapsed)`);
   writeFileSync(join(OUT, 'settled-2026-seed.json'), JSON.stringify(seed, null, 1) + '\n');
 
   // --- run metadata ---
@@ -241,14 +340,28 @@ async function main() {
     date: day,
     seriesTotal: all.length,
     seriesPolitics: politics.length,
+    seriesPoliticsQueried: openAttempted,
     openMarkets: openRows.length,
     trackerRowsAppended: appended,
     settled2026Markets: Object.keys(seed.markets).length,
     settled2026WithBars: Object.keys(seed.bars).length,
     newCandlesThisRun: newCandles,
-    errors,
+    // Runtime budget accounting (irregularity #81): a short capture must be
+    // visible in the record, never inferred from a file that failed to update.
+    runtime: {
+      concurrency: CONCURRENCY,
+      budgetMinutes: BUDGET_MINUTES,
+      elapsedMinutes: Number(elapsedMin().toFixed(2)),
+      budgetExhausted: outOfTime(),
+      complete: phasesTruncated.length === 0,
+      phasesTruncated,
+    },
+    // Sorted: workers finish in arbitrary order, and an unsorted error list would
+    // make two otherwise identical runs produce different files.
+    errors: [...errors].sort(),
   };
   writeFileSync(join(OUT, `meta-${day}.json`), JSON.stringify(meta, null, 1) + '\n');
+  log(`runtime: ${elapsedMin().toFixed(1)} min of ${BUDGET_MINUTES} min budget at concurrency ${CONCURRENCY}; ${phasesTruncated.length ? `${phasesTruncated.length} phase(s) truncated` : 'all phases complete'}`);
   log(errors.length ? `DONE with ${errors.length} errors (see meta-${day}.json)` : 'DONE, no errors');
   // Fail hard only when the core universe came back empty (nothing usable to commit).
   if (openRows.length === 0 && all.length === 0) process.exit(1);

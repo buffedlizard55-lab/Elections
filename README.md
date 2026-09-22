@@ -11,7 +11,7 @@
 each, scored every day on **open** Kalshi election markets. See
 [§ The live 2026 contest](#the-live-2026-contest-r16).
 
-**267 sources · 80 irregularities · 156 tests.** This session closed the queued
+**267 sources · 81 irregularities · 160 tests.** This session closed the queued
 control-market question from the exchange's own rule text, published the canonical
 open-market list with an arithmetic reconciliation gate, and built the forward
 paper-trading engine, and rebuilt the forward contest layer around the captured panels.
@@ -20,6 +20,23 @@ previous session had queued rather than confirmed, and one that records what `cl
 really is on this exchange. **#80** (2026-09-22) records the test staleness + provenance
 drift fixed by `scripts/refresh-poll-layer-provenance.mjs` and the rewritten signals-ledger
 assertion in `test/forward-contest.test.mjs`.
+
+**#81 (2026-09-22, high) — the daily collector was silently losing a whole phase.**
+`scripts/collect-universe.mjs` fetched ~4,200 series one at a time (measured 3.94 req/s) and
+ran past the workflow's 25-minute step timeout on **both** 2026-09-21 and 2026-09-22, so the
+settled-2026 candle seed never reached its write and stayed frozen at its 2026-09-19 content
+(9,350 markets / 400 bars). Because the step is `continue-on-error`, the GitHub API still
+reported that step as `success`. The collector now uses bounded concurrency (default 6, about
+a fifth of the documented 20 req/s Basic-tier read ceiling) **and** its own wall-clock budget
+(`--budget-minutes`, default 20) so every artifact is written before the runner can kill it;
+truncation is recorded in `meta-<date>.json` and surfaced as a workflow warning. Output is
+deterministic under concurrency (sorted keys, ticker-tiebroken candle queue), verified by
+two jittered runs producing byte-identical files.
+
+**New: [All Markets](https://buffedlizard55-lab.github.io/Elections/#/allmarkets)** — the
+project's "full list" is now browsable on the site (searchable, filterable by eligibility
+verdict), backed by the canonical 24,139-row
+[`market-list-latest.csv`](data/kalshi/universe/market-list-latest.csv).
 
 ## Two toolchains, one standard
 
@@ -31,7 +48,7 @@ assertion in `test/forward-contest.test.mjs`.
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (2024, settled, real Kalshi fees) · `src/contest/forward-*.js` → `data/contest/forward-2026/` (**live 2026 season**, 12 entrants, daily scoring) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (156 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Checks | `npm test` (160 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
 | Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
@@ -42,7 +59,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 
 | Path | What it is |
 |---|---|
-| `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, **2026 Markets** (from the daily capture), **2026 Polls** (poll layer vs market vs ratings), **Tracker** (forward loop + calibration + collector cross-check), backtests, contest, sources, irregularities, methodology, roadmap |
+| `index.html` + `src/site/` | Main static site (GitHub Pages, main branch root): overview, **All Markets** (the full captured open political/election universe — searchable, filterable by eligibility verdict), **2026 Markets** (from the daily capture), **2026 Polls** (poll layer vs market vs ratings), **Tracker** (forward loop + calibration + collector cross-check), backtests, contest, sources, irregularities, methodology, roadmap |
 | `docs/` | Toolkit site (served as `/docs/`): 20-source registry browser, Kalshi layer, contest leaderboard, methodology, verification evidence |
 | `data/kalshi/` | `universe/series.json` + `universe/latest.json` (today's registry + open events; per-market `status` when not active), `tracker/daily/YYYY-MM-DD.csv` (traded, not-yet-settled markets, one row per day, with the exchange `status`), `tracker/{index,settlements,calibration,discrepancy-watch,collector-crosscheck,history}.json` (descriptors · official results · look-ahead-guarded scorer · consistency findings · two-collector agreement · one record per run day), `historical/senate-2024.json` (36 settled 2024 Senate markets + 1,269 daily bars), `forward/` (**FULL open-universe capture**: `universe-open.json` 24,150 markets, `tracker.csv` daily bid/ask appends, `settled-2026-candles.json` 400-market candle seed), `historical-2024/senate-races.json` (same 36 Senate markets with candle series for the T-1..T-60 backtest), the 2026-09-18 hand snapshot; core 2024 markets in `src/kalshi-data.js` |
 | `data/crosslayer/` + `src/crosslayer.js` | **Cross-layer scoreboard (R14)** — Kalshi vs Metaculus vs DDHQ vs EBO-rendered Kalshi on the 2026 Senate/House control questions; snapshots stay `pending` until `outcomes.json` carries an official canvass with a source url, then Brier/log-loss per layer (look-ahead guarded). Collectors: `scripts/collect-metaculus.mjs` (hub HTML; api2 is auth-walled, #54), `scripts/collect-statenavigate.mjs` (free forecast pages + API-host probe, #55), `scripts/crosscheck-renderings.mjs` (R13 standing monitor → `data/kalshi/tracker/rendering-crosscheck.json`) |
@@ -57,7 +74,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `data/polls/` | 538's archived national averages (verbatim GitHub copy; git-blob SHA-1 = upstream + SHA-256 in `PROVENANCE.md`), `verified-polls.json` (verification chains) and `poll-layer-2026.json` (2026 generic-ballot + state-race polls, Cook/Inside ratings, exit-poll status) |
 | `data/backtest-results.json` | Market calibration over 39 settled 2024 markets (groups core/senate/all; Brier/log-loss/hold-PnL at T-1…T-60; favourite hit-rate; pooled calibration curve) + poll-vs-market-vs-outcome (generated) |
 | `data/contest-results.json` | Paper-trading contest: 8 entrants, $100k each, Kalshi's real fees, The Leap's ≥3-trading-day rule, two universes (core-2024 / all-2024) (generated) |
-| `data/irregularities.json` + `IRREGULARITIES.md` | 70 Node-track irregularities plus the Python-track items, with severities and actions; the lint fails if the table and the JSON drift apart |
+| `data/irregularities.json` + `IRREGULARITIES.md` | 71 Node-track irregularities plus the Python-track items, with severities and actions; the lint fails if the table and the JSON drift apart |
 | `src/` | Zero-dependency Node engines: fee schedule, market backtests, poll backtest, contest engine + strategies, no-fabrication lint |
 | `scripts/*.py` | Python toolkit: Kalshi collector, source validator, backtester, contest engine, site-data sync |
 | `test/` + `scripts/*.mjs` | 101 Node tests (incl. an offline end-to-end replay that must reproduce the live capture byte-for-byte); `run-backtests`, `run-contest`, `build-site`, `collect-kalshi`, `collect-senate-2024`, `crosscheck-collectors`, `lint-verified`, `render-check` |

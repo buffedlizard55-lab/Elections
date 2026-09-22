@@ -213,6 +213,63 @@ const doc = {
 
 writeFileSync(join(OUT_DIR, 'market-list-latest.json'), JSON.stringify(doc, null, 2) + '\n');
 
+// ---------------------------------------------------------------------------
+// Browsable slice for the static site. The full list is ~4.5 MB of CSV, which is
+// too large to load into a page, but publishing only aggregate counts means the
+// site asserts "24,139 markets" without ever showing one. This writes the
+// highest-volume rows in a compact positional layout the browser can search and
+// page through, with the SAME eligibility verdict as the canonical CSV, plus a
+// per-series roll-up over ALL rows so the totals on the page are complete even
+// though the row list is capped. Every field is copied from the captured row —
+// nothing is recomputed here.
+// ---------------------------------------------------------------------------
+const BROWSE_LIMIT = 3000;
+const numOrNull = (v) => (v == null || v === '' ? null : Number(v));
+const browseRows = [...rows]
+  .sort((a, b) => (numOrNull(b.lifetime_volume) || 0) - (numOrNull(a.lifetime_volume) || 0))
+  .slice(0, BROWSE_LIMIT)
+  .map((r) => [
+    r.ticker,
+    r.yes_sub_title || '',
+    r.series,
+    numOrNull(r.mid),
+    numOrNull(r.yes_bid),
+    numOrNull(r.yes_ask),
+    numOrNull(r.lifetime_volume),
+    numOrNull(r.open_interest),
+    String(r.close_time || '').slice(0, 10),
+    r.eligibility_reason,
+    r.us_election_series === 'yes' ? 1 : 0,
+  ]);
+
+// Roll-up across every listed row (not just the browsable slice).
+const seriesRollup = Object.values(rows.reduce((acc, r) => {
+  const k = r.series || '(none)';
+  const a = acc[k] || (acc[k] = { series: k, markets: 0, eligible: 0, volume: 0, usElection: r.us_election_series === 'yes' });
+  a.markets++;
+  if (r.contest_eligible === 'yes') a.eligible++;
+  a.volume += numOrNull(r.lifetime_volume) || 0;
+  return acc;
+}, {})).sort((a, b) => b.volume - a.volume);
+
+writeFileSync(join(OUT_DIR, 'market-list-browse.json'), JSON.stringify({
+  title: 'Browsable slice of the canonical open political/election market list',
+  note: `The ${BROWSE_LIMIT} highest-volume rows of the ${rows.length}-row canonical list, for the static site. The complete list is data/kalshi/universe/market-list-latest.csv; the per-series roll-up below covers ALL ${rows.length} rows, not just the slice.`,
+  capturedFrom: openUniverse.capturedFrom,
+  capturedAt: openUniverse.capturedAt,
+  capturedForDate: openUniverse.date,
+  latestPanelDate: latestDate,
+  totalListed: rows.length,
+  browsableRows: browseRows.length,
+  contestEligibleCount: doc.contestEligibleCount,
+  csvPath: 'data/kalshi/universe/market-list-latest.csv',
+  csvUrl: 'https://github.com/buffedlizard55-lab/Elections/blob/main/data/kalshi/universe/market-list-latest.csv',
+  fields: ['ticker', 'outcome', 'series', 'mid', 'bid', 'ask', 'volume', 'openInterest', 'closes', 'reason', 'usElection'],
+  rows: browseRows,
+  seriesRollup,
+}, null, 1) + '\n');
+log(`browsable slice: ${browseRows.length} of ${rows.length} rows (top by volume) + ${seriesRollup.length}-series roll-up`);
+
 const header = Object.keys(rows[0]);
 const esc = (v) => {
   const s = String(v == null ? '' : v);

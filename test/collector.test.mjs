@@ -265,3 +265,76 @@ test('collector helpers: daily schema carries the exchange status; lifecycle and
   assert.equal(isUsElectionSeries(null), false);
 });
 
+// ---------- collect-universe runtime budget (irregularity #81) ----------
+// The full-universe collector was killed by its 25-minute step timeout on
+// 2026-09-21 and 2026-09-22, so the settled-2026 seed phase never reached its
+// writeFileSync and the seed silently froze at its 2026-09-19 content. These
+// tests pin the two properties that make that failure impossible to repeat:
+// the script must bound its own concurrency, and it must stop on its own
+// wall-clock deadline (strictly inside the step timeout) while still writing
+// every artifact and recording the truncation.
+
+test('collect-universe: the workflow step timeout is strictly greater than the script budget it passes', () => {
+  const wf = readFileSync('.github/workflows/daily-collection.yml', 'utf8');
+  const step = wf.slice(wf.indexOf('FULL open-market universe snapshot'));
+  const timeout = Number(/timeout-minutes:\s*(\d+)/.exec(step)?.[1]);
+  const budget = Number(/--budget-minutes\s+(\d+)/.exec(step)?.[1]);
+  const conc = Number(/--concurrency\s+(\d+)/.exec(step)?.[1]);
+  assert.ok(Number.isFinite(timeout), 'step must declare timeout-minutes');
+  assert.ok(Number.isFinite(budget), 'step must pass --budget-minutes');
+  assert.ok(Number.isFinite(conc), 'step must pass --concurrency');
+  // The margin is what guarantees the final writes land before the runner kills the step.
+  assert.ok(budget < timeout, `budget ${budget} must be < step timeout ${timeout}`);
+  assert.ok(timeout - budget >= 5, `need >=5 min write margin, got ${timeout - budget}`);
+  // Kalshi Basic tier: 200 read tokens/s / 10 tokens per request = 20 req/s sustained.
+  // https://docs.kalshi.com/getting_started/rate_limits.md (read 2026-09-22)
+  assert.ok(conc >= 1 && conc <= 10, `concurrency ${conc} must stay well inside the 20 req/s read ceiling`);
+});
+
+test('collect-universe: every phase is deadline-guarded and truncation is recorded, not inferred', () => {
+  const src = readFileSync('scripts/collect-universe.mjs', 'utf8');
+  // A pool that stops enqueuing when the budget is gone, used by all three phases.
+  assert.match(src, /async function mapPool\(/, 'must use a bounded worker pool');
+  assert.match(src, /if \(outOfTime\(\)\) return;/, 'the pool must stop on the deadline');
+  const poolCalls = src.match(/await mapPool\(/g) || [];
+  assert.equal(poolCalls.length, 3, 'open-universe, settled discovery and candle phases must all be pooled');
+  // Truncation must be published as data on both the meta and the universe file.
+  for (const key of ['budgetExhausted', 'phasesTruncated', 'elapsedMinutes', 'concurrency']) {
+    assert.ok(src.includes(key), `meta.runtime must carry ${key}`);
+  }
+  assert.match(src, /seriesEligible/, 'universe-open.json must record how many series were eligible vs queried');
+  // The writes must not be inside the pooled loops: each phase writes after it finishes.
+  // (Match the actual writeFileSync, not the filename's mention in the header comment.)
+  const seedWrite = src.indexOf("writeFileSync(join(OUT, 'settled-2026-seed.json')");
+  assert.ok(seedWrite > 0, 'the seed write must exist');
+  assert.ok(seedWrite > src.lastIndexOf('await mapPool('),
+    'the seed must be written after the last pooled phase, so a truncated run still persists it');
+  const metaWrite = src.indexOf('writeFileSync(join(OUT, `meta-${day}.json`)');
+  assert.ok(metaWrite > seedWrite, 'meta (which records the truncation) must be written last');
+  // Deterministic output ordering keeps the committed diff stable under concurrency.
+  assert.match(src, /openRows\.sort\(/, 'open rows must be sorted so concurrent completion order does not churn the file');
+});
+
+test('collect-universe: the daily workflow surfaces an incomplete capture as a warning', () => {
+  const wf = readFileSync('.github/workflows/daily-collection.yml', 'utf8');
+  assert.match(wf, /Report universe capture completeness/);
+  assert.match(wf, /::warning::universe capture INCOMPLETE/);
+  assert.match(wf, /r\.complete === false/);
+});
+
+test('collect-universe: concurrent output is deterministic (sorted keys, tie-broken candle order)', () => {
+  const src = readFileSync('scripts/collect-universe.mjs', 'utf8');
+  // Under concurrency, workers finish in arbitrary order. Every collection that
+  // reaches a written file must therefore be ordered explicitly, or the daily
+  // commit churns and the offline replay comparison becomes meaningless.
+  assert.match(src, /seed\.markets = sortKeys\(seed\.markets\)/);
+  assert.match(src, /seed\.bars = sortKeys\(seed\.bars\)/);
+  assert.match(src, /seed\.candleEndpoint = sortKeys\(seed\.candleEndpoint\)/);
+  assert.match(src, /seed\.skipped\.sort\(\)/);
+  assert.match(src, /errors: \[\.\.\.errors\]\.sort\(\)/);
+  // close_time ties must fall back to ticker, else two runs can pick a different
+  // set of markets at the --max-candles cap.
+  const sortLine = /pendingCandles\.sort\(\([\s\S]{0,240}?\);/.exec(src);
+  assert.ok(sortLine, 'candle queue must be sorted');
+  assert.match(sortLine[0], /a\.ticker < b\.ticker/, 'candle sort needs a ticker tiebreak');
+});
