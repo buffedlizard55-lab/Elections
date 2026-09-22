@@ -1,7 +1,7 @@
 {
   "title": "Master list of official verified trusted sources",
   "updated": "2026-09-21",
-  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings.",
+  "method": "Each entry was verified line-by-line during the 2026-09-18 or 2026-09-19 sessions: the URL was fetched (or located via live search when a direct fetch failed \u2014 noted per entry) and the 'verified' field records exactly what was observed. Nothing in this list is assumed. 32 (2026-09-18) + 21 (2026-09-19 \u00a76) + 20 (2026-09-19 session-3 \u00a77) + 12 unique entries from the independent late batch (\u00a78; 8 institutions that overlapped with session 3 were merged into those entries as labeled second-batch addenda instead of duplicated) + 20 (2026-09-19 session-4 \u00a79, every one fetched directly this session) = 105. The 'category' field is an organisational label added 2026-09-19 for the site's Sources view; the assignment is a fixed per-id map (reviewed id-by-id in VERIFICATION.md \u00a79b) and never changes a source's verified content. Session 7 (2026-09-20) added 22 more, every one fetched directly this session: 13 state election authorities (AL AR CT ID IN KY LA MD MS MO NH UT WV), 7 university survey centres (Elon, HPU, UMass Lowell, Roanoke IPOR, UH Hobby School, FHSU Docking, Winthrop) and two re-test admissions (SurveyUSA's archive host, HarrisX) \u2014 total 169. Session 8 added 20 sources (total 189); session 9 (2026-09-21) added 20 directly fetched local election authority pages (total 209). Admission verifies only observed page content, not every linked document. Eight additional candidates withheld for fetch errors or insufficient content; see admissions-2026-09-21.json. Session 10 (2026-09-21 batch2) added 20 more directly fetched sources: 8 local election authorities (NYC BOE, Miami-Dade SOE, Fulton County GA, Washoe County NV, Pima County Recorder, Oakland County MI, Travis County TX, plus NASED association), 3 academic/research (Caltech/MIT VTP, CEIR, Annenberg Public Policy Center), 2 pollsters (PRRI, KFF), 4 news (Bloomberg Politics, FactCheck.org, Economist US, BBC US & Canada) and 3 civic-tech/nonprofit (Vote.org, Rock the Vote, Census CVAP federal) \u2014 total 229. All 20 verified by direct page fetch this session with quoted observed headings. Session 11 (2026-09-21, branch arena/01a0c65b-elections) added 20 directly fetched entries (18 county or city election authorities plus the League of Women Voters and Verified Voting) and corrected the categories of vote-org and rock-the-vote (irregularity #69). JS shells, a wrong path, a 404, and a failed fetch were not admitted.",
   "sources": [
     {
       "id": "kalshi",
@@ -2478,8 +2478,8 @@
       "verified": "Fetched directly 2026-09-21. Observed heading: \"Everything You Need to Vote - Vote.org\" and \"You have the right to vote. If anyone tries to stop you, call or text Election Protection Hotline at 1-866-687-8683\". Tagline: \"The power is in our hands. Voting shouldn't be hard. We make sure it isn't. In just two minutes, you can be registered to vote in next election.\" Buttons: Register to vote, Check your registration, Everything you need to vote now. Note: \"36% of Americans didn't vote in 2024. Let's change that.\" State election centers: Select your state Alabama Alaska Arizona ... Wyoming with links /state/alabama/ etc. Sections: Looking to start your own voter engagement drive? While Vote.org reaches voters directly through multi-tiered approach, we also partner with key organizations, businesses, public figures. Free online tools: Add Vote.org's award-winning technology to your website. Funded by people for people: No government funding. No agenda. Just access. Donation transparency 72 cents of every dollar spent supports mission-driven programming.",
       "verifiedOn": "2026-09-21",
       "status": "verified",
-      "notes": "Nonpartisan nonprofit; free registration verification tools; state centers link to official state sources.",
-      "category": "Government \u2014 federal"
+      "notes": "Nonpartisan nonprofit; free registration verification tools; state centers link to official state sources. Category corrected 2026-09-21 (irregularity #69): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
+      "category": "Ratings, forecasts & analysis"
     },
     {
       "id": "economist-us",
@@ -2511,18 +2511,238 @@
       "verified": "Fetched directly 2026-09-21. Observed heading: \"Rock the Vote - Register to Vote, Find Election Info, and More!\" and \"Get Ready to Vote Midterms are here: are you ready? Find everything you need to vote.\" Sections: Voting Information by State, Make sure you're registered and make voting plan, Choose State Alabama Alaska Arizona ... Wyoming with links /how-to-vote/alabama etc. Buttons: Register to Vote, Check Your Registration Status, Request an Absentee Ballot, Get Election Reminders. Pledge to Vote in 2026 Midterms form with Name Date of Birth Address Email Phone, consent for text messages from Rock the Vote 788683, terms and privacy. Mission: \"Rock the Vote is a nonpartisan nonprofit dedicated to building political power of young people. For over 30 years, Rock the Vote has revolutionized use of pop culture, music, art, and technology to engage young people in politics and build collective power.\" Contact info@rockthevote.org, social links Facebook Bluesky Instagram YouTube TikTok.",
       "verifiedOn": "2026-09-21",
       "status": "verified",
-      "notes": "Youth-focused nonprofit; state guides link to official sources; 30+ year history.",
+      "notes": "Youth-focused nonprofit; state guides link to official sources; 30+ year history. Category corrected 2026-09-21 (irregularity #69): civic nonprofit, not a government election authority. verifiedOn and observed text unchanged.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "fairfax-county-va",
+      "name": "Fairfax County Office of Elections",
+      "type": "County election authority \u2014 general registrar",
+      "url": "https://www.fairfaxcounty.gov/elections/",
+      "verified": "Fetched directly 2026-09-21. Observed heading: \"Office of Elections\". Contact: Office Hours Monday-Friday 8:00 a.m.-4:30 p.m.; 703-222-0776; voting@fairfaxcounty.gov; 12000 Government Center Parkway Suite 323, Fairfax, VA 22035. \"Eric L. Spicer, General Registrar and Director of Elections\". What We Do: \"The Office of Elections is committed to providing each citizen of Fairfax County with the opportunity to exercise their right to vote in an efficient and equitable manner in accordance with the Constitutions of the United States and the Commonwealth of Virginia, as well as the Code of Virginia.\"",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County registrar page, not a certified canvass. No 2026 results numbers were on the fetched page.",
       "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "montgomery-county-md",
+      "name": "Montgomery County Board of Elections (Maryland)",
+      "type": "County board of elections",
+      "url": "https://mcg.montgomerycountymd.gov/elections/index2.html",
+      "verified": "Fetched directly 2026-09-21. The requested montgomerycountymd.gov/elections/ path resolved to this Board page. Observed links: \"Official 2026 Gubernatorial Primary Election Results\", \"Official 2026 Gubernatorial Primary Election Results for Montgomery County\", and \"Data Files (including precinct-level) for the 2026 Gubernatorial Election Results\". \"Next Board Meeting: September 28, at 2:00 p.m.\" Media advisories on the page: \"MONTGOMERY COUNTY BOARD OF ELECTIONS DROP BOXES FOR THE 2026 GUBERNATORIAL GENERAL ELECTION ARE AVAILABLE\" and \"MONTGOMERY COUNTY BOARD OF ELECTIONS CELEBRATES NATIONAL VOTER REGISTRATION DAY ON TUESDAY, SEPTEMBER 15, 2026\". Also a \"2026 Gubernatorial General Ballots\" link. A petition-determination notice says the Committee to Control MoCo Spending has not submitted a sufficient number of legally valid petition signatures to have the question appear on the 2026 General Election ballot.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Official county board. Primary-results links point at elections.maryland.gov; those result files were not opened this session, so no vote totals are transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "multnomah-county-or",
+      "name": "Multnomah County Elections Division",
+      "type": "County elections division",
+      "url": "https://multco.us/departments/multnomah-county-elections-division",
+      "verified": "Fetched directly 2026-09-21. multco.us/elections resolved here. Heading: \"Multnomah County Elections Division\". Observed: \"We conduct all local, city, county, state and federal elections for the voters of Multnomah County.\" Link \"November 3, 2026 General Election\" described as \"Election information including deadlines and important dates for voters.\" News item: \"NEWS RELEASE: Today is National Voter Registration Day!\" dated September 15, 2026. Address 1040 SE Morrison St., Portland, OR 97214; phone 503-988-8683; elections@multco.us. Related pages include Results and History, Official Ballot Drop Sites, Ranked Choice Voting (RCV), Track Your Ballot, and Signature Challenge Resolution Letters - November 2026 General Election.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections division. The November 3, 2026 detail page was linked, not opened; no vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "shelby-county-tn",
+      "name": "Shelby County Election Commission",
+      "type": "County election commission",
+      "url": "https://www.electionsshelbytn.gov/",
+      "verified": "Fetched directly 2026-09-21. shelbyvote.com resolved to electionsshelbytn.gov. Heading: \"SHELBY COUNTY IS OUR HOME\" / \"VOTE FOR OUR FUTURE\". Observed: \"To vote in an election, your Voter Registration Application must be received in our office, or postmarked, 30 days before the election.\" Requirements listed: US citizen, at least 18 years old on or before the next election, resident of Shelby County, and felony voting rights restored. Absentee section: \"Tennessee law requires that you list a reason to vote absentee.\" FAQ: \"We begin accepting Absentee Ballot Applications 90 days before an election. The deadline to request an application is 10 days before Election Day.\" Mail address 980 Nixon Dr. Memphis, TN 38134. A banner links the Tennessee Secretary of State \"2026 Congressional Redistricting\" announcement. A November 3, 2026 absentee application PDF is linked.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County election commission. The redistricting banner is a state SOS link, not a Shelby canvass. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "allegheny-county-pa",
+      "name": "Allegheny County Elections Division",
+      "type": "County elections division",
+      "url": "https://www.alleghenycounty.us/Government/Elections",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Elections\". Observed: \"The Elections Division is responsible for all parts of the administration of an election. Responsibilities include maintaining voter roles and registration, approving requests for mail-in and absentee ballots, and providing support and resources for electoral candidates.\" Links: Vote By Mail Application, Voter Application, Voter Registration Status, Find Your Polling Place, Track Your Ballot, Mail-In Ballot Dashboard, Election Results, Election Calendar, Board of Elections. Contact: Elections Division, County Office Building, 542 Forbes Avenue, Room 312, Pittsburgh, PA 15219; phone 412-350-4500; hours Monday to Friday 8:30 am to 4:30 pm.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections division. \"voter roles\" is the page's wording, not corrected. No 2026 vote totals on the fetched page.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "salt-lake-county-ut",
+      "name": "Salt Lake County Clerk \u2014 Elections",
+      "type": "County clerk elections office",
+      "url": "https://www.saltlakecounty.gov/clerk/elections/",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Elections\" under Clerk. Observed: \"Welcome to Salt Lake County Elections!\" Links include \"2026 Elections Home\", Check Your Voter Registration, Register to Vote, Vote in Person, Vote by Mail, Election Results, Candidate Filing, Financial Disclosures, and Election Security.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County clerk elections page. The 2026 elections home was linked, not opened; no vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "baltimore-city-boe",
+      "name": "Baltimore City Board of Elections",
+      "type": "City board of elections",
+      "url": "https://www.baltimorecity.gov/boe",
+      "verified": "Fetched directly 2026-09-21. boe.baltimorecity.gov resolved here. Heading: \"Baltimore City Board of Elections\". Observed: \"November 2026 General Election\" and \"Ballot Question Text\". What We Do: \"We promote voter education, administer an efficient voting process, maintain an accurate voter registration database, and ensure that elected officials are elected in accordance with Federal, State, and County election laws.\" \"Clifford Tatum, Election Director\" and \"Lisa Stanley, Acting Deputy Director\". Election-judge notice: volunteers \"paid by the Board of Elections $250 - $325\". Contact (410) 396-5550; 417 E. Fayette St., Benton Office Building, Room #129, Baltimore, Md. 21202. The page's own disclaimer says the Board \"cannot promise that our website will always have the newest information, be complete, or show the latest legal decisions.\"",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "City board, not a canvass. The page's freshness disclaimer is recorded, not overridden. Ballot-question text was linked, not opened.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "denver-elections",
+      "name": "Denver Elections Division",
+      "type": "City and county clerk \u2014 elections division",
+      "url": "https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Denver-Clerk-and-Recorder/Elections-Division",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Denver Elections Division\". Observed slides: \"2026 General Election Information \u2014 The 2026 Midterm General Election will be held on Nov. 3, 2026. Ballots will be sent out on Oct. 5.\" \"November 3, 2026 Special Election Information \u2014 Denver City Council member Sarah Parady recently announced her intention to resign, effective August 5.\" \"2026 State Primary Election Results\". Sections: Voter Services, Campaign & Candidate Resources, Upcoming Elections, How We Run Elections, Election Data and Maps.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "City and County of Denver clerk. The Parady resignation sentence is the page's own wording; the special-election page was not opened, so no candidate list or vote totals are transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "cobb-county-ga",
+      "name": "Cobb County Elections and Voter Registration",
+      "type": "County elections department",
+      "url": "https://www.cobbcounty.gov/elections",
+      "verified": "Fetched directly 2026-09-21. cobbcounty.org/elections resolved to cobbcounty.gov/elections. Heading: \"Elections and Voter Registration\". Mission: \"to register citizens of Cobb County to vote; to ensure that elections are free, impartial, fair, accurate, convenient and accessible to all voters\". Link: \"Official Election Results - General Primary Runoff Election - June 16, 2026\" pointing at results.sos.ga.gov. News: \"Cobb County Celebrates National Voter Registration Day\" dated Monday, September 14, 2026, naming the October 5, 2026 registration deadline for the November 3 General Election/Special Election. Director Leigh Phillips. Address 995 Roswell St. NE, Marietta, GA 30060; 770-528-2581; electionsinfo@cobbcounty.gov.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections department. The June 16 runoff results page was linked, not opened; no vote totals transcribed from it.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "prince-georges-md",
+      "name": "Prince George's County Board of Elections",
+      "type": "County board of elections",
+      "url": "https://www.princegeorgescountymd.gov/boards-commissions/board-elections",
+      "verified": "Fetched directly 2026-09-21. The departments-offices/board-elections path resolved to boards-commissions/board-elections. Heading: \"Board of Elections\". Mission: \"promote voter education, administer an efficient voting process, maintain an accurate voter registration database\". 2026 Gubernatorial Election links: Filed Candidates, 2026 Gubernatorial General Ballot, 2026 Ballot Questions. Primary dates on the page: \"Early Voting - June 11, 2026 through June 18, 2026 (7am - 8pm)\"; \"Election Day - June 23, 2026 - 7am - 8pm\". General dates: \"Early Voting - October 22, 2026 through October 29, 2026 (7am - 8pm)\"; \"Election Day - November 3, 2026 - 7am - 8pm\". Election Administrator Wendy Honesty-Bey; 1100 Mercantile Lane, Suite 115A, Largo, MD 20774; 301-341-7300. Board president Beatrice P. Tignor (D).",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County board. Candidate and ballot PDFs were linked, not opened. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "collin-county-tx",
+      "name": "Collin County Elections",
+      "type": "County elections administrator",
+      "url": "https://www.collincountytx.gov/elections",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Elections\". Observed: \"The Office of Elections Administrator was created by the Collin County Commissioners Court on Aug. 18, 1980, pursuant to Section 31.031 of the Texas Election Code. The duties of the Elections Administrator are to facilitate voter registration and conduct elections.\" Emails absenteemailballoting@collincountytx.gov and voterregistration@collincountytx.gov. Links: Election Details, Election Results, Election Livestream, My Elected Official, Track my Ballot, My Voter Portal.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections administrator. No 2026 vote totals on the fetched page.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "mecklenburg-boe",
+      "name": "Mecklenburg County Board of Elections",
+      "type": "County board of elections",
+      "url": "https://vote.mecknc.gov/",
+      "verified": "Fetched directly 2026-09-21. mecknc.gov/BOE resolved to vote.mecknc.gov. Heading: \"Board of Elections\". Observed: \"Managing the election process within Mecklenburg County.\" Banner: \"Official County websites use MeckNC.gov\". Links: \"Offices on the Ballot for 2026 General Election\", \"Early Voting Sites and Hours For 11/3/2026 Election\", and \"2026 Official General Election Notice\" dated Friday, July 24, 2026. Contact 704-336-2133; Vote@MeckNC.gov; 741 Kenilworth Ave., Suite 202, Charlotte, NC 28204.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County board. The July 24 notice was linked, not opened. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "wake-county-boe",
+      "name": "Wake County Board of Elections",
+      "type": "County board of elections",
+      "url": "https://www.wake.gov/departments-government/board-elections",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Board of Elections\". Observed calendar rows for the 2026 General Election: Logic & Accuracy Testing begins Sept. 1, 2026 and concluded Sept. 18, 2026; Voter Registration Deadline Oct. 9, 2026 at 5:00 p.m.; Early Voting begins Oct. 15, 2026 at 8:00 a.m. and ends Oct. 31, 2026 at 3:00 p.m.; Election Day Nov. 3, 2026 6:30 a.m. - 7:30 p.m.; Absentee Ballot Request Deadline Oct. 20, 2026 at 5:00 p.m.; Absentee Ballot Delivery Deadline Nov. 3, 2026 at 7:30 p.m. Sections include Election Information, Voter Information, and Data & Reports (Past Election Results).",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County board calendar. Dates are from the page's event table, not from a canvass. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "gwinnett-county-ga",
+      "name": "Gwinnett County Voter Registrations and Elections",
+      "type": "County elections office",
+      "url": "https://www.gwinnettcounty.com/government/departments/elections",
+      "verified": "Fetched directly 2026-09-21. The /web/gwinnett/departments/elections path resolved here. Heading: \"Elections\". Observed: \"The Voter Registrations and Elections Office is a division of the County Administrator's office and is overseen by the Gwinnett County Board of Voter Registrations and Elections.\" Duties listed include registering voters, administering federal, state, county and special elections, assisting military and overseas voters, testing voting equipment, and acting as filing officer for campaign disclosure reports. Links: Check/Update Registration, Find Polling Location, Absentee Voting, View Sample Ballot, Schedule, Results. Page note: \"Any interaction with the Department of Drivers Services (DDS) may have affected your voter registration information.\"",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections office. No vote totals on the fetched page. A language-assistance paragraph was cut off in the fetch and is not quoted beyond what was read.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "dekalb-county-ga",
+      "name": "DeKalb County Voter Registration and Elections",
+      "type": "County voter registration and elections office",
+      "url": "https://dekalbcountyga.gov/departments/voter-registration-and-elections",
+      "verified": "Fetched directly 2026-09-21. /voter-registration-elections resolved here. Heading: \"Voter Registration & Elections\". Current Elections block: \"General Election/ Special Election. Election Date: November 3rd. Early voting: October 13th-October 30th. First Day to Request Absentee Ballot: August 17th. Last Day to Request Absentee Ballot: October 23rd. Registration Deadline: October 5th.\" Public notices heading: \"November 3, 2026: General/Special Election Notices\" including Notice of Logic & Accuracy Testing, Polling Place Change Notice(s), and Notice of Ballot Proof Availability. Also \"General Election/ Special Election Runoff. Election Date: December 1st.\" Early voting for that runoff was listed as TBD.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "The November 3 date in the current-elections block does not print the year on that line; the notices heading does say November 3, 2026. The year is not inferred onto the undated line. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "bernalillo-county-nm",
+      "name": "Bernalillo County Clerk",
+      "type": "County clerk \u2014 bureau of elections",
+      "url": "https://www.berncoclerk.gov/",
+      "verified": "Fetched directly 2026-09-21. bernco.gov/clerk/elections/ resolved to berncoclerk.gov. Heading: \"Office of the Bernalillo County Clerk\" and \"Clerk Michelle S. Kavanaugh\". Observed: \"Protecting your right to vote and your right to know with transparency and dedicated service.\" \"2026 General Election Dates \u2014 Big election dates are happening now! Check out our timeline leading up to Election Day on November 3.\" \"Next Election: 2026 General Election, Tuesday, November 3, 2026.\" \"2026 Primary Election Results\" links electionresults.sos.nm.gov. News: \"BernCo Clerk Celebrates National Voter Registration Day at Three Locations\" Sep 15, 2026. Widgets labeled \"Registered Voters in Bernalillo County\" and \"2026 Primary Election Voter Turnout\" showed \"Last updated 9/15/2026\" but the numeric values were not in the fetched text.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County clerk. Registration and turnout widgets did not expose numbers to the fetcher; none are recorded. The primary-results host was linked, not opened.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "ramsey-county-mn",
+      "name": "Ramsey County Elections & Voting",
+      "type": "County elections office",
+      "url": "https://www.ramseycountymn.gov/residents/elections-voting",
+      "verified": "Fetched directly 2026-09-21. ramseycounty.us/residents/elections-voting resolved here. Heading: \"Elections & Voting\". Observed: \"Quick links for Ramsey County voters, candidates and election judges.\" Sections: Voting basics; \"Have questions for the Elections team? The Ramsey County Elections office will be hosting public online Q&A sessions. Registration is required.\" Links: Vote before Election Day, Vote on Election Day, Key election dates, Information for candidates, Information for election judges, Election results.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections page. No 2026 vote totals on the fetched page. Hennepin's elections path still 404'd the same day and was not admitted.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "fort-bend-county-tx",
+      "name": "Fort Bend County Elections Administration",
+      "type": "County elections administrator",
+      "url": "https://www.fortbendcountytx.gov/government/departments/elections-voter-registration",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Elections/ Voter Registration\". Observed notice: \"The Fort Bend County Election Administration Office will be closed on Friday, September 25, 2026, in observance of County Fair Day. Normal office operations will resume on Monday, September 28, 2026.\" Also: \"We have received several reports that district information found on third party websites are reflecting outdated 2021-2025 district information. Please use the 'New Voter Precinct Interactive Web Map' and 'View my registration' for up-to-date 2026 district information.\" Duties include maintenance of the voter registration database and \"Supervision of tabulation and preparation of final canvassing reports.\" Contact vote@fbctx.gov.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "County elections administrator. The third-party district-map warning is the office's own notice, recorded as a warning, not verified against a map. No vote totals transcribed.",
+      "category": "Government \u2014 state & local"
+    },
+    {
+      "id": "lwv",
+      "name": "League of Women Voters",
+      "type": "Nonpartisan civic organization \u2014 voter education and voting-rights advocacy",
+      "url": "https://www.lwv.org/",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Empowering Voters. Defending Democracy.\" Observed: \"The League of Women Voters is a nonpartisan, grassroots organization working to protect and expand voting rights and ensure everyone is represented in our democracy.\" Voting tool: \"Register to vote, find your polling place, look up your ballot, and more at VOTE411.org.\" \"In 2024, more than 9.5 million people found nonpartisan voting resources on VOTE411\". \"In 2024 we protected more than 9.38 million voters in courts across the nation.\" Case titles on the page include \"Protecting Mail-In Voting from the Trump Administration's Illegal Attacks\" and \"Supporting Fair Representation for All\" (Louisiana v. Callais), with the page stating that in April 2026 the Supreme Court issued an opinion \"effectively destroying the remainder of Section 2 of the Voting Rights Act\".",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Civic nonprofit, not an election authority and not a canvass source. The 9.5 million / 9.38 million figures and the Section 2 characterization are the organization's own claims, recorded as claims. Filed under Ratings, forecasts & analysis (same bucket as the Brennan Center), not government.",
+      "category": "Ratings, forecasts & analysis"
+    },
+    {
+      "id": "verified-voting",
+      "name": "Verified Voting",
+      "type": "Nonprofit \u2014 election technology and post-election audit advocacy",
+      "url": "https://verifiedvoting.org/",
+      "verified": "Fetched directly 2026-09-21. Heading: \"Verified Voting \u2013 Strengthening Democracy\". Observed mission: \"Verified Voting's mission is to strengthen democracy for all voters by promoting the responsible use of technology in elections.\" Tools listed: The Verifier (\"The most comprehensive view of voting equipment use and post-election audit requirements across the United States.\"), Voting Equipment Database, Audit Law Database, Recount Law Database. Issues: Voting Equipment, Post-Election Audits, Paper Records, Internet Voting (\"Internet voting is not private or secure and makes elections less trustworthy.\"), Election Security. Report tile: \"The Election Chain of Custody Blueprint: A Review of the Law, Best Practices, and Messaging Tools\" in partnership with Advance Elections and the Election Law Program.",
+      "verifiedOn": "2026-09-21",
+      "status": "verified",
+      "notes": "Nonprofit research and advocacy, not an official canvass authority. The Verifier is their equipment and audit-law database, not certified returns. Filed under Ratings, forecasts & analysis, not government.",
+      "category": "Ratings, forecasts & analysis"
     }
   ],
   "categories": [
     {
       "name": "Government \u2014 federal",
-      "count": 22
+      "count": 21
     },
     {
       "name": "Government \u2014 state & local",
-      "count": 89
+      "count": 106
     },
     {
       "name": "Official publishers & archives",
@@ -2546,7 +2766,7 @@
     },
     {
       "name": "Ratings, forecasts & analysis",
-      "count": 18
+      "count": 22
     },
     {
       "name": "Contest & methodology references",

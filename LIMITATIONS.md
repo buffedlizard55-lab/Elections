@@ -179,3 +179,10 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
   review remain necessary; current workflow artifacts expire after seven days.
 - Existing contest results are historical simulations, not a full persistent
   execution/PnL ledger for today's open markets. See the next-session worklist.
+- Session 11 (2026-09-21) added 18 county or city election-authority pages plus
+  the League of Women Voters and Verified Voting. Those pages are not certified
+  canvasses. Ten other candidate URLs were shells, a wrong path, a 404, or a
+  failed fetch and were not admitted (irregularity #70). Vote.org and Rock the
+  Vote were recategorized out of government (irregularity #69). No turnout or
+  vote totals were invented from widgets or linked result files that were not
+  opened.

@@ -1047,3 +1047,84 @@ Pass3 — completeness: re-checked all 20 new entries against observed headings,
 - Kalshi daily collection is live (latest 2026-09-20T16:22Z, 121 pages / 120k total markets / 28k politics / 2000 listed / allowlist 4167) — continue forward collection and track expected vs actual after Nov 3.
 - Site bundle includes admissions file for session9 only (admissions-2026-09-21.json); batch2 admissions are in a separate JSON — consider merging admissions rendering to show both files or consolidating into one evidence file per date.
 - GitHub Pages deployment status must be checked independently; static preview bound to 0.0.0.0 and site tests run in Node VM, not full visual browser audit.
+
+
+## 16. Session 11 — 2026-09-21 batch 3, 20 directly fetched sources (249 total)
+
+Branch `arena/01a0c65b-elections`. Baseline at start: `main` at `39f6cc8`,
+229 sources, 68 Node irregularities, 40 entries already dated 2026-09-21.
+Task for this branch: produce a non-empty pull request and merge it, without
+inventing sources. Every admitted page below was fetched in this session before
+it was written into `data/sources/master.json`. Search was not used as evidence.
+
+### 16a. Admitted — 18 election authorities
+
+These are county or city election-administration pages. None is a certified
+canvass. Linked result files were not opened, so no vote totals are transcribed.
+Quotes are abridged; the full observed text is on each master entry and in
+`data/sources/admissions-2026-09-21-batch3.json`.
+
+| id | URL fetched 2026-09-21 | Observed |
+|---|---|---|
+| `fairfax-county-va` | https://www.fairfaxcounty.gov/elections/ | "Office of Elections"; Eric L. Spicer, General Registrar and Director of Elections; 703-222-0776; voting@fairfaxcounty.gov; 12000 Government Center Parkway Suite 323, Fairfax, VA 22035 |
+| `montgomery-county-md` | https://mcg.montgomerycountymd.gov/elections/index2.html | Board page (the montgomerycountymd.gov/elections/ path resolved here). Links to official 2026 gubernatorial primary results and data files; next board meeting September 28 at 2:00 p.m.; drop-box and September 15, 2026 voter-registration advisories; petition notice that the Committee to Control MoCo Spending lacked enough valid signatures for the 2026 general |
+| `multnomah-county-or` | https://multco.us/departments/multnomah-county-elections-division | "We conduct all local, city, county, state and federal elections for the voters of Multnomah County." November 3, 2026 General Election link; 1040 SE Morrison St., Portland, OR 97214; 503-988-8683; elections@multco.us |
+| `shelby-county-tn` | https://www.electionsshelbytn.gov/ | Registration must be received or postmarked 30 days before the election; absentee voting requires a reason; applications open 90 days before an election and close 10 days before Election Day; 980 Nixon Dr., Memphis, TN 38134. A Tennessee Secretary of State redistricting banner is a state link, not a Shelby canvass |
+| `allegheny-county-pa` | https://www.alleghenycounty.us/Government/Elections | Elections Division; the page says "voter roles"; 542 Forbes Avenue, Room 312, Pittsburgh, PA 15219; 412-350-4500; Monday to Friday 8:30 am to 4:30 pm |
+| `salt-lake-county-ut` | https://www.saltlakecounty.gov/clerk/elections/ | Clerk "Elections" page; links include 2026 Elections Home, registration, vote-by-mail, results, and candidate filing. The 2026 home was linked, not opened |
+| `baltimore-city-boe` | https://www.baltimorecity.gov/boe | Baltimore City Board of Elections; Clifford Tatum, Election Director; Lisa Stanley, Acting Deputy Director; November 2026 General Election; 417 E. Fayette St., Room 129, Baltimore, Md. 21202; (410) 396-5550. The page says it cannot promise the newest information |
+| `denver-elections` | https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Denver-Clerk-and-Recorder/Elections-Division | "The 2026 Midterm General Election will be held on Nov. 3, 2026. Ballots will be sent out on Oct. 5." Special-election slide: Sarah Parady resignation effective August 5. That special page was not opened |
+| `cobb-county-ga` | https://www.cobbcounty.gov/elections | Elections and Voter Registration; Leigh Phillips, Director; 995 Roswell St. NE, Marietta, GA 30060; (770) 528-2581; electionsinfo@cobbcounty.gov. News item names the October 5, 2026 registration deadline for the November 3 General Election. A June 16, 2026 runoff-results link was not opened |
+| `prince-georges-md` | https://www.princegeorgescountymd.gov/boards-commissions/board-elections | Board of Elections; Wendy Honesty-Bey; 1100 Mercantile Lane, Suite 115A, Largo, MD 20774; 301-341-7300. General: early voting October 22–29, 2026; Election Day November 3, 2026, 7am–8pm. Primary dates June 11–18 and June 23, 2026 are also on the page |
+| `collin-county-tx` | https://www.collincountytx.gov/elections | Office of Elections Administrator created August 18, 1980, pursuant to Section 31.031 of the Texas Election Code; absenteemailballoting@collincountytx.gov and voterregistration@collincountytx.gov |
+| `mecklenburg-boe` | https://vote.mecknc.gov/ | Board of Elections; "Managing the election process within Mecklenburg County"; early-voting link for the 11/3/2026 election; 741 Kenilworth Ave., Suite 202, Charlotte, NC 28204; 704-336-2133; Vote@MeckNC.gov |
+| `wake-county-boe` | https://www.wake.gov/departments-government/board-elections | 2026 General Election calendar: L&A began Sept. 1 and concluded Sept. 18; registration deadline Oct. 9 at 5:00 p.m.; early voting Oct. 15 at 8:00 a.m. through Oct. 31 at 3:00 p.m.; Election Day Nov. 3, 6:30 a.m.–7:30 p.m.; absentee request deadline Oct. 20 at 5:00 p.m.; absentee delivery deadline Nov. 3 at 7:30 p.m. |
+| `gwinnett-county-ga` | https://www.gwinnettcounty.com/government/departments/elections | "The Voter Registrations and Elections Office is a division of the County Administrator's office and is overseen by the Gwinnett County Board of Voter Registrations and Elections." A language-assistance sentence was cut off in the fetch and is not quoted past what was read |
+| `dekalb-county-ga` | https://dekalbcountyga.gov/departments/voter-registration-and-elections | Current-elections block: "General Election/ Special Election. Election Date: November 3rd" — that line does not print a year. Notices heading does say "November 3, 2026". Early voting October 13–30; absentee request August 17 through October 23; registration deadline October 5; runoff Election Date December 1, early voting TBD. The year was not added to the undated line |
+| `bernalillo-county-nm` | https://www.berncoclerk.gov/ | Office of the Bernalillo County Clerk; Clerk Michelle S. Kavanaugh; "Next Election: 2026 General Election, Tuesday, November 3, 2026." Widgets labeled registered voters and 2026 primary turnout said "Last updated 9/15/2026" but the numbers were not in the fetched text and are not recorded |
+| `ramsey-county-mn` | https://www.ramseycountymn.gov/residents/elections-voting | "Elections & Voting"; public online Q&A sessions; links to vote before Election Day, vote on Election Day, key dates, and election results. Domain is ramseycountymn.gov |
+| `fort-bend-county-tx` | https://www.fortbendcountytx.gov/government/departments/elections-voter-registration | Closed Friday, September 25, 2026, for County Fair Day; resumes September 28, 2026. Warns that third-party sites still show 2021–2025 district information. The warning is recorded; a map was not verified. vote@fbctx.gov |
+
+### 16b. Admitted — two civic nonprofits, not government
+
+Filed under Ratings, forecasts & analysis, the same organisational bucket as the
+Brennan Center. Neither is an official canvass source. Figures below are the
+organizations' own claims.
+
+| id | URL fetched 2026-09-21 | Observed |
+|---|---|---|
+| `lwv` | https://www.lwv.org/ | "The League of Women Voters is a nonpartisan, grassroots organization working to protect and expand voting rights"; VOTE411.org; the page claims more than 9.5 million people used VOTE411 in 2024 and that the League protected more than 9.38 million voters in court in 2024 |
+| `verified-voting` | https://verifiedvoting.org/ | "Verified Voting's mission is to strengthen democracy for all voters by promoting the responsible use of technology in elections." Tools: The Verifier, Voting Equipment Database, Audit Law Database, Recount Law Database. Internet voting is described as "not private or secure". Election Chain of Custody Blueprint with Advance Elections and the Election Law Program |
+
+### 16c. Not admitted
+
+Recorded in the batch-3 evidence file and as irregularity #70. Not retried as
+admissions.
+
+| URL | Why it was withheld |
+|---|---|
+| https://www.votehillsborough.gov/ | CivicPlus loading shell |
+| https://www.votepalmbeach.gov/ | Loading shell plus an offices-closed alert for September 21, 2026 (Yom Kippur). pbcelections.org redirected here |
+| https://www.votepinellas.gov/ | Welcome text and 727-464-VOTE (8683) / Election@VotePinellas.gov only |
+| https://www.duvalelections.gov/ | CivicPlus loading shell |
+| https://www.piercecountywa.gov/200/Elections | Resolved to the county Entertainment page |
+| https://www.piercecountywa.gov/328/Elections | Title only; body was a loading shell |
+| https://www.nassaucountyny.gov/566/Board-of-Elections | Breadcrumb only; body was a loading shell |
+| https://www.epcounty.com/elections/ | Site's own Custom404 |
+| https://elections.honolulu.gov/ | Fetch failed; no body |
+| https://www.hennepincounty.gov/en/your-government/elections-voting | 404 after redesign. The older hennepin.us path was already 404 |
+
+### 16d. Category correction, not a new source
+
+`vote-org` was Government — federal and `rock-the-vote` was Government — state &
+local. Both verified fields, left unchanged, describe civic nonprofits. Both were
+moved to Ratings, forecasts & analysis on 2026-09-21 (irregularity #69). A
+government category would let a later canvass gate treat them as official
+authorities. `verifiedOn` was not rewritten.
+
+### 16e. Counts after the batch
+
+Master 229 → **249**. Categories: federal 22 → 21 (vote-org moved out), state &
+local 89 → 106 (18 added, rock-the-vote moved out), ratings 18 → 22 (two new
+nonprofits plus the two recategorizations). Entries with `verifiedOn` 2026-09-21:
+40 → **60**. No poll-layer rows added. Next irregularity id: **71**.

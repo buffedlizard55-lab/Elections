@@ -523,6 +523,24 @@
       "detail": "Code audit: compareRange checked only captured yes_bid, so a missing ask could yield NaN; no timestamp-age limit. Site used panel.a/panel.b although parser emits panel.dem/panel.rep.",
       "action": "Validate both quotes and ordering, withhold comparisons more than 24 hours apart, fix dem/rep rendering, expose scoring refusals on site. Compare EBO midpoint and 270toWin last trade, not the same basis.",
       "source": "https://github.com/buffedlizard55-lab/Elections/blob/main/scripts/crosscheck-renderings.mjs"
+    },
+    {
+      "id": 69,
+      "severity": "low",
+      "area": "Master list hygiene",
+      "title": "vote-org and rock-the-vote were filed as government authorities; both pages describe civic nonprofits",
+      "detail": "Observed 2026-09-21 in data/sources/master.json as admitted on 2026-09-21: vote-org (https://www.vote.org/) was category Government — federal, and rock-the-vote (https://www.rockthevote.org/) was category Government — state & local. Both verified fields, left unchanged, describe nonpartisan nonprofits (Vote.org: no government funding; Rock the Vote: nonpartisan nonprofit). A government category would let a later canvass gate treat them as official authorities.",
+      "action": "Recategorized both to Ratings, forecasts & analysis on 2026-09-21. verifiedOn and observed text unchanged. Do not treat either URL as an official canvass source. Next irregularity id is 71.",
+      "source": "https://www.vote.org/"
+    },
+    {
+      "id": 70,
+      "severity": "low",
+      "area": "Source access",
+      "title": "Session 11 withheld 10 candidate election pages that were shells, a wrong path, a 404, or a failed fetch",
+      "detail": "Fetched 2026-09-21 and not admitted: votehillsborough.gov and duvalelections.gov were CivicPlus loading shells; votepalmbeach.gov (redirect from pbcelections.org) was a loading shell plus a Yom Kippur closure alert for September 21, 2026; votepinellas.gov had a welcome paragraph and phone 727-464-VOTE but no dates, results, or calendar; piercecountywa.gov/200/Elections resolved to Entertainment; piercecountywa.gov/328/Elections and nassaucountyny.gov/566/Board-of-Elections were titled elections pages whose bodies were loading shells; epcounty.com/elections/ was the site's own Custom404; elections.honolulu.gov failed to fetch; hennepincounty.gov/en/your-government/elections-voting was 404 after redesign. Ramsey County's elections page did fetch and was admitted instead.",
+      "action": "Recorded in data/sources/admissions-2026-09-21-batch3.json notAdmitted. Do not reconstruct these offices from memory. Retry with a headless browser before any canvass use. A loading shell is not an official results page.",
+      "source": "https://www.votehillsborough.gov/"
     }
   ]
 }

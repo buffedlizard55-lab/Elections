@@ -210,6 +210,42 @@ test('registry: the 20 session-8 entries are present, dated 2026-09-20, with not
   assert.match(byId['cook-county-il'].verified, /500/, 'Cook County 500 at verification time is recorded, not papered over');
 });
 
+const SESSION11_IDS = [
+  'fairfax-county-va', 'montgomery-county-md', 'multnomah-county-or', 'shelby-county-tn',
+  'allegheny-county-pa', 'salt-lake-county-ut', 'baltimore-city-boe', 'denver-elections',
+  'cobb-county-ga', 'prince-georges-md', 'collin-county-tx', 'mecklenburg-boe',
+  'wake-county-boe', 'gwinnett-county-ga', 'dekalb-county-ga', 'bernalillo-county-nm',
+  'ramsey-county-mn', 'fort-bend-county-tx', 'lwv', 'verified-voting',
+];
+
+test('registry: the 20 session-11 entries are present, dated 2026-09-21, fetched directly; shells stay out', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  assert.equal(SESSION11_IDS.length, 20);
+  for (const id of SESSION11_IDS) {
+    const s = byId[id];
+    assert.ok(s, `missing session-11 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-21', `${id}: verifiedOn`);
+    assert.equal(s.status, 'verified', `${id}: status`);
+    assert.match(s.verified, /Fetched directly 2026-09-21/, `${id}: must state it was fetched this session`);
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+  }
+  assert.equal(byId.lwv.category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['verified-voting'].category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['fairfax-county-va'].category, 'Government — state & local');
+  assert.equal(byId['vote-org'].category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['rock-the-vote'].category, 'Ratings, forecasts & analysis');
+  const declined = [
+    'https://www.votehillsborough.gov/', 'https://www.votepalmbeach.gov/', 'https://www.votepinellas.gov/',
+    'https://www.duvalelections.gov/', 'https://www.piercecountywa.gov/200/Elections',
+    'https://www.piercecountywa.gov/328/Elections', 'https://www.nassaucountyny.gov/566/Board-of-Elections',
+    'https://www.epcounty.com/elections/', 'https://elections.honolulu.gov/',
+    'https://www.hennepincounty.gov/en/your-government/elections-voting',
+  ];
+  for (const url of declined) assert.ok(!master.sources.some((s) => s.url === url), url);
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-21').length, 60);
+  assert.equal(master.sources.length, 249);
+});
+
 test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {
   const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
   const fams = new Set(Object.keys(PL.methodFamilies.families));
