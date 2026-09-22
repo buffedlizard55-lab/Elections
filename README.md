@@ -11,13 +11,15 @@
 each, scored every day on **open** Kalshi election markets. See
 [§ The live 2026 contest](#the-live-2026-contest-r16).
 
-**267 sources · 79 irregularities · 156 tests.** This session closed the queued
+**267 sources · 80 irregularities · 156 tests.** This session closed the queued
 control-market question from the exchange's own rule text, published the canonical
 open-market list with an arithmetic reconciliation gate, and built the forward
 paper-trading engine, and rebuilt the forward contest layer around the captured panels.
 Seven new irregularities (#72–#78) were filed, including one that withdraws an assumption the
 previous session had queued rather than confirmed, and one that records what `close_time`
-really is on this exchange.
+really is on this exchange. **#80** (2026-09-22) records the test staleness + provenance
+drift fixed by `scripts/refresh-poll-layer-provenance.mjs` and the rewritten signals-ledger
+assertion in `test/forward-contest.test.mjs`.
 
 ## Two toolchains, one standard
 
