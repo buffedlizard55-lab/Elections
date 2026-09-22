@@ -667,7 +667,11 @@
         ${note}${met}${series ? `<details><summary>Attribution by series (top 5 of ${at.bySeriesCount})</summary><div class="body">${series}</div></details>` : ''}
       </div>`;
     };
-    const gate = C26.signals && C26.signals.pollLayer ? C26.signals.pollLayer.identityGate : null;
+    // The season publishes the gate as signals.pollLayer { considered, admitted,
+    // excluded } plus ratingsGate. Read THAT shape: a renamed key here once made
+    // the whole refusals block silently render its fallback instead.
+    const pl = C26.signals && C26.signals.pollLayer ? C26.signals.pollLayer : null;
+    const gate = pl ? { polls: { considered: pl.considered, admitted: pl.admitted, excluded: pl.excluded || [] }, ratings: pl.ratingsGate || { considered: 0, admitted: 0 } } : null;
     const gateExcl = gate ? gate.polls.excluded.slice(0, 14).map((e) => `<li><span class="mono">${esc(e.id)}</span> — ${esc(e.reason)}</li>`).join('') : '';
     const U = C26.universe;
     const perDate = U ? Object.entries(U.perDate).map(([d, s]) => `<tr><td class="mono">${esc(d)}</td><td class="num">${int(s.panelRows)}</td><td class="num">${int(s.notElectionSeries)}</td><td class="num">${int(s.noUsableBook)}</td><td class="num">${int(s.eligible)}</td><td class="num">${int(s.tradedOnDay)}</td></tr>`).join('') : '';
