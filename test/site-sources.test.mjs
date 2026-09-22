@@ -214,6 +214,37 @@ test('registry: the 20 session-8 entries are present, dated 2026-09-20, with not
   assert.match(byId['cook-county-il'].verified, /500/, 'Cook County 500 at verification time is recorded, not papered over');
 });
 
+const BATCH4_IDS = [
+  'fairfax-county-va', 'montgomery-county-md', 'shelby-county-tn', 'allegheny-county-pa',
+  'cobb-county-ga', 'prince-georges-md', 'collin-county-tx', 'mecklenburg-boe',
+  'wake-county-boe', 'gwinnett-county-ga', 'dekalb-county-ga', 'bernalillo-county-nm',
+  'ramsey-county-mn', 'fort-bend-county-tx', 'lwv', 'verified-voting',
+];
+
+test('registry: the 16 batch-4 entries are present and already-admitted offices were not duplicated', () => {
+  const byId = Object.fromEntries(master.sources.map((s) => [s.id, s]));
+  assert.equal(BATCH4_IDS.length, 16);
+  for (const id of BATCH4_IDS) {
+    const s = byId[id];
+    assert.ok(s, `missing batch-4 entry ${id}`);
+    assert.equal(s.verifiedOn, '2026-09-21', `${id}: verifiedOn`);
+    assert.equal(s.status, 'verified', `${id}: status`);
+    assert.match(s.verified, /Fetched directly 2026-09-21/, `${id}: must state it was fetched this session`);
+    assert.ok(s.notes && s.notes.length > 40, `${id}: notes`);
+  }
+  assert.equal(byId.lwv.category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['verified-voting'].category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['vote-org'].category, 'Ratings, forecasts & analysis');
+  assert.equal(byId['rock-the-vote'].category, 'Ratings, forecasts & analysis');
+  assert.ok(byId['baltimore-city-boe'], 'existing Baltimore entry must remain');
+  assert.equal(byId['baltimore-city-boe'].url, 'https://www.baltimorecity.gov/boe');
+  assert.ok(!byId['denver-elections'], 'denver-elections must not duplicate denver-clerk-recorder');
+  assert.ok(!byId['multnomah-county-or'], 'multnomah-county-or must not duplicate multnomah-county-elections');
+  assert.ok(!byId['salt-lake-county-ut'], 'salt-lake-county-ut must not duplicate salt-lake-county-clerk');
+  assert.equal(master.sources.filter((s) => s.verifiedOn === '2026-09-21').length, 76);
+  assert.equal(master.sources.length, 265);
+});
+
 test('poll layer: session-7 rows (Elon + HPU NC Senate, HarrisX generic) carry #49 labels; declined rows stay in pendingSources', () => {
   const PL = JSON.parse(readFileSync(join(ROOT, 'data/polls/poll-layer-2026.json'), 'utf8'));
   const fams = new Set(Object.keys(PL.methodFamilies.families));

@@ -532,6 +532,24 @@
    "detail": "Direct fetches 2026-09-21 transcribed toplines for GA governor (Jackson 48 / Bottoms 45), GA Senate (Ossoff 51 / Collins 42), SC Senate (Graham 48 / Andrews 43), AK Senate (Sullivan 39 / Peltola 39, four-candidate RCV ballot) and the generic ballot (D 49 / R 41). The SC release's biographical framing — 'the seat formerly held by the late Sen. Lindsey Graham', an appointment narrative — is the publisher's own and is NOT corroborated by this project; the AK release hinges on a two-candidate read of a four-candidate RCV ballot. Candidate identity itself is corroborated exactly against the exchange: SENATESC-26 yes_sub_titles 'Darline Graham'/'Annie Andrews' and vote-share markets KXVOTEGENERAL-SENATESC-26DGRA/-AAND; GOVPARTYGA-26 RJAC/KBOT; SENATEGA-26 Ossoff/Collins. The ingested SC margin (R+5 → mapped D p≈0.248) sits far below the captured SENATESC-26-D market (~0.13-0.14) — a genuine poll-vs-market divergence the dashboard now displays; GA Senate shows the mirror image (poll-implied D 0.881 vs market ~0.932). UPDATE 2026-09-21 (session 11): FairVote (admitted to the master list as fairvote, fetched directly the same day) independently documents the surrounding facts Rasmussen leans on — \"Dan Sullivan faces Dan Sullivan for Alaska Senate seat\" (the two-Sullivans AK ballot) and \"South Carolina runoff to replace Lindsey Graham is state’s 4th election in 11 weeks\" (the SC vacancy and Aug 25 runoff). The seat-vacancy/runoff context is therefore corroborated; the release’s specific biographical/appointment framing remains the publisher’s own and stays flagged. Action unchanged: rows already labeled \"publisher-framing-unverified\"; divergences published-not-reconciled.",
    "action": "Rows carry the exact release quotes; the uncorroborated narrative is recorded in the row's marketBasis and is not relied upon anywhere. AK comparison is withheld by the candidate check (party market). Both divergences are published for review, not reconciled by assumption; re-check when the next independent polls of SC/GA land.",
    "source": "https://www.rasmussenreports.com/public_content/politics/elections/election_2026/election_2026_south_carolina_senate"
+  },
+  {
+   "id": 70,
+   "severity": "low",
+   "area": "Master list hygiene",
+   "title": "vote-org and rock-the-vote were filed as government authorities; both pages describe civic nonprofits",
+   "detail": "Observed 2026-09-21 in data/sources/master.json: vote-org (https://www.vote.org/) was category Government — federal, and rock-the-vote (https://www.rockthevote.org/) was category Government — state & local. Both verified fields, left unchanged, describe nonpartisan nonprofits. A government category would let a later canvass gate treat them as official authorities.",
+   "action": "Recategorized both to Ratings, forecasts & analysis on 2026-09-21. verifiedOn and observed text unchanged. Do not treat either URL as an official canvass source. Next irregularity id is 72. The Metaculus duplication check queued in NEXT_SESSION.md, if confirmed, should use 72 rather than 70.",
+   "source": "https://www.vote.org/"
+  },
+  {
+   "id": 71,
+   "severity": "low",
+   "area": "Source access",
+   "title": "Follow-up fetch withheld 10 candidate election pages that were shells, a wrong path, a 404, or a failed fetch",
+   "detail": "Fetched 2026-09-21 and not admitted: votehillsborough.gov and duvalelections.gov were CivicPlus loading shells; votepalmbeach.gov was a loading shell plus a Yom Kippur closure alert for September 21, 2026; votepinellas.gov had a welcome paragraph and a phone number but no dates or calendar; piercecountywa.gov/200/Elections resolved to Entertainment; piercecountywa.gov/328/Elections and nassaucountyny.gov/566/Board-of-Elections were titled elections pages whose bodies were loading shells; epcounty.com/elections/ was the site's own Custom404; elections.honolulu.gov failed to fetch; hennepincounty.gov/en/your-government/elections-voting was 404 after redesign. Baltimore City, Denver, Multnomah, and Salt Lake were fetched in the same pass but were already in the registry and were not duplicated.",
+   "action": "Recorded in data/sources/admissions-2026-09-21-batch4.json. Do not reconstruct the withheld offices from memory. Retry shells with a headless browser before any canvass use.",
+   "source": "https://www.votehillsborough.gov/"
   }
  ]
 }

@@ -1142,3 +1142,48 @@ assertion (oregon-sos no longer verified-via-search), verification-gates total-f
   the new data reality instead of loosened; Rasmussen framing flagged (#69) rather than silently ingested.
 - Pass 3 (re-check against request): every admitted entry quotes observed text; every declined
   candidate recorded with the reason; remaining work + limitations listed in NEXT_SESSION.md and the PR.
+
+
+## 17. Follow-up — 16 more directly fetched sources (265 total)
+
+Branch `arena/01a0c65b-elections`, merged onto the session-11 registry already on main
+(PR #13, 249 sources). This follow-up does not replace §16. Four offices fetched in
+this pass were already admitted there and were not duplicated: Baltimore City
+(`baltimore-city-boe`), Denver (`denver-clerk-recorder`), Multnomah
+(`multnomah-county-elections`), and Salt Lake (`salt-lake-county-clerk`).
+
+### 17a. Admitted — 14 county authorities plus two civic pages
+
+All 16 were fetched directly on 2026-09-21 before insertion. Full observed text is
+on each master entry and in `data/sources/admissions-2026-09-21-batch4.json`.
+None is a certified canvass. Linked result files were not opened.
+
+| id | URL | Observed |
+|---|---|---|
+| `fairfax-county-va` | https://www.fairfaxcounty.gov/elections/ | Office of Elections; Eric L. Spicer, General Registrar; 703-222-0776; voting@fairfaxcounty.gov; 12000 Government Center Parkway Suite 323, Fairfax, VA 22035 |
+| `montgomery-county-md` | https://mcg.montgomerycountymd.gov/elections/index2.html | 2026 gubernatorial primary-results links; next board meeting September 28 at 2:00 p.m.; drop-box and September 15, 2026 registration advisories |
+| `shelby-county-tn` | https://www.electionsshelbytn.gov/ | Registration received or postmarked 30 days before the election; absentee reason required; applications open 90 days and close 10 days before Election Day; 980 Nixon Dr., Memphis, TN 38134 |
+| `allegheny-county-pa` | https://www.alleghenycounty.us/Government/Elections | Elections Division; the page says "voter roles"; 542 Forbes Avenue, Room 312, Pittsburgh, PA 15219; 412-350-4500 |
+| `cobb-county-ga` | https://www.cobbcounty.gov/elections | Leigh Phillips, Director; 995 Roswell St. NE, Marietta, GA 30060; October 5, 2026 registration deadline named for the November 3 general. June 16 runoff-results link not opened |
+| `prince-georges-md` | https://www.princegeorgescountymd.gov/boards-commissions/board-elections | Wendy Honesty-Bey; general early voting October 22–29, 2026; Election Day November 3, 2026, 7am–8pm |
+| `collin-county-tx` | https://www.collincountytx.gov/elections | Elections Administrator created August 18, 1980, pursuant to Texas Election Code Section 31.031 |
+| `mecklenburg-boe` | https://vote.mecknc.gov/ | Early-voting link for the 11/3/2026 election; 741 Kenilworth Ave., Suite 202, Charlotte, NC 28204 |
+| `wake-county-boe` | https://www.wake.gov/departments-government/board-elections | 2026 general calendar: registration Oct. 9 at 5:00 p.m.; early voting Oct. 15–31; Election Day Nov. 3, 6:30 a.m.–7:30 p.m. |
+| `gwinnett-county-ga` | https://www.gwinnettcounty.com/government/departments/elections | Voter Registrations and Elections is a division of the County Administrator's office. A cut-off language-assistance sentence was not quoted past what was read |
+| `dekalb-county-ga` | https://dekalbcountyga.gov/departments/voter-registration-and-elections | Current-elections line says "November 3rd" with no year. Notices heading says "November 3, 2026". The year was not added to the undated line |
+| `bernalillo-county-nm` | https://www.berncoclerk.gov/ | Clerk Michelle S. Kavanaugh; next election Tuesday, November 3, 2026. Registration and turnout widget numbers were not in the fetched text and are not recorded |
+| `ramsey-county-mn` | https://www.ramseycountymn.gov/residents/elections-voting | Elections & Voting; public online Q&A; key dates and results links. Hennepin's path 404'd the same day and was not admitted |
+| `fort-bend-county-tx` | https://www.fortbendcountytx.gov/government/departments/elections-voter-registration | Closed Friday, September 25, 2026, for County Fair Day. Warns that third-party sites still show 2021–2025 districts. The warning is recorded; a map was not verified |
+| `lwv` | https://www.lwv.org/ | League homepage. Distinct from `vote411-lwv`. The 9.5 million / 9.38 million figures are the organization's own claims |
+| `verified-voting` | https://verifiedvoting.org/ | Nonprofit election-technology advocacy. The Verifier is an equipment and audit-law database, not certified returns. Internet voting described as "not private or secure" |
+
+### 17b. Not added
+
+Already on main, so not duplicated: Multnomah, Salt Lake, Baltimore City, Denver.
+Withheld as shells, a wrong path, a 404, or a failed fetch (irregularity #71):
+Hillsborough, Palm Beach, Pinellas, Duval, Pierce /200 and /328, Nassau, El Paso,
+Honolulu, and Hennepin. Vote.org and Rock the Vote were recategorized out of
+government (irregularity #70). `verifiedOn` and observed text on those two entries
+were not rewritten.
+
+Master 249 → **265**. Entries dated 2026-09-21: 60 → **76**. Next irregularity id: **72**.

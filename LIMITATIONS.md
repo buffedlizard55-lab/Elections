@@ -179,3 +179,10 @@ Machine-readable twin of the bullet list: `data/roadmap.json → limitations`.
   review remain necessary; current workflow artifacts expire after seven days.
 - Existing contest results are historical simulations, not a full persistent
   execution/PnL ledger for today's open markets. See the next-session worklist.
+- Follow-up on 2026-09-21 added 14 county election-authority pages plus the
+  League of Women Voters homepage and Verified Voting. Those pages are not
+  certified canvasses. Baltimore City, Denver, Multnomah, and Salt Lake were
+  already in the registry and were not duplicated. Ten other candidate URLs were
+  shells, a wrong path, a 404, or a failed fetch and were not admitted
+  (irregularity #71). Vote.org and Rock the Vote were recategorized out of
+  government (irregularity #70). No turnout or vote totals were invented.

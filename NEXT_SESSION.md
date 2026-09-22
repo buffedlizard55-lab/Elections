@@ -1,6 +1,12 @@
 # Next session (12) — handoff
 
-Updated **2026-09-21** (session 11 wrap). Branch: `arena/01a0c626-elections` (merged to main via PR).
+Updated **2026-09-21** after the follow-up on `arena/01a0c65b-elections`.
+Session 11 (`arena/01a0c626-elections`) is already on main. This follow-up added
+16 sources that were not already there (249 → **265**) and did not duplicate
+Baltimore City, Denver, Multnomah, or Salt Lake. Evidence:
+`data/sources/admissions-2026-09-21-batch4.json`. Irregularities #70 (Vote.org /
+Rock the Vote recategorized) and #71 (10 shells/404s withheld). No new poll rows
+and no vote totals.
 Primary audit: `VERIFICATION.md` §16. Do not interpret successful schema tests as independent
 confirmation of a source's truth.
 
