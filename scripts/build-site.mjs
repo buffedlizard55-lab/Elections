@@ -54,6 +54,10 @@ const cf2026Season = readOptional('data/contest/forward-2026/season.json');
 const cf2026Universe = readOptional('data/contest/forward-2026/universe.json');
 const cf2026Attribution = readOptional('data/contest/forward-2026/attribution.json');
 const marketList = readOptional('data/kalshi/universe/market-list-latest.json');
+// Browsable slice of the same canonical list (written by scripts/build-market-list.mjs).
+// The page must be able to SHOW markets, not just count them; the full 4.5 MB CSV stays
+// the canonical artifact and is linked from the section.
+const marketBrowse = readOptional('data/kalshi/universe/market-list-browse.json');
 const crosslayerFills = readOptional('data/contest/forward-2026/crosslayer-fills.json');
 const comboEdges = readOptional('data/contest/forward-2026/combo-edges.json');
 const contest2026 = cf2026 && cf2026Season ? {
@@ -244,6 +248,12 @@ const universeSummary = universeOpen && {
   date: universeOpen.date,
   count: universeOpen.count,
   seriesQueried: universeOpen.seriesQueried,
+  // Present only on captures written after irregularity #81. `complete === false`
+  // means the collector hit its wall-clock budget and the capture is a partial
+  // one — the page must say so rather than print a smaller number as if it were
+  // the whole universe. Older captures have no flag and are shown unannotated.
+  seriesEligible: universeOpen.seriesEligible ?? null,
+  complete: universeOpen.complete ?? null,
   top: [...(universeOpen.markets || [])]
     .sort((a, b) => Number(b.vol || 0) - Number(a.vol || 0))
     .slice(0, 15)
@@ -260,6 +270,7 @@ const bundle = {
   contest,
   contest2026,
   marketList,
+  marketBrowse,
   irregularities,
   roadmap,
   pollSeries2024: pollSeries,

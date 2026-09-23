@@ -89,7 +89,14 @@ jobs:
   collect:
     if: ${{ vars.COLLECT_DISABLED != 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # The per-step timeouts below sum to more than one job can take, because they
+    # are worst-case caps on steps that normally finish far sooner (the whole job
+    # ran 34m30s on 2026-09-22). But the JOB cap must still exceed the realistic
+    # worst case, or the runner kills the job mid-step and -- exactly as in #81 --
+    # the later steps silently never run. Raised 90 -> 150 when the universe step
+    # went to 45 min; a test asserts the job cap stays above the universe step's
+    # cap plus the other steps' observed runtime.
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
@@ -118,10 +125,48 @@ jobs:
         continue-on-error: true
         run: node scripts/crosscheck-collectors.mjs
 
+      # Runtime budget (irregularity #81): the script's own --budget-minutes must stay
+      # STRICTLY BELOW this step timeout, or the runner kills it mid-phase and the
+      # settled-2026 seed never reaches its writeFileSync — which is exactly what
+      # silently froze the seed at its 2026-09-19 content on 2026-09-21 and 2026-09-22
+      # (both steps ran 25.2 min against a 25 min limit and were reported "success"
+      # by continue-on-error).
+      #
+      # Tuned again after live run 35796490195, the first real run of that fix. It
+      # completed without being killed (34m30s), but exposed three more defects now
+      # filed as #82/#83/#84: the aggregate request rate exceeded Kalshi's documented
+      # 20 req/s read ceiling and lost 18 series to HTTP 429 (now bounded by a
+      # process-wide token bucket in src/kalshi-live.js); a truncated phase re-walked
+      # the same prefix forever (now a rotating cursor); and unbounded discovery
+      # starved the candle phase of budget entirely (now --candle-reserve).
+      #
+      # 45 min timeout / 38 min budget: discovery needs ~41 min for a full sweep at
+      # the observed rate, so the rotating cursor finishes a sweep every couple of
+      # runs while the reserve keeps bars growing every run. The 7 min margin covers
+      # the final writes.
       - name: FULL open-market universe snapshot (forward loop -> data/kalshi/forward/)
         continue-on-error: true
-        timeout-minutes: 25
-        run: node scripts/collect-universe.mjs || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+        timeout-minutes: 45
+        run: node scripts/collect-universe.mjs --concurrency 6 --budget-minutes 38 --candle-reserve 0.35 || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+
+      # A truncated capture is legitimate (the budget is a safety valve), but it must be
+      # VISIBLE. This surfaces it as a workflow warning instead of leaving it only in meta.
+      - name: Report universe capture completeness
+        continue-on-error: true
+        run: |
+          META="data/kalshi/forward/meta-$(date -u +%F).json"
+          if [ ! -f "$META" ]; then
+            echo "::warning::no universe meta for today ($META) - the capture step wrote nothing"
+            exit 0
+          fi
+          node -e '
+            const m = require("./" + process.argv[1]);
+            const r = m.runtime || {};
+            console.log(`universe capture: ${m.openMarkets} open markets, ${m.settled2026Markets} settled-2026 (${m.settled2026WithBars} with bars), ${r.elapsedMinutes} min at concurrency ${r.concurrency}`);
+            for (const p of r.phasesTruncated || []) console.log(`::warning::universe capture truncated - ${p}`);
+            if (r.complete === false) console.log(`::warning::universe capture INCOMPLETE - next run resumes the discovery sweep at index ${r.discoveryCursorNext}`);
+            if (r.rateLimited429) console.log(`::warning::${r.rateLimited429} request(s) were rate-limited (HTTP 429) - lower --concurrency or KALSHI_MAX_RPS if this persists`);
+          ' "$META"
 
       - name: 2024 per-state Senate races capture (forward loop -> data/kalshi/historical-2024/)
         continue-on-error: true

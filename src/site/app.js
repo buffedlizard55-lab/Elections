@@ -11,6 +11,7 @@
 
   const SECTIONS = [
     ['overview', 'Overview'],
+    ['allmarkets', 'All Markets'],
     ['markets', '2026 Markets'],
     ['polls', '2026 Polls'],
     ['tracker', 'Tracker'],
@@ -958,6 +959,9 @@
         <strong class="mono">${Number(u.count).toLocaleString('en-US')}</strong> open politics/elections markets across <strong>${u.seriesQueried}</strong> series.
         The daily loop (GitHub Actions, <span class="mono">daily-collection.yml</span>, 12:30 UTC) appends every open market's bid/ask to
         <span class="mono">data/kalshi/forward/open-prices.csv</span> — the forward "expected vs actual" feed.</p>
+        ${u.complete === false ? `<p class="small"><span class="chip warn">partial capture</span>
+        This run stopped at ${int(u.seriesQueried)} of ${int(u.seriesEligible)} eligible series when it reached its wall-clock budget
+        (irregularity #81). The counts above describe what was captured, not the whole universe; the next run resumes where this one stopped.</p>` : ''}
         <table><thead><tr><th>Market</th><th>Event</th><th>Outcome</th><th class="num">Bid</th><th class="num">Ask</th><th class="num">Volume</th><th class="num">Closes</th></tr></thead>
         <tbody>${u.top.map((m) => `<tr><td class="mono">${esc(m.ticker)}</td><td class="mono small">${esc(m.event || '')}</td><td>${esc(m.sub || '')}</td>
           <td class="num">${m.bid == null ? '—' : (Number(m.bid) * 100).toFixed(0) + '¢'}</td>
@@ -1146,6 +1150,146 @@
     <div class="card">${rend ? `<table><thead><tr><th>Date</th><th>EBO Kalshi Senate-D</th><th>DDHQ odds</th><th>270toWin Kalshi panel</th><th>Flags</th></tr></thead><tbody>${rend}</tbody></table><p class="small">${esc(X.renderings.method)}</p>` : '<p class="small">No automated rows yet — <span class="mono">scripts/crosscheck-renderings.mjs</span> runs daily. Manual check 2026-09-19: EBO showed Kalshi Senate-D 58.4–59.4% against our captured 59/60¢ (within tolerance); DDHQ House 70% / Senate 52%; 270toWin\'s Kalshi panel 57% / 41% (2028 presidency, as of Sep. 19, 2026 20:29 UTC).</p>'}</div>`;
   }
 
+  // ---------- ALL MARKETS (browsable canonical list) ----------
+  // The project's goal is "a full list that follows our requirements". The
+  // canonical artifact is data/kalshi/universe/market-list-latest.csv (one row per
+  // open political/election market, with its eligibility verdict). That file is
+  // ~4.5 MB, so the page loads the highest-volume slice published by
+  // scripts/build-market-list.mjs and links the complete CSV for review. Every
+  // value shown is copied from the capture; nothing is recomputed here.
+  const MB = D.marketBrowse;
+  const MB_PAGE = 100;
+
+  function allmarkets() {
+    if (!MB) {
+      return `<h1>All markets</h1>
+      <div class="callout">No browsable market list in this build — run <span class="kbd">npm run market-list</span>.</div>`;
+    }
+    const reasons = [...new Set(MB.rows.map((r) => r[9]))].sort();
+    const top = MB.seriesRollup.slice(0, 12).map((s) => `<tr>
+      <td class="mono">${esc(s.series)}</td>
+      <td class="num">${int(s.markets)}</td>
+      <td class="num">${int(s.eligible)}</td>
+      <td class="num">${money(s.volume)}</td>
+      <td>${s.usElection ? '<span class="chip good">US election</span>' : '<span class="chip">other</span>'}</td></tr>`).join('');
+    return `
+    <h1>All open political &amp; election markets on Kalshi</h1>
+    <p class="lead">The complete captured universe: <strong>${int(MB.totalListed)}</strong> open political/election markets from the
+    ${esc(MB.capturedForDate)} capture, of which <strong>${int(MB.contestEligibleCount)}</strong> are contest-eligible on
+    ${esc(MB.latestPanelDate)}. Every row carries the exchange's own fields and this project's eligibility verdict.</p>
+
+    <div class="callout"><strong>What you are looking at.</strong> Prices are the <em>captured</em> book
+    (<span class="mono">${esc(String(MB.capturedAt).slice(0, 16).replace('T', ' '))} UTC</span>) — a snapshot, not a live quote; the exchange moves after capture.
+    The table below is the <strong>${int(MB.browsableRows)} highest-volume rows</strong> so the page stays fast. The complete
+    ${int(MB.totalListed)}-row list is the CSV: <a href="${esc(MB.csvUrl)}" target="_blank" rel="noopener">market-list-latest.csv</a>.
+    The per-series totals underneath cover <strong>all ${int(MB.totalListed)} rows</strong>, not just the slice.</div>
+
+    <div class="toolbar">
+      <input type="search" id="mk-q" placeholder="Search ${int(MB.browsableRows)} markets — ticker, outcome, series…" aria-label="Search markets">
+      <select id="mk-reason" aria-label="Filter by eligibility">
+        <option value="">All eligibility verdicts</option>
+        ${reasons.map((r) => `<option value="${esc(r)}">${esc(r)} (${MB.rows.filter((x) => x[9] === r).length})</option>`).join('')}
+      </select>
+      <select id="mk-el" aria-label="Filter by US election">
+        <option value="">US-election and other</option>
+        <option value="1">US-election series only</option>
+        <option value="0">Non-US-election only</option>
+      </select>
+      <button class="btn" id="mk-more" type="button">Show more</button>
+    </div>
+    <p class="small" id="mk-count" aria-live="polite"></p>
+    <div class="card" style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>Market</th><th>Outcome</th><th class="num">Mid</th><th class="num">Bid</th><th class="num">Ask</th>
+          <th class="num">Volume</th><th class="num">Open int.</th><th class="num">Closes</th><th>Contest eligibility</th>
+        </tr></thead>
+        <tbody id="mk-body"></tbody>
+      </table>
+      <p class="small" id="mk-empty" style="display:none">No market matches those filters.</p>
+    </div>
+
+    <h2>Every series in the list (all ${int(MB.totalListed)} rows)</h2>
+    <div class="card" style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Series</th><th class="num">Markets</th><th class="num">Contest-eligible</th><th class="num">Lifetime volume</th><th>Tag</th></tr></thead>
+        <tbody>${top}</tbody>
+      </table>
+      <p class="small">Top 12 of ${int(MB.seriesRollup.length)} series by lifetime volume. Volume is the exchange's cumulative
+      <span class="mono">volume_fp</span> in dollars, summed over the series' markets.</p>
+    </div>
+
+    <h2>How a market becomes "contest-eligible"</h2>
+    <div class="card"><p style="font-size:14.5px; margin-top:0">${esc((ML && ML.universeDefinition) || '')}</p>
+      <p class="small">Defined once, in <span class="mono">src/contest/forward-universe.js</span>, and used by both the scored season and
+      this list — so the page and the contest cannot disagree about which markets existed on which day. The reconciliation ladder that
+      accounts for every market not in the eligible set is on the <a href="#/contest2026">Live 2026 Contest</a> page.</p>
+      ${srcs([MB.capturedFrom, MB.csvUrl])}</div>`;
+  }
+
+  // Search / filter / paging for All Markets. Pure DOM work over the bundle slice.
+  function wireAllMarkets() {
+    if (!MB) return;
+    const q = document.getElementById('mk-q');
+    const reason = document.getElementById('mk-reason');
+    const el = document.getElementById('mk-el');
+    const body = document.getElementById('mk-body');
+    const countEl = document.getElementById('mk-count');
+    const emptyEl = document.getElementById('mk-empty');
+    const moreBtn = document.getElementById('mk-more');
+    if (!body || !q) return;
+
+    // Precompute one lowercase haystack per row so typing stays responsive.
+    const hay = MB.rows.map((r) => `${r[0]} ${r[1]} ${r[2]}`.toLowerCase());
+    let shown = MB_PAGE;
+
+    const priceCell = (v) => (v == null ? '—' : (v * 100).toFixed(v < 0.1 ? 1 : 0) + '¢');
+    const rowHtml = (r) => `<tr>
+      <td class="mono">${esc(r[0])}<div class="small">${esc(r[2])}</div></td>
+      <td>${esc(r[1])}</td>
+      <td class="num">${priceCell(r[3])}</td>
+      <td class="num">${priceCell(r[4])}</td>
+      <td class="num">${priceCell(r[5])}</td>
+      <td class="num">${r[6] == null ? '—' : money(r[6])}</td>
+      <td class="num">${r[7] == null ? '—' : int(r[7])}</td>
+      <td class="num small">${esc(r[8])}</td>
+      <td><span class="chip ${r[9] === 'contest-eligible' ? 'good' : 'warn'}">${esc(r[9])}</span></td>
+    </tr>`;
+
+    function matches() {
+      const term = q.value.trim().toLowerCase();
+      const wantReason = reason.value;
+      const wantEl = el.value;
+      const out = [];
+      for (let i = 0; i < MB.rows.length; i++) {
+        const r = MB.rows[i];
+        if (term && !hay[i].includes(term)) continue;
+        if (wantReason && r[9] !== wantReason) continue;
+        if (wantEl !== '' && String(r[10]) !== wantEl) continue;
+        out.push(r);
+      }
+      return out;
+    }
+
+    function apply() {
+      const hits = matches();
+      const page = hits.slice(0, shown);
+      body.innerHTML = page.map(rowHtml).join('');
+      emptyEl.style.display = hits.length ? 'none' : '';
+      countEl.textContent = hits.length
+        ? `Showing ${page.length} of ${hits.length} matching market${hits.length === 1 ? '' : 's'} (of ${MB.browsableRows} browsable, ${MB.totalListed} captured in total).`
+        : `No match among the ${MB.browsableRows} browsable rows — the full ${MB.totalListed}-row list is in the CSV.`;
+      moreBtn.style.display = hits.length > page.length ? '' : 'none';
+    }
+
+    const reset = () => { shown = MB_PAGE; apply(); };
+    q.addEventListener('input', reset);
+    reason.addEventListener('change', reset);
+    el.addEventListener('change', reset);
+    moreBtn.addEventListener('click', () => { shown += 400; apply(); });
+    apply();
+  }
+
   // ---------- ROADMAP ----------
   function roadmap() {
     const items = D.roadmap.items.map((r) => `
@@ -1164,8 +1308,8 @@
   }
 
   // ---------- ROUTER ----------
-  const RENDER = { overview, markets, polls, tracker, forward, crosslayer, backtests, contest, contest2026, sources, irregularities, methodology, roadmap };
-  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, contest2026: drawContest2026Charts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources };
+  const RENDER = { overview, allmarkets, markets, polls, tracker, forward, crosslayer, backtests, contest, contest2026, sources, irregularities, methodology, roadmap };
+  const AFTER = { forward: drawForwardCharts, backtests: drawBacktestCharts, contest: drawContestCharts, contest2026: drawContest2026Charts, polls: drawPollCharts, tracker: drawTrackerCharts, sources: wireSources, allmarkets: wireAllMarkets };
 
   const nav = document.getElementById('nav');
   nav.innerHTML = SECTIONS.map(([id, label]) => `<a href="#/${id}" data-id="${id}">${label}</a>`).join('');

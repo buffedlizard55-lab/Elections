@@ -1,96 +1,151 @@
-# Next session (13) — handoff
+# Next session (15) — handoff
 
-Updated **2026-09-22**, session 13 pass on `arena/01a0c7eb-elections`.
-Primary audit for this pass: `VERIFICATION.md` §20. Session 12 remains `VERIFICATION.md` §18–§19. Do not interpret a passing test as
-independent confirmation of a source's truth.
+Updated **2026-09-22**, session 14 pass on `arena/01a0cb4d-elections`.
+**Item 1 of the old plan is already done:** the fix was confirmed on a real runner during this
+session (run `35796490195`) and that run exposed three further defects, now fixed as #82/#83/#84.
+Primary audit for this pass: `VERIFICATION.md` §20 (session 13) plus the run-log evidence quoted in
+irregularity **#81** below. Do not interpret a passing test as independent confirmation of a source's truth.
 
-## Delivered in session 13 (this pass)
+## Delivered in session 14 (this pass)
 
-- **Two failing tests repaired.** `test/forward-contest.test.mjs` — "the signals ledger is one row per published signal per captured day" — hard-coded the 3-day horizon (`days.size === 3`, `kinds.poll === admitted * 3`, poll/rating must be unusable on ANY captured day, `pollLayer.asOf === lastCapturedDay`). Now that the daily workflow has produced a fourth captured day, three of those assertions no longer match the data. The test is rewritten to use the actual `days.size` and to assert the **real** look-ahead invariant — that a poll/rating row is usable only on a trading day **strictly after** the poll layer's capture date. 19 admitted poll rows × 4 days = 76 poll rows in the ledger, of which 19 (the day-after capture) are usable; no look-ahead leak. `test/verification-gates.test.mjs` — "wrong nominees are retained as history but never compared as the current matchup" — asserted `poll-layer-2026.json::candidateMismatchProvenance.universeCapturedAt === universe/latest.json::capturedAt`. The provenance was stale because the universe was re-captured (2026-09-22) after the session-11 patch (2026-09-21). New `scripts/refresh-poll-layer-provenance.mjs` re-anchors the field to whatever the universe currently carries and is idempotent; the field now reads `2026-09-22T17:09:13.388Z`. Both fixes preserve the original invariants the tests were meant to enforce.
-- **Package.json script name fixed.** `package.json` `pipeline` referenced `npm run gen-roadmap` but the script key was `roadmap`; the pipeline crashed at the roadmap step. Renamed the reference; the full pipeline (`backtest + contest + contest-forward + crosslayer + build-site + market-list + roadmap + render-check`) now runs end-to-end without manual steps.
-- **Tests green again.** 155 pass, 0 fail, 1 skipped (intentional). Lint clean. Site bundle rebuilt and verified (`scripts/render-check.cjs`; no template leaks across all 13 sections).
-- **Site + bundle regenerated.** `src/data/site-data.js` rebuilt from the current data files (2026-09-22 capture, 4-day signals ledger, refreshed poll-layer provenance). GitHub Pages deploys from the `main` branch root, so the bundle will land at https://buffedlizard55-lab.github.io/Elections/ as soon as this branch is merged.
-- **Counts unchanged this pass.** Master list 267 sources (no new entries); irregularities 79; tests 156; the 24,150-market open universe and the 12-entrant live 2026 contest were not regenerated for content.
+- **Found and fixed a silent production failure (#81, high).** The daily `daily-collection`
+  workflow had been **losing an entire collection phase for two days without reporting it**.
+  `scripts/collect-universe.mjs` fetched the ~4,200 politics/elections series strictly serially
+  (measured from the run log: 17.87 min for 4,223 series = 0.254 s/series = 3.94 req/s), which left
+  too little of the 25-minute step timeout for the settled-2026 seed phase. The runner killed the
+  step **before `settled-2026-seed.json` was written** on both 2026-09-21 (run `35637340481`, step 9
+  ran 18:18:50Z→18:44:03Z = 25.22 min) and 2026-09-22 (run `35758788558`, 17:12:07Z→17:37:19Z =
+  25.20 min). Both steps are `continue-on-error`, so the GitHub API still reports step 9 of the
+  9/21 run as `conclusion: success` and the whole run was green — the failure was invisible.
+  Evidence: the seed is still stamped `2026-09-19T04:56:27.917Z` with 9,350 markets / **400 bars /
+  8,950 skipped**, and `meta-2026-09-19.json` is the only meta file in the repository even though the
+  collector has run every day since.
+  - **Fix (a) bounded concurrency.** `--concurrency` (default 6). Kalshi's documented Basic-tier read
+    budget is 200 tokens/s at 10 tokens per request = **20 req/s sustained**
+    (<https://docs.kalshi.com/getting_started/rate_limits.md>, read 2026-09-22); 6-way concurrency with
+    the existing pacing stays at roughly a fifth of that ceiling.
+  - **Fix (b) a wall-clock budget.** `--budget-minutes` (default 20) is checked by every phase before
+    it enqueues more work, so **all five artifacts are always written** rather than the process being
+    killed mid-phase. The workflow now allows **30 min** and passes `--budget-minutes 24`, a 6-minute
+    write margin. A test asserts `budget < timeout` so the two can never be edited out of sync again.
+  - **Fix (c) truncation is data, not an inference.** `meta-<date>.json` carries
+    `runtime.{concurrency,budgetMinutes,elapsedMinutes,budgetExhausted,complete,phasesTruncated}`,
+    `universe-open.json` carries `complete` + `seriesQueried` vs `seriesEligible`, and a new
+    *Report universe capture completeness* step emits `::warning::` when `complete` is false.
+  - **Fix (d) determinism under concurrency.** Workers finish in arbitrary order, so every written
+    collection is now explicitly ordered (open rows sorted by ticker; seed `markets`/`bars`/
+    `candleEndpoint` key-sorted; `skipped` and `errors` sorted; the candle queue sorted by
+    `close_time` with a **ticker tiebreak** so the `--max-candles` cap picks the same set every run).
+    Verified: two runs against a jittered-latency mock produced **byte-identical** output.
+  - Verified offline against a mock API: peak concurrency never exceeded 6; a deliberately exhausted
+    budget still wrote all five files and recorded both truncated phases; the next full run recovered
+    the 10 missing series; a repeat run appended **0** duplicate CSV rows.
+- **Confirmed #81 on a real runner, and found three more defects doing it (#82/#83/#84, all high).**
+  Pushing this branch triggered `daily-collection` run `35796490195`. It **proved the #81 fix**: the
+  open phase completed **4,225/4,225 series**, the step ran **34m30s** and was never killed, and every
+  artifact was written. The same run's `meta-2026-09-22.json` then exposed three defects that no
+  offline mock could have produced:
+  - **#82 — the concurrency change exceeded Kalshi's rate limit.** The `--concurrency 6` justification
+    compared the *serial* rate (3.94 req/s) against the 20 req/s ceiling; the figure that matters is
+    the *aggregate*, 6 × 3.94 = **23.6 req/s**. The run logged **18 HTTP 429 errors**, each one a
+    series silently dropped from the sweep. A per-worker `sleep(80)` bounds one worker, never the
+    aggregate. `src/kalshi-live.js` now has a **process-wide token bucket** (default 14 req/s,
+    `KALSHI_MAX_RPS`) shared by every `getJson()` caller, retries raised 2 → 4 with **jittered**
+    exponential backoff, and a 429 debits the global bucket. Measured against a local counting
+    server: peak in any 1-second window fell **64 → 17 req/s**, under the documented 20.
+  - **#83 — a truncated phase re-walked the same prefix forever.** `mapPool` always starts at index 0,
+    so discovery stopping at **738/1,890** meant series 739–1,890 were **unreachable on every future
+    run**. Now the Elections list is ticker-sorted and a **rotating cursor** (`seed.discoveryCursor`)
+    persists the resume point. Verified on a 120-series mock: four truncated runs covered
+    36 → 72 → 108 → 120 with bars growing 5 → 10 → 15 → 20; a fifth complete run reset the cursor to 0.
+  - **#84 — discovery starved the candle phase of budget entirely.** Discovery is ~41 min of work and
+    absorbed the whole 24-min budget, so the candle phase got **0/400** and the bars that feed
+    calibration had not grown since 2026-09-19. `mapPool` now takes a per-phase deadline and
+    discovery runs against an earlier one, reserving `--candle-reserve` (default 35%). Verified: a
+    budget tight enough to truncate discovery at 36/120 still fetched 5 new candle sets (was 0).
+  - Workflow retuned to **45 min timeout / 38 min budget**, and the completeness reporter now also
+    warns on `rateLimited429` and prints the next discovery cursor.
 
-## Delivered in session 12
-
-- **Live 2026 contest (R16) — new.** `src/contest/forward-universe.js` (offline contest
-  universe + the shared capture loaders, so the season and the market list read byte-identical
-  inputs), `src/contest/forward-engine.js` (mark-to-market replay, exact accounting identity
-  that **throws** rather than warns, per-entry fee accounting, participation cap, pro-rata
-  daily deployment ceiling, `sideMark` so a NO position is marked `1 − yesMid`),
-  `src/contest/strategies-forward.js` (12 entrants: 7 carried over unchanged from 2024 — the
-  test asserts object identity of their `decide()` functions — plus 5 new 2026 theses),
-  `scripts/run-forward-contest.mjs` (8 artifacts under `data/contest/forward-2026/`),
-  `test/forward-contest.test.mjs` (**35 tests**), and the site section `Live 2026 Contest`.
-- **Canonical open-market list — new.** `scripts/build-market-list.mjs` writes
-  `data/kalshi/universe/market-list-latest.{csv,json}`: every open political/election market
-  (24,102) with an eligibility verdict and reason, plus a reconciliation ladder that must close
-  arithmetically (10,981 + 13,120 + 200 = 24,301) or the script exits non-zero. Every row lands
-  in a reason the universe builder actually applies — an `unclassified` row is now a build
-  failure, not a bucket.
-- **Irregularity #78 filed** — `close_time` is the exchange's listing-expiry / cycle field, not
-  a resolution date (SENATEAK-26-D, a 2026 race, carries 2027-11-03). The season scopes with
-  `SEASON.closesBy` and settles only from a captured official result.
-- **Silent-failure guard.** The poll identity gate is asserted non-empty at runtime and pinned
-  by tests: if the captured universe document ever drops out of the loaders, the run fails
-  instead of quietly admitting markets that resolve on another person.
-- **Control-market rules captured (closes the old item 1).** The queued "majority 51 + VP
-  tiebreak" reading is **withdrawn** (irregularity #72).
-- **Counts.** Master 265 → 267 sources; irregularities → **#78**; tests 110 → **146**.
-
-
-## Delivered this pass
-
-- **Identity flags stored (#77 resolved).** `candidateMismatch()` is written onto every `stateRaces` row in `data/polls/poll-layer-2026.json`, with `candidateMismatchProvenance.universeCapturedAt` equal to the universe capture `2026-09-21T18:16:44.622Z`. `review` and `comparisonBlockedReason` were not flipped. The contest still calls the live function. Six rows store a refusal string (the five previously unflagged identity rows, plus `nyt-siena-2026-07-ak-senate`, which already had `review: true`). The site shows an `identity` chip whose title is that string, and a `stored/live disagree` chip if the stored flag and a fresh recompute ever diverge.
-- **Fee registration no longer counts a silent skip (#79).** The runner passes `fee_type` and `fee_multiplier`, uses the registration return, and throws if that return is not the count of series with a numeric multiplier. This run registered **4185** and used the documented default for **0**. Maker M defaults to 0 (`makerFee`, coefficient 0.0175) and is not copied from the captured taker multiplier (#76 resolved). The contest remains taker-only. Published PnL did not move: no fill used one of the 10 series whose captured multiplier is 0, and every traded series has multiplier 1.
-- **Cross-layer fills reconciled.** `data/contest/forward-2026/crosslayer-fills.json` ties all three `crosslayer-arb` entries to a prior snapshot. `2026-09-20` `CONTROLS-2026-D` NO binds to `2026-09-19-senate` (crowd 0.517, snapshot mid 0.595, panel mid 0.595). `2026-09-21` `GOVPARTYMI-26-D` binds to `2026-09-20-governor-mi-2026` (crowd 0.85, snapshot mid 0.915, panel mid 0.9165). `2026-09-21` `SENATEAK-26-D` binds to `2026-09-20-senate-ak-2026` (crowd 0.54, snapshot mid 0.695, panel mid 0.705). Each fill price is the taker cross and each fee equals `takerFee` on the fill's series. Nothing was auto-filed.
-- **Basket edges recorded for every priceable day.** All three captured days had the four legs eligible and traded. Best edge remains **2026-09-21** (ask sum 1.002, fee 0.0375, edge −0.0395). **2026-09-20** recomputed from the panel is ask sum 1.002, fee 0.0389, edge −0.0409 — not the earlier hand figure. **2026-09-19** is ask sum 1.012, fee 0.0395, edge −0.0515. Pair attempts 6. Trades 0. The independent scan agrees with `combo-coherence`.
-- **Look-ahead guard is inside `decide()`.** `signalsForTradingDay` is what the runner uses. `poll-anchor-26` and `ratings-ratchet` also refuse a row whose `asOf` is not strictly before the trading day. Published orders did not change: 19 of 31 poll rows admitted, 12 refused, poll and rating signals still unusable on every captured day.
+- **The "full list" is now actually browsable (site).** The project's stated goal is "a full list that
+  follows our requirements", but the site published only *counts* — the 24,139-row list existed solely
+  as a 4.5 MB CSV. New **All Markets** section: searchable by ticker/outcome/series, filterable by
+  eligibility verdict and US-election tag, paged (100 rows, "Show more"), with a per-series roll-up
+  computed over **all 24,139 rows** (not just the browsable slice) and a direct link to the canonical
+  CSV. New artifact `data/kalshi/universe/market-list-browse.json` (top 3,000 by volume, positional
+  layout). Roll-up arithmetic is checked: series totals sum to 24,139 and eligible sums to 6,384,
+  both matching the canonical list exactly.
+- **Checks extended.** `scripts/render-check.cjs` now renders the new section and asserts its required
+  content (table shell, search control, CSV link) and forbids its empty-state fallback. Tests:
+  **156 → 163**, all passing (162 pass + 1 intentional skip). Lint clean. Irregularities 80 → **84**.
+- **Verified against the live exchange.** `CONTROLH-2026-D`, `CONTROLS-2026-D` and `SENATEAK-26-D`
+  were re-read from `GET /markets?tickers=…` during this session: tickers, `close_time`,
+  `yes_sub_title` and rules text match the captured rows field-for-field (prices had moved in the
+  ~6 h since capture, as expected — the page labels prices as a capture, not a live quote).
 
 ## Remaining work (priority order)
 
-1. **Score the Metaculus-vs-Kalshi gap (P0 for the project).** `crosslayer-arb` has three days
-   of signal and no settlement; the question stays unscored until the canvass runs.
-   `controlQuestion.resolutionRule.confirmed` must stay false — the confirmed rule is the one
-   captured in §18c, not the withdrawn assumption. Do not score Metaculus from this handoff.
-2. **First post-election canvass pass (after 2026-11-03).** Then the 2026 contest converts from
-   mark-to-market to realised, and the live calibration scorer gets its first `scoreableMarkets`
+1. **Verify #82/#83/#84 on the next real runner (P0, do this first).** Pushing this branch triggered
+   [run `35796490195`](https://github.com/buffedlizard55-lab/Elections/actions/runs/35796490195),
+   which **confirmed the #81 fix** (open phase 4,225/4,225 series, 34m30s, never killed, every
+   artifact written) and exposed #82/#83/#84. Those three fixes are again **mock-verified only**.
+   On the next run check `meta-<today>.json` for:
+   `runtime.rateLimited429` → should be **0** (was 18);
+   `runtime.discoveryCursorNext` → should **advance** run over run, or be 0 after a complete sweep;
+   `settled2026WithBars` → must be **> 400 and rising** (frozen at 400 since 2026-09-19);
+   `runtime.elapsedMinutes` → should sit under the 38-minute budget inside a 45-minute step.
+   If 429s reappear, lower `KALSHI_MAX_RPS` (env, default 14) before touching `--concurrency`.
+2. **Backfill the ~9,009 missing candle seeds.** With `--candle-reserve` the phase now always makes
+   progress, but the cap is still `--max-candles` (400) per run, so a full backfill is ~22 complete
+   runs. Consider a one-off `workflow_dispatch` with a raised `--max-candles`/`--budget-minutes`, or
+   accept the gradual fill — but **decide and record it**, because the R3 calibration sample size
+   depends on it. Note the discovery sweep itself needs ~41 min at the observed rate, so with the
+   rotating cursor a full sweep now completes about every second run.
+3. **Score the Metaculus-vs-Kalshi gap (P0 for the project).** `crosslayer-arb` has four days of
+   signal and no settlement; the question stays unscored until the canvass runs.
+   `controlQuestion.resolutionRule.confirmed` must stay false.
+4. **First post-election canvass pass (after 2026-11-03).** Then the 2026 contest converts from
+   mark-to-market to realised and the live calibration scorer gets its first `scoreableMarkets`
    (still 0 today by design). Election day remains 2026-11-03.
-3. **Open the entry windows the entrants are waiting on.** `momentum-mule`, `fader-flipper` and
+5. **Open the entry windows the entrants are waiting on.** `momentum-mule`, `fader-flipper` and
    `shock-surfer` need 5–7 days of history; `yield-yak` and `breakout-bandit` need to be inside
-   14/7 days of the election; `poll-anchor-26` and `ratings-ratchet` need a poll capture that
-   predates a price panel. All are published as unranked with a reason; verify each fires when
-   its window opens rather than assuming it will.
-4. **Modelling gaps that bound the current results.** Maker M now defaults to 0 and the contest
-   stays taker-only; there is still no order-book depth (fills are taker-only at the captured
-   top of book). `logistic(k=4.5)` is still a labelled heuristic imported from the 2024 national
-   backtest and is the binding assumption behind every poll gap.
-5. **Poll-layer backlog:** pendingSources `echelon-2026-04-fl`, `prri-2026-ava-midterms`,
+   14/7 days of the election; `poll-anchor-26` and `ratings-ratchet` need a poll capture that predates
+   a price panel. All are published as unranked with a reason; verify each fires when its window
+   opens rather than assuming it will.
+6. **Modelling gaps that bound the current results.** Maker M defaults to 0 and the contest stays
+   taker-only; there is still no order-book depth (fills are taker-only at the captured top of book).
+   `logistic(k=4.5)` is still a labelled heuristic imported from the 2024 national backtest and is the
+   binding assumption behind every poll gap.
+7. **Poll-layer backlog:** pendingSources `echelon-2026-04-fl`, `prri-2026-ava-midterms`,
    `kff-2026-06-mifepristone-midterms`, `surveyusa-28000-mn`; candidate re-tests per #53;
    SurveyUSA/HarrisX/CourtListener re-tests; blocked official paths (WI/NV/CA/MA) re-probe;
    Bexar/Tarrant/Hennepin headless-render re-test.
-6. **Third-party corroboration of the contest's own numbers.** The 2026-09-21 capture of
-   `CONTROLH-2026-D/R` and `CONTROLS-2026-D/R` has been re-read once (§18d) and matches.
-   Extend that to a standing daily re-read so a capture-pipeline regression is caught the day
-   it happens.
-7. **Bound repository growth.** `season.json` is about 0.78 MB with three days of fills;
-   `attribution.json` is bounded by design (top 100 markets per entrant + counts). Decide
-   whether to rotate the fill log monthly, and record the decision.
+8. **Audit the other `continue-on-error` steps for the same blind spot as #81.** The completeness
+   reporter now covers the universe capture, but the Metaculus / State Navigate / rendering /
+   host-probe steps are all `continue-on-error` too and could fail silently in the same way.
+9. **Bound repository growth.** `season.json` is ~0.92 MB with four days of fills (it was ~0.78 MB at
+   three days, so it grows ~0.2 MB/day and will pass 10 MB before election day); `open-prices.csv` is
+   14 MB and append-only, growing ~3.6 MB/day; the new `market-list-browse.json` is 0.7 MB and
+   overwritten, not appended. Decide whether to rotate the fill log and the price CSV monthly (e.g.
+   `open-prices-YYYY-MM.csv`), and record the decision.
 
 ## Limitations (unchanged + new)
 
-- Sandbox has **no general egress**: node `fetch` and `curl` fail TLS to the exchange host, so
-  live collection runs only in GitHub Actions. Session-12 verification used the page-fetch
-  channel (listed in `VERIFICATION.md` §18a).
-- **Zero settled 2026 outcomes.** All 356 settlements on file predate the first capture, so the
-  live scorer is legitimately empty and the contest leaderboard is a mark-to-market snapshot.
-  Nothing on the site presents it as a track record.
-- **Three captured days is not a season.** Nine of the twelve entrants are unranked — eight
-  with no trade at all, one short of the 3-day minimum.
+- Sandbox has **no general egress**: node `fetch` and `curl` fail TLS to the exchange host, so live
+  collection runs only in GitHub Actions. #81 has now been confirmed on a real runner, but the
+  **#82/#83/#84 fixes are mock-verified only** — item 1 above is what closes that gap. The general
+  lesson from this session: an offline mock cannot reproduce rate limits, and a single run cannot
+  reveal starvation that only shows up across consecutive runs. Treat "verified against a mock" as
+  provisional until a real run agrees.
+- **Zero settled 2026 outcomes.** All 462 settlements on file predate the first capture, so the live
+  scorer is legitimately empty and the contest leaderboard is a mark-to-market snapshot. Nothing on
+  the site presents it as a track record.
+- **Four captured days is not a season.** Nine of the twelve entrants are unranked.
+- The **settled-2026 candle seed is still 400 bars against 9,409 discovered markets** (~9,009 short)
+  until item 2 lands; `data/calibration-2026.json` scores only the 400 markets that have bars. The
+  cause is now fixed (#84) rather than merely described, but the backlog itself is unchanged.
+- The site's **All Markets** table shows the 3,000 highest-volume rows; the complete 24,139-row list
+  is the CSV, and the page says so. Per-series totals cover all rows.
+- Prices on the site are a **capture**, not a live quote.
 - Four hosts are fetch-blocked or bot-walled (WI/NV/CA/MA officials).
-- `market-list-latest.csv` is overwritten each run, not appended, to bound growth; the
-  append-only record remains `data/kalshi/forward/open-prices.csv` and the daily panels.
-- Cygnal + Change Research remain at `needs-review`; the ratings bands remain a labelled
-  heuristic, so `ratings-ratchet`'s result is evidence about the heuristic, never a correction
-  of the publishers.
+- Cygnal + Change Research remain at `needs-review`; the ratings bands remain a labelled heuristic, so
+  `ratings-ratchet`'s result is evidence about the heuristic, never a correction of the publishers.

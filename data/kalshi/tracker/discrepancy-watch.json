@@ -1,15 +1,15 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true",
- "capturedAt": "2026-09-22T17:09:13.388Z",
+ "capturedAt": "2026-09-22T23:15:09.170Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "date": "2026-09-22",
  "method": "C1 mutually-exclusive-sum-over (sum of YES mids - 1 > 0.06, fully two-sided events; high) / C1b -under (1 - sum > 0.06, >= 3 markets; info — the exchange flag does not imply an exhaustive outcome set); C2 crossed-book (bid > ask; high); C3 stale-last-vs-book (last trade > 0.1 outside the book; info). Findings are published, never used to alter data.",
- "eventsChecked": 4090,
- "marketsChecked": 24352,
+ "eventsChecked": 4092,
+ "marketsChecked": 24358,
  "counts": {
-  "mutually-exclusive-sum-over": 31,
-  "mutually-exclusive-sum-under": 42,
-  "stale-last-vs-book": 413
+  "mutually-exclusive-sum-over": 20,
+  "mutually-exclusive-sum-under": 40,
+  "stale-last-vs-book": 438
  },
  "findings": [
   {
@@ -19,8 +19,8 @@
    "event_ticker": "KXNEXTNATOSECGEN-99",
    "title": "Who will be the next Secretary General of NATO?",
    "markets": 8,
-   "sumOfMids": 1.245,
-   "deviation": 0.245,
+   "sumOfMids": 1.24,
+   "deviation": 0.24,
    "volume": 6859.629999999999
   },
   {
@@ -30,9 +30,20 @@
    "event_ticker": "KXNEWPOPE-70",
    "title": "Who will the next Pope be?",
    "markets": 7,
-   "sumOfMids": 0.2495,
-   "deviation": -0.7505,
+   "sumOfMids": 0.247,
+   "deviation": -0.753,
    "volume": 140446.01
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXNEXTISRAELPM-45JAN01",
+   "ticker": "KXNEXTISRAELPM-45JAN01-NBEN",
+   "yes_bid": 0.12,
+   "yes_ask": 0.21,
+   "last_price": 0.49,
+   "volume": 38813.79
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -71,23 +82,23 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
-   "event_ticker": "KXTAIWANLVL4",
-   "ticker": "KXTAIWANLVL4-30JAN01",
-   "yes_bid": 0.34,
-   "yes_ask": 0.39,
-   "last_price": 0.028,
-   "volume": 22132.88
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
    "event_ticker": "KXELECTUKRAINE-30JAN01",
    "ticker": "KXELECTUKRAINE-30JAN01-28JAN01",
    "yes_bid": 0.22,
    "yes_ask": 0.29,
    "last_price": 0.78,
    "volume": 2338.95
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 1,
+   "event_ticker": "KXNYCMAYORPERSON-29",
+   "title": "New York City mayoral election winner?",
+   "markets": 12,
+   "sumOfMids": 1.21,
+   "deviation": 0.21,
+   "volume": 5904.92
   },
   {
    "check": "stale-last-vs-book",
@@ -128,8 +139,8 @@
    "us_election": 1,
    "event_ticker": "KXDSENATESEATS-29",
    "ticker": "KXDSENATESEATS-29-E52",
-   "yes_bid": 0.11,
-   "yes_ask": 0.14,
+   "yes_bid": 0.1,
+   "yes_ask": 0.15,
    "last_price": 0.54,
    "volume": 2419.92
   },
@@ -139,7 +150,7 @@
    "us_election": 1,
    "event_ticker": "KXDSENATESEATS-29",
    "ticker": "KXDSENATESEATS-29-E53",
-   "yes_bid": 0.06,
+   "yes_bid": 0.07,
    "yes_ask": 0.09,
    "last_price": 0.63,
    "volume": 2740.41
@@ -150,7 +161,7 @@
    "us_election": 1,
    "event_ticker": "KXDSENATESEATS-29",
    "ticker": "KXDSENATESEATS-29-E54",
-   "yes_bid": 0.06,
+   "yes_bid": 0.07,
    "yes_ask": 0.09,
    "last_price": 0.73,
    "volume": 2661.65
@@ -161,7 +172,7 @@
    "us_election": 1,
    "event_ticker": "KXDSENATESEATS-29",
    "ticker": "KXDSENATESEATS-29-E55",
-   "yes_bid": 0.08,
+   "yes_bid": 0.09,
    "yes_ask": 0.11,
    "last_price": 0.62,
    "volume": 2059.06
@@ -173,9 +184,53 @@
    "event_ticker": "KXDSENATESEATS-29",
    "ticker": "KXDSENATESEATS-29-E56",
    "yes_bid": 0.08,
-   "yes_ask": 0.13,
+   "yes_ask": 0.12,
    "last_price": 0.86,
    "volume": 2122.47
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXCENSUSEXCLUDE-26SEP",
+   "ticker": "KXCENSUSEXCLUDE-26SEP-29JAN20",
+   "yes_bid": 0.32,
+   "yes_ask": 0.4,
+   "last_price": 0.63,
+   "volume": 5309.19
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXTRUMPPARDONS-29JAN21",
+   "ticker": "KXTRUMPPARDONS-29JAN21-THAT",
+   "yes_bid": 0.37,
+   "yes_ask": 0.46,
+   "last_price": 0.2,
+   "volume": 9573.38
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXTRUMPPARDONS-29JAN21",
+   "ticker": "KXTRUMPPARDONS-29JAN21-SCOM",
+   "yes_bid": 0.32,
+   "yes_ask": 0.42,
+   "last_price": 0.21,
+   "volume": 38846
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXTRUMPPARDONS-29JAN21",
+   "ticker": "KXTRUMPPARDONS-29JAN21-BHWA",
+   "yes_bid": 0.35,
+   "yes_ask": 0.45,
+   "last_price": 0.081,
+   "volume": 283.65
   },
   {
    "check": "stale-last-vs-book",
@@ -184,7 +239,7 @@
    "event_ticker": "KXTRUMPPARDONS-29JAN21",
    "ticker": "KXTRUMPPARDONS-29JAN21-TBLA",
    "yes_bid": 0.57,
-   "yes_ask": 0.7,
+   "yes_ask": 0.64,
    "last_price": 0.36,
    "volume": 3371.01
   },
@@ -206,9 +261,9 @@
    "event_ticker": "KXSTATE51-29",
    "title": "What will be the 51st state in Trump's term?",
    "markets": 8,
-   "sumOfMids": 0.1245,
-   "deviation": -0.8755,
-   "volume": 1821543.5
+   "sumOfMids": 0.123,
+   "deviation": -0.877,
+   "volume": 1821749.3800000001
   },
   {
    "check": "stale-last-vs-book",
@@ -236,12 +291,45 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
+   "event_ticker": "KXNEWSCOTUSCONF-29JAN20",
+   "ticker": "KXNEWSCOTUSCONF-29JAN20-0",
+   "yes_bid": 0.35,
+   "yes_ask": 0.4,
+   "last_price": 0.59,
+   "volume": 42852.11
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 0,
+   "event_ticker": "KXNEWSCOTUSCONF-29JAN20",
+   "title": "How many Supreme Court justices will the President confirm?",
+   "markets": 10,
+   "sumOfMids": 1.0745,
+   "deviation": 0.0745,
+   "volume": 213596.58000000002
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
    "event_ticker": "KXIMPEACHCABINET",
    "ticker": "KXIMPEACHCABINET-28JAN01",
    "yes_bid": 0.69,
    "yes_ask": 0.74,
    "last_price": 0.87,
    "volume": 37825.5
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXABRAHAMSA-29",
+   "ticker": "KXABRAHAMSA-29-JAN20",
+   "yes_bid": 0.4,
+   "yes_ask": 0.45,
+   "last_price": 0.56,
+   "volume": 91101.11
   },
   {
    "check": "stale-last-vs-book",
@@ -275,17 +363,6 @@
    "yes_ask": 0.43,
    "last_price": 0.67,
    "volume": 9799.62
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "SENATEIA-28",
-   "ticker": "SENATEIA-28-D",
-   "yes_bid": 0.35,
-   "yes_ask": 0.38,
-   "last_price": 0.65,
-   "volume": 1665.36
   },
   {
    "check": "stale-last-vs-book",
@@ -327,8 +404,8 @@
    "event_ticker": "KXSERBIAPM-27DEC31",
    "title": "Prime Minister of Serbia after the next election?",
    "markets": 6,
-   "sumOfMids": 1.23,
-   "deviation": 0.23,
+   "sumOfMids": 1.09,
+   "deviation": 0.09,
    "volume": 9798.27
   },
   {
@@ -338,8 +415,8 @@
    "event_ticker": "KXGHANAPRES-28",
    "title": "Ghana presidential election winner?",
    "markets": 6,
-   "sumOfMids": 0.8675,
-   "deviation": -0.1325,
+   "sumOfMids": 0.8635,
+   "deviation": -0.1365,
    "volume": 11604.14
   },
   {
@@ -349,9 +426,9 @@
    "event_ticker": "KXRTICKET-28NOV07",
    "title": "2028 Republican Presidential ticket",
    "markets": 25,
-   "sumOfMids": 0.7595,
-   "deviation": -0.2405,
-   "volume": 91064.15000000001
+   "sumOfMids": 0.837,
+   "deviation": -0.163,
+   "volume": 92559.73
   },
   {
    "check": "stale-last-vs-book",
@@ -371,8 +448,8 @@
    "event_ticker": "KXDTICKET-28NOV07",
    "title": "2028 Democratic Presidential ticket",
    "markets": 25,
-   "sumOfMids": 0.5725,
-   "deviation": -0.4275,
+   "sumOfMids": 0.5755,
+   "deviation": -0.4245,
    "volume": 51448.259999999995
   },
   {
@@ -382,9 +459,9 @@
    "event_ticker": "KXVPRESNOMR-28",
    "title": "2028 Republican VP nominee",
    "markets": 22,
-   "sumOfMids": 0.7,
-   "deviation": -0.3,
-   "volume": 1529473.7700000003
+   "sumOfMids": 0.7005,
+   "deviation": -0.2995,
+   "volume": 1530023.34
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -448,8 +525,8 @@
    "event_ticker": "KXDECLAREPRESFIRSTD-28NOV07",
    "title": "Who will be the first Democrat listed to announce a presidential run?",
    "markets": 10,
-   "sumOfMids": 0.8195,
-   "deviation": -0.1805,
+   "sumOfMids": 0.8225,
+   "deviation": -0.1775,
    "volume": 87730.20999999999
   },
   {
@@ -459,9 +536,9 @@
    "event_ticker": "KXPRESMATCHUP-28NOV07",
    "title": "2028 Presidential matchup",
    "markets": 16,
-   "sumOfMids": 0.6345,
-   "deviation": -0.3655,
-   "volume": 283676.14999999997
+   "sumOfMids": 0.613,
+   "deviation": -0.387,
+   "volume": 284035.01
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -579,8 +656,8 @@
    "us_election": 1,
    "event_ticker": "KXJUSTICEGOV-28",
    "ticker": "KXJUSTICEGOV-28-26OCT01",
-   "yes_bid": 0.21,
-   "yes_ask": 0.29,
+   "yes_bid": 0.22,
+   "yes_ask": 0.28,
    "last_price": 0.4,
    "volume": 205
   },
@@ -601,32 +678,10 @@
    "us_election": 0,
    "event_ticker": "KXCANEUNEGOTIATE-28",
    "ticker": "KXCANEUNEGOTIATE-28-27JAN01",
-   "yes_bid": 0.05,
-   "yes_ask": 0.09,
+   "yes_bid": 0.03,
+   "yes_ask": 0.1,
    "last_price": 0.35,
    "volume": 3328.32
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXBCCONLEAD-28JAN01",
-   "ticker": "KXBCCONLEAD-28JAN01-CELL",
-   "yes_bid": 0.1,
-   "yes_ask": 0.26,
-   "last_price": 0.37,
-   "volume": 334.05
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXBCCONLEAD-28JAN01",
-   "ticker": "KXBCCONLEAD-28JAN01-IBLA",
-   "yes_bid": 0.03,
-   "yes_ask": 0.12,
-   "last_price": 0.29,
-   "volume": 1487.1
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -635,9 +690,9 @@
    "event_ticker": "KXBCCONLEAD-28JAN01",
    "title": "Who will be the next leader of the Conservative Party of British Columbia?",
    "markets": 10,
-   "sumOfMids": 0.635,
-   "deviation": -0.365,
-   "volume": 3547.86
+   "sumOfMids": 0.8,
+   "deviation": -0.2,
+   "volume": 5379.370000000001
   },
   {
    "check": "stale-last-vs-book",
@@ -673,15 +728,15 @@
    "volume": 13377.13
   },
   {
-   "check": "mutually-exclusive-sum-under",
+   "check": "stale-last-vs-book",
    "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXUSTESTSMATH-26",
-   "title": "US test scores in Math in 2026?",
-   "markets": 3,
-   "sumOfMids": 0.93,
-   "deviation": -0.07,
-   "volume": 59216.44
+   "us_election": 1,
+   "event_ticker": "KX2028DRUN-28",
+   "ticker": "KX2028DRUN-28-TWAL",
+   "yes_bid": 0.05,
+   "yes_ask": 0.085,
+   "last_price": 0.19,
+   "volume": 40106.35
   },
   {
    "check": "stale-last-vs-book",
@@ -717,15 +772,15 @@
    "volume": 1659.16
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
+   "check": "stale-last-vs-book",
+   "severity": "info",
    "us_election": 0,
    "event_ticker": "KXONTLIBLEAD-26NOV21",
-   "title": "Ontario Liberal Party leadership election winner?",
-   "markets": 5,
-   "sumOfMids": 1.27,
-   "deviation": 0.27,
-   "volume": 1241
+   "ticker": "KXONTLIBLEAD-26NOV21-LFAI",
+   "yes_bid": 0.26,
+   "yes_ask": 0.35,
+   "last_price": 0.15,
+   "volume": 219
   },
   {
    "check": "stale-last-vs-book",
@@ -734,7 +789,7 @@
    "event_ticker": "KXTHC3MG-FED",
    "ticker": "KXTHC3MG-FED-26DEC10",
    "yes_bid": 0.8,
-   "yes_ask": 0.85,
+   "yes_ask": 0.92,
    "last_price": 0.52,
    "volume": 10686.01
   },
@@ -748,28 +803,6 @@
    "yes_ask": 0.18,
    "last_price": 0.31,
    "volume": 358
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMVOTETURN-WYSEN",
-   "ticker": "KXMIDTERMVOTETURN-WYSEN-280000",
-   "yes_bid": 0.01,
-   "yes_ask": 0.08,
-   "last_price": 0.23,
-   "volume": 186
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMVOTETURN-WYSEN",
-   "ticker": "KXMIDTERMVOTETURN-WYSEN-300000",
-   "yes_bid": 0.01,
-   "yes_ask": 0.08,
-   "last_price": 0.39,
-   "volume": 100
   },
   {
    "check": "stale-last-vs-book",
@@ -830,6 +863,17 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXMIDTERMVOTETURN-TX09",
+   "ticker": "KXMIDTERMVOTETURN-TX09-182000",
+   "yes_bid": 0.23,
+   "yes_ask": 0.29,
+   "last_price": 0.4,
+   "volume": 600
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXMIDTERMVOTETURN-SCGOV",
    "ticker": "KXMIDTERMVOTETURN-SCGOV-1780000",
    "yes_bid": 0.52,
@@ -865,8 +909,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMVOTETURN-NYGOV",
    "ticker": "KXMIDTERMVOTETURN-NYGOV-6100000",
-   "yes_bid": 0.53,
-   "yes_ask": 0.73,
+   "yes_bid": 0.48,
+   "yes_ask": 0.68,
    "last_price": 0.98,
    "volume": 260.35
   },
@@ -1096,8 +1140,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-VA07D",
    "ticker": "KXMIDTERMMOV-VA07D-P11",
-   "yes_bid": 0.69,
-   "yes_ask": 0.76,
+   "yes_bid": 0.7,
+   "yes_ask": 0.75,
    "last_price": 0.56,
    "volume": 205
   },
@@ -1108,7 +1152,7 @@
    "event_ticker": "KXMIDTERMMOV-VA07D",
    "ticker": "KXMIDTERMMOV-VA07D-P17",
    "yes_bid": 0.41,
-   "yes_ask": 0.48,
+   "yes_ask": 0.47,
    "last_price": 0.29,
    "volume": 10
   },
@@ -1140,8 +1184,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-TX23R",
    "ticker": "KXMIDTERMMOV-TX23R-P14",
-   "yes_bid": 0.089,
-   "yes_ask": 0.15,
+   "yes_bid": 0.051,
+   "yes_ask": 0.11,
    "last_price": 0.53,
    "volume": 1246.22
   },
@@ -1151,8 +1195,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-TX23R",
    "ticker": "KXMIDTERMMOV-TX23R-P17",
-   "yes_bid": 0.051,
-   "yes_ask": 0.1,
+   "yes_bid": 0.03,
+   "yes_ask": 0.08,
    "last_price": 0.51,
    "volume": 4226.17
   },
@@ -1240,7 +1284,7 @@
    "event_ticker": "KXMIDTERMMOV-TN05R",
    "ticker": "KXMIDTERMMOV-TN05R-P5",
    "yes_bid": 0.7,
-   "yes_ask": 0.77,
+   "yes_ask": 0.76,
    "last_price": 0.043,
    "volume": 427
   },
@@ -1262,7 +1306,7 @@
    "event_ticker": "KXMIDTERMMOV-RISEND",
    "ticker": "KXMIDTERMMOV-RISEND-P35",
    "yes_bid": 0.16,
-   "yes_ask": 0.25,
+   "yes_ask": 0.24,
    "last_price": 0.6,
    "volume": 302
   },
@@ -1448,8 +1492,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-OHSEND",
    "ticker": "KXMIDTERMMOV-OHSEND-P10",
-   "yes_bid": 0.042,
-   "yes_ask": 0.09,
+   "yes_bid": 0.031,
+   "yes_ask": 0.08,
    "last_price": 0.49,
    "volume": 3332.23
   },
@@ -1471,7 +1515,7 @@
    "event_ticker": "KXMIDTERMMOV-OH09D",
    "ticker": "KXMIDTERMMOV-OH09D-P3",
    "yes_bid": 0.56,
-   "yes_ask": 0.63,
+   "yes_ask": 0.62,
    "last_price": 0.46,
    "volume": 4955.04
   },
@@ -1490,21 +1534,10 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-NY02R",
-   "ticker": "KXMIDTERMMOV-NY02R-P1",
-   "yes_bid": 0.82,
-   "yes_ask": 0.84,
-   "last_price": 0.967,
-   "volume": 627.12
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-NV04D",
    "ticker": "KXMIDTERMMOV-NV04D-P7",
-   "yes_bid": 0.8,
-   "yes_ask": 0.87,
+   "yes_bid": 0.79,
+   "yes_ask": 0.88,
    "last_price": 0.66,
    "volume": 625
   },
@@ -1514,8 +1547,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-NV04D",
    "ticker": "KXMIDTERMMOV-NV04D-P10",
-   "yes_bid": 0.71,
-   "yes_ask": 0.78,
+   "yes_bid": 0.7,
+   "yes_ask": 0.79,
    "last_price": 0.43,
    "volume": 131
   },
@@ -1556,6 +1589,17 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXMIDTERMMOV-NHGOVD",
+   "ticker": "KXMIDTERMMOV-NHGOVD-P1",
+   "yes_bid": 0.032,
+   "yes_ask": 0.09,
+   "last_price": 0.2,
+   "volume": 3267.71
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-MO06R",
    "ticker": "KXMIDTERMMOV-MO06R-P18",
    "yes_bid": 0.83,
@@ -1569,7 +1613,7 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-MO05R",
    "ticker": "KXMIDTERMMOV-MO05R-P9",
-   "yes_bid": 0.039,
+   "yes_bid": 0.04,
    "yes_ask": 0.05,
    "last_price": 0.2,
    "volume": 2001.36
@@ -1580,8 +1624,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-MO04R",
    "ticker": "KXMIDTERMMOV-MO04R-P8",
-   "yes_bid": 0.88,
-   "yes_ask": 0.929,
+   "yes_bid": 0.89,
+   "yes_ask": 0.937,
    "last_price": 0.75,
    "volume": 10
   },
@@ -1592,7 +1636,7 @@
    "event_ticker": "KXMIDTERMMOV-MO04R",
    "ticker": "KXMIDTERMMOV-MO04R-P11",
    "yes_bid": 0.86,
-   "yes_ask": 0.906,
+   "yes_ask": 0.914,
    "last_price": 0.71,
    "volume": 453.17
   },
@@ -1602,8 +1646,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-MO04R",
    "ticker": "KXMIDTERMMOV-MO04R-P17",
-   "yes_bid": 0.81,
-   "yes_ask": 0.84,
+   "yes_bid": 0.82,
+   "yes_ask": 0.86,
    "last_price": 0.66,
    "volume": 527
   },
@@ -1614,7 +1658,7 @@
    "event_ticker": "KXMIDTERMMOV-MO02R",
    "ticker": "KXMIDTERMMOV-MO02R-P6",
    "yes_bid": 0.54,
-   "yes_ask": 0.6,
+   "yes_ask": 0.59,
    "last_price": 0.33,
    "volume": 1078.93
   },
@@ -1624,21 +1668,10 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-MN01R",
    "ticker": "KXMIDTERMMOV-MN01R-P10",
-   "yes_bid": 0.14,
-   "yes_ask": 0.21,
+   "yes_bid": 0.027,
+   "yes_ask": 0.095,
    "last_price": 0.34,
    "volume": 300
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-MI07R",
-   "ticker": "KXMIDTERMMOV-MI07R-P5",
-   "yes_bid": 0.25,
-   "yes_ask": 0.28,
-   "last_price": 0.1,
-   "volume": 8457
   },
   {
    "check": "stale-last-vs-book",
@@ -1694,39 +1727,6 @@
    "yes_ask": 0.57,
    "last_price": 0.4,
    "volume": 605
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-MD01R",
-   "ticker": "KXMIDTERMMOV-MD01R-P8",
-   "yes_bid": 0.68,
-   "yes_ask": 0.74,
-   "last_price": 0.54,
-   "volume": 948.77
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-MD01R",
-   "ticker": "KXMIDTERMMOV-MD01R-P11",
-   "yes_bid": 0.55,
-   "yes_ask": 0.61,
-   "last_price": 0.41,
-   "volume": 155.48
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-MD01R",
-   "ticker": "KXMIDTERMMOV-MD01R-P14",
-   "yes_bid": 0.41,
-   "yes_ask": 0.47,
-   "last_price": 0.26,
-   "volume": 25.57
   },
   {
    "check": "stale-last-vs-book",
@@ -2117,17 +2117,6 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-FL14D",
-   "ticker": "KXMIDTERMMOV-FL14D-P11",
-   "yes_bid": 0.21,
-   "yes_ask": 0.28,
-   "last_price": 0.1,
-   "volume": 499.04
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-FL06R",
    "ticker": "KXMIDTERMMOV-FL06R-P18",
    "yes_bid": 0.53,
@@ -2196,7 +2185,7 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-COSEND",
    "ticker": "KXMIDTERMMOV-COSEND-P22",
-   "yes_bid": 0.57,
+   "yes_bid": 0.56,
    "yes_ask": 0.63,
    "last_price": 0.34,
    "volume": 42
@@ -2207,7 +2196,7 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-COSEND",
    "ticker": "KXMIDTERMMOV-COSEND-P24",
-   "yes_bid": 0.5,
+   "yes_bid": 0.49,
    "yes_ask": 0.56,
    "last_price": 0.21,
    "volume": 49
@@ -2218,8 +2207,8 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-COSEND",
    "ticker": "KXMIDTERMMOV-COSEND-P28",
-   "yes_bid": 0.36,
-   "yes_ask": 0.37,
+   "yes_bid": 0.35,
+   "yes_ask": 0.36,
    "last_price": 0.11,
    "volume": 19
   },
@@ -2229,7 +2218,7 @@
    "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-CO04R",
    "ticker": "KXMIDTERMMOV-CO04R-P2",
-   "yes_bid": 0.56,
+   "yes_bid": 0.61,
    "yes_ask": 0.62,
    "last_price": 0.958,
    "volume": 281.45
@@ -2321,17 +2310,6 @@
    "yes_ask": 0.75,
    "last_price": 0.45,
    "volume": 10
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXMIDTERMMOV-AZ02R",
-   "ticker": "KXMIDTERMMOV-AZ02R-P10",
-   "yes_bid": 0.18,
-   "yes_ask": 0.24,
-   "last_price": 0.34,
-   "volume": 800
   },
   {
    "check": "stale-last-vs-book",
@@ -2488,26 +2466,15 @@
    "volume": 359.04
   },
   {
-   "check": "mutually-exclusive-sum-under",
+   "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXKSSENGOVCOMBO-26NOV",
-   "title": "Kansas Governor-Senate combo",
-   "markets": 4,
-   "sumOfMids": 0.94,
-   "deviation": -0.06,
-   "volume": 30026.21
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXHOUSEWINSTATE-UTD",
-   "title": "How many House seats will Democrats win in Utah?",
-   "markets": 4,
-   "sumOfMids": 1.07,
-   "deviation": 0.07,
-   "volume": 7192.62
+   "event_ticker": "KXLAMOV-KXMAYORLA26NRAM",
+   "ticker": "KXLAMOV-KXMAYORLA26NRAM-NRAM-P53",
+   "yes_bid": 0.26,
+   "yes_ask": 0.31,
+   "last_price": 0.15,
+   "volume": 280.93
   },
   {
    "check": "mutually-exclusive-sum-over",
@@ -2524,12 +2491,45 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXCABALLOTMEASURES-26NOV03",
+   "ticker": "KXCABALLOTMEASURES-26NOV03-PR03",
+   "yes_bid": 0.66,
+   "yes_ask": 0.76,
+   "last_price": 0.97,
+   "volume": 421.71
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXCABALLOTMEASURES-26NOV03",
+   "ticker": "KXCABALLOTMEASURES-26NOV03-PR39",
+   "yes_bid": 0.28,
+   "yes_ask": 0.31,
+   "last_price": 0.13,
+   "volume": 1227.52
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXWASUPREME3-26NOV03",
    "ticker": "KXWASUPREME3-26NOV03-DSTE",
-   "yes_bid": 0.71,
-   "yes_ask": 0.88,
+   "yes_bid": 0.75,
+   "yes_ask": 0.85,
    "last_price": 0.16,
    "volume": 1
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTECOUNTY-SENATETX26WEBBJTAL",
+   "ticker": "KXVOTECOUNTY-SENATETX26WEBBJTAL-62",
+   "yes_bid": 0.3,
+   "yes_ask": 0.39,
+   "last_price": 0.17,
+   "volume": 725.01
   },
   {
    "check": "stale-last-vs-book",
@@ -2560,7 +2560,7 @@
    "event_ticker": "KXVOTECOUNTY-SENATEMI26WASHTENAWAELS",
    "ticker": "KXVOTECOUNTY-SENATEMI26WASHTENAWAELS-72",
    "yes_bid": 0.65,
-   "yes_ask": 0.73,
+   "yes_ask": 0.68,
    "last_price": 0.99,
    "volume": 290.29
   },
@@ -2571,7 +2571,7 @@
    "event_ticker": "KXVOTECOUNTY-SENATEMI26MACOMBMROG",
    "ticker": "KXVOTECOUNTY-SENATEMI26MACOMBMROG-50",
    "yes_bid": 0.79,
-   "yes_ask": 0.84,
+   "yes_ask": 0.81,
    "last_price": 0.69,
    "volume": 400
   },
@@ -2700,10 +2700,54 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXMIDTERMMOV-MTSENR",
+   "ticker": "KXMIDTERMMOV-MTSENR-P5",
+   "yes_bid": 0.62,
+   "yes_ask": 0.7,
+   "last_price": 0.82,
+   "volume": 83.31
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXMIDTERMMOV-MTSENR",
+   "ticker": "KXMIDTERMMOV-MTSENR-P10",
+   "yes_bid": 0.3,
+   "yes_ask": 0.37,
+   "last_price": 0.6,
+   "volume": 670
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXMIDTERMMOV-MTSENR",
+   "ticker": "KXMIDTERMMOV-MTSENR-P15",
+   "yes_bid": 0.04,
+   "yes_ask": 0.12,
+   "last_price": 0.38,
+   "volume": 50
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXMIDTERMMOV-MTSENR",
+   "ticker": "KXMIDTERMMOV-MTSENR-P20",
+   "yes_bid": 0.02,
+   "yes_ask": 0.061,
+   "last_price": 0.19,
+   "volume": 50
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXMIDTERMMOV-CAGOVD",
    "ticker": "KXMIDTERMMOV-CAGOVD-P12",
    "yes_bid": 0.89,
-   "yes_ask": 0.97,
+   "yes_ask": 0.969,
    "last_price": 0.76,
    "volume": 55.93
   },
@@ -2735,7 +2779,7 @@
    "us_election": 1,
    "event_ticker": "KXSTATEBALLOTMEASURE-SD",
    "ticker": "KXSTATEBALLOTMEASURE-SD-AL",
-   "yes_bid": 0.16,
+   "yes_bid": 0.17,
    "yes_ask": 0.24,
    "last_price": 0.04,
    "volume": 675.02
@@ -2746,7 +2790,7 @@
    "us_election": 1,
    "event_ticker": "KXSTATEBALLOTMEASURE-MA",
    "ticker": "KXSTATEBALLOTMEASURE-MA-Q8",
-   "yes_bid": 0.08,
+   "yes_bid": 0.09,
    "yes_ask": 0.13,
    "last_price": 0.43,
    "volume": 205.38
@@ -2758,8 +2802,8 @@
    "event_ticker": "KXARGENTINAPRES-27",
    "title": "Argentina presidential election winner?",
    "markets": 7,
-   "sumOfMids": 1.068,
-   "deviation": 0.068,
+   "sumOfMids": 1.066,
+   "deviation": 0.066,
    "volume": 37507.11
   },
   {
@@ -2769,20 +2813,9 @@
    "event_ticker": "KXWINNIPEGMAYOR-26OCT28",
    "title": "Winnipeg mayoral election winner?",
    "markets": 3,
-   "sumOfMids": 0.82,
-   "deviation": -0.18,
+   "sumOfMids": 0.825,
+   "deviation": -0.175,
    "volume": 3734.24
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXTLAXGOV-27JUN06",
-   "ticker": "KXTLAXGOV-27JUN06-ALRI",
-   "yes_bid": 0.42,
-   "yes_ask": 0.49,
-   "last_price": 0.23,
-   "volume": 2580.37
   },
   {
    "check": "stale-last-vs-book",
@@ -2790,8 +2823,8 @@
    "us_election": 0,
    "event_ticker": "KXBERLINGOVMAYOR-26OCT01",
    "ticker": "KXBERLINGOVMAYOR-26OCT01-EERA",
-   "yes_bid": 0.53,
-   "yes_ask": 0.79,
+   "yes_bid": 0.66,
+   "yes_ask": 0.73,
    "last_price": 0.4,
    "volume": 20774.22
   },
@@ -2824,7 +2857,7 @@
    "event_ticker": "KXTRUMPKENNEDYFACADE-27",
    "ticker": "KXTRUMPKENNEDYFACADE-27-27JUL01",
    "yes_bid": 0.37,
-   "yes_ask": 0.42,
+   "yes_ask": 0.43,
    "last_price": 0.25,
    "volume": 1236.79
   },
@@ -2857,8 +2890,8 @@
    "event_ticker": "KXMONGOLIAPRES-27",
    "title": "Mongolian presidential election winner?",
    "markets": 5,
-   "sumOfMids": 0.7115,
-   "deviation": -0.2885,
+   "sumOfMids": 0.711,
+   "deviation": -0.289,
    "volume": 33277.38
   },
   {
@@ -2886,6 +2919,28 @@
   {
    "check": "stale-last-vs-book",
    "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXGREENWOODCONF-26SEP14",
+   "ticker": "KXGREENWOODCONF-26SEP14-MAR01",
+   "yes_bid": 0.14,
+   "yes_ask": 0.24,
+   "last_price": 0.82,
+   "volume": 0.01
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXGREENWOODCONF-26SEP14",
+   "ticker": "KXGREENWOODCONF-26SEP14-JUN01",
+   "yes_bid": 0.46,
+   "yes_ask": 0.56,
+   "last_price": 0.85,
+   "volume": 0.02
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
    "us_election": 1,
    "event_ticker": "KXNYCSTAT-SHEL26",
    "ticker": "KXNYCSTAT-SHEL26-A90000",
@@ -2904,17 +2959,6 @@
    "yes_ask": 0.67,
    "last_price": 0.93,
    "volume": 20
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXDSAMEMBERSHIP-26DEC31",
-   "ticker": "KXDSAMEMBERSHIP-26DEC31-A140000",
-   "yes_bid": 0.63,
-   "yes_ask": 0.69,
-   "last_price": 0.8,
-   "volume": 1268
   },
   {
    "check": "stale-last-vs-book",
@@ -2977,7 +3021,7 @@
    "us_election": 1,
    "event_ticker": "KXTRUMPDEMDISTRICTS-26NOV03",
    "ticker": "KXTRUMPDEMDISTRICTS-26NOV03-AL25",
-   "yes_bid": 0.78,
+   "yes_bid": 0.76,
    "yes_ask": 0.82,
    "last_price": 0.62,
    "volume": 2
@@ -2988,7 +3032,7 @@
    "us_election": 1,
    "event_ticker": "KXTRUMPDEMDISTRICTS-26NOV03",
    "ticker": "KXTRUMPDEMDISTRICTS-26NOV03-AL28",
-   "yes_bid": 0.72,
+   "yes_bid": 0.71,
    "yes_ask": 0.77,
    "last_price": 0.56,
    "volume": 2
@@ -2999,7 +3043,7 @@
    "us_election": 1,
    "event_ticker": "KXTRUMPDEMDISTRICTS-26NOV03",
    "ticker": "KXTRUMPDEMDISTRICTS-26NOV03-AL31",
-   "yes_bid": 0.61,
+   "yes_bid": 0.59,
    "yes_ask": 0.65,
    "last_price": 0.45,
    "volume": 2
@@ -3010,7 +3054,7 @@
    "us_election": 1,
    "event_ticker": "KXTRUMPDEMDISTRICTS-26NOV03",
    "ticker": "KXTRUMPDEMDISTRICTS-26NOV03-AL35",
-   "yes_bid": 0.5,
+   "yes_bid": 0.47,
    "yes_ask": 0.53,
    "last_price": 0.33,
    "volume": 2
@@ -3032,8 +3076,8 @@
    "us_election": 1,
    "event_ticker": "KXHOUSEPOPVOTEMARGIND-26NOV03",
    "ticker": "KXHOUSEPOPVOTEMARGIND-26NOV03-AL6",
-   "yes_bid": 0.84,
-   "yes_ask": 0.9,
+   "yes_bid": 0.85,
+   "yes_ask": 0.91,
    "last_price": 0.69,
    "volume": 2351
   },
@@ -3044,31 +3088,31 @@
    "event_ticker": "RSENATESEATS-27",
    "title": "How many Senate seats will Republicans hold after the Midterms?",
    "markets": 15,
-   "sumOfMids": 1.095,
-   "deviation": 0.095,
-   "volume": 1064679.34
+   "sumOfMids": 1.11,
+   "deviation": 0.11,
+   "volume": 1072841.1900000002
+  },
+  {
+   "check": "mutually-exclusive-sum-over",
+   "severity": "high",
+   "us_election": 1,
+   "event_ticker": "KXRHOUSESEATS-27",
+   "title": "How many House seats will Republicans hold after the Midterms?",
+   "markets": 11,
+   "sumOfMids": 1.0615,
+   "deviation": 0.0615,
+   "volume": 3211573.97
   },
   {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXSAMEPARTYCONGRESS-27FEB01",
-   "ticker": "KXSAMEPARTYCONGRESS-27FEB01",
-   "yes_bid": 0.6,
-   "yes_ask": 0.65,
-   "last_price": 0.02,
-   "volume": 45.88
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXRHOUSEWON-26NOV03",
-   "ticker": "KXRHOUSEWON-26NOV03-AL206",
-   "yes_bid": 0.32,
-   "yes_ask": 0.4,
-   "last_price": 0.53,
-   "volume": 1.81
+   "event_ticker": "KXMOPROPA-26NOV03",
+   "ticker": "KXMOPROPA-26NOV03-YES",
+   "yes_bid": 0.42,
+   "yes_ask": 0.52,
+   "last_price": 0.06,
+   "volume": 293.23
   },
   {
    "check": "stale-last-vs-book",
@@ -3107,10 +3151,21 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXDSENATEWON-26NOV03",
+   "ticker": "KXDSENATEWON-26NOV03-AL17",
+   "yes_bid": 0.62,
+   "yes_ask": 0.69,
+   "last_price": 0.79,
+   "volume": 2027.71
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXDHOUSESEATSDIR-27",
    "ticker": "KXDHOUSESEATSDIR-27-A232",
-   "yes_bid": 0.6,
-   "yes_ask": 0.68,
+   "yes_bid": 0.62,
+   "yes_ask": 0.71,
    "last_price": 0.48,
    "volume": 139.06
   },
@@ -3120,8 +3175,8 @@
    "us_election": 1,
    "event_ticker": "KXDHOUSESEATSDIR-27",
    "ticker": "KXDHOUSESEATSDIR-27-A238",
-   "yes_bid": 0.45,
-   "yes_ask": 0.53,
+   "yes_bid": 0.47,
+   "yes_ask": 0.56,
    "last_price": 0.32,
    "volume": 113.13
   },
@@ -3131,21 +3186,10 @@
    "us_election": 1,
    "event_ticker": "KXDHOUSESEATSDIR-27",
    "ticker": "KXDHOUSESEATSDIR-27-A247",
-   "yes_bid": 0.22,
-   "yes_ask": 0.3,
+   "yes_bid": 0.23,
+   "yes_ask": 0.32,
    "last_price": 0.1,
    "volume": 50
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXAZCORPCOMM-26",
-   "title": "Arizona Corporation Commission party breakdown?",
-   "markets": 3,
-   "sumOfMids": 1.24,
-   "deviation": 0.24,
-   "volume": 0
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -3154,75 +3198,9 @@
    "event_ticker": "KXCLOSESTGOVERNOR-27JAN20",
    "title": "Closest Governor race in 2026?",
    "markets": 15,
-   "sumOfMids": 0.675,
-   "deviation": -0.325,
-   "volume": 64438.570000000014
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATEWY-26NOV03",
-   "title": "Wyoming Secretary of State winner?",
-   "markets": 3,
-   "sumOfMids": 1.265,
-   "deviation": 0.265,
-   "volume": 0
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATEVT-26NOV03",
-   "title": "Vermont Secretary of State winner?",
-   "markets": 3,
-   "sumOfMids": 1.225,
-   "deviation": 0.225,
-   "volume": 0
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATESD-26NOV03",
-   "title": "South Dakota Secretary of State winner?",
-   "markets": 3,
-   "sumOfMids": 1.24,
-   "deviation": 0.24,
-   "volume": 0
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATENE-26NOV03",
-   "title": "Nebraska Secretary of State winner?",
-   "markets": 4,
-   "sumOfMids": 1.48,
-   "deviation": 0.48,
-   "volume": 0
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATEKS-26NOV03",
-   "title": "Kansas Secretary of State winner?",
-   "markets": 3,
-   "sumOfMids": 1.23,
-   "deviation": 0.23,
-   "volume": 0
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSECSTATEAR-26NOV03",
-   "title": "Arkansas Secretary of State winner?",
-   "markets": 3,
-   "sumOfMids": 1.23,
-   "deviation": 0.23,
-   "volume": 0
+   "sumOfMids": 0.6935,
+   "deviation": -0.3065,
+   "volume": 66672.57
   },
   {
    "check": "mutually-exclusive-sum-over",
@@ -3231,9 +3209,31 @@
    "event_ticker": "KXPARAIBAGOV-26OCT04",
    "title": "Paraíba Governor winner?",
    "markets": 6,
-   "sumOfMids": 1.58,
-   "deviation": 0.58,
+   "sumOfMids": 1.06,
+   "deviation": 0.06,
    "volume": 191.14
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXNVTREASR-26NOV03",
+   "ticker": "KXNVTREASR-26NOV03-DJOH",
+   "yes_bid": 0.38,
+   "yes_ask": 0.48,
+   "last_price": 0.23,
+   "volume": 275
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXIAAGSEC-26NOV03",
+   "ticker": "KXIAAGSEC-26NOV03-CJON",
+   "yes_bid": 0.48,
+   "yes_ask": 0.58,
+   "last_price": 0.82,
+   "volume": 563.69
   },
   {
    "check": "stale-last-vs-book",
@@ -3241,8 +3241,8 @@
    "us_election": 1,
    "event_ticker": "KXIAAGSEC-26NOV03",
    "ticker": "KXIAAGSEC-26NOV03-MNAI",
-   "yes_bid": 0.06,
-   "yes_ask": 0.61,
+   "yes_bid": 0.42,
+   "yes_ask": 0.52,
    "last_price": 0.72,
    "volume": 1520.48
   },
@@ -3253,20 +3253,20 @@
    "event_ticker": "KXAZSUPERINTENDENT-26NOV03",
    "title": "Arizona Superintendent of Public Instruction winner?",
    "markets": 4,
-   "sumOfMids": 0.57,
-   "deviation": -0.43,
+   "sumOfMids": 0.68,
+   "deviation": -0.32,
    "volume": 7882
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 0,
-   "event_ticker": "KXACREGOV-26OCT04",
-   "title": "Acre Governor winner?",
-   "markets": 6,
-   "sumOfMids": 1.06,
-   "deviation": 0.06,
-   "volume": 1526.71
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXATTYGENGA-26",
+   "ticker": "KXATTYGENGA-26-D",
+   "yes_bid": 0.44,
+   "yes_ask": 0.46,
+   "last_price": 0.32,
+   "volume": 1224.05
   },
   {
    "check": "stale-last-vs-book",
@@ -3274,21 +3274,21 @@
    "us_election": 1,
    "event_ticker": "KXATTYGENGA-26",
    "ticker": "KXATTYGENGA-26-R",
-   "yes_bid": 0.32,
-   "yes_ask": 0.7,
+   "yes_bid": 0.46,
+   "yes_ask": 0.53,
    "last_price": 0.906,
    "volume": 1468.94
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
+   "check": "stale-last-vs-book",
+   "severity": "info",
    "us_election": 1,
    "event_ticker": "KXATTYGENOK-26",
-   "title": "Oklahoma Attorney General winner?",
-   "markets": 2,
-   "sumOfMids": 1.234,
-   "deviation": 0.234,
-   "volume": 629.1
+   "ticker": "KXATTYGENOK-26-D",
+   "yes_bid": 0.032,
+   "yes_ask": 0.11,
+   "last_price": 0.55,
+   "volume": 137.1
   },
   {
    "check": "stale-last-vs-book",
@@ -3300,6 +3300,39 @@
    "yes_ask": 0.14,
    "last_price": 0.4,
    "volume": 1164.91
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXUSCHINAAISAFETY-27",
+   "ticker": "KXUSCHINAAISAFETY-27-27JAN01",
+   "yes_bid": 0.34,
+   "yes_ask": 0.41,
+   "last_price": 0.67,
+   "volume": 885.91
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXUSCANADATARIFFDOWN-26SEP21",
+   "ticker": "KXUSCANADATARIFFDOWN-26SEP21-DEC01",
+   "yes_bid": 0.19,
+   "yes_ask": 0.69,
+   "last_price": 0.81,
+   "volume": 2.43
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXTARIFFRATEPRC-27JAN01",
+   "ticker": "KXTARIFFRATEPRC-27JAN01-10",
+   "yes_bid": 0.73,
+   "yes_ask": 0.83,
+   "last_price": 0.53,
+   "volume": 1030.48
   },
   {
    "check": "stale-last-vs-book",
@@ -3349,34 +3382,56 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXHOUSERACE-WI06-26",
-   "ticker": "KXHOUSERACE-WI06-26-R",
-   "yes_bid": 0.93,
-   "yes_ask": 0.949,
-   "last_price": 0.82,
-   "volume": 19287.34
+   "event_ticker": "KXMTCOURT-26",
+   "ticker": "KXMTCOURT-26-AEDD",
+   "yes_bid": 0.46,
+   "yes_ask": 0.55,
+   "last_price": 0.8,
+   "volume": 12.32
   },
   {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXHOUSERACE-IA02-26",
-   "ticker": "KXHOUSERACE-IA02-26-D",
-   "yes_bid": 0.51,
-   "yes_ask": 0.52,
-   "last_price": 0.65,
-   "volume": 17464.59
+   "event_ticker": "KXMOSD30-26",
+   "ticker": "KXMOSD30-26-BFOG",
+   "yes_bid": 0.85,
+   "yes_ask": 0.87,
+   "last_price": 0.5,
+   "volume": 19.32
   },
   {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
-   "event_ticker": "HOUSEVA1-26",
-   "ticker": "HOUSEVA1-26-D",
-   "yes_bid": 0.41,
-   "yes_ask": 0.42,
-   "last_price": 0.63,
-   "volume": 42592.24
+   "event_ticker": "KXHOUSERACE-MD01-26",
+   "ticker": "KXHOUSERACE-MD01-26-D",
+   "yes_bid": 0.089,
+   "yes_ask": 0.13,
+   "last_price": 0.39,
+   "volume": 16124.98
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXSECSTATEWI-26",
+   "ticker": "KXSECSTATEWI-26-R",
+   "yes_bid": 0.15,
+   "yes_ask": 0.19,
+   "last_price": 0.023,
+   "volume": 1082
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-SENATETX-26KPAX",
+   "ticker": "KXVOTEGENERAL-SENATETX-26KPAX-50",
+   "yes_bid": 0.2,
+   "yes_ask": 0.29,
+   "last_price": 0.41,
+   "volume": 600
   },
   {
    "check": "stale-last-vs-book",
@@ -3384,8 +3439,8 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-SENATENH-26JSUN",
    "ticker": "KXVOTEGENERAL-SENATENH-26JSUN-48",
-   "yes_bid": 0.19,
-   "yes_ask": 0.28,
+   "yes_bid": 0.17,
+   "yes_ask": 0.26,
    "last_price": 0.42,
    "volume": 50
   },
@@ -3406,9 +3461,20 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-SENATEMT26KALM",
    "ticker": "KXVOTEGENERAL-SENATEMT26KALM-55",
-   "yes_bid": 0.02,
+   "yes_bid": 0.03,
    "yes_ask": 0.05,
    "last_price": 0.19,
+   "volume": 5
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-SENATEMT26ABAN",
+   "ticker": "KXVOTEGENERAL-SENATEMT26ABAN-20",
+   "yes_bid": 0.03,
+   "yes_ask": 0.08,
+   "last_price": 0.38,
    "volume": 5
   },
   {
@@ -3528,7 +3594,7 @@
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-VA05-26JMCG",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-VA05-26JMCG-54",
    "yes_bid": 0.39,
-   "yes_ask": 0.49,
+   "yes_ask": 0.42,
    "last_price": 0.23,
    "volume": 3280
   },
@@ -3674,6 +3740,17 @@
    "yes_ask": 0.18,
    "last_price": 0.35,
    "volume": 395.5
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-OH07-26BPOI",
+   "ticker": "KXVOTEGENERAL-KXHOUSERACE-OH07-26BPOI-52",
+   "yes_bid": 0.56,
+   "yes_ask": 0.66,
+   "last_price": 0.35,
+   "volume": 2600
   },
   {
    "check": "stale-last-vs-book",
@@ -3889,6 +3966,17 @@
    "severity": "info",
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL",
+   "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-38",
+   "yes_bid": 0.93,
+   "yes_ask": 0.94,
+   "last_price": 0.73,
+   "volume": 44
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-42",
    "yes_bid": 0.46,
    "yes_ask": 0.54,
@@ -3912,8 +4000,8 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-48",
-   "yes_bid": 0.2,
-   "yes_ask": 0.29,
+   "yes_bid": 0.27,
+   "yes_ask": 0.37,
    "last_price": 0.6,
    "volume": 200
   },
@@ -4188,7 +4276,7 @@
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26ELAU",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26ELAU-42",
    "yes_bid": 0.79,
-   "yes_ask": 0.88,
+   "yes_ask": 0.82,
    "last_price": 0.58,
    "volume": 600
   },
@@ -4198,8 +4286,8 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN-2",
-   "yes_bid": 0.8,
-   "yes_ask": 0.89,
+   "yes_bid": 0.88,
+   "yes_ask": 0.97,
    "last_price": 0.53,
    "volume": 200
   },
@@ -4210,9 +4298,31 @@
    "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN",
    "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN-4",
    "yes_bid": 0.13,
-   "yes_ask": 0.21,
+   "yes_ask": 0.16,
    "last_price": 0.58,
    "volume": 200
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN",
+   "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN-5",
+   "yes_bid": 0.02,
+   "yes_ask": 0.06,
+   "last_price": 0.2,
+   "volume": 232.2
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN",
+   "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO04-26DMAN-6",
+   "yes_bid": 0.04,
+   "yes_ask": 0.05,
+   "last_price": 0.21,
+   "volume": 1202
   },
   {
    "check": "stale-last-vs-book",
@@ -4372,6 +4482,17 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXVOTEGENERAL-HOUSETX28-26HCUE",
+   "ticker": "KXVOTEGENERAL-HOUSETX28-26HCUE-54",
+   "yes_bid": 0.49,
+   "yes_ask": 0.59,
+   "last_price": 0.34,
+   "volume": 450
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU",
    "ticker": "KXVOTEGENERAL-HOUSETX15-26MCRU-44",
    "yes_bid": 0.71,
@@ -4418,8 +4539,8 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-HOUSENV1-26CBUC",
    "ticker": "KXVOTEGENERAL-HOUSENV1-26CBUC-48",
-   "yes_bid": 0.24,
-   "yes_ask": 0.67,
+   "yes_bid": 0.23,
+   "yes_ask": 0.68,
    "last_price": 0.1,
    "volume": 2691
   },
@@ -4660,8 +4781,8 @@
    "us_election": 1,
    "event_ticker": "KXVOTEGENERAL-GOVPARTYAL-26DJON",
    "ticker": "KXVOTEGENERAL-GOVPARTYAL-26DJON-44",
-   "yes_bid": 0.55,
-   "yes_ask": 0.58,
+   "yes_bid": 0.54,
+   "yes_ask": 0.59,
    "last_price": 0.29,
    "volume": 1499.64
   },
@@ -4683,20 +4804,9 @@
    "event_ticker": "KXVPBREAKS-26",
    "title": "How many ties will J.D. Vance break in 2026?",
    "markets": 9,
-   "sumOfMids": 1.914,
-   "deviation": 0.914,
+   "sumOfMids": 2.1435,
+   "deviation": 1.1435,
    "volume": 2940.8599999999997
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXAAAGASMAXNY-26DEC31",
-   "ticker": "KXAAAGASMAXNY-26DEC31-4.80",
-   "yes_bid": 0.543,
-   "yes_ask": 0.642,
-   "last_price": 0.193,
-   "volume": 16645.12
   },
   {
    "check": "stale-last-vs-book",
@@ -4708,17 +4818,6 @@
    "yes_ask": 0.78,
    "last_price": 0.1,
    "volume": 4094.82
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXVOTECLARITY-26MAY16",
-   "ticker": "KXVOTECLARITY-26MAY16-T66",
-   "yes_bid": 0.02,
-   "yes_ask": 0.09,
-   "last_price": 0.45,
-   "volume": 2979.31
   },
   {
    "check": "stale-last-vs-book",
@@ -4749,9 +4848,20 @@
    "event_ticker": "KXTRUMPFIRE-27",
    "title": "How many Cabinet members will Trump say he fired in 2026?",
    "markets": 6,
-   "sumOfMids": 0.8715,
-   "deviation": -0.1285,
+   "sumOfMids": 0.8665,
+   "deviation": -0.1335,
    "volume": 134645.72000000003
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXSCOTUSCERT-27JAN",
+   "ticker": "KXSCOTUSCERT-27JAN-ROY",
+   "yes_bid": 0.25,
+   "yes_ask": 0.35,
+   "last_price": 0.13,
+   "volume": 2298.03
   },
   {
    "check": "stale-last-vs-book",
@@ -4759,8 +4869,8 @@
    "us_election": 1,
    "event_ticker": "KXPRESSSECANNOUNCE-26AUG",
    "ticker": "KXPRESSSECANNOUNCE-26AUG-JAN01",
-   "yes_bid": 0.73,
-   "yes_ask": 0.8,
+   "yes_bid": 0.74,
+   "yes_ask": 0.82,
    "last_price": 0.4,
    "volume": 484.85
   },
@@ -4771,8 +4881,8 @@
    "event_ticker": "KXPARDONSYEAR-26DEC",
    "title": "How many people will Trump pardon in 2026?",
    "markets": 5,
-   "sumOfMids": 0.9075,
-   "deviation": -0.0925,
+   "sumOfMids": 0.902,
+   "deviation": -0.098,
    "volume": 13286.580000000002
   },
   {
@@ -4793,7 +4903,7 @@
    "event_ticker": "KXMCDONALDCONF-26JUN17",
    "ticker": "KXMCDONALDCONF-26JUN17-JAN01",
    "yes_bid": 0.09,
-   "yes_ask": 0.13,
+   "yes_ask": 0.1,
    "last_price": 0.5,
    "volume": 4423.36
   },
@@ -4807,17 +4917,6 @@
    "yes_ask": 0.11,
    "last_price": 0.46,
    "volume": 2138.84
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 0,
-   "event_ticker": "KXICEREFORM",
-   "ticker": "KXICEREFORM-HSI",
-   "yes_bid": 0.089,
-   "yes_ask": 0.11,
-   "last_price": 0.24,
-   "volume": 1250.9
   },
   {
    "check": "stale-last-vs-book",
@@ -4903,8 +5002,8 @@
    "event_ticker": "KXNEWZEALANDPARLI-26DEC31",
    "title": "New Zealand general election winner?",
    "markets": 6,
-   "sumOfMids": 1.097,
-   "deviation": 0.097,
+   "sumOfMids": 1.088,
+   "deviation": 0.088,
    "volume": 8555.36
   },
   {
@@ -4914,8 +5013,8 @@
    "event_ticker": "KXLATVIAPARLIAMENT-26DEC31",
    "title": "Latvia parliamentary election winner?",
    "markets": 9,
-   "sumOfMids": 1.0715,
-   "deviation": 0.0715,
+   "sumOfMids": 1.071,
+   "deviation": 0.071,
    "volume": 22305.72
   },
   {
@@ -4927,7 +5026,7 @@
    "markets": 3,
    "sumOfMids": 0.905,
    "deviation": -0.095,
-   "volume": 960.99
+   "volume": 999.99
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -4949,7 +5048,7 @@
    "markets": 3,
    "sumOfMids": 0.735,
    "deviation": -0.265,
-   "volume": 6946.420000000001
+   "volume": 7004.420000000001
   },
   {
    "check": "stale-last-vs-book",
@@ -4969,8 +5068,8 @@
    "event_ticker": "KXBULGARIAPRES-26NOV15",
    "title": "Bulgarian presidential election winner?",
    "markets": 11,
-   "sumOfMids": 1.149,
-   "deviation": 0.149,
+   "sumOfMids": 1.164,
+   "deviation": 0.164,
    "volume": 28549.509999999995
   },
   {
@@ -5032,34 +5131,34 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
-   "event_ticker": "KXWHPRESSBANEND-26",
-   "ticker": "KXWHPRESSBANEND-26-26NOV01",
-   "yes_bid": 0.25,
-   "yes_ask": 0.34,
-   "last_price": 0.57,
-   "volume": 372.32
+   "event_ticker": "KXYASHARCOUNT-26OCT27",
+   "ticker": "KXYASHARCOUNT-26OCT27-A29",
+   "yes_bid": 0.15,
+   "yes_ask": 0.16,
+   "last_price": 0.76,
+   "volume": 1332.62
   },
   {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
    "event_ticker": "KXQCPQSEATSNUM-26OCT05",
-   "ticker": "KXQCPQSEATSNUM-26OCT05-AL52",
-   "yes_bid": 0.48,
-   "yes_ask": 0.55,
-   "last_price": 0.27,
-   "volume": 65.08
+   "ticker": "KXQCPQSEATSNUM-26OCT05-AL39",
+   "yes_bid": 0.8,
+   "yes_ask": 0.88,
+   "last_price": 0.7,
+   "volume": 1450
   },
   {
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 0,
-   "event_ticker": "KXVOTEBR1-BRPRES26RSAN",
-   "ticker": "KXVOTEBR1-BRPRES26RSAN-12",
-   "yes_bid": 0.12,
-   "yes_ask": 0.17,
-   "last_price": 0.28,
-   "volume": 907.7
+   "event_ticker": "KXQCCAQSEATS-26OCT05",
+   "ticker": "KXQCCAQSEATS-26OCT05-AL27",
+   "yes_bid": 0.39,
+   "yes_ask": 0.49,
+   "last_price": 0.61,
+   "volume": 1783.8
   },
   {
    "check": "stale-last-vs-book",
@@ -5087,34 +5186,45 @@
    "check": "stale-last-vs-book",
    "severity": "info",
    "us_election": 1,
+   "event_ticker": "KXTXCOMPTROLLER-26",
+   "ticker": "KXTXCOMPTROLLER-26-DHUF",
+   "yes_bid": 0.75,
+   "yes_ask": 0.85,
+   "last_price": 0.31,
+   "volume": 66.5
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXTXCOMPTROLLER-26",
+   "ticker": "KXTXCOMPTROLLER-26-SECK",
+   "yes_bid": 0.15,
+   "yes_ask": 0.25,
+   "last_price": 0.69,
+   "volume": 8.15
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
    "event_ticker": "KXSTATELEG-TXHOUS26",
    "ticker": "KXSTATELEG-TXHOUS26-R",
-   "yes_bid": 0.83,
-   "yes_ask": 0.94,
+   "yes_bid": 0.82,
+   "yes_ask": 0.88,
    "last_price": 0.16,
    "volume": 25.36
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
+   "check": "stale-last-vs-book",
+   "severity": "info",
    "us_election": 1,
-   "event_ticker": "KXSTATELEG-TXHOUS26",
-   "title": "Texas State House winner?",
-   "markets": 2,
-   "sumOfMids": 1.125,
-   "deviation": 0.125,
-   "volume": 245.08999999999997
-  },
-  {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXSTATELEG-MISEN26",
-   "title": "Michigan State Senate winner?",
-   "markets": 2,
-   "sumOfMids": 1.175,
-   "deviation": 0.175,
-   "volume": 1534.97
+   "event_ticker": "KXSTATELEG-MNHOUSE26",
+   "ticker": "KXSTATELEG-MNHOUSE26-D",
+   "yes_bid": 0.75,
+   "yes_ask": 0.81,
+   "last_price": 0.94,
+   "volume": 10638.71
   },
   {
    "check": "stale-last-vs-book",
@@ -5122,8 +5232,8 @@
    "us_election": 1,
    "event_ticker": "KXSTATELEG-MIHOUSE26",
    "ticker": "KXSTATELEG-MIHOUSE26-D",
-   "yes_bid": 0.61,
-   "yes_ask": 0.79,
+   "yes_bid": 0.65,
+   "yes_ask": 0.74,
    "last_price": 0.96,
    "volume": 1098.08
   },
@@ -5133,21 +5243,43 @@
    "us_election": 1,
    "event_ticker": "KXSTATELEG-MESEN26",
    "ticker": "KXSTATELEG-MESEN26-R",
-   "yes_bid": 0.06,
-   "yes_ask": 0.17,
+   "yes_bid": 0.12,
+   "yes_ask": 0.18,
    "last_price": 0.88,
    "volume": 4286.1
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXSTATELEG-AZSEN26",
+   "ticker": "KXSTATELEG-AZSEN26-D",
+   "yes_bid": 0.42,
+   "yes_ask": 0.51,
+   "last_price": 0.98,
+   "volume": 1401.44
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 1,
+   "event_ticker": "KXSTATELEG-AZHOUSE26",
+   "ticker": "KXSTATELEG-AZHOUSE26-D",
+   "yes_bid": 0.42,
+   "yes_ask": 0.52,
+   "last_price": 0.72,
+   "volume": 63.4
   },
   {
    "check": "mutually-exclusive-sum-over",
    "severity": "high",
    "us_election": 1,
-   "event_ticker": "KXSTATELEG-AKSEN26",
-   "title": "Alaska State Senate winner?",
-   "markets": 2,
-   "sumOfMids": 1.115,
-   "deviation": 0.115,
-   "volume": 1470.8700000000001
+   "event_ticker": "KXMANCHINCOMBO-26NOV03",
+   "title": "Manchin Senate combo: Rogers & Collins",
+   "markets": 4,
+   "sumOfMids": 1.06,
+   "deviation": 0.06,
+   "volume": 58856.39
   },
   {
    "check": "mutually-exclusive-sum-under",
@@ -5172,17 +5304,6 @@
    "volume": 36389.11
   },
   {
-   "check": "mutually-exclusive-sum-over",
-   "severity": "high",
-   "us_election": 1,
-   "event_ticker": "KXLA13-26",
-   "title": "Los Angeles City Council District 13 winner election?",
-   "markets": 4,
-   "sumOfMids": 1.075,
-   "deviation": 0.075,
-   "volume": 29510.800000000003
-  },
-  {
    "check": "mutually-exclusive-sum-under",
    "severity": "info",
    "us_election": 1,
@@ -5199,7 +5320,7 @@
    "us_election": 1,
    "event_ticker": "KXGENERALCOUNTY-SENATEFLS-26",
    "ticker": "KXGENERALCOUNTY-SENATEFLS-26-PIN",
-   "yes_bid": 0.5,
+   "yes_bid": 0.51,
    "yes_ask": 0.57,
    "last_price": 0.25,
    "volume": 1448.29
@@ -5211,20 +5332,9 @@
    "event_ticker": "KXGENERALCOUNTY-SENATEFLS-26",
    "ticker": "KXGENERALCOUNTY-SENATEFLS-26-STL",
    "yes_bid": 0.21,
-   "yes_ask": 0.28,
+   "yes_ask": 0.29,
    "last_price": 0.02,
    "volume": 359.39
-  },
-  {
-   "check": "stale-last-vs-book",
-   "severity": "info",
-   "us_election": 1,
-   "event_ticker": "KXGENERALCOUNTY-SENATEFLS-26",
-   "ticker": "KXGENERALCOUNTY-SENATEFLS-26-MIA",
-   "yes_bid": 0.34,
-   "yes_ask": 0.43,
-   "last_price": 0.73,
-   "volume": 5462.81
   },
   {
    "check": "stale-last-vs-book",
@@ -5277,7 +5387,7 @@
    "event_ticker": "KXBRGOVMOSTSEATS-26OCT04",
    "ticker": "KXBRGOVMOSTSEATS-26OCT04-PL",
    "yes_bid": 0.3,
-   "yes_ask": 0.34,
+   "yes_ask": 0.37,
    "last_price": 0.19,
    "volume": 805
   },
@@ -5288,8 +5398,8 @@
    "event_ticker": "KXBRGOVMOSTSEATS-26OCT04",
    "title": "Brazil Gubernatorial Elections: Most Governorships Won",
    "markets": 12,
-   "sumOfMids": 2.845,
-   "deviation": 1.845,
+   "sumOfMids": 2.855,
+   "deviation": 1.855,
    "volume": 3049.8199999999997
   },
   {
@@ -5302,6 +5412,28 @@
    "yes_ask": 0.34,
    "last_price": 0.06,
    "volume": 1442.28
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXSUEZWEEKLY-26SEP27",
+   "ticker": "KXSUEZWEEKLY-26SEP27-T280",
+   "yes_bid": 0.64,
+   "yes_ask": 0.73,
+   "last_price": 0.48,
+   "volume": 3211.59
+  },
+  {
+   "check": "stale-last-vs-book",
+   "severity": "info",
+   "us_election": 0,
+   "event_ticker": "KXPANAMAWEEKLY-26SEP27",
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T200",
+   "yes_bid": 0.4,
+   "yes_ask": 0.52,
+   "last_price": 0.29,
+   "volume": 760.35
   },
   {
    "check": "stale-last-vs-book",
@@ -5343,8 +5475,8 @@
    "event_ticker": "KXCONGRESSTRADES-25",
    "title": "Which member of Congress will have the biggest returns in 2025?",
    "markets": 10,
-   "sumOfMids": 1.485,
-   "deviation": 0.485,
+   "sumOfMids": 1.5335,
+   "deviation": 0.5335,
    "volume": 29126.04
   },
   {
