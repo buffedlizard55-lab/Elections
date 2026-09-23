@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv + data/kalshi/universe/latest.json + data/kalshi/forward/universe-open.json + data/polls/poll-layer-2026.json + data/crosslayer/snapshots.json + data/kalshi/tracker/settlements.json (all read offline; the runner makes no network calls)",
-  "capturedAt": "2026-09-23T00:29:49.288Z",
+  "capturedAt": "2026-09-23T01:22:36.219Z",
   "capturedBy": "scripts/run-forward-contest.mjs",
   "model": {
     "seasonId": "S1-2026",
@@ -23,9 +23,9 @@
       "schedule": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
       "scheduleReadOn": "2026-09-22",
       "settlementFee": "none — the official schedule lists no settlement fee",
-      "seriesWithCapturedConfig": 4192,
+      "seriesWithCapturedConfig": 4193,
       "seriesUsingDocumentedDefault": 0,
-      "totalSeriesRegistered": 4192,
+      "totalSeriesRegistered": 4193,
       "contestCharges": "taker-only"
     },
     "leapSource": "https://www.tradingview.com/the-leap/february-2026-eurex/rules/",
@@ -35,10 +35,10 @@
     "seasonWindow": "A market is only eligible if its close_time is on or before 2027-12-31T23:59:59Z — the season trades the 2026 cycle. A 2028 Senate market is collected and published in the market list, but pricing it against a days-to-election clock would be meaningless."
   },
   "openedOn": "2026-09-19",
-  "lastCapturedDay": "2026-09-22",
-  "capturedTradingDays": 4,
+  "lastCapturedDay": "2026-09-23",
+  "capturedTradingDays": 5,
   "electionDay": "2026-11-03",
-  "status": "The season has captured 4 day(s) and 3 of 12 entrants have met the 3-day minimum.",
+  "status": "The season has captured 5 day(s) and 3 of 12 entrants have met the 3-day minimum.",
   "field": {
     "entrants": 12,
     "transferredFrom2024": 7,
@@ -192,7 +192,7 @@
       },
       "ratingsBandsLabel": "The band is a heuristic interval per rating category published by this project (data/polls/poll-layer-2026.json raceRatings.bands) and is labelled as such. It is not a Cook Political Report or Inside Elections probability, and neither publisher is corrected by this entrant."
     },
-    "crossLayerRows": 41,
+    "crossLayerRows": 54,
     "k": 4.5
   },
   "universe": {
@@ -200,7 +200,8 @@
       "2026-09-19",
       "2026-09-20",
       "2026-09-21",
-      "2026-09-22"
+      "2026-09-22",
+      "2026-09-23"
     ],
     "perDate": {
       "2026-09-19": {
@@ -234,19 +235,27 @@
         "noUsableBook": 433,
         "eligible": 6438,
         "tradedOnDay": 1044
+      },
+      "2026-09-23": {
+        "panelRows": 11132,
+        "notElectionSeries": 3480,
+        "notInSeasonWindow": 765,
+        "noUsableBook": 433,
+        "eligible": 6454,
+        "tradedOnDay": 1059
       }
     },
-    "distinctTickers": 6494,
+    "distinctTickers": 6513,
     "rejectionReasons": {
-      "not-us-election-series": 14014,
-      "closes-after-season-window": 3054,
-      "book-not-two-sided-at-capture": 3407
+      "not-us-election-series": 17494,
+      "closes-after-season-window": 3819,
+      "book-not-two-sided-at-capture": 3840
     },
     "seriesCoverage": {
-      "distinctSeries": 440,
-      "distinctTickers": 6494,
+      "distinctSeries": 441,
+      "distinctTickers": 6513,
       "seriesResolvedFromTickerPrefix": 1,
-      "rowsPassingSeriesTag": 29681
+      "rowsPassingSeriesTag": 37333
     }
   },
   "identityCheck": {
@@ -256,10 +265,10 @@
         "holds": true,
         "legs": {
           "startingCapital": 100000,
-          "realizedPnl": -406.3668,
-          "unrealizedPnl": -198.279265,
-          "sum": 99395.353935,
-          "netEquity": 99395.353935
+          "realizedPnl": -422.0887,
+          "unrealizedPnl": -208.46539,
+          "sum": 99369.44591,
+          "netEquity": 99369.44591
         }
       },
       {
@@ -267,10 +276,10 @@
         "holds": true,
         "legs": {
           "startingCapital": 100000,
-          "realizedPnl": -536.2258,
-          "unrealizedPnl": -1201.485335,
-          "sum": 98262.288865,
-          "netEquity": 98262.288865
+          "realizedPnl": -553.2331,
+          "unrealizedPnl": -1217.29978,
+          "sum": 98229.46712,
+          "netEquity": 98229.46712
         }
       },
       {
@@ -333,10 +342,10 @@
         "holds": true,
         "legs": {
           "startingCapital": 100000,
-          "realizedPnl": -535.967,
-          "unrealizedPnl": -174.248895,
-          "sum": 99289.784105,
-          "netEquity": 99289.784105
+          "realizedPnl": -540.4211,
+          "unrealizedPnl": -249.972915,
+          "sum": 99209.605985,
+          "netEquity": 99209.605985
         }
       },
       {
@@ -345,9 +354,9 @@
         "legs": {
           "startingCapital": 100000,
           "realizedPnl": -366.4342,
-          "unrealizedPnl": -133.100895,
-          "sum": 99500.464905,
-          "netEquity": 99500.464905
+          "unrealizedPnl": -210.498475,
+          "sum": 99423.067325,
+          "netEquity": 99423.067325
         }
       },
       {
@@ -366,10 +375,10 @@
         "holds": true,
         "legs": {
           "startingCapital": 100000,
-          "realizedPnl": -23.555,
-          "unrealizedPnl": -116.928235,
-          "sum": 99859.516765,
-          "netEquity": 99859.516765
+          "realizedPnl": -23.6686,
+          "unrealizedPnl": -121.92541,
+          "sum": 99854.40599,
+          "netEquity": 99854.40599
         }
       },
       {
@@ -1016,30 +1025,43 @@
         "KXVOTEGENERAL-SENATEMT26SBOD-35": "KXVOTEGENERAL",
         "KXVOTEGENERAL-SENATEOHS-26SBRO-46": "KXVOTEGENERAL",
         "KXVOTEGENERAL-SENATEOHS-26SBRO-48": "KXVOTEGENERAL",
-        "KXVOTEGENERAL-SENATETX-26JTAL-48": "KXVOTEGENERAL"
+        "KXVOTEGENERAL-SENATETX-26JTAL-48": "KXVOTEGENERAL",
+        "GOVPARTYMD-26-D": "GOVPARTYMD",
+        "HOUSECA41-26-D": "HOUSECA41",
+        "HOUSEPA8-26-D": "HOUSEPA8",
+        "KXDHOUSEWON-26NOV03-AL222": "KXDHOUSEWON",
+        "KXDHOUSEWON-26NOV03-AL226": "KXDHOUSEWON",
+        "KXDHOUSEWON-26NOV03-AL230": "KXDHOUSEWON",
+        "KXGENERALCOUNTY-SENATEFLS-26-HIL": "KXGENERALCOUNTY",
+        "KXRHOUSEWON-26NOV03-AL186": "KXRHOUSEWON",
+        "KXRHOUSEWON-26NOV03-AL190": "KXRHOUSEWON",
+        "KXRHOUSEWON-26NOV03-AL194": "KXRHOUSEWON",
+        "KXRHOUSEWON-26NOV03-AL198": "KXRHOUSEWON",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-42": "KXVOTEGENERAL",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-44": "KXVOTEGENERAL"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
-      "cash": 61787.66935,
-      "netEquity": 99395.353935,
-      "netReturnPct": -0.604646,
-      "realizedPnl": -406.3668,
-      "unrealizedPnl": -198.279265,
-      "feesPaid": 406.3668,
+      "cash": 60627.45165,
+      "netEquity": 99369.44591,
+      "netReturnPct": -0.630554,
+      "realizedPnl": -422.0887,
+      "unrealizedPnl": -208.46539,
+      "feesPaid": 422.0887,
       "accountingIdentityHolds": true,
       "identityLegs": {
         "startingCapital": 100000,
-        "realizedPnl": -406.3668,
-        "unrealizedPnl": -198.279265,
-        "sum": 99395.353935,
-        "netEquity": 99395.353935
+        "realizedPnl": -422.0887,
+        "unrealizedPnl": -208.46539,
+        "sum": 99369.44591,
+        "netEquity": 99369.44591
       },
-      "trades": 623,
-      "tradingDays": 4,
-      "marketsTraded": 623,
-      "openPositions": 623,
+      "trades": 636,
+      "tradingDays": 5,
+      "marketsTraded": 636,
+      "openPositions": 636,
       "openPositionSample": [
         {
           "ticker": "CONTROLH-2026-D",
@@ -1055,7 +1077,7 @@
           "side": "YES",
           "shares": 2.04,
           "avgCost": 0.928,
-          "mark": 0.925,
+          "mark": 0.9255,
           "carriedMark": false,
           "series": "GOVPARTYAL"
         },
@@ -1064,7 +1086,7 @@
           "side": "YES",
           "shares": 0.12,
           "avgCost": 0.989,
-          "mark": 0.9755,
+          "mark": 0.9745,
           "carriedMark": false,
           "series": "GOVPARTYAR"
         },
@@ -1082,7 +1104,7 @@
           "side": "YES",
           "shares": 34.8,
           "avgCost": 0.967,
-          "mark": 0.9625,
+          "mark": 0.962,
           "carriedMark": false,
           "series": "GOVPARTYCA"
         },
@@ -1127,7 +1149,7 @@
           "side": "YES",
           "shares": 124.19,
           "avgCost": 0.78,
-          "mark": 0.815,
+          "mark": 0.825,
           "carriedMark": false,
           "series": "GOVPARTYIA"
         },
@@ -1190,7 +1212,7 @@
           "side": "YES",
           "shares": 0.08,
           "avgCost": 0.94,
-          "mark": 0.923,
+          "mark": 0.9205,
           "carriedMark": false,
           "series": "GOVPARTYNE"
         },
@@ -1199,7 +1221,7 @@
           "side": "YES",
           "shares": 326.77,
           "avgCost": 0.93,
-          "mark": 0.938,
+          "mark": 0.9385,
           "carriedMark": false,
           "series": "GOVPARTYNY"
         },
@@ -1217,7 +1239,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.949,
-          "mark": 0.9425,
+          "mark": 0.942,
           "carriedMark": false,
           "series": "GOVPARTYSC"
         },
@@ -1226,7 +1248,7 @@
           "side": "YES",
           "shares": 2.39,
           "avgCost": 0.995,
-          "mark": 0.976,
+          "mark": 0.9755,
           "carriedMark": false,
           "series": "GOVPARTYSD"
         },
@@ -1282,7 +1304,7 @@
           "side": "YES",
           "shares": 2.04,
           "avgCost": 0.928,
-          "mark": 0.925,
+          "mark": 0.9255,
           "series": "GOVPARTYAL",
           "carriedMark": false
         },
@@ -1291,7 +1313,7 @@
           "side": "YES",
           "shares": 0.12,
           "avgCost": 0.989,
-          "mark": 0.9755,
+          "mark": 0.9745,
           "series": "GOVPARTYAR",
           "carriedMark": false
         },
@@ -1309,7 +1331,7 @@
           "side": "YES",
           "shares": 34.8,
           "avgCost": 0.967,
-          "mark": 0.9625,
+          "mark": 0.962,
           "series": "GOVPARTYCA",
           "carriedMark": false
         },
@@ -1354,7 +1376,7 @@
           "side": "YES",
           "shares": 124.19,
           "avgCost": 0.78,
-          "mark": 0.815,
+          "mark": 0.825,
           "series": "GOVPARTYIA",
           "carriedMark": false
         },
@@ -1417,7 +1439,7 @@
           "side": "YES",
           "shares": 0.08,
           "avgCost": 0.94,
-          "mark": 0.923,
+          "mark": 0.9205,
           "series": "GOVPARTYNE",
           "carriedMark": false
         },
@@ -1426,7 +1448,7 @@
           "side": "YES",
           "shares": 326.77,
           "avgCost": 0.93,
-          "mark": 0.938,
+          "mark": 0.9385,
           "series": "GOVPARTYNY",
           "carriedMark": false
         },
@@ -1444,7 +1466,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.949,
-          "mark": 0.9425,
+          "mark": 0.942,
           "series": "GOVPARTYSC",
           "carriedMark": false
         },
@@ -1453,7 +1475,7 @@
           "side": "YES",
           "shares": 2.39,
           "avgCost": 0.995,
-          "mark": 0.976,
+          "mark": 0.9755,
           "series": "GOVPARTYSD",
           "carriedMark": false
         },
@@ -1498,7 +1520,7 @@
           "side": "YES",
           "shares": 41.94,
           "avgCost": 0.9,
-          "mark": 0.886,
+          "mark": 0.891,
           "series": "HOUSEAKAL",
           "carriedMark": false
         },
@@ -1552,7 +1574,7 @@
           "side": "YES",
           "shares": 0.44,
           "avgCost": 0.96,
-          "mark": 0.956,
+          "mark": 0.957,
           "series": "HOUSECA47",
           "carriedMark": false
         },
@@ -1570,7 +1592,7 @@
           "side": "YES",
           "shares": 120.73,
           "avgCost": 0.73,
-          "mark": 0.715,
+          "mark": 0.705,
           "series": "HOUSEFL13",
           "carriedMark": false
         },
@@ -1615,7 +1637,7 @@
           "side": "YES",
           "shares": 0.99,
           "avgCost": 0.934,
-          "mark": 0.923,
+          "mark": 0.93,
           "series": "HOUSENE2",
           "carriedMark": false
         },
@@ -1633,7 +1655,7 @@
           "side": "YES",
           "shares": 2.26,
           "avgCost": 0.96,
-          "mark": 0.9475,
+          "mark": 0.947,
           "series": "HOUSENJ5",
           "carriedMark": false
         },
@@ -1642,7 +1664,7 @@
           "side": "YES",
           "shares": 17.1,
           "avgCost": 0.83,
-          "mark": 0.805,
+          "mark": 0.81,
           "series": "HOUSENJ7",
           "carriedMark": false
         },
@@ -1651,7 +1673,7 @@
           "side": "YES",
           "shares": 3.93,
           "avgCost": 0.961,
-          "mark": 0.962,
+          "mark": 0.9615,
           "series": "HOUSENJ9",
           "carriedMark": false
         },
@@ -1678,7 +1700,7 @@
           "side": "YES",
           "shares": 6.44,
           "avgCost": 0.983,
-          "mark": 0.9655,
+          "mark": 0.9665,
           "series": "HOUSENY19",
           "carriedMark": false
         },
@@ -1687,7 +1709,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.954,
-          "mark": 0.9375,
+          "mark": 0.9345,
           "series": "HOUSENY22",
           "carriedMark": false
         },
@@ -1705,7 +1727,7 @@
           "side": "YES",
           "shares": 0.81,
           "avgCost": 0.95,
-          "mark": 0.9625,
+          "mark": 0.962,
           "series": "HOUSEOH13",
           "carriedMark": false
         },
@@ -1768,7 +1790,7 @@
           "side": "YES",
           "shares": 11.6,
           "avgCost": 0.72,
-          "mark": 0.725,
+          "mark": 0.72,
           "series": "HOUSEWI3",
           "carriedMark": false
         },
@@ -1777,7 +1799,7 @@
           "side": "YES",
           "shares": 47.03,
           "avgCost": 0.7,
-          "mark": 0.805,
+          "mark": 0.795,
           "series": "KXAKSENATE",
           "carriedMark": false
         },
@@ -1804,7 +1826,7 @@
           "side": "YES",
           "shares": 334,
           "avgCost": 0.84,
-          "mark": 0.845,
+          "mark": 0.835,
           "series": "KXBLUEWAVECOMBO",
           "carriedMark": false
         },
@@ -1813,7 +1835,7 @@
           "side": "YES",
           "shares": 6.94,
           "avgCost": 0.69,
-          "mark": 0.675,
+          "mark": 0.68,
           "series": "KXCA11PERSON",
           "carriedMark": false
         },
@@ -1831,7 +1853,7 @@
           "side": "YES",
           "shares": 0.03,
           "avgCost": 0.959,
-          "mark": 0.927,
+          "mark": 0.9265,
           "series": "KXCABILLIONAIRETAX",
           "carriedMark": false
         },
@@ -1849,7 +1871,7 @@
           "side": "YES",
           "shares": 1.24,
           "avgCost": 0.88,
-          "mark": 0.605,
+          "mark": 0.615,
           "series": "KXCAELECTION",
           "carriedMark": false
         },
@@ -1858,7 +1880,7 @@
           "side": "YES",
           "shares": 21.38,
           "avgCost": 0.71,
-          "mark": 0.665,
+          "mark": 0.655,
           "series": "KXCAHOUSEDEM",
           "carriedMark": false
         },
@@ -1903,7 +1925,7 @@
           "side": "YES",
           "shares": 1.36,
           "avgCost": 0.88,
-          "mark": 0.705,
+          "mark": 0.71,
           "series": "KXEXITPOLL",
           "carriedMark": false
         },
@@ -2002,7 +2024,7 @@
           "side": "YES",
           "shares": 22.43,
           "avgCost": 0.8,
-          "mark": 0.805,
+          "mark": 0.81,
           "series": "KXGOVPARTYAK",
           "carriedMark": false
         },
@@ -2074,7 +2096,7 @@
           "side": "YES",
           "shares": 2.15,
           "avgCost": 0.86,
-          "mark": 0.855,
+          "mark": 0.85,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2083,7 +2105,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.986,
-          "mark": 0.965,
+          "mark": 0.966,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2101,7 +2123,7 @@
           "side": "YES",
           "shares": 471.19,
           "avgCost": 0.88,
-          "mark": 0.875,
+          "mark": 0.885,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2110,7 +2132,7 @@
           "side": "YES",
           "shares": 4.49,
           "avgCost": 0.73,
-          "mark": 0.715,
+          "mark": 0.71,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2128,7 +2150,7 @@
           "side": "YES",
           "shares": 4.27,
           "avgCost": 0.89,
-          "mark": 0.86,
+          "mark": 0.865,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2137,7 +2159,7 @@
           "side": "YES",
           "shares": 14.95,
           "avgCost": 0.96,
-          "mark": 0.931,
+          "mark": 0.9335,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2191,7 +2213,7 @@
           "side": "YES",
           "shares": 23.22,
           "avgCost": 0.947,
-          "mark": 0.905,
+          "mark": 0.911,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2200,7 +2222,7 @@
           "side": "YES",
           "shares": 0.17,
           "avgCost": 0.96,
-          "mark": 0.9425,
+          "mark": 0.9445,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2218,7 +2240,7 @@
           "side": "YES",
           "shares": 8.25,
           "avgCost": 0.78,
-          "mark": 0.675,
+          "mark": 0.665,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2227,7 +2249,7 @@
           "side": "YES",
           "shares": 0.25,
           "avgCost": 0.924,
-          "mark": 0.9055,
+          "mark": 0.9185,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2245,7 +2267,7 @@
           "side": "YES",
           "shares": 8.55,
           "avgCost": 0.78,
-          "mark": 0.775,
+          "mark": 0.76,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2254,7 +2276,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.95,
-          "mark": 0.9285,
+          "mark": 0.9425,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2263,7 +2285,7 @@
           "side": "YES",
           "shares": 8.5,
           "avgCost": 0.949,
-          "mark": 0.9215,
+          "mark": 0.9285,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2281,7 +2303,7 @@
           "side": "YES",
           "shares": 18.04,
           "avgCost": 0.958,
-          "mark": 0.947,
+          "mark": 0.9475,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2326,7 +2348,7 @@
           "side": "YES",
           "shares": 1.28,
           "avgCost": 0.961,
-          "mark": 0.943,
+          "mark": 0.9445,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2344,7 +2366,7 @@
           "side": "YES",
           "shares": 23.51,
           "avgCost": 0.88,
-          "mark": 0.875,
+          "mark": 0.88,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2353,7 +2375,7 @@
           "side": "YES",
           "shares": 10.7,
           "avgCost": 0.8,
-          "mark": 0.81,
+          "mark": 0.805,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2362,7 +2384,7 @@
           "side": "YES",
           "shares": 0.26,
           "avgCost": 0.78,
-          "mark": 0.785,
+          "mark": 0.79,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2380,7 +2402,7 @@
           "side": "YES",
           "shares": 21.12,
           "avgCost": 0.918,
-          "mark": 0.875,
+          "mark": 0.885,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2389,7 +2411,7 @@
           "side": "YES",
           "shares": 0.42,
           "avgCost": 0.959,
-          "mark": 0.953,
+          "mark": 0.938,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2407,7 +2429,7 @@
           "side": "YES",
           "shares": 11.11,
           "avgCost": 0.997,
-          "mark": 0.9735,
+          "mark": 0.9725,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2416,7 +2438,7 @@
           "side": "YES",
           "shares": 3.26,
           "avgCost": 0.992,
-          "mark": 0.9595,
+          "mark": 0.9665,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2443,7 +2465,7 @@
           "side": "YES",
           "shares": 106.71,
           "avgCost": 0.68,
-          "mark": 0.645,
+          "mark": 0.635,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2452,7 +2474,7 @@
           "side": "YES",
           "shares": 2.05,
           "avgCost": 0.966,
-          "mark": 0.9475,
+          "mark": 0.9465,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2461,7 +2483,7 @@
           "side": "YES",
           "shares": 47.03,
           "avgCost": 0.86,
-          "mark": 0.825,
+          "mark": 0.82,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2479,7 +2501,7 @@
           "side": "YES",
           "shares": 6.41,
           "avgCost": 0.919,
-          "mark": 0.911,
+          "mark": 0.9125,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -2524,7 +2546,7 @@
           "side": "YES",
           "shares": 17,
           "avgCost": 0.73,
-          "mark": 0.615,
+          "mark": 0.625,
           "series": "KXKSSENGOVCOMBO",
           "carriedMark": false
         },
@@ -2542,7 +2564,7 @@
           "side": "YES",
           "shares": 12.59,
           "avgCost": 0.67,
-          "mark": 0.715,
+          "mark": 0.725,
           "series": "KXMESENATEPERSON",
           "carriedMark": false
         },
@@ -2560,7 +2582,7 @@
           "side": "YES",
           "shares": 41.84,
           "avgCost": 0.86,
-          "mark": 0.855,
+          "mark": 0.86,
           "series": "KXMIDTERMHAPPEN",
           "carriedMark": false
         },
@@ -2659,7 +2681,7 @@
           "side": "YES",
           "shares": 0.04,
           "avgCost": 0.87,
-          "mark": 0.84,
+          "mark": 0.845,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -2832,7 +2854,7 @@
           "avgCost": 0.99,
           "mark": 0.985,
           "series": "KXPROVIDENCEMAYOR",
-          "carriedMark": false
+          "carriedMark": true
         },
         {
           "ticker": "KXREDISTRICTING-26-CA",
@@ -2848,7 +2870,7 @@
           "side": "YES",
           "shares": 6.02,
           "avgCost": 0.91,
-          "mark": 0.94,
+          "mark": 0.935,
           "series": "KXRENTFREEZEEFFECT",
           "carriedMark": false
         },
@@ -3181,7 +3203,7 @@
           "side": "YES",
           "shares": 76.11,
           "avgCost": 0.95,
-          "mark": 0.9225,
+          "mark": 0.923,
           "series": "SENATEID",
           "carriedMark": false
         },
@@ -3235,7 +3257,7 @@
           "side": "YES",
           "shares": 234.83,
           "avgCost": 0.904,
-          "mark": 0.9045,
+          "mark": 0.905,
           "series": "SENATEMN",
           "carriedMark": false
         },
@@ -3253,7 +3275,7 @@
           "side": "YES",
           "shares": 14.9,
           "avgCost": 0.927,
-          "mark": 0.9295,
+          "mark": 0.9325,
           "series": "SENATENC",
           "carriedMark": false
         },
@@ -3343,7 +3365,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.979,
-          "mark": 0.9535,
+          "mark": 0.9555,
           "series": "GOVPARTYRI",
           "carriedMark": false
         },
@@ -3352,7 +3374,7 @@
           "side": "YES",
           "shares": 2.21,
           "avgCost": 0.943,
-          "mark": 0.937,
+          "mark": 0.936,
           "series": "GOVPARTYVT",
           "carriedMark": false
         },
@@ -3361,7 +3383,7 @@
           "side": "YES",
           "shares": 6.08,
           "avgCost": 0.82,
-          "mark": 0.82,
+          "mark": 0.825,
           "series": "HOUSEAZ6",
           "carriedMark": false
         },
@@ -3388,7 +3410,7 @@
           "side": "YES",
           "shares": 1.5,
           "avgCost": 0.944,
-          "mark": 0.932,
+          "mark": 0.9365,
           "series": "HOUSEMI3",
           "carriedMark": false
         },
@@ -3397,7 +3419,7 @@
           "side": "YES",
           "shares": 0.05,
           "avgCost": 0.944,
-          "mark": 0.921,
+          "mark": 0.9215,
           "series": "HOUSENV3",
           "carriedMark": false
         },
@@ -3406,7 +3428,7 @@
           "side": "YES",
           "shares": 1.05,
           "avgCost": 0.91,
-          "mark": 0.8985,
+          "mark": 0.9015,
           "series": "HOUSENY3",
           "carriedMark": false
         },
@@ -3514,7 +3536,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.73,
-          "mark": 0.835,
+          "mark": 0.84,
           "series": "KXEXITPOLL",
           "carriedMark": false
         },
@@ -3523,7 +3545,7 @@
           "side": "YES",
           "shares": 0.2,
           "avgCost": 0.98,
-          "mark": 0.795,
+          "mark": 0.79,
           "series": "KXEXITPOLL",
           "carriedMark": false
         },
@@ -3532,7 +3554,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.69,
-          "mark": 0.87,
+          "mark": 0.875,
           "series": "KXEXITPOLL",
           "carriedMark": false
         },
@@ -3550,7 +3572,7 @@
           "side": "YES",
           "shares": 2.1,
           "avgCost": 0.87,
-          "mark": 0.88,
+          "mark": 0.915,
           "series": "KXGENERALCOUNTY",
           "carriedMark": false
         },
@@ -3595,7 +3617,7 @@
           "side": "YES",
           "shares": 0.2,
           "avgCost": 0.92,
-          "mark": 0.9125,
+          "mark": 0.9155,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3613,7 +3635,7 @@
           "side": "YES",
           "shares": 2.59,
           "avgCost": 0.946,
-          "mark": 0.943,
+          "mark": 0.9465,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3640,7 +3662,7 @@
           "side": "YES",
           "shares": 4,
           "avgCost": 0.945,
-          "mark": 0.9195,
+          "mark": 0.9205,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3649,7 +3671,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.915,
-          "mark": 0.9015,
+          "mark": 0.9075,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3667,7 +3689,7 @@
           "side": "YES",
           "shares": 8.2,
           "avgCost": 0.945,
-          "mark": 0.942,
+          "mark": 0.9425,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3676,7 +3698,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.92,
-          "mark": 0.895,
+          "mark": 0.905,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3685,7 +3707,7 @@
           "side": "YES",
           "shares": 47.39,
           "avgCost": 0.72,
-          "mark": 0.755,
+          "mark": 0.76,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3694,7 +3716,7 @@
           "side": "YES",
           "shares": 1.4,
           "avgCost": 0.992,
-          "mark": 0.9735,
+          "mark": 0.967,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3703,7 +3725,7 @@
           "side": "YES",
           "shares": 2,
           "avgCost": 0.88,
-          "mark": 0.8855,
+          "mark": 0.885,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3721,7 +3743,7 @@
           "side": "YES",
           "shares": 5.1,
           "avgCost": 0.965,
-          "mark": 0.9355,
+          "mark": 0.944,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3730,7 +3752,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.967,
-          "mark": 0.9465,
+          "mark": 0.946,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3739,7 +3761,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.945,
-          "mark": 0.963,
+          "mark": 0.9605,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3757,7 +3779,7 @@
           "side": "YES",
           "shares": 3,
           "avgCost": 0.982,
-          "mark": 0.9635,
+          "mark": 0.968,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3766,7 +3788,7 @@
           "side": "YES",
           "shares": 5.2,
           "avgCost": 0.953,
-          "mark": 0.9305,
+          "mark": 0.942,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3775,7 +3797,7 @@
           "side": "YES",
           "shares": 9.29,
           "avgCost": 0.966,
-          "mark": 0.956,
+          "mark": 0.9555,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3784,7 +3806,7 @@
           "side": "YES",
           "shares": 14.49,
           "avgCost": 0.71,
-          "mark": 0.725,
+          "mark": 0.73,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3793,7 +3815,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.969,
-          "mark": 0.9505,
+          "mark": 0.9455,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3802,7 +3824,7 @@
           "side": "YES",
           "shares": 3.1,
           "avgCost": 0.949,
-          "mark": 0.9385,
+          "mark": 0.9365,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3811,7 +3833,7 @@
           "side": "YES",
           "shares": 4.3,
           "avgCost": 0.94,
-          "mark": 0.9445,
+          "mark": 0.9395,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3820,7 +3842,7 @@
           "side": "YES",
           "shares": 7.6,
           "avgCost": 0.902,
-          "mark": 0.905,
+          "mark": 0.909,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -3874,7 +3896,7 @@
           "side": "YES",
           "shares": 1.41,
           "avgCost": 0.69,
-          "mark": 0.665,
+          "mark": 0.675,
           "series": "KXMESENGOVCOMBO",
           "carriedMark": false
         },
@@ -4009,7 +4031,7 @@
           "side": "YES",
           "shares": 14.79,
           "avgCost": 0.68,
-          "mark": 0.655,
+          "mark": 0.66,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -4117,7 +4139,7 @@
           "side": "YES",
           "shares": 112.1,
           "avgCost": 0.98,
-          "mark": 0.93,
+          "mark": 0.9275,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -4207,7 +4229,7 @@
           "side": "YES",
           "shares": 0.35,
           "avgCost": 0.78,
-          "mark": 0.705,
+          "mark": 0.72,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -4261,7 +4283,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.81,
-          "mark": 0.81,
+          "mark": 0.82,
           "series": "KXRGOVCOUNT",
           "carriedMark": false
         },
@@ -4594,7 +4616,7 @@
           "side": "YES",
           "shares": 110.58,
           "avgCost": 0.94,
-          "mark": 0.94,
+          "mark": 0.945,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4603,7 +4625,7 @@
           "side": "YES",
           "shares": 40,
           "avgCost": 0.83,
-          "mark": 0.82,
+          "mark": 0.825,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4621,7 +4643,7 @@
           "side": "YES",
           "shares": 40,
           "avgCost": 0.8,
-          "mark": 0.8,
+          "mark": 0.795,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4639,7 +4661,7 @@
           "side": "YES",
           "shares": 119.82,
           "avgCost": 0.87,
-          "mark": 0.815,
+          "mark": 0.825,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4648,7 +4670,7 @@
           "side": "YES",
           "shares": 29.04,
           "avgCost": 0.86,
-          "mark": 0.845,
+          "mark": 0.835,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4657,7 +4679,7 @@
           "side": "YES",
           "shares": 51.25,
           "avgCost": 0.97,
-          "mark": 0.875,
+          "mark": 0.88,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4666,7 +4688,7 @@
           "side": "YES",
           "shares": 47.2,
           "avgCost": 0.89,
-          "mark": 0.87,
+          "mark": 0.88,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4711,7 +4733,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.79,
-          "mark": 0.77,
+          "mark": 0.775,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4756,7 +4778,7 @@
           "side": "YES",
           "shares": 21,
           "avgCost": 0.88,
-          "mark": 0.81,
+          "mark": 0.78,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4765,7 +4787,7 @@
           "side": "YES",
           "shares": 70,
           "avgCost": 0.81,
-          "mark": 0.83,
+          "mark": 0.835,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -4783,7 +4805,7 @@
           "side": "YES",
           "shares": 2,
           "avgCost": 0.76,
-          "mark": 0.72,
+          "mark": 0.725,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4792,7 +4814,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.82,
-          "mark": 0.8,
+          "mark": 0.805,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4801,7 +4823,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.79,
-          "mark": 0.75,
+          "mark": 0.755,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4855,7 +4877,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.78,
-          "mark": 0.74,
+          "mark": 0.745,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4882,7 +4904,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.79,
-          "mark": 0.75,
+          "mark": 0.755,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4900,7 +4922,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.74,
-          "mark": 0.7,
+          "mark": 0.705,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4909,7 +4931,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.86,
-          "mark": 0.815,
+          "mark": 0.685,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4918,7 +4940,7 @@
           "side": "YES",
           "shares": 2.5,
           "avgCost": 0.74,
-          "mark": 0.705,
+          "mark": 0.495,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4936,7 +4958,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.7,
-          "mark": 0.675,
+          "mark": 0.655,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -4999,7 +5021,7 @@
           "side": "YES",
           "shares": 1138.42,
           "avgCost": 0.66,
-          "mark": 0.705,
+          "mark": 0.715,
           "series": "SENATEMI",
           "carriedMark": false
         },
@@ -5026,7 +5048,7 @@
           "side": "YES",
           "shares": 29,
           "avgCost": 0.971,
-          "mark": 0.9705,
+          "mark": 0.971,
           "series": "SENATEOK",
           "carriedMark": false
         },
@@ -5071,7 +5093,7 @@
           "side": "YES",
           "shares": 715.5,
           "avgCost": 0.934,
-          "mark": 0.9235,
+          "mark": 0.9325,
           "series": "HOUSEVA7",
           "carriedMark": false
         },
@@ -5143,7 +5165,7 @@
           "side": "YES",
           "shares": 13.96,
           "avgCost": 0.959,
-          "mark": 0.9425,
+          "mark": 0.9445,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5152,7 +5174,7 @@
           "side": "YES",
           "shares": 9.59,
           "avgCost": 0.941,
-          "mark": 0.91,
+          "mark": 0.9095,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5161,7 +5183,7 @@
           "side": "YES",
           "shares": 15.45,
           "avgCost": 0.979,
-          "mark": 0.9595,
+          "mark": 0.9605,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5170,7 +5192,7 @@
           "side": "YES",
           "shares": 7.99,
           "avgCost": 0.71,
-          "mark": 0.705,
+          "mark": 0.695,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5179,7 +5201,7 @@
           "side": "YES",
           "shares": 7.99,
           "avgCost": 0.956,
-          "mark": 0.962,
+          "mark": 0.9475,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5188,7 +5210,7 @@
           "side": "YES",
           "shares": 10.5,
           "avgCost": 0.96,
-          "mark": 0.9415,
+          "mark": 0.9435,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5197,7 +5219,7 @@
           "side": "YES",
           "shares": 0.51,
           "avgCost": 0.959,
-          "mark": 0.9465,
+          "mark": 0.945,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5206,7 +5228,7 @@
           "side": "YES",
           "shares": 3.3,
           "avgCost": 0.977,
-          "mark": 0.959,
+          "mark": 0.9565,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5224,7 +5246,7 @@
           "side": "YES",
           "shares": 10.28,
           "avgCost": 0.975,
-          "mark": 0.9495,
+          "mark": 0.946,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5233,7 +5255,7 @@
           "side": "YES",
           "shares": 48.3,
           "avgCost": 0.926,
-          "mark": 0.925,
+          "mark": 0.931,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5242,7 +5264,7 @@
           "side": "YES",
           "shares": 7.4,
           "avgCost": 0.933,
-          "mark": 0.925,
+          "mark": 0.9265,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5305,7 +5327,7 @@
           "side": "YES",
           "shares": 14.95,
           "avgCost": 0.947,
-          "mark": 0.9525,
+          "mark": 0.95,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -5350,7 +5372,7 @@
           "side": "YES",
           "shares": 46.25,
           "avgCost": 0.66,
-          "mark": 0.63,
+          "mark": 0.635,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -5557,7 +5579,7 @@
           "side": "YES",
           "shares": 1.72,
           "avgCost": 0.82,
-          "mark": 0.75,
+          "mark": 0.755,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -5593,7 +5615,7 @@
           "side": "YES",
           "shares": 6.44,
           "avgCost": 0.75,
-          "mark": 0.74,
+          "mark": 0.735,
           "series": "KXNHSENGOVCOMBO",
           "carriedMark": false
         },
@@ -5638,7 +5660,7 @@
           "side": "YES",
           "shares": 1.35,
           "avgCost": 0.73,
-          "mark": 0.68,
+          "mark": 0.685,
           "series": "KXSTATEBALLOTMEASURE",
           "carriedMark": false
         },
@@ -5656,7 +5678,7 @@
           "side": "YES",
           "shares": 15.5,
           "avgCost": 0.81,
-          "mark": 0.78,
+          "mark": 0.785,
           "series": "KXSTATEBALLOTMEASURE",
           "carriedMark": false
         },
@@ -5692,7 +5714,7 @@
           "side": "YES",
           "shares": 235,
           "avgCost": 0.84,
-          "mark": 0.8,
+          "mark": 0.795,
           "series": "KXTAIPEIMAYOR",
           "carriedMark": false
         },
@@ -5710,7 +5732,7 @@
           "side": "YES",
           "shares": 8.66,
           "avgCost": 0.85,
-          "mark": 0.76,
+          "mark": 0.765,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -5764,7 +5786,7 @@
           "side": "YES",
           "shares": 123.38,
           "avgCost": 0.66,
-          "mark": 0.655,
+          "mark": 0.635,
           "series": "HOUSECO3",
           "carriedMark": false
         },
@@ -5773,7 +5795,7 @@
           "side": "YES",
           "shares": 5.1,
           "avgCost": 0.966,
-          "mark": 0.9475,
+          "mark": 0.9435,
           "series": "HOUSEMI8",
           "carriedMark": false
         },
@@ -5809,7 +5831,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.88,
-          "mark": 0.835,
+          "mark": 0.84,
           "series": "KXATTYGENFL",
           "carriedMark": false
         },
@@ -5890,7 +5912,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.7,
-          "mark": 0.67,
+          "mark": 0.675,
           "series": "KXDSAMEMBERSHIP",
           "carriedMark": false
         },
@@ -5899,7 +5921,7 @@
           "side": "YES",
           "shares": 4.5,
           "avgCost": 0.79,
-          "mark": 0.74,
+          "mark": 0.8,
           "series": "KXDSAMEMBERSHIP",
           "carriedMark": false
         },
@@ -5917,7 +5939,7 @@
           "side": "YES",
           "shares": 95,
           "avgCost": 0.96,
-          "mark": 0.945,
+          "mark": 0.95,
           "series": "KXDSENATEWON",
           "carriedMark": false
         },
@@ -5980,7 +6002,7 @@
           "side": "YES",
           "shares": 7.9,
           "avgCost": 0.95,
-          "mark": 0.915,
+          "mark": 0.92,
           "series": "KXEXITPOLL",
           "carriedMark": false
         },
@@ -5989,7 +6011,7 @@
           "side": "YES",
           "shares": 41,
           "avgCost": 0.72,
-          "mark": 0.675,
+          "mark": 0.68,
           "series": "KXGENERALCOUNTY",
           "carriedMark": false
         },
@@ -6016,7 +6038,7 @@
           "side": "YES",
           "shares": 55.3,
           "avgCost": 0.975,
-          "mark": 0.9545,
+          "mark": 0.9555,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6025,7 +6047,7 @@
           "side": "YES",
           "shares": 1.5,
           "avgCost": 0.979,
-          "mark": 0.962,
+          "mark": 0.965,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6034,7 +6056,7 @@
           "side": "YES",
           "shares": 7.6,
           "avgCost": 0.985,
-          "mark": 0.974,
+          "mark": 0.978,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6061,7 +6083,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.929,
-          "mark": 0.9195,
+          "mark": 0.9185,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6070,7 +6092,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.959,
-          "mark": 0.9415,
+          "mark": 0.9405,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6079,7 +6101,7 @@
           "side": "YES",
           "shares": 50,
           "avgCost": 0.93,
-          "mark": 0.915,
+          "mark": 0.918,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6088,7 +6110,7 @@
           "side": "YES",
           "shares": 150,
           "avgCost": 0.986,
-          "mark": 0.9735,
+          "mark": 0.968,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6097,7 +6119,7 @@
           "side": "YES",
           "shares": 1.8,
           "avgCost": 0.95,
-          "mark": 0.937,
+          "mark": 0.9355,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6106,7 +6128,7 @@
           "side": "YES",
           "shares": 12.5,
           "avgCost": 0.78,
-          "mark": 0.775,
+          "mark": 0.765,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6115,7 +6137,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.956,
-          "mark": 0.9445,
+          "mark": 0.9425,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6133,7 +6155,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.978,
-          "mark": 0.96,
+          "mark": 0.9565,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6142,7 +6164,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.997,
-          "mark": 0.982,
+          "mark": 0.971,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -6259,7 +6281,7 @@
           "side": "YES",
           "shares": 20.5,
           "avgCost": 0.904,
-          "mark": 0.877,
+          "mark": 0.86,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -6385,7 +6407,7 @@
           "side": "YES",
           "shares": 1.55,
           "avgCost": 0.77,
-          "mark": 0.73,
+          "mark": 0.735,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -6430,7 +6452,7 @@
           "side": "YES",
           "shares": 80,
           "avgCost": 0.78,
-          "mark": 0.75,
+          "mark": 0.755,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -6448,7 +6470,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.79,
-          "mark": 0.76,
+          "mark": 0.765,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -6466,7 +6488,7 @@
           "side": "YES",
           "shares": 40,
           "avgCost": 0.69,
-          "mark": 0.66,
+          "mark": 0.665,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -6493,7 +6515,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.72,
-          "mark": 0.69,
+          "mark": 0.695,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -6502,7 +6524,7 @@
           "side": "YES",
           "shares": 1.26,
           "avgCost": 0.7,
-          "mark": 0.66,
+          "mark": 0.665,
           "series": "KXMIDTERMVOTETURN",
           "carriedMark": false
         },
@@ -6547,7 +6569,7 @@
           "side": "YES",
           "shares": 55,
           "avgCost": 0.89,
-          "mark": 0.865,
+          "mark": 0.87,
           "series": "KXRSENATEWON",
           "carriedMark": false
         },
@@ -6556,7 +6578,7 @@
           "side": "YES",
           "shares": 55,
           "avgCost": 0.71,
-          "mark": 0.685,
+          "mark": 0.69,
           "series": "KXRSENATEWON",
           "carriedMark": false
         },
@@ -6646,7 +6668,7 @@
           "side": "YES",
           "shares": 2.21,
           "avgCost": 0.94,
-          "mark": 0.915,
+          "mark": 0.91,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6727,7 +6749,7 @@
           "side": "YES",
           "shares": 1.7,
           "avgCost": 0.79,
-          "mark": 0.745,
+          "mark": 0.74,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6745,7 +6767,7 @@
           "side": "YES",
           "shares": 20.5,
           "avgCost": 0.75,
-          "mark": 0.705,
+          "mark": 0.71,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6763,7 +6785,7 @@
           "side": "YES",
           "shares": 2.5,
           "avgCost": 0.93,
-          "mark": 0.89,
+          "mark": 0.895,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6781,7 +6803,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.92,
-          "mark": 0.88,
+          "mark": 0.885,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6790,7 +6812,7 @@
           "side": "YES",
           "shares": 40,
           "avgCost": 0.76,
-          "mark": 0.715,
+          "mark": 0.725,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6844,7 +6866,7 @@
           "side": "YES",
           "shares": 10,
           "avgCost": 0.75,
-          "mark": 0.72,
+          "mark": 0.725,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6862,7 +6884,7 @@
           "side": "YES",
           "shares": 4.5,
           "avgCost": 0.76,
-          "mark": 0.72,
+          "mark": 0.725,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -6874,14 +6896,131 @@
           "mark": 0.655,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
+        },
+        {
+          "ticker": "GOVPARTYMD-26-D",
+          "side": "YES",
+          "shares": 0.1,
+          "avgCost": 0.979,
+          "mark": 0.969,
+          "series": "GOVPARTYMD",
+          "carriedMark": false
+        },
+        {
+          "ticker": "HOUSECA41-26-D",
+          "side": "YES",
+          "shares": 10.29,
+          "avgCost": 0.97,
+          "mark": 0.9625,
+          "series": "HOUSECA41",
+          "carriedMark": false
+        },
+        {
+          "ticker": "HOUSEPA8-26-D",
+          "side": "YES",
+          "shares": 25.51,
+          "avgCost": 0.66,
+          "mark": 0.65,
+          "series": "HOUSEPA8",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXDHOUSEWON-26NOV03-AL222",
+          "side": "YES",
+          "shares": 1.5,
+          "avgCost": 0.86,
+          "mark": 0.855,
+          "series": "KXDHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXDHOUSEWON-26NOV03-AL226",
+          "side": "YES",
+          "shares": 421.91,
+          "avgCost": 0.88,
+          "mark": 0.875,
+          "series": "KXDHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXDHOUSEWON-26NOV03-AL230",
+          "side": "YES",
+          "shares": 141,
+          "avgCost": 0.81,
+          "mark": 0.72,
+          "series": "KXDHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXGENERALCOUNTY-SENATEFLS-26-HIL",
+          "side": "YES",
+          "shares": 4.25,
+          "avgCost": 0.7,
+          "mark": 0.65,
+          "series": "KXGENERALCOUNTY",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL186",
+          "side": "YES",
+          "shares": 3.38,
+          "avgCost": 0.84,
+          "mark": 0.785,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL190",
+          "side": "YES",
+          "shares": 224,
+          "avgCost": 0.85,
+          "mark": 0.845,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL194",
+          "side": "YES",
+          "shares": 234,
+          "avgCost": 0.76,
+          "mark": 0.74,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL198",
+          "side": "YES",
+          "shares": 370,
+          "avgCost": 0.69,
+          "mark": 0.67,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-42",
+          "side": "YES",
+          "shares": 0.5,
+          "avgCost": 0.79,
+          "mark": 0.77,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-44",
+          "side": "YES",
+          "shares": 1.5,
+          "avgCost": 0.7,
+          "mark": 0.66,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
         }
       ],
       "skips": 4,
       "skipReasons": {
         "size-below-participation-floor": 4
       },
-      "fillCount": 623,
-      "fillsCappedByParticipation": 626,
+      "fillCount": 636,
+      "fillsCappedByParticipation": 639,
       "fillLog": [
         {
           "date": "2026-09-19",
@@ -14358,6 +14497,162 @@
           "executedAt": "yes_ask",
           "series": "KXVOTEGENERAL",
           "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "GOVPARTYMD-26-D",
+          "action": "enter",
+          "side": "YES",
+          "shares": 0.1,
+          "price": 0.979,
+          "fee": 0.0002,
+          "executedAt": "yes_ask",
+          "series": "GOVPARTYMD",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "HOUSECA41-26-D",
+          "action": "enter",
+          "side": "YES",
+          "shares": 10.29,
+          "price": 0.97,
+          "fee": 0.021,
+          "executedAt": "yes_ask",
+          "series": "HOUSECA41",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "HOUSEPA8-26-D",
+          "action": "enter",
+          "side": "YES",
+          "shares": 25.51,
+          "price": 0.66,
+          "fee": 0.4008,
+          "executedAt": "yes_ask",
+          "series": "HOUSEPA8",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXDHOUSEWON-26NOV03-AL222",
+          "action": "enter",
+          "side": "YES",
+          "shares": 1.5,
+          "price": 0.86,
+          "fee": 0.0127,
+          "executedAt": "yes_ask",
+          "series": "KXDHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXDHOUSEWON-26NOV03-AL226",
+          "action": "enter",
+          "side": "YES",
+          "shares": 421.91,
+          "price": 0.88,
+          "fee": 3.1188,
+          "executedAt": "yes_ask",
+          "series": "KXDHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXDHOUSEWON-26NOV03-AL230",
+          "action": "enter",
+          "side": "YES",
+          "shares": 141,
+          "price": 0.81,
+          "fee": 1.519,
+          "executedAt": "yes_ask",
+          "series": "KXDHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXGENERALCOUNTY-SENATEFLS-26-HIL",
+          "action": "enter",
+          "side": "YES",
+          "shares": 4.25,
+          "price": 0.7,
+          "fee": 0.0625,
+          "executedAt": "yes_ask",
+          "series": "KXGENERALCOUNTY",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL186",
+          "action": "enter",
+          "side": "YES",
+          "shares": 3.38,
+          "price": 0.84,
+          "fee": 0.0318,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL190",
+          "action": "enter",
+          "side": "YES",
+          "shares": 224,
+          "price": 0.85,
+          "fee": 1.9992,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL194",
+          "action": "enter",
+          "side": "YES",
+          "shares": 234,
+          "price": 0.76,
+          "fee": 2.9878,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL198",
+          "action": "enter",
+          "side": "YES",
+          "shares": 370,
+          "price": 0.69,
+          "fee": 5.5401,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-42",
+          "action": "enter",
+          "side": "YES",
+          "shares": 0.5,
+          "price": 0.79,
+          "fee": 0.0059,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26FWEL-44",
+          "action": "enter",
+          "side": "YES",
+          "shares": 1.5,
+          "price": 0.7,
+          "fee": 0.0221,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
         }
       ],
       "equityCurve": [
@@ -14392,6 +14687,14 @@
           "netEquity": 99395.353935,
           "openPositions": 623,
           "entriesToday": 124
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 60627.45165,
+          "openValue": 38741.99426,
+          "netEquity": 99369.44591,
+          "openPositions": 636,
+          "entriesToday": 13
         }
       ],
       "ranked": true,
@@ -14962,30 +15265,46 @@
         "KXVOTEGENERAL-SENATEMT26ABAN-20": "KXVOTEGENERAL",
         "KXVOTEGENERAL-SENATEMT26KALM-50": "KXVOTEGENERAL",
         "KXVOTEGENERAL-SENATESD-26BBEN-48": "KXVOTEGENERAL",
-        "RSENATESEATS-27-E45": "RSENATESEATS"
+        "RSENATESEATS-27-E45": "RSENATESEATS",
+        "KXATTYGENTX-26-D": "KXATTYGENTX",
+        "KXDHOUSEWON-26NOV03-AL246": "KXDHOUSEWON",
+        "KXGENERALCOUNTY-GOVPARTYNV-26-CARS": "KXGENERALCOUNTY",
+        "KXHOUSERACE-AZ09-26-D": "KXHOUSERACE",
+        "KXHOUSEWINSTATE-NCD-E4": "KXHOUSEWINSTATE",
+        "KXMIDTERMMOV-IAGOVR-P6": "KXMIDTERMMOV",
+        "KXMIDTERMMOV-IAGOVR-P9": "KXMIDTERMMOV",
+        "KXRHOUSESEATS-27-220": "KXRHOUSESEATS",
+        "KXRHOUSEWON-26NOV03-AL214": "KXRHOUSEWON",
+        "KXRHOUSEWON-26NOV03-AL222": "KXRHOUSEWON",
+        "KXRHOUSEWON-26NOV03-AL226": "KXRHOUSEWON",
+        "KXVOTEGENERAL-KXHOUSERACE-CO05-26MCAV-1": "KXVOTEGENERAL",
+        "KXVOTEGENERAL-KXHOUSERACE-MN01-26JJOH-50": "KXVOTEGENERAL",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-56": "KXVOTEGENERAL",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-58": "KXVOTEGENERAL",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-60": "KXVOTEGENERAL"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
-      "cash": 90581.68126,
-      "netEquity": 98262.288865,
-      "netReturnPct": -1.737711,
-      "realizedPnl": -536.2258,
-      "unrealizedPnl": -1201.485335,
-      "feesPaid": 536.2258,
+      "cash": 90288.64824,
+      "netEquity": 98229.46712,
+      "netReturnPct": -1.770533,
+      "realizedPnl": -553.2331,
+      "unrealizedPnl": -1217.29978,
+      "feesPaid": 553.2331,
       "accountingIdentityHolds": true,
       "identityLegs": {
         "startingCapital": 100000,
-        "realizedPnl": -536.2258,
-        "unrealizedPnl": -1201.485335,
-        "sum": 98262.288865,
-        "netEquity": 98262.288865
+        "realizedPnl": -553.2331,
+        "unrealizedPnl": -1217.29978,
+        "sum": 98229.46712,
+        "netEquity": 98229.46712
       },
-      "trades": 556,
-      "tradingDays": 4,
-      "marketsTraded": 556,
-      "openPositions": 556,
+      "trades": 572,
+      "tradingDays": 5,
+      "marketsTraded": 572,
+      "openPositions": 572,
       "openPositionSample": [
         {
           "ticker": "CONTROLH-2026-R",
@@ -15001,7 +15320,7 @@
           "side": "YES",
           "shares": 97.64,
           "avgCost": 0.093,
-          "mark": 0.0665,
+          "mark": 0.0715,
           "carriedMark": false,
           "series": "GOVPARTYAL"
         },
@@ -15019,7 +15338,7 @@
           "side": "YES",
           "shares": 41.44,
           "avgCost": 0.062,
-          "mark": 0.0545,
+          "mark": 0.055,
           "carriedMark": false,
           "series": "GOVPARTYMA"
         },
@@ -15064,7 +15383,7 @@
           "side": "YES",
           "shares": 9.43,
           "avgCost": 0.096,
-          "mark": 0.067,
+          "mark": 0.0665,
           "carriedMark": false,
           "series": "GOVPARTYNM"
         },
@@ -15100,7 +15419,7 @@
           "side": "YES",
           "shares": 38.91,
           "avgCost": 0.08,
-          "mark": 0.03,
+          "mark": 0.025,
           "carriedMark": false,
           "series": "GOVPARTYRI"
         },
@@ -15118,7 +15437,7 @@
           "side": "YES",
           "shares": 111.1,
           "avgCost": 0.087,
-          "mark": 0.057,
+          "mark": 0.0575,
           "carriedMark": false,
           "series": "GOVPARTYVT"
         },
@@ -15145,7 +15464,7 @@
           "side": "YES",
           "shares": 2.62,
           "avgCost": 0.079,
-          "mark": 0.05,
+          "mark": 0.0515,
           "carriedMark": false,
           "series": "HOUSECA45"
         },
@@ -15190,7 +15509,7 @@
           "side": "YES",
           "shares": 26,
           "avgCost": 0.091,
-          "mark": 0.0705,
+          "mark": 0.0735,
           "carriedMark": false,
           "series": "HOUSENV1"
         },
@@ -15199,7 +15518,7 @@
           "side": "YES",
           "shares": 4.7,
           "avgCost": 0.098,
-          "mark": 0.0955,
+          "mark": 0.1005,
           "carriedMark": false,
           "series": "HOUSENY3"
         },
@@ -15208,7 +15527,7 @@
           "side": "YES",
           "shares": 711.22,
           "avgCost": 0.091,
-          "mark": 0.084,
+          "mark": 0.083,
           "carriedMark": false,
           "series": "HOUSENY4"
         }
@@ -15228,7 +15547,7 @@
           "side": "YES",
           "shares": 97.64,
           "avgCost": 0.093,
-          "mark": 0.0665,
+          "mark": 0.0715,
           "series": "GOVPARTYAL",
           "carriedMark": false
         },
@@ -15246,7 +15565,7 @@
           "side": "YES",
           "shares": 41.44,
           "avgCost": 0.062,
-          "mark": 0.0545,
+          "mark": 0.055,
           "series": "GOVPARTYMA",
           "carriedMark": false
         },
@@ -15291,7 +15610,7 @@
           "side": "YES",
           "shares": 9.43,
           "avgCost": 0.096,
-          "mark": 0.067,
+          "mark": 0.0665,
           "series": "GOVPARTYNM",
           "carriedMark": false
         },
@@ -15327,7 +15646,7 @@
           "side": "YES",
           "shares": 38.91,
           "avgCost": 0.08,
-          "mark": 0.03,
+          "mark": 0.025,
           "series": "GOVPARTYRI",
           "carriedMark": false
         },
@@ -15345,7 +15664,7 @@
           "side": "YES",
           "shares": 111.1,
           "avgCost": 0.087,
-          "mark": 0.057,
+          "mark": 0.0575,
           "series": "GOVPARTYVT",
           "carriedMark": false
         },
@@ -15372,7 +15691,7 @@
           "side": "YES",
           "shares": 2.62,
           "avgCost": 0.079,
-          "mark": 0.05,
+          "mark": 0.0515,
           "series": "HOUSECA45",
           "carriedMark": false
         },
@@ -15417,7 +15736,7 @@
           "side": "YES",
           "shares": 26,
           "avgCost": 0.091,
-          "mark": 0.0705,
+          "mark": 0.0735,
           "series": "HOUSENV1",
           "carriedMark": false
         },
@@ -15426,7 +15745,7 @@
           "side": "YES",
           "shares": 4.7,
           "avgCost": 0.098,
-          "mark": 0.0955,
+          "mark": 0.1005,
           "series": "HOUSENY3",
           "carriedMark": false
         },
@@ -15435,7 +15754,7 @@
           "side": "YES",
           "shares": 711.22,
           "avgCost": 0.091,
-          "mark": 0.084,
+          "mark": 0.083,
           "series": "HOUSENY4",
           "carriedMark": false
         },
@@ -15453,7 +15772,7 @@
           "side": "YES",
           "shares": 94.61,
           "avgCost": 0.094,
-          "mark": 0.0815,
+          "mark": 0.082,
           "series": "HOUSEVA7",
           "carriedMark": false
         },
@@ -15516,7 +15835,7 @@
           "side": "YES",
           "shares": 13636.36,
           "avgCost": 0.11,
-          "mark": 0.084,
+          "mark": 0.083,
           "series": "KXBALANCEPOWERCOMBO",
           "carriedMark": false
         },
@@ -15552,7 +15871,7 @@
           "side": "YES",
           "shares": 71.2,
           "avgCost": 0.16,
-          "mark": 0.039,
+          "mark": 0.0385,
           "series": "KXCAHOUSEDEM",
           "carriedMark": false
         },
@@ -15588,7 +15907,7 @@
           "side": "YES",
           "shares": 103.51,
           "avgCost": 0.079,
-          "mark": 0.0755,
+          "mark": 0.076,
           "series": "KXCLOSESTSENATE",
           "carriedMark": false
         },
@@ -15642,7 +15961,7 @@
           "side": "YES",
           "shares": 535.31,
           "avgCost": 0.061,
-          "mark": 0.0635,
+          "mark": 0.063,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -15651,7 +15970,7 @@
           "side": "YES",
           "shares": 130.74,
           "avgCost": 0.095,
-          "mark": 0.091,
+          "mark": 0.088,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -15696,7 +16015,7 @@
           "side": "YES",
           "shares": 16.21,
           "avgCost": 0.091,
-          "mark": 0.0915,
+          "mark": 0.091,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -15705,7 +16024,7 @@
           "side": "YES",
           "shares": 45,
           "avgCost": 0.06,
-          "mark": 0.0625,
+          "mark": 0.062,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -15723,7 +16042,7 @@
           "side": "YES",
           "shares": 54.67,
           "avgCost": 0.25,
-          "mark": 0.185,
+          "mark": 0.19,
           "series": "KXDHOUSESEATSDIR",
           "carriedMark": false
         },
@@ -15732,7 +16051,7 @@
           "side": "YES",
           "shares": 25.89,
           "avgCost": 0.076,
-          "mark": 0.0595,
+          "mark": 0.061,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -15741,7 +16060,7 @@
           "side": "YES",
           "shares": 136.54,
           "avgCost": 0.096,
-          "mark": 0.0875,
+          "mark": 0.0645,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -15786,7 +16105,7 @@
           "side": "YES",
           "shares": 82.9,
           "avgCost": 0.23,
-          "mark": 0.38,
+          "mark": 0.375,
           "series": "KXGENERALCOUNTY",
           "carriedMark": false
         },
@@ -15813,7 +16132,7 @@
           "side": "YES",
           "shares": 7.3,
           "avgCost": 0.16,
-          "mark": 0.14,
+          "mark": 0.15,
           "series": "KXGOVAK",
           "carriedMark": false
         },
@@ -15831,7 +16150,7 @@
           "side": "YES",
           "shares": 34.2,
           "avgCost": 0.15,
-          "mark": 0.12,
+          "mark": 0.125,
           "series": "KXHARRISCOUNTYJUDGE",
           "carriedMark": false
         },
@@ -15840,7 +16159,7 @@
           "side": "YES",
           "shares": 5.5,
           "avgCost": 0.07,
-          "mark": 0.105,
+          "mark": 0.115,
           "series": "KXHOUSEMO5",
           "carriedMark": false
         },
@@ -15867,7 +16186,7 @@
           "side": "YES",
           "shares": 556.65,
           "avgCost": 0.067,
-          "mark": 0.055,
+          "mark": 0.0545,
           "series": "KXHOUSEPOPVOTEMARGIN",
           "carriedMark": false
         },
@@ -15894,7 +16213,7 @@
           "side": "YES",
           "shares": 54.8,
           "avgCost": 0.1,
-          "mark": 0.0745,
+          "mark": 0.0735,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15903,7 +16222,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.093,
-          "mark": 0.0385,
+          "mark": 0.0365,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15921,7 +16240,7 @@
           "side": "YES",
           "shares": 14.9,
           "avgCost": 0.099,
-          "mark": 0.0755,
+          "mark": 0.081,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15930,7 +16249,7 @@
           "side": "YES",
           "shares": 13.37,
           "avgCost": 0.17,
-          "mark": 0.175,
+          "mark": 0.18,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15939,7 +16258,7 @@
           "side": "YES",
           "shares": 8.9,
           "avgCost": 0.12,
-          "mark": 0.0765,
+          "mark": 0.0775,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15948,7 +16267,7 @@
           "side": "YES",
           "shares": 27.6,
           "avgCost": 0.1,
-          "mark": 0.0925,
+          "mark": 0.091,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15957,7 +16276,7 @@
           "side": "YES",
           "shares": 15,
           "avgCost": 0.16,
-          "mark": 0.098,
+          "mark": 0.092,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15966,7 +16285,7 @@
           "side": "YES",
           "shares": 70.7,
           "avgCost": 0.11,
-          "mark": 0.1095,
+          "mark": 0.109,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15975,7 +16294,7 @@
           "side": "YES",
           "shares": 18.7,
           "avgCost": 0.065,
-          "mark": 0.074,
+          "mark": 0.0685,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -15993,7 +16312,7 @@
           "side": "YES",
           "shares": 1.9,
           "avgCost": 0.2,
-          "mark": 0.16,
+          "mark": 0.165,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16002,7 +16321,7 @@
           "side": "YES",
           "shares": 68.5,
           "avgCost": 0.078,
-          "mark": 0.0645,
+          "mark": 0.064,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16020,7 +16339,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.18,
-          "mark": 0.16,
+          "mark": 0.165,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16047,7 +16366,7 @@
           "side": "YES",
           "shares": 4.8,
           "avgCost": 0.07,
-          "mark": 0.058,
+          "mark": 0.0575,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16065,7 +16384,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.088,
-          "mark": 0.0555,
+          "mark": 0.065,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16083,7 +16402,7 @@
           "side": "YES",
           "shares": 3.9,
           "avgCost": 0.16,
-          "mark": 0.155,
+          "mark": 0.165,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -16146,7 +16465,7 @@
           "side": "YES",
           "shares": 10,
           "avgCost": 0.17,
-          "mark": 0.175,
+          "mark": 0.165,
           "series": "KXHOUSEWINSTATE",
           "carriedMark": false
         },
@@ -16182,7 +16501,7 @@
           "side": "YES",
           "shares": 8.2,
           "avgCost": 0.18,
-          "mark": 0.145,
+          "mark": 0.135,
           "series": "KXHOUSEWINSTATE",
           "carriedMark": false
         },
@@ -16200,7 +16519,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.13,
-          "mark": 0.18,
+          "mark": 0.17,
           "series": "KXHOUSEWINSTATE",
           "carriedMark": false
         },
@@ -16371,7 +16690,7 @@
           "side": "YES",
           "shares": 10.6,
           "avgCost": 0.18,
-          "mark": 0.245,
+          "mark": 0.24,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -16407,7 +16726,7 @@
           "side": "YES",
           "shares": 6.1,
           "avgCost": 0.18,
-          "mark": 0.155,
+          "mark": 0.16,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -16560,7 +16879,7 @@
           "side": "YES",
           "shares": 2.52,
           "avgCost": 0.08,
-          "mark": 0.06,
+          "mark": 0.065,
           "series": "KXMNSENGOVCOMBO",
           "carriedMark": false
         },
@@ -16569,7 +16888,7 @@
           "side": "YES",
           "shares": 1.53,
           "avgCost": 0.31,
-          "mark": 0.27,
+          "mark": 0.16,
           "series": "KXNMARIANAGOV",
           "carriedMark": false
         },
@@ -16578,7 +16897,7 @@
           "side": "YES",
           "shares": 45.65,
           "avgCost": 0.098,
-          "mark": 0.105,
+          "mark": 0.1015,
           "series": "KXNYCCHILDCARE",
           "carriedMark": false
         },
@@ -16632,7 +16951,7 @@
           "side": "YES",
           "shares": 6.29,
           "avgCost": 0.14,
-          "mark": 0.16,
+          "mark": 0.175,
           "series": "KXOHSENGOVCOMBO",
           "carriedMark": false
         },
@@ -16659,7 +16978,7 @@
           "side": "YES",
           "shares": 13.03,
           "avgCost": 0.071,
-          "mark": 0.0925,
+          "mark": 0.0935,
           "series": "KXREDISTRICTING",
           "carriedMark": false
         },
@@ -16677,7 +16996,7 @@
           "side": "YES",
           "shares": 8.62,
           "avgCost": 0.13,
-          "mark": 0.14,
+          "mark": 0.145,
           "series": "KXRHOUSESEATS",
           "carriedMark": false
         },
@@ -16713,7 +17032,7 @@
           "side": "YES",
           "shares": 6.66,
           "avgCost": 0.083,
-          "mark": 0.0815,
+          "mark": 0.0805,
           "series": "KXRHOUSESEATS",
           "carriedMark": false
         },
@@ -16731,7 +17050,7 @@
           "side": "YES",
           "shares": 28.54,
           "avgCost": 0.069,
-          "mark": 0.059,
+          "mark": 0.06,
           "series": "KXSENATELA",
           "carriedMark": false
         },
@@ -16974,7 +17293,7 @@
           "side": "YES",
           "shares": 201.37,
           "avgCost": 0.1,
-          "mark": 0.085,
+          "mark": 0.09,
           "series": "RSENATESEATS",
           "carriedMark": false
         },
@@ -17001,7 +17320,7 @@
           "side": "YES",
           "shares": 1506.34,
           "avgCost": 0.12,
-          "mark": 0.1045,
+          "mark": 0.0995,
           "series": "SENATEFLS",
           "carriedMark": false
         },
@@ -17028,7 +17347,7 @@
           "side": "YES",
           "shares": 6.31,
           "avgCost": 0.061,
-          "mark": 0.058,
+          "mark": 0.057,
           "series": "SENATELA",
           "carriedMark": false
         },
@@ -17064,7 +17383,7 @@
           "side": "YES",
           "shares": 199.36,
           "avgCost": 0.081,
-          "mark": 0.0705,
+          "mark": 0.0665,
           "series": "SENATENC",
           "carriedMark": false
         },
@@ -17136,7 +17455,7 @@
           "side": "YES",
           "shares": 6.86,
           "avgCost": 0.09,
-          "mark": 0.08,
+          "mark": 0.0795,
           "series": "HOUSENE2",
           "carriedMark": false
         },
@@ -17145,7 +17464,7 @@
           "side": "YES",
           "shares": 220.5,
           "avgCost": 0.17,
-          "mark": 0.145,
+          "mark": 0.14,
           "series": "HOUSEOH1",
           "carriedMark": false
         },
@@ -17253,7 +17572,7 @@
           "side": "YES",
           "shares": 18.5,
           "avgCost": 0.18,
-          "mark": 0.2,
+          "mark": 0.195,
           "series": "KXGOVPARTYAK",
           "carriedMark": false
         },
@@ -17271,7 +17590,7 @@
           "side": "YES",
           "shares": 0.95,
           "avgCost": 0.1,
-          "mark": 0.095,
+          "mark": 0.0895,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17280,7 +17599,7 @@
           "side": "YES",
           "shares": 8.85,
           "avgCost": 0.14,
-          "mark": 0.13,
+          "mark": 0.12,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17289,7 +17608,7 @@
           "side": "YES",
           "shares": 0.27,
           "avgCost": 0.099,
-          "mark": 0.072,
+          "mark": 0.067,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17298,7 +17617,7 @@
           "side": "YES",
           "shares": 0.3,
           "avgCost": 0.059,
-          "mark": 0.0555,
+          "mark": 0.056,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17307,7 +17626,7 @@
           "side": "YES",
           "shares": 1.1,
           "avgCost": 0.16,
-          "mark": 0.15,
+          "mark": 0.145,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17316,7 +17635,7 @@
           "side": "YES",
           "shares": 0.11,
           "avgCost": 0.079,
-          "mark": 0.043,
+          "mark": 0.0475,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17325,7 +17644,7 @@
           "side": "YES",
           "shares": 7.8,
           "avgCost": 0.073,
-          "mark": 0.0485,
+          "mark": 0.0425,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17334,7 +17653,7 @@
           "side": "YES",
           "shares": 138.9,
           "avgCost": 0.089,
-          "mark": 0.056,
+          "mark": 0.0555,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17352,7 +17671,7 @@
           "side": "YES",
           "shares": 0.26,
           "avgCost": 0.099,
-          "mark": 0.0785,
+          "mark": 0.079,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17361,7 +17680,7 @@
           "side": "YES",
           "shares": 0.12,
           "avgCost": 0.085,
-          "mark": 0.0525,
+          "mark": 0.053,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17370,7 +17689,7 @@
           "side": "YES",
           "shares": 0.11,
           "avgCost": 0.07,
-          "mark": 0.05,
+          "mark": 0.06,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17379,7 +17698,7 @@
           "side": "YES",
           "shares": 134.22,
           "avgCost": 0.2,
-          "mark": 0.185,
+          "mark": 0.18,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17388,7 +17707,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.11,
-          "mark": 0.0875,
+          "mark": 0.082,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17397,7 +17716,7 @@
           "side": "YES",
           "shares": 2.1,
           "avgCost": 0.07,
-          "mark": 0.062,
+          "mark": 0.0625,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -17478,7 +17797,7 @@
           "side": "YES",
           "shares": 1.02,
           "avgCost": 0.18,
-          "mark": 0.15,
+          "mark": 0.155,
           "series": "KXIDHB932",
           "carriedMark": false
         },
@@ -17622,7 +17941,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.13,
-          "mark": 0.092,
+          "mark": 0.0925,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -17874,7 +18193,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.1,
-          "mark": 0.0985,
+          "mark": 0.101,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -18108,7 +18427,7 @@
           "side": "YES",
           "shares": 5.5,
           "avgCost": 0.27,
-          "mark": 0.23,
+          "mark": 0.22,
           "series": "KXOHSENGOVCOMBO",
           "carriedMark": false
         },
@@ -18297,7 +18616,7 @@
           "side": "YES",
           "shares": 80.21,
           "avgCost": 0.09,
-          "mark": 0.08,
+          "mark": 0.075,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -18324,7 +18643,7 @@
           "side": "YES",
           "shares": 110.58,
           "avgCost": 0.13,
-          "mark": 0.07,
+          "mark": 0.06,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -18333,7 +18652,7 @@
           "side": "YES",
           "shares": 208.3,
           "avgCost": 0.12,
-          "mark": 0.16,
+          "mark": 0.165,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -18369,7 +18688,7 @@
           "side": "YES",
           "shares": 2.82,
           "avgCost": 0.21,
-          "mark": 0.32,
+          "mark": 0.355,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -18396,7 +18715,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.12,
-          "mark": 0.135,
+          "mark": 0.12,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -18486,7 +18805,7 @@
           "side": "YES",
           "shares": 293.51,
           "avgCost": 0.1,
-          "mark": 0.0935,
+          "mark": 0.081,
           "series": "HOUSEWA3",
           "carriedMark": false
         },
@@ -18531,7 +18850,7 @@
           "side": "YES",
           "shares": 2.35,
           "avgCost": 0.12,
-          "mark": 0.098,
+          "mark": 0.097,
           "series": "KXCLOSESTGOVERNOR",
           "carriedMark": false
         },
@@ -18576,7 +18895,7 @@
           "side": "YES",
           "shares": 1.9,
           "avgCost": 0.16,
-          "mark": 0.12,
+          "mark": 0.115,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -18585,7 +18904,7 @@
           "side": "YES",
           "shares": 16.9,
           "avgCost": 0.1,
-          "mark": 0.0505,
+          "mark": 0.0455,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -18594,7 +18913,7 @@
           "side": "YES",
           "shares": 4.9,
           "avgCost": 0.076,
-          "mark": 0.045,
+          "mark": 0.04,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -18603,7 +18922,7 @@
           "side": "YES",
           "shares": 36.77,
           "avgCost": 0.15,
-          "mark": 0.09,
+          "mark": 0.0895,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -18612,7 +18931,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.1,
-          "mark": 0.07,
+          "mark": 0.065,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -18621,7 +18940,7 @@
           "side": "YES",
           "shares": 23.01,
           "avgCost": 0.072,
-          "mark": 0.0465,
+          "mark": 0.0515,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18630,7 +18949,7 @@
           "side": "YES",
           "shares": 0.3,
           "avgCost": 0.1,
-          "mark": 0.095,
+          "mark": 0.096,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18639,7 +18958,7 @@
           "side": "YES",
           "shares": 48.61,
           "avgCost": 0.073,
-          "mark": 0.0475,
+          "mark": 0.047,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18666,7 +18985,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.099,
-          "mark": 0.046,
+          "mark": 0.052,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18675,7 +18994,7 @@
           "side": "YES",
           "shares": 55.03,
           "avgCost": 0.075,
-          "mark": 0.0245,
+          "mark": 0.0385,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18684,7 +19003,7 @@
           "side": "YES",
           "shares": 0.2,
           "avgCost": 0.089,
-          "mark": 0.0615,
+          "mark": 0.0575,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -18702,7 +19021,7 @@
           "side": "YES",
           "shares": 77.08,
           "avgCost": 0.21,
-          "mark": 0.18,
+          "mark": 0.195,
           "series": "KXHOUSETURNOUT",
           "carriedMark": false
         },
@@ -18720,7 +19039,7 @@
           "side": "YES",
           "shares": 7.9,
           "avgCost": 0.21,
-          "mark": 0.185,
+          "mark": 0.175,
           "series": "KXHOUSEWINSTATE",
           "carriedMark": false
         },
@@ -18747,7 +19066,7 @@
           "side": "YES",
           "shares": 144.21,
           "avgCost": 0.063,
-          "mark": 0.054,
+          "mark": 0.0485,
           "series": "KXLEAVEWALZ",
           "carriedMark": false
         },
@@ -19080,7 +19399,7 @@
           "side": "YES",
           "shares": 77.78,
           "avgCost": 0.068,
-          "mark": 0.0615,
+          "mark": 0.069,
           "series": "KXNYCTAXMILLIONS",
           "carriedMark": false
         },
@@ -19134,7 +19453,7 @@
           "side": "YES",
           "shares": 226.45,
           "avgCost": 0.18,
-          "mark": 0.17,
+          "mark": 0.19,
           "series": "KXTAIPEIMAYOR",
           "carriedMark": false
         },
@@ -19242,7 +19561,7 @@
           "side": "YES",
           "shares": 79.81,
           "avgCost": 0.09,
-          "mark": 0.055,
+          "mark": 0.05,
           "series": "KXCAWEALTHTAXMOVD",
           "carriedMark": false
         },
@@ -19269,7 +19588,7 @@
           "side": "YES",
           "shares": 717.18,
           "avgCost": 0.07,
-          "mark": 0.064,
+          "mark": 0.0645,
           "series": "KXDSENATESEATSH",
           "carriedMark": false
         },
@@ -19278,7 +19597,7 @@
           "side": "YES",
           "shares": 72,
           "avgCost": 0.07,
-          "mark": 0.06,
+          "mark": 0.065,
           "series": "KXDSENATEWON",
           "carriedMark": false
         },
@@ -19314,7 +19633,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.11,
-          "mark": 0.065,
+          "mark": 0.06,
           "series": "KXGENERALCOUNTY",
           "carriedMark": false
         },
@@ -19323,7 +19642,7 @@
           "side": "YES",
           "shares": 1,
           "avgCost": 0.07,
-          "mark": 0.068,
+          "mark": 0.0795,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19332,7 +19651,7 @@
           "side": "YES",
           "shares": 0.4,
           "avgCost": 0.098,
-          "mark": 0.0845,
+          "mark": 0.0835,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19350,7 +19669,7 @@
           "side": "YES",
           "shares": 105.14,
           "avgCost": 0.093,
-          "mark": 0.081,
+          "mark": 0.079,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19359,7 +19678,7 @@
           "side": "YES",
           "shares": 0.1,
           "avgCost": 0.082,
-          "mark": 0.0605,
+          "mark": 0.055,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19377,7 +19696,7 @@
           "side": "YES",
           "shares": 5164.1,
           "avgCost": 0.19,
-          "mark": 0.185,
+          "mark": 0.195,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19386,7 +19705,7 @@
           "side": "YES",
           "shares": 1.1,
           "avgCost": 0.07,
-          "mark": 0.0555,
+          "mark": 0.0595,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19413,7 +19732,7 @@
           "side": "YES",
           "shares": 1.1,
           "avgCost": 0.078,
-          "mark": 0.0515,
+          "mark": 0.048,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -19458,7 +19777,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.16,
-          "mark": 0.15,
+          "mark": 0.155,
           "series": "KXLOSEREELECTIONRSEN",
           "carriedMark": false
         },
@@ -19593,7 +19912,7 @@
           "side": "YES",
           "shares": 1.9,
           "avgCost": 0.11,
-          "mark": 0.0985,
+          "mark": 0.1,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -19602,7 +19921,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.2,
-          "mark": 0.19,
+          "mark": 0.165,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -19719,7 +20038,7 @@
           "side": "YES",
           "shares": 2.62,
           "avgCost": 0.17,
-          "mark": 0.165,
+          "mark": 0.131,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -19881,7 +20200,7 @@
           "side": "YES",
           "shares": 63.53,
           "avgCost": 0.12,
-          "mark": 0.115,
+          "mark": 0.075,
           "series": "KXRHOUSEWON",
           "carriedMark": false
         },
@@ -19890,7 +20209,7 @@
           "side": "YES",
           "shares": 5,
           "avgCost": 0.19,
-          "mark": 0.18,
+          "mark": 0.185,
           "series": "KXRSENATEWON",
           "carriedMark": false
         },
@@ -19899,7 +20218,7 @@
           "side": "YES",
           "shares": 130,
           "avgCost": 0.1,
-          "mark": 0.08,
+          "mark": 0.09,
           "series": "KXRSENATEWON",
           "carriedMark": false
         },
@@ -19935,7 +20254,7 @@
           "side": "YES",
           "shares": 29.51,
           "avgCost": 0.11,
-          "mark": 0.075,
+          "mark": 0.095,
           "series": "KXSTATELEG",
           "carriedMark": false
         },
@@ -19962,7 +20281,7 @@
           "side": "YES",
           "shares": 1.5,
           "avgCost": 0.21,
-          "mark": 0.165,
+          "mark": 0.17,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -19980,7 +20299,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.09,
-          "mark": 0.07,
+          "mark": 0.06,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -19989,7 +20308,7 @@
           "side": "YES",
           "shares": 40,
           "avgCost": 0.14,
-          "mark": 0.09,
+          "mark": 0.095,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -20007,7 +20326,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.15,
-          "mark": 0.11,
+          "mark": 0.115,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -20016,7 +20335,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.13,
-          "mark": 0.085,
+          "mark": 0.09,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -20025,7 +20344,7 @@
           "side": "YES",
           "shares": 20,
           "avgCost": 0.12,
-          "mark": 0.075,
+          "mark": 0.08,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -20079,7 +20398,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.14,
-          "mark": 0.1,
+          "mark": 0.095,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20099,14 +20418,14 @@
           "avgCost": 0.06,
           "mark": 0.05,
           "series": "KXVOTEGENERAL",
-          "carriedMark": false
+          "carriedMark": true
         },
         {
           "ticker": "KXVOTEGENERAL-KXHOUSERACE-MN01-26BFIN-54",
           "side": "YES",
           "shares": 10.5,
           "avgCost": 0.09,
-          "mark": 0.055,
+          "mark": 0.06,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20115,7 +20434,7 @@
           "side": "YES",
           "shares": 3,
           "avgCost": 0.12,
-          "mark": 0.07,
+          "mark": 0.075,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20124,7 +20443,7 @@
           "side": "YES",
           "shares": 3.5,
           "avgCost": 0.12,
-          "mark": 0.11,
+          "mark": 0.105,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20133,7 +20452,7 @@
           "side": "YES",
           "shares": 51,
           "avgCost": 0.07,
-          "mark": 0.05,
+          "mark": 0.045,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20142,7 +20461,7 @@
           "side": "YES",
           "shares": 0.5,
           "avgCost": 0.07,
-          "mark": 0.06,
+          "mark": 0.055,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -20217,12 +20536,156 @@
           "mark": 0.065,
           "series": "RSENATESEATS",
           "carriedMark": false
+        },
+        {
+          "ticker": "KXATTYGENTX-26-D",
+          "side": "YES",
+          "shares": 43.49,
+          "avgCost": 0.21,
+          "mark": 0.19,
+          "series": "KXATTYGENTX",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXDHOUSEWON-26NOV03-AL246",
+          "side": "YES",
+          "shares": 294,
+          "avgCost": 0.24,
+          "mark": 0.17,
+          "series": "KXDHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXGENERALCOUNTY-GOVPARTYNV-26-CARS",
+          "side": "YES",
+          "shares": 20.5,
+          "avgCost": 0.2,
+          "mark": 0.175,
+          "series": "KXGENERALCOUNTY",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXHOUSERACE-AZ09-26-D",
+          "side": "YES",
+          "shares": 1.29,
+          "avgCost": 0.072,
+          "mark": 0.0525,
+          "series": "KXHOUSERACE",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXHOUSEWINSTATE-NCD-E4",
+          "side": "YES",
+          "shares": 2,
+          "avgCost": 0.21,
+          "mark": 0.2,
+          "series": "KXHOUSEWINSTATE",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXMIDTERMMOV-IAGOVR-P6",
+          "side": "YES",
+          "shares": 14.27,
+          "avgCost": 0.12,
+          "mark": 0.083,
+          "series": "KXMIDTERMMOV",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXMIDTERMMOV-IAGOVR-P9",
+          "side": "YES",
+          "shares": 20,
+          "avgCost": 0.094,
+          "mark": 0.059,
+          "series": "KXMIDTERMMOV",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSESEATS-27-220",
+          "side": "YES",
+          "shares": 2229.56,
+          "avgCost": 0.059,
+          "mark": 0.0545,
+          "series": "KXRHOUSESEATS",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL214",
+          "side": "YES",
+          "shares": 249,
+          "avgCost": 0.1,
+          "mark": 0.095,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL222",
+          "side": "YES",
+          "shares": 195.12,
+          "avgCost": 0.09,
+          "mark": 0.075,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXRHOUSEWON-26NOV03-AL226",
+          "side": "YES",
+          "shares": 186.41,
+          "avgCost": 0.07,
+          "mark": 0.055,
+          "series": "KXRHOUSEWON",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO05-26MCAV-1",
+          "side": "YES",
+          "shares": 0.5,
+          "avgCost": 0.06,
+          "mark": 0.055,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MN01-26JJOH-50",
+          "side": "YES",
+          "shares": 3.62,
+          "avgCost": 0.15,
+          "mark": 0.1,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-56",
+          "side": "YES",
+          "shares": 2,
+          "avgCost": 0.21,
+          "mark": 0.175,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-58",
+          "side": "YES",
+          "shares": 0.5,
+          "avgCost": 0.13,
+          "mark": 0.085,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-60",
+          "side": "YES",
+          "shares": 0.2,
+          "avgCost": 0.08,
+          "mark": 0.055,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
         }
       ],
       "skips": 0,
       "skipReasons": {},
-      "fillCount": 556,
-      "fillsCappedByParticipation": 554,
+      "fillCount": 572,
+      "fillsCappedByParticipation": 570,
       "fillLog": [
         {
           "date": "2026-09-19",
@@ -26895,6 +27358,198 @@
           "executedAt": "yes_ask",
           "series": "RSENATESEATS",
           "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXATTYGENTX-26-D",
+          "action": "enter",
+          "side": "YES",
+          "shares": 43.49,
+          "price": 0.21,
+          "fee": 0.5051,
+          "executedAt": "yes_ask",
+          "series": "KXATTYGENTX",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXDHOUSEWON-26NOV03-AL246",
+          "action": "enter",
+          "side": "YES",
+          "shares": 294,
+          "price": 0.24,
+          "fee": 3.7538,
+          "executedAt": "yes_ask",
+          "series": "KXDHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXGENERALCOUNTY-GOVPARTYNV-26-CARS",
+          "action": "enter",
+          "side": "YES",
+          "shares": 20.5,
+          "price": 0.2,
+          "fee": 0.2296,
+          "executedAt": "yes_ask",
+          "series": "KXGENERALCOUNTY",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXHOUSERACE-AZ09-26-D",
+          "action": "enter",
+          "side": "YES",
+          "shares": 1.29,
+          "price": 0.072,
+          "fee": 0.0061,
+          "executedAt": "yes_ask",
+          "series": "KXHOUSERACE",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXHOUSEWINSTATE-NCD-E4",
+          "action": "enter",
+          "side": "YES",
+          "shares": 2,
+          "price": 0.21,
+          "fee": 0.0233,
+          "executedAt": "yes_ask",
+          "series": "KXHOUSEWINSTATE",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXMIDTERMMOV-IAGOVR-P6",
+          "action": "enter",
+          "side": "YES",
+          "shares": 14.27,
+          "price": 0.12,
+          "fee": 0.1055,
+          "executedAt": "yes_ask",
+          "series": "KXMIDTERMMOV",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXMIDTERMMOV-IAGOVR-P9",
+          "action": "enter",
+          "side": "YES",
+          "shares": 20,
+          "price": 0.094,
+          "fee": 0.1193,
+          "executedAt": "yes_ask",
+          "series": "KXMIDTERMMOV",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSESEATS-27-220",
+          "action": "enter",
+          "side": "YES",
+          "shares": 2229.56,
+          "price": 0.059,
+          "fee": 8.6649,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSESEATS",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL214",
+          "action": "enter",
+          "side": "YES",
+          "shares": 249,
+          "price": 0.1,
+          "fee": 1.5687,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL222",
+          "action": "enter",
+          "side": "YES",
+          "shares": 195.12,
+          "price": 0.09,
+          "fee": 1.1187,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXRHOUSEWON-26NOV03-AL226",
+          "action": "enter",
+          "side": "YES",
+          "shares": 186.41,
+          "price": 0.07,
+          "fee": 0.8495,
+          "executedAt": "yes_ask",
+          "series": "KXRHOUSEWON",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-CO05-26MCAV-1",
+          "action": "enter",
+          "side": "YES",
+          "shares": 0.5,
+          "price": 0.06,
+          "fee": 0.002,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MN01-26JJOH-50",
+          "action": "enter",
+          "side": "YES",
+          "shares": 3.62,
+          "price": 0.15,
+          "fee": 0.0324,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-56",
+          "action": "enter",
+          "side": "YES",
+          "shares": 2,
+          "price": 0.21,
+          "fee": 0.0233,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-58",
+          "action": "enter",
+          "side": "YES",
+          "shares": 0.5,
+          "price": 0.13,
+          "fee": 0.004,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-60",
+          "action": "enter",
+          "side": "YES",
+          "shares": 0.2,
+          "price": 0.08,
+          "fee": 0.0011,
+          "executedAt": "yes_ask",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
         }
       ],
       "equityCurve": [
@@ -26929,6 +27584,14 @@
           "netEquity": 98262.288865,
           "openPositions": 556,
           "entriesToday": 118
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 90288.64824,
+          "openValue": 7940.81888,
+          "netEquity": 98229.46712,
+          "openPositions": 572,
+          "entriesToday": 16
         }
       ],
       "ranked": true,
@@ -26945,8 +27608,8 @@
       "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test.",
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -27000,6 +27663,14 @@
         },
         {
           "date": "2026-09-22",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
           "cash": 100000,
           "openValue": 0,
           "netEquity": 100000,
@@ -27020,8 +27691,8 @@
       "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test.",
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -27075,6 +27746,14 @@
         },
         {
           "date": "2026-09-22",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
           "cash": 100000,
           "openValue": 0,
           "netEquity": 100000,
@@ -27095,8 +27774,8 @@
       "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test.",
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -27150,6 +27829,14 @@
         },
         {
           "date": "2026-09-22",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
           "cash": 100000,
           "openValue": 0,
           "netEquity": 100000,
@@ -27170,8 +27857,8 @@
       "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test.",
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -27225,6 +27912,14 @@
         },
         {
           "date": "2026-09-22",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
           "cash": 100000,
           "openValue": 0,
           "netEquity": 100000,
@@ -27245,8 +27940,8 @@
       "adapts": "Carried unchanged from the 2024 contest field — same decide() reference, asserted by test.",
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -27300,6 +27995,14 @@
         },
         {
           "date": "2026-09-22",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
           "cash": 100000,
           "openValue": 0,
           "netEquity": 100000,
@@ -27331,27 +28034,27 @@
         "SENATETX-26-D": "SENATETX"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
-      "cash": 82684.90001,
-      "netEquity": 99289.784105,
-      "netReturnPct": -0.710216,
-      "realizedPnl": -535.967,
-      "unrealizedPnl": -174.248895,
-      "feesPaid": 535.967,
+      "cash": 82714.39527,
+      "netEquity": 99209.605985,
+      "netReturnPct": -0.790394,
+      "realizedPnl": -540.4211,
+      "unrealizedPnl": -249.972915,
+      "feesPaid": 538.0303,
       "accountingIdentityHolds": true,
       "identityLegs": {
         "startingCapital": 100000,
-        "realizedPnl": -535.967,
-        "unrealizedPnl": -174.248895,
-        "sum": 99289.784105,
-        "netEquity": 99289.784105
+        "realizedPnl": -540.4211,
+        "unrealizedPnl": -249.972915,
+        "sum": 99209.605985,
+        "netEquity": 99209.605985
       },
       "trades": 10,
       "tradingDays": 1,
       "marketsTraded": 10,
-      "openPositions": 10,
+      "openPositions": 9,
       "openPositionSample": [
         {
           "ticker": "GOVPARTYAZ-26-D",
@@ -27412,18 +28115,9 @@
           "side": "NO",
           "shares": 7596.31,
           "avgCost": 0.3,
-          "mark": 0.295,
+          "mark": 0.285,
           "carriedMark": false,
           "series": "SENATEMI"
-        },
-        {
-          "ticker": "SENATENC-26-D",
-          "side": "NO",
-          "shares": 478.16,
-          "avgCost": 0.071,
-          "mark": 0.0705,
-          "carriedMark": false,
-          "series": "SENATENC"
         },
         {
           "ticker": "SENATESC-26-D",
@@ -27504,17 +28198,8 @@
           "side": "NO",
           "shares": 7596.31,
           "avgCost": 0.3,
-          "mark": 0.295,
+          "mark": 0.285,
           "series": "SENATEMI",
-          "carriedMark": false
-        },
-        {
-          "ticker": "SENATENC-26-D",
-          "side": "NO",
-          "shares": 478.16,
-          "avgCost": 0.071,
-          "mark": 0.0705,
-          "series": "SENATENC",
           "carriedMark": false
         },
         {
@@ -27538,7 +28223,7 @@
       ],
       "skips": 0,
       "skipReasons": {},
-      "fillCount": 10,
+      "fillCount": 11,
       "fillsCappedByParticipation": 8,
       "fillLog": [
         {
@@ -27660,6 +28345,19 @@
           "executedAt": "yes_ask",
           "series": "SENATETX",
           "fillCapApplied": false
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "SENATENC-26-D",
+          "action": "exit",
+          "side": "NO",
+          "shares": 478.16,
+          "price": 0.066,
+          "fee": 2.0633,
+          "pnl": -4.4541,
+          "reason": "strategy-exit",
+          "executedAt": "derived(1 - yes_ask)",
+          "series": "SENATENC"
         }
       ],
       "equityCurve": [
@@ -27694,6 +28392,14 @@
           "netEquity": 99289.784105,
           "openPositions": 10,
           "entriesToday": 10
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 82714.39527,
+          "openValue": 16495.210715,
+          "netEquity": 99209.605985,
+          "openPositions": 9,
+          "entriesToday": 0
         }
       ],
       "ranked": false,
@@ -27723,22 +28429,22 @@
         "SENATENH-26-D": "SENATENH"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 88914.27091,
-      "netEquity": 99500.464905,
-      "netReturnPct": -0.499535,
+      "netEquity": 99423.067325,
+      "netReturnPct": -0.576933,
       "realizedPnl": -366.4342,
-      "unrealizedPnl": -133.100895,
+      "unrealizedPnl": -210.498475,
       "feesPaid": 366.4342,
       "accountingIdentityHolds": true,
       "identityLegs": {
         "startingCapital": 100000,
         "realizedPnl": -366.4342,
-        "unrealizedPnl": -133.100895,
-        "sum": 99500.464905,
-        "netEquity": 99500.464905
+        "unrealizedPnl": -210.498475,
+        "sum": 99423.067325,
+        "netEquity": 99423.067325
       },
       "trades": 7,
       "tradingDays": 1,
@@ -27786,7 +28492,7 @@
           "side": "NO",
           "shares": 7596.31,
           "avgCost": 0.3,
-          "mark": 0.295,
+          "mark": 0.285,
           "carriedMark": false,
           "series": "SENATEMI"
         },
@@ -27795,7 +28501,7 @@
           "side": "NO",
           "shares": 478.16,
           "avgCost": 0.071,
-          "mark": 0.0705,
+          "mark": 0.0675,
           "carriedMark": false,
           "series": "SENATENC"
         },
@@ -27851,7 +28557,7 @@
           "side": "NO",
           "shares": 7596.31,
           "avgCost": 0.3,
-          "mark": 0.295,
+          "mark": 0.285,
           "series": "SENATEMI",
           "carriedMark": false
         },
@@ -27860,7 +28566,7 @@
           "side": "NO",
           "shares": 478.16,
           "avgCost": 0.071,
-          "mark": 0.0705,
+          "mark": 0.0675,
           "series": "SENATENC",
           "carriedMark": false
         },
@@ -27996,6 +28702,14 @@
           "netEquity": 99500.464905,
           "openPositions": 7,
           "entriesToday": 7
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 88914.27091,
+          "openValue": 10508.796415,
+          "netEquity": 99423.067325,
+          "openPositions": 7,
+          "entriesToday": 0
         }
       ],
       "ranked": false,
@@ -28020,8 +28734,8 @@
         "SENATEAK-26-D": "SENATEAK"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 99050.7909,
       "netEquity": 99879.76271,
@@ -28173,12 +28887,20 @@
           "netEquity": 99879.76271,
           "openPositions": 3,
           "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 99050.7909,
+          "openValue": 828.97181,
+          "netEquity": 99879.76271,
+          "openPositions": 3,
+          "entriesToday": 0
         }
       ],
       "ranked": false,
       "unrankedReason": "only 2 active trading day(s); The Leap minimum is 3",
       "strategyMetrics": {
-        "controlQuestionsWithACrowdReading": 27,
+        "controlQuestionsWithACrowdReading": 41,
         "largestAbsGap": 0.215,
         "gaps": [
           {
@@ -28219,9 +28941,9 @@
           },
           {
             "ticker": "SENATEMT-26-D",
-            "kalshiMid": 0.0065,
+            "kalshiMid": 0.012,
             "crowdProb": 0.01,
-            "gap": 0.0035
+            "gap": -0.002
           },
           {
             "ticker": "SENATERI-26-D",
@@ -28491,30 +29213,34 @@
         "KXVOTEGENERAL-KXHOUSERACE-MN01-26BFIN-56": "KXVOTEGENERAL",
         "KXVOTEGENERAL-KXHOUSERACE-SC01-26MELL-1": "KXVOTEGENERAL",
         "KXVOTEGENERAL-KXHOUSERACE-UT04-26JGOT-6": "KXVOTEGENERAL",
-        "KXVOTEGENERAL-SENATEMT26ABAN-25": "KXVOTEGENERAL"
+        "KXVOTEGENERAL-SENATEMT26ABAN-25": "KXVOTEGENERAL",
+        "KXCAWEALTHTAXMOVD-CAWEALTHTAX26YES-YES-P16": "KXCAWEALTHTAXMOVD",
+        "KXHOUSERACE-OH14-26-D": "KXHOUSERACE",
+        "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-62": "KXVOTEGENERAL",
+        "SENATESD-26-D": "SENATESD"
       },
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
-      "cash": 84186.2859,
-      "netEquity": 99859.516765,
-      "netReturnPct": -0.140483,
-      "realizedPnl": -23.555,
-      "unrealizedPnl": -116.928235,
-      "feesPaid": 28.3998,
+      "cash": 84098.83564,
+      "netEquity": 99854.40599,
+      "netReturnPct": -0.145594,
+      "realizedPnl": -23.6686,
+      "unrealizedPnl": -121.92541,
+      "feesPaid": 28.5134,
       "accountingIdentityHolds": true,
       "identityLegs": {
         "startingCapital": 100000,
-        "realizedPnl": -23.555,
-        "unrealizedPnl": -116.928235,
-        "sum": 99859.516765,
-        "netEquity": 99859.516765
+        "realizedPnl": -23.6686,
+        "unrealizedPnl": -121.92541,
+        "sum": 99854.40599,
+        "netEquity": 99854.40599
       },
-      "trades": 251,
-      "tradingDays": 4,
-      "marketsTraded": 251,
-      "openPositions": 250,
+      "trades": 255,
+      "tradingDays": 5,
+      "marketsTraded": 255,
+      "openPositions": 254,
       "openPositionSample": [
         {
           "ticker": "GOVPARTYAR-26-D",
@@ -28548,7 +29274,7 @@
           "side": "NO",
           "shares": 0.5,
           "avgCost": 0.99,
-          "mark": 0.97,
+          "mark": 0.971,
           "carriedMark": false,
           "series": "GOVPARTYCT"
         },
@@ -28593,7 +29319,7 @@
           "side": "NO",
           "shares": 38.91,
           "avgCost": 0.98,
-          "mark": 0.97,
+          "mark": 0.975,
           "carriedMark": false,
           "series": "GOVPARTYRI"
         },
@@ -28629,7 +29355,7 @@
           "side": "NO",
           "shares": 19.9,
           "avgCost": 0.98,
-          "mark": 0.9605,
+          "mark": 0.9555,
           "carriedMark": false,
           "series": "HOUSENJ5"
         },
@@ -28665,7 +29391,7 @@
           "side": "NO",
           "shares": 1009.08,
           "avgCost": 0.991,
-          "mark": 0.9935,
+          "mark": 0.9925,
           "carriedMark": false,
           "series": "KXBALANCEPOWERCOMBO"
         },
@@ -28710,7 +29436,7 @@
           "side": "NO",
           "shares": 85.74,
           "avgCost": 0.958,
-          "mark": 0.964,
+          "mark": 0.9645,
           "carriedMark": false,
           "series": "KXCLOSESTSENATE"
         },
@@ -28728,7 +29454,7 @@
           "side": "NO",
           "shares": 12.84,
           "avgCost": 0.967,
-          "mark": 0.9715,
+          "mark": 0.9725,
           "carriedMark": false,
           "series": "KXDHOUSESEATS"
         },
@@ -28737,7 +29463,7 @@
           "side": "NO",
           "shares": 5.25,
           "avgCost": 0.966,
-          "mark": 0.971,
+          "mark": 0.973,
           "carriedMark": false,
           "series": "KXDHOUSESEATS"
         }
@@ -28775,7 +29501,7 @@
           "side": "NO",
           "shares": 0.5,
           "avgCost": 0.99,
-          "mark": 0.97,
+          "mark": 0.971,
           "series": "GOVPARTYCT",
           "carriedMark": false
         },
@@ -28820,7 +29546,7 @@
           "side": "NO",
           "shares": 38.91,
           "avgCost": 0.98,
-          "mark": 0.97,
+          "mark": 0.975,
           "series": "GOVPARTYRI",
           "carriedMark": false
         },
@@ -28856,7 +29582,7 @@
           "side": "NO",
           "shares": 19.9,
           "avgCost": 0.98,
-          "mark": 0.9605,
+          "mark": 0.9555,
           "series": "HOUSENJ5",
           "carriedMark": false
         },
@@ -28892,7 +29618,7 @@
           "side": "NO",
           "shares": 1009.08,
           "avgCost": 0.991,
-          "mark": 0.9935,
+          "mark": 0.9925,
           "series": "KXBALANCEPOWERCOMBO",
           "carriedMark": false
         },
@@ -28937,7 +29663,7 @@
           "side": "NO",
           "shares": 85.74,
           "avgCost": 0.958,
-          "mark": 0.964,
+          "mark": 0.9645,
           "series": "KXCLOSESTSENATE",
           "carriedMark": false
         },
@@ -28955,7 +29681,7 @@
           "side": "NO",
           "shares": 12.84,
           "avgCost": 0.967,
-          "mark": 0.9715,
+          "mark": 0.9725,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -28964,7 +29690,7 @@
           "side": "NO",
           "shares": 5.25,
           "avgCost": 0.966,
-          "mark": 0.971,
+          "mark": 0.973,
           "series": "KXDHOUSESEATS",
           "carriedMark": false
         },
@@ -28982,7 +29708,7 @@
           "side": "NO",
           "shares": 746.39,
           "avgCost": 0.982,
-          "mark": 0.9825,
+          "mark": 0.9865,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -28991,7 +29717,7 @@
           "side": "NO",
           "shares": 21.08,
           "avgCost": 0.978,
-          "mark": 0.9835,
+          "mark": 0.9825,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -29009,7 +29735,7 @@
           "side": "NO",
           "shares": 1037.89,
           "avgCost": 0.96,
-          "mark": 0.974,
+          "mark": 0.9755,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -29018,7 +29744,7 @@
           "side": "NO",
           "shares": 1,
           "avgCost": 0.967,
-          "mark": 0.936,
+          "mark": 0.9355,
           "series": "KXDSENATESEATSH",
           "carriedMark": false
         },
@@ -29027,7 +29753,7 @@
           "side": "NO",
           "shares": 33.5,
           "avgCost": 0.984,
-          "mark": 0.974,
+          "mark": 0.973,
           "series": "KXDSENATESEATSH",
           "carriedMark": false
         },
@@ -29081,7 +29807,7 @@
           "side": "NO",
           "shares": 4,
           "avgCost": 0.973,
-          "mark": 0.9745,
+          "mark": 0.9735,
           "series": "KXGOVAK",
           "carriedMark": false
         },
@@ -29099,7 +29825,7 @@
           "side": "NO",
           "shares": 20.1,
           "avgCost": 0.984,
-          "mark": 0.982,
+          "mark": 0.9825,
           "series": "KXGOVAK",
           "carriedMark": false
         },
@@ -29108,7 +29834,7 @@
           "side": "NO",
           "shares": 1040.58,
           "avgCost": 0.961,
-          "mark": 0.964,
+          "mark": 0.9625,
           "series": "KXGOVCA",
           "carriedMark": false
         },
@@ -29144,7 +29870,7 @@
           "side": "NO",
           "shares": 187.7,
           "avgCost": 0.988,
-          "mark": 0.9805,
+          "mark": 0.9775,
           "series": "KXHOUSEPOPVOTEMARGIN",
           "carriedMark": false
         },
@@ -29162,7 +29888,7 @@
           "side": "NO",
           "shares": 10.3,
           "avgCost": 0.997,
-          "mark": 0.9675,
+          "mark": 0.9725,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29180,7 +29906,7 @@
           "side": "NO",
           "shares": 55.2,
           "avgCost": 0.996,
-          "mark": 0.967,
+          "mark": 0.963,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29189,7 +29915,7 @@
           "side": "NO",
           "shares": 30.2,
           "avgCost": 0.971,
-          "mark": 0.945,
+          "mark": 0.9565,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29198,7 +29924,7 @@
           "side": "NO",
           "shares": 98.02,
           "avgCost": 0.982,
-          "mark": 0.9375,
+          "mark": 0.9365,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29207,7 +29933,7 @@
           "side": "NO",
           "shares": 0.4,
           "avgCost": 0.984,
-          "mark": 0.937,
+          "mark": 0.943,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29216,7 +29942,7 @@
           "side": "NO",
           "shares": 7.8,
           "avgCost": 0.995,
-          "mark": 0.987,
+          "mark": 0.981,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29225,7 +29951,7 @@
           "side": "NO",
           "shares": 1.5,
           "avgCost": 0.992,
-          "mark": 0.9545,
+          "mark": 0.956,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29234,7 +29960,7 @@
           "side": "NO",
           "shares": 1,
           "avgCost": 0.988,
-          "mark": 0.9445,
+          "mark": 0.944,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29252,7 +29978,7 @@
           "side": "NO",
           "shares": 14,
           "avgCost": 0.991,
-          "mark": 0.944,
+          "mark": 0.9445,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29261,7 +29987,7 @@
           "side": "NO",
           "shares": 6.33,
           "avgCost": 0.994,
-          "mark": 0.9475,
+          "mark": 0.947,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29270,7 +29996,7 @@
           "side": "NO",
           "shares": 19.38,
           "avgCost": 0.992,
-          "mark": 0.965,
+          "mark": 0.957,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29279,7 +30005,7 @@
           "side": "NO",
           "shares": 2.6,
           "avgCost": 0.997,
-          "mark": 0.975,
+          "mark": 0.986,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29288,7 +30014,7 @@
           "side": "NO",
           "shares": 10,
           "avgCost": 0.979,
-          "mark": 0.9725,
+          "mark": 0.973,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29297,7 +30023,7 @@
           "side": "NO",
           "shares": 64.86,
           "avgCost": 0.996,
-          "mark": 0.9755,
+          "mark": 0.9615,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29306,7 +30032,7 @@
           "side": "NO",
           "shares": 4.8,
           "avgCost": 0.97,
-          "mark": 0.942,
+          "mark": 0.9425,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29333,7 +30059,7 @@
           "side": "NO",
           "shares": 3.8,
           "avgCost": 0.993,
-          "mark": 0.966,
+          "mark": 0.967,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29405,7 +30131,7 @@
           "side": "NO",
           "shares": 63.78,
           "avgCost": 0.955,
-          "mark": 0.946,
+          "mark": 0.9515,
           "series": "KXLEAVEWALZ",
           "carriedMark": false
         },
@@ -29450,7 +30176,7 @@
           "side": "NO",
           "shares": 13.03,
           "avgCost": 0.971,
-          "mark": 0.9075,
+          "mark": 0.9065,
           "series": "KXREDISTRICTING",
           "carriedMark": false
         },
@@ -29477,7 +30203,7 @@
           "side": "NO",
           "shares": 26.43,
           "avgCost": 0.974,
-          "mark": 0.9675,
+          "mark": 0.972,
           "series": "KXREDISTRICTING",
           "carriedMark": false
         },
@@ -29495,7 +30221,7 @@
           "side": "NO",
           "shares": 102.47,
           "avgCost": 0.955,
-          "mark": 0.952,
+          "mark": 0.9455,
           "series": "KXRHOUSESEATS",
           "carriedMark": false
         },
@@ -29522,7 +30248,7 @@
           "side": "NO",
           "shares": 82,
           "avgCost": 0.985,
-          "mark": 0.987,
+          "mark": 0.9875,
           "series": "KXRHOUSESEATS",
           "carriedMark": false
         },
@@ -29540,7 +30266,7 @@
           "side": "NO",
           "shares": 277.21,
           "avgCost": 0.969,
-          "mark": 0.982,
+          "mark": 0.9825,
           "series": "KXTRUMPBULLCASECOMBO",
           "carriedMark": false
         },
@@ -29648,7 +30374,7 @@
           "side": "NO",
           "shares": 32.26,
           "avgCost": 0.998,
-          "mark": 0.9935,
+          "mark": 0.988,
           "series": "SENATEMT",
           "carriedMark": false
         },
@@ -29684,7 +30410,7 @@
           "side": "NO",
           "shares": 3.5,
           "avgCost": 0.994,
-          "mark": 0.9745,
+          "mark": 0.974,
           "series": "SENATEWV",
           "carriedMark": false
         },
@@ -29720,7 +30446,7 @@
           "side": "NO",
           "shares": 27.7,
           "avgCost": 0.976,
-          "mark": 0.967,
+          "mark": 0.9645,
           "series": "HOUSEOH13",
           "carriedMark": false
         },
@@ -29756,7 +30482,7 @@
           "side": "NO",
           "shares": 7.3,
           "avgCost": 0.99,
-          "mark": 0.96,
+          "mark": 0.965,
           "series": "KXCLOSESTGOVERNOR",
           "carriedMark": false
         },
@@ -29774,7 +30500,7 @@
           "side": "NO",
           "shares": 0.1,
           "avgCost": 0.99,
-          "mark": 0.984,
+          "mark": 0.9845,
           "series": "KXCLOSESTSENATE",
           "carriedMark": false
         },
@@ -29783,7 +30509,7 @@
           "side": "NO",
           "shares": 85.61,
           "avgCost": 0.978,
-          "mark": 0.9405,
+          "mark": 0.939,
           "series": "KXDSENATESEATS",
           "carriedMark": false
         },
@@ -29792,7 +30518,7 @@
           "side": "NO",
           "shares": 102.11,
           "avgCost": 0.987,
-          "mark": 0.9765,
+          "mark": 0.976,
           "series": "KXDSENATESEATSH",
           "carriedMark": false
         },
@@ -29810,7 +30536,7 @@
           "side": "NO",
           "shares": 16.5,
           "avgCost": 0.989,
-          "mark": 0.9745,
+          "mark": 0.9795,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -29828,7 +30554,7 @@
           "side": "NO",
           "shares": 1.7,
           "avgCost": 0.989,
-          "mark": 0.979,
+          "mark": 0.984,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -29837,7 +30563,7 @@
           "side": "NO",
           "shares": 20,
           "avgCost": 0.98,
-          "mark": 0.935,
+          "mark": 0.94,
           "series": "KXGENERALCOUNTY",
           "carriedMark": false
         },
@@ -29855,7 +30581,7 @@
           "side": "NO",
           "shares": 2.34,
           "avgCost": 0.991,
-          "mark": 0.979,
+          "mark": 0.977,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29864,7 +30590,7 @@
           "side": "NO",
           "shares": 0.29,
           "avgCost": 0.998,
-          "mark": 0.981,
+          "mark": 0.989,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29882,7 +30608,7 @@
           "side": "NO",
           "shares": 0.3,
           "avgCost": 0.997,
-          "mark": 0.9835,
+          "mark": 0.972,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29936,7 +30662,7 @@
           "side": "NO",
           "shares": 0.6,
           "avgCost": 0.995,
-          "mark": 0.9755,
+          "mark": 0.9815,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29945,7 +30671,7 @@
           "side": "NO",
           "shares": 3.7,
           "avgCost": 0.982,
-          "mark": 0.954,
+          "mark": 0.959,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -29972,7 +30698,7 @@
           "side": "NO",
           "shares": 0.2,
           "avgCost": 0.992,
-          "mark": 0.971,
+          "mark": 0.974,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30026,7 +30752,7 @@
           "side": "NO",
           "shares": 42.15,
           "avgCost": 0.981,
-          "mark": 0.9385,
+          "mark": 0.931,
           "series": "KXNYCTAXMILLIONS",
           "carriedMark": false
         },
@@ -30143,7 +30869,7 @@
           "side": "NO",
           "shares": 40,
           "avgCost": 0.98,
-          "mark": 0.89,
+          "mark": 0.885,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -30152,7 +30878,7 @@
           "side": "NO",
           "shares": 20,
           "avgCost": 0.98,
-          "mark": 0.915,
+          "mark": 0.91,
           "series": "KXVOTECOUNTY",
           "carriedMark": false
         },
@@ -30161,7 +30887,7 @@
           "side": "NO",
           "shares": 1.5,
           "avgCost": 0.98,
-          "mark": 0.97,
+          "mark": 0.965,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -30197,7 +30923,7 @@
           "side": "NO",
           "shares": 27.4,
           "avgCost": 0.98,
-          "mark": 0.983,
+          "mark": 0.9765,
           "series": "HOUSEAKAL",
           "carriedMark": false
         },
@@ -30206,7 +30932,7 @@
           "side": "NO",
           "shares": 174.8,
           "avgCost": 0.971,
-          "mark": 0.9525,
+          "mark": 0.9505,
           "series": "HOUSEMI8",
           "carriedMark": false
         },
@@ -30260,7 +30986,7 @@
           "side": "NO",
           "shares": 6.83,
           "avgCost": 0.985,
-          "mark": 0.9575,
+          "mark": 0.9625,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -30269,7 +30995,7 @@
           "side": "NO",
           "shares": 5.3,
           "avgCost": 0.963,
-          "mark": 0.895,
+          "mark": 0.885,
           "series": "KXHOUSEMO5",
           "carriedMark": false
         },
@@ -30278,7 +31004,7 @@
           "side": "NO",
           "shares": 3,
           "avgCost": 0.984,
-          "mark": 0.9575,
+          "mark": 0.954,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30296,7 +31022,7 @@
           "side": "NO",
           "shares": 23.49,
           "avgCost": 0.971,
-          "mark": 0.952,
+          "mark": 0.961,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30305,7 +31031,7 @@
           "side": "NO",
           "shares": 5,
           "avgCost": 0.968,
-          "mark": 0.955,
+          "mark": 0.958,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30314,7 +31040,7 @@
           "side": "NO",
           "shares": 3.4,
           "avgCost": 0.994,
-          "mark": 0.967,
+          "mark": 0.97,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30323,7 +31049,7 @@
           "side": "NO",
           "shares": 5,
           "avgCost": 0.997,
-          "mark": 0.967,
+          "mark": 0.9705,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30422,7 +31148,7 @@
           "side": "NO",
           "shares": 2,
           "avgCost": 0.977,
-          "mark": 0.9535,
+          "mark": 0.953,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -30476,7 +31202,7 @@
           "side": "NO",
           "shares": 5,
           "avgCost": 0.99,
-          "mark": 0.925,
+          "mark": 0.905,
           "series": "KXSTATELEG",
           "carriedMark": false
         },
@@ -30539,7 +31265,7 @@
           "side": "NO",
           "shares": 1033.08,
           "avgCost": 0.967,
-          "mark": 0.95,
+          "mark": 0.9485,
           "series": "HOUSECA45",
           "carriedMark": false
         },
@@ -30548,7 +31274,7 @@
           "side": "NO",
           "shares": 2.7,
           "avgCost": 0.995,
-          "mark": 0.978,
+          "mark": 0.976,
           "series": "HOUSENJ9",
           "carriedMark": false
         },
@@ -30593,7 +31319,7 @@
           "side": "NO",
           "shares": 1.7,
           "avgCost": 0.984,
-          "mark": 0.972,
+          "mark": 0.977,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -30611,7 +31337,7 @@
           "side": "NO",
           "shares": 1.7,
           "avgCost": 0.992,
-          "mark": 0.971,
+          "mark": 0.976,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -30620,7 +31346,7 @@
           "side": "NO",
           "shares": 1.7,
           "avgCost": 0.999,
-          "mark": 0.9795,
+          "mark": 0.9845,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -30629,7 +31355,7 @@
           "side": "NO",
           "shares": 1.7,
           "avgCost": 0.988,
-          "mark": 0.979,
+          "mark": 0.984,
           "series": "KXFOURSTATESEN",
           "carriedMark": false
         },
@@ -30647,7 +31373,7 @@
           "side": "NO",
           "shares": 38.5,
           "avgCost": 0.998,
-          "mark": 0.992,
+          "mark": 0.984,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30674,7 +31400,7 @@
           "side": "NO",
           "shares": 2.6,
           "avgCost": 0.993,
-          "mark": 0.979,
+          "mark": 0.9795,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30683,7 +31409,7 @@
           "side": "NO",
           "shares": 5.2,
           "avgCost": 0.971,
-          "mark": 0.9515,
+          "mark": 0.9525,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30692,7 +31418,7 @@
           "side": "NO",
           "shares": 50.1,
           "avgCost": 0.968,
-          "mark": 0.9515,
+          "mark": 0.9575,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30701,7 +31427,7 @@
           "side": "NO",
           "shares": 0.1,
           "avgCost": 0.994,
-          "mark": 0.9765,
+          "mark": 0.968,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30710,7 +31436,7 @@
           "side": "NO",
           "shares": 20,
           "avgCost": 0.996,
-          "mark": 0.9705,
+          "mark": 0.972,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30719,7 +31445,7 @@
           "side": "NO",
           "shares": 0.3,
           "avgCost": 0.965,
-          "mark": 0.953,
+          "mark": 0.9545,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30737,7 +31463,7 @@
           "side": "NO",
           "shares": 0.1,
           "avgCost": 0.978,
-          "mark": 0.954,
+          "mark": 0.948,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30755,7 +31481,7 @@
           "side": "NO",
           "shares": 0.1,
           "avgCost": 0.973,
-          "mark": 0.9575,
+          "mark": 0.9505,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30764,7 +31490,7 @@
           "side": "NO",
           "shares": 4.9,
           "avgCost": 0.988,
-          "mark": 0.975,
+          "mark": 0.976,
           "series": "KXHOUSERACE",
           "carriedMark": false
         },
@@ -30818,7 +31544,7 @@
           "side": "NO",
           "shares": 14.27,
           "avgCost": 0.98,
-          "mark": 0.9575,
+          "mark": 0.917,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -30845,7 +31571,7 @@
           "side": "NO",
           "shares": 0.2,
           "avgCost": 0.995,
-          "mark": 0.96,
+          "mark": 0.9595,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -30854,7 +31580,7 @@
           "side": "NO",
           "shares": 18.74,
           "avgCost": 0.97,
-          "mark": 0.9535,
+          "mark": 0.954,
           "series": "KXMIDTERMMOV",
           "carriedMark": false
         },
@@ -30935,7 +31661,7 @@
           "side": "NO",
           "shares": 12.11,
           "avgCost": 0.98,
-          "mark": 0.96,
+          "mark": 0.955,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -30946,7 +31672,7 @@
           "avgCost": 0.96,
           "mark": 0.955,
           "series": "KXVOTEGENERAL",
-          "carriedMark": false
+          "carriedMark": true
         },
         {
           "ticker": "KXVOTEGENERAL-KXHOUSERACE-LA04-26MGRO-34",
@@ -30955,7 +31681,7 @@
           "avgCost": 0.96,
           "mark": 0.95,
           "series": "KXVOTEGENERAL",
-          "carriedMark": false
+          "carriedMark": true
         },
         {
           "ticker": "KXVOTEGENERAL-KXHOUSERACE-MN01-26BFIN-56",
@@ -30971,7 +31697,7 @@
           "side": "NO",
           "shares": 51,
           "avgCost": 0.97,
-          "mark": 0.95,
+          "mark": 0.955,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
         },
@@ -30992,12 +31718,48 @@
           "mark": 0.97,
           "series": "KXVOTEGENERAL",
           "carriedMark": false
+        },
+        {
+          "ticker": "KXCAWEALTHTAXMOVD-CAWEALTHTAX26YES-YES-P16",
+          "side": "NO",
+          "shares": 79.81,
+          "avgCost": 0.98,
+          "mark": 0.95,
+          "series": "KXCAWEALTHTAXMOVD",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXHOUSERACE-OH14-26-D",
+          "side": "NO",
+          "shares": 1.1,
+          "avgCost": 0.975,
+          "mark": 0.952,
+          "series": "KXHOUSERACE",
+          "carriedMark": false
+        },
+        {
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-62",
+          "side": "NO",
+          "shares": 0.2,
+          "avgCost": 0.97,
+          "mark": 0.96,
+          "series": "KXVOTEGENERAL",
+          "carriedMark": false
+        },
+        {
+          "ticker": "SENATESD-26-D",
+          "side": "NO",
+          "shares": 7.88,
+          "avgCost": 0.997,
+          "mark": 0.9955,
+          "series": "SENATESD",
+          "carriedMark": false
         }
       ],
       "skips": 0,
       "skipReasons": {},
-      "fillCount": 252,
-      "fillsCappedByParticipation": 246,
+      "fillCount": 256,
+      "fillsCappedByParticipation": 250,
       "fillLog": [
         {
           "date": "2026-09-19",
@@ -34022,6 +34784,54 @@
           "executedAt": "derived(1 - yes_bid)",
           "series": "KXVOTEGENERAL",
           "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXCAWEALTHTAXMOVD-CAWEALTHTAX26YES-YES-P16",
+          "action": "enter",
+          "side": "NO",
+          "shares": 79.81,
+          "price": 0.98,
+          "fee": 0.1095,
+          "executedAt": "derived(1 - yes_bid)",
+          "series": "KXCAWEALTHTAXMOVD",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXHOUSERACE-OH14-26-D",
+          "action": "enter",
+          "side": "NO",
+          "shares": 1.1,
+          "price": 0.975,
+          "fee": 0.0019,
+          "executedAt": "derived(1 - yes_bid)",
+          "series": "KXHOUSERACE",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "KXVOTEGENERAL-KXHOUSERACE-MO02-26AWAG-62",
+          "action": "enter",
+          "side": "NO",
+          "shares": 0.2,
+          "price": 0.97,
+          "fee": 0.0005,
+          "executedAt": "derived(1 - yes_bid)",
+          "series": "KXVOTEGENERAL",
+          "fillCapApplied": true
+        },
+        {
+          "date": "2026-09-23",
+          "ticker": "SENATESD-26-D",
+          "action": "enter",
+          "side": "NO",
+          "shares": 7.88,
+          "price": 0.997,
+          "fee": 0.0017,
+          "executedAt": "derived(1 - yes_bid)",
+          "series": "SENATESD",
+          "fillCapApplied": true
         }
       ],
       "equityCurve": [
@@ -34056,14 +34866,22 @@
           "netEquity": 99859.516765,
           "openPositions": 250,
           "entriesToday": 51
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 84098.83564,
+          "openValue": 15755.57035,
+          "netEquity": 99854.40599,
+          "openPositions": 254,
+          "entriesToday": 4
         }
       ],
       "ranked": true,
       "unrankedReason": null,
       "strategyMetrics": {
         "qualifyingMarketsOnLastDay": 103,
-        "entryOrdersPlaced": 251,
-        "meanYesMidAtEntry": 0.048506
+        "entryOrdersPlaced": 255,
+        "meanYesMidAtEntry": 0.059984
       },
       "attributionReconciles": true,
       "rank": 1
@@ -34076,8 +34894,8 @@
       "adapts": null,
       "seriesOf": {},
       "startDate": "2026-09-19",
-      "lastDate": "2026-09-22",
-      "capturedTradingDays": 4,
+      "lastDate": "2026-09-23",
+      "capturedTradingDays": 5,
       "startingCapital": 100000,
       "cash": 100000,
       "netEquity": 100000,
@@ -34136,6 +34954,14 @@
           "netEquity": 100000,
           "openPositions": 0,
           "entriesToday": 0
+        },
+        {
+          "date": "2026-09-23",
+          "cash": 100000,
+          "openValue": 0,
+          "netEquity": 100000,
+          "openPositions": 0,
+          "entriesToday": 0
         }
       ],
       "ranked": false,
@@ -34147,8 +34973,8 @@
           "feePerContract": 0.0375,
           "edge": -0.0395
         },
-        "daysTheFullBasketWasPriceable": 4,
-        "daysThePairTradeWasPriceable": 8,
+        "daysTheFullBasketWasPriceable": 5,
+        "daysThePairTradeWasPriceable": 10,
         "note": "edge = 1 - (sum of the four captured asks + the quadratic taker fee per contract). Reported even when negative, because \"the basket never got cheap enough\" is the result this thesis is testing for."
       },
       "attributionReconciles": true
@@ -34204,8 +35030,8 @@
       "username": "poll-anchor-26",
       "strategy": "StatePollVsMarket",
       "origin": "new-2026",
-      "netEquity": 99289.784105,
-      "netReturnPct": -0.710216,
+      "netEquity": 99209.605985,
+      "netReturnPct": -0.790394,
       "trades": 10,
       "reason": "only 1 active trading day(s); The Leap minimum is 3"
     },
@@ -34213,8 +35039,8 @@
       "username": "ratings-ratchet",
       "strategy": "TwoPublisherBandGap",
       "origin": "new-2026",
-      "netEquity": 99500.464905,
-      "netReturnPct": -0.499535,
+      "netEquity": 99423.067325,
+      "netReturnPct": -0.576933,
       "trades": 7,
       "reason": "only 1 active trading day(s); The Leap minimum is 3"
     },

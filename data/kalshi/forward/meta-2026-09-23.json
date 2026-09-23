@@ -1,0 +1,35 @@
+{
+ "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2",
+ "capturedAt": "2026-09-23T00:33:32.866Z",
+ "capturedBy": "scripts/collect-universe.mjs",
+ "date": "2026-09-23",
+ "seriesTotal": 14287,
+ "seriesPolitics": 4226,
+ "seriesPoliticsQueried": 4226,
+ "openMarkets": 24141,
+ "trackerRowsAppended": 24141,
+ "settled2026Markets": 9447,
+ "settled2026WithBars": 800,
+ "newCandlesThisRun": 400,
+ "runtime": {
+  "concurrency": 6,
+  "budgetMinutes": 38,
+  "maxRequestsPerSecond": 14,
+  "candleReserveFraction": 0.35,
+  "elapsedMinutes": 32.66,
+  "budgetExhausted": false,
+  "complete": false,
+  "phasesTruncated": [
+   "settled-2026 discovery stopped at 1569/1890 Elections series after 31.0 min (budget 38 min); next run resumes at index 1569"
+  ],
+  "discoveryStartedAt": 0,
+  "discoveryCursorNext": 1569,
+  "rateLimited429": 4
+ },
+ "errors": [
+  "settled(hist) KXELECTION24538: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/historical/markets?series_ticker=KXELECTION24538&limit=200",
+  "settled(live) KXEXITPOLL: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXEXITPOLL&status=settled&limit=200",
+  "settled(live) KXKHAMENEIOUT: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXKHAMENEIOUT&status=settled&limit=200",
+  "settled(live) KXSCPRIMARY: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXSCPRIMARY&status=settled&limit=200"
+ ]
+}

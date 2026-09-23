@@ -891,7 +891,167 @@
      ]
     }
    }
+  },
+  {
+   "date": "2026-09-23",
+   "capturedAt": "2026-09-23T01:06:12.487Z",
+   "capturedFrom": "https://www.metaculus.com/midterms-2026/",
+   "fetchMethod": "headless-chrome",
+   "houseD": 90.6,
+   "houseR": 9.4,
+   "senateD": 53.1,
+   "senateR": 46.9,
+   "control": {
+    "DH_DS": 52.1,
+    "DH_RS": 38.5,
+    "RH_RS": 8.3,
+    "RH_DS": 1
+   },
+   "seatMedians": {
+    "house": "D +13",
+    "senate": "D +1"
+   },
+   "racesLine": "18 of 35 races lean Democrat · 4 too close to call",
+   "keyDriverDataDate": "Sep 23, 2026",
+   "inconsistent": {
+    "house": false,
+    "senate": false
+   },
+   "parse": "ok",
+   "consistencyFlags": [],
+   "questions": [
+    {
+     "id": "senate-states-group",
+     "office": "senate",
+     "state": null,
+     "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated).",
+     "capturedFrom": "https://www.metaculus.com/questions/40598/",
+     "fetchMethod": "headless-chrome",
+     "kind": "state-group",
+     "title": "Will the Democratic candidate win the 2026 US Senate election in the following states?",
+     "parse": "ok",
+     "states": {
+      "RI": 99,
+      "OR": 99,
+      "CO": 98,
+      "GA": 92
+     },
+     "othersHidden": 19,
+     "forecasters": 128
+    },
+    {
+     "id": "governor-states-group",
+     "office": "governor",
+     "state": null,
+     "note": "Democrat wins 2026 gubernatorial election in these states? — same rendering limit (four states + \"13 others\").",
+     "capturedFrom": "https://www.metaculus.com/questions/43448/",
+     "fetchMethod": "headless-chrome",
+     "kind": "state-group",
+     "title": "Will the Democratic candidate win the 2026 gubernatorial election in the following US states?",
+     "parse": "ok",
+     "states": {
+      "HI": 98,
+      "NM": 92.8,
+      "OR": 88.2,
+      "MI": 84
+     },
+     "othersHidden": 13,
+     "forecasters": 79
+    },
+    {
+     "id": "senate-plurality",
+     "office": "senate-plurality",
+     "state": null,
+     "note": "US Senate plurality after 2026 midterms? (Democrats / Republicans / Other) — a different question from control: no tie-break, so it is stored beside the hub number, not merged with it.",
+     "capturedFrom": "https://www.metaculus.com/questions/36370/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will hold the most seats in the US Senate after the 2026 midterm elections?",
+     "parse": "ok",
+     "D": 56,
+     "R": 43.9,
+     "other": 0.1,
+     "forecasters": 463
+    },
+    {
+     "id": "ak-peltola",
+     "office": "senate",
+     "state": "AK",
+     "note": "Mary Peltola wins Alaska senate seat 2026? — a candidate question; paired with SENATEAK-26-D (party market) with that caveat recorded.",
+     "capturedFrom": "https://www.metaculus.com/questions/41678/",
+     "fetchMethod": "headless-chrome",
+     "kind": "binary",
+     "title": "Will Mary Peltola win the 2026 US Senate election in Alaska?",
+     "parse": "ok",
+     "p": 54,
+     "forecasters": 26
+    },
+    {
+     "id": "mt-party",
+     "office": "senate",
+     "state": "MT",
+     "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other).",
+     "capturedFrom": "https://www.metaculus.com/questions/44711/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will win the 2026 Montana Senate election?",
+     "parse": "ok",
+     "D": 1,
+     "R": 94,
+     "other": 5,
+     "forecasters": 57
+    },
+    {
+     "id": "ne-party",
+     "office": "senate",
+     "state": "NE",
+     "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB).",
+     "capturedFrom": "https://www.metaculus.com/questions/44710/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Which party will win the 2026 Nebraska Senate election?",
+     "parse": "ok",
+     "D": 0.2,
+     "R": 72,
+     "other": 27.8,
+     "forecasters": 51
+    }
+   ],
+   "api": null,
+   "fetchLog": {
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5641,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5855,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "render": {
+     "ok": true,
+     "bin": "/usr/bin/google-chrome",
+     "challenge": null,
+     "bytes": 4864716,
+     "attempts": [
+      {
+       "budgetMs": 20000,
+       "bytes": 4864716,
+       "challenge": null
+      }
+     ]
+    }
+   }
   }
  ],
- "capturedAt": "2026-09-22T23:42:10.738Z"
+ "capturedAt": "2026-09-23T01:06:12.487Z"
 }
