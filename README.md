@@ -11,7 +11,7 @@
 each, scored every day on **open** Kalshi election markets. See
 [§ The live 2026 contest](#the-live-2026-contest-r16).
 
-**267 sources · 81 irregularities · 160 tests.** This session closed the queued
+**267 sources · 84 irregularities · 163 tests.** This session closed the queued
 control-market question from the exchange's own rule text, published the canonical
 open-market list with an arithmetic reconciliation gate, and built the forward
 paper-trading engine, and rebuilt the forward contest layer around the captured panels.
@@ -33,6 +33,24 @@ truncation is recorded in `meta-<date>.json` and surfaced as a workflow warning.
 deterministic under concurrency (sorted keys, ticker-tiebroken candle queue), verified by
 two jittered runs producing byte-identical files.
 
+**#82/#83/#84 (2026-09-22, high) — what the first *real* run of that fix exposed.**
+[Run 35796490195](https://github.com/buffedlizard55-lab/Elections/actions/runs/35796490195)
+confirmed the timeout fix (4,225/4,225 series captured, 34m30s, never killed) and then
+surfaced three further defects that no offline mock could have shown:
+
+- **#82 rate limiting.** The `--concurrency 6` justification compared the *serial* rate to
+  Kalshi's ceiling; the figure that matters is the *aggregate* one, 6 × 3.94 = **23.6 req/s
+  against a documented 20 req/s limit**. The run lost **18 series to HTTP 429**. A per-worker
+  `sleep()` can never bound an aggregate rate, so `src/kalshi-live.js` now has a
+  **process-wide token bucket** shared by every request, plus jittered exponential backoff.
+  Measured: peak fell from 64 to **17 requests per second**.
+- **#83 starvation.** A truncated phase restarted at index 0 every run, so discovery stopped
+  at 738/1,890 and **series 739–1,890 were unreachable on any future run**. Now a persisted
+  rotating cursor: four truncated runs covered 36 → 72 → 108 → 120 of a 120-series mock.
+- **#84 phase starvation.** Discovery (~41 min of work) ate the whole budget and the candle
+  phase got **0/400** — the bars that feed calibration had not grown since 2026-09-19. A
+  `--candle-reserve` (default 35%) now guarantees the candle phase always makes progress.
+
 **New: [All Markets](https://buffedlizard55-lab.github.io/Elections/#/allmarkets)** — the
 project's "full list" is now browsable on the site (searchable, filterable by eligibility
 verdict), backed by the canonical 24,139-row
@@ -48,7 +66,7 @@ verdict), backed by the canonical 24,139-row
 | Backtests | `src/backtest.js`, `src/poll-backtest.js` → `data/backtest-results.json` (39 settled 2024 markets) · `src/calibration.js` (live 2026 scorer) · `src/consistency.js` (standing monitor) · `src/poll-layer.js` (2026 polls/ratings vs market) | `scripts/backtest.py` + `backtest/` (Brier/log-loss/calibration + flags) |
 | Contest | `src/contest/` → `data/contest-results.json` (2024, settled, real Kalshi fees) · `src/contest/forward-*.js` → `data/contest/forward-2026/` (**live 2026 season**, 12 entrants, daily scoring) | `scripts/paper_trading.py` + `contest/` (Leap-style rules, 8 strategies) |
 | Site | `index.html` + `src/site/` (built by `scripts/build-site.mjs`) | `docs/` (static, synced by `scripts/sync_site_data.py`) |
-| Checks | `npm test` (160 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
+| Checks | `npm test` (163 tests) + `npm run lint` (provenance, irregularities md⇄json **field-by-field** sync, poll-layer tickers) + `scripts/render-check.cjs` (headless site render **with required-content assertions**) | `python scripts/validate_sources.py` (schema + CSV + live checks) |
 | Automation | `daily-collection.yml` — **live**: cron 12:30 UTC + push trigger; runs both collectors, the cross-check, `npm run pipeline`, lint, tests, then commits `data/` + the site bundle (opt-out: repo variable `COLLECT_DISABLED=true`) | `validate.yml` (CI) · `pages.yml` (manual deploy fallback) |
 
 Both stacks obey the same honesty contract (§ below). The 2024 headline results come from the
@@ -74,7 +92,7 @@ labeled synthetic data until wired to the verified datasets (see `NEXT_SESSION.m
 | `data/polls/` | 538's archived national averages (verbatim GitHub copy; git-blob SHA-1 = upstream + SHA-256 in `PROVENANCE.md`), `verified-polls.json` (verification chains) and `poll-layer-2026.json` (2026 generic-ballot + state-race polls, Cook/Inside ratings, exit-poll status) |
 | `data/backtest-results.json` | Market calibration over 39 settled 2024 markets (groups core/senate/all; Brier/log-loss/hold-PnL at T-1…T-60; favourite hit-rate; pooled calibration curve) + poll-vs-market-vs-outcome (generated) |
 | `data/contest-results.json` | Paper-trading contest: 8 entrants, $100k each, Kalshi's real fees, The Leap's ≥3-trading-day rule, two universes (core-2024 / all-2024) (generated) |
-| `data/irregularities.json` + `IRREGULARITIES.md` | 71 Node-track irregularities plus the Python-track items, with severities and actions; the lint fails if the table and the JSON drift apart |
+| `data/irregularities.json` + `IRREGULARITIES.md` | 74 Node-track irregularities plus the Python-track items, with severities and actions; the lint fails if the table and the JSON drift apart |
 | `src/` | Zero-dependency Node engines: fee schedule, market backtests, poll backtest, contest engine + strategies, no-fabrication lint |
 | `scripts/*.py` | Python toolkit: Kalshi collector, source validator, backtester, contest engine, site-data sync |
 | `test/` + `scripts/*.mjs` | 101 Node tests (incl. an offline end-to-end replay that must reproduce the live capture byte-for-byte); `run-backtests`, `run-contest`, `build-site`, `collect-kalshi`, `collect-senate-2024`, `crosscheck-collectors`, `lint-verified`, `render-check` |
@@ -116,7 +134,7 @@ exclusion was logged rather than reconstructed from memory (irregularities #40�
 Node pipeline (no dependencies, Node ≥ 18, no network needed):
 
 ```bash
-npm test          # 156 tests
+npm test          # 163 tests
 npm run lint      # no-fabrication provenance lint
 npm run backtest  # regenerate data/backtest-results.json
 npm run contest   # regenerate data/contest-results.json (2024, in-sample)

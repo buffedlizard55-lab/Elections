@@ -123,13 +123,24 @@ jobs:
       # settled-2026 seed never reaches its writeFileSync — which is exactly what
       # silently froze the seed at its 2026-09-19 content on 2026-09-21 and 2026-09-22
       # (both steps ran 25.2 min against a 25 min limit and were reported "success"
-      # by continue-on-error). 30 min timeout / 24 min budget leaves a 6 min margin for
-      # the final writes, and --concurrency 6 keeps the open-universe phase at roughly
-      # a fifth of Kalshi's documented 20 req/s Basic read ceiling.
+      # by continue-on-error).
+      #
+      # Tuned again after live run 35796490195, the first real run of that fix. It
+      # completed without being killed (34m30s), but exposed three more defects now
+      # filed as #82/#83/#84: the aggregate request rate exceeded Kalshi's documented
+      # 20 req/s read ceiling and lost 18 series to HTTP 429 (now bounded by a
+      # process-wide token bucket in src/kalshi-live.js); a truncated phase re-walked
+      # the same prefix forever (now a rotating cursor); and unbounded discovery
+      # starved the candle phase of budget entirely (now --candle-reserve).
+      #
+      # 45 min timeout / 38 min budget: discovery needs ~41 min for a full sweep at
+      # the observed rate, so the rotating cursor finishes a sweep every couple of
+      # runs while the reserve keeps bars growing every run. The 7 min margin covers
+      # the final writes.
       - name: FULL open-market universe snapshot (forward loop -> data/kalshi/forward/)
         continue-on-error: true
-        timeout-minutes: 30
-        run: node scripts/collect-universe.mjs --concurrency 6 --budget-minutes 24 || echo "::warning::forward universe capture failed - previous snapshot stays in place"
+        timeout-minutes: 45
+        run: node scripts/collect-universe.mjs --concurrency 6 --budget-minutes 38 --candle-reserve 0.35 || echo "::warning::forward universe capture failed - previous snapshot stays in place"
 
       # A truncated capture is legitimate (the budget is a safety valve), but it must be
       # VISIBLE. This surfaces it as a workflow warning instead of leaving it only in meta.
@@ -146,7 +157,8 @@ jobs:
             const r = m.runtime || {};
             console.log(`universe capture: ${m.openMarkets} open markets, ${m.settled2026Markets} settled-2026 (${m.settled2026WithBars} with bars), ${r.elapsedMinutes} min at concurrency ${r.concurrency}`);
             for (const p of r.phasesTruncated || []) console.log(`::warning::universe capture truncated - ${p}`);
-            if (r.complete === false) console.log("::warning::universe capture INCOMPLETE - the next run resumes where this one stopped");
+            if (r.complete === false) console.log(`::warning::universe capture INCOMPLETE - next run resumes the discovery sweep at index ${r.discoveryCursorNext}`);
+            if (r.rateLimited429) console.log(`::warning::${r.rateLimited429} request(s) were rate-limited (HTTP 429) - lower --concurrency or KALSHI_MAX_RPS if this persists`);
           ' "$META"
 
       - name: 2024 per-state Senate races capture (forward loop -> data/kalshi/historical-2024/)

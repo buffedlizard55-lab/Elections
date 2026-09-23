@@ -295,7 +295,7 @@ test('collect-universe: every phase is deadline-guarded and truncation is record
   const src = readFileSync('scripts/collect-universe.mjs', 'utf8');
   // A pool that stops enqueuing when the budget is gone, used by all three phases.
   assert.match(src, /async function mapPool\(/, 'must use a bounded worker pool');
-  assert.match(src, /if \(outOfTime\(\)\) return;/, 'the pool must stop on the deadline');
+  assert.match(src, /if \(Date\.now\(\) >= deadlineMs\) return;/, 'the pool must stop on the deadline');
   const poolCalls = src.match(/await mapPool\(/g) || [];
   assert.equal(poolCalls.length, 3, 'open-universe, settled discovery and candle phases must all be pooled');
   // Truncation must be published as data on both the meta and the universe file.
@@ -337,4 +337,57 @@ test('collect-universe: concurrent output is deterministic (sorted keys, tie-bro
   const sortLine = /pendingCandles\.sort\(\([\s\S]{0,240}?\);/.exec(src);
   assert.ok(sortLine, 'candle queue must be sorted');
   assert.match(sortLine[0], /a\.ticker < b\.ticker/, 'candle sort needs a ticker tiebreak');
+});
+
+// ---------- live-run findings from run 35796490195 (irregularities #82/#83/#84) ----------
+
+test('kalshi-live: the GET rate ceiling is enforced process-wide, not per worker', () => {
+  const src = readFileSync('src/kalshi-live.js', 'utf8');
+  // Per-call pacing (`await sleep(80)` inside a worker) bounds ONE worker; N
+  // concurrent workers multiply it. Live run 35796490195 pushed 6 x 3.94 = 23.6
+  // req/s past the documented 20 req/s ceiling and lost 18 series to HTTP 429.
+  // The limiter must therefore be shared process-wide by every getJson caller.
+  assert.match(src, /RATE_LIMIT_RPS/, 'a rate ceiling must exist');
+  assert.match(src, /function acquireToken/, 'requests must take a token before going out');
+  assert.match(src, /await acquireToken\(\);/, 'getJson must acquire before fetching');
+  const rps = /const RATE_LIMIT_RPS = [^;]*?: (\d+(?:\.\d+)?);/.exec(src);
+  assert.ok(rps, 'the default ceiling must be a literal');
+  assert.ok(Number(rps[1]) <= 20, `default ${rps[1]} req/s must stay under Kalshi's documented 20 req/s`);
+  // A 429 must slow the whole process down, and retries must be jittered so
+  // concurrent workers do not retry in lockstep and collide again.
+  assert.match(src, /Math\.random\(\)/, '429/5xx backoff must carry jitter');
+  assert.match(src, /bucket\.tokens = Math\.min\(bucket\.tokens, 0\)/, 'a 429 must spend global budget');
+});
+
+test('collect-universe: a truncated discovery sweep resumes instead of re-walking the same prefix', () => {
+  const src = readFileSync('scripts/collect-universe.mjs', 'utf8');
+  // mapPool always starts at index 0. Without a persisted cursor a phase that
+  // runs out of budget covers the identical prefix on every future run: live
+  // run 35796490195 stopped at 738/1890, so series 739..1890 were unreachable
+  // forever and the candle phase below it stayed frozen at 400 bars.
+  assert.match(src, /discoveryCursor/, 'the sweep position must be persisted in the seed');
+  assert.match(src, /prevSeed\?\.discoveryCursor/, 'the next run must read the previous cursor');
+  assert.match(src, /const rotated =/, 'the series list must be rotated to the resume point');
+  assert.match(src, /mapPool\(rotated,/, 'discovery must iterate the rotated list');
+  // The list must be ordered before rotation, or the cursor indexes into a
+  // different sequence each day and the round-robin skips series.
+  assert.match(src, /\}\)\.sort\(\(a, b\) => \(a\.ticker < b\.ticker/, 'electionsSeries must be sorted before rotating');
+  // A complete sweep resets to the top rather than drifting.
+  assert.match(src, /seedAttempted >= electionsSeries\.length[\s\S]{0,40}\? 0/, 'a full sweep resets the cursor');
+});
+
+test('collect-universe: the candle phase always gets budget, even when discovery is starved', () => {
+  const src = readFileSync('scripts/collect-universe.mjs', 'utf8');
+  // Discovery is unbounded work (~1,890 series, ~41 min) and will consume every
+  // minute offered. In run 35796490195 it took the whole 24-min budget and the
+  // candle phase got 0/400 -- so the bars that actually feed calibration never
+  // grew. Discovery must run against an EARLIER deadline than the hard one.
+  assert.match(src, /CANDLE_RESERVE_FRACTION/, 'a candle reserve must exist');
+  assert.match(src, /const discoveryDeadline = DEADLINE_MS - candleReserveMs/, 'discovery needs its own earlier deadline');
+  assert.match(src, /\}, discoveryDeadline\);/, 'the discovery pool must be bound to that deadline');
+  // mapPool must honour a caller-supplied deadline rather than only the global one.
+  assert.match(src, /async function mapPool\(items, limit, worker, deadlineMs = DEADLINE_MS\)/);
+  assert.match(src, /if \(Date\.now\(\) >= deadlineMs\) return;/);
+  const frac = /numArg\('--candle-reserve', (0?\.\d+)\)/.exec(src);
+  assert.ok(frac && Number(frac[1]) > 0 && Number(frac[1]) < 1, 'reserve must be a sensible fraction');
 });

@@ -36,25 +36,44 @@
  * (9,350 markets / 400 bars) while the step still reported "success" because of
  * continue-on-error. Two changes fix that class of failure for good:
  *
- *   1. Bounded concurrency (--concurrency, default 6). Kalshi's documented Basic
- *      tier read budget is 200 tokens/s and a default request costs 10 tokens =
- *      20 req/s sustained (https://docs.kalshi.com/getting_started/rate_limits.md,
- *      read 2026-09-22). Serial fetching used 3.94 req/s; 6-way concurrency with
- *      the existing per-request pacing stays well inside that ceiling, and
- *      getJson() already retries 429/5xx with backoff.
+ *   1. Bounded concurrency (--concurrency, default 6) plus a process-wide token
+ *      bucket in getJson() (src/kalshi-live.js) holding the aggregate GET rate
+ *      under Kalshi's documented Basic-tier ceiling of 200 tokens/s at 10 tokens
+ *      per request = 20 req/s
+ *      (https://docs.kalshi.com/getting_started/rate_limits.md, read 2026-09-22).
  *   2. A wall-clock DEADLINE (--budget-minutes, default 20 < the step's 25). Each
  *      phase checks the remaining budget and stops enqueuing new work when it is
  *      exhausted. Whatever has been collected is still written, and the run
  *      records `budgetExhausted` + `phasesTruncated` in meta so a short capture is
  *      visible as data rather than inferred from a missing file.
  *
+ * What live run 35796490195 (2026-09-22) then proved, and what it exposed
+ * ----------------------------------------------------------------------
+ * Confirmed fixed: the open phase completed 4225/4225 series and every artifact
+ * was written — the step ran 34m30s and was never killed. But the same run
+ * surfaced three defects that only a real capture could reveal:
+ *
+ *   #82 rate limiting. 6 workers x 3.94 req/s = 23.6 req/s, ABOVE the documented
+ *       20 req/s ceiling; 18 series were dropped with HTTP 429 after exhausting
+ *       their retries. Per-call `sleep(80)` bounds one worker, never the
+ *       aggregate. Fixed with a process-wide token bucket + jittered backoff.
+ *   #83 starvation. mapPool always restarts at index 0, so a truncated phase
+ *       re-walks the same prefix forever: discovery stopped at 738/1890 and
+ *       series 739..1890 would never have been reached on any future run. Fixed
+ *       with a persisted rotating cursor (seed.discoveryCursor).
+ *   #84 phase starvation. Discovery is unbounded (~41 min of work) and consumed
+ *       the entire budget, leaving the candle phase 0/400 — so the bars that
+ *       feed calibration stayed frozen at 400 since 2026-09-19. Fixed by
+ *       reserving --candle-reserve (default 35%) of the budget for candles.
+ *
  * Usage: node scripts/collect-universe.mjs [--no-candles] [--max-candles N]
  *                                          [--concurrency N] [--budget-minutes N]
+ *                                          [--candle-reserve 0..0.9]
  */
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { API_BASE, getJson, paginate, normalizeBar, compactMarket, compactSeries, isPoliticsSeries, sleep } from '../src/kalshi-live.js';
+import { API_BASE, getJson, paginate, normalizeBar, compactMarket, compactSeries, isPoliticsSeries } from '../src/kalshi-live.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'data/kalshi/forward');
@@ -69,6 +88,11 @@ const numArg = (flag, dflt) => {
 const MAX_NEW_CANDLES = numArg('--max-candles', 400);
 const CONCURRENCY = Math.max(1, Math.floor(numArg('--concurrency', 6)));
 const BUDGET_MINUTES = numArg('--budget-minutes', 20);
+// Share of the remaining budget held back for the candle phase so unbounded
+// discovery work can never starve it completely (irregularity #84).
+const CANDLE_RESERVE_FRACTION = Math.min(0.9, Math.max(0, numArg('--candle-reserve', 0.35)));
+// Aggregate GET ceiling enforced by the token bucket in src/kalshi-live.js.
+const MAX_RPS = Number(process.env.KALSHI_MAX_RPS) > 0 ? Number(process.env.KALSHI_MAX_RPS) : 14;
 
 const now = new Date();
 const day = now.toISOString().slice(0, 10);
@@ -91,14 +115,14 @@ const log = (...a) => console.log('[universe]', ...a);
  * the wall-clock budget is gone. Returns how many items were actually attempted
  * so the caller can record truncation honestly.
  */
-async function mapPool(items, limit, worker) {
+async function mapPool(items, limit, worker, deadlineMs = DEADLINE_MS) {
   let next = 0;
   let attempted = 0;
   const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
     for (;;) {
       const i = next++;
       if (i >= items.length) return;
-      if (outOfTime()) return;
+      if (Date.now() >= deadlineMs) return;
       attempted++;
       await worker(items[i], i);
     }
@@ -204,7 +228,8 @@ async function main() {
       const ms = await fetchOpenMarkets(s.ticker);
       perSeries[s.ticker] = ms.length;
       for (const m of ms) openRows.push(compactMarket(m, s.ticker));
-      await sleep(80);
+      // No per-call sleep: pacing is enforced process-wide by the token bucket
+      // in getJson(). A per-worker sleep does not bound the aggregate rate.
     } catch (e) {
       errors.push(`open ${s.ticker}: ${e.message}`);
       perSeries[s.ticker] = null;
@@ -268,11 +293,39 @@ async function main() {
   const electionsSeries = politics.filter((s) => {
     const cats = [s.category, ...(s.categories || [])].filter(Boolean);
     return cats.includes('Elections') && s.frequency !== 'daily';
-  });
+  }).sort((a, b) => (a.ticker < b.ticker ? -1 : a.ticker > b.ticker ? 1 : 0));
+
+  // Rotating start offset (irregularity #83, 2026-09-22).
+  // ------------------------------------------------------------------
+  // mapPool always walks its input from index 0, so a phase that runs out of
+  // budget covers the SAME prefix on every subsequent run. Live run
+  // 35796490195 stopped discovery at 738/1890 series; because the series list
+  // is stable, series 739..1890 would never have been reached on any future
+  // run, and the candle phase downstream of it would never get budget again
+  // (settled2026WithBars was still 400, frozen since 2026-09-19).
+  //
+  // Persisting where the last run stopped and starting the next one there
+  // turns a permanently starved tail into a round-robin that covers the whole
+  // list over a few days. The rotation is recorded in the seed so the cycle is
+  // auditable rather than implicit.
+  const startAt = electionsSeries.length
+    ? (Number.isInteger(prevSeed?.discoveryCursor) ? prevSeed.discoveryCursor : 0) % electionsSeries.length
+    : 0;
+  const rotated = startAt ? [...electionsSeries.slice(startAt), ...electionsSeries.slice(0, startAt)] : electionsSeries;
+  if (startAt) log(`settled-2026 discovery resumes at index ${startAt}/${electionsSeries.length} (${rotated[0]?.ticker})`);
+
   let newCandles = 0;
   // Phase A — discover settled 2026 markets (bounded concurrency, deadline-aware).
   const pendingCandles = [];
-  const seedAttempted = await mapPool(electionsSeries, CONCURRENCY, async (s) => {
+  // Reserve a slice of the budget for the candle phase (irregularity #84).
+  // Discovery is unbounded work (1,890 series, ~41 min at the observed rate) and
+  // will always consume every minute it is offered. In live run 35796490195 it
+  // did exactly that and the candle phase got 0/400 markets — so the bars that
+  // actually feed calibration never grow. Capping discovery at a fraction of the
+  // remaining budget guarantees the candle phase always makes progress.
+  const candleReserveMs = Math.max(0, timeLeftMs()) * CANDLE_RESERVE_FRACTION;
+  const discoveryDeadline = DEADLINE_MS - candleReserveMs;
+  const seedAttempted = await mapPool(rotated, CONCURRENCY, async (s) => {
     let settled;
     try {
       settled = await fetchSettled2026(s.ticker);
@@ -290,9 +343,14 @@ async function main() {
       };
       if (!seed.bars[m.ticker] && !NO_CANDLES && m.close_time) pendingCandles.push(m);
     }
-  });
+  }, discoveryDeadline);
+  // Where the NEXT run should begin: just past the last series this run attempted.
+  // A complete sweep resets to 0 so a healthy run always starts at the top.
+  seed.discoveryCursor = seedAttempted >= electionsSeries.length || !electionsSeries.length
+    ? 0
+    : (startAt + seedAttempted) % electionsSeries.length;
   if (seedAttempted < electionsSeries.length) {
-    const msg = `settled-2026 discovery stopped at ${seedAttempted}/${electionsSeries.length} Elections series after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min)`;
+    const msg = `settled-2026 discovery stopped at ${seedAttempted}/${electionsSeries.length} Elections series after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min); next run resumes at index ${seed.discoveryCursor}`;
     phasesTruncated.push(msg);
     log(`WARNING: ${msg}`);
   }
@@ -314,8 +372,7 @@ async function main() {
       seed.candleEndpoint[m.ticker] = got.endpoint;
       newCandles++;
     }
-    await sleep(80);
-  });
+  }, DEADLINE_MS);
   if (candlesAttempted < candleTargets.length) {
     const msg = `candle phase stopped at ${candlesAttempted}/${candleTargets.length} new markets after ${elapsedMin().toFixed(1)} min (budget ${BUDGET_MINUTES} min)`;
     phasesTruncated.push(msg);
@@ -351,10 +408,17 @@ async function main() {
     runtime: {
       concurrency: CONCURRENCY,
       budgetMinutes: BUDGET_MINUTES,
+      maxRequestsPerSecond: MAX_RPS,
+      candleReserveFraction: CANDLE_RESERVE_FRACTION,
       elapsedMinutes: Number(elapsedMin().toFixed(2)),
       budgetExhausted: outOfTime(),
       complete: phasesTruncated.length === 0,
       phasesTruncated,
+      // Round-robin state for the settled-2026 discovery sweep (irregularity #83):
+      // where this run began and where the next one will pick up.
+      discoveryStartedAt: startAt,
+      discoveryCursorNext: seed.discoveryCursor,
+      rateLimited429: errors.filter((e) => /HTTP 429/.test(e)).length,
     },
     // Sorted: workers finish in arbitrary order, and an unsorted error list would
     // make two otherwise identical runs produce different files.

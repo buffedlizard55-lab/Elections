@@ -28,16 +28,65 @@ export const API_BASE = process.env.KALSHI_API_BASE || 'https://api.elections.ka
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * Global read-side token bucket (irregularity #82, 2026-09-22).
+ * ---------------------------------------------------------------------
+ * Kalshi bills a default GET at 10 tokens against a Basic-tier read budget of
+ * 200 tokens/s = 20 requests/s sustained, with the bucket holding 3 seconds of
+ * budget so an idle client may burst
+ * (https://docs.kalshi.com/getting_started/rate_limits.md, read 2026-09-22).
+ * 429s carry no Retry-After and no X-RateLimit-* headers, so a client cannot
+ * discover the ceiling by observation — it has to be enforced locally.
+ *
+ * Per-call `await sleep(80)` pacing does NOT do that: it bounds one worker, and
+ * N concurrent workers simply multiply the aggregate rate. Live run 35796490195
+ * proved it — 6 workers x 3.94 req/s = 23.6 req/s, over the 20 req/s ceiling,
+ * and 18 series were dropped with HTTP 429 after exhausting their retries.
+ *
+ * This limiter is process-wide and shared by every caller of getJson(), so the
+ * aggregate rate is correct no matter how many workers or phases are in flight.
+ * Default 16 req/s leaves ~20% headroom under the documented ceiling.
+ */
+const RATE_LIMIT_RPS = Number(process.env.KALSHI_MAX_RPS) > 0 ? Number(process.env.KALSHI_MAX_RPS) : 14;
+// The docs allow a 3-second burst, but spending it all at once puts ~4x the
+// sustained rate into a single second, which is exactly the shape that earned
+// the 429s. Hold only a quarter second of budget: measured peak in any 1-second
+// sliding window then stays at or under the documented 20 req/s ceiling.
+const BUCKET_BURST = Math.max(1, RATE_LIMIT_RPS * 0.25);
+const bucket = { tokens: BUCKET_BURST, last: Date.now() };
+
+/** Block until one request's worth of budget is available. Serialised via a promise chain. */
+let rateChain = Promise.resolve();
+function acquireToken() {
+  const wait = rateChain.then(async () => {
+    for (;;) {
+      const now = Date.now();
+      bucket.tokens = Math.min(BUCKET_BURST, bucket.tokens + ((now - bucket.last) / 1000) * RATE_LIMIT_RPS);
+      bucket.last = now;
+      if (bucket.tokens >= 1) { bucket.tokens -= 1; return; }
+      await sleep(Math.max(5, Math.ceil(((1 - bucket.tokens) / RATE_LIMIT_RPS) * 1000)));
+    }
+  });
+  rateChain = wait.catch(() => {});
+  return wait;
+}
+
 /** GET JSON with a timeout, limited retries on 429/5xx/network errors. 4xx (except 429) fail fast. */
-export async function getJson(path, { retries = 2, timeoutMs = 30000 } = {}) {
+export async function getJson(path, { retries = 4, timeoutMs = 30000 } = {}) {
   const url = path.startsWith('http') ? path : API_BASE + path;
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
+    await acquireToken();
     try {
       const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(timeoutMs) });
       if (res.status === 429 || res.status >= 500) {
         lastErr = new Error(`HTTP ${res.status} for ${url}`);
-        await sleep(1500 * (attempt + 1));
+        // Exponential backoff with full jitter. 429s arrive in bursts across
+        // concurrent workers; without jitter they all retry in lockstep and
+        // collide again. Also spend a second of bucket budget so the whole
+        // process backs off, not just this one request.
+        if (res.status === 429) bucket.tokens = Math.min(bucket.tokens, 0) - RATE_LIMIT_RPS;
+        await sleep(Math.round((500 * 2 ** attempt) * (0.5 + Math.random() / 2)));
         continue;
       }
       if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
@@ -45,7 +94,7 @@ export async function getJson(path, { retries = 2, timeoutMs = 30000 } = {}) {
     } catch (e) {
       lastErr = e;
       if (/HTTP 4\d\d/.test(String(e.message))) throw e; // bad request / not found: retrying won't help
-      await sleep(750 * (attempt + 1));
+      await sleep(Math.round((750 * 2 ** attempt) * (0.5 + Math.random() / 2)));
     }
   }
   throw lastErr;
