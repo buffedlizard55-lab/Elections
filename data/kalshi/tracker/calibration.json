@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-23T00:30:40.397Z",
+ "capturedAt": "2026-09-23T17:21:59.331Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 476,
- "scoreableMarkets": 174,
+ "settledMarkets": 482,
+ "scoreableMarkets": 180,
  "observationsExcludedAsLookAhead": 27,
- "trackedMarkets": 11325,
+ "trackedMarkets": 11401,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -17,17 +17,17 @@
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 174,
-   "meanBrier": 0.0555941091954023,
-   "meanLogloss": 0.1928478716133385,
-   "meanP": 0.3806609195402298
+   "nMarkets": 180,
+   "meanBrier": 0.05423805555555554,
+   "meanLogloss": 0.1896793206905799,
+   "meanP": 0.3928888888888888
   },
   {
    "nDays": 3,
-   "nMarkets": 103,
-   "meanBrier": 0.06260873786407763,
-   "meanLogloss": 0.2269448049374189,
-   "meanP": 0.4037864077669906
+   "nMarkets": 109,
+   "meanBrier": 0.06204587155963299,
+   "meanLogloss": 0.22545415084927295,
+   "meanP": 0.4187155963302755
   },
   {
    "nDays": 7,
@@ -55,8 +55,8 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 178,
-   "meanP": 0.029438202247190987,
+   "n": 182,
+   "meanP": 0.02901098901098898,
    "observedYesRate": 0
   },
   {
@@ -90,9 +90,9 @@
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 9,
-   "meanP": 0.5494444444444445,
-   "observedYesRate": 0.2222222222222222
+   "n": 12,
+   "meanP": 0.5370833333333334,
+   "observedYesRate": 0.4166666666666667
   },
   {
    "lo": 0.6,
@@ -104,23 +104,23 @@
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 11,
-   "meanP": 0.7477272727272727,
-   "observedYesRate": 0.8181818181818182
+   "n": 15,
+   "meanP": 0.749,
+   "observedYesRate": 0.8666666666666667
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 12,
-   "meanP": 0.82625,
-   "observedYesRate": 0.9166666666666666
+   "n": 18,
+   "meanP": 0.8291666666666667,
+   "observedYesRate": 0.9444444444444444
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 115,
-   "meanP": 0.9726521739130434,
-   "observedYesRate": 0.9217391304347826
+   "n": 122,
+   "meanP": 0.9710245901639344,
+   "observedYesRate": 0.9262295081967213
   }
  ],
  "perMarket": [
@@ -23225,6 +23225,306 @@
      "date": "2026-09-19",
      "brier": 0.03999999999999998,
      "logloss": 0.2231435513142097
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXLEGISLATIVECOMBO-27JAN-NONELAW",
+   "title": "Will a crypto market structure bill be not become law AND the farm bill be not become law AND a federal housing bill be not become law for Jan 2027?",
+   "series_ticker": "KXLEGISLATIVECOMBO",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-AALS",
+   "title": "Will Donald Trump meet (including phone calls) Ahmed al-Sharaa in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.5,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.25,
+     "logloss": 0.6931471805599453
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-AGUT",
+   "title": "Will Donald Trump meet (including phone calls) António Guterres in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.81,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.03609999999999998,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 3,
+     "p": 0.81,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.03609999999999998,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-DROD",
+   "title": "Will Donald Trump meet (including phone calls) Delcy Rodríguez in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.9299999999999999,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.0049000000000000085,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-JTHU",
+   "title": "Will Donald Trump meet (including phone calls) John Thune in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.78,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.04839999999999999,
+     "logloss": 0.2484613592984996
+    },
+    {
+     "nDays": 3,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-RERD",
+   "title": "Will Donald Trump meet (including phone calls) Recep Tayyip Erdoğan in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.9450000000000001,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.003024999999999993,
+     "logloss": 0.05657035148839423
+    },
+    {
+     "nDays": 3,
+     "p": 0.86,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.019600000000000003,
+     "logloss": 0.15082288973458366
     },
     {
      "nDays": 7,

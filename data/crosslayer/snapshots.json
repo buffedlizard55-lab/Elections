@@ -1,7 +1,7 @@
 {
  "title": "Cross-layer snapshots — Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
  "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
- "capturedAt": "2026-09-23T01:06:12.487Z",
+ "capturedAt": "2026-09-23T17:57:42.881Z",
  "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project — every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
  "questions": {
   "SENATE-CONTROL-2026": {
@@ -111,6 +111,14 @@
    "text": "Democratic candidate wins the 2026 U.S. Senate election in GA",
    "electionDate": "2026-11-03",
    "kalshiEvent": "SENATEGA-26",
+   "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
+   "seat": true,
+   "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
+  },
+  "SENATE-NC-2026": {
+   "text": "Democratic candidate wins the 2026 U.S. Senate election in NC",
+   "electionDate": "2026-11-03",
+   "kalshiEvent": "SENATENC-26",
    "metaculusQuestion": "https://www.metaculus.com/questions/40598/",
    "seat": true,
    "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated)."
@@ -1160,6 +1168,25 @@
     }
    },
    "source": "https://www.metaculus.com/questions/44710/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-23-senate-nc-2026",
+   "question": "SENATE-NC-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-23T17:57:42.881Z",
+   "layers": {
+    "metaculus": 0.92,
+    "kalshi": {
+     "ticker": "SENATENC-26-D",
+     "bid": 0.934,
+     "ask": 0.939,
+     "last": 0.939,
+     "capturedAt": "2026-09-23T17:21:59.331Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
    "collector": "scripts/collect-metaculus.mjs"
   }
  ]
