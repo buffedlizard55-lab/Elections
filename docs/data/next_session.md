@@ -1,8 +1,10 @@
 # Next session (15) — handoff
 
 Updated **2026-09-22**, session 14 pass on `arena/01a0cb4d-elections`.
-**Item 1 of the old plan is already done:** the fix was confirmed on a real runner during this
-session (run `35796490195`) and that run exposed three further defects, now fixed as #82/#83/#84.
+**Items 1 and 2 of the old plan are already done:** #81 was confirmed on a real runner (run
+`35796490195`), that run exposed three further defects (#82/#83/#84), and those fixes were **also
+confirmed on the live exchange** by run `35802360360` after the merge — 429s 18 → 4, discovery
+738 → 1,569 of 1,890 series, and the calibration bar set finally moved **400 → 800**.
 Primary audit for this pass: `VERIFICATION.md` §20 (session 13) plus the run-log evidence quoted in
 irregularity **#81** below. Do not interpret a passing test as independent confirmation of a source's truth.
 
@@ -84,22 +86,27 @@ irregularity **#81** below. Do not interpret a passing test as independent confi
 
 ## Remaining work (priority order)
 
-1. **Verify #82/#83/#84 on the next real runner (P0, do this first).** Pushing this branch triggered
-   [run `35796490195`](https://github.com/buffedlizard55-lab/Elections/actions/runs/35796490195),
-   which **confirmed the #81 fix** (open phase 4,225/4,225 series, 34m30s, never killed, every
-   artifact written) and exposed #82/#83/#84. Those three fixes are again **mock-verified only**.
-   On the next run check `meta-<today>.json` for:
-   `runtime.rateLimited429` → should be **0** (was 18);
-   `runtime.discoveryCursorNext` → should **advance** run over run, or be 0 after a complete sweep;
-   `settled2026WithBars` → must be **> 400 and rising** (frozen at 400 since 2026-09-19);
-   `runtime.elapsedMinutes` → should sit under the 38-minute budget inside a 45-minute step.
-   If 429s reappear, lower `KALSHI_MAX_RPS` (env, default 14) before touching `--concurrency`.
+1. **Watch the residual 429s and the sweep completing (P1 — the P0 is closed).**
+   [Run `35802360360`](https://github.com/buffedlizard55-lab/Elections/actions/runs/35802360360)
+   confirmed all three fixes against the live exchange:
+   `rateLimited429` **18 → 4**, `discoveryCursorNext` **1569** (was stuck re-walking 0–738),
+   `newCandlesThisRun` **400** (was 0), `settled2026WithBars` **400 → 800** — the first growth since
+   2026-09-19. Elapsed 32.66 min inside the 38-min budget and 45-min step cap.
+   Two things still to watch on the next runs:
+   - **The 4 residual 429s** (`KXELECTION24538` on `/historical/markets`; `KXEXITPOLL`,
+     `KXKHAMENEIOUT`, `KXSCPRIMARY` on `/markets`). Not yet zero. Either a few endpoints cost more
+     than the default 10 tokens — `GET /account/endpoint_costs` is authoritative but needs auth — or
+     the burst allowance still lets a brief overshoot through. If the count rises rather than falls,
+     lower `KALSHI_MAX_RPS` (default 14) before touching `--concurrency`.
+   - **The sweep closing the loop.** The cursor should go 1569 → past 1890 → reset to 0, i.e. a
+     complete sweep with `runtime.complete: true`. Confirm it actually wraps rather than stalling.
+
 2. **Backfill the ~9,009 missing candle seeds.** With `--candle-reserve` the phase now always makes
    progress, but the cap is still `--max-candles` (400) per run, so a full backfill is ~22 complete
    runs. Consider a one-off `workflow_dispatch` with a raised `--max-candles`/`--budget-minutes`, or
    accept the gradual fill — but **decide and record it**, because the R3 calibration sample size
-   depends on it. Note the discovery sweep itself needs ~41 min at the observed rate, so with the
-   rotating cursor a full sweep now completes about every second run.
+   depends on it. Now measured rather than projected: the live run added exactly 400 bars (400 → 800)
+   against 9,447 discovered markets, so the remaining backfill is ~22 runs at the current cap.
 3. **Score the Metaculus-vs-Kalshi gap (P0 for the project).** `crosslayer-arb` has four days of
    signal and no settlement; the question stays unscored until the canvass runs.
    `controlQuestion.resolutionRule.confirmed` must stay false.
@@ -131,18 +138,19 @@ irregularity **#81** below. Do not interpret a passing test as independent confi
 ## Limitations (unchanged + new)
 
 - Sandbox has **no general egress**: node `fetch` and `curl` fail TLS to the exchange host, so live
-  collection runs only in GitHub Actions. #81 has now been confirmed on a real runner, but the
-  **#82/#83/#84 fixes are mock-verified only** — item 1 above is what closes that gap. The general
-  lesson from this session: an offline mock cannot reproduce rate limits, and a single run cannot
-  reveal starvation that only shows up across consecutive runs. Treat "verified against a mock" as
-  provisional until a real run agrees.
+  collection runs only in GitHub Actions. **All four fixes (#81–#84) have now been confirmed on real
+  runners** (runs `35796490195` and `35802360360`), so this session's collector work is no longer
+  provisional. The general lesson still stands and is worth carrying forward: an offline mock cannot
+  reproduce rate limits, and a single run cannot reveal starvation that only shows up across
+  consecutive runs. Treat "verified against a mock" as provisional until a real run agrees — that is
+  precisely how #82/#83/#84 were found, one day after #81 was declared fixed.
 - **Zero settled 2026 outcomes.** All 462 settlements on file predate the first capture, so the live
   scorer is legitimately empty and the contest leaderboard is a mark-to-market snapshot. Nothing on
   the site presents it as a track record.
 - **Four captured days is not a season.** Nine of the twelve entrants are unranked.
-- The **settled-2026 candle seed is still 400 bars against 9,409 discovered markets** (~9,009 short)
-  until item 2 lands; `data/calibration-2026.json` scores only the 400 markets that have bars. The
-  cause is now fixed (#84) rather than merely described, but the backlog itself is unchanged.
+- The **settled-2026 candle seed is 800 bars against 9,447 discovered markets** (~8,647 short) and
+  now growing 400/run; `data/calibration-2026.json` scores only the markets that have bars. The cause
+  is fixed and confirmed live (#84); the remaining backlog is ~22 runs.
 - The site's **All Markets** table shows the 3,000 highest-volume rows; the complete 24,139-row list
   is the CSV, and the page says so. Per-series totals cover all rows.
 - Prices on the site are a **capture**, not a live quote.
