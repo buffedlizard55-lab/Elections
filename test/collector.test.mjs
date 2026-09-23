@@ -289,6 +289,14 @@ test('collect-universe: the workflow step timeout is strictly greater than the s
   // Kalshi Basic tier: 200 read tokens/s / 10 tokens per request = 20 req/s sustained.
   // https://docs.kalshi.com/getting_started/rate_limits.md (read 2026-09-22)
   assert.ok(conc >= 1 && conc <= 10, `concurrency ${conc} must stay well inside the 20 req/s read ceiling`);
+  // The JOB cap must also clear the universe step, or the runner kills the job
+  // mid-step and every later step silently never runs -- the #81 failure mode
+  // one level up. Real run 35796490195 took 34.5 min end to end with the
+  // universe step using 24 of it, so the other steps need ~11 min of headroom.
+  const jobCap = Number(/jobs:[\s\S]*?collect:[\s\S]*?timeout-minutes:\s*(\d+)/.exec(wf)?.[1]);
+  assert.ok(Number.isFinite(jobCap), 'the collect job must declare timeout-minutes');
+  assert.ok(jobCap >= timeout + 15,
+    `job cap ${jobCap} must exceed the universe step cap ${timeout} plus the other steps' runtime`);
 });
 
 test('collect-universe: every phase is deadline-guarded and truncation is recorded, not inferred', () => {

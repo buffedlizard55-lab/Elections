@@ -89,7 +89,14 @@ jobs:
   collect:
     if: ${{ vars.COLLECT_DISABLED != 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # The per-step timeouts below sum to more than one job can take, because they
+    # are worst-case caps on steps that normally finish far sooner (the whole job
+    # ran 34m30s on 2026-09-22). But the JOB cap must still exceed the realistic
+    # worst case, or the runner kills the job mid-step and -- exactly as in #81 --
+    # the later steps silently never run. Raised 90 -> 150 when the universe step
+    # went to 45 min; a test asserts the job cap stays above the universe step's
+    # cap plus the other steps' observed runtime.
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
