@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv via the contest universe eligible map; fees from the registered series registry",
-  "capturedAt": "2026-09-23T00:08:16.310Z",
+  "capturedAt": "2026-09-23T00:29:49.288Z",
   "method": "A day is priceable when all four Balance-of-Power legs are in that day's eligible map and tradedToday. The fee series is the universe entry's series, not the ticker prefix. edge = 1 - (sum of the four yes asks + the quadratic taker fee on one contract of each leg). bestObservedEdge is the maximum edge across priceable days; an equal edge keeps the earlier day. A trade requires edge greater than the threshold. pairAttempts counts each control pair on each priceable basket day whose control market also traded. This scan is independent of combo-coherence and the run throws if the two disagree.",
   "threshold": 0.005,
   "days": [
@@ -109,34 +109,34 @@
     {
       "date": "2026-09-22",
       "priceable": true,
-      "askSum": 1.009,
-      "feePerContract": 0.0371,
-      "edge": -0.0461,
+      "askSum": 1.012,
+      "feePerContract": 0.0369,
+      "edge": -0.0489,
       "feeClears": false,
       "legs": [
         {
           "key": "DD",
           "ticker": "KXBALANCEPOWERCOMBO-27FEB-DD",
           "series": "KXBALANCEPOWERCOMBO",
-          "yesAsk": 0.62
+          "yesAsk": 0.63
         },
         {
           "key": "RR",
           "ticker": "KXBALANCEPOWERCOMBO-27FEB-RR",
           "series": "KXBALANCEPOWERCOMBO",
-          "yesAsk": 0.081
+          "yesAsk": 0.085
         },
         {
           "key": "DR",
           "ticker": "KXBALANCEPOWERCOMBO-27FEB-DR",
           "series": "KXBALANCEPOWERCOMBO",
-          "yesAsk": 0.3
+          "yesAsk": 0.29
         },
         {
           "key": "RD",
           "ticker": "KXBALANCEPOWERCOMBO-27FEB-RD",
           "series": "KXBALANCEPOWERCOMBO",
-          "yesAsk": 0.008
+          "yesAsk": 0.007
         }
       ]
     }
