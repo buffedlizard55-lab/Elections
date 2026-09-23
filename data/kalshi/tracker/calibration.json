@@ -1,32 +1,33 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-22T23:15:09.170Z",
+ "capturedAt": "2026-09-23T00:30:40.397Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 474,
- "scoreableMarkets": 173,
- "observationsExcludedAsLookAhead": 25,
- "trackedMarkets": 11308,
+ "settledMarkets": 476,
+ "scoreableMarkets": 174,
+ "observationsExcludedAsLookAhead": 27,
+ "trackedMarkets": 11325,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
   "2026-09-21",
-  "2026-09-22"
+  "2026-09-22",
+  "2026-09-23"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 173,
-   "meanBrier": 0.05591488439306359,
-   "meanLogloss": 0.19390450476801965,
-   "meanP": 0.37713872832369927
+   "nMarkets": 174,
+   "meanBrier": 0.0555941091954023,
+   "meanLogloss": 0.1928478716133385,
+   "meanP": 0.3806609195402298
   },
   {
    "nDays": 3,
-   "nMarkets": 102,
-   "meanBrier": 0.06321862745098035,
-   "meanLogloss": 0.2289716882474179,
-   "meanP": 0.39813725490196106
+   "nMarkets": 103,
+   "meanBrier": 0.06260873786407763,
+   "meanLogloss": 0.2269448049374189,
+   "meanP": 0.4037864077669906
   },
   {
    "nDays": 7,
@@ -117,9 +118,9 @@
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 112,
-   "meanP": 0.9722767857142858,
-   "observedYesRate": 0.9196428571428571
+   "n": 115,
+   "meanP": 0.9726521739130434,
+   "observedYesRate": 0.9217391304347826
   }
  ],
  "perMarket": [
@@ -18210,6 +18211,54 @@
    ]
   },
   {
+   "ticker": "KXCANSNAPPROV-28-BC",
+   "title": "Will it be reported by any of the Source Agencies that the government of British Columbia calls a snap provincial election before Jan 1, 2028?",
+   "series_ticker": "KXCANSNAPPROV",
+   "result": "yes",
+   "settlementDay": "2026-09-22",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXEOWEEK-26SEP19-0",
    "title": "Will the President sign more than 0 Executive Orders between Sep 13, 2026 and Sep 19, 2026?",
    "series_ticker": "KXEOWEEK",
@@ -21126,6 +21175,56 @@
      "date": null,
      "brier": null,
      "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETING-27JAN01-ABUR",
+   "title": "Will Donald Trump meet in person Andy Burnham before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPMEETING",
+   "result": "yes",
+   "settlementDay": "2026-09-22",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-21",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-21",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-19",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
     },
     {
      "nDays": 7,

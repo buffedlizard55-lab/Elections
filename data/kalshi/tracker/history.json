@@ -1,6 +1,6 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true",
- "capturedAt": "2026-09-22T23:15:09.170Z",
+ "capturedAt": "2026-09-23T00:30:40.397Z",
  "replayedAt": "2026-09-19T01:29:08.185Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "note": "one record per collection day, written by scripts/collect-kalshi.mjs (crosscheck fields merged by scripts/crosscheck-collectors.mjs); a same-day re-run replaces the record",
@@ -148,7 +148,43 @@
     "lastShare": 0.9984,
     "volumeDecreased": 0
    }
+  },
+  {
+   "date": "2026-09-23",
+   "capturedAt": "2026-09-23T00:30:40.397Z",
+   "seriesInRegistry": 4193,
+   "openEvents": 4092,
+   "usElectionEvents": 3272,
+   "openMarkets": 24360,
+   "openMarketsTraded": 11132,
+   "openMarketsTradedNotActive": 0,
+   "openMarketsFinalizedInFeed": 204,
+   "openMarketsClosedBeforeCapture": 204,
+   "exchangeWideOpenEvents": 13258,
+   "shrinkRatioVsPrevious": 1,
+   "settlementsFound": 2,
+   "settlementsKnown": 476,
+   "settledMarketsScored": 174,
+   "brierT1": 0.0555941091954023,
+   "consistency": {
+    "mutually-exclusive-sum-over": 21,
+    "mutually-exclusive-sum-under": 42,
+    "stale-last-vs-book": 442,
+    "total": 505
+   },
+   "apiRequests": 70,
+   "apiBytes": 280195765,
+   "errors": 0,
+   "crosscheck": {
+    "pythonCapturedAt": "2026-09-23T00:30:58+00:00",
+    "pythonMarkets": 2000,
+    "overlap": 1821,
+    "lastWithinTolerance": 1819,
+    "lastCompared": 1821,
+    "lastShare": 0.9989,
+    "volumeDecreased": 0
+   }
   }
  ],
- "count": 4
+ "count": 5
 }
