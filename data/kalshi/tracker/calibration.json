@@ -1,33 +1,34 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-23T17:21:59.331Z",
+ "capturedAt": "2026-09-24T17:27:09.863Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 482,
- "scoreableMarkets": 180,
- "observationsExcludedAsLookAhead": 27,
- "trackedMarkets": 11401,
+ "settledMarkets": 503,
+ "scoreableMarkets": 200,
+ "observationsExcludedAsLookAhead": 35,
+ "trackedMarkets": 11554,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
   "2026-09-21",
   "2026-09-22",
-  "2026-09-23"
+  "2026-09-23",
+  "2026-09-24"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 180,
-   "meanBrier": 0.05423805555555554,
-   "meanLogloss": 0.1896793206905799,
-   "meanP": 0.3928888888888888
+   "nMarkets": 200,
+   "meanBrier": 0.05189486999999999,
+   "meanLogloss": 0.1826899950966145,
+   "meanP": 0.40669
   },
   {
    "nDays": 3,
-   "nMarkets": 109,
-   "meanBrier": 0.06204587155963299,
-   "meanLogloss": 0.22545415084927295,
-   "meanP": 0.4187155963302755
+   "nMarkets": 119,
+   "meanBrier": 0.061163621848739455,
+   "meanLogloss": 0.2223766231592568,
+   "meanP": 0.4537731092436977
   },
   {
    "nDays": 7,
@@ -55,16 +56,16 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 182,
-   "meanP": 0.02901098901098898,
+   "n": 189,
+   "meanP": 0.029074074074074047,
    "observedYesRate": 0
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 43,
-   "meanP": 0.12441860465116274,
-   "observedYesRate": 0.06976744186046512
+   "n": 44,
+   "meanP": 0.12465909090909086,
+   "observedYesRate": 0.06818181818181818
   },
   {
    "lo": 0.2,
@@ -76,51 +77,51 @@
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 8,
-   "meanP": 0.32375,
-   "observedYesRate": 0.125
+   "n": 11,
+   "meanP": 0.3377272727272727,
+   "observedYesRate": 0.09090909090909091
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 9,
-   "meanP": 0.44611111111111107,
-   "observedYesRate": 0.5555555555555556
+   "n": 10,
+   "meanP": 0.4425,
+   "observedYesRate": 0.5
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 12,
-   "meanP": 0.5370833333333334,
-   "observedYesRate": 0.4166666666666667
+   "n": 16,
+   "meanP": 0.5393749999999999,
+   "observedYesRate": 0.3125
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 7,
-   "meanP": 0.6528571428571429,
-   "observedYesRate": 0.42857142857142855
+   "n": 8,
+   "meanP": 0.6531250000000001,
+   "observedYesRate": 0.5
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 15,
-   "meanP": 0.749,
-   "observedYesRate": 0.8666666666666667
+   "n": 18,
+   "meanP": 0.7538888888888889,
+   "observedYesRate": 0.8888888888888888
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 18,
-   "meanP": 0.8291666666666667,
-   "observedYesRate": 0.9444444444444444
+   "n": 20,
+   "meanP": 0.8307500000000001,
+   "observedYesRate": 0.95
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 122,
-   "meanP": 0.9710245901639344,
-   "observedYesRate": 0.9262295081967213
+   "n": 154,
+   "meanP": 0.9683441558441566,
+   "observedYesRate": 0.9415584415584416
   }
  ],
  "perMarket": [
@@ -23300,6 +23301,645 @@
    ]
   },
   {
+   "ticker": "KXMAMDANIPOLL-26AUG13-AL56",
+   "title": "Will the percentage of New York City respondents who say they have a favorable opinion of Zohran Mamdani in Siena University’s poll be at least 56 in the first such poll released after Aug 13, 2026?",
+   "series_ticker": "KXMAMDANIPOLL",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.915,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.007224999999999994,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 3,
+     "p": 0.915,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.007224999999999994,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAMDANIPOLL-26AUG13-AL62",
+   "title": "Will the percentage of New York City respondents who say they have a favorable opinion of Zohran Mamdani in Siena University’s poll be at least 62 in the first such poll released after Aug 13, 2026?",
+   "series_ticker": "KXMAMDANIPOLL",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAMDANIPOLL-26AUG13-AL64",
+   "title": "Will the percentage of New York City respondents who say they have a favorable opinion of Zohran Mamdani in Siena University’s poll be at least 64 in the first such poll released after Aug 13, 2026?",
+   "series_ticker": "KXMAMDANIPOLL",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.5549999999999999,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.30802499999999994,
+     "logloss": 0.8096809968158967
+    },
+    {
+     "nDays": 3,
+     "p": 0.5549999999999999,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.30802499999999994,
+     "logloss": 0.8096809968158967
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAMDANIPOLL-26AUG13-AL66",
+   "title": "Will the percentage of New York City respondents who say they have a favorable opinion of Zohran Mamdani in Siena University’s poll be at least 66 in the first such poll released after Aug 13, 2026?",
+   "series_ticker": "KXMAMDANIPOLL",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.375,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.140625,
+     "logloss": 0.4700036292457356
+    },
+    {
+     "nDays": 3,
+     "p": 0.375,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.140625,
+     "logloss": 0.4700036292457356
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-A40.2",
+   "title": "Will Trump's RCP approval average be above 40.2 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E39.6",
+   "title": "Will Trump's RCP approval average be exactly 39.6 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.135,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E39.7",
+   "title": "Will Trump's RCP approval average be exactly 39.7 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E39.8",
+   "title": "Will Trump's RCP approval average be exactly 39.8 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E39.9",
+   "title": "Will Trump's RCP approval average be exactly 39.9 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E40.0",
+   "title": "Will Trump's RCP approval average be exactly 40.0 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E40.1",
+   "title": "Will Trump's RCP approval average be exactly 40.1 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-E40.2",
+   "title": "Will Trump's RCP approval average be exactly 40.2 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP23-U39.6",
+   "title": "Will Trump's RCP approval average be below 39.6 on Sep 23, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.655,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.11902499999999998,
+     "logloss": 0.4231200433468851
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXTRUMPMEETM-26OCT01-AALS",
    "title": "Will Donald Trump meet (including phone calls) Ahmed al-Sharaa in Sep 2026?",
    "series_ticker": "KXTRUMPMEETM",
@@ -23500,6 +24140,56 @@
    ]
   },
   {
+   "ticker": "KXTRUMPMEETM-26OCT01-PLI",
+   "title": "Will Donald Trump meet (including phone calls) Peng Liyuan in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.93,
+     "basis": "last",
+     "date": "2026-09-20",
+     "brier": 0.004899999999999993,
+     "logloss": 0.07257069283483537
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXTRUMPMEETM-26OCT01-RERD",
    "title": "Will Donald Trump meet (including phone calls) Recep Tayyip Erdoğan in Sep 2026?",
    "series_ticker": "KXTRUMPMEETM",
@@ -23525,6 +24215,355 @@
      "date": "2026-09-20",
      "brier": 0.019600000000000003,
      "logloss": 0.15082288973458366
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26OCT01-XJIN",
+   "title": "Will Donald Trump meet (including phone calls) Xi Jinping in Sep 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.004224999999999993,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXXIUSA-26JUL07-NOV01",
+   "title": "Will Xi Jinping visit the United States of America before Nov 1, 2026?",
+   "series_ticker": "KXXIUSA",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXXIUSA-26JUL07-OCT01",
+   "title": "Will Xi Jinping visit the United States of America before Oct 1, 2026?",
+   "series_ticker": "KXXIUSA",
+   "result": "yes",
+   "settlementDay": "2026-09-23",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-22",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.955,
+     "basis": "mid",
+     "date": "2026-09-20",
+     "brier": 0.002025000000000004,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNETANYAHUNYC-26JUL27-OCT01",
+   "title": "Will Benjamin Netanyahu visit New York City before Oct 1, 2026?",
+   "series_ticker": "KXNETANYAHUNYC",
+   "result": "yes",
+   "settlementDay": "2026-09-24",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-23",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-09-23",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.94,
+     "basis": "mid",
+     "date": "2026-09-21",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXWHPRESSBANCOURT-WHPB26",
+   "title": "Will any federal or state court rule issues a temporary restraining order, preliminary or permanent injunction, stay, or vacatur that blocks or enjoins any part of the September 18, 2026 White House ban on CNN, MS NOW, or Politico in a case concerning the September 18, 2026 White House ban on CNN, MS NOW, and Politico before Oct 15, 2026?",
+   "series_ticker": "KXWHPRESSBANCOURT",
+   "result": "yes",
+   "settlementDay": "2026-09-24",
+   "observations": 2,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-23",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-09-23",
+     "brier": 0.004224999999999993,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXWHPRESSBANCOURT-WHPB26-YES",
+   "title": "Will a court block Trump's White House press ban?",
+   "series_ticker": "KXWHPRESSBANCOURT",
+   "result": "yes",
+   "settlementDay": "2026-09-24",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-23",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.905,
+     "basis": "mid",
+     "date": "2026-09-23",
+     "brier": 0.009024999999999995,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 3,
+     "p": 0.79,
+     "basis": "mid",
+     "date": "2026-09-21",
+     "brier": 0.044099999999999986,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXWHVISIT-27-XJIN",
+   "title": "Will Xi Jinping visit the White House before Jan 1, 2027?",
+   "series_ticker": "KXWHVISIT",
+   "result": "yes",
+   "settlementDay": "2026-09-24",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-23",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.993,
+     "basis": "mid",
+     "date": "2026-09-23",
+     "brier": 0.000049000000000000087,
+     "logloss": 0.007024614936964466
+    },
+    {
+     "nDays": 3,
+     "p": 0.989,
+     "basis": "mid",
+     "date": "2026-09-21",
+     "brier": 0.00012100000000000022,
+     "logloss": 0.011060947359424948
     },
     {
      "nDays": 7,

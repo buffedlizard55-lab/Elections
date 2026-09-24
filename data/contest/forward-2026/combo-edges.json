@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv via the contest universe eligible map; fees from the registered series registry",
-  "capturedAt": "2026-09-23T18:05:10.730Z",
+  "capturedAt": "2026-09-24T18:08:17.601Z",
   "method": "A day is priceable when all four Balance-of-Power legs are in that day's eligible map and tradedToday. The fee series is the universe entry's series, not the ticker prefix. edge = 1 - (sum of the four yes asks + the quadratic taker fee on one contract of each leg). bestObservedEdge is the maximum edge across priceable days; an equal edge keeps the earlier day. A trade requires edge greater than the threshold. pairAttempts counts each control pair on each priceable basket day whose control market also traded. This scan is independent of combo-coherence and the run throws if the two disagree.",
   "threshold": 0.005,
   "days": [
@@ -173,6 +173,40 @@
           "yesAsk": 0.007
         }
       ]
+    },
+    {
+      "date": "2026-09-24",
+      "priceable": true,
+      "askSum": 1.006,
+      "feePerContract": 0.0374,
+      "edge": -0.0434,
+      "feeClears": false,
+      "legs": [
+        {
+          "key": "DD",
+          "ticker": "KXBALANCEPOWERCOMBO-27FEB-DD",
+          "series": "KXBALANCEPOWERCOMBO",
+          "yesAsk": 0.61
+        },
+        {
+          "key": "RR",
+          "ticker": "KXBALANCEPOWERCOMBO-27FEB-RR",
+          "series": "KXBALANCEPOWERCOMBO",
+          "yesAsk": 0.078
+        },
+        {
+          "key": "DR",
+          "ticker": "KXBALANCEPOWERCOMBO-27FEB-DR",
+          "series": "KXBALANCEPOWERCOMBO",
+          "yesAsk": 0.31
+        },
+        {
+          "key": "RD",
+          "ticker": "KXBALANCEPOWERCOMBO-27FEB-RD",
+          "series": "KXBALANCEPOWERCOMBO",
+          "yesAsk": 0.008
+        }
+      ]
     }
   ],
   "bestObservedEdge": {
@@ -181,8 +215,8 @@
     "feePerContract": 0.0375,
     "edge": -0.0395
   },
-  "daysTheFullBasketWasPriceable": 5,
-  "daysThePairTradeWasPriceable": 10,
+  "daysTheFullBasketWasPriceable": 6,
+  "daysThePairTradeWasPriceable": 12,
   "trades": 0,
   "agreesWithStrategy": true
 }

@@ -1,72 +1,81 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv (captured price panels) + data/kalshi/universe/latest.json + data/kalshi/forward/universe-open.json",
-  "capturedAt": "2026-09-23T18:05:10.730Z",
+  "capturedAt": "2026-09-24T18:08:17.601Z",
   "dates": [
     "2026-09-19",
     "2026-09-20",
     "2026-09-21",
     "2026-09-22",
-    "2026-09-23"
+    "2026-09-23",
+    "2026-09-24"
   ],
   "perDate": {
     "2026-09-19": {
       "panelRows": 10686,
-      "notElectionSeries": 3497,
+      "notElectionSeries": 3501,
       "notInSeasonWindow": 763,
-      "noUsableBook": 1811,
-      "eligible": 4615,
-      "tradedOnDay": 851
+      "noUsableBook": 1808,
+      "eligible": 4614,
+      "tradedOnDay": 850
     },
     "2026-09-20": {
       "panelRows": 10911,
-      "notElectionSeries": 3520,
+      "notElectionSeries": 3524,
       "notInSeasonWindow": 763,
       "noUsableBook": 747,
-      "eligible": 5881,
-      "tradedOnDay": 1041
+      "eligible": 5877,
+      "tradedOnDay": 1040
     },
     "2026-09-21": {
       "panelRows": 10981,
-      "notElectionSeries": 3516,
+      "notElectionSeries": 3520,
       "notInSeasonWindow": 763,
       "noUsableBook": 416,
-      "eligible": 6286,
-      "tradedOnDay": 871
+      "eligible": 6282,
+      "tradedOnDay": 870
     },
     "2026-09-22": {
       "panelRows": 11117,
-      "notElectionSeries": 3481,
+      "notElectionSeries": 3485,
       "notInSeasonWindow": 765,
       "noUsableBook": 433,
-      "eligible": 6438,
-      "tradedOnDay": 1044
+      "eligible": 6434,
+      "tradedOnDay": 1043
     },
     "2026-09-23": {
       "panelRows": 11193,
-      "notElectionSeries": 3486,
+      "notElectionSeries": 3491,
       "notInSeasonWindow": 767,
-      "noUsableBook": 557,
-      "eligible": 6383,
-      "tradedOnDay": 1085
+      "noUsableBook": 553,
+      "eligible": 6382,
+      "tradedOnDay": 1084
+    },
+    "2026-09-24": {
+      "panelRows": 11325,
+      "notElectionSeries": 3506,
+      "notInSeasonWindow": 769,
+      "noUsableBook": 944,
+      "eligible": 6106,
+      "tradedOnDay": 1186
     }
   },
   "rejectionReasons": {
-    "not-us-election-series": 17500,
-    "closes-after-season-window": 3821,
-    "book-not-two-sided-at-capture": 3964
+    "not-us-election-series": 21027,
+    "closes-after-season-window": 4590,
+    "book-not-two-sided-at-capture": 4901
   },
   "exclusionReasonTally": {
-    "notElectionSeries": 17500,
-    "notInSeasonWindow": 3821,
-    "noUsableBook": 3964
+    "notElectionSeries": 21027,
+    "notInSeasonWindow": 4590,
+    "noUsableBook": 4901
   },
   "exclusionTallyNote": "Sums of the per-date counts above, one row per excluded market-day. A market present on three captured days and ineligible on all three is counted three times, because each day it occupied a slot the contest could otherwise have filled.",
   "seriesCoverage": {
-    "distinctSeries": 445,
-    "distinctTickers": 6570,
+    "distinctSeries": 448,
+    "distinctTickers": 6701,
     "seriesResolvedFromTickerPrefix": 1,
-    "rowsPassingSeriesTag": 37388
+    "rowsPassingSeriesTag": 45186
   },
-  "distinctTickers": 6570,
+  "distinctTickers": 6701,
   "definition": "A market/day is contest-eligible when its series is US-election tagged in the captured universe, it appears in that day's captured panel, its yes_bid/yes_ask form a real two-sided book, and its close_time is on or before 2027-12-31T23:59:59Z. NOTE: close_time is the exchange's listing-expiry field, not the resolution date (SENATEAK-26-D, a 2026 race, carries 2027-11-03), so the bound scopes the 2026 cycle rather than dating a settlement. A market can only be FILLED on a day it actually traded (volume_24h > 0); the eligible count is the quoting set, the traded count is the fillable set."
 }
