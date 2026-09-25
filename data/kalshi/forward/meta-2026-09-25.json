@@ -1,0 +1,32 @@
+{
+ "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2",
+ "capturedAt": "2026-09-25T17:28:57.647Z",
+ "capturedBy": "scripts/collect-universe.mjs",
+ "date": "2026-09-25",
+ "seriesTotal": 14386,
+ "seriesPolitics": 4273,
+ "seriesPoliticsQueried": 4273,
+ "openMarkets": 24491,
+ "trackerRowsAppended": 24491,
+ "settled2026Markets": 9672,
+ "settled2026WithBars": 1999,
+ "newCandlesThisRun": 399,
+ "runtime": {
+  "concurrency": 6,
+  "budgetMinutes": 38,
+  "maxRequestsPerSecond": 14,
+  "candleReserveFraction": 0.35,
+  "elapsedMinutes": 32.81,
+  "budgetExhausted": false,
+  "complete": false,
+  "phasesTruncated": [
+   "settled-2026 discovery stopped at 1546/1919 Elections series after 31.1 min (budget 38 min); next run resumes at index 527"
+  ],
+  "discoveryStartedAt": 900,
+  "discoveryCursorNext": 527,
+  "rateLimited429": 1
+ },
+ "errors": [
+  "candles KXWVPRIMARY-01D26-VGEO: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/historical/markets/KXWVPRIMARY-01D26-VGEO/candlesticks?start_ts=1770475059&end_ts=1778855859&period_interval=1440 / fallback HTTP 404 for https://api.elections.kalshi.com/trade-api/v2/series/KXWVPRIMARY/markets/KXWVPRIMARY-01D26-VGEO/candlesticks?start_ts=1770475059&end_ts=1778855859&period_interval=1440"
+ ]
+}
