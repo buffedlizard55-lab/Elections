@@ -1569,7 +1569,167 @@
      ]
     }
    }
+  },
+  {
+   "date": "2026-09-26",
+   "capturedAt": "2026-09-26T17:09:28.758Z",
+   "capturedFrom": "https://www.metaculus.com/midterms-2026/",
+   "fetchMethod": "headless-chrome",
+   "houseD": 92.9,
+   "houseR": 7.1,
+   "senateD": 57.2,
+   "senateR": 42.8,
+   "control": {
+    "DH_DS": 56.2,
+    "DH_RS": 36.7,
+    "RH_RS": 6.1,
+    "RH_DS": 1
+   },
+   "seatMedians": {
+    "house": "D +15",
+    "senate": "D +1"
+   },
+   "racesLine": "18 of 35 races lean Democrat · 4 too close to call",
+   "keyDriverDataDate": "Sep 26, 2026",
+   "inconsistent": {
+    "house": false,
+    "senate": false
+   },
+   "parse": "ok",
+   "consistencyFlags": [],
+   "questions": [
+    {
+     "id": "senate-states-group",
+     "office": "senate",
+     "state": null,
+     "note": "Will the Democratic candidate win the 2026 US Senate election in the following states? — the HTML lists the four leading states; the other 19 are behind a client-side control (recorded, not estimated).",
+     "capturedFrom": "https://www.metaculus.com/questions/40598/",
+     "fetchMethod": "headless-chrome",
+     "kind": "state-group",
+     "title": "Will the Democratic candidate win the 2026 US Senate election in the following states?",
+     "parse": "ok",
+     "states": {
+      "RI": 99.3,
+      "OR": 99,
+      "CO": 98,
+      "MN": 94
+     },
+     "othersHidden": 19,
+     "forecasters": 133
+    },
+    {
+     "id": "governor-states-group",
+     "office": "governor",
+     "state": null,
+     "note": "Democrat wins 2026 gubernatorial election in these states? — same rendering limit (four states + \"13 others\").",
+     "capturedFrom": "https://www.metaculus.com/questions/43448/",
+     "fetchMethod": "headless-chrome (second pass)",
+     "kind": "state-group",
+     "title": "Will the Democratic candidate win the 2026 gubernatorial election in the following US states?",
+     "parse": "ok",
+     "states": {
+      "HI": 98,
+      "NM": 92.8,
+      "OR": 88,
+      "MI": 85
+     },
+     "othersHidden": 13,
+     "forecasters": 82
+    },
+    {
+     "id": "senate-plurality",
+     "office": "senate-plurality",
+     "state": null,
+     "note": "US Senate plurality after 2026 midterms? (Democrats / Republicans / Other) — a different question from control: no tie-break, so it is stored beside the hub number, not merged with it.",
+     "capturedFrom": "https://www.metaculus.com/questions/36370/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Will AI Cause Human Extinction?",
+     "parse": "ok",
+     "D": 56.6,
+     "R": 43.3,
+     "other": 0.1,
+     "forecasters": 469
+    },
+    {
+     "id": "ak-peltola",
+     "office": "senate",
+     "state": "AK",
+     "note": "Mary Peltola wins Alaska senate seat 2026? — a candidate question; paired with SENATEAK-26-D (party market) with that caveat recorded.",
+     "capturedFrom": "https://www.metaculus.com/questions/41678/",
+     "fetchMethod": "headless-chrome",
+     "kind": "binary",
+     "title": "Will Mary Peltola win the 2026 US Senate election in Alaska?",
+     "parse": "ok",
+     "p": 54.8,
+     "forecasters": 28
+    },
+    {
+     "id": "mt-party",
+     "office": "senate",
+     "state": "MT",
+     "note": "Which party will win the 2026 Montana Senate election? (Democrat / Republican / Other).",
+     "capturedFrom": "https://www.metaculus.com/questions/44711/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Will AI Cause Human Extinction?",
+     "parse": "ok",
+     "D": 1,
+     "R": 94,
+     "other": 5,
+     "forecasters": 60
+    },
+    {
+     "id": "ne-party",
+     "office": "senate",
+     "state": "NE",
+     "note": "Which party will win the 2026 Nebraska Senate election? (Democrat / Republican / Other — Kalshi lists the independent Osborn as SENATENE-26-DOSB).",
+     "capturedFrom": "https://www.metaculus.com/questions/44710/",
+     "fetchMethod": "headless-chrome",
+     "kind": "party-choice",
+     "title": "Will AI Cause Human Extinction?",
+     "parse": "ok",
+     "D": 0.1,
+     "R": 72.1,
+     "other": 27.8,
+     "forecasters": 56
+    }
+   ],
+   "api": null,
+   "fetchLog": {
+    "attempts": [
+     {
+      "profile": "project",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5641,
+      "challenge": "cloudflare-challenge"
+     },
+     {
+      "profile": "browser",
+      "status": 403,
+      "finalUrl": "https://www.metaculus.com/midterms-2026/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 5855,
+      "challenge": "cloudflare-challenge"
+     }
+    ],
+    "render": {
+     "ok": true,
+     "bin": "/usr/bin/google-chrome",
+     "challenge": null,
+     "bytes": 4839677,
+     "attempts": [
+      {
+       "budgetMs": 20000,
+       "bytes": 4839677,
+       "challenge": null
+      }
+     ]
+    }
+   }
   }
  ],
- "capturedAt": "2026-09-25T18:01:46.168Z"
+ "capturedAt": "2026-09-26T17:09:28.758Z"
 }

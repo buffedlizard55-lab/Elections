@@ -2,111 +2,111 @@
   "title": "Canonical open political/election market list (Kalshi)",
   "purpose": "The complete list of open Kalshi political and election markets captured by this project, with the contest-eligibility verdict for every row, and a reconciliation ladder that shows where every other count went.",
   "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker={each politics/elections series}&status=open (cursor-paginated)",
-  "capturedAt": "2026-09-25T17:28:57.647Z",
+  "capturedAt": "2026-09-26T16:36:45.799Z",
   "capturedBy": "scripts/collect-universe.mjs",
-  "capturedForDate": "2026-09-25",
-  "latestPanelDate": "2026-09-25",
+  "capturedForDate": "2026-09-26",
+  "latestPanelDate": "2026-09-26",
   "listFile": "data/kalshi/universe/market-list-latest.csv",
   "listFileNote": "Overwritten on every run so the repository does not grow by a multi-megabyte duplicate each day. The underlying capture (data/kalshi/forward/universe-open.json + data/kalshi/tracker/daily/*.csv) is the append-only record.",
-  "totalListed": 24491,
-  "contestEligibleCount": 6388,
+  "totalListed": 24529,
+  "contestEligibleCount": 6680,
   "eligibilityBreakdown": {
-    "not-us-election-series": 3986,
-    "contest-eligible": 6388,
-    "closes-after-season-window": 170,
-    "priced-but-did-not-trade-that-day": 499,
-    "untraded-and-no-usable-book": 842,
-    "not-in-that-days-captured-panel": 12550,
-    "traded-but-book-not-two-sided": 56
+    "not-us-election-series": 4013,
+    "contest-eligible": 6680,
+    "closes-after-season-window": 200,
+    "priced-but-did-not-trade-that-day": 468,
+    "untraded-and-no-usable-book": 655,
+    "not-in-that-days-captured-panel": 12476,
+    "traded-but-book-not-two-sided": 37
   },
   "reconciliationLadder": [
     {
       "step": "1. open EVENTS exchange-wide",
-      "value": 14651,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 14538,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "GET /events?status=open&with_nested_markets=true&limit=200 — every open event on the exchange, all categories"
     },
     {
       "step": "2. open POLITICAL/ELECTION events kept",
-      "value": 4136,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 4143,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "events whose series is in the Elections/Politics registry or whose own category is Elections/Politics"
     },
     {
       "step": "2b. of those, US-election tagged",
-      "value": 3303,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 3305,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "derived US-election flag — see US_ELECTION_TAGS in scripts/collect-kalshi.mjs"
     },
     {
       "step": "3. open political/election MARKETS",
-      "value": 24721,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 24757,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "markets nested in the kept events"
     },
     {
       "step": "3a. …of which finalized in the feed",
-      "value": 214,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 216,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "status finalized: recorded as settlements and excluded from the daily panel"
     },
     {
       "step": "3b. …of which untraded and not listed",
-      "value": 13040,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.meta.json",
+      "value": 12931,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.meta.json",
       "method": "zero lifetime volume AND zero open interest: counted, not listed"
     },
     {
       "step": "4. TRADED open markets (daily panel rows)",
-      "value": 11467,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.csv",
+      "value": 11610,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.csv",
       "method": "volume > 0 or open_interest > 0 — the panel this repo treats as tradeable"
     },
     {
       "step": "5. series in the politics/elections registry",
-      "value": 4243,
+      "value": 4246,
       "basis": "data/kalshi/universe/series.json",
       "method": "GET /series?category=Elections|Politics, cursor-paginated"
     },
     {
       "step": "5b. of those, US-election tagged",
-      "value": 1449,
+      "value": 1450,
       "basis": "data/kalshi/universe/series.json",
       "method": "derived US-election flag over the API series tags"
     },
     {
       "step": "6. full open list in this artifact",
-      "value": 24491,
+      "value": 24529,
       "basis": "data/kalshi/forward/universe-open.json",
       "method": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker={each politics/elections series}&status=open (cursor-paginated)"
     },
     {
       "step": "7. contest-eligible markets on the last captured day",
-      "value": 6388,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.csv",
+      "value": 6680,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.csv",
       "method": "US-election series + captured panel + two-sided book + close_time inside the season window"
     },
     {
       "step": "7b. …excluded by the season window (2028-cycle rows open today)",
-      "value": 170,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.csv",
+      "value": 200,
+      "basis": "data/kalshi/tracker/daily/2026-09-26.csv",
       "method": "close_time after 2027-12-31T23:59:59Z — open now, settles years from now, outside the 2026 season (see SEASON in src/contest/forward-universe.js)"
     },
     {
       "step": "7a. …of which actually traded that day",
       "value": 0,
-      "basis": "data/kalshi/tracker/daily/2026-09-25.csv",
+      "basis": "data/kalshi/tracker/daily/2026-09-26.csv",
       "method": "volume_24h > 0 — the only markets the contest engine will fill in"
     },
     {
       "step": "X1. independent Python collector, exchange-wide active markets",
-      "value": 133698,
+      "value": 135660,
       "basis": "data/kalshi/LATEST.json",
       "method": "https://external-api.kalshi.com/trade-api/v2 GET /markets?status=open (top 2000 by volume listed) — a DIFFERENT query shape from rung 3, so the totals are not expected to match"
     },
     {
       "step": "X2. independent Python collector, politics-filtered markets",
-      "value": 29252,
+      "value": 29291,
       "basis": "data/kalshi/LATEST.json",
       "method": "client-side filter on the allowlist of 4,185 politics/elections series"
     }
@@ -114,7 +114,7 @@
   "largestSeries": [
     {
       "series": "KXVOTEGENERAL",
-      "markets": 9002
+      "markets": 9011
     },
     {
       "series": "KXMIDTERMMOV",
@@ -195,7 +195,7 @@
   ],
   "universeDefinition": "contest-eligible = the market's series carries the collected US-election tag, the market appears in that day's captured panel with a two-sided book (yes_bid > 0, yes_ask < 1), and its close_time is strictly after that date. Defined once, in src/contest/forward-universe.js.",
   "discrepancies": [
-    "Measurement note (not an error): this list holds 24491 markets from https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker={each politics/elections series}&status=open (cursor-paginated), while the daily events feed recorded 24721 open political/election markets at 2026-09-25T17:25:33.044Z. The two use different endpoints (/markets?series_ticker=… per series vs /events?status=open) and are captured minutes apart, so small differences are expected; a large one means one of the collectors changed behaviour and should be investigated."
+    "Measurement note (not an error): this list holds 24529 markets from https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker={each politics/elections series}&status=open (cursor-paginated), while the daily events feed recorded 24757 open political/election markets at 2026-09-26T16:35:01.662Z. The two use different endpoints (/markets?series_ticker=… per series vs /events?status=open) and are captured minutes apart, so small differences are expected; a large one means one of the collectors changed behaviour and should be investigated."
   ],
   "errors": [],
   "gate": {
