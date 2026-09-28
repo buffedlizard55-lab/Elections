@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/kalshi/tracker/daily/*.csv (captured price panels) + data/kalshi/universe/latest.json + data/kalshi/forward/universe-open.json",
-  "capturedAt": "2026-09-27T17:52:05.326Z",
+  "capturedAt": "2026-09-28T20:25:59.285Z",
   "dates": [
     "2026-09-19",
     "2026-09-20",
@@ -10,7 +10,8 @@
     "2026-09-24",
     "2026-09-25",
     "2026-09-26",
-    "2026-09-27"
+    "2026-09-27",
+    "2026-09-28"
   ],
   "perDate": {
     "2026-09-19": {
@@ -84,25 +85,33 @@
       "noUsableBook": 623,
       "eligible": 6747,
       "tradedOnDay": 1100
+    },
+    "2026-09-28": {
+      "panelRows": 11953,
+      "notElectionSeries": 3588,
+      "notInSeasonWindow": 773,
+      "noUsableBook": 611,
+      "eligible": 6981,
+      "tradedOnDay": 1286
     }
   },
   "rejectionReasons": {
-    "not-us-election-series": 31603,
-    "closes-after-season-window": 6902,
-    "book-not-two-sided-at-capture": 6916
+    "not-us-election-series": 35191,
+    "closes-after-season-window": 7675,
+    "book-not-two-sided-at-capture": 7527
   },
   "exclusionReasonTally": {
-    "notElectionSeries": 31603,
-    "notInSeasonWindow": 6902,
-    "noUsableBook": 6916
+    "notElectionSeries": 35191,
+    "notInSeasonWindow": 7675,
+    "noUsableBook": 7527
   },
   "exclusionTallyNote": "Sums of the per-date counts above, one row per excluded market-day. A market present on three captured days and ineligible on all three is counted three times, because each day it occupied a slot the contest could otherwise have filled.",
   "seriesCoverage": {
-    "distinctSeries": 470,
-    "distinctTickers": 7023,
+    "distinctSeries": 473,
+    "distinctTickers": 7250,
     "seriesResolvedFromTickerPrefix": 8,
-    "rowsPassingSeriesTag": 69400
+    "rowsPassingSeriesTag": 77765
   },
-  "distinctTickers": 7023,
+  "distinctTickers": 7250,
   "definition": "A market/day is contest-eligible when its series is US-election tagged in the captured universe, it appears in that day's captured panel, its yes_bid/yes_ask form a real two-sided book, and its close_time is on or before 2027-12-31T23:59:59Z. NOTE: close_time is the exchange's listing-expiry field, not the resolution date (SENATEAK-26-D, a 2026 race, carries 2027-11-03), so the bound scopes the 2026 cycle rather than dating a settlement. A market can only be FILLED on a day it actually traded (volume_24h > 0); the eligible count is the quoting set, the traded count is the fillable set."
 }

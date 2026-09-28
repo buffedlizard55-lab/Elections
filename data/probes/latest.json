@@ -1,13 +1,13 @@
 {
  "title": "Host re-test monitor — what each previously unreachable URL answered from this runner",
  "capturedFrom": "data/probes/targets.json (URLs) fetched by scripts/probe-hosts.mjs",
- "capturedAt": "2026-09-27T17:49:02.595Z",
+ "capturedAt": "2026-09-28T20:23:07.227Z",
  "runner": {
   "platform": "linux",
   "node": "v22.23.2",
   "chrome": "/usr/bin/google-chrome",
   "github": {
-   "runId": "36335869020",
+   "runId": "36474627393",
    "workflow": "daily-collection",
    "ref": "main"
   }
@@ -32,8 +32,8 @@
   "selzerco": "reachable",
   "statenavigate-api-docs": "reachable",
   "statenavigate-national": "reachable",
-  "metaculus-hub": "blocked-cloudflare-challenge",
-  "metaculus-senate-states": "blocked-cloudflare-challenge",
+  "metaculus-hub": "reachable-rendered-only",
+  "metaculus-senate-states": "reachable-rendered-only",
   "muhlenberg-poll-library": "reachable",
   "fandmpoll": "reachable",
   "270towin-home": "reachable",
@@ -54,7 +54,7 @@
    "url": "https://www.surveypoll.com/",
    "name": "SurveyUSA (client results host)",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:02.598Z",
+   "capturedAt": "2026-09-28T20:23:07.230Z",
    "fetch": {
     "ok": false,
     "status": 0,
@@ -96,7 +96,7 @@
    "url": "https://www.surveyusa.com/",
    "name": "SurveyUSA (corporate site)",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:04.321Z",
+   "capturedAt": "2026-09-28T20:23:08.462Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -123,7 +123,7 @@
    "url": "https://harrisx.com/",
    "name": "HarrisX (political polling brand; not Harris Poll)",
    "irregularity": 43,
-   "capturedAt": "2026-09-27T17:49:04.937Z",
+   "capturedAt": "2026-09-28T20:23:09.113Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -150,7 +150,7 @@
    "url": "https://thehillx.com/",
    "name": "The Hill / HarrisX poll site",
    "irregularity": 43,
-   "capturedAt": "2026-09-27T17:49:05.690Z",
+   "capturedAt": "2026-09-28T20:23:09.955Z",
    "fetch": {
     "ok": false,
     "status": 0,
@@ -177,7 +177,7 @@
    "url": "https://www.courtlistener.com/api/rest/v4/",
    "name": "CourtListener REST API root (v4)",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:06.145Z",
+   "capturedAt": "2026-09-28T20:23:10.464Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -204,7 +204,7 @@
    "url": "https://election.princeton.edu/",
    "name": "Princeton Election Consortium",
    "irregularity": 53,
-   "capturedAt": "2026-09-27T17:49:06.625Z",
+   "capturedAt": "2026-09-28T20:23:11.171Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -231,7 +231,7 @@
    "url": "https://split-ticket.org/",
    "name": "Split Ticket",
    "irregularity": 53,
-   "capturedAt": "2026-09-27T17:49:07.623Z",
+   "capturedAt": "2026-09-28T20:23:11.945Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -258,7 +258,7 @@
    "url": "https://elections.wi.gov/elections-voting",
    "name": "Wisconsin Elections Commission — /elections-voting",
    "irregularity": 40,
-   "capturedAt": "2026-09-27T17:49:08.228Z",
+   "capturedAt": "2026-09-28T20:23:12.449Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -293,7 +293,7 @@
    "url": "https://www.nvsos.gov/sos-elections",
    "name": "Nevada SoS — legacy /sos-elections path",
    "irregularity": 41,
-   "capturedAt": "2026-09-27T17:49:08.775Z",
+   "capturedAt": "2026-09-28T20:23:13.038Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -313,12 +313,12 @@
       "status": 403,
       "finalUrl": "https://www.nvsos.gov/sos-elections",
       "contentType": "text/html",
-      "bytes": 597,
+      "bytes": 596,
       "challenge": "akamai-block"
      }
     ],
     "title": "Access Denied",
-    "sample": "Access Denied Access Denied You don't have permission to access \"http www nvsos gov sos elections\" on this server. Reference 18 8a1c1602 1790531348 5764e368 https errors edgesuite net 18 8a1c1602 1790531348 5764e368",
+    "sample": "Access Denied Access Denied You don't have permission to access \"http www nvsos gov sos elections\" on this server. Reference 18 e6263e17 1790626993 22899144 https errors edgesuite net 18 e6263e17 1790626993 22899144",
     "error": null
    },
    "verdict": "blocked-akamai-block"
@@ -328,7 +328,7 @@
    "url": "https://elections.cdn.sos.ca.gov/",
    "name": "California SoS results/statements CDN",
    "irregularity": 42,
-   "capturedAt": "2026-09-27T17:49:09.371Z",
+   "capturedAt": "2026-09-28T20:23:13.741Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -363,7 +363,7 @@
    "url": "https://www.sec.state.ma.us/divisions/elections/",
    "name": "Massachusetts Elections Division root",
    "irregularity": 51,
-   "capturedAt": "2026-09-27T17:49:09.855Z",
+   "capturedAt": "2026-09-28T20:23:14.500Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -375,7 +375,7 @@
       "status": 403,
       "finalUrl": "https://www.sec.state.ma.us/divisions/elections/",
       "contentType": "text/html",
-      "bytes": 1365,
+      "bytes": 1367,
       "challenge": "imperva-block"
      },
      {
@@ -398,7 +398,7 @@
    "url": "https://results.enr.clarityelections.com/GA/",
    "name": "Georgia official results host (Clarity/Scytl ENR)",
    "irregularity": 35,
-   "capturedAt": "2026-09-27T17:49:10.477Z",
+   "capturedAt": "2026-09-28T20:23:15.128Z",
    "fetch": {
     "ok": true,
     "status": 202,
@@ -445,7 +445,7 @@
    "url": "https://www.sos.nh.gov/elections",
    "name": "New Hampshire SoS elections",
    "irregularity": 35,
-   "capturedAt": "2026-09-27T17:49:12.399Z",
+   "capturedAt": "2026-09-28T20:23:17.486Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -457,7 +457,7 @@
       "status": 403,
       "finalUrl": "https://www.sos.nh.gov/elections",
       "contentType": "text/html",
-      "bytes": 381,
+      "bytes": 377,
       "challenge": "akamai-block"
      },
      {
@@ -480,7 +480,7 @@
    "url": "https://www.nytimes.com/interactive/2026/07/01/polls/times-siena-alaska-poll-toplines.html",
    "name": "NYT/Siena Alaska toplines (n / MoE / field dates)",
    "irregularity": 35,
-   "capturedAt": "2026-09-27T17:49:13.357Z",
+   "capturedAt": "2026-09-28T20:23:18.373Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -515,7 +515,7 @@
    "url": "https://healthyelections.org/",
    "name": "healthyelections.org (Stanford–MIT project, archived at MIT)",
    "irregularity": 45,
-   "capturedAt": "2026-09-27T17:49:13.899Z",
+   "capturedAt": "2026-09-28T20:23:18.987Z",
    "fetch": {
     "ok": false,
     "status": 0,
@@ -542,7 +542,7 @@
    "url": "https://selzerco.com/",
    "name": "Selzer & Co.",
    "irregularity": 48,
-   "capturedAt": "2026-09-27T17:49:15.074Z",
+   "capturedAt": "2026-09-28T20:23:19.957Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -584,7 +584,7 @@
    "url": "https://data.statenavigate.com/",
    "name": "State Navigate API documentation host",
    "irregularity": 55,
-   "capturedAt": "2026-09-27T17:49:16.715Z",
+   "capturedAt": "2026-09-28T20:23:22.083Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -626,7 +626,7 @@
    "url": "https://projects.statenavigate.com/25-26/national/",
    "name": "State Navigate national forecast page",
    "irregularity": 58,
-   "capturedAt": "2026-09-27T17:49:17.819Z",
+   "capturedAt": "2026-09-28T20:23:23.042Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -638,7 +638,7 @@
       "status": 200,
       "finalUrl": "https://projects.statenavigate.com/25-26/national/",
       "contentType": "text/html; charset=utf-8",
-      "bytes": 18268,
+      "bytes": 18314,
       "challenge": null
      }
     ],
@@ -651,12 +651,12 @@
     "bin": "/usr/bin/google-chrome",
     "challenge": null,
     "title": "2026 National Statehouse Forecast | State Navigate",
-    "textLength": 5626,
+    "textLength": 5634,
     "sample": "2026 National Statehouse Forecast | State Navigate Skip to the national forecast About Us ↘ Our Mission About Us Donors Get Connected ↘ Sponsorships Donate Data Downloads Newsletter Contact Us Events Select a State ↘ Alaska Colorado Florida Georgia Iowa Michigan Minnesota New Jersey New York North C",
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 95842,
+      "bytes": 96340,
       "challenge": null
      }
     ]
@@ -668,7 +668,7 @@
    "url": "https://www.metaculus.com/midterms-2026/",
    "name": "Metaculus midterms hub",
    "irregularity": 58,
-   "capturedAt": "2026-09-27T17:49:19.995Z",
+   "capturedAt": "2026-09-28T20:23:24.726Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -699,31 +699,26 @@
    "render": {
     "ok": true,
     "bin": "/usr/bin/google-chrome",
-    "challenge": "cloudflare-challenge",
-    "title": "Just a moment...",
-    "textLength": 346,
-    "sample": "Just a moment... www.metaculus.com Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting for www.metaculus.com to respond Ray ID: a41c58328debdf82 ",
+    "challenge": null,
+    "title": "2026 US Midterm Elections | Metaculus",
+    "textLength": 29252,
+    "sample": "2026 US Midterm Elections | Metaculus Questions Tournaments Services News Questions Tournaments Questions Questions More Log in Sign Up Log in Sign Up 2026 US Midterm Elections Real-time forecasts from the Metaculus community. Forecasts from the Metaculus community on contested races and the policie",
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 28517,
-      "challenge": "cloudflare-challenge"
-     },
-     {
-      "budgetMs": 35000,
-      "bytes": 28517,
-      "challenge": "cloudflare-challenge"
+      "bytes": 4837835,
+      "challenge": null
      }
     ]
    },
-   "verdict": "blocked-cloudflare-challenge"
+   "verdict": "reachable-rendered-only"
   },
   {
    "id": "metaculus-senate-states",
    "url": "https://www.metaculus.com/questions/40598/",
    "name": "Metaculus — Democrat wins 2026 Senate election in these states? (question group)",
    "irregularity": 58,
-   "capturedAt": "2026-09-27T17:49:23.020Z",
+   "capturedAt": "2026-09-28T20:23:31.738Z",
    "fetch": {
     "ok": false,
     "status": 403,
@@ -735,7 +730,7 @@
       "status": 403,
       "finalUrl": "https://www.metaculus.com/questions/40598/",
       "contentType": "text/html; charset=UTF-8",
-      "bytes": 5626,
+      "bytes": 5647,
       "challenge": "cloudflare-challenge"
      },
      {
@@ -754,31 +749,26 @@
    "render": {
     "ok": true,
     "bin": "/usr/bin/google-chrome",
-    "challenge": "cloudflare-challenge",
-    "title": "Just a moment...",
-    "textLength": 346,
-    "sample": "Just a moment... www.metaculus.com Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Verification successful. Waiting for www.metaculus.com to respond Ray ID: a41c58444d3feb26 ",
+    "challenge": null,
+    "title": "Democrat Wins 2026 Senate Election in these states?",
+    "textLength": 5224,
+    "sample": "Democrat Wins 2026 Senate Election in these states? Questions Tournaments Services News Questions Tournaments Questions Questions More Log in Sign Up Log in Sign Up 8 134 forecasters 3 8 comments Closes Nov 3, 2026 134 forecasters US Midterms 2026 3 more ... Will the Democratic candidate win the 202",
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 28544,
-      "challenge": "cloudflare-challenge"
-     },
-     {
-      "budgetMs": 35000,
-      "bytes": 28544,
-      "challenge": "cloudflare-challenge"
+      "bytes": 2071232,
+      "challenge": null
      }
     ]
    },
-   "verdict": "blocked-cloudflare-challenge"
+   "verdict": "reachable-rendered-only"
   },
   {
    "id": "muhlenberg-poll-library",
    "url": "https://www.muhlenberg.edu/academics/centers-and-institutes/institute-of-public-opinion/poll-library/",
    "name": "Muhlenberg College Institute of Public Opinion — poll library",
    "irregularity": 49,
-   "capturedAt": "2026-09-27T17:49:25.884Z",
+   "capturedAt": "2026-09-28T20:23:36.020Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -805,7 +795,7 @@
    "url": "https://www.fandmpoll.org/",
    "name": "Franklin & Marshall College Poll (fandmpoll.org)",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:26.376Z",
+   "capturedAt": "2026-09-28T20:23:36.696Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -817,7 +807,7 @@
       "status": 200,
       "finalUrl": "https://www.fandmpoll.org/",
       "contentType": "text/html; charset=utf-8",
-      "bytes": 126346,
+      "bytes": 120557,
       "challenge": null
      }
     ],
@@ -832,7 +822,7 @@
    "url": "https://www.270towin.com/",
    "name": "270toWin homepage (Kalshi panel for the R13 monitor)",
    "irregularity": 58,
-   "capturedAt": "2026-09-27T17:49:26.952Z",
+   "capturedAt": "2026-09-28T20:23:37.508Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -859,7 +849,7 @@
    "url": "https://cnalysis.com/",
    "name": "cnalysis.com (retired brand → statenavigate.org)",
    "irregularity": 52,
-   "capturedAt": "2026-09-27T17:49:27.404Z",
+   "capturedAt": "2026-09-28T20:23:38.013Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -871,7 +861,7 @@
       "status": 200,
       "finalUrl": "https://statenavigate.org/",
       "contentType": "text/html; charset=UTF-8",
-      "bytes": 127675,
+      "bytes": 127599,
       "challenge": null
      }
     ],
@@ -886,7 +876,7 @@
    "url": "https://results.surveyusa.com/client/PollReport.aspx?g=d7f40035-0e8c-4e35-b8ba-1891335ea708",
    "name": "SurveyUSA Poll #28000 (Minnesota, 09/16/26) report page",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:28.168Z",
+   "capturedAt": "2026-09-28T20:23:38.877Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -928,7 +918,7 @@
    "url": "https://results.surveyusa.com/PollHistory.aspx",
    "name": "SurveyUSA public poll archive (index)",
    "irregularity": 47,
-   "capturedAt": "2026-09-27T17:49:30.520Z",
+   "capturedAt": "2026-09-28T20:23:40.817Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -940,7 +930,7 @@
       "status": 200,
       "finalUrl": "https://results.surveyusa.com/PollHistory.aspx",
       "contentType": "text/html; charset=utf-8",
-      "bytes": 48597,
+      "bytes": 48612,
       "challenge": null
      }
     ],
@@ -955,7 +945,7 @@
    "url": "https://electionresults.sos.ca.gov/",
    "name": "California SoS live results host",
    "irregularity": 42,
-   "capturedAt": "2026-09-27T17:49:31.186Z",
+   "capturedAt": "2026-09-28T20:23:41.296Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -967,7 +957,7 @@
       "status": 200,
       "finalUrl": "https://www.sos.ca.gov/elections/prior-elections",
       "contentType": "text/html; charset=UTF-8",
-      "bytes": 62329,
+      "bytes": 62330,
       "challenge": null
      }
     ],
@@ -982,7 +972,7 @@
    "url": "https://results.enr.clarityelections.com/WV/126209",
    "name": "West Virginia primary results (Clarity ENR)",
    "irregularity": 35,
-   "capturedAt": "2026-09-27T17:49:31.706Z",
+   "capturedAt": "2026-09-28T20:23:42.003Z",
    "fetch": {
     "ok": true,
     "status": 202,
@@ -1024,7 +1014,7 @@
    "url": "https://www.highpoint.edu/blog/2026/04/hpu-poll-120-north-carolina-likely-voters-weigh-in-on-u-s-senate-north-carolina-supreme-court-races/",
    "name": "HPU Poll 120 (NC Senate, April 2026) release",
    "irregularity": null,
-   "capturedAt": "2026-09-27T17:51:17.233Z",
+   "capturedAt": "2026-09-28T20:25:27.709Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -1051,7 +1041,7 @@
    "url": "https://www.winthrop.edu/winthroppoll/poll-results.aspx",
    "name": "Winthrop Poll results index",
    "irregularity": null,
-   "capturedAt": "2026-09-27T17:51:17.966Z",
+   "capturedAt": "2026-09-28T20:25:28.819Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -1078,7 +1068,7 @@
    "url": "https://elections.bexar.gov/",
    "name": "Bexar County Elections (TX)",
    "irregularity": null,
-   "capturedAt": "2026-09-27T17:51:18.925Z",
+   "capturedAt": "2026-09-28T20:25:29.751Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -1108,7 +1098,7 @@
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 165098,
+      "bytes": 165100,
       "challenge": null
      }
     ]
@@ -1120,7 +1110,7 @@
    "url": "https://www.tarrantcountytx.gov/en/elections.html",
    "name": "Tarrant County Elections (TX)",
    "irregularity": null,
-   "capturedAt": "2026-09-27T17:51:22.630Z",
+   "capturedAt": "2026-09-28T20:25:32.478Z",
    "fetch": {
     "ok": true,
     "status": 200,
@@ -1132,7 +1122,7 @@
       "status": 200,
       "finalUrl": "https://www.tarrantcountytx.gov/en/elections.html",
       "contentType": "text/html;charset=utf-8",
-      "bytes": 378679,
+      "bytes": 378657,
       "challenge": null
      }
     ],
@@ -1146,11 +1136,11 @@
     "challenge": null,
     "title": "Elections",
     "textLength": 12686,
-    "sample": "Elections Skip to Main Content Select Language Abkhaz Acehnese Acholi Afar Afrikaans Albanian Alur Amharic Arabic Armenian Assamese Avar Awadhi Aymara Azerbaijani Balinese Baluchi Bambara Baoulé Bashkir Basque Batak Karo Batak Simalungun Batak Toba Belarusian Bemba Bengali Betawi Bhojpuri Bikol Bosn",
+    "sample": "Elections Original text Rate this translation Your feedback will be used to help improve Google Translate Skip to Main Content Select Language Abkhaz Acehnese Acholi Afar Afrikaans Albanian Alur Amharic Arabic Armenian Assamese Avar Awadhi Aymara Azerbaijani Balinese Baluchi Bambara Baoulé Bashkir B",
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 418611,
+      "bytes": 418595,
       "challenge": null
      }
     ]
@@ -1162,27 +1152,19 @@
    "url": "https://www.hennepincounty.gov/services/elections",
    "name": "Hennepin County Elections (MN)",
    "irregularity": null,
-   "capturedAt": "2026-09-27T17:51:26.151Z",
+   "capturedAt": "2026-09-28T20:25:35.368Z",
    "fetch": {
     "ok": true,
     "status": 200,
     "finalUrl": "https://www.hennepincounty.gov/services/elections",
-    "profile": "browser",
+    "profile": "project",
     "attempts": [
      {
       "profile": "project",
-      "status": 403,
-      "finalUrl": "https://www.hennepincounty.gov/services/elections",
-      "contentType": "text/html",
-      "bytes": 9308,
-      "challenge": null
-     },
-     {
-      "profile": "browser",
       "status": 200,
       "finalUrl": "https://www.hennepincounty.gov/services/elections",
       "contentType": "text/html; charset=utf-8",
-      "bytes": 99006,
+      "bytes": 99126,
       "challenge": null
      }
     ],
@@ -1200,7 +1182,7 @@
     "attempts": [
      {
       "budgetMs": 20000,
-      "bytes": 217157,
+      "bytes": 217275,
       "challenge": null
      }
     ]
