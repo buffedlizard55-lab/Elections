@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-09-28T19:47:18.306Z",
+ "capturedAt": "2026-09-29T18:11:54.713Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 650,
- "scoreableMarkets": 328,
+ "settledMarkets": 704,
+ "scoreableMarkets": 382,
  "observationsExcludedAsLookAhead": 80,
- "trackedMarkets": 12320,
+ "trackedMarkets": 12553,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -17,29 +17,30 @@
   "2026-09-25",
   "2026-09-26",
   "2026-09-27",
-  "2026-09-28"
+  "2026-09-28",
+  "2026-09-29"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 328,
-   "meanBrier": 0.06048451600609753,
-   "meanLogloss": 0.2016375764681608,
-   "meanP": 0.31989176829268356
+   "nMarkets": 382,
+   "meanBrier": 0.06243153468586387,
+   "meanLogloss": 0.2082375816555937,
+   "meanP": 0.3192133507853408
   },
   {
    "nDays": 3,
-   "nMarkets": 195,
-   "meanBrier": 0.07718142692307685,
-   "meanLogloss": 0.26569064090856487,
-   "meanP": 0.38364358974358975
+   "nMarkets": 240,
+   "meanBrier": 0.07526709687499994,
+   "meanLogloss": 0.2593668994331246,
+   "meanP": 0.37539791666666666
   },
   {
    "nDays": 7,
-   "nMarkets": 25,
-   "meanBrier": 0.21317599999999998,
-   "meanLogloss": 0.6284887451702456,
-   "meanP": 0.19799999999999998
+   "nMarkets": 65,
+   "meanBrier": 0.13306615384615386,
+   "meanLogloss": 0.40905570932939206,
+   "meanP": 0.2683076923076923
   },
   {
    "nDays": 14,
@@ -60,72 +61,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 450,
-   "meanP": 0.03272222222222221,
-   "observedYesRate": 0.028888888888888888
+   "n": 628,
+   "meanP": 0.0327627388535032,
+   "observedYesRate": 0.020700636942675158
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 116,
-   "meanP": 0.13624999999999998,
-   "observedYesRate": 0.13793103448275862
+   "n": 182,
+   "meanP": 0.1411813186813187,
+   "observedYesRate": 0.14835164835164835
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 59,
-   "meanP": 0.24627118644067789,
-   "observedYesRate": 0.2711864406779661
+   "n": 85,
+   "meanP": 0.2438235294117647,
+   "observedYesRate": 0.18823529411764706
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 38,
-   "meanP": 0.3405263157894737,
-   "observedYesRate": 0.5263157894736842
+   "n": 49,
+   "meanP": 0.34183673469387754,
+   "observedYesRate": 0.40816326530612246
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 29,
-   "meanP": 0.44086206896551716,
-   "observedYesRate": 0.5172413793103449
+   "n": 34,
+   "meanP": 0.43970588235294117,
+   "observedYesRate": 0.5588235294117647
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 22,
-   "meanP": 0.5436363636363637,
-   "observedYesRate": 0.3181818181818182
+   "n": 34,
+   "meanP": 0.5438235294117647,
+   "observedYesRate": 0.29411764705882354
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 26,
-   "meanP": 0.6473076923076925,
-   "observedYesRate": 0.5
+   "n": 37,
+   "meanP": 0.6459459459459461,
+   "observedYesRate": 0.43243243243243246
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 37,
-   "meanP": 0.7609459459459461,
-   "observedYesRate": 0.8378378378378378
+   "n": 47,
+   "meanP": 0.7562765957446811,
+   "observedYesRate": 0.7872340425531915
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 30,
-   "meanP": 0.8450000000000002,
-   "observedYesRate": 0.8
+   "n": 63,
+   "meanP": 0.8434126984126985,
+   "observedYesRate": 0.8253968253968254
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 192,
-   "meanP": 0.9668385416666677,
-   "observedYesRate": 0.9322916666666666
+   "n": 248,
+   "meanP": 0.9627338709677433,
+   "observedYesRate": 0.9274193548387096
   }
  ],
  "perMarket": [
@@ -31860,6 +31861,2737 @@
      "date": "2026-09-21",
      "brier": 0.39690000000000003,
      "logloss": 0.994252273343867
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26SEP27-T150",
+   "title": "Will there be more than 150 transit calls through the Bab el-Mandeb Strait from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.97,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.905,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.009024999999999995,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 7,
+     "p": 0.8,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.03999999999999998,
+     "logloss": 0.2231435513142097
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26SEP27-T175",
+   "title": "Will there be more than 175 transit calls through the Bab el-Mandeb Strait from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.835,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.027225000000000013,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 3,
+     "p": 0.64,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.1296,
+     "logloss": 0.4462871026284195
+    },
+    {
+     "nDays": 7,
+     "p": 0.425,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.33062499999999995,
+     "logloss": 0.8556661100577203
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26SEP27-T200",
+   "title": "Will there be more than 200 transit calls through the Bab el-Mandeb Strait from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 7,
+     "p": 0.14,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.019600000000000003,
+     "logloss": 0.15082288973458366
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26SEP27-T225",
+   "title": "Will there be more than 225 transit calls through the Bab el-Mandeb Strait from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26SEP27-T250",
+   "title": "Will there be more than 250 transit calls through the Bab el-Mandeb Strait from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCBRATEHIKE-27-RBA",
+   "title": "Will the Reserve Bank of Australia raise its cash rate target before 2027?",
+   "series_ticker": "KXCBRATEHIKE",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.945,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0030250000000000055,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP21",
+   "title": "Will September 21 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP22",
+   "title": "Will September 22 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.075,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.005625,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP23",
+   "title": "Will September 23 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.28,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.07840000000000001,
+     "logloss": 0.3285040669720361
+    },
+    {
+     "nDays": 3,
+     "p": 0.22499999999999998,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.05062499999999999,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 7,
+     "p": 0.165,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.027225000000000003,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP24",
+   "title": "Will September 24 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.7310249999999999,
+     "logloss": 1.9310215365615626
+    },
+    {
+     "nDays": 3,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.7310249999999999,
+     "logloss": 1.9310215365615626
+    },
+    {
+     "nDays": 7,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.7310249999999999,
+     "logloss": 1.9310215365615626
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP25",
+   "title": "Will September 25 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 3,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 7,
+     "p": 0.215,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.046224999999999995,
+     "logloss": 0.24207156119972859
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP26",
+   "title": "Will September 26 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.19,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 3,
+     "p": 0.195,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.038025,
+     "logloss": 0.21691300156357377
+    },
+    {
+     "nDays": 7,
+     "p": 0.22000000000000003,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.04840000000000001,
+     "logloss": 0.2484613592984996
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26SEP27-SEP27",
+   "title": "Will September 27 be the day with the most transit calls through the Strait of Hormuz (9/21 - 9/27)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.024025,
+     "logloss": 0.16841865162496322
+    },
+    {
+     "nDays": 3,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.024025,
+     "logloss": 0.16841865162496322
+    },
+    {
+     "nDays": 7,
+     "p": 0.15000000000000002,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T10",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 10 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T15",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 15 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T20",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 20 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T25",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 25 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T30",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 30 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26SEP27-T5",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 5 from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.925,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.8556250000000001,
+     "logloss": 2.590267165445827
+    },
+    {
+     "nDays": 3,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.8742250000000001,
+     "logloss": 2.733368009086501
+    },
+    {
+     "nDays": 7,
+     "p": 0.8,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.6400000000000001,
+     "logloss": 1.6094379124341005
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T10",
+   "title": "Will there be more than 10 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T100",
+   "title": "Will there be more than 100 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T15",
+   "title": "Will there be more than 15 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.004224999999999993,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T20",
+   "title": "Will there be more than 20 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.925,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.005624999999999994,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 7,
+     "p": 0.71,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.08410000000000002,
+     "logloss": 0.342490308946776
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T25",
+   "title": "Will there be more than 25 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.61,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.3721,
+     "logloss": 0.9416085398584448
+    },
+    {
+     "nDays": 3,
+     "p": 0.335,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.11222500000000002,
+     "logloss": 0.4079682383262829
+    },
+    {
+     "nDays": 7,
+     "p": 0.315,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.09922500000000001,
+     "logloss": 0.3783364407199117
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T30",
+   "title": "Will there be more than 30 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.28,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.07840000000000001,
+     "logloss": 0.3285040669720361
+    },
+    {
+     "nDays": 3,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 7,
+     "p": 0.16,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T35",
+   "title": "Will there be more than 35 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T40",
+   "title": "Will there be more than 40 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T45",
+   "title": "Will there be more than 45 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T50",
+   "title": "Will there be more than 50 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26SEP27-T75",
+   "title": "Will there be more than 75 transit calls through the Strait of Hormuz from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T175",
+   "title": "Will there be more than 175 transit calls through the Panama Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 3,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 7,
+     "p": 0.94,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T200",
+   "title": "Will there be more than 200 transit calls through the Panama Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 3,
+     "p": 0.26,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.06760000000000001,
+     "logloss": 0.3011050927839216
+    },
+    {
+     "nDays": 7,
+     "p": 0.29,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.0841,
+     "logloss": 0.342490308946776
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T225",
+   "title": "Will there be more than 225 transit calls through the Panama Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T250",
+   "title": "Will there be more than 250 transit calls through the Panama Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26SEP27-T275",
+   "title": "Will there be more than 275 transit calls through the Panama Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEDEMVOTES-PCSASENDEMYEA26OCT01R-GE10",
+   "title": "Will at least 10 Democrats vote for the Protect College Sports Act in the Senate?",
+   "series_ticker": "KXSENATEDEMVOTES",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEDEMVOTES-PCSASENDEMYEA26OCT01R-GE15",
+   "title": "Will at least 15 Democrats vote for the Protect College Sports Act in the Senate?",
+   "series_ticker": "KXSENATEDEMVOTES",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.89,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.012099999999999998,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 3,
+     "p": 0.91,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.008099999999999994,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEDEMVOTES-PCSASENDEMYEA26OCT01R-GE20",
+   "title": "Will at least 20 Democrats vote for the Protect College Sports Act in the Senate?",
+   "series_ticker": "KXSENATEDEMVOTES",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.86,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.019600000000000003,
+     "logloss": 0.15082288973458366
+    },
+    {
+     "nDays": 3,
+     "p": 0.89,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.012099999999999998,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEDEMVOTES-PCSASENDEMYEA26OCT01R-GE30",
+   "title": "Will at least 30 Democrats vote for the Protect College Sports Act in the Senate?",
+   "series_ticker": "KXSENATEDEMVOTES",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 3,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSENATEDEMVOTES-PCSASENDEMYEA26OCT01R-GE35",
+   "title": "Will at least 35 Democrats vote for the Protect College Sports Act in the Senate?",
+   "series_ticker": "KXSENATEDEMVOTES",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-26",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26SEP27-T260",
+   "title": "Will there be more than 260 transit calls through the Suez Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.945,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0030250000000000055,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.945,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0030250000000000055,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 7,
+     "p": 0.875,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26SEP27-T270",
+   "title": "Will there be more than 270 transit calls through the Suez Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-21",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.8049999999999999,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.038025000000000024,
+     "logloss": 0.21691300156357377
+    },
+    {
+     "nDays": 3,
+     "p": 0.81,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.03609999999999998,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 7,
+     "p": 0.775,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.05062499999999999,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26SEP27-T280",
+   "title": "Will there be more than 280 transit calls through the Suez Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.72,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.5184,
+     "logloss": 1.2729656758128873
+    },
+    {
+     "nDays": 3,
+     "p": 0.71,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.5041,
+     "logloss": 1.2378743560016172
+    },
+    {
+     "nDays": 7,
+     "p": 0.685,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.46922500000000006,
+     "logloss": 1.1551826401565042
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26SEP27-T290",
+   "title": "Will there be more than 290 transit calls through the Suez Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.46499999999999997,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.21622499999999997,
+     "logloss": 0.6254885320861304
+    },
+    {
+     "nDays": 3,
+     "p": 0.525,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.275625,
+     "logloss": 0.7444404749474959
+    },
+    {
+     "nDays": 7,
+     "p": 0.52,
+     "basis": "mid",
+     "date": "2026-09-22",
+     "brier": 0.27040000000000003,
+     "logloss": 0.7339691750802004
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26SEP27-T300",
+   "title": "Will there be more than 300 transit calls through the Suez Canal from Sep 21, 2026 to Sep 27, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.050625,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 3,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 7,
+     "p": 0.5,
+     "basis": "last",
+     "date": "2026-09-22",
+     "brier": 0.25,
+     "logloss": 0.6931471805599453
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-A39.0",
+   "title": "Will Trump's RCP approval average be above 39.0 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.4",
+   "title": "Will Trump's RCP approval average be exactly 38.4 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.5",
+   "title": "Will Trump's RCP approval average be exactly 38.5 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.6",
+   "title": "Will Trump's RCP approval average be exactly 38.6 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.024025,
+     "logloss": 0.16841865162496322
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.7",
+   "title": "Will Trump's RCP approval average be exactly 38.7 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21500000000000002,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.04622500000000001,
+     "logloss": 0.24207156119972872
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.8",
+   "title": "Will Trump's RCP approval average be exactly 38.8 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.22499999999999998,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.05062499999999999,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E38.9",
+   "title": "Will Trump's RCP approval average be exactly 38.9 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.175,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.6806249999999999,
+     "logloss": 1.742969305058623
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-E39.0",
+   "title": "Will Trump's RCP approval average be exactly 39.0 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26SEP29-U38.4",
+   "title": "Will Trump's RCP approval average be below 38.4 on Sep 29, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-09-29",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-09-28",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-28",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
     },
     {
      "nDays": 14,

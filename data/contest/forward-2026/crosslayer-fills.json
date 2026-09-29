@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/crosslayer/snapshots.json + the crosslayer-arb fill log + that day's eligible panel",
-  "capturedAt": "2026-09-28T20:25:59.285Z",
+  "capturedAt": "2026-09-29T18:52:57.538Z",
   "method": "Crowd extraction matches buildSignals: dedupe key is asOf|question, first row wins, metaculus when it is a number else ddhq. The binding snapshot is the prior row (asOf strictly before the trading day) for that ticker with the largest absolute gap of crowdProb minus that day's panel mid that clears the strategy threshold. An equal absolute gap keeps the first row. The fill price is checked against the taker cross (a NO entry pays 1 - yes_bid) and the fee against takerFee on the fill's series.",
   "threshold": 0.05,
   "entrant": "crosslayer-arb",
@@ -191,6 +191,85 @@
           "asOf": "2026-09-26",
           "crowdProb": 0.88,
           "gap": 0.05,
+          "clears": true
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "ticker": "SENATEMN-26-D",
+      "series": "SENATEMN",
+      "side": "YES",
+      "shares": 30.94,
+      "price": 0.9,
+      "fee": 0.195,
+      "executedAt": "yes_ask",
+      "tied": true,
+      "reason": null,
+      "binding": {
+        "snapshotId": "2026-09-28-senate-mn-2026",
+        "question": "SENATE-MN-2026",
+        "asOf": "2026-09-28",
+        "crowdLayer": "metaculus",
+        "crowdProb": 0.95,
+        "kalshiSnapshotMid": 0.895,
+        "panelMid": 0.895,
+        "gap": 0.055,
+        "expectedSide": "YES",
+        "expectedPrice": 0.9,
+        "expectedFee": 0.195,
+        "priceMatches": true,
+        "feeMatches": true,
+        "sideMatches": true
+      },
+      "candidates": [
+        {
+          "snapshotId": "2026-09-20-senate-mn-2026",
+          "asOf": "2026-09-20",
+          "crowdProb": 0.92,
+          "gap": 0.025,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-21-senate-mn-2026",
+          "asOf": "2026-09-21",
+          "crowdProb": 0.93,
+          "gap": 0.035,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-22-senate-mn-2026",
+          "asOf": "2026-09-22",
+          "crowdProb": 0.93,
+          "gap": 0.035,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-24-senate-mn-2026",
+          "asOf": "2026-09-24",
+          "crowdProb": 0.94,
+          "gap": 0.045,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-25-senate-mn-2026",
+          "asOf": "2026-09-25",
+          "crowdProb": 0.94,
+          "gap": 0.045,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-26-senate-mn-2026",
+          "asOf": "2026-09-26",
+          "crowdProb": 0.94,
+          "gap": 0.045,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-28-senate-mn-2026",
+          "asOf": "2026-09-28",
+          "crowdProb": 0.95,
+          "gap": 0.055,
           "clears": true
         }
       ]

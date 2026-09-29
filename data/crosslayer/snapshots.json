@@ -1,7 +1,7 @@
 {
  "title": "Cross-layer snapshots — Kalshi vs Metaculus vs third-party renderings (scored only against official canvasses)",
  "capturedFrom": "Kalshi rows: data/kalshi/universe/latest.json (this project's own API capture). Metaculus rows: https://www.metaculus.com/midterms-2026/ (server-rendered hub numbers, fetched 2026-09-19). DDHQ rows: https://votes.decisiondeskhq.com/ (fetched 2026-09-19). EBO rows: https://electionbettingodds.com/ (fetched 2026-09-19 19:42 EDT stamp on page).",
- "capturedAt": "2026-09-28T20:21:48.815Z",
+ "capturedAt": "2026-09-29T18:46:21.879Z",
  "method": "One row per (question, capture). Each layer's probability is the number the layer itself published for 'Democrats win/control'; Kalshi and EBO are bid/ask ranges and are scored at their midpoint (src/crosslayer.js). Rows stay status=pending until data/crosslayer/outcomes.json carries an official canvass/certification for the question. No number below was computed by this project — every one was read from the cited page and can be re-checked at the link. Collectors (scripts/collect-metaculus.mjs, scripts/crosscheck-renderings.mjs) append new snapshots daily; this seed is the manual first capture.",
  "questions": {
   "SENATE-CONTROL-2026": {
@@ -2175,6 +2175,254 @@
      "ask": 0.005,
      "last": 0.005,
      "capturedAt": "2026-09-28T19:47:18.306Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44710/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate",
+   "question": "SENATE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.569,
+    "kalshi": {
+     "ticker": "CONTROLS-2026-D",
+     "bid": 0.62,
+     "ask": 0.63,
+     "last": 0.62,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/midterms-2026/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-house",
+   "question": "HOUSE-CONTROL-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.925,
+    "kalshi": {
+     "ticker": "CONTROLH-2026-D",
+     "bid": 0.915,
+     "ask": 0.916,
+     "last": 0.916,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/midterms-2026/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-ri-2026",
+   "question": "SENATE-RI-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.991,
+    "kalshi": {
+     "ticker": "SENATERI-26-D",
+     "bid": 0.987,
+     "ask": 0.99,
+     "last": 0.994,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-or-2026",
+   "question": "SENATE-OR-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.99,
+    "kalshi": {
+     "ticker": "SENATEOR-26-D",
+     "bid": 0.977,
+     "ask": 0.978,
+     "last": 0.978,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-co-2026",
+   "question": "SENATE-CO-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.98,
+    "kalshi": {
+     "ticker": "SENATECO-26-D",
+     "bid": 0.984,
+     "ask": 0.987,
+     "last": 0.984,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-mn-2026",
+   "question": "SENATE-MN-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.95,
+    "kalshi": {
+     "ticker": "SENATEMN-26-D",
+     "bid": 0.89,
+     "ask": 0.9,
+     "last": 0.9,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/40598/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-governor-hi-2026",
+   "question": "GOVERNOR-HI-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.98,
+    "kalshi": {
+     "ticker": "GOVPARTYHI-26-D",
+     "bid": 0.969,
+     "ask": 0.98,
+     "last": 0.98,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/43448/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-governor-nm-2026",
+   "question": "GOVERNOR-NM-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.925,
+    "kalshi": {
+     "ticker": "GOVPARTYNM-26-D",
+     "bid": 0.922,
+     "ask": 0.938,
+     "last": 0.941,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/43448/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-governor-or-2026",
+   "question": "GOVERNOR-OR-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.874,
+    "kalshi": {
+     "ticker": "GOVPARTYOR-26-D",
+     "bid": 0.81,
+     "ask": 0.82,
+     "last": 0.82,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/43448/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-governor-mi-2026",
+   "question": "GOVERNOR-MI-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.84,
+    "kalshi": {
+     "ticker": "GOVPARTYMI-26-D",
+     "bid": 0.918,
+     "ask": 0.934,
+     "last": 0.917,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/43448/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-ak-2026",
+   "question": "SENATE-AK-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.54,
+    "kalshi": {
+     "ticker": "SENATEAK-26-D",
+     "bid": 0.69,
+     "ask": 0.7,
+     "last": 0.7,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/41678/",
+   "collector": "scripts/collect-metaculus.mjs",
+   "caveat": "candidate question (Peltola) paired with a party market (SENATEAK-26-D)"
+  },
+  {
+   "id": "2026-09-29-senate-mt-2026",
+   "question": "SENATE-MT-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.01,
+    "kalshi": {
+     "ticker": "SENATEMT-26-D",
+     "bid": 0.014,
+     "ask": 0.015,
+     "last": 0.014,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
+     "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
+    }
+   },
+   "source": "https://www.metaculus.com/questions/44711/",
+   "collector": "scripts/collect-metaculus.mjs"
+  },
+  {
+   "id": "2026-09-29-senate-ne-2026",
+   "question": "SENATE-NE-2026",
+   "electionDate": "2026-11-03",
+   "capturedAt": "2026-09-29T18:46:21.879Z",
+   "layers": {
+    "metaculus": 0.001,
+    "kalshi": {
+     "ticker": "SENATENE-26-D",
+     "bid": 0,
+     "ask": 0.005,
+     "last": 0.005,
+     "capturedAt": "2026-09-29T18:11:54.713Z",
      "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true&limit=200"
     }
    },

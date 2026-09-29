@@ -691,7 +691,64 @@
     }
    },
    "flags": []
+  },
+  {
+   "date": "2026-09-29",
+   "capturedAt": "2026-09-29T18:47:15.774Z",
+   "kalshiCapturedAt": "2026-09-29T18:11:54.713Z",
+   "renderers": {
+    "ebo": {
+     "capturedFrom": "https://electionbettingodds.com/",
+     "status": 200,
+     "extract": "ok",
+     "stamp": "2:44PM EDT on Sep 29, 2026",
+     "senateDemKalshi": {
+      "bid": 0.62,
+      "ask": 0.63
+     },
+     "senateRepKalshi": {
+      "bid": 0.37,
+      "ask": 0.38
+     },
+     "eboHeadlineDem": 0.632,
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.625,
+      "capturedMid": 0.625,
+      "diff": 0,
+      "flagged": false
+     }
+    },
+    "ddhq": {
+     "capturedFrom": "https://votes.decisiondeskhq.com/",
+     "status": 200,
+     "layer": "context (DDHQ odds, not Kalshi)",
+     "extract": "ok",
+     "houseD": 0.76,
+     "senateD": 0.55
+    },
+    "270towin": {
+     "capturedFrom": "https://www.270towin.com/",
+     "status": 200,
+     "fetchMethod": "fetch",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "failed",
+     "kalshiPanel": null,
+     "kpow": {
+      "value": "+3.80 D",
+      "asOf": "9/25/26 8:29 AM EDT"
+     },
+     "sample": " 270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 2",
+     "render": {
+      "ok": false,
+      "reason": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
+     }
+    }
+   },
+   "flags": [
+    "270towin: not extractable this run (status 200) — recorded, nothing estimated"
+   ]
   }
  ],
- "capturedAt": "2026-09-28T20:22:51.474Z"
+ "capturedAt": "2026-09-29T18:47:15.774Z"
 }
