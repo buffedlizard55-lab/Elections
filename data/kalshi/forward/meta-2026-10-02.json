@@ -1,0 +1,32 @@
+{
+ "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2",
+ "capturedAt": "2026-10-02T18:00:31.064Z",
+ "capturedBy": "scripts/collect-universe.mjs",
+ "date": "2026-10-02",
+ "seriesTotal": 14573,
+ "seriesPolitics": 4369,
+ "seriesPoliticsQueried": 4369,
+ "openMarkets": 24978,
+ "trackerRowsAppended": 24978,
+ "settled2026Markets": 9930,
+ "settled2026WithBars": 4799,
+ "newCandlesThisRun": 400,
+ "runtime": {
+  "concurrency": 6,
+  "budgetMinutes": 38,
+  "maxRequestsPerSecond": 14,
+  "candleReserveFraction": 0.35,
+  "elapsedMinutes": 32.85,
+  "budgetExhausted": false,
+  "complete": false,
+  "phasesTruncated": [
+   "settled-2026 discovery stopped at 1527/1986 Elections series after 31.2 min (budget 38 min); next run resumes at index 1595"
+  ],
+  "discoveryStartedAt": 68,
+  "discoveryCursorNext": 1595,
+  "rateLimited429": 1
+ },
+ "errors": [
+  "settled(live) HOUSEOH1: HTTP 429 for https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=HOUSEOH1&status=settled&limit=200"
+ ]
+}

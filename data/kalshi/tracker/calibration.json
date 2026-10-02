@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-01T18:31:43.589Z",
+ "capturedAt": "2026-10-02T17:58:24.639Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 984,
- "scoreableMarkets": 644,
- "observationsExcludedAsLookAhead": 162,
- "trackedMarkets": 12903,
+ "settledMarkets": 1037,
+ "scoreableMarkets": 689,
+ "observationsExcludedAsLookAhead": 171,
+ "trackedMarkets": 13060,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -20,29 +20,30 @@
   "2026-09-28",
   "2026-09-29",
   "2026-09-30",
-  "2026-10-01"
+  "2026-10-01",
+  "2026-10-02"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 644,
-   "meanBrier": 0.052267253493788884,
-   "meanLogloss": 0.1800660856815239,
-   "meanP": 0.2792212732919251
+   "nMarkets": 689,
+   "meanBrier": 0.05280658962264163,
+   "meanLogloss": 0.18281800375820867,
+   "meanP": 0.2770994194484757
   },
   {
    "nDays": 3,
-   "nMarkets": 479,
-   "meanBrier": 0.05609281732776613,
-   "meanLogloss": 0.19587371577196902,
-   "meanP": 0.30603340292275594
+   "nMarkets": 513,
+   "meanBrier": 0.05852302046783621,
+   "meanLogloss": 0.20724352938766852,
+   "meanP": 0.3051267056530216
   },
   {
    "nDays": 7,
-   "nMarkets": 302,
-   "meanBrier": 0.06057912334437082,
-   "meanLogloss": 0.19934110748753073,
-   "meanP": 0.255663907284768
+   "nMarkets": 324,
+   "meanBrier": 0.06239967669753085,
+   "meanLogloss": 0.2068806659367884,
+   "meanP": 0.25194598765432086
   },
   {
    "nDays": 14,
@@ -63,72 +64,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 2412,
-   "meanP": 0.028873341625207362,
-   "observedYesRate": 0.011608623548922056
+   "n": 2571,
+   "meanP": 0.02941365227537938,
+   "observedYesRate": 0.015947102294826914
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 379,
-   "meanP": 0.14159630606860144,
-   "observedYesRate": 0.10817941952506596
+   "n": 421,
+   "meanP": 0.1433372921615199,
+   "observedYesRate": 0.1021377672209026
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 187,
-   "meanP": 0.24165775401069522,
-   "observedYesRate": 0.20320855614973263
+   "n": 218,
+   "meanP": 0.24116972477064227,
+   "observedYesRate": 0.2018348623853211
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 100,
-   "meanP": 0.34224999999999994,
-   "observedYesRate": 0.36
+   "n": 118,
+   "meanP": 0.3428813559322032,
+   "observedYesRate": 0.3220338983050847
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 64,
-   "meanP": 0.4404687500000001,
-   "observedYesRate": 0.5625
+   "n": 67,
+   "meanP": 0.44119402985074635,
+   "observedYesRate": 0.5373134328358209
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 83,
-   "meanP": 0.5487951807228915,
-   "observedYesRate": 0.5662650602409639
+   "n": 86,
+   "meanP": 0.548720930232558,
+   "observedYesRate": 0.5813953488372093
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 83,
-   "meanP": 0.6476506024096383,
-   "observedYesRate": 0.5662650602409639
+   "n": 84,
+   "meanP": 0.647738095238095,
+   "observedYesRate": 0.5714285714285714
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 86,
-   "meanP": 0.746220930232558,
-   "observedYesRate": 0.7325581395348837
+   "n": 98,
+   "meanP": 0.7479081632653062,
+   "observedYesRate": 0.7653061224489796
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 105,
-   "meanP": 0.8493333333333329,
-   "observedYesRate": 0.8
+   "n": 112,
+   "meanP": 0.8508482142857139,
+   "observedYesRate": 0.8125
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 657,
-   "meanP": 0.9676757990867636,
-   "observedYesRate": 0.9573820395738204
+   "n": 683,
+   "meanP": 0.9672247437774578,
+   "observedYesRate": 0.9502196193265008
   }
  ],
  "perMarket": [
@@ -48586,6 +48587,439 @@
    ]
   },
   {
+   "ticker": "KXVHGCB-26OCT01-A9.2",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.2 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-30",
+   "lastObserved": "2026-09-30",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.06,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.0036,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E9.1",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.1 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-E9.2",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.2 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT01-U8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.6 on Oct 1, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-01",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXVOTESAVEAMERICA-26MAY-OCT01",
    "title": "Will the Senate vote on the SAVE America Act?",
    "series_ticker": "KXVOTESAVEAMERICA",
@@ -48772,6 +49206,2218 @@
      "date": "2026-09-24",
      "brier": 0.00005625,
      "logloss": 0.0075282664207915245
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-AELS",
+   "title": "Will Abdul El-Sayed be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-27",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 3,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-ANIX",
+   "title": "Will Angie Nixon be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-JOSS",
+   "title": "Will Jon Ossoff be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-JTAL",
+   "title": "Will James Talarico be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.875,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 3,
+     "p": 0.88,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-MPEL",
+   "title": "Will Mary Peltola be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-SBRO",
+   "title": "Will Sherrod Brown be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXACTBLUETOP-26OCT02-TJAC",
+   "title": "Will Troy Jackson be the top ActBlue fundraiser on Oct 2 at 10:00 AM ET?",
+   "series_ticker": "KXACTBLUETOP",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-38.1",
+   "title": "Will the President's approval rating be below 38.2 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.185,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.034225,
+     "logloss": 0.2045671657412744
+    },
+    {
+     "nDays": 3,
+     "p": 0.16,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 7,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-38.3",
+   "title": "Will the President's approval rating be between 38.2 and 38.4 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.385,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.378225,
+     "logloss": 0.9545119446943529
+    },
+    {
+     "nDays": 3,
+     "p": 0.2,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.6400000000000001,
+     "logloss": 1.6094379124341003
+    },
+    {
+     "nDays": 7,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.570025,
+     "logloss": 1.40649706843741
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-38.6",
+   "title": "Will the President's approval rating be between 38.5 and 38.7 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.33499999999999996,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.11222499999999998,
+     "logloss": 0.4079682383262829
+    },
+    {
+     "nDays": 3,
+     "p": 0.275,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.07562500000000001,
+     "logloss": 0.32158362412746233
+    },
+    {
+     "nDays": 7,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-38.9",
+   "title": "Will the President's approval rating be between 38.8 and 39.0 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.009025,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 3,
+     "p": 0.235,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.055224999999999996,
+     "logloss": 0.2678794451556012
+    },
+    {
+     "nDays": 7,
+     "p": 0.1,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-39.2",
+   "title": "Will the President's approval rating be between 39.1 and 39.3 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 7,
+     "p": 0.12,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-39.5",
+   "title": "Will the President's approval rating be between 39.4 and 39.6 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.16,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-39.8",
+   "title": "Will the President's approval rating be between 39.7 and 39.9 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.12,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXAPRPOTUS-26OCT02-40.0",
+   "title": "Will the President's approval rating be above 39.9 according to RealClearPolitics?",
+   "series_ticker": "KXAPRPOTUS",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.145,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.021025,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCABLEAVE-26MAY22-26OCT",
+   "title": "Will any member of Trump's Cabinet leave before Oct 2026?",
+   "series_ticker": "KXCABLEAVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.05,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.1-100K",
+   "title": "Will U3 be 4.1% or below AND NFP growth be 100k or above for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21000000000000002,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.04410000000000001,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 3,
+     "p": 0.35,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.12249999999999998,
+     "logloss": 0.4307829160924542
+    },
+    {
+     "nDays": 7,
+     "p": 0.26,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.06760000000000001,
+     "logloss": 0.3011050927839216
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.1-50-99K",
+   "title": "Will U3 be 4.1% or below AND NFP growth be 50-99k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.27,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0729,
+     "logloss": 0.31471074483970024
+    },
+    {
+     "nDays": 3,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 7,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.1-50K",
+   "title": "Will U3 be 4.1% or below AND NFP growth be Below 50k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.93,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.8649000000000001,
+     "logloss": 2.659260036932779
+    },
+    {
+     "nDays": 3,
+     "p": 0.93,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.8649000000000001,
+     "logloss": 2.659260036932779
+    },
+    {
+     "nDays": 7,
+     "p": 0.24,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.2-100K",
+   "title": "Will U3 be 4.2% AND NFP growth be 100k or above for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.33,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.10890000000000001,
+     "logloss": 0.4004775665971254
+    },
+    {
+     "nDays": 3,
+     "p": 0.33,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.10890000000000001,
+     "logloss": 0.4004775665971254
+    },
+    {
+     "nDays": 7,
+     "p": 0.33,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.10890000000000001,
+     "logloss": 0.4004775665971254
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.2-50-99K",
+   "title": "Will U3 be 4.2% AND NFP growth be 50-99k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.2-50K",
+   "title": "Will U3 be 4.2% AND NFP growth be Below 50k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.9025,
+     "logloss": 2.995732273553991
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.9801,
+     "logloss": 4.605170185988091
+    },
+    {
+     "nDays": 7,
+     "p": 0.08,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.8464,
+     "logloss": 2.5257286443082556
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.3-100K",
+   "title": "Will U3 be 4.3% AND NFP growth be 100k or above for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.3-50-99K",
+   "title": "Will U3 be 4.3% AND NFP growth be 50-99k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.3-50K",
+   "title": "Will U3 be 4.3% AND NFP growth be Below 50k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEMPLOYMENTCOMBO-26SEP-4.4-50K",
+   "title": "Will U3 be 4.4% or above AND NFP growth be Below 50k for Sep 2026?",
+   "series_ticker": "KXEMPLOYMENTCOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEOWEEK-26OCT03-0",
+   "title": "Will the President sign more than 0 Executive Orders between Sep 27, 2026 and Oct 3, 2026?",
+   "series_ticker": "KXEOWEEK",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEOWEEK-26OCT03-1",
+   "title": "Will the President sign more than 1 Executive Orders between Sep 27, 2026 and Oct 3, 2026?",
+   "series_ticker": "KXEOWEEK",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-27",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.004224999999999993,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEOWEEK-26OCT03-2",
+   "title": "Will the President sign more than 2 Executive Orders between Sep 27, 2026 and Oct 3, 2026?",
+   "series_ticker": "KXEOWEEK",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-28",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.75,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0625,
+     "logloss": 0.2876820724517809
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGENERICBALLOTVOTEHUB-26OCT02-T8.3",
+   "title": "Above 8.3%",
+   "series_ticker": "KXGENERICBALLOTVOTEHUB",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.945,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0030250000000000055,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.9099999999999999,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.008100000000000015,
+     "logloss": 0.09431067947124142
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXRECNCH-27-OCT01",
+   "title": "Will the House pass a reconciliation bill before January 01, 2027?",
+   "series_ticker": "KXRECNCH",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 12,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-09-30",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAICZARWHEN-26-26OCT02",
+   "title": "Will President Donald J. Trump or the White House name an AI czar before Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAICZARWHEN",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.06,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.0036,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 7,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVALBELOW-26DEC31-37",
+   "title": "Will Donald Trump's approval rating on approval rating be below 37% during Dec 2025 to Dec 2026 according to VoteHub?",
+   "series_ticker": "KXTRUMPAPPROVALBELOW",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.948,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.002704000000000005,
+     "logloss": 0.053400776727115296
+    },
+    {
+     "nDays": 3,
+     "p": 0.87,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.016900000000000002,
+     "logloss": 0.13926206733350766
+    },
+    {
+     "nDays": 7,
+     "p": 0.79,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.044099999999999986,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-A39.1",
+   "title": "Will Trump's RCP approval average be above 39.1 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E38.5",
+   "title": "Will Trump's RCP approval average be exactly 38.5 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E38.6",
+   "title": "Will Trump's RCP approval average be exactly 38.6 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E38.7",
+   "title": "Will Trump's RCP approval average be exactly 38.7 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E38.8",
+   "title": "Will Trump's RCP approval average be exactly 38.8 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E38.9",
+   "title": "Will Trump's RCP approval average be exactly 38.9 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E39.0",
+   "title": "Will Trump's RCP approval average be exactly 39.0 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-E39.1",
+   "title": "Will Trump's RCP approval average be exactly 39.1 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT02-U38.5",
+   "title": "Will Trump's RCP approval average be below 38.5 on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.655,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.11902499999999998,
+     "logloss": 0.4231200433468851
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATES-27JAN01-OK",
+   "title": "Will Donald Trump visit Oklahoma before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPSTATES",
+   "result": "yes",
+   "settlementDay": "2026-10-02",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-25",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-01",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPVH-26OCT02-T37.7",
+   "title": "Will Donald Trump's VoteHub approval polling average be above 37.7% at 10:00 AM ET on Oct 2, 2026?",
+   "series_ticker": "KXTRUMPVH",
+   "result": "no",
+   "settlementDay": "2026-10-02",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-26",
+   "lastObserved": "2026-10-01",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-01",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.275,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.07562500000000001,
+     "logloss": 0.32158362412746233
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
     },
     {
      "nDays": 14,
