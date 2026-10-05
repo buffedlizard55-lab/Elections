@@ -1143,7 +1143,64 @@
     }
    },
    "flags": []
+  },
+  {
+   "date": "2026-10-05",
+   "capturedAt": "2026-10-05T21:16:49.599Z",
+   "kalshiCapturedAt": "2026-10-05T20:39:51.201Z",
+   "renderers": {
+    "ebo": {
+     "capturedFrom": "https://electionbettingodds.com/",
+     "status": 200,
+     "extract": "ok",
+     "stamp": "5:10PM EDT on Oct 05, 2026",
+     "senateDemKalshi": {
+      "bid": 0.64,
+      "ask": 0.65
+     },
+     "senateRepKalshi": {
+      "bid": 0.35,
+      "ask": 0.36
+     },
+     "eboHeadlineDem": 0.642,
+     "vsCaptured": {
+      "comparable": true,
+      "renderedMid": 0.645,
+      "capturedMid": 0.645,
+      "diff": 0,
+      "flagged": false
+     }
+    },
+    "ddhq": {
+     "capturedFrom": "https://votes.decisiondeskhq.com/",
+     "status": 429,
+     "layer": "context (DDHQ odds, not Kalshi)",
+     "extract": "failed",
+     "error": "HTTP 429; content withheld because fetch failed"
+    },
+    "270towin": {
+     "capturedFrom": "https://www.270towin.com/",
+     "status": 200,
+     "fetchMethod": "fetch",
+     "note": "Kalshi panel on the homepage is the 2028 presidency (KXPRESPARTY-2028, last-trade basis per the page); compared with captured last_price, not bid/ask",
+     "extract": "failed",
+     "kalshiPanel": null,
+     "kpow": {
+      "value": "+4.40 D",
+      "asOf": "10/4/26 7:22 AM EDT"
+     },
+     "sample": " 270toWin - 2028 Presidential Election Interactive Map Search our Site: --> X Search Search for Your Local Elected Officials: X Search --> X Search News President (current) 2028 Electoral College Map Kalshi Presidential Prediction Markets 2028 Democratic Primary Polls 2028 Republican Primary Polls 2",
+     "render": {
+      "ok": false,
+      "reason": "spawnSync /usr/bin/google-chrome ETIMEDOUT"
+     }
+    }
+   },
+   "flags": [
+    "ddhq: not extractable this run (status 429) — recorded, nothing estimated",
+    "270towin: not extractable this run (status 200) — recorded, nothing estimated"
+   ]
   }
  ],
- "capturedAt": "2026-10-04T17:33:16.233Z"
+ "capturedAt": "2026-10-05T21:16:49.599Z"
 }
