@@ -1,173 +1,154 @@
 {
- "capturedFrom": "data/kalshi/tracker/daily/2026-10-06.csv (Node, 2026-10-06) vs data/kalshi/markets_politics_latest.json (Python, 2026-10-06T18:32:43+00:00)",
- "capturedAt": "2026-10-06T18:34:03.137Z",
+ "capturedFrom": "data/kalshi/tracker/daily/2026-10-07.csv (Node, 2026-10-07) vs data/kalshi/markets_politics_latest.json (Python, 2026-10-07T19:02:17+00:00)",
+ "capturedAt": "2026-10-07T19:04:09.255Z",
  "capturedBy": "scripts/crosscheck-collectors.mjs",
- "date": "2026-10-06",
- "pythonCapturedAt": "2026-10-06T18:32:43+00:00",
+ "date": "2026-10-07",
+ "pythonCapturedAt": "2026-10-07T19:02:17+00:00",
  "method": "Tickers present in both captures are compared on last price, bid and ask (dollars). Runs are minutes apart; differences within tolerance are agreement, larger ones are listed for review (not corrected). Lifetime volume must never decrease between the earlier and the later capture.",
  "tolerance": 0.02,
- "nodeRows": 12497,
+ "nodeRows": 12617,
  "pythonMarkets": 2000,
- "overlap": 1829,
- "pythonOnly": 171,
+ "overlap": 1811,
+ "pythonOnly": 189,
  "lastPrice": {
-  "compared": 1829,
-  "withinTolerance": 1828,
-  "share": 0.9995
+  "compared": 1811,
+  "withinTolerance": 1811,
+  "share": 1
  },
  "book": {
-  "compared": 1829,
-  "withinTolerance": 1823,
-  "share": 0.9967
+  "compared": 1811,
+  "withinTolerance": 1810,
+  "share": 0.9994
  },
  "volumeDecreased": 0,
  "largestLastPriceDifferences": [
   {
-   "ticker": "KXBERNIEENDORSE-26NOV03-JTAL",
+   "ticker": "KXTRUMPUFC-26OCT2-DJT",
    "node": {
-    "bid": 0.18,
-    "ask": 0.19,
-    "last": 0.3,
-    "volume": 43311.68
+    "bid": 0.01,
+    "ask": 0.03,
+    "last": 0.03,
+    "volume": 157298.73
    },
    "python": {
-    "bid": 0.18,
-    "ask": 0.2,
-    "last": 0.19,
-    "volume": 43315.68
+    "bid": 0.01,
+    "ask": 0.03,
+    "last": 0.01,
+    "volume": 157308.82
    },
-   "dLast": 0.10999999999999999,
-   "dBid": 0,
-   "dAsk": 0.010000000000000009,
-   "volumeDelta": 4
-  },
-  {
-   "ticker": "HOUSENJ7-26-D",
-   "node": {
-    "bid": 0.89,
-    "ask": 0.918,
-    "last": 0.9,
-    "volume": 130137.8
-   },
-   "python": {
-    "bid": 0.89,
-    "ask": 0.918,
-    "last": 0.918,
-    "volume": 130137.9
-   },
-   "dLast": 0.018000000000000016,
+   "dLast": 0.019999999999999997,
    "dBid": 0,
    "dAsk": 0,
-   "volumeDelta": 0.09999999999126885
+   "volumeDelta": 10.089999999996508
+  },
+  {
+   "ticker": "KXELECTVENEZUELA-27JAN01",
+   "node": {
+    "bid": 0.023,
+    "ask": 0.054,
+    "last": 0.034,
+    "volume": 42620.93
+   },
+   "python": {
+    "bid": 0.023,
+    "ask": 0.054,
+    "last": 0.023,
+    "volume": 42650.93
+   },
+   "dLast": 0.011000000000000003,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 30
   },
   {
    "ticker": "KXBRPRES-26-FBOL",
    "node": {
-    "bid": 0.86,
-    "ask": 0.87,
-    "last": 0.87,
-    "volume": 2280216.76
+    "bid": 0.83,
+    "ask": 0.84,
+    "last": 0.83,
+    "volume": 2371032.41
    },
    "python": {
-    "bid": 0.85,
-    "ask": 0.86,
-    "last": 0.86,
-    "volume": 2294800.56
+    "bid": 0.83,
+    "ask": 0.84,
+    "last": 0.84,
+    "volume": 2371033.46
    },
    "dLast": 0.010000000000000009,
-   "dBid": 0.010000000000000009,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 1.0499999998137355
+  },
+  {
+   "ticker": "KXHOUSETX35-26-R",
+   "node": {
+    "bid": 0.39,
+    "ask": 0.4,
+    "last": 0.39,
+    "volume": 33406.66
+   },
+   "python": {
+    "bid": 0.39,
+    "ask": 0.4,
+    "last": 0.4,
+    "volume": 33526.62
+   },
+   "dLast": 0.010000000000000009,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 119.95999999999913
+  },
+  {
+   "ticker": "KXMIDTERMMOV-TXSEND-P5",
+   "node": {
+    "bid": 0.29,
+    "ask": 0.31,
+    "last": 0.28,
+    "volume": 80206.44
+   },
+   "python": {
+    "bid": 0.28,
+    "ask": 0.3,
+    "last": 0.29,
+    "volume": 80262.72
+   },
+   "dLast": 0.009999999999999953,
+   "dBid": 0.009999999999999953,
    "dAsk": 0.010000000000000009,
-   "volumeDelta": 14583.80000000028
+   "volumeDelta": 56.279999999998836
   },
   {
-   "ticker": "KXALITOANNOUNCERETIRE-26JUN-JAN01",
+   "ticker": "KXPRESNOMD-28-ZMAM",
    "node": {
-    "bid": 0.11,
-    "ask": 0.13,
-    "last": 0.12,
-    "volume": 81349.1
+    "bid": 0.001,
+    "ask": 0.002,
+    "last": 0.002,
+    "volume": 9612583.47
    },
    "python": {
-    "bid": 0.11,
-    "ask": 0.13,
-    "last": 0.13,
-    "volume": 81552.1
+    "bid": 0.001,
+    "ask": 0.002,
+    "last": 0.001,
+    "volume": 9612676.47
    },
-   "dLast": 0.010000000000000009,
+   "dLast": 0.001,
    "dBid": 0,
    "dAsk": 0,
-   "volumeDelta": 203
-  },
-  {
-   "ticker": "KXGOVCA-26-XBEC",
-   "node": {
-    "bid": 0.966,
-    "ask": 0.968,
-    "last": 0.968,
-    "volume": 5858364.62
-   },
-   "python": {
-    "bid": 0.966,
-    "ask": 0.968,
-    "last": 0.966,
-    "volume": 5859714.32
-   },
-   "dLast": 0.0020000000000000018,
-   "dBid": 0,
-   "dAsk": 0,
-   "volumeDelta": 1349.7000000001863
+   "volumeDelta": 93
   },
   {
    "ticker": "CONTROLH-2026-R",
    "node": {
-    "bid": 0.087,
-    "ask": 0.089,
-    "last": 0.089,
-    "volume": 29948445.68
+    "bid": 0.1,
+    "ask": 0.11,
+    "last": 0.11,
+    "volume": 31293837.09
    },
    "python": {
-    "bid": 0.087,
-    "ask": 0.089,
-    "last": 0.089,
-    "volume": 29948672.76
-   },
-   "dLast": 0,
-   "dBid": 0,
-   "dAsk": 0,
-   "volumeDelta": 227.08000000193715
-  },
-  {
-   "ticker": "KXALIENS-27",
-   "node": {
-    "bid": 0.04,
-    "ask": 0.041,
-    "last": 0.041,
-    "volume": 28670327.24
-   },
-   "python": {
-    "bid": 0.04,
-    "ask": 0.041,
-    "last": 0.041,
-    "volume": 28670327.24
-   },
-   "dLast": 0,
-   "dBid": 0,
-   "dAsk": 0,
-   "volumeDelta": 0
-  },
-  {
-   "ticker": "KXCITRINI-28JUL01",
-   "node": {
-    "bid": 0.2,
-    "ask": 0.22,
-    "last": 0.2,
-    "volume": 25931287.41
-   },
-   "python": {
-    "bid": 0.2,
-    "ask": 0.22,
-    "last": 0.2,
-    "volume": 25931287.41
+    "bid": 0.1,
+    "ask": 0.11,
+    "last": 0.11,
+    "volume": 31293837.09
    },
    "dLast": 0,
    "dBid": 0,
@@ -179,14 +160,14 @@
    "node": {
     "bid": 0.58,
     "ask": 0.59,
-    "last": 0.59,
-    "volume": 18884789.89
+    "last": 0.58,
+    "volume": 18893736.1
    },
    "python": {
     "bid": 0.58,
     "ask": 0.59,
-    "last": 0.59,
-    "volume": 18884789.89
+    "last": 0.58,
+    "volume": 18893736.1
    },
    "dLast": 0,
    "dBid": 0,
@@ -196,54 +177,35 @@
   {
    "ticker": "KXMAYORLA-26-KBAS",
    "node": {
-    "bid": 0.4,
-    "ask": 0.41,
-    "last": 0.4,
-    "volume": 17718249.06
+    "bid": 0.42,
+    "ask": 0.43,
+    "last": 0.42,
+    "volume": 17837478.41
    },
    "python": {
-    "bid": 0.4,
-    "ask": 0.41,
-    "last": 0.4,
-    "volume": 17718249.06
+    "bid": 0.42,
+    "ask": 0.43,
+    "last": 0.42,
+    "volume": 17838167.41
    },
    "dLast": 0,
    "dBid": 0,
    "dAsk": 0,
-   "volumeDelta": 0
+   "volumeDelta": 689
   },
   {
    "ticker": "CONTROLH-2026-D",
    "node": {
-    "bid": 0.915,
-    "ask": 0.916,
-    "last": 0.916,
-    "volume": 15769154.38
+    "bid": 0.89,
+    "ask": 0.9,
+    "last": 0.89,
+    "volume": 16349121
    },
    "python": {
-    "bid": 0.915,
-    "ask": 0.916,
-    "last": 0.916,
-    "volume": 15769396.39
-   },
-   "dLast": 0,
-   "dBid": 0,
-   "dAsk": 0,
-   "volumeDelta": 242.00999999977648
-  },
-  {
-   "ticker": "KXSAVEACT-27-JAN04",
-   "node": {
-    "bid": 0.025,
-    "ask": 0.028,
-    "last": 0.028,
-    "volume": 14140369.83
-   },
-   "python": {
-    "bid": 0.025,
-    "ask": 0.028,
-    "last": 0.028,
-    "volume": 14140369.83
+    "bid": 0.89,
+    "ask": 0.9,
+    "last": 0.89,
+    "volume": 16349121
    },
    "dLast": 0,
    "dBid": 0,
@@ -253,16 +215,35 @@
   {
    "ticker": "KXBALANCEPOWERCOMBO-27FEB-RR",
    "node": {
-    "bid": 0.085,
-    "ask": 0.086,
-    "last": 0.086,
-    "volume": 13639837.92
+    "bid": 0.099,
+    "ask": 0.1,
+    "last": 0.1,
+    "volume": 15202115
    },
    "python": {
-    "bid": 0.085,
-    "ask": 0.086,
-    "last": 0.086,
-    "volume": 13639837.92
+    "bid": 0.099,
+    "ask": 0.1,
+    "last": 0.1,
+    "volume": 15206115
+   },
+   "dLast": 0,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 4000
+  },
+  {
+   "ticker": "KXSAVEACT-27-JAN04",
+   "node": {
+    "bid": 0.024,
+    "ask": 0.026,
+    "last": 0.024,
+    "volume": 14145689.1
+   },
+   "python": {
+    "bid": 0.024,
+    "ask": 0.026,
+    "last": 0.024,
+    "volume": 14145689.1
    },
    "dLast": 0,
    "dBid": 0,
@@ -272,35 +253,35 @@
   {
    "ticker": "SENATETX-26-R",
    "node": {
-    "bid": 0.34,
-    "ask": 0.35,
-    "last": 0.35,
-    "volume": 11136865.95
+    "bid": 0.33,
+    "ask": 0.34,
+    "last": 0.34,
+    "volume": 11465415.47
    },
    "python": {
-    "bid": 0.34,
-    "ask": 0.35,
-    "last": 0.35,
-    "volume": 11136962.79
+    "bid": 0.33,
+    "ask": 0.34,
+    "last": 0.34,
+    "volume": 11465415.47
    },
    "dLast": 0,
    "dBid": 0,
    "dAsk": 0,
-   "volumeDelta": 96.83999999985099
+   "volumeDelta": 0
   },
   {
    "ticker": "KXGOVCA-26-SHIL",
    "node": {
     "bid": 0.034,
-    "ask": 0.035,
-    "last": 0.036,
-    "volume": 10586286.96
+    "ask": 0.04,
+    "last": 0.04,
+    "volume": 10878169.59
    },
    "python": {
     "bid": 0.034,
-    "ask": 0.035,
-    "last": 0.036,
-    "volume": 10586286.96
+    "ask": 0.04,
+    "last": 0.04,
+    "volume": 10878169.59
    },
    "dLast": 0,
    "dBid": 0,
@@ -312,33 +293,14 @@
    "node": {
     "bid": 0.13,
     "ask": 0.14,
-    "last": 0.14,
-    "volume": 10528560.92
+    "last": 0.13,
+    "volume": 10535636.5
    },
    "python": {
     "bid": 0.13,
     "ask": 0.14,
-    "last": 0.14,
-    "volume": 10528628.29
-   },
-   "dLast": 0,
-   "dBid": 0,
-   "dAsk": 0,
-   "volumeDelta": 67.36999999918044
-  },
-  {
-   "ticker": "KXPRESNOMD-28-AOC",
-   "node": {
-    "bid": 0.13,
-    "ask": 0.14,
-    "last": 0.14,
-    "volume": 9684514.28
-   },
-   "python": {
-    "bid": 0.13,
-    "ask": 0.14,
-    "last": 0.14,
-    "volume": 9684514.28
+    "last": 0.13,
+    "volume": 10535636.5
    },
    "dLast": 0,
    "dBid": 0,
@@ -346,18 +308,18 @@
    "volumeDelta": 0
   },
   {
-   "ticker": "KXPRESNOMD-28-ZMAM",
+   "ticker": "KXPRESNOMD-28-AOC",
    "node": {
-    "bid": 0.001,
-    "ask": 0.002,
-    "last": 0.001,
-    "volume": 9609835.41
+    "bid": 0.13,
+    "ask": 0.14,
+    "last": 0.13,
+    "volume": 9692709.44
    },
    "python": {
-    "bid": 0.001,
-    "ask": 0.002,
-    "last": 0.001,
-    "volume": 9609835.41
+    "bid": 0.13,
+    "ask": 0.14,
+    "last": 0.13,
+    "volume": 9692709.44
    },
    "dLast": 0,
    "dBid": 0,
@@ -368,15 +330,15 @@
    "ticker": "KXBALANCEPOWERCOMBO-27FEB-RD",
    "node": {
     "bid": 0.007,
-    "ask": 0.008,
-    "last": 0.008,
-    "volume": 9110244.48
+    "ask": 0.009,
+    "last": 0.009,
+    "volume": 9642017.14
    },
    "python": {
     "bid": 0.007,
-    "ask": 0.008,
-    "last": 0.008,
-    "volume": 9110244.48
+    "ask": 0.009,
+    "last": 0.009,
+    "volume": 9642017.14
    },
    "dLast": 0,
    "dBid": 0,
@@ -389,32 +351,51 @@
     "bid": 0.16,
     "ask": 0.17,
     "last": 0.17,
-    "volume": 8361207.45
+    "volume": 8408561.27
    },
    "python": {
     "bid": 0.16,
     "ask": 0.17,
     "last": 0.17,
-    "volume": 8361263.04
+    "volume": 8408561.27
    },
    "dLast": 0,
    "dBid": 0,
    "dAsk": 0,
-   "volumeDelta": 55.58999999985099
+   "volumeDelta": 0
   },
   {
    "ticker": "KXPRESNOMD-28-KH",
    "node": {
-    "bid": 0.081,
-    "ask": 0.084,
-    "last": 0.084,
-    "volume": 8337628.3
+    "bid": 0.08,
+    "ask": 0.081,
+    "last": 0.081,
+    "volume": 8347758.56
    },
    "python": {
-    "bid": 0.081,
-    "ask": 0.084,
-    "last": 0.084,
-    "volume": 8337628.3
+    "bid": 0.08,
+    "ask": 0.081,
+    "last": 0.081,
+    "volume": 8347758.56
+   },
+   "dLast": 0,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 0
+  },
+  {
+   "ticker": "SENATETX-26-D",
+   "node": {
+    "bid": 0.66,
+    "ask": 0.67,
+    "last": 0.67,
+    "volume": 8223499.68
+   },
+   "python": {
+    "bid": 0.66,
+    "ask": 0.67,
+    "last": 0.67,
+    "volume": 8223499.68
    },
    "dLast": 0,
    "dBid": 0,
@@ -426,14 +407,14 @@
    "node": {
     "bid": 0.003,
     "ask": 0.004,
-    "last": 0.004,
-    "volume": 8173714.47
+    "last": 0.003,
+    "volume": 8186666.09
    },
    "python": {
     "bid": 0.003,
     "ask": 0.004,
-    "last": 0.004,
-    "volume": 8173714.47
+    "last": 0.003,
+    "volume": 8186666.09
    },
    "dLast": 0,
    "dBid": 0,
@@ -444,15 +425,15 @@
    "ticker": "KXPRESNOMD-28-MK",
    "node": {
     "bid": 0.04,
-    "ask": 0.042,
-    "last": 0.042,
-    "volume": 8066399.52
+    "ask": 0.041,
+    "last": 0.04,
+    "volume": 8070257.62
    },
    "python": {
     "bid": 0.04,
-    "ask": 0.042,
-    "last": 0.042,
-    "volume": 8066399.52
+    "ask": 0.041,
+    "last": 0.04,
+    "volume": 8070257.62
    },
    "dLast": 0,
    "dBid": 0,
@@ -462,16 +443,16 @@
   {
    "ticker": "KXPRESNOMD-28-JTAL",
    "node": {
-    "bid": 0.017,
-    "ask": 0.028,
-    "last": 0.029,
-    "volume": 7970141.96
+    "bid": 0.025,
+    "ask": 0.026,
+    "last": 0.026,
+    "volume": 7979222.96
    },
    "python": {
-    "bid": 0.017,
-    "ask": 0.028,
-    "last": 0.029,
-    "volume": 7970141.96
+    "bid": 0.025,
+    "ask": 0.026,
+    "last": 0.026,
+    "volume": 7979222.96
    },
    "dLast": 0,
    "dBid": 0,
@@ -479,18 +460,37 @@
    "volumeDelta": 0
   },
   {
-   "ticker": "SENATETX-26-D",
+   "ticker": "KXPRESNOMD-28-REMA",
    "node": {
-    "bid": 0.65,
-    "ask": 0.66,
-    "last": 0.66,
-    "volume": 7840867.91
+    "bid": 0.028,
+    "ask": 0.029,
+    "last": 0.029,
+    "volume": 7477370.04
    },
    "python": {
-    "bid": 0.65,
-    "ask": 0.66,
-    "last": 0.66,
-    "volume": 7840867.91
+    "bid": 0.028,
+    "ask": 0.029,
+    "last": 0.029,
+    "volume": 7477370.04
+   },
+   "dLast": 0,
+   "dBid": 0,
+   "dAsk": 0,
+   "volumeDelta": 0
+  },
+  {
+   "ticker": "CONTROLS-2026-R",
+   "node": {
+    "bid": 0.36,
+    "ask": 0.37,
+    "last": 0.37,
+    "volume": 7009147.91
+   },
+   "python": {
+    "bid": 0.36,
+    "ask": 0.37,
+    "last": 0.37,
+    "volume": 7009147.91
    },
    "dLast": 0,
    "dBid": 0,
