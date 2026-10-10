@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-09T18:27:45.205Z",
+ "capturedAt": "2026-10-10T17:25:38.834Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 1728,
- "scoreableMarkets": 1362,
- "observationsExcludedAsLookAhead": 388,
- "trackedMarkets": 14265,
+ "settledMarkets": 1816,
+ "scoreableMarkets": 1440,
+ "observationsExcludedAsLookAhead": 462,
+ "trackedMarkets": 14536,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -28,36 +28,37 @@
   "2026-10-06",
   "2026-10-07",
   "2026-10-08",
-  "2026-10-09"
+  "2026-10-09",
+  "2026-10-10"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 1362,
-   "meanBrier": 0.05107593337004448,
-   "meanLogloss": 0.17795057474366932,
-   "meanP": 0.24321916299559296
+   "nMarkets": 1440,
+   "meanBrier": 0.05085107239583383,
+   "meanLogloss": 0.17779189198777803,
+   "meanP": 0.2354329861111091
   },
   {
    "nDays": 3,
-   "nMarkets": 1043,
-   "meanBrier": 0.054743493048897834,
-   "meanLogloss": 0.18820064825974445,
-   "meanP": 0.2687531160115038
+   "nMarkets": 1108,
+   "meanBrier": 0.05373356678700412,
+   "meanLogloss": 0.18620752080192618,
+   "meanP": 0.2588176895306843
   },
   {
    "nDays": 7,
-   "nMarkets": 792,
-   "meanBrier": 0.06042586679292942,
-   "meanLogloss": 0.19915908104459684,
-   "meanP": 0.23513762626262624
+   "nMarkets": 849,
+   "meanBrier": 0.05850434305064808,
+   "meanLogloss": 0.19512865035639426,
+   "meanP": 0.22361778563015275
   },
   {
    "nDays": 14,
-   "nMarkets": 356,
-   "meanBrier": 0.061389249297752746,
-   "meanLogloss": 0.20048875058777862,
-   "meanP": 0.22106882022471916
+   "nMarkets": 410,
+   "meanBrier": 0.056999796951219435,
+   "meanLogloss": 0.19155847070981316,
+   "meanP": 0.19942560975609808
   },
   {
    "nDays": 30,
@@ -71,72 +72,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 7142,
-   "meanP": 0.026076449173901194,
-   "observedYesRate": 0.008260991318958275
+   "n": 8147,
+   "meanP": 0.024824291150116085,
+   "observedYesRate": 0.00969682091567448
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 940,
-   "meanP": 0.14337234042553176,
-   "observedYesRate": 0.06702127659574468
+   "n": 981,
+   "meanP": 0.14400101936799173,
+   "observedYesRate": 0.06829765545361875
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 583,
-   "meanP": 0.24657804459691257,
-   "observedYesRate": 0.26758147512864494
+   "n": 599,
+   "meanP": 0.24593489148580983,
+   "observedYesRate": 0.2637729549248748
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 474,
-   "meanP": 0.348723628691983,
-   "observedYesRate": 0.3459915611814346
+   "n": 485,
+   "meanP": 0.34883505154639155,
+   "observedYesRate": 0.35670103092783506
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 308,
-   "meanP": 0.44465909090909084,
-   "observedYesRate": 0.37662337662337664
+   "n": 320,
+   "meanP": 0.44400000000000006,
+   "observedYesRate": 0.39375
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 262,
-   "meanP": 0.5503435114503812,
-   "observedYesRate": 0.5572519083969466
+   "n": 271,
+   "meanP": 0.5499815498154977,
+   "observedYesRate": 0.5682656826568265
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 329,
-   "meanP": 0.6454407294832827,
-   "observedYesRate": 0.5653495440729484
+   "n": 332,
+   "meanP": 0.6455873493975903,
+   "observedYesRate": 0.5692771084337349
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 289,
-   "meanP": 0.7482871972318329,
-   "observedYesRate": 0.6955017301038062
+   "n": 319,
+   "meanP": 0.749075235109717,
+   "observedYesRate": 0.7241379310344828
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 418,
-   "meanP": 0.8500394736842126,
-   "observedYesRate": 0.9186602870813397
+   "n": 430,
+   "meanP": 0.8496895348837231,
+   "observedYesRate": 0.9209302325581395
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 1275,
-   "meanP": 0.9587780392156922,
-   "observedYesRate": 0.9615686274509804
+   "n": 1285,
+   "meanP": 0.9589665369649863,
+   "observedYesRate": 0.9618677042801557
   }
  ],
  "perMarket": [
@@ -81170,6 +81171,2858 @@
    ]
   },
   {
+   "ticker": "KXNEXTPRESSEC-29JAN21-AFLE",
+   "title": "Will Ari Fleischer be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-AHAB",
+   "title": "Will Alina Habba be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.026000000000000002,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006760000000000002,
+     "logloss": 0.026343975339601977
+    },
+    {
+     "nDays": 3,
+     "p": 0.027000000000000003,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.0007290000000000002,
+     "logloss": 0.027371196796132015
+    },
+    {
+     "nDays": 7,
+     "p": 0.035500000000000004,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.0012602500000000003,
+     "logloss": 0.03614544663635326
+    },
+    {
+     "nDays": 14,
+     "p": 0.0325,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0010562500000000001,
+     "logloss": 0.033039854078200155
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-AKEL",
+   "title": "Will Anna Kelly be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.050625,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 3,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.050625,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 7,
+     "p": 0.20500000000000002,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.04202500000000001,
+     "logloss": 0.22941316432780523
+    },
+    {
+     "nDays": 14,
+     "p": 0.175,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.030624999999999996,
+     "logloss": 0.19237189264745613
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-BFER",
+   "title": "Will Ben Ferguson be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 17,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-BHAR",
+   "title": "Will Beni Rae Harmony be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-BJOH",
+   "title": "Will Benny Johnson be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-BSHA",
+   "title": "Will Ben Shapiro be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-CCAS",
+   "title": "Will Cara Castronuova be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-DALV",
+   "title": "Will Danielle Alvarez be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-DBON",
+   "title": "Will Dan Bongino be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-EDAU",
+   "title": "Will Eric Daugherty be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 17,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-EKIR",
+   "title": "Will Erika Kirk be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-EPIP",
+   "title": "Will Elizabeth Pipko be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.060000000000000005,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0036000000000000008,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.05,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 7,
+     "p": 0.07,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 14,
+     "p": 0.075,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.005625,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-ESCA",
+   "title": "Will Erin Elmore Scavino be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-30",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-HFIE",
+   "title": "Will Harrison Fields be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-HGID",
+   "title": "Will Hogan Gidley be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-JFRA",
+   "title": "Will Jayme Franklin be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-JMIL",
+   "title": "Will Jason Miller be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.0045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000020250000000000004,
+     "logloss": 0.004510155477886019
+    },
+    {
+     "nDays": 3,
+     "p": 0.0045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.000020250000000000004,
+     "logloss": 0.004510155477886019
+    },
+    {
+     "nDays": 7,
+     "p": 0.005,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.000025,
+     "logloss": 0.005012541823544286
+    },
+    {
+     "nDays": 14,
+     "p": 0.005,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.000025,
+     "logloss": 0.005012541823544286
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-JPAU",
+   "title": "Will Jake Paul be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 17,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-JPOS",
+   "title": "Will Jack Posobiec be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KDES",
+   "title": "Will Kush Desai be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KDOR",
+   "title": "Will Kaelan Dorr be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KLAK",
+   "title": "Will Kari Lake be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.0045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000020250000000000004,
+     "logloss": 0.004510155477886019
+    },
+    {
+     "nDays": 3,
+     "p": 0.0045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.000020250000000000004,
+     "logloss": 0.004510155477886019
+    },
+    {
+     "nDays": 7,
+     "p": 0.0065,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.00004225,
+     "logloss": 0.006521216990265463
+    },
+    {
+     "nDays": 14,
+     "p": 0.006500000000000001,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.00004225000000000001,
+     "logloss": 0.006521216990265463
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KMCE",
+   "title": "Will Kayleigh McEnany be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KMIL",
+   "title": "Will Katie Miller be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KPAV",
+   "title": "Will Katie Pavlich be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-KZAC",
+   "title": "Will Katie Zacharia be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.9801,
+     "logloss": 4.605170185988091
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.9801,
+     "logloss": 4.605170185988091
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.9801,
+     "logloss": 4.605170185988091
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.9801,
+     "logloss": 4.605170185988091
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-LBIS",
+   "title": "Will Lauren Bis be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-LHUS",
+   "title": "Will Liz Huston be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-LLOO",
+   "title": "Will Laura Loomer be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-LPAU",
+   "title": "Will Logan Paul be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 17,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-LTRU",
+   "title": "Will Lara Trump be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MBAR",
+   "title": "Will Maria Bartiromo be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": 0.075,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.005625,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MBOY",
+   "title": "Will Matthew Boyle be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MCER",
+   "title": "Will Mike Cernovich be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MCRO",
+   "title": "Will Monica Crowley be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MLEV",
+   "title": "Will Mark Levin be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 17,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-22",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MMAR",
+   "title": "Will Margo Martin be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-MWAL",
+   "title": "Will Matt Walsh be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-NHAR",
+   "title": "Will Natalie Harp be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-NNP",
+   "title": "Will No new person be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.0115,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.00013225,
+     "logloss": 0.011566636371465405
+    },
+    {
+     "nDays": 3,
+     "p": 0.0115,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.00013225,
+     "logloss": 0.011566636371465405
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": 0.0095,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.00009025,
+     "logloss": 0.009545412843531385
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-PADA",
+   "title": "Will Pat Adams be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-PDOO",
+   "title": "Will Peter Doocy be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-RCAM",
+   "title": "Will Rachel Campos-Duffy be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-RDAR",
+   "title": "Will Roma Daravi be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 14,
+     "p": 0.08,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.0064,
+     "logloss": 0.08338160893905101
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-SCHE",
+   "title": "Will Steven Cheung be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.008,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000064,
+     "logloss": 0.008032171697264267
+    },
+    {
+     "nDays": 3,
+     "p": 0.008,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.000064,
+     "logloss": 0.008032171697264267
+    },
+    {
+     "nDays": 7,
+     "p": 0.0105,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.00011025000000000001,
+     "logloss": 0.010555513939516587
+    },
+    {
+     "nDays": 14,
+     "p": 0.009000000000000001,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.00008100000000000002,
+     "logloss": 0.00904074465214907
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-SJEN",
+   "title": "Will Scott Jennings be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 7,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.024025,
+     "logloss": 0.16841865162496322
+    },
+    {
+     "nDays": 14,
+     "p": 0.165,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.027225000000000003,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-SPRA",
+   "title": "Will Spencer Pratt be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-SSTE",
+   "title": "Will Sage Steele be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.0025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.00000625,
+     "logloss": 0.002503130218118477
+    },
+    {
+     "nDays": 3,
+     "p": 0.003,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.000009,
+     "logloss": 0.0030045090202987243
+    },
+    {
+     "nDays": 7,
+     "p": 0.003,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.000009,
+     "logloss": 0.0030045090202987243
+    },
+    {
+     "nDays": 14,
+     "p": 0.0045000000000000005,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.000020250000000000004,
+     "logloss": 0.004510155477886019
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-TBUD",
+   "title": "Will Taylor Budowich be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-TCAR",
+   "title": "Will Tucker Carlson be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.002,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.000004,
+     "logloss": 0.0020020026706730793
+    },
+    {
+     "nDays": 3,
+     "p": 0.002,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.000004,
+     "logloss": 0.0020020026706730793
+    },
+    {
+     "nDays": 7,
+     "p": 0.002,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.000004,
+     "logloss": 0.0020020026706730793
+    },
+    {
+     "nDays": 14,
+     "p": 0.002,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.000004,
+     "logloss": 0.0020020026706730793
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-TGAB",
+   "title": "Will Tulsi Gabbard be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-29",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-TMCL",
+   "title": "Will Tricia McLaughlin be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-TROG",
+   "title": "Will Taylor Rogers be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTPRESSEC-29JAN21-VBRO",
+   "title": "Will Vanessa Broussard be the next White House Press Secretary of United States?",
+   "series_ticker": "KXNEXTPRESSEC",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-02",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-25",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXNOBELPEACE-26-CE",
    "title": "Who will win the Nobel Peace Prize?",
    "series_ticker": "KXNOBELPEACE",
@@ -83232,6 +86085,162 @@
    ]
   },
   {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-DEC01",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Dec 1, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.385,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.378225,
+     "logloss": 0.9545119446943529
+    },
+    {
+     "nDays": 3,
+     "p": 0.52,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.2304,
+     "logloss": 0.6539264674066639
+    },
+    {
+     "nDays": 7,
+     "p": 0.77,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.05289999999999999,
+     "logloss": 0.2613647641344075
+    },
+    {
+     "nDays": 14,
+     "p": 0.745,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.065025,
+     "logloss": 0.29437106060257756
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-JAN01",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Jan 1, 2027?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.7,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.09000000000000002,
+     "logloss": 0.35667494393873245
+    },
+    {
+     "nDays": 3,
+     "p": 0.785,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.04622499999999999,
+     "logloss": 0.24207156119972859
+    },
+    {
+     "nDays": 7,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 14,
+     "p": 0.79,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.044099999999999986,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSSECANNOUNCE-26AUG-NOV01",
+   "title": "Will Donald Trump issue any announcement (e.g., Truth Social post) on naming the next White House Press Secretary (including acting/interim) before Nov 1, 2026?",
+   "series_ticker": "KXPRESSSECANNOUNCE",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 20,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.6889000000000001,
+     "logloss": 1.7719568419318754
+    },
+    {
+     "nDays": 3,
+     "p": 0.195,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.6480249999999999,
+     "logloss": 1.6347557204183902
+    },
+    {
+     "nDays": 7,
+     "p": 0.375,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.390625,
+     "logloss": 0.9808292530117262
+    },
+    {
+     "nDays": 14,
+     "p": 0.41500000000000004,
+     "basis": "mid",
+     "date": "2026-09-25",
+     "brier": 0.34222499999999995,
+     "logloss": 0.8794767587514387
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXPUBLICTALARICO-26OCT15-26OCT09",
    "title": "Will James Talarico be seen in public before Oct 9, 2026?",
    "series_ticker": "",
@@ -83239,6 +86248,294 @@
    "settlementDay": "2026-10-09",
    "observations": 0,
    "observationsOnOrAfterSettlement": 0,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT10",
+   "title": "Will James Talarico be seen in public before Oct 10, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT11",
+   "title": "Will James Talarico be seen in public before Oct 11, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT12",
+   "title": "Will James Talarico be seen in public before Oct 12, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT13",
+   "title": "Will James Talarico be seen in public before Oct 13, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT14",
+   "title": "Will James Talarico be seen in public before Oct 14, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPUBLICTALARICO-26OCT15-26OCT15",
+   "title": "Will James Talarico be seen in public before Oct 15, 2026?",
+   "series_ticker": "KXPUBLICTALARICO",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
    "firstObserved": null,
    "lastObserved": null,
    "leads": [
@@ -86144,6 +89441,57 @@
    ]
   },
   {
+   "ticker": "KXTRUMPMEETM-26NOV01-VPUT",
+   "title": "Will Donald Trump meet (including phone calls) Vladimir Putin in Oct 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 3,
+     "p": 0.505,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.245025,
+     "logloss": 0.6831968497067772
+    },
+    {
+     "nDays": 7,
+     "p": 0.47,
+     "basis": "mid",
+     "date": "2026-10-02",
+     "brier": 0.28090000000000004,
+     "logloss": 0.7550225842780328
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXTRUMPVH-26OCT09-T36.9",
    "title": "Will Donald Trump's VoteHub approval polling average be above 36.9% at 10:00 AM ET on Oct 9, 2026?",
    "series_ticker": "KXTRUMPVH",
@@ -86627,6 +89975,1137 @@
      "date": "2026-09-25",
      "brier": 0.0006250000000000011,
      "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-A9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.0 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.4 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.5",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.5 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.32,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.4623999999999999,
+     "logloss": 1.1394342831883648
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT09-U8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.4 on Oct 9, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-09",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-08",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A10",
+   "title": "Will Trump endorse at least 10 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.8,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.03999999999999998,
+     "logloss": 0.2231435513142097
+    },
+    {
+     "nDays": 3,
+     "p": 0.725,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.07562500000000001,
+     "logloss": 0.32158362412746233
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A15",
+   "title": "Will Trump endorse at least 15 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.22499999999999998,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.05062499999999999,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 3,
+     "p": 0.255,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.065025,
+     "logloss": 0.29437106060257756
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A20",
+   "title": "Will Trump endorse at least 20 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-06",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 3,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A25",
+   "title": "Will Trump endorse at least 25 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.165,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.027225000000000003,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A3",
+   "title": "Will Trump endorse at least 3 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-07",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A5",
+   "title": "Will Trump endorse at least 5 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-07",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A50",
+   "title": "Will Trump endorse at least 50 people on Truth Social this week?",
+   "series_ticker": "KXTRUMPENDORSEMENTS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-B12",
+   "title": "Will Donald Trump make between 10 and 14 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.15,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0225,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-B17",
+   "title": "Will Donald Trump make between 15 and 19 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-B22",
+   "title": "Will Donald Trump make between 20 and 24 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-B34",
+   "title": "Will Donald Trump make between 30 and 39 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-B7",
+   "title": "Will Donald Trump make between 5 and 9 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.15,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.7224999999999999,
+     "logloss": 1.8971199848858813
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-T40",
+   "title": "Will Donald Trump make at least 40 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09000000000000001,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.008100000000000001,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT09-T5",
+   "title": "Will Donald Trump make below 5 Truth Social posts on Oct 9, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
     },
     {
      "nDays": 30,

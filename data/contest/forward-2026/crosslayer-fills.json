@@ -1,6 +1,6 @@
 {
   "capturedFrom": "data/crosslayer/snapshots.json + the crosslayer-arb fill log + that day's eligible panel",
-  "capturedAt": "2026-10-09T19:09:31.024Z",
+  "capturedAt": "2026-10-10T18:10:09.471Z",
   "method": "Crowd extraction matches buildSignals: dedupe key is asOf|question, first row wins, metaculus when it is a number else ddhq. The binding snapshot is the prior row (asOf strictly before the trading day) for that ticker with the largest absolute gap of crowdProb minus that day's panel mid that clears the strategy threshold. An equal absolute gap keeps the first row. The fill price is checked against the taker cross (a NO entry pays 1 - yes_bid) and the fee against takerFee on the fill's series.",
   "threshold": 0.05,
   "entrant": "crosslayer-arb",
@@ -271,6 +271,162 @@
           "crowdProb": 0.95,
           "gap": 0.055,
           "clears": true
+        }
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "ticker": "CONTROLS-2026-D",
+      "series": "CONTROLS",
+      "side": "NO",
+      "shares": 4829.1,
+      "price": 0.4,
+      "fee": 81.1289,
+      "executedAt": "derived(1 - yes_bid)",
+      "tied": true,
+      "reason": null,
+      "binding": {
+        "snapshotId": "2026-09-21-senate",
+        "question": "SENATE-CONTROL-2026",
+        "asOf": "2026-09-21",
+        "crowdLayer": "metaculus",
+        "crowdProb": 0.5,
+        "kalshiSnapshotMid": 0.605,
+        "panelMid": 0.605,
+        "gap": -0.105,
+        "expectedSide": "NO",
+        "expectedPrice": 0.4,
+        "expectedFee": 81.1289,
+        "priceMatches": true,
+        "feeMatches": true,
+        "sideMatches": true
+      },
+      "candidates": [
+        {
+          "snapshotId": "2026-09-19-senate",
+          "asOf": "2026-09-19",
+          "crowdProb": 0.517,
+          "gap": -0.088,
+          "clears": true
+        },
+        {
+          "snapshotId": "2026-09-21-senate",
+          "asOf": "2026-09-21",
+          "crowdProb": 0.5,
+          "gap": -0.105,
+          "clears": true
+        },
+        {
+          "snapshotId": "2026-09-22-senate",
+          "asOf": "2026-09-22",
+          "crowdProb": 0.512,
+          "gap": -0.093,
+          "clears": true
+        },
+        {
+          "snapshotId": "2026-09-23-senate",
+          "asOf": "2026-09-23",
+          "crowdProb": 0.531,
+          "gap": -0.074,
+          "clears": true
+        },
+        {
+          "snapshotId": "2026-09-24-senate",
+          "asOf": "2026-09-24",
+          "crowdProb": 0.567,
+          "gap": -0.038,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-25-senate",
+          "asOf": "2026-09-25",
+          "crowdProb": 0.582,
+          "gap": -0.023,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-26-senate",
+          "asOf": "2026-09-26",
+          "crowdProb": 0.572,
+          "gap": -0.033,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-28-senate",
+          "asOf": "2026-09-28",
+          "crowdProb": 0.555,
+          "gap": -0.05,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-29-senate",
+          "asOf": "2026-09-29",
+          "crowdProb": 0.569,
+          "gap": -0.036,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-09-30-senate",
+          "asOf": "2026-09-30",
+          "crowdProb": 0.562,
+          "gap": -0.043,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-01-senate",
+          "asOf": "2026-10-01",
+          "crowdProb": 0.565,
+          "gap": -0.04,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-02-senate",
+          "asOf": "2026-10-02",
+          "crowdProb": 0.575,
+          "gap": -0.03,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-03-senate",
+          "asOf": "2026-10-03",
+          "crowdProb": 0.581,
+          "gap": -0.024,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-04-senate",
+          "asOf": "2026-10-04",
+          "crowdProb": 0.576,
+          "gap": -0.029,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-05-senate",
+          "asOf": "2026-10-05",
+          "crowdProb": 0.584,
+          "gap": -0.021,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-06-senate",
+          "asOf": "2026-10-06",
+          "crowdProb": 0.586,
+          "gap": -0.019,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-07-senate",
+          "asOf": "2026-10-07",
+          "crowdProb": 0.588,
+          "gap": -0.017,
+          "clears": false
+        },
+        {
+          "snapshotId": "2026-10-08-senate",
+          "asOf": "2026-10-08",
+          "crowdProb": 0.598,
+          "gap": -0.007,
+          "clears": false
         }
       ]
     }
