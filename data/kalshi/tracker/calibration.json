@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-10T17:25:38.834Z",
+ "capturedAt": "2026-10-11T17:44:44.622Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 1816,
- "scoreableMarkets": 1440,
- "observationsExcludedAsLookAhead": 462,
- "trackedMarkets": 14536,
+ "settledMarkets": 1877,
+ "scoreableMarkets": 1498,
+ "observationsExcludedAsLookAhead": 480,
+ "trackedMarkets": 14824,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -29,36 +29,37 @@
   "2026-10-07",
   "2026-10-08",
   "2026-10-09",
-  "2026-10-10"
+  "2026-10-10",
+  "2026-10-11"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 1440,
-   "meanBrier": 0.05085107239583383,
-   "meanLogloss": 0.17779189198777803,
-   "meanP": 0.2354329861111091
+   "nMarkets": 1498,
+   "meanBrier": 0.05061920510680959,
+   "meanLogloss": 0.17697635648969684,
+   "meanP": 0.23326335113484448
   },
   {
    "nDays": 3,
-   "nMarkets": 1108,
-   "meanBrier": 0.05373356678700412,
-   "meanLogloss": 0.18620752080192618,
-   "meanP": 0.2588176895306843
+   "nMarkets": 1141,
+   "meanBrier": 0.05459828396143786,
+   "meanLogloss": 0.18863264860750795,
+   "meanP": 0.2583961437335656
   },
   {
    "nDays": 7,
-   "nMarkets": 849,
-   "meanBrier": 0.05850434305064808,
-   "meanLogloss": 0.19512865035639426,
-   "meanP": 0.22361778563015275
+   "nMarkets": 870,
+   "meanBrier": 0.05902288764367845,
+   "meanLogloss": 0.19724293481831787,
+   "meanP": 0.22115689655172374
   },
   {
    "nDays": 14,
-   "nMarkets": 410,
-   "meanBrier": 0.056999796951219435,
-   "meanLogloss": 0.19155847070981316,
-   "meanP": 0.19942560975609808
+   "nMarkets": 414,
+   "meanBrier": 0.05710257669082118,
+   "meanLogloss": 0.19223266882439288,
+   "meanP": 0.19957608695652224
   },
   {
    "nDays": 30,
@@ -72,72 +73,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 8147,
-   "meanP": 0.024824291150116085,
-   "observedYesRate": 0.00969682091567448
+   "n": 8292,
+   "meanP": 0.02502273275446152,
+   "observedYesRate": 0.010130246020260492
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 981,
-   "meanP": 0.14400101936799173,
-   "observedYesRate": 0.06829765545361875
+   "n": 1037,
+   "meanP": 0.14485535197685606,
+   "observedYesRate": 0.06943105110896818
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 599,
-   "meanP": 0.24593489148580983,
-   "observedYesRate": 0.2637729549248748
+   "n": 629,
+   "meanP": 0.24484896661367284,
+   "observedYesRate": 0.2543720190779014
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 485,
-   "meanP": 0.34883505154639155,
-   "observedYesRate": 0.35670103092783506
+   "n": 506,
+   "meanP": 0.34842885375494076,
+   "observedYesRate": 0.35177865612648224
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 320,
-   "meanP": 0.44400000000000006,
-   "observedYesRate": 0.39375
+   "n": 331,
+   "meanP": 0.44419939577039275,
+   "observedYesRate": 0.38368580060422963
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 271,
-   "meanP": 0.5499815498154977,
-   "observedYesRate": 0.5682656826568265
+   "n": 277,
+   "meanP": 0.550180505415162,
+   "observedYesRate": 0.5595667870036101
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 332,
-   "meanP": 0.6455873493975903,
-   "observedYesRate": 0.5692771084337349
+   "n": 336,
+   "meanP": 0.6456249999999999,
+   "observedYesRate": 0.5684523809523809
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 319,
-   "meanP": 0.749075235109717,
-   "observedYesRate": 0.7241379310344828
+   "n": 327,
+   "meanP": 0.7483333333333326,
+   "observedYesRate": 0.7217125382262997
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 430,
-   "meanP": 0.8496895348837231,
-   "observedYesRate": 0.9209302325581395
+   "n": 434,
+   "meanP": 0.8495771889400944,
+   "observedYesRate": 0.9216589861751152
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 1285,
-   "meanP": 0.9589665369649863,
-   "observedYesRate": 0.9618677042801557
+   "n": 1302,
+   "meanP": 0.9592066052227398,
+   "observedYesRate": 0.9623655913978495
   }
  ],
  "perMarket": [
@@ -90424,6 +90425,901 @@
    ]
   },
   {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-ASWO",
+   "title": "Will Amy Swonger be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-BHOW",
+   "title": "Will Ben Howard be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-30",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-03",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-JFRE",
+   "title": "Will Jeff Freeland be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.050625,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 3,
+     "p": 0.24000000000000002,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.05760000000000001,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 7,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-10-03",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 14,
+     "p": 0.20500000000000002,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.04202500000000001,
+     "logloss": 0.22941316432780523
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-JGRA",
+   "title": "Will Josh Grant be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-KBAI",
+   "title": "Will Katie Bailey be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-30",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.7140249999999999,
+     "logloss": 1.8643301620628905
+    },
+    {
+     "nDays": 3,
+     "p": 0.1,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.81,
+     "logloss": 2.3025850929940455
+    },
+    {
+     "nDays": 7,
+     "p": 0.3,
+     "basis": "last",
+     "date": "2026-10-03",
+     "brier": 0.48999999999999994,
+     "logloss": 1.2039728043259361
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-NONE",
+   "title": "Will No new Director of Legislative Affairs be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.305,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.093025,
+     "logloss": 0.3638434334173448
+    },
+    {
+     "nDays": 3,
+     "p": 0.32999999999999996,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.10889999999999997,
+     "logloss": 0.40047756659712525
+    },
+    {
+     "nDays": 7,
+     "p": 0.33499999999999996,
+     "basis": "mid",
+     "date": "2026-10-03",
+     "brier": 0.11222499999999998,
+     "logloss": 0.4079682383262829
+    },
+    {
+     "nDays": 14,
+     "p": 0.445,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.198025,
+     "logloss": 0.5887871652357026
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-TAND",
+   "title": "Will Tommy Andrews be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.034999999999999996,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012249999999999997,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-03",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-VHAL",
+   "title": "Will Vince Haley be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXNEXTLEGAFFAIRS-27JAN01-WBAR",
+   "title": "Will Walker Barrett be the next White House Director of Legislative Affairs before Jan 1, 2027?",
+   "series_ticker": "KXNEXTLEGAFFAIRS",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 3,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 7,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-03",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 14,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-09-26",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-A37.9",
+   "title": "Will Trump's RCP approval average be above 37.9 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.3",
+   "title": "Will Trump's RCP approval average be exactly 37.3 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.4",
+   "title": "Will Trump's RCP approval average be exactly 37.4 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.5",
+   "title": "Will Trump's RCP approval average be exactly 37.5 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.6",
+   "title": "Will Trump's RCP approval average be exactly 37.6 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.7",
+   "title": "Will Trump's RCP approval average be exactly 37.7 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.8",
+   "title": "Will Trump's RCP approval average be exactly 37.8 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.745,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.065025,
+     "logloss": 0.29437106060257756
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-E37.9",
+   "title": "Will Trump's RCP approval average be exactly 37.9 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT10-U37.3",
+   "title": "Will Trump's RCP approval average be below 37.3 on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXTRUMPENDORSEMENTS-26OCT09-A10",
    "title": "Will Trump endorse at least 10 people on Truth Social this week?",
    "series_ticker": "KXTRUMPENDORSEMENTS",
@@ -91085,6 +91981,2155 @@
      "date": "2026-10-09",
      "brier": 0.0006250000000000001,
      "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-A9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.0 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.4 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.5",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.5 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.24,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.425,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.33062499999999995,
+     "logloss": 0.8556661100577203
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21000000000000002,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.04410000000000001,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT10-U8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.4 on Oct 10, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-10",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-09",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAMDANIEO-26OCT10-T0",
+   "title": "Will Mamdani sign above 0 executive orders between Oct 4, 2026 and Oct 10, 2026?",
+   "series_ticker": "KXMAMDANIEO",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.16499999999999998,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.027224999999999992,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 7,
+     "p": 0.165,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.027225000000000003,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T1",
+   "title": "Will there be at least 1 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T10",
+   "title": "Will there be at least 10 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.030000000000000002,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0009000000000000002,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T15",
+   "title": "Will there be at least 15 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.034999999999999996,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0012249999999999997,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T2",
+   "title": "Will there be at least 2 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T3",
+   "title": "Will there be at least 3 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T4",
+   "title": "Will there be at least 4 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T5",
+   "title": "Will there be at least 5 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.18,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0324,
+     "logloss": 0.19845093872383818
+    },
+    {
+     "nDays": 3,
+     "p": 0.6799999999999999,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.4623999999999999,
+     "logloss": 1.1394342831883646
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T6",
+   "title": "Will there be at least 6 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.085,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.007225000000000001,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 3,
+     "p": 0.505,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.255025,
+     "logloss": 0.7031975164134467
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T7",
+   "title": "Will there be at least 7 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.030000000000000002,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0009000000000000002,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T8",
+   "title": "Will there be at least 8 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-07",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.030000000000000002,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0009000000000000002,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACT-26OCT04-T9",
+   "title": "Will there be at least 9 presidential actions in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPACT",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.030000000000000002,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0009000000000000002,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPGOLFD-26OCT10-YES",
+   "title": "Will Trump golf on Oct 10, 2026?",
+   "series_ticker": "KXTRUMPGOLFD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.54,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.2916,
+     "logloss": 0.7765287894989964
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPNOMNUM-26OCT04-T1",
+   "title": "Will there be at least 1 presidential nominations sent to the Senate in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPNOMNUM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPNOMNUM-26OCT04-T10",
+   "title": "Will there be at least 10 presidential nominations sent to the Senate in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPNOMNUM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPNOMNUM-26OCT04-T3",
+   "title": "Will there be at least 3 presidential nominations sent to the Senate in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPNOMNUM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.009025,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPNOMNUM-26OCT04-T5",
+   "title": "Will there be at least 5 presidential nominations sent to the Senate in the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUMPNOMNUM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATESMON-26OCT-KY",
+   "title": "Will Donald Trump visit Kentucky in Oct 2026?",
+   "series_ticker": "KXTRUMPSTATESMON",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-07",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.7050000000000001,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.08702499999999996,
+     "logloss": 0.3495574761698683
+    },
+    {
+     "nDays": 3,
+     "p": 0.61,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.1521,
+     "logloss": 0.4942963218147801
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B109",
+   "title": "Will Donald Trump make between 100 and 119 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.395,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.366025,
+     "logloss": 0.9288695140810151
+    },
+    {
+     "nDays": 3,
+     "p": 0.18,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.6724000000000001,
+     "logloss": 1.7147984280919268
+    },
+    {
+     "nDays": 7,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.819025,
+     "logloss": 2.353878387381596
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B129",
+   "title": "Will Donald Trump make between 120 and 139 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.49,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.24009999999999998,
+     "logloss": 0.6733445532637656
+    },
+    {
+     "nDays": 3,
+     "p": 0.235,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.055224999999999996,
+     "logloss": 0.2678794451556012
+    },
+    {
+     "nDays": 7,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B149",
+   "title": "Will Donald Trump make between 140 and 159 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.12000000000000001,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.014400000000000003,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 3,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.050625,
+     "logloss": 0.25489224962879004
+    },
+    {
+     "nDays": 7,
+     "p": 0.18,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0324,
+     "logloss": 0.19845093872383818
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B169",
+   "title": "Will Donald Trump make between 160 and 179 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.009025,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 7,
+     "p": 0.175,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.030624999999999996,
+     "logloss": 0.19237189264745613
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B189",
+   "title": "Will Donald Trump make between 180 and 199 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 7,
+     "p": 0.13,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.016900000000000002,
+     "logloss": 0.13926206733350766
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B209",
+   "title": "Will Donald Trump make between 200 and 219 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 7,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B230",
+   "title": "Will Donald Trump make between 220 and 240 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-B89",
+   "title": "Will Donald Trump make between 80 and 99 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-T240",
+   "title": "Will Donald Trump make above 240 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.060000000000000005,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0036000000000000008,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIAL-26OCT10-T80",
+   "title": "Will Donald Trump make below 80 Truth Social posts the week of Oct 4, 2026?",
+   "series_ticker": "KXTRUTHSOCIAL",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-B12",
+   "title": "Will Donald Trump make between 10 and 14 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-B17",
+   "title": "Will Donald Trump make between 15 and 19 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-B22",
+   "title": "Will Donald Trump make between 20 and 24 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.36,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.1296,
+     "logloss": 0.4462871026284195
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-B7",
+   "title": "Will Donald Trump make between 5 and 9 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-T40",
+   "title": "Will Donald Trump make at least 40 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT10-T5",
+   "title": "Will Donald Trump make below 5 Truth Social posts on Oct 10, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
     },
     {
      "nDays": 3,
