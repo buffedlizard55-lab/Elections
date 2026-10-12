@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-11T17:44:44.622Z",
+ "capturedAt": "2026-10-12T21:21:51.848Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 1877,
- "scoreableMarkets": 1498,
- "observationsExcludedAsLookAhead": 480,
- "trackedMarkets": 14824,
+ "settledMarkets": 1980,
+ "scoreableMarkets": 1601,
+ "observationsExcludedAsLookAhead": 495,
+ "trackedMarkets": 15065,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -30,36 +30,37 @@
   "2026-10-08",
   "2026-10-09",
   "2026-10-10",
-  "2026-10-11"
+  "2026-10-11",
+  "2026-10-12"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 1498,
-   "meanBrier": 0.05061920510680959,
-   "meanLogloss": 0.17697635648969684,
-   "meanP": 0.23326335113484448
+   "nMarkets": 1601,
+   "meanBrier": 0.04887683900687119,
+   "meanLogloss": 0.17270136104324835,
+   "meanP": 0.232709868831978
   },
   {
    "nDays": 3,
-   "nMarkets": 1141,
-   "meanBrier": 0.05459828396143786,
-   "meanLogloss": 0.18863264860750795,
-   "meanP": 0.2583961437335656
+   "nMarkets": 1214,
+   "meanBrier": 0.05302398434925917,
+   "meanLogloss": 0.1845312244454437,
+   "meanP": 0.2590403624382192
   },
   {
    "nDays": 7,
-   "nMarkets": 870,
-   "meanBrier": 0.05902288764367845,
-   "meanLogloss": 0.19724293481831787,
-   "meanP": 0.22115689655172374
+   "nMarkets": 943,
+   "meanBrier": 0.055660935577943105,
+   "meanLogloss": 0.18751976704971196,
+   "meanP": 0.22471527041357323
   },
   {
    "nDays": 14,
-   "nMarkets": 414,
-   "meanBrier": 0.05710257669082118,
-   "meanLogloss": 0.19223266882439288,
-   "meanP": 0.19957608695652224
+   "nMarkets": 479,
+   "meanBrier": 0.0522091685803757,
+   "meanLogloss": 0.17846301629620928,
+   "meanP": 0.214487473903967
   },
   {
    "nDays": 30,
@@ -73,72 +74,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 8292,
-   "meanP": 0.02502273275446152,
-   "observedYesRate": 0.010130246020260492
+   "n": 9194,
+   "meanP": 0.024941102893190625,
+   "observedYesRate": 0.009571459647596259
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 1037,
-   "meanP": 0.14485535197685606,
-   "observedYesRate": 0.06943105110896818
+   "n": 1222,
+   "meanP": 0.14295008183306035,
+   "observedYesRate": 0.05973813420621931
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 629,
-   "meanP": 0.24484896661367284,
-   "observedYesRate": 0.2543720190779014
+   "n": 695,
+   "meanP": 0.24346043165467712,
+   "observedYesRate": 0.23453237410071942
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 506,
-   "meanP": 0.34842885375494076,
-   "observedYesRate": 0.35177865612648224
+   "n": 511,
+   "meanP": 0.3486399217221135,
+   "observedYesRate": 0.3542074363992172
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 331,
-   "meanP": 0.44419939577039275,
-   "observedYesRate": 0.38368580060422963
+   "n": 335,
+   "meanP": 0.443955223880597,
+   "observedYesRate": 0.3880597014925373
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 277,
-   "meanP": 0.550180505415162,
-   "observedYesRate": 0.5595667870036101
+   "n": 280,
+   "meanP": 0.5497857142857138,
+   "observedYesRate": 0.5607142857142857
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 336,
-   "meanP": 0.6456249999999999,
-   "observedYesRate": 0.5684523809523809
+   "n": 352,
+   "meanP": 0.6462499999999999,
+   "observedYesRate": 0.5596590909090909
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 327,
-   "meanP": 0.7483333333333326,
-   "observedYesRate": 0.7217125382262997
+   "n": 349,
+   "meanP": 0.7480229226361025,
+   "observedYesRate": 0.7163323782234957
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 434,
-   "meanP": 0.8495771889400944,
-   "observedYesRate": 0.9216589861751152
+   "n": 484,
+   "meanP": 0.8498997933884325,
+   "observedYesRate": 0.9276859504132231
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 1302,
-   "meanP": 0.9592066052227398,
-   "observedYesRate": 0.9623655913978495
+   "n": 1617,
+   "meanP": 0.9621502782931437,
+   "observedYesRate": 0.9684601113172542
   }
  ],
  "perMarket": [
@@ -92454,6 +92455,318 @@
    ]
   },
   {
+   "ticker": "KXFRPSNOM-26OCT01-BCAZ",
+   "title": "Will Bernard Cazeneuve win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.12,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 7,
+     "p": 0.12,
+     "basis": "last",
+     "date": "2026-10-04",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 14,
+     "p": 0.12,
+     "basis": "last",
+     "date": "2026-09-27",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFRPSNOM-26OCT01-BVAL",
+   "title": "Will Boris Vallaud win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-04",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-27",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFRPSNOM-26OCT01-FHOL",
+   "title": "Will François Hollande win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "mid",
+     "date": "2026-09-27",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFRPSNOM-26OCT01-OFAU",
+   "title": "Will Olivier Faure win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.12,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0144,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 3,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 7,
+     "p": 0.1,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 14,
+     "p": 0.185,
+     "basis": "mid",
+     "date": "2026-09-27",
+     "brier": 0.034225,
+     "logloss": 0.2045671657412744
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFRPSNOM-26OCT01-RBRU",
+   "title": "Will Philippe Brun win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-08",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-04",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-27",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXFRPSNOM-26OCT01-RGLU",
+   "title": "Will Raphaël Glucksmann win the primary to select the French pôle socialiste’s candidate for the 2027 presidential election?",
+   "series_ticker": "KXFRPSNOM",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.84,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.02560000000000001,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 3,
+     "p": 0.875,
+     "basis": "mid",
+     "date": "2026-10-08",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 7,
+     "p": 0.85,
+     "basis": "mid",
+     "date": "2026-10-04",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 14,
+     "p": 0.77,
+     "basis": "mid",
+     "date": "2026-09-27",
+     "brier": 0.05289999999999999,
+     "logloss": 0.2613647641344075
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXMAMDANIEO-26OCT10-T0",
    "title": "Will Mamdani sign above 0 executive orders between Oct 4, 2026 and Oct 10, 2026?",
    "series_ticker": "KXMAMDANIEO",
@@ -93031,6 +93344,447 @@
      "date": "2026-10-08",
      "brier": 0.002025,
      "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-A38.1",
+   "title": "Will Trump's RCP approval average be above 38.1 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.105,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.011024999999999998,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E37.5",
+   "title": "Will Trump's RCP approval average be exactly 37.5 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E37.6",
+   "title": "Will Trump's RCP approval average be exactly 37.6 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E37.7",
+   "title": "Will Trump's RCP approval average be exactly 37.7 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E37.8",
+   "title": "Will Trump's RCP approval average be exactly 37.8 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.61,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.1521,
+     "logloss": 0.4942963218147801
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E37.9",
+   "title": "Will Trump's RCP approval average be exactly 37.9 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E38.0",
+   "title": "Will Trump's RCP approval average be exactly 38.0 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-E38.1",
+   "title": "Will Trump's RCP approval average be exactly 38.1 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT11-U37.5",
+   "title": "Will Trump's RCP approval average be below 37.5 on Oct 11, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
     },
     {
      "nDays": 7,
@@ -94151,6 +94905,4511 @@
      "date": null,
      "brier": null,
      "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-A9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.0 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.4 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.5",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.5 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.10500000000000001,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.801025,
+     "logloss": 2.2537949288246137
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT11-U8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.4 on Oct 11, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-11",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-10",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-AFD",
+   "title": "Will AfD finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-BSW",
+   "title": "Will BSW finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-CDU",
+   "title": "Will CDU finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-DLIN",
+   "title": "Will Die Linke finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-FDP",
+   "title": "Will FDP finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-GRUN",
+   "title": "Will Grüne finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN2ND-26SEP20-2-SPD",
+   "title": "Will SPD finish 2nd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN2ND",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-AFD",
+   "title": "Will AfD finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-BSW",
+   "title": "Will BSW finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-CDU",
+   "title": "Will CDU finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.66,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.43560000000000004,
+     "logloss": 1.07880966137193
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-DLIN",
+   "title": "Will Die Linke finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 3,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 7,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 14,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-FDP",
+   "title": "Will FDP finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-GRUN",
+   "title": "Will Grüne finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN3RD-26SEP20-3-SPD",
+   "title": "Will SPD finish 3rd in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN3RD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.08,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0064,
+     "logloss": 0.08338160893905101
+    },
+    {
+     "nDays": 3,
+     "p": 0.08,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0064,
+     "logloss": 0.08338160893905101
+    },
+    {
+     "nDays": 7,
+     "p": 0.08,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0064,
+     "logloss": 0.08338160893905101
+    },
+    {
+     "nDays": 14,
+     "p": 0.08,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0064,
+     "logloss": 0.08338160893905101
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-AFD",
+   "title": "Will AfD finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-BSW",
+   "title": "Will BSW finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-CDU",
+   "title": "Will CDU finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 3,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 7,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 14,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-DLIN",
+   "title": "Will Die Linke finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-FDP",
+   "title": "Will FDP finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-GRUN",
+   "title": "Will Grüne finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLIN4TH-26SEP20-4-SPD",
+   "title": "Will SPD finish 4th in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLIN4TH",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.16,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 3,
+     "p": 0.16,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 7,
+     "p": 0.16,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 14,
+     "p": 0.16,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLINANYSEAT-26SEP20-BSW",
+   "title": "Will BSW win at least 1 seat in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLINANYSEAT",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.15,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0225,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLINANYSEAT-26SEP20-FDP",
+   "title": "Will FDP win at least 1 seat in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLINANYSEAT",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.13,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.016900000000000002,
+     "logloss": 0.13926206733350766
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBERLINANYSEAT-26SEP20-VOLT",
+   "title": "Will Volt win at least 1 seat in the 2026 Berlin state election?",
+   "series_ticker": "KXBERLINANYSEAT",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.73,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.5328999999999999,
+     "logloss": 1.3093333199837622
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-AOWC",
+   "title": "Will Aleksandra Owca win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-BBOS",
+   "title": "Will Bartosz Bocheńczak win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-DGOS",
+   "title": "Will Daria Gosek-Popiołek win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": 0.030000000000000002,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0009000000000000002,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-JHOF",
+   "title": "Will Jan Hoffman win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-LGIB",
+   "title": "Will Łukasz Gibała win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.91,
+     "basis": "mid",
+     "date": "2026-10-05",
+     "brier": 0.008099999999999994,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 14,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-MBAN",
+   "title": "Will Marian Banaś win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-MDRE",
+   "title": "Will Michał Drewnicki win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 7,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 14,
+     "p": 0.1,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.010000000000000002,
+     "logloss": 0.10536051565782628
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-MKIL",
+   "title": "Will Michał Klimek win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-MPIA",
+   "title": "Will Monika Piątkowska win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 3,
+     "p": 0.11,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0121,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXKRAKOWMAYOR-26SEP27-SPIE",
+   "title": "Will Sławomir Pietrzyk win the 2026 special election for Mayor of Kraków?",
+   "series_ticker": "KXKRAKOWMAYOR",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-A38.1",
+   "title": "Will Trump's RCP approval average be above 38.1 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E37.5",
+   "title": "Will Trump's RCP approval average be exactly 37.5 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.195,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.038025,
+     "logloss": 0.21691300156357377
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E37.6",
+   "title": "Will Trump's RCP approval average be exactly 37.6 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.19,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E37.7",
+   "title": "Will Trump's RCP approval average be exactly 37.7 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E37.8",
+   "title": "Will Trump's RCP approval average be exactly 37.8 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.20500000000000002,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.04202500000000001,
+     "logloss": 0.22941316432780523
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E37.9",
+   "title": "Will Trump's RCP approval average be exactly 37.9 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E38.0",
+   "title": "Will Trump's RCP approval average be exactly 38.0 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-E38.1",
+   "title": "Will Trump's RCP approval average be exactly 38.1 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.931225,
+     "logloss": 3.3524072174927233
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT12-U37.5",
+   "title": "Will Trump's RCP approval average be below 37.5 on Oct 12, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-0",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 0 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-1",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 1 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-2",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 2 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-3",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 3 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-4",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 4 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-5",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 5 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-05",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-6",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 6 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.905,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.009024999999999995,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 3,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.893025,
+     "logloss": 2.900422093749666
+    },
+    {
+     "nDays": 7,
+     "p": 0.33999999999999997,
+     "basis": "mid",
+     "date": "2026-10-05",
+     "brier": 0.43560000000000004,
+     "logloss": 1.07880966137193
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPPHOTO-26OCT11-7",
+   "title": "Will the number of distinct days with a Getty Images editorial photo of Trump be exactly 7 between Oct 5, 2026 and Oct 11, 2026?",
+   "series_ticker": "KXTRUMPPHOTO",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": 0.935,
+     "basis": "mid",
+     "date": "2026-10-09",
+     "brier": 0.8742250000000001,
+     "logloss": 2.733368009086501
+    },
+    {
+     "nDays": 7,
+     "p": 0.625,
+     "basis": "mid",
+     "date": "2026-10-05",
+     "brier": 0.390625,
+     "logloss": 0.9808292530117262
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT11-T40",
+   "title": "Will Donald Trump make at least 40 Truth Social posts on Oct 11, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT11-T5",
+   "title": "Will Donald Trump make below 5 Truth Social posts on Oct 11, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20AFD-17",
+   "title": "Will AfD receive at least 17% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20AFD-19",
+   "title": "Will AfD receive at least 19% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20AFD-21",
+   "title": "Will AfD receive at least 21% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.06,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0036,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 7,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 14,
+     "p": 0.19,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0361,
+     "logloss": 0.21072103131565253
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20BSW-2",
+   "title": "Will BSW receive at least 2% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20BSW-3",
+   "title": "Will BSW receive at least 3% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20BSW-4",
+   "title": "Will BSW receive at least 4% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20BSW-5",
+   "title": "Will BSW receive at least 5% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.24,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 3,
+     "p": 0.24,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 7,
+     "p": 0.24,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 14,
+     "p": 0.24,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0576,
+     "logloss": 0.2744368457017603
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20BSW-6",
+   "title": "Will BSW receive at least 6% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.06,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0036,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20CDU-17",
+   "title": "Will CDU receive at least 17% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20CDU-23",
+   "title": "Will CDU receive at least 23% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20CDU-25",
+   "title": "Will CDU receive at least 25% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20DLIN-20",
+   "title": "Will Die Linke receive at least 20% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-21",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20DLIN-22",
+   "title": "Will Die Linke receive at least 22% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.85,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 3,
+     "p": 0.85,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 7,
+     "p": 0.85,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 14,
+     "p": 0.85,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.022500000000000006,
+     "logloss": 0.16251892949777494
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20DLIN-24",
+   "title": "Will Die Linke receive at least 24% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20DLIN-26",
+   "title": "Will Die Linke receive at least 26% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-10",
+   "title": "Will Grüne receive at least 10% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-12",
+   "title": "Will Grüne receive at least 12% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-14",
+   "title": "Will Grüne receive at least 14% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": 0.95,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0025000000000000044,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 7,
+     "p": 0.95,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0025000000000000044,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 14,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-16",
+   "title": "Will Grüne receive at least 16% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-18",
+   "title": "Will Grüne receive at least 18% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20GRUN-20",
+   "title": "Will Grüne receive at least 20% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 21,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-21",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20SPD-11",
+   "title": "Will SPD receive at least 11% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20SPD-13",
+   "title": "Will SPD receive at least 13% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 3,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 7,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 14,
+     "p": 0.21,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.04409999999999999,
+     "logloss": 0.23572233352106983
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20SPD-15",
+   "title": "Will SPD receive at least 15% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 22,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-20",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20SPD-7",
+   "title": "Will SPD receive at least 7% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.98,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVOTEBERLIN-26SEP20SPD-9",
+   "title": "Will SPD receive at least 9% of valid second votes in the 2026 Berlin state election?",
+   "series_ticker": "KXVOTEBERLIN",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 23,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.97,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.97,
+     "basis": "last",
+     "date": "2026-10-09",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.97,
+     "basis": "last",
+     "date": "2026-10-05",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.97,
+     "basis": "last",
+     "date": "2026-09-28",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
     },
     {
      "nDays": 30,
