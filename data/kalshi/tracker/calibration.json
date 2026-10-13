@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-12T21:21:51.848Z",
+ "capturedAt": "2026-10-13T19:27:01.826Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 1980,
- "scoreableMarkets": 1601,
+ "settledMarkets": 2036,
+ "scoreableMarkets": 1657,
  "observationsExcludedAsLookAhead": 495,
- "trackedMarkets": 15065,
+ "trackedMarkets": 15322,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -31,36 +31,37 @@
   "2026-10-09",
   "2026-10-10",
   "2026-10-11",
-  "2026-10-12"
+  "2026-10-12",
+  "2026-10-13"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 1601,
-   "meanBrier": 0.04887683900687119,
-   "meanLogloss": 0.17270136104324835,
-   "meanP": 0.232709868831978
+   "nMarkets": 1657,
+   "meanBrier": 0.04974939302957203,
+   "meanLogloss": 0.17553414639086629,
+   "meanP": 0.23193934821967194
   },
   {
    "nDays": 3,
-   "nMarkets": 1214,
-   "meanBrier": 0.05302398434925917,
-   "meanLogloss": 0.1845312244454437,
-   "meanP": 0.2590403624382192
+   "nMarkets": 1241,
+   "meanBrier": 0.0524758195004034,
+   "meanLogloss": 0.18301602867801045,
+   "meanP": 0.25835616438355996
   },
   {
    "nDays": 7,
-   "nMarkets": 943,
-   "meanBrier": 0.055660935577943105,
-   "meanLogloss": 0.18751976704971196,
-   "meanP": 0.22471527041357323
+   "nMarkets": 970,
+   "meanBrier": 0.05500140438144365,
+   "meanLogloss": 0.18584952261629462,
+   "meanP": 0.22463556701030887
   },
   {
    "nDays": 14,
-   "nMarkets": 479,
-   "meanBrier": 0.0522091685803757,
-   "meanLogloss": 0.17846301629620928,
-   "meanP": 0.214487473903967
+   "nMarkets": 503,
+   "meanBrier": 0.0517911366799204,
+   "meanLogloss": 0.17689616844961092,
+   "meanP": 0.21113220675944372
   },
   {
    "nDays": 30,
@@ -74,72 +75,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 9194,
-   "meanP": 0.024941102893190625,
-   "observedYesRate": 0.009571459647596259
+   "n": 9642,
+   "meanP": 0.025220234391204747,
+   "observedYesRate": 0.009334163036714374
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 1222,
-   "meanP": 0.14295008183306035,
-   "observedYesRate": 0.05973813420621931
+   "n": 1256,
+   "meanP": 0.14299761146496792,
+   "observedYesRate": 0.0589171974522293
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 695,
-   "meanP": 0.24346043165467712,
-   "observedYesRate": 0.23453237410071942
+   "n": 723,
+   "meanP": 0.2438658367911488,
+   "observedYesRate": 0.24066390041493776
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 511,
-   "meanP": 0.3486399217221135,
-   "observedYesRate": 0.3542074363992172
+   "n": 548,
+   "meanP": 0.348211678832117,
+   "observedYesRate": 0.38503649635036497
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 335,
-   "meanP": 0.443955223880597,
-   "observedYesRate": 0.3880597014925373
+   "n": 338,
+   "meanP": 0.44405325443786986,
+   "observedYesRate": 0.3905325443786982
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 280,
-   "meanP": 0.5497857142857138,
-   "observedYesRate": 0.5607142857142857
+   "n": 282,
+   "meanP": 0.5497872340425527,
+   "observedYesRate": 0.5638297872340425
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 352,
-   "meanP": 0.6462499999999999,
-   "observedYesRate": 0.5596590909090909
+   "n": 360,
+   "meanP": 0.6461666666666666,
+   "observedYesRate": 0.5694444444444444
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 349,
-   "meanP": 0.7480229226361025,
-   "observedYesRate": 0.7163323782234957
+   "n": 361,
+   "meanP": 0.7476177285318552,
+   "observedYesRate": 0.7257617728531855
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 484,
-   "meanP": 0.8498997933884325,
-   "observedYesRate": 0.9276859504132231
+   "n": 511,
+   "meanP": 0.8510303326810202,
+   "observedYesRate": 0.9315068493150684
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 1617,
-   "meanP": 0.9621502782931437,
-   "observedYesRate": 0.9684601113172542
+   "n": 1655,
+   "meanP": 0.9616326283988006,
+   "observedYesRate": 0.9685800604229607
   }
  ],
  "perMarket": [
@@ -98072,6 +98073,447 @@
    ]
   },
   {
+   "ticker": "KXVHGCB-26OCT12-A9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.0 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.4 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.8281000000000001,
+     "logloss": 2.407945608651872
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.5",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.5 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.16,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0256,
+     "logloss": 0.1743533871447778
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.31,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0961,
+     "logloss": 0.37106368139083207
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.115,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.013225,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT12-U8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.4 on Oct 12, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-12",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-11",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXVOTEBERLIN-26SEP20AFD-17",
    "title": "Will AfD receive at least 17% of valid second votes in the 2026 Berlin state election?",
    "series_ticker": "KXVOTEBERLIN",
@@ -99410,6 +99852,2387 @@
      "date": "2026-09-28",
      "brier": 0.0009000000000000016,
      "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-HHAN",
+   "title": "Will Hannes Hanso be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-ILAU",
+   "title": "Will Indrek Laul be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-ITAR",
+   "title": "Will Indrek Tarand be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-JVSE",
+   "title": "Will Jonatan Vseviov be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-KKAL",
+   "title": "Will Kersti Kaljulaid be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-MHEL",
+   "title": "Will Mart Helme be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-MMAA",
+   "title": "Will Matti Maasikas be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-MRUT",
+   "title": "Will Maive Rute be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-RUHT",
+   "title": "Will Riho Ühtegi be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-UMAD",
+   "title": "Will Ülle Madise be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 7,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 14,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0036000000000000064,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXESTPRES-27JAN01-UPAE",
+   "title": "Will Urmas Paet be the next President of Estonia before Jan 1, 2027?",
+   "series_ticker": "KXESTPRES",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 14,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-ACAN",
+   "title": "Will Alfred Cannan become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.060000000000000005,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0036000000000000008,
+     "logloss": 0.06187540371808753
+    },
+    {
+     "nDays": 3,
+     "p": 0.155,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.024025,
+     "logloss": 0.16841865162496322
+    },
+    {
+     "nDays": 7,
+     "p": 0.14,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.019600000000000003,
+     "logloss": 0.15082288973458366
+    },
+    {
+     "nDays": 14,
+     "p": 0.245,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-CBAR",
+   "title": "Will Clare Barber become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-CCHR",
+   "title": "Will Claire Christian become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 7,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 14,
+     "p": 0.04,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0016,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-CTHO",
+   "title": "Will Chris Thomas become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.885,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": 0.565,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.18922500000000006,
+     "logloss": 0.5709295478356962
+    },
+    {
+     "nDays": 7,
+     "p": 0.605,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.15602500000000002,
+     "logloss": 0.5025268209512956
+    },
+    {
+     "nDays": 14,
+     "p": 0.29500000000000004,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.49702499999999994,
+     "logloss": 1.220779922642317
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-DASH",
+   "title": "Will David Ashford become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 7,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 14,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-JFAR",
+   "title": "Will Joney Faragher become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 7,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 14,
+     "p": 0.05,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-JPOO",
+   "title": "Will Jane Poole-Wilson become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.135,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 7,
+     "p": 0.17,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.028900000000000006,
+     "logloss": 0.18632957819149348
+    },
+    {
+     "nDays": 14,
+     "p": 0.175,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.030624999999999996,
+     "logloss": 0.19237189264745613
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-LHOO",
+   "title": "Will Lawrie Hooper become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-RCAL",
+   "title": "Will Rob Callister become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 7,
+     "p": 0.07,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 14,
+     "p": 0.10500000000000001,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.011025000000000002,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXISLEMINISTER-26SEP24-TJOH",
+   "title": "Will Tim Johnston become Chief Minister of Isle of Man following the 2026 Manx general election?",
+   "series_ticker": "KXISLEMINISTER",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-10",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-29",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMETAKIDSWIN-TRIAL27",
+   "title": "Will the U.S. District Court for the Northern District of California rule rules in favor of Meta Platforms, Inc. on the plaintiff States' claims that it designed Facebook and Instagram to cause compulsive use by minors and that it misrepresented the safety of those platforms?",
+   "series_ticker": "KXMETAKIDSWIN",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": 0.045000000000000005,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.0020250000000000003,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXOBAMAENDORSE-26NOV03-RCOO",
+   "title": "Will Barack Obama endorse Roy Cooper in North Carolina Senate before Nov 3, 2026?",
+   "series_ticker": "KXOBAMAENDORSE",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-06",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.925,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.005624999999999994,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": 0.925,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.005624999999999994,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 7,
+     "p": 0.9099999999999999,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.008100000000000015,
+     "logloss": 0.09431067947124142
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPFCANCEL-26",
+   "title": "Will it be reported by Front Populaire 2027 that the 2026 United Left primary organized by Front Populaire 2027 is canceled or otherwise not held before Oct 13, 2026?",
+   "series_ticker": "KXPFCANCEL",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.89,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.012099999999999998,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 3,
+     "p": 0.89,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.012099999999999998,
+     "logloss": 0.11653381625595151
+    },
+    {
+     "nDays": 7,
+     "p": 0.895,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.011024999999999997,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 14,
+     "p": 0.875,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPRESSBRIEFINGCOUNT-26OCT-A1",
+   "title": "Will the number of White House Press Briefings in Oct 2026 be at least 1?",
+   "series_ticker": "KXPRESSBRIEFINGCOUNT",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 12,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.91,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.008099999999999994,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 7,
+     "p": 0.645,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.126025,
+     "logloss": 0.43850496218636453
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSCOTUSCERT-27JAN-USD",
+   "title": "What cases will the Supreme Court agree to hear before Jan 2027?",
+   "series_ticker": "KXSCOTUSCERT",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 24,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.36,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.4096,
+     "logloss": 1.0216512475319814
+    },
+    {
+     "nDays": 3,
+     "p": 0.38,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.3844,
+     "logloss": 0.9675840262617056
+    },
+    {
+     "nDays": 7,
+     "p": 0.32999999999999996,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.4489000000000001,
+     "logloss": 1.1086626245216111
+    },
+    {
+     "nDays": 14,
+     "p": 0.36,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.4096,
+     "logloss": 1.0216512475319814
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-A38.4",
+   "title": "Will Trump's RCP approval average be above 38.4 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E37.8",
+   "title": "Will Trump's RCP approval average be exactly 37.8 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E37.9",
+   "title": "Will Trump's RCP approval average be exactly 37.9 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E38.0",
+   "title": "Will Trump's RCP approval average be exactly 38.0 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.009025,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E38.1",
+   "title": "Will Trump's RCP approval average be exactly 38.1 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.325,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.10562500000000001,
+     "logloss": 0.3930425881096072
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E38.2",
+   "title": "Will Trump's RCP approval average be exactly 38.2 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.18,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0324,
+     "logloss": 0.19845093872383818
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E38.3",
+   "title": "Will Trump's RCP approval average be exactly 38.3 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-E38.4",
+   "title": "Will Trump's RCP approval average be exactly 38.4 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.8556250000000001,
+     "logloss": 2.5902671654458267
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPAPPROVE-26OCT13-U37.8",
+   "title": "Will Trump's RCP approval average be below 37.8 on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPAPPROVE",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPMEETM-26NOV01-MBS",
+   "title": "Will Donald Trump meet (including phone calls) Mohammed bin Salman in Oct 2026?",
+   "series_ticker": "KXTRUMPMEETM",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 12,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.97,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0009000000000000016,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.7050000000000001,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.08702499999999996,
+     "logloss": 0.3495574761698683
+    },
+    {
+     "nDays": 7,
+     "p": 0.8,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.03999999999999998,
+     "logloss": 0.2231435513142097
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B12",
+   "title": "Will Donald Trump make between 10 and 14 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B17",
+   "title": "Will Donald Trump make between 15 and 19 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B22",
+   "title": "Will Donald Trump make between 20 and 24 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.09,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0081,
+     "logloss": 0.09431067947124129
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B27",
+   "title": "Will Donald Trump make between 25 and 29 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B34",
+   "title": "Will Donald Trump make between 30 and 39 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.7921,
+     "logloss": 2.2072749131897207
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-B7",
+   "title": "Will Donald Trump make between 5 and 9 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-T40",
+   "title": "Will Donald Trump make at least 40 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.94,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.8835999999999999,
+     "logloss": 2.8134107167600355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT12-T5",
+   "title": "Will Donald Trump make below 5 Truth Social posts on Oct 12, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXZACHARIABRIEFING-26-26OCT13",
+   "title": "Will Katie Zacharia deliver her first White House briefing before Oct 13, 2026?",
+   "series_ticker": "KXZACHARIABRIEFING",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 2,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-11",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.07,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.004900000000000001,
+     "logloss": 0.0725706928348355
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXZACHARIABRIEFING-26-26OCT16",
+   "title": "Will Katie Zacharia deliver her first White House briefing before Oct 16, 2026?",
+   "series_ticker": "KXZACHARIABRIEFING",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.96,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.001600000000000003,
+     "logloss": 0.040821994520255166
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXZACHARIABRIEFING-26-26OCT20",
+   "title": "Will Katie Zacharia deliver her first White House briefing before Oct 20, 2026?",
+   "series_ticker": "KXZACHARIABRIEFING",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
     },
     {
      "nDays": 30,
