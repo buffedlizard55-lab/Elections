@@ -1,12 +1,12 @@
 {
  "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/events?status=open&with_nested_markets=true (daily) + https://api.elections.kalshi.com/trade-api/v2/markets?tickers=... (settlements)",
- "capturedAt": "2026-10-13T19:27:01.826Z",
+ "capturedAt": "2026-10-14T17:28:25.709Z",
  "capturedBy": "scripts/collect-kalshi.mjs",
  "method": "Implied p = order-book midpoint when a two-sided book (spread <= 10c) exists, else last trade price; only observations dated strictly before the settlement day count (rows with a non-active status are ignored); lead-time p = last observation on or before settlement_day - N days; Brier (p-o)^2; log-loss clipped at 1e-4. Pooled curve uses every pre-settlement (day, market) observation of settled markets.",
- "settledMarkets": 2036,
- "scoreableMarkets": 1657,
- "observationsExcludedAsLookAhead": 495,
- "trackedMarkets": 15322,
+ "settledMarkets": 2127,
+ "scoreableMarkets": 1747,
+ "observationsExcludedAsLookAhead": 506,
+ "trackedMarkets": 15555,
  "observationDays": [
   "2026-09-19",
   "2026-09-20",
@@ -32,36 +32,37 @@
   "2026-10-10",
   "2026-10-11",
   "2026-10-12",
-  "2026-10-13"
+  "2026-10-13",
+  "2026-10-14"
  ],
  "byLead": [
   {
    "nDays": 1,
-   "nMarkets": 1657,
-   "meanBrier": 0.04974939302957203,
-   "meanLogloss": 0.17553414639086629,
-   "meanP": 0.23193934821967194
+   "nMarkets": 1747,
+   "meanBrier": 0.05124251545506635,
+   "meanLogloss": 0.17930648777007643,
+   "meanP": 0.2372346880366322
   },
   {
    "nDays": 3,
-   "nMarkets": 1241,
-   "meanBrier": 0.0524758195004034,
-   "meanLogloss": 0.18301602867801045,
-   "meanP": 0.25835616438355996
+   "nMarkets": 1317,
+   "meanBrier": 0.05420201157934753,
+   "meanLogloss": 0.1875785036294826,
+   "meanP": 0.26384700075929984
   },
   {
    "nDays": 7,
-   "nMarkets": 970,
-   "meanBrier": 0.05500140438144365,
-   "meanLogloss": 0.18584952261629462,
-   "meanP": 0.22463556701030887
+   "nMarkets": 1031,
+   "meanBrier": 0.05604749878758522,
+   "meanLogloss": 0.1887547926221091,
+   "meanP": 0.2298191076624632
   },
   {
    "nDays": 14,
-   "nMarkets": 503,
-   "meanBrier": 0.0517911366799204,
-   "meanLogloss": 0.17689616844961092,
-   "meanP": 0.21113220675944372
+   "nMarkets": 519,
+   "meanBrier": 0.0519140187861271,
+   "meanLogloss": 0.17695721742459522,
+   "meanP": 0.21120905587668634
   },
   {
    "nDays": 30,
@@ -75,72 +76,72 @@
   {
    "lo": 0,
    "hi": 0.1,
-   "n": 9642,
-   "meanP": 0.025220234391204747,
-   "observedYesRate": 0.009334163036714374
+   "n": 10016,
+   "meanP": 0.025406948881788557,
+   "observedYesRate": 0.009085463258785943
   },
   {
    "lo": 0.1,
    "hi": 0.2,
-   "n": 1256,
-   "meanP": 0.14299761146496792,
-   "observedYesRate": 0.0589171974522293
+   "n": 1349,
+   "meanP": 0.1429614529280948,
+   "observedYesRate": 0.06300963676797627
   },
   {
    "lo": 0.2,
    "hi": 0.3,
-   "n": 723,
-   "meanP": 0.2438658367911488,
-   "observedYesRate": 0.24066390041493776
+   "n": 756,
+   "meanP": 0.24431878306878377,
+   "observedYesRate": 0.24735449735449735
   },
   {
    "lo": 0.3,
    "hi": 0.4,
-   "n": 548,
-   "meanP": 0.348211678832117,
-   "observedYesRate": 0.38503649635036497
+   "n": 592,
+   "meanP": 0.34905405405405426,
+   "observedYesRate": 0.38513513513513514
   },
   {
    "lo": 0.4,
    "hi": 0.5,
-   "n": 338,
-   "meanP": 0.44405325443786986,
-   "observedYesRate": 0.3905325443786982
+   "n": 388,
+   "meanP": 0.443646907216495,
+   "observedYesRate": 0.4536082474226804
   },
   {
    "lo": 0.5,
    "hi": 0.6,
-   "n": 282,
-   "meanP": 0.5497872340425527,
-   "observedYesRate": 0.5638297872340425
+   "n": 310,
+   "meanP": 0.5489032258064513,
+   "observedYesRate": 0.5774193548387097
   },
   {
    "lo": 0.6,
    "hi": 0.7,
-   "n": 360,
-   "meanP": 0.6461666666666666,
-   "observedYesRate": 0.5694444444444444
+   "n": 382,
+   "meanP": 0.6456413612565446,
+   "observedYesRate": 0.5890052356020943
   },
   {
    "lo": 0.7,
    "hi": 0.8,
-   "n": 361,
-   "meanP": 0.7476177285318552,
-   "observedYesRate": 0.7257617728531855
+   "n": 393,
+   "meanP": 0.7476463104325691,
+   "observedYesRate": 0.732824427480916
   },
   {
    "lo": 0.8,
    "hi": 0.9,
-   "n": 511,
-   "meanP": 0.8510303326810202,
-   "observedYesRate": 0.9315068493150684
+   "n": 573,
+   "meanP": 0.851931064572428,
+   "observedYesRate": 0.93717277486911
   },
   {
    "lo": 0.9,
    "hi": 1,
-   "n": 1655,
-   "meanP": 0.9616326283988006,
-   "observedYesRate": 0.9685800604229607
+   "n": 1742,
+   "meanP": 0.9614334098737156,
+   "observedYesRate": 0.9701492537313433
   }
  ],
  "perMarket": [
@@ -101058,6 +101059,106 @@
    ]
   },
   {
+   "ticker": "KXOBAMAENDORSE-26NOV03-SBRO",
+   "title": "Will Barack Obama endorse Sherrod Brown in Ohio Senate before Nov 3, 2026?",
+   "series_ticker": "KXOBAMAENDORSE",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 0,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": null,
+   "lastObserved": null,
+   "leads": [
+    {
+     "nDays": 1,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPAPPASSUNUNUDEBATE-26",
+   "title": "Will Chris Pappas and John E. Sununu debate each other before Nov 3, 2026?",
+   "series_ticker": "KXPAPPASSUNUNUDEBATE",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 16,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-09-27",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.815,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.03422500000000002,
+     "logloss": 0.2045671657412744
+    },
+    {
+     "nDays": 3,
+     "p": 0.885,
+     "basis": "mid",
+     "date": "2026-10-10",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 7,
+     "p": 0.885,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 14,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-09-29",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXPFCANCEL-26",
    "title": "Will it be reported by Front Populaire 2027 that the 2026 United Left primary organized by Front Populaire 2027 is canceled or otherwise not held before Oct 13, 2026?",
    "series_ticker": "KXPFCANCEL",
@@ -102097,6 +102198,447 @@
    ]
   },
   {
+   "ticker": "KXVHGCB-26OCT13-A9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be above 9.0 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.4 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.29500000000000004,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.08702500000000002,
+     "logloss": 0.34955747616986843
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.5",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.5 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.18,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0324,
+     "logloss": 0.19845093872383818
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.6",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.6 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.12000000000000001,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.014400000000000003,
+     "logloss": 0.12783337150988489
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.7",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.7 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.23,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0529,
+     "logloss": 0.2613647641344075
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.8",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.8 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E8.9",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 8.9 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-E9.0",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be exactly 9.0 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "no",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.034999999999999996,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012249999999999997,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXVHGCB-26OCT13-U8.4",
+   "title": "Will the VoteHub 2026 generic ballot margin (D − R, time-weighted) be below 8.4 on Oct 13, 2026?",
+   "series_ticker": "KXVHGCB",
+   "result": "yes",
+   "settlementDay": "2026-10-13",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 1,
+   "firstObserved": "2026-10-12",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.135,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.748225,
+     "logloss": 2.0024805005437076
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
    "ticker": "KXZACHARIABRIEFING-26-26OCT13",
    "title": "Will Katie Zacharia deliver her first White House briefing before Oct 13, 2026?",
    "series_ticker": "KXZACHARIABRIEFING",
@@ -102233,6 +102775,4076 @@
      "date": null,
      "brier": null,
      "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T150",
+   "title": "Will there be more than 150 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T175",
+   "title": "Will there be more than 175 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.895,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.011024999999999997,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 3,
+     "p": 0.895,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.011024999999999997,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 7,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T180",
+   "title": "Will there be more than 180 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.86,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.019600000000000003,
+     "logloss": 0.15082288973458366
+    },
+    {
+     "nDays": 3,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T190",
+   "title": "Will there be more than 190 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.62,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 3,
+     "p": 0.65,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.12249999999999998,
+     "logloss": 0.4307829160924542
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T200",
+   "title": "Will there be more than 200 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.365,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.13322499999999998,
+     "logloss": 0.4541302800894454
+    },
+    {
+     "nDays": 3,
+     "p": 0.365,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.13322499999999998,
+     "logloss": 0.4541302800894454
+    },
+    {
+     "nDays": 7,
+     "p": 0.365,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.13322499999999998,
+     "logloss": 0.4541302800894454
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T225",
+   "title": "Will there be more than 225 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXBABELMANDEBWEEKLY-26OCT11-T250",
+   "title": "Will there be more than 250 transit calls through the Bab el-Mandeb Strait from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXBABELMANDEBWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0201",
+   "title": "Will Headline be 0.2% or below AND Core be 0.1% or below for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0202",
+   "title": "Will Headline be 0.2% or below AND Core be Exactly 0.2% for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0203",
+   "title": "Will Headline be 0.2% or below AND Core be 0.3% or above for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0301",
+   "title": "Will Headline be Exactly 0.3% AND Core be 0.1% or below for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0302",
+   "title": "Will Headline be Exactly 0.3% AND Core be Exactly 0.2% for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0303",
+   "title": "Will Headline be Exactly 0.3% AND Core be 0.3% or above for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0401",
+   "title": "Will Headline be Exactly 0.4% AND Core be 0.1% or below for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0402",
+   "title": "Will Headline be Exactly 0.4% AND Core be Exactly 0.2% for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0403",
+   "title": "Will Headline be Exactly 0.4% AND Core be 0.3% or above for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 3,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 7,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 14,
+     "p": 0.03,
+     "basis": "last",
+     "date": "2026-09-30",
+     "brier": 0.0009,
+     "logloss": 0.030459207484708574
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0501",
+   "title": "Will Headline be 0.5% or above AND Core be 0.1% or below for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 3,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 7,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 14,
+     "p": 0.175,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.030624999999999996,
+     "logloss": 0.19237189264745613
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0502",
+   "title": "Will Headline be 0.5% or above AND Core be Exactly 0.2% for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.38,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 3,
+     "p": 0.38,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 7,
+     "p": 0.38,
+     "basis": "last",
+     "date": "2026-10-06",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 14,
+     "p": 0.38,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXCPICOMBO-26SEP-0503",
+   "title": "Will Headline be 0.5% or above AND Core be 0.3% or above for Sep 2026?",
+   "series_ticker": "KXCPICOMBO",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 18,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-06",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.38,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.3844,
+     "logloss": 0.9675840262617056
+    },
+    {
+     "nDays": 3,
+     "p": 0.38,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.3844,
+     "logloss": 0.9675840262617056
+    },
+    {
+     "nDays": 7,
+     "p": 0.38,
+     "basis": "mid",
+     "date": "2026-10-06",
+     "brier": 0.3844,
+     "logloss": 0.9675840262617056
+    },
+    {
+     "nDays": 14,
+     "p": 0.365,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.403225,
+     "logloss": 1.0078579253996456
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXEOWEEK-26OCT10-0",
+   "title": "Will the President sign more than 0 Executive Orders between Oct 4, 2026 and Oct 10, 2026?",
+   "series_ticker": "KXEOWEEK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-07",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUILFOYLEOUT-26OCT-26DEC01",
+   "title": "Will Kimberly Guilfoyle be out as US Ambassador to Greece before Dec 1, 2026?",
+   "series_ticker": "KXGUILFOYLEOUT",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-08",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.5800000000000001,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.17639999999999995,
+     "logloss": 0.5447271754416719
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUILFOYLEOUT-26OCT-26NOV01",
+   "title": "Will Kimberly Guilfoyle be out as US Ambassador to Greece before Nov 1, 2026?",
+   "series_ticker": "KXGUILFOYLEOUT",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.395,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.366025,
+     "logloss": 0.9288695140810151
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXGUILFOYLEOUT-26OCT-27JAN01",
+   "title": "Will Kimberly Guilfoyle be out as US Ambassador to Greece before Jan 1, 2027?",
+   "series_ticker": "KXGUILFOYLEOUT",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.655,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.11902499999999998,
+     "logloss": 0.4231200433468851
+    },
+    {
+     "nDays": 7,
+     "p": 0.19,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.6561000000000001,
+     "logloss": 1.6607312068216509
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT05",
+   "title": "Will October 5 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.275,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.525625,
+     "logloss": 1.2909841813155656
+    },
+    {
+     "nDays": 3,
+     "p": 0.255,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.555025,
+     "logloss": 1.3664917338237108
+    },
+    {
+     "nDays": 7,
+     "p": 0.28500000000000003,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.5112249999999999,
+     "logloss": 1.2552660987134865
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT06",
+   "title": "Will October 6 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT07",
+   "title": "Will October 7 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.375,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.140625,
+     "logloss": 0.4700036292457356
+    },
+    {
+     "nDays": 3,
+     "p": 0.385,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.148225,
+     "logloss": 0.4861330111756192
+    },
+    {
+     "nDays": 7,
+     "p": 0.16999999999999998,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.028899999999999995,
+     "logloss": 0.18632957819149337
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT08",
+   "title": "Will October 8 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 7,
+     "p": 0.095,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.009025,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT09",
+   "title": "Will October 9 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 3,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 7,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT10",
+   "title": "Will October 10 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0025000000000000005,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZMAX-26OCT11-OCT11",
+   "title": "Will October 11 be the day with the most transit calls through the Strait of Hormuz (10/5 - 10/11)?",
+   "series_ticker": "KXHORMUZMAX",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 7,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T10",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 10 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T12",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 12 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T14",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 14 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T4",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 4 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.74,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.06760000000000001,
+     "logloss": 0.3011050927839216
+    },
+    {
+     "nDays": 3,
+     "p": 0.765,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.055224999999999996,
+     "logloss": 0.2678794451556012
+    },
+    {
+     "nDays": 7,
+     "p": 0.915,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.007224999999999994,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T5",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 5 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.61,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.1521,
+     "logloss": 0.4942963218147801
+    },
+    {
+     "nDays": 3,
+     "p": 0.615,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.148225,
+     "logloss": 0.4861330111756192
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T6",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 6 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.6006250000000001,
+     "logloss": 1.491654876777717
+    },
+    {
+     "nDays": 3,
+     "p": 0.20500000000000002,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.6320249999999998,
+     "logloss": 1.5847452998437288
+    },
+    {
+     "nDays": 7,
+     "p": 0.33999999999999997,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.43560000000000004,
+     "logloss": 1.07880966137193
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZPEAK-26OCT11-T8",
+   "title": "Will the highest single-day number of transit calls through the Strait of Hormuz be more than 8 from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZPEAK",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T10",
+   "title": "Will there be more than 10 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.985,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0002250000000000004,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T100",
+   "title": "Will there be more than 100 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 8,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-12",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T15",
+   "title": "Will there be more than 15 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.925,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.005624999999999994,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T20",
+   "title": "Will there be more than 20 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.905,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.009024999999999995,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 3,
+     "p": 0.745,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.065025,
+     "logloss": 0.29437106060257756
+    },
+    {
+     "nDays": 7,
+     "p": 0.745,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.065025,
+     "logloss": 0.29437106060257756
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T22",
+   "title": "Will there be more than 22 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.75,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0625,
+     "logloss": 0.2876820724517809
+    },
+    {
+     "nDays": 3,
+     "p": 0.675,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.10562499999999997,
+     "logloss": 0.3930425881096072
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T25",
+   "title": "Will there be more than 25 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.41000000000000003,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.34809999999999997,
+     "logloss": 0.8915981192837835
+    },
+    {
+     "nDays": 3,
+     "p": 0.375,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.390625,
+     "logloss": 0.9808292530117262
+    },
+    {
+     "nDays": 7,
+     "p": 0.385,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.378225,
+     "logloss": 0.9545119446943529
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T30",
+   "title": "Will there be more than 30 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.11499999999999999,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.013224999999999997,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 3,
+     "p": 0.125,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.015625,
+     "logloss": 0.13353139262452263
+    },
+    {
+     "nDays": 7,
+     "p": 0.13,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.016900000000000002,
+     "logloss": 0.13926206733350766
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T35",
+   "title": "Will there be more than 35 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.045,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.002025,
+     "logloss": 0.046043938501406846
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.07500000000000001,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0056250000000000015,
+     "logloss": 0.0779615414697118
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T40",
+   "title": "Will there be more than 40 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T45",
+   "title": "Will there be more than 45 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T50",
+   "title": "Will there be more than 50 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXHORMUZWEEKLY-26OCT11-T75",
+   "title": "Will there be more than 75 transit calls through the Strait of Hormuz from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXHORMUZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMARENTCONTROL-26",
+   "title": "Will the Massachusetts Rent Control Initiative in Massachusetts pass?",
+   "series_ticker": "KXMARENTCONTROL",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 25,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.05550000000000001,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.003080250000000001,
+     "logloss": 0.0570995920405728
+    },
+    {
+     "nDays": 3,
+     "p": 0.0615,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.00378225,
+     "logloss": 0.06347242295557354
+    },
+    {
+     "nDays": 7,
+     "p": 0.07200000000000001,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.005184000000000001,
+     "logloss": 0.07472354619593655
+    },
+    {
+     "nDays": 14,
+     "p": 0.053000000000000005,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.0028090000000000007,
+     "logloss": 0.054456185796058855
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAXSHIPSHORMUZ-26OCT01-AL5",
+   "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 5 in Oct 2026?",
+   "series_ticker": "KXMAXSHIPSHORMUZ",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.98,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0004000000000000007,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 7,
+     "p": 0.95,
+     "basis": "last",
+     "date": "2026-10-07",
+     "brier": 0.0025000000000000044,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXMAXSHIPSHORMUZ-26OCT01-AL8",
+   "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 8 in Oct 2026?",
+   "series_ticker": "KXMAXSHIPSHORMUZ",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-05",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.52,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.2304,
+     "logloss": 0.6539264674066639
+    },
+    {
+     "nDays": 3,
+     "p": 0.74,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.06760000000000001,
+     "logloss": 0.3011050927839216
+    },
+    {
+     "nDays": 7,
+     "p": 0.58,
+     "basis": "last",
+     "date": "2026-10-07",
+     "brier": 0.17640000000000003,
+     "logloss": 0.544727175441672
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T175",
+   "title": "Will there be more than 175 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 11,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.945,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0030250000000000055,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.905,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.009024999999999995,
+     "logloss": 0.0998203352822109
+    },
+    {
+     "nDays": 7,
+     "p": 0.865,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.018225,
+     "logloss": 0.14502577205025774
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T180",
+   "title": "Will there be more than 180 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.83,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.028900000000000012,
+     "logloss": 0.18632957819149348
+    },
+    {
+     "nDays": 3,
+     "p": 0.835,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.027225000000000013,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T190",
+   "title": "Will there be more than 190 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.495,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.245025,
+     "logloss": 0.6831968497067772
+    },
+    {
+     "nDays": 3,
+     "p": 0.505,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.255025,
+     "logloss": 0.7031975164134467
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T200",
+   "title": "Will there be more than 200 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 3,
+     "p": 0.165,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.027225000000000003,
+     "logloss": 0.18032355413128162
+    },
+    {
+     "nDays": 7,
+     "p": 0.08499999999999999,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.007224999999999999,
+     "logloss": 0.0888312137066157
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T210",
+   "title": "Will there be more than 210 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 3,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T220",
+   "title": "Will there be more than 220 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 3,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-10",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T225",
+   "title": "Will there be more than 225 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 3,
+     "p": 0.035,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0012250000000000002,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 7,
+     "p": 0.055,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.003025,
+     "logloss": 0.05657035148839435
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T250",
+   "title": "Will there be more than 250 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.025,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0006250000000000001,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPANAMAWEEKLY-26OCT11-T275",
+   "title": "Will there be more than 275 transit calls through the Panama Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXPANAMAWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 3,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 7,
+     "p": 0.015,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.000225,
+     "logloss": 0.015113637810048184
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26OCT-0",
+   "title": "Will exactly 0 people be pardoned in Oct 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 13,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-01",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.7250000000000001,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.5256250000000001,
+     "logloss": 1.290984181315566
+    },
+    {
+     "nDays": 3,
+     "p": 0.7749999999999999,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.6006249999999999,
+     "logloss": 1.4916548767777165
+    },
+    {
+     "nDays": 7,
+     "p": 0.605,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.366025,
+     "logloss": 0.9288695140810151
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXPARDONSTRUMP-26OCT-1",
+   "title": "Will exactly 1 people be pardoned in Oct 2026?",
+   "series_ticker": "KXPARDONSTRUMP",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 12,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-02",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 3,
+     "p": 0.115,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.013225,
+     "logloss": 0.12216763397420753
+    },
+    {
+     "nDays": 7,
+     "p": 0.22,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0484,
+     "logloss": 0.2484613592984996
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T260",
+   "title": "Will there be more than 260 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 10,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-03",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 3,
+     "p": 0.975,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0006250000000000011,
+     "logloss": 0.025317807984289897
+    },
+    {
+     "nDays": 7,
+     "p": 0.895,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.011024999999999997,
+     "logloss": 0.11093156070728166
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T270",
+   "title": "Will there be more than 270 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 9,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-04",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.855,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 3,
+     "p": 0.855,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 7,
+     "p": 0.755,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T280",
+   "title": "Will there be more than 280 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-06",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.755,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 3,
+     "p": 0.755,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.060024999999999995,
+     "logloss": 0.28103752973311236
+    },
+    {
+     "nDays": 7,
+     "p": 0.585,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.17222500000000002,
+     "logloss": 0.5361434317502807
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T290",
+   "title": "Will there be more than 290 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 6,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-07",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.475,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.275625,
+     "logloss": 0.7444404749474959
+    },
+    {
+     "nDays": 3,
+     "p": 0.475,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.275625,
+     "logloss": 0.7444404749474959
+    },
+    {
+     "nDays": 7,
+     "p": 0.475,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.275625,
+     "logloss": 0.7444404749474959
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T300",
+   "title": "Will there be more than 300 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 7,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-06",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.28500000000000003,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.08122500000000002,
+     "logloss": 0.33547273628812946
+    },
+    {
+     "nDays": 3,
+     "p": 0.28500000000000003,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.08122500000000002,
+     "logloss": 0.33547273628812946
+    },
+    {
+     "nDays": 7,
+     "p": 0.29000000000000004,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.08410000000000002,
+     "logloss": 0.342490308946776
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T310",
+   "title": "Will there be more than 310 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 3,
+     "p": 0.14500000000000002,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.021025000000000005,
+     "logloss": 0.15665381004537685
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXSUEZWEEKLY-26OCT11-T320",
+   "title": "Will there be more than 320 transit calls through the Suez Canal from Oct 5, 2026 to Oct 11, 2026?",
+   "series_ticker": "KXSUEZWEEKLY",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 4,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-12",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-12",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 3,
+     "p": 0.065,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.0042250000000000005,
+     "logloss": 0.06720874969344999
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPACTD-26OCT13-YES",
+   "title": "Will Trump do anything on Oct 13, 2026?",
+   "series_ticker": "KXTRUMPACTD",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-13",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.21500000000000002,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.04622500000000001,
+     "logloss": 0.24207156119972872
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUMPSTATES-27JAN01-AK",
+   "title": "Will Donald Trump visit Alaska before Jan 1, 2027?",
+   "series_ticker": "KXTRUMPSTATES",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 25,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": 0.99,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.00010000000000000018,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 7,
+     "p": 0.965,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.0012250000000000021,
+     "logloss": 0.03562717764315116
+    },
+    {
+     "nDays": 14,
+     "p": 0.95,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.0025000000000000044,
+     "logloss": 0.05129329438755058
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT13-B27",
+   "title": "Will Donald Trump make between 25 and 29 Truth Social posts on Oct 13, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-13",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.73,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.5328999999999999,
+     "logloss": 1.3093333199837622
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT13-B7",
+   "title": "Will Donald Trump make between 5 and 9 Truth Social posts on Oct 13, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-13",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT13-T40",
+   "title": "Will Donald Trump make at least 40 Truth Social posts on Oct 13, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-13",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.02,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.0004,
+     "logloss": 0.020202707317519466
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRUTHSOCIALD-26OCT13-T5",
+   "title": "Will Donald Trump make below 5 Truth Social posts on Oct 13, 2026?",
+   "series_ticker": "KXTRUTHSOCIALD",
+   "result": "no",
+   "settlementDay": "2026-10-14",
+   "observations": 1,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-13",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.01,
+     "basis": "last",
+     "date": "2026-10-13",
+     "brier": 0.0001,
+     "logloss": 0.01005033585350145
+    },
+    {
+     "nDays": 3,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-26DEC01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Dec 1, 2026?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.425,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.33062499999999995,
+     "logloss": 0.8556661100577203
+    },
+    {
+     "nDays": 3,
+     "p": 0.55,
+     "basis": "last",
+     "date": "2026-10-11",
+     "brier": 0.20249999999999996,
+     "logloss": 0.5978370007556204
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-26NOV01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Nov 1, 2026?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.225,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.6006250000000001,
+     "logloss": 1.491654876777717
+    },
+    {
+     "nDays": 3,
+     "p": 0.195,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.6480249999999999,
+     "logloss": 1.6347557204183902
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-27APR01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Apr 1, 2027?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 5,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-10-09",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.7050000000000001,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.08702499999999996,
+     "logloss": 0.3495574761698683
+    },
+    {
+     "nDays": 3,
+     "p": 0.6599999999999999,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.11560000000000005,
+     "logloss": 0.41551544396166595
+    },
+    {
+     "nDays": 7,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 14,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    },
+    {
+     "nDays": 30,
+     "p": null,
+     "date": null,
+     "brier": null,
+     "logloss": null
+    }
+   ]
+  },
+  {
+   "ticker": "KXTRYFIRECOOK-27JAN01-27JAN01",
+   "title": "Will the President try to fire the Lisa Cook as member of the Board of Governors of the Federal Reserve System before Jan 1, 2027?",
+   "series_ticker": "KXTRYFIRECOOK",
+   "result": "yes",
+   "settlementDay": "2026-10-14",
+   "observations": 25,
+   "observationsOnOrAfterSettlement": 0,
+   "firstObserved": "2026-09-19",
+   "lastObserved": "2026-10-13",
+   "leads": [
+    {
+     "nDays": 1,
+     "p": 0.62,
+     "basis": "mid",
+     "date": "2026-10-13",
+     "brier": 0.1444,
+     "logloss": 0.4780358009429998
+    },
+    {
+     "nDays": 3,
+     "p": 0.61,
+     "basis": "mid",
+     "date": "2026-10-11",
+     "brier": 0.1521,
+     "logloss": 0.4942963218147801
+    },
+    {
+     "nDays": 7,
+     "p": 0.45499999999999996,
+     "basis": "mid",
+     "date": "2026-10-07",
+     "brier": 0.29702500000000004,
+     "logloss": 0.7874578600311868
+    },
+    {
+     "nDays": 14,
+     "p": 0.46499999999999997,
+     "basis": "mid",
+     "date": "2026-09-30",
+     "brier": 0.286225,
+     "logloss": 0.7657178733947808
     },
     {
      "nDays": 30,
