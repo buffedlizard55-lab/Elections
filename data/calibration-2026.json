@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-14T18:10:51.902Z",
+ "generatedAt": "2026-10-15T17:54:25.472Z",
  "inputs": [
   {
    "path": "data/kalshi/forward/open-prices.csv",
@@ -42,7 +42,8 @@
    "2026-10-11",
    "2026-10-12",
    "2026-10-13",
-   "2026-10-14"
+   "2026-10-14",
+   "2026-10-15"
   ],
   "rowsPerDay": {
    "2026-09-19": 24162,
@@ -70,9 +71,10 @@
    "2026-10-11": 27175,
    "2026-10-12": 28222,
    "2026-10-13": 28187,
-   "2026-10-14": 28368
+   "2026-10-14": 28368,
+   "2026-10-15": 28410
   },
-  "totalRows": 654242,
+  "totalRows": 682652,
   "headlineSeries": {
    "CONTROLS-2026-D": [
     {
@@ -227,6 +229,12 @@
     },
     {
      "date": "2026-10-14",
+     "bid": 0.61,
+     "ask": 0.62,
+     "mid": 0.615
+    },
+    {
+     "date": "2026-10-15",
      "bid": 0.61,
      "ask": 0.62,
      "mid": 0.615
@@ -388,6 +396,12 @@
      "bid": 0.37,
      "ask": 0.38,
      "mid": 0.375
+    },
+    {
+     "date": "2026-10-15",
+     "bid": 0.38,
+     "ask": 0.39,
+     "mid": 0.385
     }
    ],
    "CONTROLH-2026-R": [
@@ -546,6 +560,12 @@
      "bid": 0.098,
      "ask": 0.099,
      "mid": 0.0985
+    },
+    {
+     "date": "2026-10-15",
+     "bid": 0.099,
+     "ask": 0.1,
+     "mid": 0.0995
     }
    ],
    "CONTROLH-2026-D": [
@@ -704,15 +724,21 @@
      "bid": 0.902,
      "ask": 0.903,
      "mid": 0.9025000000000001
+    },
+    {
+     "date": "2026-10-15",
+     "bid": 0.901,
+     "ask": 0.902,
+     "mid": 0.9015
     }
    ]
   }
  },
  "settled2026": {
   "capturedFrom": "https://api.elections.kalshi.com/trade-api/v2/markets + /historical/markets (status=settled, close_time >= 2026-01-01T00:00:00Z) + candlesticks period_interval=1440",
-  "capturedAt": "2026-10-14T17:31:40.387Z",
-  "nMarketsWithResult": 10691,
-  "nScored": 9281,
+  "capturedAt": "2026-10-15T17:17:55.612Z",
+  "nMarketsWithResult": 10693,
+  "nScored": 9347,
   "byLead": [
    {
     "nDays": 1,
@@ -12815,6 +12841,1110 @@
       "p": 0.82,
       "brier": 0.03240000000000002,
       "logloss": 0.19845093872383832
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-AFD",
+    "series": "KXBERLIN2ND",
+    "sub": "AfD",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 40,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-BSW",
+    "series": "KXBERLIN2ND",
+    "sub": "BSW",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 47,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-CDU",
+    "series": "KXBERLIN2ND",
+    "sub": "CDU",
+    "result": "yes",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 45,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-DLIN",
+    "series": "KXBERLIN2ND",
+    "sub": "Die Linke",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 39,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-FDP",
+    "series": "KXBERLIN2ND",
+    "sub": "FDP",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 47,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-GRUN",
+    "series": "KXBERLIN2ND",
+    "sub": "Grüne",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 49,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN2ND-26SEP20-2-SPD",
+    "series": "KXBERLIN2ND",
+    "sub": "SPD",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:07Z",
+    "nBars": 49,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-AFD",
+    "series": "KXBERLIN3RD",
+    "sub": "AfD",
+    "result": "yes",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 42,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-BSW",
+    "series": "KXBERLIN3RD",
+    "sub": "BSW",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 20,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-CDU",
+    "series": "KXBERLIN3RD",
+    "sub": "CDU",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 38,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-DLIN",
+    "series": "KXBERLIN3RD",
+    "sub": "Die Linke",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 38,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-FDP",
+    "series": "KXBERLIN3RD",
+    "sub": "FDP",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 19,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-GRUN",
+    "series": "KXBERLIN3RD",
+    "sub": "Grüne",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 37,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN3RD-26SEP20-3-SPD",
+    "series": "KXBERLIN3RD",
+    "sub": "SPD",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:22Z",
+    "nBars": 49,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-AFD",
+    "series": "KXBERLIN4TH",
+    "sub": "AfD",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 37,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-BSW",
+    "series": "KXBERLIN4TH",
+    "sub": "BSW",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 7,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-CDU",
+    "series": "KXBERLIN4TH",
+    "sub": "CDU",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 36,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-DLIN",
+    "series": "KXBERLIN4TH",
+    "sub": "Die Linke",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 49,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-FDP",
+    "series": "KXBERLIN4TH",
+    "sub": "FDP",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 7,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-GRUN",
+    "series": "KXBERLIN4TH",
+    "sub": "Grüne",
+    "result": "yes",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 48,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLIN4TH-26SEP20-4-SPD",
+    "series": "KXBERLIN4TH",
+    "sub": "SPD",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:41Z",
+    "nBars": 37,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLINANYSEAT-26SEP20-BSW",
+    "series": "KXBERLINANYSEAT",
+    "sub": "BSW",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:46Z",
+    "nBars": 11,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLINANYSEAT-26SEP20-FDP",
+    "series": "KXBERLINANYSEAT",
+    "sub": "FDP",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:46Z",
+    "nBars": 22,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXBERLINANYSEAT-26SEP20-VOLT",
+    "series": "KXBERLINANYSEAT",
+    "sub": "Volt",
+    "result": "no",
+    "closeTime": "2026-10-12T14:52:46Z",
+    "nBars": 22,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
      },
      {
       "nDays": 30,
@@ -74195,6 +75325,512 @@
     ]
    },
    {
+    "ticker": "KXESTPRES-27JAN01-HHAN",
+    "series": "KXESTPRES",
+    "sub": "Hannes Hanso",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 51,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-ILAU",
+    "series": "KXESTPRES",
+    "sub": "Indrek Laul",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-ITAR",
+    "series": "KXESTPRES",
+    "sub": "Indrek Tarand",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 41,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-JVSE",
+    "series": "KXESTPRES",
+    "sub": "Jonatan Vseviov",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-KKAL",
+    "series": "KXESTPRES",
+    "sub": "Kersti Kaljulaid",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-MHEL",
+    "series": "KXESTPRES",
+    "sub": "Mart Helme",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-MMAA",
+    "series": "KXESTPRES",
+    "sub": "Matti Maasikas",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-MRUT",
+    "series": "KXESTPRES",
+    "sub": "Maive Rute",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 63,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-RUHT",
+    "series": "KXESTPRES",
+    "sub": "Riho Ühtegi",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 45,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-UMAD",
+    "series": "KXESTPRES",
+    "sub": "Ülle Madise",
+    "result": "yes",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 68,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXESTPRES-27JAN01-UPAE",
+    "series": "KXESTPRES",
+    "sub": "Urmas Paet",
+    "result": "no",
+    "closeTime": "2026-10-13T02:27:01Z",
+    "nBars": 43,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
     "ticker": "KXFALEALILI1-26SEP18-ALAT",
     "series": "KXFALEALILI1",
     "sub": "Alec Latu",
@@ -89635,6 +91271,328 @@
       "p": 0.09,
       "brier": 0.0081,
       "logloss": 0.09431067947124129
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-BCAZ",
+    "series": "KXFRPSNOM",
+    "sub": "Bernard Cazeneuve",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 79,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-BVAL",
+    "series": "KXFRPSNOM",
+    "sub": "Boris Vallaud",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 84,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-FHOL",
+    "series": "KXFRPSNOM",
+    "sub": "François Hollande",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-JGUE",
+    "series": "KXFRPSNOM",
+    "sub": "Jérôme Guedj",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 66,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-OFAU",
+    "series": "KXFRPSNOM",
+    "sub": "Olivier Faure",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 88,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-RBRU",
+    "series": "KXFRPSNOM",
+    "sub": "Philippe Brun",
+    "result": "no",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 47,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXFRPSNOM-26OCT01-RGLU",
+    "series": "KXFRPSNOM",
+    "sub": "Raphaël Glucksmann",
+    "result": "yes",
+    "closeTime": "2026-10-11T18:06:05Z",
+    "nBars": 91,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
      },
      {
       "nDays": 30,
@@ -122173,6 +124131,328 @@
     ]
    },
    {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-1",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 1%",
+    "result": "yes",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-2",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 2%",
+    "result": "yes",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-3",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 3%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-4",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 4%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-5",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 5%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-6",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 6%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RES-8",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 8%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:43:36Z",
+    "nBars": 2,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
     "ticker": "KXHOLBORNVOTE-26DEC31RUK-12",
     "series": "KXHOLBORNVOTE",
     "sub": "At least 12%",
@@ -122271,6 +124551,236 @@
     "result": "no",
     "closeTime": "2026-10-09T04:40:15Z",
     "nBars": 30,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RUK-25",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 25%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:40:15Z",
+    "nBars": 21,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RUK-3",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 3%",
+    "result": "yes",
+    "closeTime": "2026-10-09T04:40:15Z",
+    "nBars": 26,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RUK-5",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 5%",
+    "result": "yes",
+    "closeTime": "2026-10-09T04:40:15Z",
+    "nBars": 33,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RUK-7",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 7%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:40:15Z",
+    "nBars": 39,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXHOLBORNVOTE-26DEC31RUK-9",
+    "series": "KXHOLBORNVOTE",
+    "sub": "At least 9%",
+    "result": "no",
+    "closeTime": "2026-10-09T04:40:15Z",
+    "nBars": 39,
     "leads": [
      {
       "nDays": 1,
@@ -146727,6 +149237,466 @@
       "p": 0.83,
       "brier": 0.028900000000000012,
       "logloss": 0.18632957819149348
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-ACAN",
+    "series": "KXISLEMINISTER",
+    "sub": "Alfred Cannan",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 72,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-CBAR",
+    "series": "KXISLEMINISTER",
+    "sub": "Clare Barber",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-CCHR",
+    "series": "KXISLEMINISTER",
+    "sub": "Claire Christian",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-CTHO",
+    "series": "KXISLEMINISTER",
+    "sub": "Chris Thomas",
+    "result": "yes",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 72,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-DASH",
+    "series": "KXISLEMINISTER",
+    "sub": "David Ashford",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-JFAR",
+    "series": "KXISLEMINISTER",
+    "sub": "Joney Faragher",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-JPOO",
+    "series": "KXISLEMINISTER",
+    "sub": "Jane Poole-Wilson",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 72,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-LHOO",
+    "series": "KXISLEMINISTER",
+    "sub": "Lawrie Hooper",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 62,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-RCAL",
+    "series": "KXISLEMINISTER",
+    "sub": "Rob Callister",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 62,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXISLEMINISTER-26SEP24-TJOH",
+    "series": "KXISLEMINISTER",
+    "sub": "Tim Johnston",
+    "result": "no",
+    "closeTime": "2026-10-13T16:37:32Z",
+    "nBars": 70,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
      },
      {
       "nDays": 60,
@@ -180359,6 +183329,98 @@
       "p": 0.9,
       "brier": 0.009999999999999995,
       "logloss": 0.10536051565782628
+     }
+    ]
+   },
+   {
+    "ticker": "KXMISENATE-26-HSTE",
+    "series": "KXMISENATE",
+    "sub": "Haley Stevens",
+    "result": "no",
+    "closeTime": "2026-10-15T05:22:51Z",
+    "nBars": 92,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     }
+    ]
+   },
+   {
+    "ticker": "KXMISENATE-26-MMCM",
+    "series": "KXMISENATE",
+    "sub": "Mallory McMorrow",
+    "result": "no",
+    "closeTime": "2026-10-15T05:22:43Z",
+    "nBars": 87,
+    "leads": [
+     {
+      "nDays": 1,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 3,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 7,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 14,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 30,
+      "p": null,
+      "brier": null,
+      "logloss": null
+     },
+     {
+      "nDays": 60,
+      "p": null,
+      "brier": null,
+      "logloss": null
      }
     ]
    },
@@ -427851,9 +430913,9 @@
     "event": "KXCAGOVLAMAYOR-26NOV",
     "series": "KXCAGOVLAMAYOR",
     "sub": "Karen Bass and Xavier Becerra",
-    "bid": "0.4600",
-    "ask": "0.4700",
-    "vol": "10772.30",
+    "bid": "0.4700",
+    "ask": "0.4900",
+    "vol": "10931.28",
     "close_time": "2027-11-03T14:00:00Z"
    },
    {
@@ -427863,7 +430925,7 @@
     "sub": "Karen Bass and Steve Hilton",
     "bid": "0.0100",
     "ask": "0.0200",
-    "vol": "6070.82",
+    "vol": "8557.42",
     "close_time": "2027-11-03T14:00:00Z"
    },
    {
@@ -427871,9 +430933,9 @@
     "event": "KXCAGOVLAMAYOR-26NOV",
     "series": "KXCAGOVLAMAYOR",
     "sub": "Nithya Raman and Xavier Becerra",
-    "bid": "0.5400",
-    "ask": "0.5500",
-    "vol": "20125.07",
+    "bid": "0.5100",
+    "ask": "0.5200",
+    "vol": "20402.97",
     "close_time": "2027-11-03T14:00:00Z"
    },
    {
@@ -427891,9 +430953,9 @@
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥2%",
-    "bid": "0.4300",
-    "ask": "0.7200",
-    "vol": "5096.76",
+    "bid": "0.3900",
+    "ask": "0.7300",
+    "vol": "5096.77",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427901,9 +430963,9 @@
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥4%",
-    "bid": "0.2500",
-    "ask": "0.8800",
-    "vol": "3793.15",
+    "bid": "0.2900",
+    "ask": "0.8900",
+    "vol": "3794.69",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427911,9 +430973,9 @@
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥6%",
-    "bid": "0.2500",
-    "ask": "0.9200",
-    "vol": "296.66",
+    "bid": "0.2100",
+    "ask": "0.9600",
+    "vol": "297.42",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427922,8 +430984,8 @@
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥8%",
     "bid": "0.0300",
-    "ask": "0.2200",
-    "vol": "14.84",
+    "ask": "0.2600",
+    "vol": "14.87",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427931,8 +430993,8 @@
     "event": "KXLAMOV-KXMAYORLA26KBAS",
     "series": "KXLAMOV",
     "sub": "Karen Bass, ≥10%",
-    "bid": "0.0500",
-    "ask": "0.1600",
+    "bid": "0.0400",
+    "ask": "0.2000",
     "vol": "898.65",
     "close_time": "2027-11-03T15:00:00Z"
    },
@@ -427953,7 +431015,7 @@
     "sub": "Nithya Raman, ≥4%",
     "bid": "0.4300",
     "ask": "0.5200",
-    "vol": "2128.29",
+    "vol": "2128.30",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427961,9 +431023,9 @@
     "event": "KXLAMOV-KXMAYORLA26NRAM",
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥6%",
-    "bid": "0.3400",
-    "ask": "0.4200",
-    "vol": "1311.10",
+    "bid": "0.3000",
+    "ask": "0.3900",
+    "vol": "1521.11",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427971,9 +431033,9 @@
     "event": "KXLAMOV-KXMAYORLA26NRAM",
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥8%",
-    "bid": "0.2700",
-    "ask": "0.3500",
-    "vol": "652.37",
+    "bid": "0.2300",
+    "ask": "0.3200",
+    "vol": "852.37",
     "close_time": "2027-11-03T15:00:00Z"
    },
    {
@@ -427981,8 +431043,8 @@
     "event": "KXLAMOV-KXMAYORLA26NRAM",
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥10%",
-    "bid": "0.2400",
-    "ask": "0.2600",
+    "bid": "0.2200",
+    "ask": "0.2500",
     "vol": "1833.18",
     "close_time": "2027-11-03T15:00:00Z"
    },
@@ -427991,7 +431053,7 @@
     "event": "KXLAMOV-KXMAYORLA26NRAM",
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥12%",
-    "bid": "0.0400",
+    "bid": "0.0500",
     "ask": "0.9800",
     "vol": "0.00",
     "close_time": "2027-11-03T15:00:00Z"
@@ -428002,7 +431064,7 @@
     "series": "KXLAMOV",
     "sub": "Nithya Raman, ≥14%",
     "bid": "0.0200",
-    "ask": "0.9700",
+    "ask": "0.9900",
     "vol": "0.00",
     "close_time": "2027-11-03T15:00:00Z"
    },
@@ -428021,9 +431083,9 @@
     "event": "KXMAYORLA-26",
     "series": "KXMAYORLA",
     "sub": "Karen Bass",
-    "bid": "0.4300",
-    "ask": "0.4400",
-    "vol": "19335556.72",
+    "bid": "0.4600",
+    "ask": "0.4700",
+    "vol": "19518124.30",
     "close_time": "2027-06-02T14:00:00Z"
    },
    {
@@ -428031,9 +431093,9 @@
     "event": "KXMAYORLA-26",
     "series": "KXMAYORLA",
     "sub": "Nithya Raman",
-    "bid": "0.5600",
-    "ask": "0.5700",
-    "vol": "20201188.02",
+    "bid": "0.5200",
+    "ask": "0.5300",
+    "vol": "20405879.18",
     "close_time": "2027-06-02T14:00:00Z"
    },
    {
@@ -428071,7 +431133,7 @@
     "event": "KXUSTURNOUT-MAYORLA26",
     "series": "KXUSTURNOUT",
     "sub": "Above 1.0M",
-    "bid": "0.0500",
+    "bid": "0.0400",
     "ask": "0.9900",
     "vol": "1.00",
     "close_time": "2027-11-03T15:00:00Z"
@@ -428121,7 +431183,7 @@
     "event": "KXUSTURNOUT-MAYORLA26",
     "series": "KXUSTURNOUT",
     "sub": "Above 1.25M",
-    "bid": "0.0400",
+    "bid": "0.0300",
     "ask": "0.9700",
     "vol": "0.09",
     "close_time": "2027-11-03T15:00:00Z"
@@ -428161,7 +431223,7 @@
     "event": "KXUSTURNOUT-MAYORLA26",
     "series": "KXUSTURNOUT",
     "sub": "Above 1.45M",
-    "bid": "0.0400",
+    "bid": "0.0300",
     "ask": "0.9900",
     "vol": "17.10",
     "close_time": "2027-11-03T15:00:00Z"
@@ -428181,8 +431243,8 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 62%",
-    "bid": "0.7800",
-    "ask": "0.8600",
+    "bid": "0.7700",
+    "ask": "0.8700",
     "vol": "0.00",
     "close_time": "2027-11-03T14:00:00Z"
    },
@@ -428191,7 +431253,7 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 64%",
-    "bid": "0.6200",
+    "bid": "0.6100",
     "ask": "0.7100",
     "vol": "0.00",
     "close_time": "2027-11-03T14:00:00Z"
@@ -428201,7 +431263,7 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 66%",
-    "bid": "0.4200",
+    "bid": "0.4100",
     "ask": "0.5100",
     "vol": "1851.32",
     "close_time": "2027-11-03T14:00:00Z"
@@ -428211,7 +431273,7 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 68%",
-    "bid": "0.2300",
+    "bid": "0.2200",
     "ask": "0.3200",
     "vol": "0.00",
     "close_time": "2027-11-03T14:00:00Z"
@@ -428221,7 +431283,7 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 70%",
-    "bid": "0.1000",
+    "bid": "0.0800",
     "ask": "0.1800",
     "vol": "14.47",
     "close_time": "2027-11-03T14:00:00Z"
@@ -428231,7 +431293,7 @@
     "event": "KXVOTECOUNTY-GOVCA26LOSANGELESXBEC",
     "series": "KXVOTECOUNTY",
     "sub": "At least 72%",
-    "bid": "0.0400",
+    "bid": "0.0200",
     "ask": "0.0900",
     "vol": "24.90",
     "close_time": "2027-11-03T14:00:00Z"
@@ -428269,154 +431331,154 @@
   ],
   "upcomingSettlements": [
    {
-    "ticker": "KXVHGCB-26OCT14-A8.7",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-A8.5",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
-    "sub": "Above 8.7%",
-    "bid": "0.0000",
+    "sub": "Above 8.5%",
+    "bid": "0.0100",
     "ask": "0.0200",
-    "vol": "8032.00",
-    "close_time": "2026-10-14T21:04:00Z"
+    "vol": "3260.26",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.1",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-E7.9",
+    "event": "KXVHGCB-26OCT15",
+    "series": "KXVHGCB",
+    "sub": "7.9%",
+    "bid": "0.0100",
+    "ask": "0.0200",
+    "vol": "471.53",
+    "close_time": "2026-10-15T21:04:00Z"
+   },
+   {
+    "ticker": "KXVHGCB-26OCT15-E8.0",
+    "event": "KXVHGCB-26OCT15",
+    "series": "KXVHGCB",
+    "sub": "8.0%",
+    "bid": "0.0100",
+    "ask": "0.0500",
+    "vol": "400.57",
+    "close_time": "2026-10-15T21:04:00Z"
+   },
+   {
+    "ticker": "KXVHGCB-26OCT15-E8.1",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
     "sub": "8.1%",
-    "bid": "0.1600",
-    "ask": "0.2300",
-    "vol": "327.83",
-    "close_time": "2026-10-14T21:04:00Z"
+    "bid": "0.8000",
+    "ask": "0.8800",
+    "vol": "4644.25",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.2",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-E8.2",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
     "sub": "8.2%",
-    "bid": "0.5900",
-    "ask": "0.7500",
-    "vol": "1519.59",
-    "close_time": "2026-10-14T21:04:00Z"
+    "bid": "0.0600",
+    "ask": "0.2200",
+    "vol": "1105.76",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.3",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-E8.3",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
     "sub": "8.3%",
-    "bid": "0.0400",
-    "ask": "0.1300",
-    "vol": "180.21",
-    "close_time": "2026-10-14T21:04:00Z"
+    "bid": "0.0100",
+    "ask": "0.0800",
+    "vol": "497.89",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.4",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-E8.4",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
     "sub": "8.4%",
-    "bid": "0.0400",
-    "ask": "0.1100",
-    "vol": "354.97",
-    "close_time": "2026-10-14T21:04:00Z"
+    "bid": "0.0100",
+    "ask": "0.0200",
+    "vol": "4334.74",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.5",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-E8.5",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
     "sub": "8.5%",
     "bid": "0.0100",
-    "ask": "0.0400",
-    "vol": "1102.46",
-    "close_time": "2026-10-14T21:04:00Z"
-   },
-   {
-    "ticker": "KXVHGCB-26OCT14-E8.6",
-    "event": "KXVHGCB-26OCT14",
-    "series": "KXVHGCB",
-    "sub": "8.6%",
-    "bid": "0.0100",
     "ask": "0.0200",
-    "vol": "1095.00",
-    "close_time": "2026-10-14T21:04:00Z"
+    "vol": "405.51",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXVHGCB-26OCT14-E8.7",
-    "event": "KXVHGCB-26OCT14",
+    "ticker": "KXVHGCB-26OCT15-U7.9",
+    "event": "KXVHGCB-26OCT15",
     "series": "KXVHGCB",
-    "sub": "8.7%",
-    "bid": "0.0100",
-    "ask": "0.0200",
-    "vol": "2395.00",
-    "close_time": "2026-10-14T21:04:00Z"
-   },
-   {
-    "ticker": "KXVHGCB-26OCT14-U8.1",
-    "event": "KXVHGCB-26OCT14",
-    "series": "KXVHGCB",
-    "sub": "Below 8.1%",
-    "bid": "0.0500",
-    "ask": "0.2200",
-    "vol": "257.30",
-    "close_time": "2026-10-14T21:04:00Z"
-   },
-   {
-    "ticker": "KXSERBIAELECTIONCALL-26NOV01-26OCT15",
-    "event": "KXSERBIAELECTIONCALL-26NOV01",
-    "series": "KXSERBIAELECTIONCALL",
-    "sub": "Before Oct 15, 2026",
+    "sub": "Below 7.9%",
     "bid": "0.0200",
-    "ask": "0.0300",
-    "vol": "6726.62",
-    "close_time": "2026-10-15T03:59:00Z"
+    "ask": "0.1100",
+    "vol": "3872.53",
+    "close_time": "2026-10-15T21:04:00Z"
    },
    {
-    "ticker": "KXTRUTHSOCIALD-26OCT14-B12",
-    "event": "KXTRUTHSOCIALD-26OCT14",
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B12",
+    "event": "KXTRUTHSOCIALD-26OCT15",
     "series": "KXTRUTHSOCIALD",
     "sub": "10-14",
-    "bid": "0.0000",
-    "ask": "0.0700",
-    "vol": "437.00",
-    "close_time": "2026-10-15T03:59:00Z"
+    "bid": "0.0200",
+    "ask": "0.7400",
+    "vol": "142.00",
+    "close_time": "2026-10-16T03:59:00Z"
    },
    {
-    "ticker": "KXTRUTHSOCIALD-26OCT14-B17",
-    "event": "KXTRUTHSOCIALD-26OCT14",
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B17",
+    "event": "KXTRUTHSOCIALD-26OCT15",
     "series": "KXTRUTHSOCIALD",
     "sub": "15-19",
-    "bid": "0.0000",
-    "ask": "0.0800",
-    "vol": "902.00",
-    "close_time": "2026-10-15T03:59:00Z"
+    "bid": "0.0200",
+    "ask": "0.3300",
+    "vol": "6.00",
+    "close_time": "2026-10-16T03:59:00Z"
    },
    {
-    "ticker": "KXTRUTHSOCIALD-26OCT14-B22",
-    "event": "KXTRUTHSOCIALD-26OCT14",
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B22",
+    "event": "KXTRUTHSOCIALD-26OCT15",
     "series": "KXTRUTHSOCIALD",
     "sub": "20-24",
-    "bid": "0.0000",
-    "ask": "0.0400",
-    "vol": "639.39",
-    "close_time": "2026-10-15T03:59:00Z"
+    "bid": "0.0200",
+    "ask": "0.3600",
+    "vol": "0.00",
+    "close_time": "2026-10-16T03:59:00Z"
    },
    {
-    "ticker": "KXTRUTHSOCIALD-26OCT14-B27",
-    "event": "KXTRUTHSOCIALD-26OCT14",
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B27",
+    "event": "KXTRUTHSOCIALD-26OCT15",
     "series": "KXTRUTHSOCIALD",
     "sub": "25-29",
-    "bid": "0.0000",
-    "ask": "0.0700",
-    "vol": "742.31",
-    "close_time": "2026-10-15T03:59:00Z"
+    "bid": "0.1000",
+    "ask": "0.3100",
+    "vol": "15.38",
+    "close_time": "2026-10-16T03:59:00Z"
    },
    {
-    "ticker": "KXTRUTHSOCIALD-26OCT14-B34",
-    "event": "KXTRUTHSOCIALD-26OCT14",
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B34",
+    "event": "KXTRUTHSOCIALD-26OCT15",
     "series": "KXTRUTHSOCIALD",
     "sub": "30-39",
-    "bid": "0.2000",
-    "ask": "0.6200",
-    "vol": "1484.61",
-    "close_time": "2026-10-15T03:59:00Z"
+    "bid": "0.1200",
+    "ask": "0.3300",
+    "vol": "0.00",
+    "close_time": "2026-10-16T03:59:00Z"
+   },
+   {
+    "ticker": "KXTRUTHSOCIALD-26OCT15-B7",
+    "event": "KXTRUTHSOCIALD-26OCT15",
+    "series": "KXTRUTHSOCIALD",
+    "sub": "5-9",
+    "bid": "0.0100",
+    "ask": "0.1900",
+    "vol": "0.00",
+    "close_time": "2026-10-16T03:59:00Z"
    }
   ]
  }
